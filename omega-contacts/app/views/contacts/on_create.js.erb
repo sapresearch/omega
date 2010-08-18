@@ -1,0 +1,2 @@
+$('#contacts_contact_pane').empty().append('<%= escape_javascript(render(:partial => 'contacts/shared/contact_details')) %>');
+$('#contacts ul').append('<%= escape_javascript(render('contact_row', :contact_row => @contact)) %>');

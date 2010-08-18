@@ -1,0 +1,12 @@
+en:
+  sign_up: 'Sign up'
+  
+  helpers:
+    submit:
+      session:
+        create: "Login"
+      user:
+        create: "Register"
+      volunteering:
+          position:
+              create: "Create"  

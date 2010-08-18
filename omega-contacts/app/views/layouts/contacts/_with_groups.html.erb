@@ -1,0 +1,56 @@
+<% require_javascript 'thirdParty/jquery.validate', 'thirdParty/jquery.jfilter', 'contacts', 'nested' %>
+<% require_stylesheet 'omega_contacts', 'thirdParty/jquery.autocomplete' %>
+<h1>Contacts</h1>
+
+<div id="cm">
+  <div class="head_bg">
+    <div id="contact_filter_wrapper">
+
+      <input id="contact_filter" value=""/>
+
+      <div id="filter_ctrl">
+
+        <div class="magnifier"></div>
+        <div id="clear_filter"></div>
+      </div>
+    </div>
+    <div style="float:right">
+      <span class="btn_action"> <%= link_to 'New Contact', new_contact_path, :remote => true %></span>
+      <span class="btn_action"><%= link_to 'New Household', new_contact_household_path, :remote => true %></span>
+      <span class="btn_action"><%= link_to 'New Organisation', new_contact_organization_path, :remote => true %></span>
+    </div>
+  </div>
+
+  <div id="contacts_alphabet" class="left">
+    <ul>
+      <% ('A'..'Z').each do |l| %>
+          <li><%= link_to l, "/contacts/#{l}", :remote => true, :class => 'link_btn' %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="contacts_groups" class="left">
+    <ul>
+      <li><%= link_to 'All Contacts', all_contacts_path, :remote => true, :id=> 'dummy' %></li>
+      
+      <% @contact_groups.keys.each do |group_type| %>
+          <li class="header"><%= group_type.try(:pluralize) %></li>
+          <% @contact_groups[group_type].each do |group| %>
+              <li class="<%= cycle("even", "odd", :name => "group_rows") %>"><%= link_to group.name, group, :remote=> true %></li>
+          <% end %>
+          <% reset_cycle("group_rows") %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="contacts_group_pane" class="left" style="clear: right">
+  <%= yield %>
+</div>
+
+</div>
+
+
+
+<div id="ajax_loading_wrapper">
+  <div id="ajax_loading_img"></div>
+</div>

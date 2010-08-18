@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<% content_for(:content) do # have yield up here so require_stylesheet in a view/partial works
+    render(:layout => "layouts/columns") do
+        i(render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
+            i(yield)
+        end)
+    end
+end %>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>THIS IS ANFIELD<%= controller.action_name %></title>
+  <%= i i stylesheet_tags 'application', 'menu', 'thirdParty/nyroModal', 'jquery-ui-1.8.1.custom' %>
+  <%= i i javascript_tags 'thirdParty/jquery', 'thirdParty/jquery-ui',
+                          'rails', 'application', 'menu' %>
+  <%= i i csrf_meta_tag %>
+  <!--[if IE]>
+            <%= stylesheet_link_tag "ie" %>
+        <![endif]-->
+</head>
+<body>
+<div id="wrapper">
+  <noscript>
+    <div id="warning">Sorry, your browser does not support JavaScript!</div>
+  </noscript>
+  <div id="head" class="center">
+    <div id="topBar">
+      <div id="badge"></div>
+      <div id="msgCtrl">
+
+      </div>
+
+
+      <div id="ctlrBar">
+
+        <% if current_user.is_anonymous? -%>
+            <span id="trigger"><a class=" btnLoginCtrl"><span>Login</span></a><a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
+
+
+        <% else -%>
+            <%= link_to content_tag(:span, "logout"), sessions_url, :method => :delete, :confirm => 'Are you sure?', :class => 'newB' %>
+        <% end -%>
+        | <%= link_to content_tag(:span, t(:sign_up)), register_users_url %>
+      </div>
+            <div id="search_submit"><input src="../images/omega_search_submit.png" type="image" value="Go"></div>
+      <div id="search">
+        <input type="text">
+      </div>
+      <div id="loginWrapper">
+        <div id="loginPanel" class="center">
+          <%= render :partial => "layouts/partials/login" %>
+        </div>
+      </div>
+    </div>
+
+    <%= render :partial => "layouts/menu" %>
+  </div>
+
+  <div id="content_wrapper" class="center">
+    <%= ii yield(:content) %>
+  </div>
+
+  <%= render :partial => "layouts/partials/social" %>
+</div>
+</body>
+</html>

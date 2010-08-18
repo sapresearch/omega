@@ -1,0 +1,27 @@
+<div id="left">
+    <div id="liquid-round">
+        <div class="top">
+            <span></span>
+        </div>
+        <div class="center-content">
+            <%= yield %>
+        </div>
+        <div class="bottom">
+            <span></span>
+        </div>
+    </div>
+</div>
+<div id="right">
+    <div id="liquid-round">
+        <div class="top">
+            <span></span>
+        </div>
+        <div class="center-content">
+            <%= yield :sidebar %>
+        </div>
+        <div class="bottom">
+            <span></span>
+        </div>
+    </div>
+</div>
+

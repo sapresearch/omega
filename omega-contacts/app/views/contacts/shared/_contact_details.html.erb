@@ -1,0 +1,65 @@
+<% require_javascript 'contacts' %>
+<% require_stylesheet 'contacts' %>
+<div id="contact_mgm" class="corners">
+  <span class="btn_action left"> <span class="icon-delete"></span> <%= link_to 'delete', @contact, :method=> :delete, :remote => true %></span>
+  <span class="btn_action left"> <span class="icon-edit"></span> <%= link_to 'edit', edit_contact_path(@contact), :remote => true %></span>
+  <dl id="contact_assign" class="drop_down">
+    <dt><a href="#" class="corners"><span>Assign this contact</span></a></dt>
+    <dd>
+      <ul class="corners">
+        <div>
+          <li>Assign</li>
+
+          <% Contact::Group.without_contact(@contact).each do |g| %>
+              <li>
+                <%= link_to g.name, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
+              </li>
+          <% end %>
+
+
+
+          <li>Remove</li>
+
+          <% Contact::Group.with_contact(@contact).each do |g| %>
+              <li>
+                <%= link_to g.name, remove_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
+              </li>
+          <% end %>
+        </div>
+      </ul>
+    </dd>
+  </dl>
+
+
+</div>
+<h3 id="contact_name"><%= "#{@contact.first_name.capitalize} #{@contact.last_name.capitalize}" %></h3>
+<div id="contact_image">
+  <%= image_tag("profile.jpg", :width =>  '100') %>
+</div>
+<div style="clear:left;"></div>
+<div id="contact_fields">
+  <div class="contact_fields">
+    <div class="contact_field" id="assigned_groups">
+      <%= render :partial => 'contacts/partials/assigned_groups' %>
+
+    </div>
+    <div class="contact_field"><span class="contact_label">Email:</span> <%= @contact.email %></div>
+    <% @contact.addresses.each do |address| %>
+        <div class="contact_field"><span class="contact_label">City: </span> <%= address.city.capitalize %> </div>
+        <div class="contact_field"><span class="contact_label">Street: </span><%= address.street %></div>
+        <div class="contact_field"><span class="contact_label">Postal Code: </span><%= address.zip_code %></div>
+    <% end %>
+
+    <% @contact.phone_numbers.each do |phone| %>
+        <div class="contact_field"><span class="contact_label">Number Type: </span> <%= phone.number_type %> </div>
+        <div class="contact_field"><span class="contact_label">Number: </span> <%= phone.number %> </div>
+    <% end %>
+  </div>
+</div>
+
+<div style="clear:left;"></div>
+
+
+
+
+

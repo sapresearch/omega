@@ -1,0 +1,62 @@
+<% require_javascript 'thirdParty/jquery.validate.js', 'thirdParty/jquery.tableFilter.js', 'contacts.js', 'nested' %>
+<% require_stylesheet 'omega_contacts.css' %>
+
+<img src="/images/icons/symbols/user.png" alt="" class="img_module">
+<div id="cm">
+  <div class="head_bg">
+    <div style="float:right">
+      <span class="btn_action"> <span class="icon-user"><%= link_to 'New Contact', new_contact_path, :remote => true %></span> </span>
+      <span class="btn_action"> <span class="icon-group"><%= link_to 'New Group', new_contact_group_path, :remote => true %></span> </span>
+    </div>
+
+    <div id="contact_filter_wrapper">
+
+      <input id="contact_filter" value=""/>
+
+      <div id="filter_ctrl">
+
+        <div class="magnifier"></div>
+        <div id="clear_filter"></div>
+      </div>
+    </div>
+
+  </div>
+  <div  class="col_mid">
+
+    <div class="col_left">
+      <div class="col1" id="cm_group_list">
+        <ul>
+          <li>
+            <%= link_to 'All Contacts', all_contacts_path, :remote => true %>
+          </li>
+          <% @groups.each do |group| %>
+              <li class="<%= cycle("even", "odd") %>">
+                <%= link_to group.name, group, :remote=> true %>
+
+              </li>
+
+          <% end %>
+
+
+        </ul>
+
+
+      </div>
+      <div id="cm_wrapper" class="col2">
+        <div id="cm_contacts" >
+        <%= yield %></div>
+        </div>
+      <div class="col3">
+
+        <div id="cm_contact_wrapper">
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div id="ajax_loading_wrapper">
+    <div id="ajax_loading_img"></div>
+  </div>
+</div>

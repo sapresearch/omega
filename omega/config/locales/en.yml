@@ -1,0 +1,6 @@
+en:
+  sign_up: 'Sign up'
+  
+  helpers:
+    submit:
+         create: "Create"  

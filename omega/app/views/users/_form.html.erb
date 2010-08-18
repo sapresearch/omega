@@ -1,0 +1,54 @@
+<% require_javascript 'thirdParty/jquery.validate.js' %>
+<% require_javascript 'validations/new_user.js' %>
+<div class="module">
+	<h1>Sign up for an new account</h1>
+
+	<div class="form">
+		<%= form_for @user, :'data-validations' => 'user[contact,role]' do |f| %>
+			<%= errors_for_form @user %>
+			<%= hidden_field_tag :registration, params['registration'] %>
+
+				<p>
+					<%= f.label :user %>
+					<%= f.text_field :username %>
+				</p>
+
+				<p>
+					<%= f.label:first_name %>
+					<%= f.text_field :first_name %>
+				</p>
+
+				<p>
+					<%= f.label :last_name %>
+					<%= f.text_field :last_name %>
+				</p>
+
+				<p>
+					<%= f.label :email %>
+					<%= f.text_field :email %>
+				</p>
+
+
+				<p>
+					<%= f.label :password %>
+					<%= f.password_field :password %>
+				</p>
+
+				<p>
+					<%= f.label :confirmation %>
+					<%= f.password_field :password_confirmation %>
+				</p>
+
+
+				<%=f.submit %>
+
+		
+
+
+		<% end %>
+
+	</div>
+</div>
+<% content_for :sidebar do %>
+	<%= render :partial => "layouts/sidebar_home" %>
+<% end %>

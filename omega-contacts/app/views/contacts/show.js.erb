@@ -1,0 +1,7 @@
+$('#contacts_contact_pane').empty().append('<%= escape_javascript(render(:partial => 'contacts/shared/contact_details')) %>');
+
+<% if request.post? %>
+$('#contacts ul').append('<%= escape_javascript(render('contact_row', :contact_row => @contact)) %>');
+<% elsif request.put? %>
+$('#contact_<%= @contact.id %>').replaceWith('<%= escape_javascript(render('contact_row', :contact_row => @contact)) %>');
+<% end %>

@@ -1,0 +1,46 @@
+<% require_javascript 'nested', 'thirdParty/jquery.validate.js', 'validations/new_contact.js' %>
+<div class="form">
+  <%= form_for @contact, :remote => true do |f| %>
+      <%= errors_for_form @contact %>
+      <div id="contact_image">
+        please choose an image
+      </div>
+      <p>
+        <%= f.label t(:title) %>
+        <%= f.select :title, options_for_select(Contact::TITLES) %>
+      </p>
+      <p>
+        <%= f.label t(:first_name) %>
+        <%= f.text_field :first_name %>
+      </p>
+
+      <p>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+      </p>
+
+      <p>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+      </p>
+
+      <div id="addresses">
+        <%= f.fields_for :addresses do |a| %>
+            <%= render 'address_form', :f => a %>
+        <% end %>
+        <%= link_to_new_nested f, :addresses do |a| %>
+            <%= render 'address_form', :f => a %>
+        <% end %>
+      </div>
+
+      <div id="phone_numbers">
+        <%= f.fields_for :phone_numbers do |pn| %>
+            <%= render 'phone_number_form', :f => pn %>
+        <% end %>
+        <%= link_to_new_nested f, :phone_numbers do |pn| %>
+            <%= render 'phone_number_form', :f => pn %>
+        <% end %>
+      </div>
+      <%= f.submit %>
+  <% end %>
+</div>

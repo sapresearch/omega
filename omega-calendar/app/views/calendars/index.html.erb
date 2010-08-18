@@ -1,0 +1,13 @@
+<% require_javascript 'thirdParty/jquery.fullcalendar.js' , 'calendars.js' %>
+<% require_stylesheet 'thirdParty/jquery.fullcalendar.css', 'omega_calendars.css' %>
+
+<h1>Calendar Name</h1>
+<div id="cal">
+</div>
+<% content_for :sidebar do %>
+	<%= render :partial => "layouts/sidebox_calendars" %>
+<% end %>
+
+<% content_for :rows do %>
+	<%= render :partial => "layouts/sidebox_events" %>
+<% end %>
