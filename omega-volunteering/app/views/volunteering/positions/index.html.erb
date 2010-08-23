@@ -1,51 +1,67 @@
+<% require_javascript 'omega_volunteering' %>
+<% require_stylesheet 'omega_volunteering' %>
 <h1>Listing positions</h1>
-<span class="arrow"></span>
 <ul id="positions_list">
-	<% Volunteering::Position.all.each do |position| %>
-		<li class="clearfix">
-			<div class="posDate">
-				<div class="posCalMonth"> <%= position.start_date.strftime("%b") %></div>
-				<div class="posCalDay"> <%= position.start_date.day %></div>
+  <% Volunteering::Position.all.each do |position| %>
+      <li class="clearfix">
+        <div class="position">
+          <div class="actions">
 
-			</div>
+            <%= link_to 'Show', position %>
+            <%= link_to 'Edit', edit_volunteering_position_path(position) %>
+            <%= link_to 'Destroy', :method => "delete" %>
 
-			<div class="posDetails">
-				<div>
+          </div>
+          <% if position.start? %>
+              <div class="posDate">
+                <div class="posCalMonth">
 
-					<h2><%= position.name %></h2>
+                  <%= position.start.strftime("%b") %></div>
 
-				</div>
+                <div class="posCalDay"> <%= position.start.day %></div>
+              </div>
+           <% else %>
+          <div class="posDate">
+                <div class="posCalMonth">
+
+                  </div>
+
+                <div class="posCalDay"></div>
+              </div>
+          <% end %>
+          <div >
+
+            <h2><%= position.name %></h2>
 
 
-				<div class="posDescribtion">	<%= position.description %></div>
+            <p class="posDescribtion">
+
+              <%= truncate(position.description, :length=> 200) %>
+            </p>
+             <% if position.start? %>
 					<span class="liDate">
-					Start: <%= position.start_date.to_formatted_s(:short) %>
-						<br>
+					Start: <%= position.start.to_formatted_s(:short) %>
+                      <br>
 
-					End: <%= position.end_date.to_formatted_s(:short) %>
+					End: <%= position.end.to_formatted_s(:short) %>
 					</span>
+<% end %>
 
-				<div class="posActions go">
-					<div class="toolTip">
-						<div>
-							<%= link_to 'Show', position %>&nbsp;
-							<%= link_to 'Edit', edit_volunteering_position_path(position) %> &nbsp;
-							<%= link_to 'Destroy', :method => "delete" %>
-						</div>
-						<div class="toolTipArrow"></div>
-					</div>
-				</div>
+          </div>
 
-			</div>
+          <div class="clear"></div>
 
-			<%#= position.contact %>
-			<%#= link_to 'Show', position %>
-			<%#= link_to 'Edit', edit_volunteering_position_path(position) %>
-			<%#= link_to 'Destroy', position, :confirm => 'Are you sure?', :method => :delete %>
-		</li>
 
-	<% end %>
+        </div>
+
+        <%#= position.contact %>
+        <%#= link_to 'Show', position %>
+        <%#= link_to 'Edit', edit_volunteering_position_path(position) %>
+        <%#= link_to 'Destroy', position, :confirm => 'Are you sure?', :method => :delete %>
+      </li>
+
+  <% end %>
 </ul>
 <% content_for :sidebar do %>
-	<%= render :partial => "layouts/sidebar_positions" %>
+    <%= render :partial => "layouts/sidebar_positions" %>
 <% end %>

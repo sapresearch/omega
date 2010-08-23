@@ -1,0 +1,22 @@
+<tr>
+  <td>
+    <%= d.object.day %>
+  </td>
+  <td>
+    <%= d.check_box :day, :id => nil %>
+
+  </td>
+  <td>
+    <%= d.text_field :start_time, :disabled => true, :size=> 5, :class=> 'tpickr' %>
+  </td>
+  <td>
+    <%= d.text_field :end_time, :disabled => true, :size=> 5, :class=> 'tpickr' %>
+  </td>
+  <td>
+    <%= d.text_field :volunteers, :disabled => true, :size=> 5 %>
+  </td>
+</tr>
+
+
+
+

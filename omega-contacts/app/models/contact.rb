@@ -20,11 +20,15 @@ class Contact < ActiveRecord::Base
   has_many :addresses,     :as => :contact, :dependent => :destroy
   has_many :phone_numbers, :as => :contact, :dependent => :destroy
 
+  accepts_flattened_values_for :interests, :skills, :value => :name
+
   accepts_nested_attributes_for :addresses, :phone_numbers,
                                 :reject_if => NestedHelper::REJECT_TEMPLATE, :allow_destroy => true
 
   default_scope order('last_name, first_name')
-  scope :orderd, order('last_name, first_name')
+  scope :ordered, order('last_name, first_name')
+
+  scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
 
   validates :title,      :presence  => true,
                          :inclusion => { :in => TITLES }

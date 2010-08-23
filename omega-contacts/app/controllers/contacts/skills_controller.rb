@@ -5,6 +5,9 @@ class Contacts::SkillsController < ApplicationController
   require_permission Contact::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 
   def index
+    if q = params[:q]
+      @contact_skills = Contact::Skill.where('name like ?', "%#{q}%")
+    end
     respond_with(@contact_skills)
   end
 

@@ -1,0 +1,123 @@
+<% require_stylesheet 'omega_volunteering','jquery.autocomplete' %>
+<% require_javascript 'new_volunteering_position.js','jquery.autocomplete' %>
+
+
+
+<%= form_for(@position) do |f| %>
+    <% if @position.errors.any? %>
+        <div id="errorExplanation">
+          <h2><%= pluralize(@position.errors.count, "error") %>prohibited this position from being
+            saved:</h2>
+          <ul>
+            <% @position.errors.full_messages.each do |msg| %>
+                <li>
+                  <%= msg %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <p>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :description %>
+      <%= f.text_area :description, :rows => 6 %>
+    </p>
+    <p>
+      <%= f.label :hours %>
+      <%= f.text_field :hours, :class => "inputSmall" %>
+    </p>
+    <p>
+      <%#= f.label :volunteers_required %>
+      <%#= f.text_field :volunteers_required, :class => "inputSmall" %>
+    </p>
+    <p>
+      <%= f.label :recurrent %>
+      <%= f.check_box :recurrence %>
+
+    </p>
+    <div id="non_recurrent">
+
+      <p>
+        <%= f.label :start_date %>
+        <%= f.text_field :start_date_nr, :class=>'datepickr', :size=>7 %>
+        <%= f.text_field :starttime_nr, :class=>'tpickr', :size=>7 %>
+      </p>
+
+      <p>
+        <%= f.label :end_date %>
+        <%= f.text_field :end_date_nr, :class=>'datepickr', :size=>7 %>
+        <%= f.text_field :endtime_nr, :class=>'tpickr', :size=>7 %>
+      </p>
+    </div>
+    <div id="scheduler">
+      <label for="volunteering_position[schedule_type]">Pattern</label>
+
+      <%= f.fields_for :schedule do |ff| %>
+
+          <% ['daily', 'weekly', 'monthly', 'yearly'].each do |d| %>
+              <%= ff.radio_button :schedule_type, d, :id=> nil %> <%= d %>
+          <% end %>
+      <% end %>
+
+
+      <%= render('form_schedule_weekly', :f => f) %>
+      <%= render('form_schedule_daily', :f => f) %>
+    </div>
+
+    <p>
+      <%= f.label :volunteers_needed %>
+      <%= f.text_field :volunteers_required, :size=>7 %>
+    </p>
+
+    <p>
+      <%#= f.label :skills_values %>
+
+      <%#= f.text_field :skills_values %>
+
+    <p>
+      <%#= f.label :interests_values %>
+
+      <%#= f.text_field :interests_values %>
+
+
+
+
+    <div id="vp_contact">
+      <% [[:none, 'no contact'], [:existing, 'existing contact'], [:new, 'new contact']].each do |value, text| %>
+          <%= radio_button_tag 'contact_assignment', value, false %><%= text %>
+      <% end %>
+
+      <fieldset id="position_exisiting_contact" class="hide">
+        <legend>Assign an existing contact</legend>
+        <%= f.label :contact_id %>
+        <%= text_field_tag 'ac_contacts',nil, :class=>'left' %>
+        <%= f.hidden_field :contact_id %>
+        <ul id="assigned_contacts" class="left">
+          
+        </ul>
+      </fieldset>
+
+
+      <fieldset id="position_new_contact" class="hide">
+        <legend>Create a new contact</legend>
+        <%= f.fields_for :contact do |ff| %>
+            <%= render 'contact_form', :f => ff %>
+        <% end %>
+      </fieldset>
+
+
+    </div>
+
+
+
+
+    <p>
+
+      <%= cust_button f.submit %>
+    </p>
+
+
+<% end %>

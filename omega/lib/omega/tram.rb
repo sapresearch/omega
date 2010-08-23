@@ -12,6 +12,10 @@ module Omega
       end
     end
 
+    initializer :'omega.add_mime_types' do
+      Mime::Type.register_alias('text/plain', :psv)
+    end
+
     initializer :'omega.set_field_error_proc' do
       ActiveSupport.on_load(:action_view) do
         # Override the default error message layout

@@ -1,4 +1,593 @@
 <% require_javascript 'nested', 'thirdParty/jquery.validate.js', 'validations/new_contact.js' %>
+<%= javascript_tag do %>
+     /*
+ * AutoSuggest
+ * Copyright 2009-2010 Drew Wilson
+ * www.drewwilson.com
+ * code.drewwilson.com/entry/autosuggest-jquery-plugin
+ *
+ * Version 1.4   -   Updated: Mar. 23, 2010
+ *
+ * This Plug-In will auto-complete or auto-suggest completed search queries
+ * for you as you type. You can add multiple selections and remove them on
+ * the fly. It supports keybord navigation (UP + DOWN + RETURN), as well
+ * as multiple AutoSuggest fields on the same page.
+ *
+ * Inspied by the Autocomplete plugin by: Jšrn Zaefferer
+ * and the Facelist plugin by: Ian Tearle (iantearle.com)
+ *
+ * This AutoSuggest jQuery plug-in is dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ */
+
+(function($){
+	$.fn.autoSuggest = function(data, options) {
+		var defaults = {
+			asHtmlID: false,
+			startText: "Enter Name Here",
+			emptyText: "No Results Found",
+			preFill: {},
+			limitText: "No More Selections Are Allowed",
+			selectedItemProp: "value", //name of object property
+			selectedValuesProp: "value", //name of object property
+			searchObjProps: "value", //comma separated list of object property names
+			queryParam: "q",
+			retrieveLimit: false, //number for 'limit' param on ajax request
+			extraParams: "",
+			matchCase: false,
+			minChars: 1,
+			keyDelay: 400,
+			resultsHighlight: true,
+			neverSubmit: false,
+			selectionLimit: false,
+			showResultList: true,
+		  	start: function(){},
+		  	selectionClick: function(elem){},
+		  	selectionAdded: function(elem){},
+		  	selectionRemoved: function(elem){ elem.remove(); },
+		  	formatList: false, //callback function
+		  	beforeRetrieve: function(string){ return string; },
+		  	retrieveComplete: function(data){ return data; },
+		  	resultClick: function(data){},
+		  	resultsComplete: function(){}
+	  	};
+	 	var opts = $.extend(defaults, options);
+
+		var d_type = "object";
+		var d_count = 0;
+		if(typeof data == "string") {
+			d_type = "string";
+			var req_string = data;
+		} else {
+			var org_data = data;
+			for (k in data) if (data.hasOwnProperty(k)) d_count++;
+		}
+		if((d_type == "object" && d_count > 0) || d_type == "string"){
+			return this.each(function(x){
+				if(!opts.asHtmlID){
+					x = x+""+Math.floor(Math.random()*100); //this ensures there will be unique IDs on the page if autoSuggest() is called multiple times
+					var x_id = "as-input-"+x;
+				} else {
+					x = opts.asHtmlID;
+					var x_id = x;
+				}
+				opts.start.call(this);
+				var input = $(this);
+				input.attr("autocomplete","off").addClass("as-input").attr("id",x_id).val(opts.startText);
+				var input_focus = false;
+
+				// Setup basic elements and render them to the DOM
+				input.wrap('<ul class="as-selections" id="as-selections-'+x+'"></ul>').wrap('<li class="as-original" id="as-original-'+x+'"></li>');
+				var selections_holder = $("#as-selections-"+x);
+				var org_li = $("#as-original-"+x);
+				var results_holder = $('<div class="as-results" id="as-results-'+x+'"></div>').hide();
+				var results_ul =  $('<ul class="as-list"></ul>');
+				var values_input = $('<input type="hidden" class="as-values" name="as_values_'+x+'" id="as-values-'+x+'" />');
+				var prefill_value = "";
+				if(typeof opts.preFill == "string"){
+					var vals = opts.preFill.split(",");
+					for(var i=0; i < vals.length; i++){
+						var v_data = {};
+						v_data[opts.selectedValuesProp] = vals[i];
+						if(vals[i] != ""){
+							add_selected_item(v_data, "000"+i);
+						}
+					}
+					prefill_value = opts.preFill;
+				} else {
+					prefill_value = "";
+					var prefill_count = 0;
+					for (k in opts.preFill) if (opts.preFill.hasOwnProperty(k)) prefill_count++;
+					if(prefill_count > 0){
+						for(var i=0; i < prefill_count; i++){
+							var new_v = opts.preFill[i][opts.selectedValuesProp];
+							if(new_v == undefined){ new_v = ""; }
+							prefill_value = prefill_value+new_v+",";
+							if(new_v != ""){
+								add_selected_item(opts.preFill[i], "000"+i);
+							}
+						}
+					}
+				}
+				if(prefill_value != ""){
+					input.val("");
+					var lastChar = prefill_value.substring(prefill_value.length-1);
+					if(lastChar != ","){ prefill_value = prefill_value+","; }
+					values_input.val(","+prefill_value);
+					$("li.as-selection-item", selections_holder).addClass("blur").removeClass("selected");
+				}
+				input.after(values_input);
+				selections_holder.click(function(){
+					input_focus = true;
+					input.focus();
+				}).mousedown(function(){ input_focus = false; }).after(results_holder);
+
+				var timeout = null;
+				var prev = "";
+				var totalSelections = 0;
+				var tab_press = false;
+
+				// Handle input field events
+				input.focus(function(){
+					if($(this).val() == opts.startText && values_input.val() == ""){
+						$(this).val("");
+					} else if(input_focus){
+						$("li.as-selection-item", selections_holder).removeClass("blur");
+						if($(this).val() != ""){
+							results_ul.css("width",selections_holder.outerWidth());
+							results_holder.show();
+						}
+					}
+					input_focus = true;
+					return true;
+				}).blur(function(){
+					if($(this).val() == "" && values_input.val() == "" && prefill_value == ""){
+						$(this).val(opts.startText);
+					} else if(input_focus){
+						$("li.as-selection-item", selections_holder).addClass("blur").removeClass("selected");
+						results_holder.hide();
+					}
+				}).keydown(function(e) {
+					// track last key pressed
+					lastKeyPressCode = e.keyCode;
+					first_focus = false;
+					switch(e.keyCode) {
+						case 38: // up
+							e.preventDefault();
+							moveSelection("up");
+							break;
+						case 40: // down
+							e.preventDefault();
+							moveSelection("down");
+							break;
+						case 8:  // delete
+							if(input.val() == ""){
+								var last = values_input.val().split(",");
+								last = last[last.length - 2];
+								selections_holder.children().not(org_li.prev()).removeClass("selected");
+								if(org_li.prev().hasClass("selected")){
+									values_input.val(values_input.val().replace(","+last+",",","));
+									opts.selectionRemoved.call(this, org_li.prev());
+								} else {
+									opts.selectionClick.call(this, org_li.prev());
+									org_li.prev().addClass("selected");
+								}
+							}
+							if(input.val().length == 1){
+								results_holder.hide();
+								 prev = "";
+							}
+							if($(":visible",results_holder).length > 0){
+								if (timeout){ clearTimeout(timeout); }
+								timeout = setTimeout(function(){ keyChange(); }, opts.keyDelay);
+							}
+							break;
+						case 9: case 188:  // tab or comma
+							tab_press = true;
+							var i_input = input.val().replace(/(,)/g, "");
+							if(i_input != "" && values_input.val().search(","+i_input+",") < 0 && i_input.length >= opts.minChars){
+								e.preventDefault();
+								var n_data = {};
+								n_data[opts.selectedItemProp] = i_input;
+								n_data[opts.selectedValuesProp] = i_input;
+								var lis = $("li", selections_holder).length;
+								add_selected_item(n_data, "00"+(lis+1));
+								input.val("");
+							}
+						case 13: // return
+							tab_press = false;
+							var active = $("li.active:first", results_holder);
+							if(active.length > 0){
+								active.click();
+								results_holder.hide();
+							}
+							if(opts.neverSubmit || active.length > 0){
+								e.preventDefault();
+							}
+							break;
+						default:
+							if(opts.showResultList){
+								if(opts.selectionLimit && $("li.as-selection-item", selections_holder).length >= opts.selectionLimit){
+									results_ul.html('<li class="as-message">'+opts.limitText+'</li>');
+									results_holder.show();
+								} else {
+									if (timeout){ clearTimeout(timeout); }
+									timeout = setTimeout(function(){ keyChange(); }, opts.keyDelay);
+								}
+							}
+							break;
+					}
+				});
+
+				function keyChange() {
+					// ignore if the following keys are pressed: [del] [shift] [capslock]
+					if( lastKeyPressCode == 46 || (lastKeyPressCode > 8 && lastKeyPressCode < 32) ){ return results_holder.hide(); }
+					var string = input.val().replace(/[\\]+|[\/]+/g,"");
+					if (string == prev) return;
+					prev = string;
+					if (string.length >= opts.minChars) {
+						selections_holder.addClass("loading");
+						if(d_type == "string"){
+							var limit = "";
+							if(opts.retrieveLimit){
+								limit = "&limit="+encodeURIComponent(opts.retrieveLimit);
+							}
+							if(opts.beforeRetrieve){
+								string = opts.beforeRetrieve.call(this, string);
+							}
+							$.getJSON(req_string+"?"+opts.queryParam+"="+encodeURIComponent(string)+limit+opts.extraParams, function(data){
+								d_count = 0;
+								var new_data = opts.retrieveComplete.call(this, data);
+								for (k in new_data) if (new_data.hasOwnProperty(k)) d_count++;
+								processData(new_data, string);
+							});
+						} else {
+							if(opts.beforeRetrieve){
+								string = opts.beforeRetrieve.call(this, string);
+							}
+							processData(org_data, string);
+						}
+					} else {
+						selections_holder.removeClass("loading");
+						results_holder.hide();
+					}
+				}
+				var num_count = 0;
+				function processData(data, query){
+					if (!opts.matchCase){ query = query.toLowerCase(); }
+					var matchCount = 0;
+					results_holder.html(results_ul.html("")).hide();
+					for(var i=0;i<d_count;i++){
+						var num = i;
+						num_count++;
+						var forward = false;
+						if(opts.searchObjProps == "value") {
+							var str = data[num].value;
+						} else {
+							var str = "";
+							var names = opts.searchObjProps.split(",");
+							for(var y=0;y<names.length;y++){
+								var name = $.trim(names[y]);
+								str = str+data[num][name]+" ";
+							}
+						}
+						if(str){
+							if (!opts.matchCase){ str = str.toLowerCase(); }
+							if(str.search(query) != -1 && values_input.val().search(","+data[num][opts.selectedValuesProp]+",") == -1){
+								forward = true;
+							}
+						}
+						if(forward){
+							var formatted = $('<li class="as-result-item" id="as-result-item-'+num+'"></li>').click(function(){
+									var raw_data = $(this).data("data");
+									var number = raw_data.num;
+									if($("#as-selection-"+number, selections_holder).length <= 0 && !tab_press){
+										var data = raw_data.attributes;
+										input.val("").focus();
+										prev = "";
+										add_selected_item(data, number);
+										opts.resultClick.call(this, raw_data);
+										results_holder.hide();
+									}
+									tab_press = false;
+								}).mousedown(function(){ input_focus = false; }).mouseover(function(){
+									$("li", results_ul).removeClass("active");
+									$(this).addClass("active");
+								}).data("data",{attributes: data[num], num: num_count});
+							var this_data = $.extend({},data[num]);
+							if (!opts.matchCase){
+								var regx = new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + query + ")(?![^<>]*>)(?![^&;]+;)", "gi");
+							} else {
+								var regx = new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + query + ")(?![^<>]*>)(?![^&;]+;)", "g");
+							}
+
+							if(opts.resultsHighlight){
+								this_data[opts.selectedItemProp] = this_data[opts.selectedItemProp].replace(regx,"<em>$1</em>");
+							}
+							if(!opts.formatList){
+								formatted = formatted.html(this_data[opts.selectedItemProp]);
+							} else {
+								formatted = opts.formatList.call(this, this_data, formatted);
+							}
+							results_ul.append(formatted);
+							delete this_data;
+							matchCount++;
+							if(opts.retrieveLimit && opts.retrieveLimit == matchCount ){ break; }
+						}
+					}
+					selections_holder.removeClass("loading");
+					if(matchCount <= 0){
+						results_ul.html('<li class="as-message">'+opts.emptyText+'</li>');
+					}
+					results_ul.css("width", selections_holder.outerWidth());
+					results_holder.show();
+					opts.resultsComplete.call(this);
+				}
+
+				function add_selected_item(data, num){
+					values_input.val(values_input.val()+data[opts.selectedValuesProp]+",");
+					var item = $('<li class="as-selection-item" id="as-selection-'+num+'"></li>').click(function(){
+							opts.selectionClick.call(this, $(this));
+							selections_holder.children().removeClass("selected");
+							$(this).addClass("selected");
+						}).mousedown(function(){ input_focus = false; });
+					var close = $('<a class="as-close">&times;</a>').click(function(){
+							values_input.val(values_input.val().replace(","+data[opts.selectedValuesProp]+",",","));
+							opts.selectionRemoved.call(this, item);
+							input_focus = true;
+							input.focus();
+							return false;
+						});
+					org_li.before(item.html(data[opts.selectedItemProp]).prepend(close));
+					opts.selectionAdded.call(this, org_li.prev());
+				}
+
+				function moveSelection(direction){
+					if($(":visible",results_holder).length > 0){
+						var lis = $("li", results_holder);
+						if(direction == "down"){
+							var start = lis.eq(0);
+						} else {
+							var start = lis.filter(":last");
+						}
+						var active = $("li.active:first", results_holder);
+						if(active.length > 0){
+							if(direction == "down"){
+							start = active.next();
+							} else {
+								start = active.prev();
+							}
+						}
+						lis.removeClass("active");
+						start.addClass("active");
+					}
+				}
+
+			});
+		}
+	}
+})(jQuery);  	
+<% end %>
+<style type="text/css">
+  /* AutoSuggest CSS - Version 1.2 */
+
+ul.as-selections {
+	list-style-type: none;
+	border-top: 1px solid #888;
+	border-bottom: 1px solid #b6b6b6;
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	padding: 4px 0 4px 4px;
+	margin: 0;
+	overflow: auto;
+	background-color: #fff;
+	box-shadow:inset 0 1px 2px #888;
+	-webkit-box-shadow:inset 0 1px 2px #888;
+	-moz-box-shadow:inset 0 1px 2px #888;
+}
+
+ul.as-selections.loading {
+	background-color: #eee;
+}
+
+ul.as-selections li {
+	float: left;
+	margin: 1px 4px 1px 0;
+}
+
+ul.as-selections li.as-selection-item {
+	color: #2b3840;
+	font-size: 13px;
+	font-family: "Lucida Grande", arial, sans-serif;
+	text-shadow: 0 1px 1px #fff;
+	background-color: #ddeefe;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddeefe), to(#bfe0f1));
+	border: 1px solid #acc3ec;
+	border-top-color: #c0d9e9;
+	padding: 2px 7px 2px 10px;
+	border-radius: 12px;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	box-shadow: 0 1px 1px #e4edf2;
+	-webkit-box-shadow: 0 1px 1px #e4edf2;
+	-moz-box-shadow: 0 1px 1px #e4edf2;
+}
+
+ul.as-selections li.as-selection-item:last-child {
+	margin-left: 30px;
+}
+
+ul.as-selections li.as-selection-item a.as-close {
+	float: right;
+	margin: 1px 0 0 7px;
+	padding: 0 2px;
+	cursor: pointer;
+	color: #5491be;
+	font-family: "Helvetica", helvetica, arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: 0 1px 1px #fff;
+	-webkit-transition: color .1s ease-in;
+}
+
+ul.as-selections li.as-selection-item.blur {
+	color: #666666;
+	background-color: #f4f4f4;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4f4f4), to(#d5d5d5));
+	border-color: #bbb;
+	border-top-color: #ccc;
+	box-shadow: 0 1px 1px #e9e9e9;
+	-webkit-box-shadow: 0 1px 1px #e9e9e9;
+	-moz-box-shadow: 0 1px 1px #e9e9e9;
+}
+
+ul.as-selections li.as-selection-item.blur a.as-close {
+	color: #999;
+}
+
+ul.as-selections li:hover.as-selection-item {
+	color: #2b3840;
+	background-color: #bbd4f1;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bbd4f1), to(#a3c2e5));
+	border-color: #6da0e0;
+	border-top-color: #8bb7ed;
+}
+
+ul.as-selections li:hover.as-selection-item a.as-close {
+	color: #4d70b0;
+}
+
+ul.as-selections li.as-selection-item.selected {
+	border-color: #1f30e4;
+}
+
+ul.as-selections li.as-selection-item a:hover.as-close {
+	color: #1b3c65;
+}
+
+ul.as-selections li.as-selection-item a:active.as-close {
+	color: #4d70b0;
+}
+
+ul.as-selections li.as-original {
+	margin-left: 0;
+}
+
+ul.as-selections li.as-original input {
+	border: none;
+	outline: none;
+	font-size: 13px;
+	width: 120px;
+	height: 18px;
+	padding-top: 3px;
+}
+
+ul.as-list {
+	position: absolute;
+	list-style-type: none;
+	margin: 2px 0 0 0;
+	padding: 0;
+	font-size: 14px;
+	color: #000;
+	font-family: "Lucida Grande", arial, sans-serif;
+	background-color: #fff;
+	background-color: rgba(255,255,255,0.95);
+	z-index: 2;
+	box-shadow: 0 2px 12px #222;
+	-webkit-box-shadow: 0 2px 12px #222;
+	-moz-box-shadow: 0 2px 12px #222;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+li.as-result-item, li.as-message {
+	margin: 0 0 0 0;
+	padding: 5px 12px;
+	background-color: transparent;
+	border: 1px solid #fff;
+	border-bottom: 1px solid #ddd;
+	cursor: pointer;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+li:first-child.as-result-item {
+	margin: 0;
+}
+
+li.as-message {
+	margin: 0;
+	cursor: default;
+}
+
+li.as-result-item.active {
+	background-color: #3668d9;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 64%, from(rgb(110, 129, 245)), to(rgb(62, 82, 242)));
+	border-color: #3342e8;
+	color: #fff;
+	text-shadow: 0 1px 2px #122042;
+}
+
+li.as-result-item em {
+	font-style: normal;
+	background: #444;
+	padding: 0 2px;
+	color: #fff;
+}
+
+li.as-result-item.active em {
+	background: #253f7a;
+	color: #fff;
+}
+
+/* Webkit Hacks  */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	ul.as-selections {
+		border-top-width: 2px;
+	}
+	ul.as-selections li.as-selection-item {
+		padding-top: 3px;
+		padding-bottom: 3px;
+	}
+	ul.as-selections li.as-selection-item a.as-close {
+		margin-top: -1px;
+	}
+	ul.as-selections li.as-original input {
+		height: 19px;
+	}
+}
+
+/* Opera Hacks  */
+@media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
+	ul.as-list {
+		border: 1px solid #888;
+	}
+	ul.as-selections li.as-selection-item a.as-close {
+		margin-left: 4px;
+		margin-top: 0;
+	}
+}
+
+/* IE Hacks  */
+ul.as-list {
+	border: 1px solid #888\9;
+}
+ul.as-selections li.as-selection-item a.as-close {
+	margin-left: 4px\9;
+	margin-top: 0\9;
+}
+
+/* Firefox 3.0 Hacks */
+ul.as-list,  x:-moz-any-link, x:default {
+	border: 1px solid #888;
+}
+BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
+	border: none;
+}
+</style>
 <div class="form">
   <%= form_for @contact, :remote => true do |f| %>
       <%= errors_for_form @contact %>
@@ -22,6 +611,17 @@
       <p>
         <%= f.label :email %>
         <%= f.email_field :email %>
+      </p>
+
+      <p>
+        <%= f.label :skills %>
+        <%= f.text_field :skills_values %>
+        <%= javascript_tag do %>
+            $(function () {
+                $('#contact_skills_values').autoSuggest('/contacts/skills', {selectedItemProp: "name", selectedValuesProp: "name"});
+
+            });
+        <% end %>
       </p>
 
       <div id="addresses">

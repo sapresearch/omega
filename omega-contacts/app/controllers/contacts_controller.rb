@@ -41,9 +41,19 @@ class ContactsController < ApplicationController
     respond_with(@contact = Contact.create(params[:contact]))
   end
 
+  def autocomplete
+    @q = params[:q]
+    @contacts = Contact.named(@q)
+    @contacts.limit(params[:limit]) if params[:limit]
+
+    respond_with(@contacts) do |format|
+      format.psv { render :text => @contacts.map { |c| "#{c.last_name} #{c.first_name}|#{c.id}" }.join("\n") }
+    end
+  end
+
   def search
     @q = params[:q]
-    @contacts = Contact.where('last_name like ? or first_name like ?', "%#{@q}%", "%#{@q}%").order('last_name')
+    @contacts = Contact.named(@q)
 
     respond_with(@contacts) do |format|
       format.any(:html, :js) { render 'all' }
