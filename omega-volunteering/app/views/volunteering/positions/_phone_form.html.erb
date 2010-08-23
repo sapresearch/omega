@@ -1,0 +1,14 @@
+<%= div_for f.object do %>
+	
+   <p>
+		<%= f.label :number_type %>
+		<%= f.select :number_type, options_for_select(Contact::PhoneNumber::NUMBER_TYPES) %>
+	</p>
+
+    <p>
+		<%= f.label :number %>
+		<%= f.text_field :number %>
+	</p>
+    
+
+<% end %>

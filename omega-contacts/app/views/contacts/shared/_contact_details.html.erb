@@ -1,5 +1,3 @@
-<% require_javascript 'contacts' %>
-<% require_stylesheet 'contacts' %>
 <div id="contact_mgm" class="corners">
   <span class="btn_action left"> <span class="icon-delete"></span> <%= link_to 'delete', @contact, :method=> :delete, :remote => true %></span>
   <span class="btn_action left"> <span class="icon-edit"></span> <%= link_to 'edit', edit_contact_path(@contact), :remote => true %></span>

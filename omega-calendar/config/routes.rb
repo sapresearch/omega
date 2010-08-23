@@ -6,7 +6,4 @@ Omega::Calendar::Tram.routes.draw do
   resources :calendars
   resources :events
   resources :form_builders
-  
-
-  
 end

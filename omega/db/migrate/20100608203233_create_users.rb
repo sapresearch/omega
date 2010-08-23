@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration
       t.timestamps
     end
     add_index :users, :username
+    add_index :users, :email
   end
 
   def self.down

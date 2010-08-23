@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
-  include Mixins::Controllers::Crud
-  include Mixins::Controllers::CurrentUser
-  include Mixins::Controllers::Permissions
-  include Mixins::Controllers::SubLayouts
+  include Omega::Mixins::Controllers::Crud
+  include Omega::Mixins::Controllers::CurrentUser
+  include Omega::Mixins::Controllers::Permissions
+  include Omega::Mixins::Controllers::SubLayouts
 
   include Trams::Assets::Dependencies
   

@@ -6,6 +6,7 @@ class CreatePermissions < ActiveRecord::Migration
       t.string :value,       :null => false
       t.text   :description
     end
+    add_index :permissions, :name
     add_index :permissions, :value
 
     create_table :permissions_roles, :id => false do |t|

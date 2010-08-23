@@ -1,5 +1,5 @@
 Omega::Contacts::Tram.routes.draw do
-  scope :path => 'contacts', :as => 'contact', :module => 'contacts' do
+  scope :path => 'contacts', :name_prefix => 'contact', :module => 'contacts' do
     resources :groups
     resources :households
     resources :organizations
@@ -12,10 +12,10 @@ Omega::Contacts::Tram.routes.draw do
       get :all
       get :search
 
-      match ':letter' => 'contacts#letter', :constraints => { :letter => /[A-Za-z]/}
+      match ':letter' => 'contacts#letter', :constraints => { :letter => %r[\w]}
     end
 
-    scope :as => 'contact', :module => 'contacts' do
+    scope :name_prefix => 'contact', :module => 'contacts' do
       resources :groups do
         member do
           put :assign
@@ -27,4 +27,4 @@ Omega::Contacts::Tram.routes.draw do
 
   match 'contacts/:action' => 'contacts#search'
 
-end
+  end

@@ -57,13 +57,6 @@ class User < ActiveRecord::Base
   before_update :save_password
   before_save   :ensure_has_authenticated_role
 
-  before_destroy :test
-
-  def test
-    puts "test()"
-#    false
-  end
-
   def authenticate(pass)
     password_hash == hash_password(pass)
   end

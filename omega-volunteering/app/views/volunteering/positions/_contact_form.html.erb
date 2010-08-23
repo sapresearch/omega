@@ -1,0 +1,32 @@
+<%= div_for f.object do %>
+    <%= errors_for_model f.object %>
+
+       <p>
+				<%= f.label t(:title) %>
+				<%= f.select :title, options_for_select(Contact::TITLES) %>
+       </p>
+
+
+        <p>
+            <%=f.label :first_name %>
+            <%= f.text_field :first_name %>
+        </p>
+
+        <p>
+            <%=f.label :last_name %>
+            <%= f.text_field :last_name %>
+        </p>
+         <p>
+            <%=f.label :email %>
+            <%= f.text_field :email %>
+        </p>
+
+
+
+        <%= f.fields_for :phone_numbers do |fff| %>
+
+            <%= render 'phone_form', :f => fff %>
+
+        <%end%>
+
+<%end%>

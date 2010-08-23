@@ -2,10 +2,12 @@ class SessionsController < ApplicationController
   respond_to :html, :xml, :json, :js
 
   def index
+    require_permission Session::PERMISSION_SESSIONS_VIEW
     respond_with(@sessions = Session.all)
   end
 
   def show
+    require_permission Session::PERMISSION_SESSIONS_VIEW
     respond_with(@session = Session.find_by_id(params[:id]))
   end
 
@@ -14,23 +16,17 @@ class SessionsController < ApplicationController
   end
 
   def edit
+    require_permission Session::PERMISSION_SESSIONS_EDIT
   end
 
   def create
     @session = Session.new(params[:session])
-    @session.requested_page = url_for(session[:requested_page]) if session[:requested_page]
-    options = {}
-
     if @session.authenticate
       flash['Logged in']
       set_current_user(@session.user)
-      options[location] = @session.requested_page || root_url
-
-      # clear out requested page so it doesn't come back after the user has logged out
-      session[:requested_page] = nil
     end
     
-    respond_with(@session, options)
+    respond_with(@session, :location => session[:requested_page] || root_url)
   end
 
   def update
@@ -39,6 +35,7 @@ class SessionsController < ApplicationController
 
   def destroy
     if params[:id]
+      require_permission Session::PERMISSION_SESSIONS_DESTROY
       @session = Session.find(params[:id])
     else
       @session = nil #current session?
@@ -51,7 +48,7 @@ class SessionsController < ApplicationController
   private
     def clear_current_user
       @current_user = nil
-      session[:user_id] = nil
+      reset_session
     end
 
     def set_current_user(user)

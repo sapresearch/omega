@@ -1,6 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <% content_for(:content) do # have yield up here so require_stylesheet in a view/partial works
-
+    render(:layout => "layouts/columns") do
+        (render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
+            (yield)
+        end)
+    end
 end %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -48,11 +52,7 @@ end %>
   </div>
 
   <div id="content" class="center">
-    <%= ii(render(:layout => "layouts/columns") do
-        (render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
-            (yield)
-        end)
-    end) %>
+    <%= ii yield(:content) %>
   </div>
 
   <%#= render :partial => "layouts/partials/social" %>

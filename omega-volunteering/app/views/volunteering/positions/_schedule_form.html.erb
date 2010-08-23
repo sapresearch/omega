@@ -1,0 +1,34 @@
+<h2>Recurrent Event</h2>
+
+<%= div_for f.object do %>
+
+        <p>
+            <%=f.label :schedule_type %>
+            <%= f.text_field :schedule_type %>
+        </p>
+
+        <p>
+            <%=f.label :value %>
+            <%= f.text_field :value %>
+        </p>
+
+        <p>
+            <%=f.label :start_date %>
+            <%= f.text_field :start_date %>
+        </p>
+
+        <p>
+            <%=f.label :end_date%>
+            <%= f.text_field :end_date %> 
+        </p>
+
+        <h2>Weekly Schedule Days</h2>
+
+            <%= f.fields_for :days do |fff| %>
+
+                <%= render 'schedule_days_form', :f => fff %>
+
+            <%end%>
+
+
+<%end%>

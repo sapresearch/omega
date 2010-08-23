@@ -24,10 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency('trams-assets',        trams_version)
   s.add_dependency('trams-custom-fields', trams_version)
   s.add_dependency('trams-files',         trams_version)
-  s.add_dependency('trams-locales',       trams_version)
   s.add_dependency('trams-logs',          trams_version)
-  s.add_dependency('trams-migrations',    trams_version)
-  s.add_dependency('trams-settings',      trams_version)
   
-  s.add_dependency('accepts-flattened-values', '>=0.1.2')
+  s.add_dependency('accepts-flattened-values', '>=0.1.3')
 end

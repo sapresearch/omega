@@ -7,16 +7,13 @@ class Session < ActiveRecord::Base
   belongs_to :user
 
   attr_accessor :username, :password
-  attr_accessor :requested_page
 
   scope :enabled, :conditions => { :enabled => true }
 
   def authenticate
-    # TODO: maybe add to errors, somehow
-    @authenticated ||= (self.user = User.authenticate(username, password)) ? true : false
-  end
-
-  def authenticated?
-    @authenticated ||= authenticate
+    unless self.user = User.authenticate(username, password)
+      errors['Username/password'] << 'is invalid'
+    end
+    user
   end
 end

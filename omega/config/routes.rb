@@ -15,8 +15,4 @@ Omega::Tram.routes.draw do
   resources :permissions, :only => [:index, :show]
   
   root :to => 'home#index'
-
-  namespace :contacts, :singular_path => true do
-    root :to => 'contacts#index'
-  end
 end
