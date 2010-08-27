@@ -1,0 +1,104 @@
+.ui_icon, .ui_emtextarea, .ui_em_checkbox,.ui_em_input,.ui_em_date,.ui_em_map,.ui_em_paragraph,.ui_em_select_box,.ui_em_data_table,
+.icon_minus,.icon_plus,.ui_element_plus,.ui_element_minus,.ui_em_paragraph, .ui_icon_move, .ui_icon_edit_app {
+  background:url("../images/form_builder_ui_elements.png") no-repeat;
+    width:16px;
+    height:16px;
+    display:block;
+    
+    margin:0.1em 0.1em;
+}
+.ui_em_checkbox{
+    background-position:0 0;
+}
+.ui_em_textarea{
+    background-position:0 -16px;
+}
+.ui_em_input{
+    background-position:0 -32px;
+}
+.ui_em_date{
+    background-position:0 -48px;
+}
+.ui_em_map{
+    background-position:0 -64px;
+}
+.ui_em_paragraph{
+    background-position:0 -80px;;
+}
+.ui_em_select_box{
+    background-position:0 -96px;;
+}
+.ui_em_data_table{
+    background-position:0 -112px;;
+}
+.icon_minus{
+    background-position:0 -128px;;
+}
+.icon_plus{
+    background-position:0 -144px;;
+}
+.ui_element_plus{
+    background-position:0 -160px;
+    cursor:pointer;
+}
+.ui_element_minus{
+    background-position:0 -176px;
+    cursor:pointer;
+}
+.ui_em_paragraph{
+    background-position:0 -192px;
+    cursor:pointer;
+}
+.ui_icon_move{
+    background-position:0 -208px;
+    cursor:move;
+}
+.ui_icon_edit_app{
+    background-position:0 -224px;
+    cursor:pointer;
+}
+
+#custom_form_preview_port{
+    padding:1em;
+    -moz-border-radius: 8px;
+    border:6px solid #DFE5E7;
+    background:#ECF2F4;
+}
+#fb_elements{
+    
+    
+}
+#fb_elements li,#custom_form_preview_port li {
+    font-size: 16px;
+
+   
+}
+
+.widget_control{
+
+    position:relative;
+   float:right; 
+ 
+
+}
+.cf_label{
+    width:100px;
+}
+.cf_div{
+    float:left;
+}
+.cf_explanation{
+    margin: 0 1em;
+    float:left;
+}
+.cf_move{
+    float:right
+}
+#custom_form li{
+  margin:0.5em 0;
+    border:1px dotted #DFE5E7;
+}
+.cf_explanation{
+    font-style:italic;
+    font-size:0.7em;
+}

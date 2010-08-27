@@ -7,7 +7,7 @@ class CreateUserSessions < ActiveRecord::Migration
       t.string     :last_activity
       t.datetime   :last_activity_at
     end
-    add_index :user_sessions, :user
+    add_index :user_sessions, :user_id
   end
 
   def self.down

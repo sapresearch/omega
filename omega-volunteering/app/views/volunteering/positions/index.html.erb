@@ -1,63 +1,48 @@
-<% require_javascript 'omega_volunteering' %>
 <% require_stylesheet 'omega_volunteering' %>
-<h1>Listing positions</h1>
+<% require_javascript 'omega_volunteering' %>
+
+<h1>Volunteering Overview</h1>
+<div class="postions_crl"><%= link_to 'sort by name', volunteering_positions_path(:name => 'asc') %></div>
+
 <ul id="positions_list">
-  <% Volunteering::Position.all.each do |position| %>
+  <% @positions.each do |position| %>
       <li class="clearfix">
         <div class="position">
-          <div class="actions">
+          <div class="position_actions">
+            <a href="">Delete</a>
+            <a href="">Delete</a>
+            <a href="">Delete</a>
 
-            <%= link_to 'Show', position %>
-            <%= link_to 'Edit', edit_volunteering_position_path(position) %>
-            <%= link_to 'Destroy', :method => "delete" %>
 
           </div>
-          <% if position.start? %>
-              <div class="posDate">
-                <div class="posCalMonth">
 
-                  <%= position.start.strftime("%b") %></div>
 
-                <div class="posCalDay"> <%= position.start.day %></div>
-              </div>
-           <% else %>
-          <div class="posDate">
-                <div class="posCalMonth">
-
-                  </div>
-
-                <div class="posCalDay"></div>
-              </div>
-          <% end %>
-          <div >
-
-            <h2><%= position.name %></h2>
+          <div>
+            <h2>
+              <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position)  %>
+              </h2>
 
 
             <p class="posDescribtion">
 
-              <%= truncate(position.description, :length=> 200) %>
+              <%= truncate(position.description, :length=> 160) %>
             </p>
-             <% if position.start? %>
-					<span class="liDate">
-					Start: <%= position.start.to_formatted_s(:short) %>
-                      <br>
+            <div class="position_details">
 
-					End: <%= position.end.to_formatted_s(:short) %>
-					</span>
-<% end %>
+
+    
+            </div>
+           <p class="position_tags">
+                <% Volunteering::Position.last.skills.each do  |skill|  %>
+            <span class="skill_tag"><a href=""><%= skill.name %></a> </span> 
+             <% end %>
+           </p>
 
           </div>
 
           <div class="clear"></div>
-
-
         </div>
-
         <%#= position.contact %>
-        <%#= link_to 'Show', position %>
-        <%#= link_to 'Edit', edit_volunteering_position_path(position) %>
-        <%#= link_to 'Destroy', position, :confirm => 'Are you sure?', :method => :delete %>
       </li>
 
   <% end %>

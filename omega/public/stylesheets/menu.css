@@ -1,0 +1,112 @@
+#mainMenu {
+    text-align: center;
+    margin: 0 auto;
+    width: 800px;
+    margin-top: 14px;
+}
+
+#mainMenu a {
+
+    margin:0.5em;
+    font-weight: bold;
+    font-size: 1em;;
+    color: #055f67;
+    text-transform:capitalize;
+
+    padding: 0 0 1px 50px;
+    background: url("../images/menu/icons.png") left no-repeat;
+}
+#mainMenu a.contacts{
+
+background-position: 0 0 ;
+}
+#mainMenu a.home{
+
+background-position:0 -20px ;
+}
+#mainMenu a.volunteering{
+
+background-position: 0 -40px ;
+}
+#mainMenu a.services{
+   
+background-position: 0 -60px ;
+}
+
+
+#mainMenu a:hover {
+    text-decoration: none;
+}
+
+#mainMenu li {
+    display: inline;
+    position: relative;
+}
+
+* + html #mainMenu li span.active {
+    border-top: solid 2px #E5E5E5;
+    padding-bottom: 3px;
+}
+
+#mainMenu div.sub_menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    margin-top: 18px;
+    border-top: solid 1px #1484E6;
+    border-left: solid 1px #1484E6;
+    border-right: solid 1px #61B0F2;
+    border-bottom: solid 1px #61B0F2;
+    padding: 4px;
+    top: 2px;
+    width: 160px;
+    background: #2A4A66;
+    z-index: 11000 !important;
+}
+
+* html #mainMenu div.sub_menu {
+    margin-top: 23px;
+}
+
+/* IE6 */
+* + html #mainMenu div.sub_menu {
+    margin-top: 23px;
+}
+
+/* IE7 */
+#mainMenu div.sub_menu a:link, #mainMenu div.sub_menu a:visited, #mainMenu div.sub_menu a:hover {
+    display: block;
+    font-size: 11px;
+    padding: 4px;
+}
+
+span.btn_menu_left_cap {
+    background: url("../images/menu/menu_button.png") no-repeat scroll 0 -74px transparent;
+    display: block;
+    float: left;
+    height: 37px;
+    width: 35px;
+}
+
+span.btn_menu_text {
+    background: url("../images/menu/menu_button.png") no-repeat scroll 0 -37px transparent;
+    color: #333;
+    display: block;
+    float: left;
+    height: 37px;
+    line-height: 37px;
+    
+    text-align: center;
+    text-decoration: none;
+
+}
+
+span.btn_menu_right_cap {
+    background: url("../images/menu/menu_button.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    height: 37px;
+    width: 25px;
+    margin-right:10px;
+}

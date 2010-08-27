@@ -1,10 +1,7 @@
-<div class="module">
-    <h1>Create a new volunteer position</h1>
-    <span class="arrow"></span>
-    <div class="content">
-        <%= render 'form1' %>
-    </div>
+<div class="form">
+  <%= render 'form' %>
 </div>
+
 <% content_for :sidebar do %>
-<%= render :partial => "layouts/sidebar_home" %>
+    <%= render :partial => "layouts/sidebar_home" %>
 <% end %>

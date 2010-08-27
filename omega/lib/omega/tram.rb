@@ -1,3 +1,10 @@
+require 'trams'
+require 'trams/migrations/tram'
+require 'trams/assets/tram'
+require 'trams/custom_fields/tram'
+require 'trams/files/tram'
+require 'trams/logs/tram'
+
 require 'omega'
 require 'accepts_flattened_values'
 
