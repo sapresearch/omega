@@ -9,8 +9,8 @@ end %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <title>THIS IS ANFIELD<%= controller.action_name %></title>
-  <% require_stylesheet 'application', 'menu', 'thirdParty/nyroModal', 'jquery-ui-1.8.1.custom' %>
-  <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui',
+  <% require_stylesheet 'application', 'jquery-ui-1.8.1.custom', 'thirdParty/jquery.prettyPhoto' %>
+  <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.prettyPhoto.js',
                       'rails', 'application' %>
   <%= csrf_meta_tag %>
   <!--[if IE]>
@@ -23,39 +23,66 @@ end %>
     <div id="warning">Sorry, your browser does not support JavaScript!</div>
   </noscript>
   <div id="head" class="center">
+
     <div id="topBar">
-      
+
       <div id="msgCtrl">
       </div>
       <div id="ctlrBar">
 
         <% if current_user.is_anonymous? -%>
-            <span id="trigger"><a class="btnLoginCtrl"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
+            <span id="trigger"><a class="btnLoginCtrl" rel="prettyPhoto" href="#loginWrapper"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
 
         <% else -%>
             <%= link_to content_tag(:span, "logout"), sessions_url, :method => :delete, :confirm => 'Are you sure?' %>
         <% end -%>
         | <%= link_to content_tag(:span, t(:sign_up)), register_users_url %>
       </div>
-            <div id="search_wrapper">
+      <div id="search_wrapper">
         <input id="search_input">
 
-      </div>    
+      </div>
       <div id="loginWrapper">
-        <div id="loginPanel" class="center">
+       
           <%= render :partial => "layouts/partials/login" %>
-        </div>
+
       </div>
     </div>
 
     <%= render :partial => "layouts/menu" %>
   </div>
 
-  <div id="content" class="center">
+  <div id="content" class="clearfix">
+
     <%= ii yield(:content) %>
   </div>
 
-  <%#= render :partial => "layouts/partials/social" %>
 </div>
+<div id="footer">
+  <div>
+    <div class="footer_blocks left">
+      <h1>Find us</h1>
+      111 Rue Duke <br>
+      345645 Motnreal , Ca
+    </div>
+    <div class="footer_blocks left">
+      <h1>Join our mailing List</h1>
+      <%= label_tag 'join' %>
+      <%= text_field_tag '','' %>
+    </div>
+    <div class="footer_blocks left">
+      <h1>Social Stuff</h1>
+      <ul>
+        <li>link to a</li>
+        <li>link to b</li>
+        <li>link to c</li>
+        <li>link to d</li>
+      </ul>
+    </div>
+    <div class="clear"></div>
+  </div>
+
+</div>
+
 </body>
 </html>

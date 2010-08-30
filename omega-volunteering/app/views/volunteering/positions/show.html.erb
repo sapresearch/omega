@@ -1,40 +1,43 @@
 <% if notice != nil %><p class="notice"><%= notice %></p><% end %>
 <div class="article">
 <h1>
-  <%= @volunteering_position.name %>
+  <%= @position.name %>
 </h1>
 <span class="arrow"></span>
 
 <p class="articleDescribtion">
-  <%= @volunteering_position.description %>
+  <%= @position.description %>
 </p>
 <div class="articleDetails" >
+  <% if @position.start %>
 <p>
  <span class="fieldDescribtion"> Start date:</span>
-  <%= @volunteering_position.start_date.to_formatted_s(:long) %>
+  <%= @position.start.to_formatted_s(:long) %>
 </p>
-
+<% end %>
+  <% if @position.end %>
 <p>
   <span class="fieldDescribtion">End date:</span>
-  <%= @volunteering_position.end_date.to_formatted_s(:long) %>
+  <%= @position.end.to_formatted_s(:long) %>
 </p>
-
+<% end %>
 <p>
  <span class="fieldDescribtion"> Hours:</span>
-  <%= @volunteering_position.hours %>
+  <%= @position.hours %>
 </p>
 
 <p>
-  <span class="fieldDescribtion">Positions available:</span>
-  <%= @volunteering_position.positions_available %>
+  <!--<span class="fieldDescribtion">Positions available:</span>-->
+  <%#= @position.positions_available %>
 </p>
-
+  <%= debug @position.schedule %>
+  <%#= debug @position.schedule.days %>
 
 <p>
  <span class="fieldDescribtion"> Contact:</span>
   <%#= @volunteering_position.contact %>
 </p>
-	<%= link_to 'Edit', edit_volunteering_position_path(@volunteering_position) %>
+	<%= link_to 'Edit', edit_volunteering_position_path(@position) %>
 	<%= link_to 'Back', volunteering_positions_path %>
 </div>
 

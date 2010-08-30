@@ -1,8 +1,8 @@
-<% require_stylesheet 'omega_volunteering','jquery.autocomplete' %>
-<% require_javascript 'new_volunteering_position.js','jquery.autocomplete' %>
+<% require_stylesheet 'omega_volunteering', 'jquery.autocomplete' %>
+<% require_javascript 'new_volunteering_position', 'jquery.autocomplete' %>
 
 
-
+<h1>Create a new volunteer position</h1>
 <%= form_for(@position) do |f| %>
     <% if @position.errors.any? %>
         <div id="errorExplanation">
@@ -58,7 +58,7 @@
       <%= f.fields_for :schedule do |ff| %>
 
           <% ['daily', 'weekly', 'monthly', 'yearly'].each do |d| %>
-              <%= ff.radio_button :schedule_type, d, :id=> nil %> <%= d %>
+              <%= ff.radio_button :schedule_type, d %> <%= d %>
           <% end %>
       <% end %>
 
@@ -68,7 +68,7 @@
     </div>
 
     <p>
-      <%= f.label :volunteers_needed %>
+      <%= f.label :volunteers %>
       <%= f.text_field :volunteers_required, :size=>7 %>
     </p>
 
@@ -92,32 +92,38 @@
 
       <fieldset id="position_exisiting_contact" class="hide">
         <legend>Assign an existing contact</legend>
-        <%= f.label :contact_id %>
-        <%= text_field_tag 'ac_contacts',nil, :class=>'left' %>
-        <%= f.hidden_field :contact_id %>
-        <ul id="assigned_contacts" class="left">
-          
+        <%= f.label "contact_name(s)" %>
+        <%= text_field_tag 'ac_contacts', nil %>
+        <%#= f.hidden_field :contact_ids %>
+        <ul id="assigned_contacts" class="right">
+
         </ul>
       </fieldset>
 
 
       <fieldset id="position_new_contact" class="hide">
         <legend>Create a new contact</legend>
-        <%= f.fields_for :contact do |ff| %>
+        <%= f.fields_for :contacts do |ff| %>
             <%= render 'contact_form', :f => ff %>
         <% end %>
       </fieldset>
 
-
     </div>
-
-
-
+    <p>
+      <%= f.label :skills %>
+      <%= f.text_field :skills_values %>
+    </p>
 
     <p>
-
-      <%= cust_button f.submit %>
+      <%= f.label :interests %>
+      <%= f.text_field :interests_values %>
     </p>
+
+
+    <div class="form_submit_box">
+      <%= f.submit %>
+    </div>
+
 
 
 <% end %>

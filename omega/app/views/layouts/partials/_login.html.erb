@@ -1,3 +1,4 @@
+<div class="form">
 <div id="loginFailed">
 </div>
 <%= form_for Session.new, :remote => true, :'data-type' => 'json' do |f| %>
@@ -9,8 +10,10 @@
     <%= f.label :password %>
     <%= f.password_field :password, :class => 'inputMid' %>
 </p>
-<div >
-    <%= f.submit %>
-</div>
+
+    <div class="form_submit_box">
+      <%= f.submit %>
+    </div>
 
 <% end %>
+</div>

@@ -1,0 +1,85 @@
+<% require_stylesheet 'omega_volunteering' %>
+<% require_javascript 'omega_volunteering' %>
+
+<h1>Listing positions</h1>
+<ul id="positions_list">
+  <% @positions.each do |position| %>
+      <li class="clearfix">
+        <div class="position">
+          <div class="position_actions">
+            <a href=""><span class="nav_em_show"></span>Delete</a>
+
+            <div class="clear"></div>
+            <a href=""><span class="nav_em_show"></span>Read</a>
+
+            <div class="clear"></div>
+            <a href=""><span class="nav_em_show"></span>Delete</a>
+
+            <div class="clear"></div>
+          </div>
+
+          <% if position.start? %>
+              <div class="posDate">
+                <div class="posCalMonth">
+                  <%= position.start.strftime("%b") %></div>
+                <div class="posCalDay"> <%= position.start.day %></div>
+              </div>
+          <% else %>
+              <div class="posDate">
+                <div class="posCalMonth">
+
+                </div>
+
+                <div class="posCalDay"></div>
+              </div>
+          <% end %>
+          <div>
+            <h2><%= truncate(position.name, :length=>80) %></h2>
+
+
+            <div class="posDescribtion">
+
+              <%= truncate(position.description, :length=> 200) %>
+            </div>
+            <div class="position_details">
+              <ul>
+                <% if position.start? %>
+                    <li>
+                      <span class="icon-date"></span>
+                      <b>Start:</b> <%= position.start.to_formatted_s(:short) %>
+                      <div class="clear"></div>
+                    </li>
+                    <li>
+                      <span class="icon-date"></span>
+                      <b>End:</b> <%= position.end.to_formatted_s(:short) %>
+                      <div class="clear"></div>
+
+                    </li>
+                <% end %>
+              </ul>
+
+              <ul>
+                    
+                <% if position.schedule %>
+                    <li>
+                      <span class="icon-date"></span>
+                      <b>This event recurrs on:</b> <%= position.schedule.days %>
+                      <div class="clear"></div>
+                    </li>
+
+                <% end %>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="clear"></div>
+        </div>
+        <%#= position.contact %>
+      </li>
+
+  <% end %>
+</ul>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_positions" %>
+<% end %>
