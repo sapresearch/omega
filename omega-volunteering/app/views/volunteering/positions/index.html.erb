@@ -33,7 +33,7 @@
     
             </div>
            <p class="position_tags">
-                <% Volunteering::Position.last.skills.each do  |skill|  %>
+                <% position.skills.each do  |skill|  %>
             <span class="skill_tag"><a href=""><%= skill.name %></a> </span> 
              <% end %>
            </p>
@@ -49,4 +49,23 @@
 </ul>
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_positions" %>
+
+<% if @skills %>
+Skills:<br />
+	<% @skills.each do |skill| %>
+		<%= link_to skills_volunteering_positions_path(:skills => [params[:skills], skill.name].compact.join('+')) do %>
+		<%= skill.name %> x <%= skill.count %><br />
+		<% end %>
+	<% end %>
+<% end %>
+<br />
+
+<% if @interests %>
+Interests:<br />
+	<% @interests.each do |interest| %>
+		<%= link_to interests_volunteering_positions_path(:interests => [params[:interests], interest.name].compact.join('+')) do %>
+			<%= interest.name %> x <%= interest.count %><br />
+		<% end %>
+	<% end %>
+<% end %>
 <% end %>

@@ -3,6 +3,9 @@ class Volunteering::PositionsController < ApplicationController
   require_permission Volunteering::PERM_VIEW
   require_permission Volunteering::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 
+  before_filter :get_positions, :only => [:index, :upcoming, :skills, :interests]
+  before_filter :get_skills, :only => [:index, :upcoming, :skills,]
+  before_filter :get_interests, :only => [:index, :upcoming, :interests]
   before_filter :sort, :only => [:index]
 
   def index
@@ -82,24 +85,78 @@ class Volunteering::PositionsController < ApplicationController
       @position.endtime_nr = params[:endtime_nr]
       @position.end_date_nr = params[:end_date_nr]
       respond_with(@position)
-    end
+  end
 
-    def update
-      @position = Volunteering::Position.find(params[:id])
-      respond_with(@position)
-    end
+  def update
+    @position = Volunteering::Position.find(params[:id])
+    respond_with(@position)
+  end
 
+  def skills
+    render :index
+  end
+
+  def interests
+    render :index
+  end
 
   private
+    def get_positions
+      @positions = Volunteering::Position.scoped.includes(:skills)
+
+      if skills = params[:skills].try(:split, '+')
+        @positions.select! do |position|
+          position_skills = position.skills.map(&:name)
+          skills.all? do |skill|
+            position_skills.include?(skill)
+          end
+        end
+      end
+
+      if interests = params[:interests].try(:split, '+')
+        @positions.select! do |position|
+          position_interests = position.interests.map(&:name)
+          interests.all? do |interest|
+            position_interests.include?(interest)
+          end
+        end
+      end
+    end
+
+    def get_skills
+      @skills = Volunteering::Position.scoped.where(:id => @positions.map(&:id)).
+                                              joins(:skills).
+                                              group('contact_skills.name').
+                                              select('contact_skills.*, count(*) AS count').
+                                              order('count desc')
+
+      if skills = params[:skills].try(:split, '+')
+        skills.each do |skill|
+          @skills = @skills.where('contact_skills.name != ?', skill)
+        end
+      end
+    end
+
+    def get_interests
+      @interests = @positions.where(:id => @positions.map(&:id)).
+                              joins(:interests).
+                              group('contact_interests.name').
+                              select('contact_interests.*, count(*) as count').
+                              order('count desc')
+
+      if interests = params[:interests].try(:split, '+')
+        interests.each do |interest|
+          @interests = @interests.where('contact_interests.name != ?', interest)
+        end
+      end
+    end
+  
     SORT_KEYS = ['name']
     SORT_DIRECTIONS = ['asc', 'desc']
     def sort
-      @positions = Volunteering::Position.scoped
-
       params.each do |attr, direction|
         next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
         @positions = @positions.order("#{attr} #{direction}")
       end
     end
-
 end
