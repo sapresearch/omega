@@ -1,2 +1,5 @@
-alert('assigned <%= @contact.id %> to <%= @contact_group.id %> with pos=<%= @group_position.id %>');
- $('#assigned_groups').empty().append('<%= escape_javascript(render :partial => 'contacts/partials/assigned_groups') %>');
+
+    console.log('assigned <%= @contact.id %> to <%= @contact_group.id %> with pos=<%= @group_position.id %>');
+
+
+ $('#contact_ag').empty().append('<%= escape_javascript(render :partial => 'contacts/partials/assigned_groups') %>');

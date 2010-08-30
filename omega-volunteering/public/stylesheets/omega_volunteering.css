@@ -1,3 +1,7 @@
+
+h1{
+    position:relative;
+}
 #time_picker {
     display: none;
     text-align: left;
@@ -132,18 +136,33 @@ display:none;
     margin: 0 0 1em 0;
 }
 .skill_tag {
+
     margin:0 0.3em 0;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
-    padding:0.3em;
+    padding:0.1em 0.5em;
     display: inline-block;
     background: url("../images/tag_bg.png") repeat-x bottom;
 
 }
 .skill_tag a {
-    letter-spacing: 2px;
+   letter-spacing:0.04em;
        
     font-size:0.9em;
     color: #162d3d;
 
+}
+.position_list_crl{
+    position: absolute;
+    right:0;
+    top:0;
+    padding:0.5em;
+}
+#position_search{
+    padding:1em;
+    border-bottom:4px solid #EBEBEB;
+}
+.position_r{
+    margin:  0.5em 0;
+    padding: 0.5em 0;
 }

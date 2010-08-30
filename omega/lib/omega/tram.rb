@@ -14,7 +14,7 @@ module Omega
     initializer :'omega.include_mixins' do
       ActiveSupport.on_load(:action_view) do
         ActionView::Helpers::FormBuilder.send(:include, Mixins::ActionView::FormBuilderSuggestedField)
-        ActionView::Helpers::FormBuilder.send(:include, Mixins::ActionView::FormBuilderValidations)
+#        ActionView::Helpers::FormBuilder.send(:include, Mixins::ActionView::FormBuilderValidations)
       end
     end
 

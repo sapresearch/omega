@@ -1,13 +1,9 @@
-<h1>Listing positions</h1>
+<h1>Listing positions <div class="position_list_crl">Psd</div></h1>
 <span class="arrow"></span>
 <ul id="positions_list">
 	<% Volunteering::Position.all.each do |position| %>
 		<li class="clearfix">
-			<div class="posDate">
-				<div class="posCalMonth"> <%= position.start_date.strftime("%b") %></div>
-				<div class="posCalDay"> <%= position.start_date.day %></div>
 
-			</div>
 
 			<div class="posDetails">
 				<div>

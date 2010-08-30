@@ -7,7 +7,7 @@
  */
 $(function() {
     $('[data-remote]').live('ajax:loading', function() {
-        showAjaxAnimation()
+        showAjaxAnimation();
     }).live('ajax:complete', function() {
         $("#ajax_loading_wrapper").hide();
     });
@@ -36,6 +36,7 @@ $(function() {
           showAjaxAnimation($('#contacts_group_pane'));  
         },
         success: function(data) {
+            
             $('#contacts').empty();
             var list = '<ul>';
             $(data).each(function(i) {

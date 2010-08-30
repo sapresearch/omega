@@ -1,11 +1,4 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<% content_for(:content) do # have yield up here so require_stylesheet in a view/partial works
-    render(:layout => "layouts/columns") do
-        (render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
-            (yield)
-        end)
-    end
-end %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <title>THIS IS ANFIELD<%= controller.action_name %></title>
@@ -22,7 +15,7 @@ end %>
   <noscript>
     <div id="warning">Sorry, your browser does not support JavaScript!</div>
   </noscript>
-  <div id="head" class="center">
+  <div id="head">
 
     <div id="topBar">
 
@@ -44,7 +37,7 @@ end %>
       </div>
       <div id="loginWrapper">
        
-          <%= render :partial => "layouts/partials/login" %>
+          <%#= render :partial => "layouts/partials/login" %>
 
       </div>
     </div>
@@ -54,12 +47,16 @@ end %>
 
   <div id="content" class="clearfix">
 
-    <%= ii yield(:content) %>
+    <%= render(:layout => "layouts/columns") do
+        render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
+            yield
+        end
+    end %>
   </div>
 
 </div>
-<div id="footer">
-  <div>
+<div id="footer_wrapper">
+  <div id="footer">
     <div class="footer_blocks left">
       <h1>Find us</h1>
       111 Rue Duke <br>
