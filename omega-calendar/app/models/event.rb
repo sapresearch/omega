@@ -2,17 +2,30 @@ class Event < ActiveRecord::Base
 
   belongs_to :calendar
 
-  def as_json(options ={})
-  { :title => self.title,
-    :start => self.start.strftime('%Y-%m-%dT%H:%M'),
-    :end => self.end.strftime('%Y-%m-%dT%H:%M'),
-
-    :allday => self.allday,
-    :url => self.url,
-    :event_description => self.event_description
-  }
-
+  def as_json(options = {})
+    {
+      :title => title,
+      :start => start,
+      :end => self.end,
+      :allDay => allday,
+      :url => url,
+      :event_description => event_description
+    }
   end
-  
-  
+
+  def start_time
+    start.try(:to_time)
+  end
+
+  def start_date
+    start.try(:to_date)
+  end
+
+  def end_time
+    self.end.try(:to_time)
+  end
+
+  def end_date
+    self.end.try(:to_date)
+  end
 end

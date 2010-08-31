@@ -19,7 +19,11 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.create(params[:event])
+    event = params[:event]
+    event[:start] = "#{event.delete(:start_date)} #{event.delete(:start_time)}"
+    event[:end]   = "#{event.delete(:end_date)} #{event.delete(:end_time)}"
+
+    @event = Event.create(event)
     respond_with(@event)
   end
 
