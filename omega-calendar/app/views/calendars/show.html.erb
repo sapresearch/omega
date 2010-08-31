@@ -17,11 +17,11 @@
 </table>
 
 <p>
-  <%= link_to 'Show All Events in '+ @calendar.calendar_name+ ' Calendar', :controller => 'calendars', :action => 'events', :id => @calendar.id%>
+  <%= link_to 'Show All Events in '+ @calendar.calendar_name+ ' Calendar', calendar_events_path(@calendar) %>
 </p>
 
 <p>
-  <%= link_to 'Add an Event to '+@calendar.calendar_name+ ' Calendar', :controller => 'calendars', :action => 'add_event', :id => @calendar.id %>
+  <%= link_to 'Add an Event to '+@calendar.calendar_name+ ' Calendar', calendar_events_path(@calendar) %>
 </p>
 
 

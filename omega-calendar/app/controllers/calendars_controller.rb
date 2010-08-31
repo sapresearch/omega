@@ -12,7 +12,7 @@ class CalendarsController < ApplicationController
 
   def show
     @events = Event.all
-    @calendar = Calendar.all
+    @calendar = Calendar.find(params[:id])
     respond_with(@calendars)
   end
 

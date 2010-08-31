@@ -130,8 +130,8 @@ class Volunteering::PositionsController < ApplicationController
                                               select('contact_skills.*, count(*) AS count').
                                               order('count desc')
 
-      if skills = params[:skills].try(:split, '+')
-        skills.each do |skill|
+      if @skills_tags = params[:skills].try(:split, '+')
+        @skills_tags.each do |skill|
           @skills = @skills.where('contact_skills.name != ?', skill)
         end
       end
@@ -144,8 +144,8 @@ class Volunteering::PositionsController < ApplicationController
                               select('contact_interests.*, count(*) as count').
                               order('count desc')
 
-      if interests = params[:interests].try(:split, '+')
-        interests.each do |interest|
+      if @interests_tags = params[:interests].try(:split, '+')
+        @interests_tags.each do |interest|
           @interests = @interests.where('contact_interests.name != ?', interest)
         end
       end

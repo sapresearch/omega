@@ -1,16 +1,13 @@
 class CreateEvents < ActiveRecord::Migration
   def self.up
     create_table :events do |t|
-
-      t.integer :calendar_id, :null=>false
-      t.string :title, :null => false
-      t.time :start, :null=>false
-      t.time :end, :null=>false
-      t.boolean :allday
-      t.text :url
-      t.text :event_description
-  
-
+      t.references :calendar, :null=>false
+      t.string     :title
+      t.datetime   :start
+      t.datetime   :end
+      t.boolean    :allday
+      t.text       :url
+      t.text       :event_description
       t.timestamps
     end
   end

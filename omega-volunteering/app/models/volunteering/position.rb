@@ -1,5 +1,9 @@
 class Volunteering::Position < ActiveRecord::Base
-  belongs_to :contact
+
+  has_many :contact_positions
+  has_many :contacts, :through => :contact_positions
+
+#  belongs_to :contact
   has_many :records
   has_one :schedule
   
@@ -10,15 +14,19 @@ class Volunteering::Position < ActiveRecord::Base
                                       :join_table => 'contact_interests_volunteering_positions'
 
   accepts_flattened_values_for :skills, :interests, :value => :name
-  accepts_nested_attributes_for :schedule, :contact
+  accepts_nested_attributes_for :schedule, :reject_if => proc { |att| att['start_date'].blank? }
+                                                                        # rejects empty child attributes
+  accepts_nested_attributes_for :contacts
 
-   attr_accessor :start_time, :start_date, :end_time, :end_date
+  attr_accessor :starttime_nr, :start_date_nr, :endtime_nr, :end_date_nr
 
+  before_save :combine_times
 
-  def before_save
-    self.start = @start_date + " " + @start_time
-    self.end = @end_date + " " + @end_time
-
-  end
+  private
+    def combine_times
+      self.start = start_date_nr + " " + starttime_nr
+      self.end = end_date_nr + " " + endtime_nr 
+    end
   
 end
+

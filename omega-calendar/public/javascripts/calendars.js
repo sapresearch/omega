@@ -165,8 +165,9 @@ $(document).ready(function() {
     $('#new_event').bind('ajax:success', function() {
         //todo : notification
         $('#cal').fullCalendar('refetchEvents');
-        $('#cal').show();
         $create_event.hide();
+        $('#cal').show();
+
 
         reset_form($(this))
 

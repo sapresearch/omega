@@ -1,6 +1,6 @@
-<div id="contact_mgm" class="corners">
-  <span class="btn_action left"> <span class="icon-delete"></span> <%= link_to 'delete', @contact, :method=> :delete, :remote => true %></span>
-  <span class="btn_action left"> <span class="icon-edit"></span> <%= link_to 'edit', edit_contact_path(@contact), :remote => true %></span>
+<div id="contact_mgm">
+  <%= link_to 'delete', @contact, :method=> :delete, :remote => true %>
+  <span class="icon icon_edit"></span><%= link_to 'edit', edit_contact_path(@contact), :remote => true %>
   <dl id="contact_assign" class="drop_down">
     <dt><a href="#" class="corners"><span>Assign this contact</span></a></dt>
     <dd>
@@ -13,11 +13,7 @@
                 <%= link_to g.name, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
               </li>
           <% end %>
-
-
-
           <li>Remove</li>
-
           <% Contact::Group.with_contact(@contact).each do |g| %>
               <li>
                 <%= link_to g.name, remove_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
@@ -28,35 +24,83 @@
     </dd>
   </dl>
 
-
 </div>
-<h3 id="contact_name"><%= "#{@contact.first_name.capitalize} #{@contact.last_name.capitalize}" %></h3>
-<div id="contact_image">
-  <%= image_tag("profile.jpg", :width =>  '100') %>
-</div>
-<div style="clear:left;"></div>
-<div id="contact_fields">
-  <div class="contact_fields">
-    <div class="contact_field" id="assigned_groups">
-      <%= render :partial => 'contacts/partials/assigned_groups' %>
+<table>
+  <tr>
+    <td>
+      <table>
+        <tr>
 
+<td class="label">Groups:</td>
+<td class="bold">
+
+  <span id="contact_ag">
+
+          <%= render :partial => 'contacts/partials/assigned_groups' %>
+  </span>
+</td>
+      
+        </tr>
+        <tr>
+          <td class="label">
+            Email:
+          </td>
+          <td class="bold">
+            <%= @contact.email %>
+          </td>
+        </tr>
+        <% @contact.addresses.each do |address| %>
+            <tr>
+              <td class="label">
+                City:
+              </td>
+              <td class="bold">
+                <%= address.city.capitalize %>
+              </td>
+            </tr>
+            <tr>
+             <td class="label">
+                Street:
+              </td>
+              <td class="bold">
+                <%= address.street %></td>
+            </tr>
+            <tr>
+             <td class="label">
+                Postal Code:
+              </td>
+           <td class="bold">
+                <%= address.zip_code %>
+              </td>
+
+            </tr>
+
+        <% end %>
+
+        <% @contact.phone_numbers.each do |phone| %>
+
+            <tr>
+             <td class="label">
+                Number (<%= phone.number_type %>):
+              </td>
+              <td class="bold">
+                <%= phone.number %>
+              </td>
+            </tr>
+
+        <% end %>
+
+
+      </table>
+
+    </td>
+    <td class="top">
+      <div class="user_image">
+      <%= image_tag("profile.jpg", :width =>  '130') %>
     </div>
-    <div class="contact_field"><span class="contact_label">Email:</span> <%= @contact.email %></div>
-    <% @contact.addresses.each do |address| %>
-        <div class="contact_field"><span class="contact_label">City: </span> <%= address.city.capitalize %> </div>
-        <div class="contact_field"><span class="contact_label">Street: </span><%= address.street %></div>
-        <div class="contact_field"><span class="contact_label">Postal Code: </span><%= address.zip_code %></div>
-    <% end %>
-
-    <% @contact.phone_numbers.each do |phone| %>
-        <div class="contact_field"><span class="contact_label">Number Type: </span> <%= phone.number_type %> </div>
-        <div class="contact_field"><span class="contact_label">Number: </span> <%= phone.number %> </div>
-    <% end %>
-  </div>
-</div>
-
-<div style="clear:left;"></div>
-
+    </td>
+  </tr>
+</table>
 
 
 

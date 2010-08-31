@@ -132,19 +132,19 @@ $(function() {
     $("ul.subnav").parent().append("<span></span>"); //Only shows drop down trigger when js is enabled (Adds empty span tag after ul.subnav*)
 
     $("#main_menu li span").mouseover(
-                                 function() { //When trigger is clicked...
+                                     function() { //When trigger is clicked...
 
-                                     //Following events are applied to the subnav itself (moving subnav up and down)
-                                     $(this).parent().find("ul.subnav").slideDown('fast').show(); //Drop down the subnav on click
+                                         //Following events are applied to the subnav itself (moving subnav up and down)
+                                         $(this).parent().find("ul.subnav").slideDown('fast').show(); //Drop down the subnav on click
 
-                                     $(this).parent().hover(function() {
-                                     }, function() {
-                                         $(this).parent().find("ul.subnav").slideUp('normal'); //When the mouse hovers out of the subnav, move it back up
-                                     });
+                                         $(this).parent().hover(function() {
+                                         }, function() {
+                                             $(this).parent().find("ul.subnav").slideUp('normal'); //When the mouse hovers out of the subnav, move it back up
+                                         });
 
-                                     //Following events are applied to the trigger (Hover events for the trigger)
-                                 })
-            $('ul.subnav').find('li').hover(function() {
+                                         //Following events are applied to the trigger (Hover events for the trigger)
+                                     })
+    $('ul.subnav').find('li').hover(function() {
         $(this).addClass("menu_li_hover"); //On hover over, add class "subhover"
     }, function() {    //On Hover Out
         $(this).removeClass("menu_li_hover"); //On hover out, remove class "subhover"
@@ -251,6 +251,21 @@ $(function() {
             $(".drop_down dd ul").hide();
     });
 
+
+    $('.search_wrapper_l').hover(
+                                function() {
+                                    $(this).addClass('search_wrapper_hover');
+                                },
+                                function() {
+                                    $(this).removeClass('search_wrapper_hover').find('input').blur();
+
+                                }).find('input').focus(
+                                                      function() {
+
+                                                          $(this).val('').parent().removeClass('search_wrapper_hover').addClass('search_wrapper_focus');
+                                                      }).blur(function() {
+        $(this).val('Search..').parent().removeClass('search_wrapper_focus');
+    });
 
 });
 

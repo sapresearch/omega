@@ -3,6 +3,7 @@ Omega::Volunteering::Tram.routes.draw do
     resources :positions do
       collection do
         get :scheduler
+        get :upcoming
 
         get :skills, :path => 'skills/:skills'
         get :interests, :path => 'interests/:interests'
