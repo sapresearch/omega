@@ -27,7 +27,6 @@ blockquote, q {
     quotes: none;
 }
 
-
 blockquote:before, blockquote:after,
 q:before, q:after {
     content: '';
@@ -48,46 +47,49 @@ table {
 html, body {
     color: #2D302D;
 
-    
-    
     letter-spacing: 1px;
 
     font-size: 12px;
     font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-
 
     text-align: center;
 
 }
 
 h1, h2, h3, h4 {
-    text-transform:uppercase;
-    font: bold 24px "Century Schoolbook", Georgia, Times, serif;
-    margin: .2em 0 .4em 0;
+    text-transform: uppercase;
+    font: bold "Century Schoolbook", Georgia, Times, serif;
+
     letter-spacing: -1px;
 }
 
 h1 {
-    background: url("../images/h1BgLight.png") bottom repeat-x;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius:10px;
+    font-size:24px;
+    background: url("../images/h1BgLight.png") bottom repeat-x #FFF;
     text-shadow: #999 1px 1px 1px;
     padding: 0.5em;
     margin-top: 0;
     border-bottom: 1px solid #CACBD1;
-    
-    color: #285370;
+
+    color: #421325;
 }
+
 h2 {
-color:#8F284F;
+    color: #8F284F;
 
 }
-h2 a{
 
-    color:#CE3B74;
-}
-h2 a:hover{
-    color:#8F284F;
+h2 a {
+
+    color: #CE3B74;
 }
 
+h2 a:hover {
+    color: #8F284F;
+}
 
 #right h1 {
     font-size: 1.3em;
@@ -100,33 +102,33 @@ h2 {
 
 h3 {
     color: #016390;
-    
+
 }
 
 p {
-    margin:0.8em 0 0;
-    letter-spacing: 0.03em;
-    line-height: 1.2em;
+    padding:1em;
+    line-height: 2em;
 }
 
 a {
-    color: #939494;
+    color: #162D3D;
     text-decoration: none;
 }
 
 a:hover {
-    color: #285370;
+    color: #5ABBFC;
 }
 
 #topBar {
-    
+
     height: 28px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 /** Main Menu **/
 
 #main_menu a {
+
 
     color: #FFF;
     text-shadow: 1px 1px #666;
@@ -232,14 +234,6 @@ ul.box_menu li {
 
 }
 
-li.header {
-    border-bottom: 4px solid #AAD1EC;
-    color: #016390;
-    color: #016390;
-    margin: 0.5em 0;
-    padding: 0.5em;
-}
-
 legend {
     font-size: 1.4em;
     color: #0E5A9D;
@@ -339,18 +333,16 @@ form p {
 
 div.form {
     background: url("../images/form_bg.gif") bottom repeat-x;
-    border: 8px solid #ebebeb;
-    -moz-border-radius: 7px 7px 7px 7px;
-    -webkit-border-radius: 7px 7px 7px 7px;
-    border-radius: 7px 7px 7px 7px;
+    margin: 0 1em;
 
 }
-
 
 
 legend {
     margin: 1em;
 }
+
+
 
 form input, textarea, select {
     background: url("../images/textinputbg.gif") repeat-x scroll 0 0 #FFFFFF;
@@ -430,9 +422,6 @@ form span.error {
 
 #content {
 
-    padding-top: 30px;
-    margin: 0 10%;
-    text-align: left;
 
 }
 
@@ -448,19 +437,32 @@ body > #wrapper {
 }
 
 #content {
+
+    padding-top: 30px;
+
+
     padding-bottom: 16em;
+}
+.center_content{
+       margin: 0 10%;
+    text-align: left;
 }
 
 /* must be same height as the footer */
 
-#footer {
+#footer_wrapper {
     padding: 0 10%;
-    border-top: 1px dotted #438CBC;
     position: relative;
     margin: -16em 0; /* negative value of footer height */
     height: 16em;
     clear: both;
-    
+
+}
+
+#footer {
+    margin: 1em 0 0 0;
+    border: 6px solid #eee;
+    padding-top: 1em;
 }
 
 div.footer_blocks {
@@ -500,7 +502,7 @@ div.footer_blocks {
 }
 
 #footer h1 {
-    background: #438CBC;
+    background: #7CA3BD;
     padding: 0.3em;
     -moz-border-radius: 4px;
     color: #FFF;
@@ -640,25 +642,20 @@ span.error {
     background: white url(../images/leftside.gif) repeat-y left top;
 }
 
-.top {
+div.top {
     width: 100%;
     height: 20px;
     background: url(../images/top.gif) no-repeat left top;
 }
 
-.top span {
+div.top span {
     display: block;
     position: relative;
     height: 20px;
     background: url(../images/top-right.gif) no-repeat right top;
 }
 
-.center-content {
-    position: relative;
-    background: url(../images/rightside.gif) repeat-y right top;
-    padding: 1em; /* padding:1px 20px 1px 25px; */
-    margin: -1px 0 -50px 0;
-}
+
 
 .bottom {
     padding-top: 40px;
@@ -694,40 +691,54 @@ span.error {
     background-position: 0 -20px;
 }
 
-.icon-add, .icon-edit, .icon-delete, .icon-date, .icon-user, .icon-group, .icon-mail {
-    display: block;
-    height: 16px;
-    background: url(../images/icons/iconSprite.png) no-repeat;
-    float: left;
+
+
+.icon {
+    display: inline;
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom: 1;
     width: 16px;
-    margin: 0 4px;
+    height: 16px;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    vertical-align: middle;
+    line-height: 0;
+    font-size: 0;
+    text-decoration: none;
+    text-indent: -999px;
+    background-color: transparent;
+    background-image: url(../images/icons/iconSprite.png);
 }
 
-.icon-date {
+.icon_date {
     background-position: 0 -16px;
 }
 
-.icon-add {
+.icon_add {
     background-position: 0 -32px;
 }
 
-.icon-edit {
+.icon_edit {
     background-position: 0 -48px;
 }
 
-.icon-delete {
+.icon_delete {
     background-position: 0 -64px;
+
 }
 
-.icon-user {
+.icon_user {
     background-position: 0 -112px;
 }
 
-.icon-group {
+.icon_group {
     background-position: 0 -128px;
 }
 
-.icon-mail {
+.icon_mail {
     background-position: 0 -144px;
 }
 
@@ -796,11 +807,7 @@ span.error {
     display: block;
 }
 
-.article {
-    color: #093B66;
-    font: "Verdana";
 
-}
 
 .notice {
     font-weight: bold;
@@ -832,13 +839,14 @@ th {
 }
 
 td {
+    font-size:0.8em;
 
-    vertical-align: middle;
-
+    vertical-align: bottom;
 }
 
+
 tr {
-    color: #646767;
+
     vertical-align: bottom;
 }
 
@@ -1006,4 +1014,67 @@ dl.drop_down {
 
 .hide {
     display: none;
+}
+
+.search_wrapper_l{
+    display:inline-table;
+    color:#fff;
+    width:244px;
+    height:54px;
+    background:url("../images/search_box_l.png") no-repeat scroll 0 0;
+}
+.search_wrapper_hover{
+    background-position: 0 -54px;
+}
+.search_wrapper_focus{
+    color:#162d3d !important;
+    background-position: 0 -108px;
+}
+.search_wrapper_l input{
+    padding: 18px 45px ;
+    background:transparent;
+    border:none;
+
+}
+.center {
+text-align:center !important;
+}
+
+/** TODO  source it out to a different file **/
+#landing_list{
+    position:absolute;
+    bottom:0;
+}
+
+#landing_list li{
+    border-bottom:none;
+    color:#421325;
+    width:500px;
+    background: url("../images/marketing/bullet.png") left no-repeat;
+    font-size: 24px;
+    font-weight:bold;
+    padding:6px 0 6px 45px;
+}
+
+#landing_list li span.explanation {
+    font-size:16px;
+color:#162d3d;
+}
+
+#mkt_presentation{
+    position:
+relative;
+    height:300px;
+}
+#mkt_screen {
+    position:absolute;
+    bottom:0;
+    right:0px;
+}
+#mkt_try{
+    padding:2em;
+    border-bottom:8px solid #EEE;
+    font-size:28px;
+    font-style:italic;
+    color:#c2366b;
 }
