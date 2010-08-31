@@ -1,8 +1,9 @@
 require 'trams'
-require 'trams/migrations/tram'
 require 'trams/assets/tram'
 require 'trams/custom_fields/tram'
+require 'trams/favorites/tram'
 require 'trams/logs/tram'
+require 'trams/migrations/tram'
 
 require 'omega'
 require 'accepts_flattened_values'
@@ -14,7 +15,7 @@ module Omega
     initializer :'omega.include_mixins' do
       ActiveSupport.on_load(:action_view) do
         ActionView::Helpers::FormBuilder.send(:include, Mixins::ActionView::FormBuilderSuggestedField)
-        ActionView::Helpers::FormBuilder.send(:include, Mixins::ActionView::FormBuilderValidations)
+#        ActionView::Helpers::FormBuilder.send(:include, Mixins::ActionView::FormBuilderValidations)
       end
     end
 

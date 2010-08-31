@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency('trams',               trams_version = '>=0.1.0')
   s.add_dependency('trams-assets',        trams_version)
   s.add_dependency('trams-custom-fields', trams_version)
+  s.add_dependency('trams-favorites',     trams_version)
   s.add_dependency('trams-files',         trams_version)
   s.add_dependency('trams-logs',          trams_version)
   
