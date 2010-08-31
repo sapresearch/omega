@@ -1,8 +1,28 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_javascript 'omega_volunteering' %>
+  <h1>Volunteering Overview
+    <div class="position_list_crl">
+      <%= link_to 'sort by name', volunteering_positions_path(:name => 'asc') %>
+      <%= link_to 'sort by name', volunteering_positions_path(:name => 'desc') %>
+    
+    </div>
+  </h1>
+  <div class="position_r center">
+<% if @skills_tags %>
+    <%= debug @skills_tags %>
+<% end %>
+    Applied Tags
+  </div>
 
-<h1>Volunteering Overview</h1>
-<div class="postions_crl"><%= link_to 'sort by name', volunteering_positions_path(:name => 'asc') %></div>
+  <div class="position_r center">
+    <form action="/search">
+      <div class="search_wrapper_l">
+        <input id="sd" name="sd" type="text" value="Search..." />
+      </div>
+
+    </form>
+  </div>
+
 
 <ul id="positions_list">
   <% @positions.each do |position| %>
