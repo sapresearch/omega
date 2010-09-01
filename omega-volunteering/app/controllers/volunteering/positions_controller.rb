@@ -105,27 +105,17 @@ class Volunteering::PositionsController < ApplicationController
       @positions = Volunteering::Position.scoped.includes(:skills)
 
       if skills = params[:skills].try(:split, '+')
-        @positions = @positions.select('`volunteering_positions`.*').
+        @positions = @positions.select('`volunteering_positions`.*, count(`contact_skills`.`id`) as s_count').
                                 joins(:skills).
                                 where('contact_skills.name IN (?)', skills).
-                                group('`volunteering_positions`.`id`')
-#                                having('`skill_count` = ?', [1])
-
-#        @positions.select! do |position|
-#          position_skills = position.skills.map(&:name)
-#          skills.all? do |skill|
-#            position_skills.include?(skill)
-#          end
-#        end
+                                group("`volunteering_positions`.`id` HAVING `s_count` = #{skills.size}")
       end
 
       if interests = params[:interests].try(:split, '+')
-        @positions.select! do |position|
-          position_interests = position.interests.map(&:name)
-          interests.all? do |interest|
-            position_interests.include?(interest)
-          end
-        end
+        @positions = @positions.select('`volunteering_positions`.*, count(`contact_interests`.`id`) as i_count').
+                                joins(:interests).
+                                where('contact_interests.name IN (?)', interests).
+                                group("`volunteering_positions`.`id` HAVING `t_count` = #{interests.size}")
       end
     end
 
