@@ -105,12 +105,18 @@ class Volunteering::PositionsController < ApplicationController
       @positions = Volunteering::Position.scoped.includes(:skills)
 
       if skills = params[:skills].try(:split, '+')
-        @positions.select! do |position|
-          position_skills = position.skills.map(&:name)
-          skills.all? do |skill|
-            position_skills.include?(skill)
-          end
-        end
+        @positions = @positions.select('`volunteering_positions`.*').
+                                joins(:skills).
+                                where('contact_skills.name IN (?)', skills).
+                                group('`volunteering_positions`.`id`')
+#                                having('`skill_count` = ?', [1])
+
+#        @positions.select! do |position|
+#          position_skills = position.skills.map(&:name)
+#          skills.all? do |skill|
+#            position_skills.include?(skill)
+#          end
+#        end
       end
 
       if interests = params[:interests].try(:split, '+')
