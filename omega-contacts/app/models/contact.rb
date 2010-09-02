@@ -9,7 +9,9 @@ class Contact < ActiveRecord::Base
   class << self
     def for(user) where('user_id = ?', user).first end
   end
-  self.include_root_in_json = false 
+
+  self.include_root_in_json = false
+
   belongs_to :user
   has_and_belongs_to_many :interests, :join_table => 'contact_contacts_interests'
   has_and_belongs_to_many :skills,    :join_table => 'contact_contacts_skills'
@@ -41,6 +43,17 @@ class Contact < ActiveRecord::Base
   validates :last_name,  :presence  => true,
                          :length    => 1..80,
                          :unless    => :has_user?
+
+  %w(email first_name last_name).each do |attr|
+    class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
+      def #{attr}
+        user.present? ? user.send(:#{attr}) : super
+      end
+      def #{attr}=(value)
+        user.present? ? user.send(:#{attr}=, value) : super
+      end
+    RUBY_EVAL
+  end
 
   private
     def has_user?
