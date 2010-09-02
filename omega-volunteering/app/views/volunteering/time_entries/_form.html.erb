@@ -1,0 +1,49 @@
+<% require_javascript 'new_time_entry'%>
+<% require_stylesheet 'new_time_entry'%>
+
+<%=form_for @entry do |f| %>
+
+ <% hours_errors = [] %>
+ <%= errors_for_form @entry %>
+    
+ <%= f.hidden_field :record_id%>
+
+ <p>
+   Current Week: <%= Time.now.beginning_of_week().strftime('%Y/%m/%d')%> (Monday) <br/>
+ </p>
+
+<div id="timesheet">
+
+ Pick a Week:<%= f.text_field :week, :class => 'datepickr', :size => 10 %>
+
+ <table>
+  <thead><th></th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th><th>SUN</th></thead>
+
+   <tr><td>Hours</td>
+
+    <%= f.fields_for :days do |d| %>
+    <% day = d.object %>
+    <% hours_errors << day.errors unless day.errors.empty? %>
+    <%= d.hidden_field :day %>
+
+    <td><%= d.text_field :hours, :size => 5 %><%= hours_errors.size unless day.errors.empty? %></td>
+
+    <%end%>
+
+    </tr>
+
+  </table>
+  <% unless hours_errors.empty? %>
+      <% hours_errors.each_with_index do |hour_errors, i| %>
+      <%= debug hour_errors.full_messages %><%= i + 1 %>
+      <% end %>
+  <% end %>
+</div>
+
+    <br/>
+    <p>
+
+      <%= f.submit "Save!" %>
+      
+    </p>
+<%end%>

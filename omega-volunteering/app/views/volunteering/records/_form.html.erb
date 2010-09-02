@@ -1,0 +1,75 @@
+<%= form_for(@record) do |f| %>
+    
+    <%= errors_for_form @record %>
+
+    <%= f.hidden_field :position_id %>
+
+    <%= f.fields_for :contact do |c| %>
+
+        <%= c.hidden_field :id%>
+        <p>
+        <%= c.label t(:title) %>
+        <%= c.select :title, options_for_select(Contact::TITLES) %>
+      </p>
+
+        <p>
+            <%= c.label :first_name %>
+            <%= c.text_field :first_name %>
+        </p>
+
+        <p>
+            <%= c.label :last_name %>
+            <%= c.text_field :last_name %>
+        </p>
+
+        <h2>Contact Info</h2>
+
+        <p>
+            <%= c.label :email %>
+            <%= c.text_field :email %>
+        </p>
+
+        <p>
+            <%= c.label :skills %>
+            <%= c.text_field :skills_values %>
+        </p>
+
+        <p>
+            <%= c.label :interests %>
+            <%= c.text_field :interests_values %>
+        </p>
+
+
+         <%= c.fields_for :phone_numbers do |p| %>
+
+            <%= p.hidden_field :id %>
+            
+		    <%= p.hidden_field :number_type %>
+
+
+         <p>
+            <%= p.label :phone_number %>
+            <%= p.text_field :number %>
+         </p>
+            
+        <%end%>
+
+    <%end%>
+
+    <h2>Other</h2>
+
+    <p>
+      <%= f.hidden_field :status, :value => 'Applied'%>
+    </p>
+
+    <p>
+      <%= f.label :notes %>
+      <%= f.text_area :notes%>
+    </p>
+
+    <p>
+      <%= cust_button f.submit %>
+    </p>
+
+
+<% end %>

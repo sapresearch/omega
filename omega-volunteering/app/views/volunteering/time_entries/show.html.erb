@@ -1,0 +1,40 @@
+<% require_stylesheet 'new_time_entry'%>
+
+
+<h1>Weekly Time Sheet</h1>
+<div id="timesheet">
+
+<p>
+
+  <strong>Week: <%= start = @entry.week.strftime('%Y/%m/%d')%> > <%= Date.parse(start).advance(:days => 6).to_time.strftime('%Y/%m/%d') %></strong> 
+
+</p>
+<br/>
+ <table>
+  <thead><th></th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th><th>SUN</th></thead>
+
+   <tr><td>Hours</td>
+
+    <% @entry_days.each do |ed| %>
+
+        <%if @entry.id == ed.time_entry_id%>
+
+            <td><%= ed.hours %></td>
+
+        <%end%>
+
+    <%end%>
+
+    </tr>
+
+  </table>
+
+  <br/>
+  <p id="right">
+
+    <%= link_to "Add Hours for Another Week!", new_volunteering_time_entry_url(:id => @entry.record.id)%>
+
+  </p>
+
+</div>
+
