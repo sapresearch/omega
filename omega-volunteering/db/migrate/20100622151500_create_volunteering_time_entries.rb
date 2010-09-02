@@ -1,9 +1,8 @@
 class CreateVolunteeringTimeEntries < ActiveRecord::Migration
   def self.up
     create_table :volunteering_time_entries do |t|
-      t.references :volunteering_record, :null => false
-      t.datetime   :day
-      t.integer    :hours
+      t.integer :record_id, :null => false
+      t.date   :week
     end
   end
 
