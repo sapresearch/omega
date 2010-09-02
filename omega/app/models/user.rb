@@ -37,6 +37,11 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :roles
 
+  has_many :messages,      :foreign_key => :to_id,   :class_name => '::Message', :inverse_of => :to,
+                           :conditions => ['deleted_by_to_at IS NULL']
+  has_many :sent_messages, :foreign_key => :from_id, :class_name => '::Message', :inverse_of => :from,
+                           :conditions => ['deleted_by_from_at IS NULL']
+
   attr_accessor :password, :password_confirmation
 
   validates :username,   :presence => true,
