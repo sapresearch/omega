@@ -1,0 +1,5 @@
+<h2>Favorite <%= @klass.to_s.gsub('::', ' ').titleize.pluralize %></h2>
+
+<% @favorites.each do |favorite| %>
+	Favorite: <%= link_to_favorite(favorite) %><br />
+<% end %>
