@@ -3,6 +3,8 @@ class Volunteering::Record < ActiveRecord::Base
   belongs_to :contact
   has_many :time_entries
 
-  validates :status, :presence => true,
-                     :inclusion => { :in => [:applied, :declined, :accepted] }
+  accepts_nested_attributes_for :contact
+
+  #validates :status, :presence => true,
+                     #:inclusion => { :in => [:applied, :declined, :accepted] }
 end

@@ -30,10 +30,10 @@
     <% if @position.schedule %>
         <%= debug @position.schedule %>
     <% end %>
-    <% if @position.contact %>
+    <% if @position.contacts %>
         <p>
           <span class="fieldDescribtion"> Contact:</span>
-          <%= @position.contact %>
+          <%= @position.contacts %>
         </p>
     <% end %>
     <%= link_to 'Edit', edit_volunteering_position_path(@position) %>

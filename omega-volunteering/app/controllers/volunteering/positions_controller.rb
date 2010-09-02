@@ -115,7 +115,7 @@ class Volunteering::PositionsController < ApplicationController
         @positions = @positions.select('`volunteering_positions`.*, count(`contact_interests`.`id`) as i_count').
                                 joins(:interests).
                                 where('contact_interests.name IN (?)', interests).
-                                group("`volunteering_positions`.`id` HAVING `t_count` = #{interests.size}")
+                                group("`volunteering_positions`.`id` HAVING `i_count` = #{interests.size}")
       end
     end
 
@@ -150,9 +150,12 @@ class Volunteering::PositionsController < ApplicationController
     SORT_KEYS = ['name']
     SORT_DIRECTIONS = ['asc', 'desc']
     def sort
+      @positions = Volunteering::Position.scoped
+
       params.each do |attr, direction|
         next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
         @positions = @positions.order("#{attr} #{direction}")
       end
     end
+
 end
