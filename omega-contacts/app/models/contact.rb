@@ -47,10 +47,11 @@ class Contact < ActiveRecord::Base
   %w(email first_name last_name).each do |attr|
     class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
       def #{attr}
-        user.present? ? user.send(:#{attr}) : super
+        user.try(:#{attr}) || super
       end
       def #{attr}=(value)
-        user.present? ? user.send(:#{attr}=, value) : super
+        user.send(:#{attr}=, value) if user.present?
+        super
       end
     RUBY_EVAL
   end
