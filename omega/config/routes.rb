@@ -13,6 +13,12 @@ Omega::Tram.routes.draw do
 
   resources :roles
   resources :permissions, :only => [:index, :show]
+
+  resources :messages, :except => [:edit] do
+    collection do
+      get :sent
+    end
+  end
   
   root :to => 'home#index'
   match 'product' => 'home#product'
