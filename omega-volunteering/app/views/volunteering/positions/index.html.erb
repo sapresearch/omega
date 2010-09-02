@@ -1,91 +1,65 @@
-<% require_stylesheet 'omega_volunteering' %>
+<% require_stylesheet 'omega_volunteering_positions' %>
 <% require_javascript 'omega_volunteering' %>
-  <h1>Volunteering Overview
+
+  <h1>
+    <%= link_to 'Volunteering Overview', nil %>
+
     <div class="position_list_crl">
-      <%= link_to 'sort by name', volunteering_positions_path(:name => 'asc') %>
-      <%= link_to 'sort by name', volunteering_positions_path(:name => 'desc') %>
-    
+
+
     </div>
   </h1>
   <div class="position_r center">
-<% if @skills_tags %>
-    <%= debug @skills_tags %>
-<% end %>
+    <% if @skills_tags %>
+        <%= debug @skills_tags %>
+    <% end %>
     Applied Tags
   </div>
+  <div class="position_r">
 
-  <div class="position_r center">
-    <form action="/search">
-      <div class="search_wrapper_l">
-        <input id="sd" name="sd" type="text" value="Search..." />
-      </div>
-
-    </form>
+        <input id="sd" name="sd" type="text" value="Search..."/>
+    <%= link_to 'sort by name', volunteering_positions_path(:name => 'asc') %>
+      <%= link_to 'sort by name', volunteering_positions_path(:name => 'desc') %>
   </div>
 
-
-<ul id="positions_list">
-  <% @positions.each do |position| %>
-      <li class="clearfix">
-        <div class="position">
-          <div class="position_actions">
-            <a href="">Delete</a>
-            <a href="">Delete</a>
-            <a href="">Delete</a>
-
+  <ul id="positions_list">
+    <% @positions.each do |position| %>
+        <li class="clearfix">
+          
+          <div class="position_slider">
+            <div class="position_actions">
+              <%= toggle_favorite(position) %>
+              <img src="/images/icons/quill.png" alt="">
+              <%= link_to 'Apply for this Position' %>
+            </div>
 
           </div>
-
-
-          <div>
+          <div class="position">
             <h2>
-              <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position)  %>
-              </h2>
-
-
+              <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
+            </h2>
             <p class="posDescribtion">
-
               <%= truncate(position.description, :length=> 160) %>
             </p>
             <div class="position_details">
 
-
-    
             </div>
-           <p class="position_tags">
-                <% position.skills.each do  |skill|  %>
-            <span class="skill_tag"><a href=""><%= skill.name %></a> </span> 
-             <% end %>
-           </p>
+            <p class="position_tags">
+              <% position.skills.each do |skill| %>
+                  <span class="skill_tag"><a href=""><%= skill.name %></a> </span>
+              <% end %>
+            </p>
 
           </div>
 
-          <div class="clear"></div>
-        </div>
-        <%#= position.contact %>
-      </li>
 
-  <% end %>
-</ul>
+        </li>
+
+    <% end %>
+  </ul>
+
+
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_positions" %>
 
-<% if @skills %>
-Skills:<br />
-	<% @skills.each do |skill| %>
-		<%= link_to skills_volunteering_positions_path(:skills => [params[:skills], skill.name].compact.join('+')) do %>
-		<%= skill.name %> x <%= skill.count %><br />
-		<% end %>
-	<% end %>
-<% end %>
-<br />
-
-<% if @interests %>
-Interests:<br />
-	<% @interests.each do |interest| %>
-		<%= link_to interests_volunteering_positions_path(:interests => [params[:interests], interest.name].compact.join('+')) do %>
-			<%= interest.name %> x <%= interest.count %><br />
-		<% end %>
-	<% end %>
-<% end %>
 <% end %>

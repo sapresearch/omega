@@ -9,7 +9,7 @@ class Contact < ActiveRecord::Base
   class << self
     def for(user) where('user_id = ?', user).first end
   end
-
+  self.include_root_in_json = false 
   belongs_to :user
   has_and_belongs_to_many :interests, :join_table => 'contact_contacts_interests'
   has_and_belongs_to_many :skills,    :join_table => 'contact_contacts_skills'

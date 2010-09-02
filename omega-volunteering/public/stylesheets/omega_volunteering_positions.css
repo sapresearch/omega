@@ -1,0 +1,176 @@
+h1 {
+    position: relative;
+}
+
+#time_picker {
+    display: none;
+    text-align: left;
+    border: 1px solid #999;
+    overflow: hidden;
+    height: 14em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    background: #f2f2f2;
+    list-style: none;
+    z-index: 10000;
+}
+
+#time_picker li {
+    *float: left;
+    text-indent: 0;
+    margin: 0;
+    padding: 0.1em 0.2em;
+    cursor: pointer;
+}
+
+.tpickr_li_over {
+    background: #1484E6;
+    color: #FFF;
+
+}
+
+#scheduler {
+    margin: 2em 0;
+    display: none;
+}
+
+#scheduler table {
+    width: auto;
+}
+
+#time_slider {
+    width: 300px;
+}
+
+#scheduler li {
+    background: none;
+    padding: 0;
+}
+
+.sel_wday {
+    width: 100px;
+    padding: 0.5em;
+}
+
+.schedule {
+    display: none;
+}
+
+.posDate {
+    background: url("../images/calBg.png") no-repeat;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 10px 0 0 0;
+
+    float: left;
+    width: 59px;
+    height: 70px;
+    margin-right: 1em;
+
+}
+
+.posCalMonth {
+
+    color: #FFF;
+}
+
+.posCalDay {
+    font-size: 1.7em;
+    padding-top: 8px;
+    color: #285370;
+}
+
+#positions_list li {
+    height: 180px;
+    position: relative;
+}
+
+div.position_slider {
+
+    text-align: right;
+    border: none;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    top: 20px;
+    background: url("../images/details_bg.png") repeat-x bottom;
+    color: #fff;
+    display: none;
+
+}
+
+div.position_actions {
+    padding: 2px 20px 0 0;
+}
+
+div.position {
+
+    width: 100%;
+    position: absolute;
+    top: 20px;
+
+    background: #FFF;
+
+}
+
+.position_hover {
+    border-color: #005AC8;
+
+}
+
+#positions_list .position_details li {
+
+    background: none !important;
+    padding: 5px;
+
+}
+
+.position_actions a {
+    color: #FFF;
+
+}
+
+.skill_tag {
+    border: 1px solid #CCCCCC;
+    margin: 0 4px 5px 0;
+    padding: 4px 10px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+
+    display: inline-block;
+    background: url("/images/glass.png") repeat-x scroll 0 50%
+
+}
+
+.skill_tag a {
+    letter-spacing: 0.04em;
+    font-size: 0.9em;
+    color: #2D302D;
+}
+.skill_tag a:hover {
+
+    color: #0063dc;
+}
+
+.position_list_crl {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0.5em;
+}
+
+#position_search {
+    padding: 1em;
+    border-bottom: 4px solid #EBEBEB;
+}
+
+.position_r {
+    border-bottom: 1px solid #EBEBEB;
+    background: url("../images/h1BgLight.png") repeat-x bottom #FFF;
+    margin: 0.5em 0;
+    padding: 0.5em;
+}

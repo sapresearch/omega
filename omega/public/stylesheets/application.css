@@ -15,8 +15,8 @@ table, tbody, tfoot, thead, tr, th, td {
 }
 
 body {
-    line-height: 1;
-    background: url('../images/bg.png') repeat-x;
+    background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
+
 }
 
 ol, ul {
@@ -46,54 +46,52 @@ table {
 
 html, body {
     color: #2D302D;
-
     letter-spacing: 1px;
-
     font-size: 12px;
     font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-
     text-align: center;
 
 }
-
+/* make buttons play nice in IE:
+   www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+button {  width: auto; overflow: visible; }
 h1, h2, h3, h4 {
     text-transform: uppercase;
     font: bold "Century Schoolbook", Georgia, Times, serif;
-
     letter-spacing: -1px;
 }
 
 h1 {
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius:10px;
-    font-size:24px;
-    background: url("../images/h1BgLight.png") bottom repeat-x #FFF;
-    text-shadow: #999 1px 1px 1px;
-    padding: 0.5em;
-    margin-top: 0;
-    border-bottom: 1px solid #CACBD1;
 
-    color: #421325;
+
+    font-size: 1.7em;
+    padding:0 0 1em 0;
+
+    color: #CE3B74;
 }
 
 h2 {
     color: #8F284F;
 
 }
+h1 a{
+
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color:#CE3B74;
+    border-bottom: 2px solid #CE3B74; 
+}
 
 h2 a {
 
-    color: #CE3B74;
+    color: #421325;
 }
 
 h2 a:hover {
     color: #8F284F;
 }
 
-#right h1 {
-    font-size: 1.3em;
-}
+
 
 h2 {
     letter-spacing: 0px;
@@ -106,7 +104,7 @@ h3 {
 }
 
 p {
-    padding:1em;
+    padding: 1em;
     line-height: 2em;
 }
 
@@ -125,15 +123,18 @@ a:hover {
     padding-bottom: 10px;
 }
 
+#user_custom_bar{
+    color:#1981FF;
+    padding-top:5px;
+    float:left;
+}
+
 /** Main Menu **/
 
 #main_menu a {
 
-
     color: #FFF;
-    text-shadow: 1px 1px #666;
     font-weight: bold;
-
     text-transform: capitalize;
 
 }
@@ -141,12 +142,11 @@ a:hover {
 /* Styles for the entire  menu */
 
 ul#main_menu {
-
+    padding-top:20px;
     list-style: none;
     font-weight: bold;
     margin: 0;
-    float: left;
-    font-size: 1.6em;
+    font-size: 1.3em;
 
 }
 
@@ -190,13 +190,13 @@ ul#main_menu li ul.subnav {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     width: 170px;
-    z-index: 1000;
+    z-index: 10000;
     font-size: 0.7em;
     list-style: none;
     position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
     left: 0;
     top: 30px;
-    background: url("../images/sub_menu.png");
+    background: #0063dc;
     margin: 0;
     padding: 0;
     float: left;
@@ -337,12 +337,9 @@ div.form {
 
 }
 
-
 legend {
     margin: 1em;
 }
-
-
 
 form input, textarea, select {
     background: url("../images/textinputbg.gif") repeat-x scroll 0 0 #FFFFFF;
@@ -422,29 +419,29 @@ form span.error {
 
 #content {
 
-
 }
 
 /** Sticky footer **/
 
 html, body, #wrapper {
     height: 100%;
+
 }
 
 body > #wrapper {
     height: auto;
     min-height: 100%;
+    background: url('../images/bg_light.png') repeat-x;
 }
 
 #content {
 
-    padding-top: 30px;
-
-
+    margin-top: 60px;
     padding-bottom: 16em;
 }
-.center_content{
-       margin: 0 10%;
+
+.center_content {
+    margin: 0 10%;
     text-align: left;
 }
 
@@ -502,7 +499,7 @@ div.footer_blocks {
 }
 
 #footer h1 {
-    background: #7CA3BD;
+    background: #eee;
     padding: 0.3em;
     -moz-border-radius: 4px;
     color: #FFF;
@@ -580,7 +577,7 @@ div.footer_blocks {
     text-align: left;
     float: left;
 
-    width: 75%;
+    width: 70%;
     margin: 0;
 }
 
@@ -655,8 +652,6 @@ div.top span {
     background: url(../images/top-right.gif) no-repeat right top;
 }
 
-
-
 .bottom {
     padding-top: 40px;
     height: 60px;
@@ -690,8 +685,6 @@ div.top span {
 .nav_em_show_hover {
     background-position: 0 -20px;
 }
-
-
 
 .icon {
     display: inline;
@@ -807,8 +800,6 @@ div.top span {
     display: block;
 }
 
-
-
 .notice {
     font-weight: bold;
     padding: 4px;
@@ -839,11 +830,10 @@ th {
 }
 
 td {
-    font-size:0.8em;
+    font-size: 0.8em;
 
     vertical-align: bottom;
 }
-
 
 tr {
 
@@ -1016,65 +1006,85 @@ dl.drop_down {
     display: none;
 }
 
-.search_wrapper_l{
-    display:inline-table;
-    color:#fff;
-    width:244px;
-    height:54px;
-    background:url("../images/search_box_l.png") no-repeat scroll 0 0;
+.search_wrapper_l {
+    display: inline-table;
+    color: #fff;
+    width: 244px;
+    height: 54px;
+    background: url("../images/search_box_l.png") no-repeat scroll 0 0;
 }
-.search_wrapper_hover{
+
+.search_wrapper_hover {
     background-position: 0 -54px;
 }
-.search_wrapper_focus{
-    color:#162d3d !important;
+
+.search_wrapper_focus {
+    color: #162d3d !important;
     background-position: 0 -108px;
 }
-.search_wrapper_l input{
-    padding: 18px 45px ;
-    background:transparent;
-    border:none;
+
+.search_wrapper_l input {
+    padding: 18px 45px;
+    background: transparent;
+    border: none;
 
 }
+
 .center {
-text-align:center !important;
+    text-align: center !important;
 }
 
 /** TODO  source it out to a different file **/
-#landing_list{
-    position:absolute;
-    bottom:0;
+#mkt_present{
+    padding: 5em 0 0 0;
 }
 
-#landing_list li{
-    border-bottom:none;
-    color:#421325;
-    width:500px;
+#landing_list li {
+    border-bottom: none;
+    color: #421325;
+    text-shadow: #FFF 1px 1px 1px;
+    width: 500px;
     background: url("../images/marketing/bullet.png") left no-repeat;
     font-size: 24px;
-    font-weight:bold;
-    padding:6px 0 6px 45px;
+    font-weight: bold;
+    padding: 1em 0 0 45px;
 }
 
 #landing_list li span.explanation {
-    font-size:16px;
-color:#162d3d;
+    font-size: 16px;
+    color: #2D302D;
 }
 
-#mkt_presentation{
-    position:
-relative;
-    height:300px;
+
+
+#mkt_carousel {
+    -moz-box-shadow: 0 0 20px #646767;
+    -webkit-box-shadow: 0 0 20px #646767;
+    box-shadow: 0 0 20px #646767;
+
 }
-#mkt_screen {
-    position:absolute;
-    bottom:0;
-    right:0px;
+
+#mkt_try {
+    padding: 2em 2em 0 0;
+    font-size: 24px;
+    
+    color: #162D3D;
 }
-#mkt_try{
-    padding:2em;
-    border-bottom:8px solid #EEE;
-    font-size:28px;
-    font-style:italic;
-    color:#c2366b;
+#mkt_bubbles{
+    padding-top:4em;
+}
+#mkt_bubbles .bubble{
+    color:#0063dc;
+    font-size:2em;
+    text-align:center;
+    margin:2em;
+    float:left;
+    height:160px;
+}
+
+/**carousel plugin**/
+.textholder {
+    padding: 0.5em;
+    background: #2D302D;
+    color: #FFF !important;
 }

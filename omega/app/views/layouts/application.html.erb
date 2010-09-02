@@ -18,9 +18,12 @@
   <div id="head">
 
     <div id="topBar">
-
-      <div id="msgCtrl">
+      <div id="user_custom_bar">
+            <img src="/images/icons/mail.png" alt="">(0) Messages
+        <img src="/images/icons/heart.png" alt=""> 6 Favorites
       </div>
+
+ 
       <div id="ctlrBar">
 
         <% if current_user.is_anonymous? -%>
@@ -37,7 +40,7 @@
       </div>
       <div id="loginWrapper">
        
-          <%#= render :partial => "layouts/partials/login" %>
+          <%= render :partial => "layouts/partials/login" %>
 
       </div>
     </div>
@@ -45,7 +48,7 @@
     <%= render :partial => "layouts/menu" %>
   </div>
 
-  <div id="content" class="clearfix">
+  <div id="content" class="clearfix center_content">
 
     <%= render(:layout => "layouts/columns") do
         render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do

@@ -15,4 +15,5 @@ Omega::Tram.routes.draw do
   resources :permissions, :only => [:index, :show]
   
   root :to => 'home#index'
+  match 'product' => 'home#product'
 end
