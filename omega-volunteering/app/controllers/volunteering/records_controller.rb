@@ -18,8 +18,9 @@ class Volunteering::RecordsController < ApplicationController
 
     def new
       @record = Volunteering::Record.new
-      @record.contact = Contact.for(current_user)
       @record.position = Volunteering::Position.find(params[:id])
+      @record.build_contact
+      @record.contact = Contact.for(current_user)
 
       respond_with(@record)
       
