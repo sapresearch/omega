@@ -140,7 +140,7 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def get_interests
-    @interests = @positions.where(:id => @positions.map(&:id)).
+    @interests = Volunteering::Position.where(:id => @positions.map(&:id)).
             joins(:interests).
             group('contact_interests.name').
             select('contact_interests.*, count(*) as count').
