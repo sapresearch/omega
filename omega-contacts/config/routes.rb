@@ -13,7 +13,7 @@ Omega::Contacts::Tram.routes.draw do
       get :search
 
       get :autocomplete
-      match ':letter' => 'contacts#letter', :constraints => { :letter => %r[\w]}
+      match ':letter' => 'contacts#letter', :constraints => { :letter => /[a-z]/i}
     end
 
     scope :as => 'contact', :module => 'contacts' do
