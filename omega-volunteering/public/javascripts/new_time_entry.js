@@ -8,6 +8,7 @@
 
 $(document).ready(function() {
 
+
 $('.datepickr').datepicker({
     beforeShowDay: function(date) {
         var a = new Array();
@@ -15,7 +16,7 @@ $('.datepickr').datepicker({
         a[1] = '';
         a[2] = '';
         return a;
-    }
+    }, dateFormat: 'yy-mm-dd'
 });
 
 });

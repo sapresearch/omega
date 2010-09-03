@@ -2,7 +2,7 @@ class CreateVolunteeringTimeEntries < ActiveRecord::Migration
   def self.up
     create_table :volunteering_time_entries do |t|
       t.integer :record_id, :null => false
-      t.date   :week
+      t.date :week, :null => false
     end
   end
 
