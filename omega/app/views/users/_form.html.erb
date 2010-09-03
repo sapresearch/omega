@@ -1,6 +1,6 @@
 <% require_javascript 'thirdParty/jquery.validate.js' %>
 <% require_javascript 'validations/new_user.js' %>
-<div class="form">
+
   <h1>Sign up for an new account</h1>
   <%= form_for @user, :'data-validations' => 'user[contact,role]' do |f| %>
       <%= errors_for_form @user %>
@@ -40,8 +40,4 @@
         <%= f.submit %>
       </div>
   <% end %>
-</div>
 
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_home" %>
-<% end %>

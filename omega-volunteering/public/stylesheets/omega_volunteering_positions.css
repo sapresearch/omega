@@ -113,7 +113,7 @@ div.position {
     position: absolute;
     top: 20px;
 
-    background: #FFF;
+    background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
 
 }
 
@@ -140,12 +140,16 @@ div.position {
     padding: 4px 10px;
     -moz-border-radius: 12px;
     -webkit-border-radius: 12px;
-
     display: inline-block;
     background: url("/images/glass.png") repeat-x scroll 0 50%
-
 }
-
+.skill_tag_active{
+    background-color:#A82F5D;
+    border:none;
+}
+.skill_tag_active a{
+    color:#FFF !important;
+}
 .skill_tag a {
     letter-spacing: 0.04em;
     font-size: 0.9em;
@@ -173,4 +177,7 @@ div.position {
     background: url("../images/h1BgLight.png") repeat-x bottom #FFF;
     margin: 0.5em 0;
     padding: 0.5em;
+}
+.position > h2 {
+    padding:1em;
 }

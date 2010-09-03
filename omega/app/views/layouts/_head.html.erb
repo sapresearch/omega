@@ -1,0 +1,32 @@
+  <div id="head">
+
+    <div id="topBar">
+      <div id="user_custom_bar">
+            <img src="/images/icons/mail.png" alt="">(0) Messages
+        <img src="/images/icons/heart.png" alt=""> 6 Favorites
+      </div>
+
+
+      <div id="ctlrBar">
+
+        <% if current_user.is_anonymous? -%>
+            <span id="trigger"><a class="btnLoginCtrl" rel="prettyPhoto" href="#loginWrapper"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
+
+        <% else -%>
+            <%= link_to content_tag(:span, "logout"), sessions_url, :method => :delete, :confirm => 'Are you sure?' %>
+        <% end -%>
+        | <%= link_to content_tag(:span, t(:sign_up)), register_users_url %>
+      </div>
+      <div id="search_wrapper">
+        <input id="search_input">
+
+      </div>
+      <div id="loginWrapper">
+
+          <%= render :partial => "layouts/partials/login" %>
+
+      </div>
+    </div>
+
+    <%= render :partial => "layouts/menu" %>
+  </div>

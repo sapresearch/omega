@@ -13,7 +13,7 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def upcoming
-    @positions = Volunteering::Position.where('start is not null').order('start ASC')
+    @positions = @positions.where('start is not null').order('start ASC')
     respond_with(@positions)
   end
 
@@ -102,7 +102,8 @@ class Volunteering::PositionsController < ApplicationController
 
   private
     def get_positions
-      @positions = Volunteering::Position.scoped.includes(:skills)
+      @positions = Volunteering::Position.includes(:skills)
+      @positions = @positions.started.not_ended
 
       if skills = params[:skills].try(:split, '+')
         @positions = @positions.select('`volunteering_positions`.*, count(`contact_skills`.`id`) as s_count').
@@ -120,11 +121,11 @@ class Volunteering::PositionsController < ApplicationController
     end
 
     def get_skills
-      @skills = Volunteering::Position.scoped.where(:id => @positions.map(&:id)).
-                                              joins(:skills).
-                                              group('contact_skills.name').
-                                              select('contact_skills.*, count(*) AS count').
-                                              order('count desc')
+      @skills = Volunteering::Position.where(:id => @positions.map(&:id)).
+                                       joins(:skills).
+                                       group('contact_skills.name').
+                                       select('contact_skills.*, count(*) AS count').
+                                       order('count desc')
 
       if @skills_tags = params[:skills].try(:split, '+')
         @skills_tags.each do |skill|

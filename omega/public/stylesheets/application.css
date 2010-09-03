@@ -84,11 +84,11 @@ h1 a{
 
 h2 a {
 
-    color: #421325;
+    color: #00469C;
 }
 
 h2 a:hover {
-    color: #8F284F;
+    color: #0069E9;
 }
 
 
@@ -442,13 +442,13 @@ body > #wrapper {
 
 .center_content {
     margin: 0 10%;
-    text-align: left;
+    
 }
 
 /* must be same height as the footer */
 
 #footer_wrapper {
-    padding: 0 10%;
+    padding: 4em 0 0;
     position: relative;
     margin: -16em 0; /* negative value of footer height */
     height: 16em;
@@ -457,13 +457,17 @@ body > #wrapper {
 }
 
 #footer {
-    margin: 1em 0 0 0;
-    border: 6px solid #eee;
+    width:800px;
+    color:#646767;
+    margin: 0 auto;
+    background: #191919;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
     padding-top: 1em;
 }
 
 div.footer_blocks {
-    margin: 0 1em;
+    margin: 0 2em;
 }
 
 /* CLEAR FIX*/
@@ -492,17 +496,17 @@ div.footer_blocks {
 
 #footer li {
     text-align: left;
-    border-bottom: 1px dotted #162E3D;
+
     padding: 0.5em;
-    color: #162E3D;
+
 
 }
 
 #footer h1 {
-    background: #eee;
-    padding: 0.3em;
+    font-size:1.3em;
+    padding: 0.3em 0 1em;
     -moz-border-radius: 4px;
-    color: #FFF;
+    color: #ECF2F4;
     border: none;
 }
 

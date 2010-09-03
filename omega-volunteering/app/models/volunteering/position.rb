@@ -18,7 +18,12 @@ class Volunteering::Position < ActiveRecord::Base
                                                                         # rejects empty child attributes
   accepts_nested_attributes_for :contacts
 
-   attr_accessor :starttime_nr, :start_date_nr, :endtime_nr, :end_date_nr
+  attr_accessor :starttime_nr, :start_date_nr, :endtime_nr, :end_date_nr
+
+  scope :started, where('start <= ?', Time.now)
+  scope :not_started, where('start > ?', Time.now)
+  scope :ended, where('end <= ?', Time.now)
+  scope :not_ended, where('end > ?', Time.now)
 
   before_save :combine_times
 
