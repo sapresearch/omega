@@ -1,2 +1,16 @@
+<div class="sidebar-menu">
+  <h1 class="round-top">Menu</h1>
+  <div class="round-bottom sidebar-menu-content">
+    <ul>
+      <li>
+        <%= link_to 'Edit', edit_volunteering_position_path(@position) , :class => 'sidebar-menu-nav' %>
+      </li>
+      <li><%= link_to 'Back', volunteering_positions_path,:class => 'sidebar-menu-nav' %></li>
+      <li><%= toggle_favorite(@position) %></li>
+    </ul>
 
-<h1>fgf with same Tag</h1>
+
+
+  </div>
+</div>
+

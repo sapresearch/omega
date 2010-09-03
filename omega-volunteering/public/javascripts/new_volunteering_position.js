@@ -95,7 +95,7 @@ $(function() {
 
     // selector caching
     var $assigned_contacts = $('#assigned_contacts');
-    var $vp_contact_id = $('#volunteering_position_contact_id');
+    var $vp_contact_id = $('#volunteering_position_contact_ids');
 
 
     $("#ac_contacts").autocomplete('/contacts/autocomplete.psv', {

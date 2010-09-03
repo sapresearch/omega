@@ -10,7 +10,8 @@ $(function() {
     var $positions_list = document.getElementById('positions_list');
     $('.position',$positions_list).mouseenter(function(e) {
 
-        $(this).addClass('position_hover').siblings('div.position_slider').show().animate({ 'top' : '0px'},'slow');
+$(this).addClass("position_hover").siblings("div.position_slider").show().animate({ "top" : "0px"},"fast");
+
 
 
     });

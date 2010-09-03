@@ -2,7 +2,6 @@
 <% require_javascript 'new_volunteering_position', 'jquery.autocomplete' %>
 
 
-<h1>Create a new volunteer position</h1>
 <%= form_for(@position) do |f| %>
     <% if @position.errors.any? %>
         <div id="errorExplanation">
@@ -64,7 +63,7 @@
 
 
       <%= render('form_schedule_weekly', :f => f) %>
-      <%#= render('form_schedule_daily', :f => f) %>
+      <%= render('form_schedule_daily', :f => f) %>
     </div>
 
     <p>
@@ -94,7 +93,7 @@
         <legend>Assign an existing contact</legend>
         <%= f.label "contact_name(s)" %>
         <%= text_field_tag 'ac_contacts', nil %>
-        <%#= f.hidden_field :contact_ids %>
+        <%= f.hidden_field :contact_ids %>
         <ul id="assigned_contacts" class="right">
 
         </ul>

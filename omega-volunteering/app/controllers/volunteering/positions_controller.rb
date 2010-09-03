@@ -22,6 +22,11 @@ class Volunteering::PositionsController < ApplicationController
     respond_with(@position)
   end
 
+  def edit
+    @position = Volunteering::Position.find(params[:id])
+    respond_with(@position)
+  end
+
   def new
     @position = Volunteering::Position.new
     @position.contacts.build do |c|
@@ -56,35 +61,35 @@ class Volunteering::PositionsController < ApplicationController
         params[:volunteering_position].delete(:contact_ids)
     end
 
-      if contact_ids = params[:volunteering_position][:contact_ids]
-        params[:volunteering_position][:contact_ids] = contact_ids.split(',')
+    if contact_ids = params[:volunteering_position][:contact_ids]
+      params[:volunteering_position][:contact_ids] = contact_ids.split(',')
+    end
+
+    if schedule = params[:volunteering_position].delete(:schedule_attributes)
+      case schedule[:schedule_type]
+        when 'daily'
+          params[:volunteering_position][:schedule_attributes] = schedule[:daily]
+          params[:volunteering_position][:schedule_attributes][:schedule_type] = 'daily'
+
+          if params[:daily_type] == 'every_week_day'
+            params[:volunteering_position][:schedule_attributes][:every_value] = 'weekday'
+          end
+
+        when 'weekly'
+          params[:volunteering_position][:schedule_attributes] = schedule[:weekly]
+          params[:volunteering_position][:schedule_attributes][:schedule_type] = 'weekly'
+          params[:volunteering_position][:schedule_attributes][:start_time] = "00:00"
+          params[:volunteering_position][:schedule_attributes][:end_time] = "00:00"
       end
+    end
 
-      if schedule = params[:volunteering_position].delete(:schedule_attributes)
-        case schedule[:schedule_type]
-          when 'daily'
-            params[:volunteering_position][:schedule_attributes] = schedule[:daily]
+    @position = Volunteering::Position.create(params[:volunteering_position])
 
-            if params[:daily_type] == 'every_week_day'
-                params[:volunteering_position][:schedule_attributes][:every_value] = 'weekday'
-            end
-         
-          when 'weekly'
-            params[:volunteering_position][:schedule_attributes] = schedule[:weekly]
-            params[:volunteering_position][:schedule_attributes][:start_time] = "00:00"
-            params[:volunteering_position][:schedule_attributes][:end_time] = "00:00"
-        end
-
-        params[:volunteering_position][:schedule_attributes][:schedule_type] = schedule[:schedule_type]
-      end
-
-      @position = Volunteering::Position.create(params[:volunteering_position])
-      
-      @position.starttime_nr = params[:starttime_nr]
-      @position.start_date_nr = params[:start_date_nr]
-      @position.endtime_nr = params[:endtime_nr]
-      @position.end_date_nr = params[:end_date_nr]
-      respond_with(@position)
+    @position.starttime_nr = params[:starttime_nr]
+    @position.start_date_nr = params[:start_date_nr]
+    @position.endtime_nr = params[:endtime_nr]
+    @position.end_date_nr = params[:end_date_nr]
+    respond_with(@position)
   end
 
   def update
@@ -101,62 +106,63 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   private
-    def get_positions
-      @positions = Volunteering::Position.includes(:skills)
-      @positions = @positions.started.not_ended
+  def get_positions
+    @positions = Volunteering::Position.includes(:skills)
+    @positions = @positions.started.not_ended
 
-      if skills = params[:skills].try(:split, '+')
-        @positions = @positions.select('`volunteering_positions`.*, count(`contact_skills`.`id`) as s_count').
-                                joins(:skills).
-                                where('contact_skills.name IN (?)', skills).
-                                group("`volunteering_positions`.`id` HAVING `s_count` = #{skills.size}")
-      end
-
-      if interests = params[:interests].try(:split, '+')
-        @positions = @positions.select('`volunteering_positions`.*, count(`contact_interests`.`id`) as i_count').
-                                joins(:interests).
-                                where('contact_interests.name IN (?)', interests).
-                                group("`volunteering_positions`.`id` HAVING `i_count` = #{interests.size}")
-      end
+    if skills = params[:skills].try(:split, '+')
+      @positions = @positions.select('`volunteering_positions`.*, count(`contact_skills`.`id`) as s_count').
+              joins(:skills).
+              where('contact_skills.name IN (?)', skills).
+              group("`volunteering_positions`.`id` HAVING `s_count` = #{skills.size}")
     end
 
-    def get_skills
-      @skills = Volunteering::Position.where(:id => @positions.map(&:id)).
-                                       joins(:skills).
-                                       group('contact_skills.name').
-                                       select('contact_skills.*, count(*) AS count').
-                                       order('count desc')
+    if interests = params[:interests].try(:split, '+')
+      @positions = @positions.select('`volunteering_positions`.*, count(`contact_interests`.`id`) as i_count').
+              joins(:interests).
+              where('contact_interests.name IN (?)', interests).
+              group("`volunteering_positions`.`id` HAVING `i_count` = #{interests.size}")
+    end
+  end
 
-      if @skills_tags = params[:skills].try(:split, '+')
-        @skills_tags.each do |skill|
-          @skills = @skills.where('contact_skills.name != ?', skill)
-        end
+  def get_skills
+    @skills = Volunteering::Position.where(:id => @positions.map(&:id)).
+            joins(:skills).
+            group('contact_skills.name').
+            select('contact_skills.*, count(*) AS count').
+            order('count desc')
+
+    if @skills_tags = params[:skills].try(:split, '+')
+      @skills_tags.each do |skill|
+        @skills = @skills.where('contact_skills.name != ?', skill)
       end
     end
+  end
 
-    def get_interests
-      @interests = @positions.where(:id => @positions.map(&:id)).
-                              joins(:interests).
-                              group('contact_interests.name').
-                              select('contact_interests.*, count(*) as count').
-                              order('count desc')
+  def get_interests
+    @interests = @positions.where(:id => @positions.map(&:id)).
+            joins(:interests).
+            group('contact_interests.name').
+            select('contact_interests.*, count(*) as count').
+            order('count desc')
 
-      if @interests_tags = params[:interests].try(:split, '+')
-        @interests_tags.each do |interest|
-          @interests = @interests.where('contact_interests.name != ?', interest)
-        end
+    if @interests_tags = params[:interests].try(:split, '+')
+      @interests_tags.each do |interest|
+        @interests = @interests.where('contact_interests.name != ?', interest)
       end
     end
-  
-    SORT_KEYS = ['name']
-    SORT_DIRECTIONS = ['asc', 'desc']
-    def sort
-      @positions = Volunteering::Position.scoped
+  end
 
-      params.each do |attr, direction|
-        next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
-        @positions = @positions.order("#{attr} #{direction}")
-      end
+  SORT_KEYS = ['name']
+  SORT_DIRECTIONS = ['asc', 'desc']
+
+  def sort
+    @positions = Volunteering::Position.scoped
+
+    params.each do |attr, direction|
+      next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
+      @positions = @positions.order("#{attr} #{direction}")
     end
+  end
 
 end

@@ -98,6 +98,8 @@ div.position_slider {
     position: absolute;
     top: 20px;
     background: url("../images/details_bg.png") repeat-x bottom;
+    
+
     color: #fff;
     display: none;
 
@@ -108,7 +110,8 @@ div.position_actions {
 }
 
 div.position {
-
+    -moz-border-radius:  0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
     width: 100%;
     position: absolute;
     top: 20px;
@@ -116,9 +119,19 @@ div.position {
     background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
 
 }
-
+div.position-wrapper{
+    margin: 0 2px 2px;
+    padding:0.5em;
+    background: #F2f2f2;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #e3e3e3;
+}
 .position_hover {
-    border-color: #005AC8;
+    background:#0063dc!important;
+    /*background:#c9c9c9 !important;*/
+
+
 
 }
 
