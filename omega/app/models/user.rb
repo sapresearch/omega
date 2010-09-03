@@ -42,6 +42,9 @@ class User < ActiveRecord::Base
   has_many :sent_messages, :foreign_key => :from_id, :class_name => '::Message', :inverse_of => :from,
                            :conditions => ['deleted_by_from_at IS NULL']
 
+  has_many :favorites, :class_name => 'Trams::Favorites::Favorite'
+  has_many :favorite_items, :through => :favorites, :source => :item
+
   attr_accessor :password, :password_confirmation
 
   validates :username,   :presence => true,
