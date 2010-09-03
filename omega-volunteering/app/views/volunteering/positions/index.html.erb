@@ -30,7 +30,10 @@
           <div class="position_actions">
             <%= toggle_favorite(position) %>
             <img src="/images/icons/quill.png" alt="">
-            <%= link_to 'Apply for this Position', new_volunteering_record_url(:id=>position) %>
+            <% record = Volunteering::Record.find_by_position_id_and_contact_id(position, Contact.for(current_user)) %>
+            <% if record.nil? && !current_user.is_anonymous? %>
+            <%= link_to 'Apply for this Position', new_volunteering_record_path(:id => position)%>
+            <%end%>
           </div>
 
         </div>
@@ -49,6 +52,15 @@
                 <span class="skill_tag"><a href=""><%= skill.name %></a> </span>
             <% end %>
           </div>
+
+          <p>
+            <% record = Volunteering::Record.find_by_position_id(position.id) %>
+            <% if !record.nil? && !current_user.is_anonymous? && Contact.for(current_user).id == record.contact_id%>
+
+                <%= link_to "Record Hours for this Position!", new_volunteering_time_entry_url(:id => record.id) %>
+
+            <%end%>
+          </p>
           </div>
 
 
