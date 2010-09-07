@@ -105,6 +105,31 @@ class Volunteering::PositionsController < ApplicationController
     render :index
   end
 
+   def my_positions
+
+    @positions = Array.new
+    
+    @records = Volunteering::Record.find_all_by_contact_id(Contact.for(current_user))
+    @records.each do |r|
+      @positions << Volunteering::Position.find_by_id(r.position_id)
+    end
+     
+  end
+
+  def my_time_sheets
+
+      @entry_days = Volunteering::TimeEntry::Day.all
+      
+      @timesheets = Array.new
+
+      @records = Volunteering::Record.find_all_by_contact_id(Contact.for(current_user))
+      @records.each do |r|
+        @timesheets << Volunteering::TimeEntry.find_all_by_record_id(r.id)
+      end
+      
+  end
+
+  
   private
   def get_positions
     @positions = Volunteering::Position.includes(:skills)
@@ -140,7 +165,7 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def get_interests
-    @interests = @positions.where(:id => @positions.map(&:id)).
+    @interests = Volunteering::Position.where(:id => @positions.map(&:id)).
             joins(:interests).
             group('contact_interests.name').
             select('contact_interests.*, count(*) as count').
@@ -153,6 +178,10 @@ class Volunteering::PositionsController < ApplicationController
     end
   end
 
+
+
+
+  
   SORT_KEYS = ['name']
   SORT_DIRECTIONS = ['asc', 'desc']
 

@@ -1,0 +1,58 @@
+<% require_stylesheet 'new_time_entry'%>
+
+
+<h1>My Time Sheets</h1>
+
+<% if @timesheets.empty? %>
+    <br/>
+       <strong>You Don't Have Any Time Sheets Yet!</strong><br/><br/>
+         <p>
+           <%= link_to 'Record Hours Now!', my_positions_volunteering_positions_path%>
+
+         </p>
+<%else%>
+    
+<%@timesheets.each do |timesheet| %>
+<div id="timesheet">
+
+<% timesheet.each do |t| %>
+
+<h2><%=Volunteering::Position.find_by_id(Volunteering::Record.find_by_id(t.record_id).position_id).name%></h2>
+<strong>Week: <%= start = t.week.strftime('%Y/%m/%d')%> > <%= Date.parse(start).advance(:days => 6).to_time.strftime('%Y/%m/%d') %></strong>
+
+<%unless t.nil?%>
+ 
+
+ <table>
+  <thead><th></th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th><th>SUN</th></thead>
+
+   <tr><td>Hours</td>
+
+    <% @entry_days.each do |ed| %>
+
+        <%if t.id == ed.time_entry_id%>
+
+            <td><%= ed.hours %></td>
+
+        <%end%>
+
+    <%end%>
+
+    </tr>
+
+  </table>
+  <br/>
+
+   
+      <%end%>
+
+<%end%>
+
+</div>
+
+
+
+<%end%>
+
+
+<%end%>

@@ -12,7 +12,7 @@ class Volunteering::RecordsController < ApplicationController
 
     def show
       @record = Volunteering::Record.find(params[:id])
-      @record.position = Volunteering::Position.find(params[:id])
+      @position = Volunteering::Position.find_by_id(@record.position_id)
       respond_with(@record)
     end
 

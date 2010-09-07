@@ -2,6 +2,9 @@ class Volunteering::TimeEntriesController < ApplicationController
 
   respond_to :html, :xml, :json, :js
 
+  require_permission Volunteering::PERM_VIEW
+  require_permission Volunteering::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
+  
     def show
       @entry = Volunteering::TimeEntry.find(params[:id])
       @entry_days = Volunteering::TimeEntry::Day.all
