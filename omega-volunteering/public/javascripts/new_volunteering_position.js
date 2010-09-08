@@ -105,7 +105,7 @@ $(function() {
         }
     }).result(function(e, data) {
         $(this).val('');
-        $('<li />').append('<span class="icon-delete"></span>' + data[0]).appendTo($assigned_contacts).data('cid', data[1]);
+        $('<li />').append('<span class="om-icon-only om-icon-delete"></span>' + data[0]).appendTo($assigned_contacts).data('cid', data[1]);
 
         update_cid_values()
 

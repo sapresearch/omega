@@ -9,12 +9,28 @@ table, tbody, tfoot, thead, tr, th, td {
     padding: 0;
     border: 0;
     outline: 0;
-
     vertical-align: baseline;
     background: transparent;
 }
 
-body {
+html, body, #wrapper {
+    height: 100%;
+
+}
+
+body > #wrapper {
+
+    height: auto;
+    min-height: 100%;
+
+    background: url('../images/bg_light.png') repeat-x;
+}
+
+html, body {
+    background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
+    color: #2D302D;
+    font-size: 12px;
+    font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 
 }
 
@@ -37,39 +53,16 @@ q:before, q:after {
     outline: 0;
 }
 
-/* tables still need 'cellspacing="0"' in the markup */
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-html, body {
-    background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
-    color: #2D302D;
-    letter-spacing: 1px;
-    font-size: 12px;
-    font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-    text-align: center;
-
-}
-
-/* make buttons play nice in IE:
-www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
-button {
-    width: auto;
-    overflow: visible;
-}
-
 h1, h2, h3, h4 {
     text-transform: lowercase;
     font: bold "Century Schoolbook", Georgia, Times, serif;
-    
+
 }
 
-#left h1 {
+h1 {
     margin: 0 0 1em;
     font-size: 1.3em;
-    font-weight:normal;
+    font-weight: normal;
 
 }
 
@@ -81,11 +74,6 @@ h1 span.h1 {
     display: inline-block;
     color: #FFF;
     background: #393D39;
-}
-
-h2 {
-    color: #8F284F;
-
 }
 
 h2 a {
@@ -121,7 +109,7 @@ a:hover {
 }
 
 #top-pane {
-    
+
     height: 28px;
 
 }
@@ -142,42 +130,30 @@ a:hover {
     margin: 0 auto;
 }
 
-#top-pane .btnCust {
-    float: right;
-}
-
-html, body, #wrapper {
-    height: 100%;
-
-}
-
-body > #wrapper {
-
-    height: auto;
-    min-height: 100%;
-
-    background: url('../images/bg_light.png') repeat-x;
-}
-
 #content {
+    text-align: left;
     margin: 0 auto;
     width: 950px;
     padding-bottom: 16em;
 }
 
+#left {
+    text-align: left;
+    float: left;
+    width: 70%;
+    margin: 0;
+}
+
+#right {
+    text-align: left !important;
+    width: 25%;
+    margin: 0;
+    float: right;
+}
+
 .center-content {
     width: 950px;
     margin: 0 auto;
-
-}
-
-/** Main Menu **/
-
-#main_menu a {
-
-    color: #FFF;
-    font-weight: bold;
-    text-transform: capitalize;
 
 }
 
@@ -193,23 +169,21 @@ ul#topnav {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    
+
     margin: 0;
     padding: 0;
     float: left;
     width: 950px;
     list-style: none;
-    position: relative; /*--Set relative positioning on the unordered list itself - not on the list item--*/
+    position: relative;
     font-size: 1em;
-    /*background: url(../images/menu_bg.png) repeat-x;*/
     background: #0058C2;
 }
 
 ul#topnav li {
     float: left;
     margin: 0;
-    padding: 0;
-    /*border-right: 1px solid #d1d1d1; *//*--Divider for each parent level links--*/
+    padding: 0; /*border-right: 1px solid #d1d1d1; *//*--Divider for each parent level links--*/
 }
 
 ul#topnav li a {
@@ -220,22 +194,16 @@ ul#topnav li a {
     text-decoration: none;
 }
 
-/*ul#topnav .top-nav-active {*/
-
-    /*background: url(../images/topnav_active.png) repeat-x;*/
-/*}*/
-
+/* submenu */
 ul#topnav li span {
-    
     float: left;
     padding: 0 0 10px;
     position: absolute;
     z-index: 10000 !important;
     top: 34px;
-
     display: none; /*--Hide by default--*/
-    width: 140px;
-    background:#0058C2;
+    width: 170px;
+    background: #0058C2;
     color: #fff; /*--Bottom right rounded corner--*/
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 4px 4px;
@@ -248,9 +216,8 @@ ul#topnav li:hover span {
 
 /*--Show subnav on hover--*/
 ul#topnav li span a {
-    border-bottom:1px dotted #448BE2;
-    /*background: url(../images/menu_bg.png) repeat-x;*/
-    background:#0058C2;
+    border-bottom: 1px dotted #448BE2; /*background: url(../images/menu_bg.png) repeat-x;*/
+    background: #0058C2;
     padding: 5px;
     display: block;
 }
@@ -261,7 +228,7 @@ ul#topnav li span a:hover {
     text-decoration: none;
 }
 
-/** End Menu**/
+/**************************** End Menu *****************************/
 
 legend {
     font-size: 1.4em;
@@ -285,6 +252,15 @@ fieldset {
     z-index: 1000;
     width: 100%;
     position: absolute;
+}
+
+.right {
+    float: right;
+
+}
+
+.left {
+    float: left;
 }
 
 .fieldset_active {
@@ -328,7 +304,6 @@ fieldset {
     clear: both;
 }
 
-
 * html .clearfix {
     height: 1%;
 }
@@ -339,11 +314,11 @@ fieldset {
 }
 
 .inputInvalid {
-    border: 1px solid #FF0084 !important;
+    border: 1px solid #ed513b !important;
 }
 
 .inputValid {
-    border: 1px solid #06ff00;
+    border: 1px solid #61bd68;
 
 }
 
@@ -409,6 +384,11 @@ a {
 
 }
 
+.om-button button {
+    width: auto;
+    overflow: visible;
+}
+
 .om-icon-space {
     padding: 4px 8px 4px 26px !important;
 }
@@ -426,6 +406,16 @@ span.om-button {
     border-style: solid;
     border-color: #ccc #bbb #a0a0a0;
     margin: 0px;
+}
+
+.om-icon-only {
+    margin: 0 0.5em;
+    cursor: pointer;
+    background-image: url(../images/icons/iconSprite.png);
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+
 }
 
 span.om-button-active {
@@ -519,15 +509,19 @@ span.om-button span.om-icon {
 .om-icon-mail-new {
     background-position: 0 -272px;
 }
+
 .om-icon-user-add {
     background-position: 0 -288px;
 }
+
 .om-icon-household-add {
     background-position: 0 -304px;
 }
+
 .om-icon-user-remove {
     background-position: 0 -320px;
 }
+
 .om-icon-user-edit {
     background-position: 0 -336px;
 }
@@ -583,7 +577,6 @@ form span.error {
 /* must be same height as the footer */
 
 #footer_wrapper {
-    padding: 4em 0 0;
     position: relative;
     margin: -16em 0; /* negative value of footer height */
     height: 16em;
@@ -613,8 +606,6 @@ div.footer_blocks {
     clear: both;
     visibility: hidden;
 }
-
-
 
 /* Hides from IE-mac \*/
 * html .clearfix {
@@ -653,33 +644,10 @@ div.footer_blocks {
     position: relative;
 }
 
-#appPanel form label {
-    color: #FFF;
-}
-
-#loginPanel {
-    font-size: 0.7em;
-    text-align: right;
-    padding: 26px 0 0 0;
-    *padding: 16px 0 0 0 !important;
-}
-
-#loginPanel input {
-
-}
-
-#loginPanel p {
-    margin: 0.1em 0 0.1em 0;
-}
-
-#loginCtrl {
-    padding: 0 0 4px 0;
-}
-
 #ctlrBar {
     margin-left: 1em;
-    height:28px;
-    line-height:28px;   
+    height: 28px;
+    line-height: 28px;
     float: right;
     vertical-align: bottom
 }
@@ -688,36 +656,6 @@ div.footer_blocks {
     color: #FFF;
     cursor: pointer;
 
-}
-
-#left {
-    text-align: left;
-    float: left;
-
-    width: 70%;
-    margin: 0;
-}
-
-#right {
-    text-align: left !important;
-
-    width: 25%;
-    margin: 0;
-
-}
-
-.right {
-    display: block;
-    float: right;
-
-}
-
-.left {
-    float: left;
-}
-
-#right {
-    float: right;
 }
 
 /* Errors and validation */
@@ -750,38 +688,6 @@ span.error {
     overflow: hidden;
 }
 
-/*Panel layout with shadow and rounded corners*/
-#liquid-round {
-    margin: 0px auto;
-    background: white url(../images/leftside.gif) repeat-y left top;
-}
-
-div.top {
-    width: 100%;
-    height: 20px;
-    background: url(../images/top.gif) no-repeat left top;
-}
-
-div.top span {
-    display: block;
-    position: relative;
-    height: 20px;
-    background: url(../images/top-right.gif) no-repeat right top;
-}
-
-.bottom {
-    padding-top: 40px;
-    height: 60px;
-    background: url(../images/bottom.gif) no-repeat left bottom;
-}
-
-.bottom span {
-    display: block;
-    position: relative;
-    height: 60px;
-    background: url(../images/bottom-right.gif) no-repeat right top;
-}
-
 .nav_em_show {
     display: block;
     height: 20px;
@@ -799,71 +705,6 @@ div.top span {
     background-position: 0 -20px;
 }
 
-.bt {
-    background: url("../images/roundedBg.png") no-repeat scroll 100% 0 transparent;
-    height: 40px;
-    margin: 0 0 0 40px;
-}
-
-.bt div {
-    background: url("../images/roundedBg.png") no-repeat scroll 0 0 transparent;
-    font-size: 0;
-    height: 40px;
-    left: -40px;
-    line-height: 0;
-    position: relative !important;
-    width: 40px;
-}
-
-.bb {
-    background: url("../images/roundedBg.png") no-repeat scroll 100% 100% transparent;
-    height: 40px;
-    margin: 0 0 0 40px;
-}
-
-.bb div {
-    background: url("../images/roundedBg.png") no-repeat scroll 0 100% transparent;
-    font-size: 0;
-    height: 40px;
-    left: -40px;
-    line-height: 0;
-    position: relative !important;
-    width: 40px;
-}
-
-.i1 {
-    background: url("../images/borders.png") repeat-y scroll 0 0 transparent;
-    padding: 0 0 0 19px;
-}
-
-.i2 {
-    background: url("../images/borders.png") repeat-y scroll 100% 0 transparent;
-    padding: 0 19px 0 0;
-}
-
-.i3 {
-    background: none repeat scroll 0 0 #FFFFFF;
-    display: block;
-    margin: 0;
-    padding: 1px 19px;
-}
-
-.i3:after {
-    clear: both;
-    content: ".";
-    display: block;
-    height: 0;
-    visibility: hidden;
-}
-
-.i3 {
-    display: inline-block;
-}
-
-.i3 {
-    display: block;
-}
-
 .notice {
     font-weight: bold;
     padding: 4px;
@@ -877,31 +718,6 @@ div.top span {
 
 .content li {
     padding: 1em 0 1em 0;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th {
-    vertical-align: middle;
-    color: #0E5A9D;
-    border: 1px solid #C6CCCD;
-    background: url("../images/calThBg.png") repeat-x;
-    text-align: left;
-    font-size: 12px;
-}
-
-td {
-    font-size: 0.8em;
-
-    vertical-align: bottom;
-}
-
-tr {
-
-    vertical-align: bottom;
 }
 
 .trHover {
@@ -948,34 +764,6 @@ tr {
 
 .content {
     color: #0E5A9D;
-}
-
-.o_08D9CD {
-    background: #08D9CD;
-}
-
-.o_023431 {
-    background: #023431;
-}
-
-.o_0AF3E7 {
-    background: #0AF3E7;
-}
-
-.o_07B3AA {
-    background: #07B3AA;
-
-}
-
-.o_05736E {
-    background: #05736E;
-}
-
-.corners {
-    padding: 0.2em;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
 }
 
 td h4 {
@@ -1146,29 +934,6 @@ dl.drop_down {
     height: 160px;
 }
 
-/**carousel plugin**/
-.textholder {
-    padding: 0.5em;
-    background: #2D302D;
-    color: #FFF !important;
-}
-
-.round-top {
-    -moz-border-radius: 6px 6px 0 0;
-
-    -webkit-border-radius: 6px 6px 0 0;
-}
-
-.round-bottom {
-    -moz-border-radius: 0 0 6px 6px;
-
-    -webkit-border-radius: 0 0 6px 6px;
-}
-
-div.sidebar-menu {
-    max-width: 200px;
-}
-
 .sidebar-menu h1 {
     background: #CF3A72;
     color: #FFF;
@@ -1197,7 +962,23 @@ div.sidebar-menu-content li {
     border-bottom: 1px dotted #191919;
 }
 
-li.item-list{
-    padding:0.5em 0;
-    border-bottom:1px dotted #2D302D;
+li.item-list {
+    padding: 0.5em 0;
+    border-bottom: 1px dotted #2D302D;
+}
+
+div.sidebar-menu h1 {
+    margin: 0;
+}
+
+.round-bottom {
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
+
+.round-top {
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 0 0 4px 4px 0 0;
+    border-radius: 0 0 4px 4px 0 0;
 }

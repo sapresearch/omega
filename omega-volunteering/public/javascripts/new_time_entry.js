@@ -7,7 +7,15 @@
  */
 
 $(document).ready(function() {
-
+$('#sidebar-date-picker').datepicker({
+    beforeShowDay: function(date) {
+        var a = new Array();
+        a[0] = date.getDay() == 1;
+        a[1] = '';
+        a[2] = '';
+        return a;
+    }, dateFormat: 'yy-mm-dd'
+});
 
 $('.datepickr').datepicker({
     beforeShowDay: function(date) {

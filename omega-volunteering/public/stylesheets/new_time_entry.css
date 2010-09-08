@@ -36,13 +36,6 @@ table th.Corner {
     text-align: left;
 }
 
-div #timesheet {
-    position: relative;
-    height: auto;
-    width: 760px;    
-    margin: 25px 0;
-    text-align: left;
-} 
 
 p #right {
     text-align: right;
