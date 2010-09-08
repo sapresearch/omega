@@ -15,11 +15,22 @@
     </div>
     <div style="float:right">
 
+   <span class="om-button">
+        <span class="om-icon om-icon-user-add"></span>
+        <%= link_to 'New Contact', new_contact_path, :remote => true, :class=>'om-icon-space' %>
+   </span>
 
+    <span class="om-button">
+        <span class="om-icon om-icon-household-add"></span>
+        <%= link_to 'New Household', new_contact_household_path, :remote => true, :class=>'om-icon-space' %>
+   </span>
 
-      <span class="btn_action"> <%= link_to 'New Contact', new_contact_path, :remote => true %></span>
-      <span class="btn_action"><%= link_to 'New Household', new_contact_household_path, :remote => true %></span>
-      <span class="btn_action"><%= link_to 'New Organisation', new_contact_organization_path, :remote => true %></span>
+    <span class="om-button">
+        <span class="om-icon om-icon-organization-add"></span>
+        <%= link_to 'New Organisation', new_contact_organization_path, :remote => true, :class=>'om-icon-space' %>
+   </span>
+
+      
     </div>
   </div>
 
@@ -35,7 +46,7 @@
   <div id="contacts_groups" class="left">
     <ul>
       <li><%= link_to 'All Contacts', all_contacts_path, :remote => true, :id=> 'dummy' %></li>
-      
+
       <% @contact_groups.keys.each do |group_type| %>
           <li class="header"><%= group_type.try(:pluralize) %></li>
           <% @contact_groups[group_type].each do |group| %>
@@ -46,9 +57,9 @@
     </ul>
   </div>
 
-  <div id="contacts_group_pane" >
-  <%= yield %>
-</div>
+  <div id="contacts_group_pane">
+    <%= yield %>
+  </div>
 
 </div>
 

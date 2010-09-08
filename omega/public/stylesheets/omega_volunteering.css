@@ -54,13 +54,13 @@
 }
 
 .posDate {
-    background: url("../images/calBg.png") no-repeat;
+    background: url("../images/cal_bg.png") no-repeat;
     text-align: center;
     font-size:1.3em;
-    padding: 10px 0 0 0;
+    padding: 5px 0 0 0;
 
     float: left;
-    width: 59px;
+    width: 45px;
     height: 70px;
     margin-right: 1em;
 
@@ -72,9 +72,10 @@
 }
 
 .posCalDay {
-    font-size: 1.7em;
-    padding-top: 8px;
-    color: #285370;
+
+    padding-top: 4px;
+    font-size:0.8em;
+    color:#fff;
 }
 
 

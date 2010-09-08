@@ -126,30 +126,21 @@
 
 $(function() {
 
+  
+
+
     /**
      * menu
      */
-    $("ul.subnav").parent().append("<span></span>"); //Only shows drop down trigger when js is enabled (Adds empty span tag after ul.subnav*)
 
-    $("#main_menu li span").mouseover(
-                                     function() { //When trigger is clicked...
 
-                                         //Following events are applied to the subnav itself (moving subnav up and down)
-                                         $(this).parent().find("ul.subnav").slideDown('fast').show(); //Drop down the subnav on click
-
-                                         $(this).parent().hover(function() {
-                                         }, function() {
-                                             $(this).parent().find("ul.subnav").slideUp('normal'); //When the mouse hovers out of the subnav, move it back up
-                                         });
-
-                                         //Following events are applied to the trigger (Hover events for the trigger)
-                                     })
-    $('ul.subnav').find('li').hover(function() {
-        $(this).addClass("menu_li_hover"); //On hover over, add class "subhover"
-    }, function() {    //On Hover Out
-        $(this).removeClass("menu_li_hover"); //On hover out, remove class "subhover"
+    $("ul#topnav li").hover(function() { //Hover over event on list item
+        $(this).addClass('top-nav-active'); //Add background color and image on hovered list item
+        $(this).find("span").slideDown('fast'); //Show the subnav
+    }, function() { //on hover out...
+        $(this).removeClass('top-nav-active'); //Ditch the background
+        $(this).find("span").slideUp('fast'); //Hide the subnav
     });
-    // end menu
 
 
     $("a[rel^='prettyPhoto']").prettyPhoto();

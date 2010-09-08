@@ -1,5 +1,58 @@
-<h2>Favorites</h2>
 
+
+
+
+
+
+<h1>
+  <span class="h1 left">
+  Favorites
+  </span>
+
+  <div class="right">
+   <span class="om-button">
+<span class="om-icon om-icon-sort-az"></span>
+     <%= link_to 'sort A-Z', messages_path(:subject => 'asc'), :class=> 'om-icon-space' %>
+</span>
+  <span class="om-button">
+<span class="om-icon om-icon-sort-za"></span>
+    <%= link_to 'sort Z-A', messages_path(:subject => 'desc'), :class=> 'om-icon-space' %>
+</span>
+
+  </div>
+
+  <div class="clear"></div>
+</h1>
+
+<ul id="favorites_list">
 <% @favorites.each do |favorite| %>
-	Favorite: <%= link_to_favorite(favorite) %><br />
+      <li class="item-list clearfix">
+
+        <h2>
+          <%= link_to_favorite(favorite) %>
+        </h2>
+
+        <div class="">
+          <%= truncate(favorite.to_s, :length=> 160) %>
+        </div>
+        <div class="right">
+        <span class="om-button">
+<span class="om-icon om-icon-delete"></span>
+          <%= link_to 'Delete',favorite_path(favorite), :method=> :delete, :class=> 'om-icon-space' %>
+</span>
+        </div>
+
+
+      </li>
+
+  <% end %>
+</ul>
+
+
+
+
+
+
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_favorites_menu" %>
 <% end %>

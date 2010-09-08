@@ -1,0 +1,29 @@
+<div class="sidebar-menu">
+  <h1 class="round-top">Menu</h1>
+
+  <div class="round-bottom sidebar-menu-content">
+    <ul>
+      <li>
+          <span class="om-button">
+             <span class="om-icon om-icon-mail"></span>
+            <%= link_to 'inbox', messages_path, :class => 'om-icon-space ' %>
+            </span>
+      </li>
+      <li>
+          <span class="om-button">
+            <span class="om-icon om-icon-mail-new"></span>
+            <%= link_to 'new', new_message_path, :class => 'om-icon-space ' %>
+            </span>
+      </li>
+      <li>
+          <span class="om-button">
+            <span class="om-icon om-icon-mail-sent"></span>
+            <%= link_to 'sent', sent_messages_path, :class => 'om-icon-space ' %>
+            </span>
+      </li>
+
+    </ul>
+
+  </div>
+</div>
+

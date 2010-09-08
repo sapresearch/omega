@@ -1,12 +1,12 @@
 class MessagesController < ApplicationController
   respond_to :html, :js
 
-  sub_layout 'messages'
+#  sub_layout 'messages'
 
-  before_filter :_get_messages,      :only => [:index]
-  before_filter :_get_sent_messages, :only => [:sent]
-  before_filter :_get_message,       :only => [:show, :update, :destroy]
-  before_filter :_new_message,       :only => [:new]
+  before_filter :_get_messages, :sort,      :only => [:index]
+  before_filter :_get_sent_messages,        :only => [:sent]
+  before_filter :_get_message,              :only => [:show, :update, :destroy]
+  before_filter :_new_message,              :only => [:new]
 
   def index
     respond_with(@messages)
@@ -52,6 +52,19 @@ class MessagesController < ApplicationController
     end
     respond_with(@message)
   end
+
+  SORT_KEYS = ['subject']
+  SORT_DIRECTIONS = ['asc', 'desc']
+
+  def sort
+    @positions = Volunteering::Position.scoped
+
+    params.each do |attr, direction|
+      next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
+      @messages = @messages.order("#{attr} #{direction}")
+    end
+  end
+
 
   private
     def _get_messages

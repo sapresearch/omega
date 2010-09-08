@@ -1,3 +1,54 @@
-<% @messages.each do |message| %>
-<%= message.subject %>	
+
+
+<h1>
+  <span class="h1 left">
+  Messages
+  </span>
+
+  <div class="right">
+   <span class="om-button">
+<span class="om-icon om-icon-sort-az"></span>
+     <%= link_to 'sort A-Z', messages_path(:subject => 'asc'), :class=> 'om-icon-space' %>
+</span>
+  <span class="om-button">
+<span class="om-icon om-icon-sort-za"></span>
+    <%= link_to 'sort Z-A', messages_path(:subject => 'desc'), :class=> 'om-icon-space' %>
+</span>
+
+  </div>
+
+  <div class="clear"></div>
+</h1>
+
+<ul id="messages_list">
+  <% @messages.each do |message| %>
+      <li class="item-list clearfix">
+
+        <h2>
+          <%= link_to truncate(message.subject, :length=>60), message_path(message) %>
+        </h2>
+
+        <div class="">
+          <%= truncate(message.subject, :length=> 160) %>
+        </div>
+        <div class="right">
+        <span class="om-button">
+<span class="om-icon om-icon-delete"></span>
+          <%= link_to 'Delete', message_path(message), :method=> :delete, :class=> 'om-icon-space' %>
+</span>
+        </div>
+
+
+      </li>
+
+  <% end %>
+</ul>
+
+
+
+
+
+
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_messages_menu" %>
 <% end %>

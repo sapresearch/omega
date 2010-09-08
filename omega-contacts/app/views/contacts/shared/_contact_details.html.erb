@@ -1,6 +1,17 @@
 <div id="contact_mgm">
-  <%= link_to 'delete', @contact, :method=> :delete, :remote => true %>
-  <span class="icon icon_edit"></span><%= link_to 'edit', edit_contact_path(@contact), :remote => true %>
+
+    <span class="om-button">
+        <span class="om-icon om-icon-user-remove"></span>
+        <%= link_to 'delete', @contact, :method=> :delete,  :remote => true, :class=>'om-icon-space' %>
+   </span>
+
+  <span class="om-button">
+      <span class="om-icon om-icon-user-edit"></span>
+      <%= link_to 'edit', edit_contact_path(@contact),   :remote => true, :class=>'om-icon-space' %>
+ </span>
+
+
+  
   <dl id="contact_assign" class="drop_down">
     <dt><a href="#" class="corners"><span>Assign this contact</span></a></dt>
     <dd>

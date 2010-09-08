@@ -2,5 +2,12 @@
 	<%= f.label :to %>: <%= f.text_field :to_id %><br />
 	<%= f.label :subject %>: <%= f.text_field :subject %><br />
 	<%= f.label :body %>: <%= f.text_area :body %><br />
-	<%= f.submit %>
+ <span class="om-button">
+    <%= f.submit %>
+</span>
+
+<% end %>
+
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_messages_menu" %>
 <% end %>

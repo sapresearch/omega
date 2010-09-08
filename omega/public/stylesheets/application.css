@@ -15,7 +15,6 @@ table, tbody, tfoot, thead, tr, th, td {
 }
 
 body {
-    background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
 
 }
 
@@ -45,6 +44,7 @@ table {
 }
 
 html, body {
+    background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
     color: #2D302D;
     letter-spacing: 1px;
     font-size: 12px;
@@ -61,30 +61,31 @@ button {
 }
 
 h1, h2, h3, h4 {
-    text-transform: uppercase;
+    text-transform: lowercase;
     font: bold "Century Schoolbook", Georgia, Times, serif;
-    letter-spacing: -1px;
+    
 }
 
-h1 {
+#left h1 {
+    margin: 0 0 1em;
+    font-size: 1.3em;
+    font-weight:normal;
 
-    font-size: 1.7em;
-    padding: 0 0 1em 0;
+}
 
-    color: #CE3B74;
+h1 span.h1 {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    padding: 0.5em;
+    display: inline-block;
+    color: #FFF;
+    background: #393D39;
 }
 
 h2 {
     color: #8F284F;
 
-}
-
-h1 a {
-
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    color: #CE3B74;
-    border-bottom: 2px solid #CE3B74;
 }
 
 h2 a {
@@ -116,19 +117,58 @@ a {
 }
 
 a:hover {
-    color: #5ABBFC;
+    color: #0063dc;
 }
 
-#topBar {
-
+#top-pane {
+    
     height: 28px;
-    padding-bottom: 10px;
+
 }
 
-#user_custom_bar {
-    color: #1981FF;
+#user_custom_bar a {
+    color: #FFF;
     padding-top: 5px;
     float: left;
+}
+
+#wrapper {
+    min-height: 400px;
+}
+
+#head {
+    width: 950px;
+    text-align: left;
+    margin: 0 auto;
+}
+
+#top-pane .btnCust {
+    float: right;
+}
+
+html, body, #wrapper {
+    height: 100%;
+
+}
+
+body > #wrapper {
+
+    height: auto;
+    min-height: 100%;
+
+    background: url('../images/bg_light.png') repeat-x;
+}
+
+#content {
+    margin: 0 auto;
+    width: 950px;
+    padding-bottom: 16em;
+}
+
+.center-content {
+    width: 950px;
+    margin: 0 auto;
+
 }
 
 /** Main Menu **/
@@ -142,99 +182,86 @@ a:hover {
 }
 
 /* Styles for the entire  menu */
+div#navigation {
+    margin: 50px auto;
 
-ul#main_menu {
-    padding-top: 20px;
-    list-style: none;
-    font-weight: bold;
-    margin: 0;
-    font-size: 1.3em;
+    width: 950px;
 
 }
 
-ul#main_menu li {
+ul#topnav {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 950px;
+    list-style: none;
+    position: relative; /*--Set relative positioning on the unordered list itself - not on the list item--*/
+    font-size: 1em;
+    /*background: url(../images/menu_bg.png) repeat-x;*/
+    background: #0058C2;
+}
+
+ul#topnav li {
     float: left;
     margin: 0;
-    padding: 0 15px 0 0;
-    position: relative; /*--Declare X and Y axis base for sub navigation--*/
+    padding: 0;
+    /*border-right: 1px solid #d1d1d1; *//*--Divider for each parent level links--*/
 }
 
-.menu_li_hover {
-    background: url("../images/menu_li_hover.png") repeat-x bottom;
-}
-
-ul#main_menu li a {
-    padding: 5px 5px;
-    color: #fff;
+ul#topnav li a {
+    text-transform: capitalize;
+    padding: 10px 15px;
     display: block;
+    COLOR: #fff;
     text-decoration: none;
+}
+
+/*ul#topnav .top-nav-active {*/
+
+    /*background: url(../images/topnav_active.png) repeat-x;*/
+/*}*/
+
+ul#topnav li span {
+    
     float: left;
+    padding: 0 0 10px;
+    position: absolute;
+    z-index: 10000 !important;
+    top: 34px;
+
+    display: none; /*--Hide by default--*/
+    width: 140px;
+    background:#0058C2;
+    color: #fff; /*--Bottom right rounded corner--*/
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 4px 4px;
+    border-radius: 4px;
 }
 
-ul#main_menu li span {
-/*--Drop down trigger styles--*/
-    width: 17px;
-    height: 24px;
-    float: left;
-    background: url(../images/subnav_btn.png) no-repeat center top;
+ul#topnav li:hover span {
+    display: block;
 }
 
-ul#main_menu li span.subhover {
-    background-position: center bottom;
-    cursor: pointer;
+/*--Show subnav on hover--*/
+ul#topnav li span a {
+    border-bottom:1px dotted #448BE2;
+    /*background: url(../images/menu_bg.png) repeat-x;*/
+    background:#0058C2;
+    padding: 5px;
+    display: block;
 }
 
-/*--Hover effect for trigger--*/
-ul#main_menu li ul.subnav {
-    -moz-box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.65);
-    -webkit-box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.65);
-    display: none;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    width: 170px;
-    z-index: 10000;
-    font-size: 0.7em;
-    list-style: none;
-    position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
-    left: 0;
-    top: 30px;
-    background: #0063dc;
-    margin: 0;
-    padding: 0;
-    float: left;
-
-}
-
-.active {
-    background: url("../images/menu_li_hover.png") repeat-x bottom #c2366b;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-}
-
-ul#main_menu li ul.subnav li {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    clear: both;
-
-}
-
-html ul#main_menu li ul.subnav li a {
-    float: left;
-
+/*--Since we declared a link style on the parent list link, we will correct it back to its original state--*/
+ul#topnav li span a:hover {
+    background: url(../images/nav_a_hover.png) repeat-x;
+    text-decoration: none;
 }
 
 /** End Menu**/
-
-ul.box_menu li {
-    background: url("../images/li_sub_menu.png") no-repeat;
-    font-size: 1.3em;
-    margin: 0.5em 0;
-    padding: 2px 0 2px 30px;
-
-}
 
 legend {
     font-size: 1.4em;
@@ -258,10 +285,6 @@ fieldset {
     z-index: 1000;
     width: 100%;
     position: absolute;
-}
-
-#wrapper {
-    min-height: 400px;
 }
 
 .fieldset_active {
@@ -305,9 +328,6 @@ fieldset {
     clear: both;
 }
 
-html[xmlns] .clearfix {
-    display: block;
-}
 
 * html .clearfix {
     height: 1%;
@@ -350,15 +370,169 @@ form input, textarea, select {
     color: #284966;
 }
 
-input[type="submit"] {
-    border: 0;
-    color: #FFF;
-    padding: 4px;
-    font-size: 1.3em;
-    font-weight: bolder;
-    cursor: pointer;
-    background: #285370;
+input {
+    font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    text-align: left;
+
 }
+
+a {
+    list-style-type: none;
+
+}
+
+/* ======================================= BUTTONS  =================================
+=                                                                                =
+=                                                                                =
+=                                                                                =
+=                                                                                =
+=================================================================================*/
+
+.om-button a, .om-button input, .om-button button {
+    position: relative;
+    text-transform: capitalize;
+    line-height: 18px;
+    height: 18px;
+    color: #191919;
+    vertical-align: middle;
+    background: none;
+    display: inline-block;
+    font: 12px "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+
+    white-space: nowrap;
+    overflow: visible;
+    cursor: pointer;
+    padding: 4px 8px;
+    outline: none;
+    border: none;
+
+}
+
+.om-icon-space {
+    padding: 4px 8px 4px 26px !important;
+}
+
+span.om-button {
+
+    position: relative;
+    -moz-border-radius: 3px;
+    -moz-webkit-radius: 2px;
+    border-radius: 2px;
+    display: inline-block;
+    height: 20px;
+    background: url("../images/om_button_bg.png") repeat-x bottom transparent;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc #bbb #a0a0a0;
+    margin: 0px;
+}
+
+span.om-button-active {
+
+    background: url("../images/om_button_bg_active.png") repeat-x bottom transparent;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc #bbb #a0a0a0;
+    color: #0063dc;
+}
+
+input[type="submit"]::-moz-focus-inner, button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+input[type="button"]::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+span.om-button span.om-icon {
+    background-image: url(../images/icons/iconSprite.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 2px;
+    margin: 0 0 0 4px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+
+}
+
+.om-icon-date {
+    background-position: 0 -16px;
+}
+
+.om-icon-add {
+    background-position: 0 -32px;
+}
+
+.om-icon-edit {
+    background-position: 0 -48px;
+}
+
+.om-icon-delete {
+    background-position: 0 -64px;
+
+}
+
+.om-icon-user {
+    background-position: 0 -112px;
+}
+
+.om-icon-group {
+    background-position: 0 -128px;
+}
+
+.om-icon-mail {
+    background-position: 0 -144px;
+}
+
+.om-icon-sort-az {
+    background-position: 0 -160px;
+}
+
+.om-icon-sort-za {
+    background-position: 0 -176px;
+}
+
+.om-icon-favorite-add {
+    background-position: 0 -192px;
+}
+
+.om-icon-favorite-remove {
+    background-position: 0 -208px;
+}
+
+.om-icon-back {
+    background-position: 0 -224px;
+}
+
+.om-icon-mail-sent {
+    background-position: 0 -240px;
+}
+
+.om-icon-mail-open {
+    background-position: 0 -256px;
+}
+
+.om-icon-mail-new {
+    background-position: 0 -272px;
+}
+.om-icon-user-add {
+    background-position: 0 -288px;
+}
+.om-icon-household-add {
+    background-position: 0 -304px;
+}
+.om-icon-user-remove {
+    background-position: 0 -320px;
+}
+.om-icon-user-edit {
+    background-position: 0 -336px;
+}
+
+/*END BUTTONS*/
 
 form input.inputSmall {
     width: 4em;
@@ -406,47 +580,6 @@ form span.error {
     font-weight: bold;
 }
 
-.module .content {
-    padding: 4px;
-}
-
-#head {
-    margin: 0 10%;
-    text-align: left;
-}
-
-#topBar .btnCust {
-    float: right;
-}
-
-#content {
-
-}
-
-/** Sticky footer **/
-
-html, body, #wrapper {
-    height: 100%;
-
-}
-
-body > #wrapper {
-    height: auto;
-    min-height: 100%;
-    background: url('../images/bg_light.png') repeat-x;
-}
-
-#content {
-
-    margin-top: 60px;
-    padding-bottom: 16em;
-}
-
-.center_content {
-    margin: 0 10%;
-
-}
-
 /* must be same height as the footer */
 
 #footer_wrapper {
@@ -459,7 +592,7 @@ body > #wrapper {
 }
 
 #footer {
-    width: 800px;
+    width: 950px;
     color: #646767;
     margin: 0 auto;
     background: #191919;
@@ -481,9 +614,7 @@ div.footer_blocks {
     visibility: hidden;
 }
 
-.clearfix {
-    display: inline-block;
-}
+
 
 /* Hides from IE-mac \*/
 * html .clearfix {
@@ -547,35 +678,16 @@ div.footer_blocks {
 
 #ctlrBar {
     margin-left: 1em;
-    line-height: 28px;
+    height:28px;
+    line-height:28px;   
     float: right;
-
-    width: 120px;
     vertical-align: bottom
 }
 
 #ctlrBar a {
-    color: #c2366b;
+    color: #FFF;
     cursor: pointer;
 
-}
-
-.btnCtrl {
-    padding: 0;
-    line-height: 20px;
-    height: 20px;
-    cursor: hand;
-    display: inline-block;
-    margin: 2px;
-    background-color: #F5F5F5;
-    border-color: #EEEEEE #DEDEDE #DEDEDE #EEEEEE;
-    border-style: solid;
-    border-width: 1px;
-    color: #284966;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    width: 80px;
 }
 
 #left {
@@ -670,10 +782,6 @@ div.top span {
     background: url(../images/bottom-right.gif) no-repeat right top;
 }
 
-/* navigation elements */
-
-/*Icons*/
-
 .nav_em_show {
     display: block;
     height: 20px;
@@ -689,55 +797,6 @@ div.top span {
 
 .nav_em_show_hover {
     background-position: 0 -20px;
-}
-
-.icon {
-    display: inline;
-    display: -moz-inline-stack;
-    display: inline-block;
-    zoom: 1;
-    width: 16px;
-    height: 16px;
-    overflow: hidden;
-    padding: 0;
-    border: 0;
-    margin: 0;
-    vertical-align: middle;
-    line-height: 0;
-    font-size: 0;
-    text-decoration: none;
-    text-indent: -999px;
-    background-color: transparent;
-    background-image: url(../images/icons/iconSprite.png);
-}
-
-.icon_date {
-    background-position: 0 -16px;
-}
-
-.icon_add {
-    background-position: 0 -32px;
-}
-
-.icon_edit {
-    background-position: 0 -48px;
-}
-
-.icon_delete {
-    background-position: 0 -64px;
-
-}
-
-.icon_user {
-    background-position: 0 -112px;
-}
-
-.icon_group {
-    background-position: 0 -128px;
-}
-
-.icon_mail {
-    background-position: 0 -144px;
 }
 
 .bt {
@@ -1107,29 +1166,20 @@ dl.drop_down {
 }
 
 div.sidebar-menu {
-    max-width: 180px;
+    max-width: 200px;
 }
 
 .sidebar-menu h1 {
-    background: #0063DC;
+    background: #CF3A72;
     color: #FFF;
     padding: 5px 20px
 }
-.sidebar-menu a{
-    color:#0063DC;
-}
 
-.sidebar-menu a:hover {
-    color:#002A5C;
-    background:#ECF2F4;
-    border-bottom: 1px solid #646767;
-
-}
 .sidebar-menu-content {
     padding: 5px 20px;
-    border-bottom: 1px solid #0063DC;
-    border-left: 1px solid #0063DC;
-    border-right: 1px solid #0063DC;
+    border-bottom: 1px solid #CF3A72;
+    border-left: 1px solid #CF3A72;
+    border-right: 1px solid #CF3A72;
 }
 
 .sidebar-menu-nav {
@@ -1140,4 +1190,14 @@ div.sidebar-menu {
     line-height: 1.4;
     margin: 0;
     padding: 0.2em 10px;
+}
+
+div.sidebar-menu-content li {
+    padding: 0.5em 0;
+    border-bottom: 1px dotted #191919;
+}
+
+li.item-list{
+    padding:0.5em 0;
+    border-bottom:1px dotted #2D302D;
 }

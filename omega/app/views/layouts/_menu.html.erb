@@ -1,18 +1,23 @@
-<ul id="main_menu">
-  <li>
-    <%= link_to "home", root_url, :class =>'active' %>
-    <ul class="subnav">
-      <li><a href="#">Sub Nav Link</a></li>
-      <li><a href="#">Sub Nav Link</a></li>
-    </ul>
-  </li>
-  <li>
-    <%= link_to "Volunteering", volunteering_positions_url %>
-    <ul class="subnav">
-      <li><%= link_to "Upcoming", upcoming_volunteering_positions_url %></li>
-      <li>
-      <%= link_to "Create", new_volunteering_position_path %>  
-      </li>
+<div id="navigation">
+  <ul id="topnav">
+    <li><%= link_to "home", root_url, :class =>'root_em' %></li>
+    <li>
+      <%= link_to "Volunteering", volunteering_positions_url %>
+      <!--Subnav Starts Here-->
+        <span>
+            <%= link_to "Upcoming", upcoming_volunteering_positions_url %>
+          <%= link_to "Create", new_volunteering_position_path %>
+            <a href="#">Subnav Link</a>
+        </span>
+      <!--Subnav Ends Here-->
+    </li>
+    <li><%= link_to "Favorites", trams_favorites_favorites_path %></li>
+    <li>
+      <%= link_to "Messages", messages_url %>
+      <!--Subnav Starts Here-->
+        <span>
+           <%= link_to 'inbox', messages_path %>
+          <%= link_to 'new', new_message_path %>
 
       <li>
       <%= link_to "My Positions", my_positions_volunteering_positions_path %>
@@ -20,20 +25,18 @@
       <li>
       <%= link_to "My Time Sheets", my_time_sheets_volunteering_positions_path %>
       </li>
-      <li><a href="#">Sub Nav Link</a></li>
 
-    </ul>
-  </li>
-  <li>
-    <%= link_to "Contacts", contacts_url %>
-    <ul class="subnav">
-      <li><a href="#">Sub Nav Link</a></li>
-      <li><a href="#">Sub Nav Link</a></li>
-    </ul>
-  </li>
-  <li><%= link_to "calendars", calendars_url %></li>
 
-  <li><a href="#">Contact Us</a></li>
-</ul>
+        </span>
+      <!--Subnav Ends Here-->
+    </li>
+    <li> <%= link_to "Contacts", contacts_url %></li>
+    <li> <%= link_to "Calendar", calendars_url %></li>
+  </ul>
 
-<div class="clear"></div>
+
+
+  <div class="clear"></div>
+</div>
+
+

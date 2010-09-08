@@ -2,3 +2,6 @@
 <%= message.subject %>	
 	
 <% end %>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_messages_menu" %>
+<% end %>
