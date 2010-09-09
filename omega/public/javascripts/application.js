@@ -142,11 +142,11 @@ $(function() {
 
 
     $("ul#topnav li").hover(function() { //Hover over event on list item
-        $(this).addClass('top-nav-active'); //Add background color and image on hovered list item
-        $(this).find("span").slideDown('fast'); //Show the subnav
+
+        $(this).find("div").slideDown('fast'); //Show the subnav
     }, function() { //on hover out...
-        $(this).removeClass('top-nav-active'); //Ditch the background
-        $(this).find("span").slideUp('fast'); //Hide the subnav
+        
+        $(this).find("div").slideUp('fast'); //Hide the subnav
     });
 
 
