@@ -124,9 +124,16 @@
 
         (jQuery);
 
+
+jQuery.showFlash = function(msg) {
+    var msg_div = $('#notification-flash-wrapper');
+    msg_div.find('div').html(msg);
+    msg_div.fadeIn('fast').delay(2000).fadeOut('fast');
+};
+
 $(function() {
 
-  
+
 
 
     /**

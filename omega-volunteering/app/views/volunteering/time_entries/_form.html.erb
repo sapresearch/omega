@@ -1,5 +1,5 @@
 <% require_javascript 'new_time_entry' %>
-<% require_stylesheet 'new_time_entry' %>
+
 
 <%= form_for @entry do |f| %>
 
@@ -9,37 +9,31 @@
     <%= f.hidden_field :record_id %>
 
     <p>
-      Current Week: <%= Time.now.beginning_of_week().strftime('%Y/%m/%d') %> (Monday) <br/>
+      Current Week: <%= Time.now.strftime('%U') %> <br/>
+
+
+      Pick the start date of a Week from the calendar on the right: <%= text_field_tag 'cw' %>
+
+      <%= f.hidden_field :week, :size => 10 %>
     </p>
-
-
-
-    Pick a Week from the calendar on the right:
-
-    <%= f.text_field :week, :class => 'datepickr', :size => 10 %>
-
-    <table>
+    <table width="50%">
       <thead>
       <th>Day</th>
       <th>Hours</th>
-
       </thead>
+      <% @entry.days.each_with_index do |ed| %>
+          <%= f.fields_for "days", ed do |d| %>
+              <tr class="<%= cycle("even", "odd") -%>">
+                <% day = d.object %>
+                <% hours_errors << day.errors unless day.errors.empty? %>
 
 
-
-
-
-      <%= f.fields_for :days do |d| %>
-          <tr>
-            <% day = d.object %>
-            <% hours_errors << day.errors unless day.errors.empty? %>
-            <%= d.hidden_field :day %>
-
-            <td><%= debug d.to_s %> </td>
-            <td><%= d.text_field :hours, :size => 5 %><%= hours_errors.size unless day.errors.empty? %></td>
-          </tr>
+                <td>   <%= d.hidden_field :day %>         <%= ed.day %>
+                </td>
+                <td><%= d.text_field :hours, :size => 5 %><%= hours_errors.size unless day.errors.empty? %></td>
+              </tr>
+          <% end %>
       <% end %>
-
 
     </table>
     <% unless hours_errors.empty? %>
@@ -51,9 +45,14 @@
 
     <br/>
     <p>
-<span class="om-button">
-      <%= f.submit "Save!" %>
+
+
+      <span class="om-button">
+<span class="om-icon om-icon-save"></span>
+        <%= f.submit "Save!", :class => 'om-icon-space' %>
 </span>
+
+
     </p>
 
 

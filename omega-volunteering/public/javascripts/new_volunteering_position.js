@@ -5,6 +5,8 @@
 
 $(function() {
  $('.tpickr').timepicker();
+
+
     $('#new_volunteering_position').find(".datepickr").datepicker({
         dateFormat: 'yy-mm-dd',
         showButtonPanel: true,

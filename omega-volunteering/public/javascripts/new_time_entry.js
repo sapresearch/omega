@@ -7,24 +7,22 @@
  */
 
 $(document).ready(function() {
-$('#sidebar-date-picker').datepicker({
-    beforeShowDay: function(date) {
-        var a = new Array();
-        a[0] = date.getDay() == 1;
-        a[1] = '';
-        a[2] = '';
-        return a;
-    }, dateFormat: 'yy-mm-dd'
-});
+    $('#sidebar-date-picker').datepicker({
+        firstDay:1,
+        beforeShowDay: function(date) {
+            var a = new Array();
+            a[0] = date.getDay() == 1;
+            a[1] = '';
+            a[2] = '';
+            return a;
+        }, dateFormat: 'yy-mm-dd',
+        onSelect: function(dateText) {
+        $('#volunteering_time_entry_week, #cw').val(dateText);
+        },
+         weekHeader: 'W' ,
+        showWeek: true 
 
-$('.datepickr').datepicker({
-    beforeShowDay: function(date) {
-        var a = new Array();
-        a[0] = date.getDay() == 1;
-        a[1] = '';
-        a[2] = '';
-        return a;
-    }, dateFormat: 'yy-mm-dd'
-});
+    });
+
 
 });

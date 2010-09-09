@@ -1,8 +1,33 @@
 <% require_stylesheet 'new_time_entry' %>
 
 
-<h1>  <%= Volunteering::Position.find_by_id(Volunteering::Record.find_by_id(@entry.record.id).position_id).name %>
-  Position Time Sheet</h1>
+
+
+
+
+<h1>
+  <span class="h1 left">
+  <%= Volunteering::Position.find_by_id(Volunteering::Record.find_by_id(@entry.record.id).position_id).name %>
+  Position Time Sheet
+  </span>
+
+  <div class="right">
+   <span class="om-button">
+<span class="om-icon om-icon-sort-az"></span>
+     <%= link_to 'implement !!!!! sort A-Z', '', :class=> 'om-icon-space' %>
+</span>
+  <span class="om-button">
+<span class="om-icon om-icon-sort-za"></span>
+    <%= link_to 'implement !!!!! sort A-Z', '', :class=> 'om-icon-space' %>
+</span>
+
+  </div>
+
+  <div class="clear"></div>
+</h1>
+
+
+
 <div id="timesheet">
 
   <p>

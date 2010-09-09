@@ -8,19 +8,24 @@
 
 $(function() {
     var $positions_list = document.getElementById('positions_list');
-    $('.position',$positions_list).mouseenter(function(e) {
+    $('.position', $positions_list).mouseenter(function(e) {
 
-$(this).addClass("position_hover").siblings("div.position_slider").show().animate({ "top" : "0px"},"fast");
-
+        $(this).addClass("position_hover").siblings("div.position_slider").show().animate({ "top" : "0px"}, "fast");
 
 
     });
 
-    $('ul#positions_list').delegate('li','mouseleave',function(e) {
-if(!$(e.currentTarget).is('.details'))
+    $('ul#positions_list').delegate('li', 'mouseleave', function(e) {
+        if (!$(e.currentTarget).is('.details'))
             $(this).find('div.position').removeClass('position_hover').siblings('div.position_slider').animate({ 'top' : '20px'});
 
-    })
+    });
 
+    $('.remove-favorite').bind('ajax:success', function() {
+        $.showFlash('Succesfully removed from favorites')
+    }).bind('rails:created', function() {
+        $.showFlash('Succesfully added to favorites')
+    }
 
+            );
 });

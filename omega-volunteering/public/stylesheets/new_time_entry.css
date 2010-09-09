@@ -1,48 +1,48 @@
-table {
-    border-spacing: 0px;
-    border-collapse: collapse;
-    border-top: 4px solid #00003D;
-    border-bottom: 1px solid #00003D;
-    border-left: 1px dotted #00003D;
-    border-right: 1px dotted #00003D;
-}
-table th {
-    text-align: left;
-    font-weight: normal;
-    padding: 0.2em 0.5em;
-    border-top: 1px dotted #00003D;
-    border-left: 1px dotted #00003D;
-    border-right: 1px dotted #00003D;
+/*table {*/
+    /*border-spacing: 0px;*/
+    /*border-collapse: collapse;*/
+    /*border-top: 4px solid #00003D;*/
+    /*border-bottom: 1px solid #00003D;*/
+    /*border-left: 1px dotted #00003D;*/
+    /*border-right: 1px dotted #00003D;*/
+/*}*/
+/*table th {*/
+    /*text-align: left;*/
+    /*font-weight: normal;*/
+    /*padding: 0.2em 0.5em;*/
+    /*border-top: 1px dotted #00003D;*/
+    /*border-left: 1px dotted #00003D;*/
+    /*border-right: 1px dotted #00003D;*/
 
-}
-table td {
-    text-align: center;
-    border-top: 1px dotted #00003D;
-    padding: 0.2em 0.5em;
-    font-family: 'Arial';
-    font-weight : bold;
-    color: #00003D;
-}
-table thead th {
-    text-align: center;
-    background :#2D67A1;
-    border-bottom: 1px solid #00003D;
-    font-family: 'Tahoma';
-    font-weight : bold;
-    color: #FFFFFF;
+/*}*/
+/*table td {*/
+    /*text-align: center;*/
+    /*border-top: 1px dotted #00003D;*/
+    /*padding: 0.2em 0.5em;*/
+    /*font-family: 'Arial';*/
+    /*font-weight : bold;*/
+    /*color: #00003D;*/
+/*}*/
+/*table thead th {*/
+    /*text-align: center;*/
+    /*background :#2D67A1;*/
+    /*border-bottom: 1px solid #00003D;*/
+    /*font-family: 'Tahoma';*/
+    /*font-weight : bold;*/
+    /*color: #FFFFFF;*/
 
-}
-table th.Corner {
-    text-align: left;
-}
+/*}*/
+/*table th.Corner {*/
+    /*text-align: left;*/
+/*}*/
 
 
-p #right {
-    text-align: right;
-    padding-right: 10px;
+/*p #right {*/
+    /*text-align: right;*/
+    /*padding-right: 10px;*/
 
-}
+/*}*/
 
-p #right.a {
-    color: #00003D;
+/*p #right.a {*/
+    /*color: #00003D;*/
 }

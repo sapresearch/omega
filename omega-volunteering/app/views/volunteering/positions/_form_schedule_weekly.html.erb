@@ -6,18 +6,23 @@
       every <%= s.text_field :value, :size=>2 %> weeks
       <h4> Please select the weekdays that you want to have this event reoccur</h4>
       <table id="wst">
-        <tbody>
+        <thead>
         <tr>
-          <td></td>
-          <td></td>
-          <td>Start</td>
-          <td>End</td>
-          <td>Volunteers</td>
+         <th></th>
+          <th></th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Volunteers</th>
         </tr>
+        </thead>
+
+
         <%= s.fields_for :days do |d| %>
+
             <%= render('form_schedule_weekly_day', :d => d) %>
+        
         <% end %>
-        </tbody>
+
       </table>
       <h4>Please select the range of occurences</h4>
       <p>
