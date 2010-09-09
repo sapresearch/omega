@@ -241,7 +241,7 @@ div#navigation {
     position:relative;
     margin: 50px auto;
     width: 950px;
-
+z-index:1000;
 }
 
 ul#topnav {

@@ -264,6 +264,7 @@ $(function() {
                                                       }).blur(function() {
         $(this).val('Search..').parent().removeClass('search_wrapper_focus');
     });
+    $.ajax
 
 });
 
