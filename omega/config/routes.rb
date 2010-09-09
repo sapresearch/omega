@@ -18,6 +18,11 @@ Omega::Tram.routes.draw do
     collection do
       get :sent
     end
+
+    member do
+      get :reply
+      get :forward
+    end
   end
   
   root :to => 'home#index'

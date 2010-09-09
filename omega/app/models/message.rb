@@ -14,6 +14,35 @@ class Message < ActiveRecord::Base
   end
 
   def subject
-    super || '(no subject)'
+    super
+  end
+
+  def reply
+    Message.new do |r|
+      r.to = from
+      r.subject = "RE: #{subject}"
+      r.body = "\n\n\n" +
+               " > From: #{from.username}\n" +
+               " > To: #{to.username}\n" +
+               " > Sent: #{created_at}\n" +
+               " > Subject: #{subject}\n" +
+               " > \n" +
+               body.gsub(/^/, " > ")
+    end
+  end
+
+  def forward
+    Message.new do |r|
+      r.to = from
+      r.subject = "FW: #{subject}"
+      r.body = "\n\n\n" +
+               "---------- Forwarded message ----------\n" +
+               " > From: #{from.username}\n" +
+               " > To: #{to.username}\n" +
+               " > Sent: #{created_at}\n" +
+               " > Subject: #{subject}\n" +
+               " > \n" +
+               body.gsub(/^/, " > ")
+    end
   end
 end

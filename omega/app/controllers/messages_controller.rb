@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
   before_filter :_get_messages, :sort,      :only => [:index]
   before_filter :_get_sent_messages,        :only => [:sent]
   before_filter :_get_message,              :only => [:show, :update, :destroy]
+  before_filter :_get_original_message,     :only => [:reply, :forward]
   before_filter :_new_message,              :only => [:new]
 
   def index
@@ -26,6 +27,14 @@ class MessagesController < ApplicationController
 
   def new
     respond_with(@message)
+  end
+
+  def reply
+    respond_with(@message = @original_message.reply)
+  end
+
+  def forward
+    respond_with(@message = @original_message.forward)
   end
 
   def create
@@ -57,8 +66,6 @@ class MessagesController < ApplicationController
   SORT_DIRECTIONS = ['asc', 'desc']
 
   def sort
-    @positions = Volunteering::Position.scoped
-
     params.each do |attr, direction|
       next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
       @messages = @messages.order("#{attr} #{direction}")
@@ -77,6 +84,10 @@ class MessagesController < ApplicationController
 
     def _get_message
       @message = Message.find(params[:id])
+    end
+
+    def _get_original_message
+      @original_message = Message.find(params[:id])
     end
 
     def _new_message

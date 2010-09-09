@@ -1,12 +1,4 @@
-<%= form_for @message do |f| %>
-	<%= f.label :to %>: <%= f.text_field :to_id %><br />
-	<%= f.label :subject %>: <%= f.text_field :subject %><br />
-	<%= f.label :body %>: <%= f.text_area :body %><br />
- <span class="om-button">
-    <%= f.submit %>
-</span>
-
-<% end %>
+<%= render('form') %>
 
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_messages_menu" %>
