@@ -3,17 +3,11 @@ module Omega::Mixins::Controllers
     extend ActiveSupport::Concern
 
     included do
-      
+      before_filter :get_current_user
     end
 
     def current_user
-      @current_user ||= begin
-        if session[:user_id]
-          validate_session
-        else
-          User.anonymous
-        end
-      end
+      @current_user
     end
 
     protected
@@ -23,6 +17,16 @@ module Omega::Mixins::Controllers
       end
 
     private
+      def get_current_user
+        @current_user = begin
+          if session[:user_id]
+            validate_session
+          else
+            User.anonymous
+          end
+        end
+      end
+
       def validate_session
         user = User.find_by_id(session[:user_id])
 
