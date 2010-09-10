@@ -9,11 +9,11 @@
   <div class="right">
    <span class="om-button">
 <span class="om-icon om-icon-sort-az"></span>
-     <%= link_to 'sort A-Z', volunteering_positions_path(:name => 'asc'), :class=> 'om-icon-space' %>
+     <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')), :class=> 'om-icon-space' %>
 </span>
   <span class="om-button">
 <span class="om-icon om-icon-sort-za"></span>
-    <%= link_to 'sort Z-A', volunteering_positions_path(:name => 'desc'), :class=> 'om-icon-space' %>
+    <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')), :class=> 'om-icon-space' %>
 </span>
 
   </div>
@@ -31,6 +31,7 @@
 
 
 <ul id="positions_list">
+  <%= will_paginate @positions %>
   <% @positions.each do |position| %>
       <li class="clearfix">
 

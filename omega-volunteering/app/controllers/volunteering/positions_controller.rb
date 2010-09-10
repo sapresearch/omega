@@ -12,6 +12,7 @@ class Volunteering::PositionsController < ApplicationController
   breadcrumb 'Positions' => :volunteering_positions
 
   def index
+    @positions = @positions.paginate(:page => params[:page], :per_page => 10)
     respond_with(@positions)
   end
 
