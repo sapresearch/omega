@@ -5,8 +5,9 @@ require 'trams/favorites/tram'
 require 'trams/logs/tram'
 require 'trams/migrations/tram'
 
-require 'omega'
 require 'accepts_flattened_values'
+require 'will_paginate'
+require 'omega'
 
 module Omega
   class Tram < Trams::Base

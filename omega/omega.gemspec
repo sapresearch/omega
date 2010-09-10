@@ -28,4 +28,6 @@ Gem::Specification.new do |s|
   s.add_dependency('trams-logs',          trams_version)
   
   s.add_dependency('accepts-flattened-values', '>=0.1.3')
+
+  s.add_dependency('will_paginate', '~>3.0')
 end
