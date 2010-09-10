@@ -2,14 +2,15 @@
   <legend> weekly_schedule</legend>
   <h4> Please select when this event reoccurs</h4>
   <%= f.fields_for :schedule do |s| %>
+  <%= s.fields_for :weekly, s.object do |w| %>
       <% schedule = s.object %>
-      every <%= s.text_field :value, :size=>2 %> weeks
+      every <%= w.text_field :value, :size=>2 %> weeks
       <h4> Please select the weekdays that you want to have this event reoccur</h4>
       <table id="wst">
         <thead>
         <tr>
-         <th></th>
-          <th></th>
+         <th></th><th></th>
+
           <th>Start</th>
           <th>End</th>
           <th>Volunteers</th>
@@ -17,23 +18,24 @@
         </thead>
 
 
-        <%= s.fields_for :days do |d| %>
+        <%= w.fields_for :days do |d| %>
 
             <%= render('form_schedule_weekly_day', :d => d) %>
-        
+
         <% end %>
 
       </table>
       <h4>Please select the range of occurences</h4>
       <p>
-        <%= f.label :start_date %>
-        <%= s.text_field :start_date, :class=>'datepickr', :size=>7 %>
+        <%= w.label :start_date %>
+        <%= w.text_field :start_date, :class=>'datepickr', :size=>7 %>
       </p>
 
       <p>
-        <%=f.label :end_date%>
-        <%= s.text_field :end_date, :class=>'datepickr', :size=>7 %>
+        <%= w.label :end_date%>
+        <%= w.text_field :end_date, :class=>'datepickr', :size=>7 %>
       </p>
+  <% end %>
   <% end %>
 </fieldset>
 

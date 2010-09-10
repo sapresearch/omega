@@ -4,21 +4,21 @@
     <li>
       <%= link_to "Volunteering", volunteering_positions_url %>
       <!--Subnav Starts Here-->
-        <span>
+        <div>
             <%= link_to "Upcoming", upcoming_volunteering_positions_url %>
           <%= link_to "Create", new_volunteering_position_path %>
             <a href="#">Subnav Link</a>
-        </span>
+        </div>
       <!--Subnav Ends Here-->
     </li>
     <li><%= link_to "Favorites", trams_favorites_favorites_path %></li>
     <li>
       <%= link_to "Messages", messages_url %>
       <!--Subnav Starts Here-->
-        <span>
+        <div>
            <%= link_to 'inbox', messages_path %>
           <%= link_to 'new', new_message_path %>
-</span>
+</div>
       <li>
       <%= link_to "My Positions", my_positions_volunteering_positions_path %>
       </li>

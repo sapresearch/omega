@@ -30,7 +30,7 @@
   <% if @position.schedule %>
       <p>
         <span class="fieldDescribtion"> Recurrence:</span>
-        <% if @position.schedule.value.to_i > 1 %>
+        <% if @position.schedule.schedule_type %>
             every  <%= @position.schedule.value %> days
         <% else %>
             every day
