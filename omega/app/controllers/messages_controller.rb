@@ -3,6 +3,8 @@ class MessagesController < ApplicationController
 
 #  sub_layout 'messages'
 
+  breadcrumb 'Messages' => :messages
+
   before_filter :_get_messages, :sort,      :only => [:index]
   before_filter :_get_sent_messages,        :only => [:sent]
   before_filter :_get_message,              :only => [:show, :update, :destroy]
@@ -30,11 +32,15 @@ class MessagesController < ApplicationController
   end
 
   def reply
-    respond_with(@message = @original_message.reply)
+    @message = @original_message.reply
+    breadcrumb "Reply" => reply_message_path(@original_message)
+    respond_with(@message)
   end
 
   def forward
-    respond_with(@message = @original_message.forward)
+    @message = @original_message.forward
+    breadcrumb "Forward" => forward_message_path(@original_message)
+    respond_with(@message)
   end
 
   def create
@@ -80,17 +86,21 @@ class MessagesController < ApplicationController
 
     def _get_sent_messages
       @messages = current_user.sent_messages
+      breadcrumb "Sent" => sent_messages_path
     end
 
     def _get_message
       @message = Message.find(params[:id])
+      breadcrumb "#{@message.subject}" => message_path(@message)
     end
 
     def _get_original_message
       @original_message = Message.find(params[:id])
+      breadcrumb "#{@original_message.subject}" => message_path(@original_message)
     end
 
     def _new_message
       @message = Message.new
+      breadcrumb "New" => new_message_path
     end
 end
