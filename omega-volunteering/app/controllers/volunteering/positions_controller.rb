@@ -8,6 +8,9 @@ class Volunteering::PositionsController < ApplicationController
   before_filter :get_interests, :only => [:index, :upcoming, :interests]
   before_filter :sort, :only => [:index]
 
+  breadcrumb 'Volunteering' => :volunteering
+  breadcrumb 'Positions' => :volunteering_positions
+
   def index
     respond_with(@positions)
   end
@@ -18,7 +21,9 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def show
+
     @position = Volunteering::Position.find(params[:id])
+    breadcrumb @position.name => volunteering_position_path(@position)
     respond_with(@position)
   end
 
@@ -52,13 +57,14 @@ class Volunteering::PositionsController < ApplicationController
 
   def create
     case params[:contact_assignment]
-      when 'none'
-        params[:volunteering_position].delete(:contact_ids)
-        params[:volunteering_position].delete(:contacts_attributes)
       when 'existing'
         params[:volunteering_position].delete(:contacts_attributes)
       when 'new'
         params[:volunteering_position].delete(:contact_ids)
+      when 'none'
+      else
+        params[:volunteering_position].delete(:contact_ids)
+        params[:volunteering_position].delete(:contacts_attributes)
     end
 
     if contact_ids = params[:volunteering_position][:contact_ids]
@@ -132,6 +138,8 @@ class Volunteering::PositionsController < ApplicationController
   
   private
   def get_positions
+
+
     @positions = Volunteering::Position.includes(:skills)
     @positions = @positions.started.not_ended
 
@@ -155,7 +163,7 @@ class Volunteering::PositionsController < ApplicationController
             joins(:skills).
             group('contact_skills.name').
             select('contact_skills.*, count(*) AS count').
-            order('count desc')
+            order('count desc').limit(20)
 
     if @skills_tags = params[:skills].try(:split, '+')
       @skills_tags.each do |skill|
@@ -169,7 +177,7 @@ class Volunteering::PositionsController < ApplicationController
             joins(:interests).
             group('contact_interests.name').
             select('contact_interests.*, count(*) as count').
-            order('count desc')
+            order('count desc').limit(10)
 
     if @interests_tags = params[:interests].try(:split, '+')
       @interests_tags.each do |interest|

@@ -2,33 +2,6 @@ h1 {
     position: relative;
 }
 
-#time_picker {
-    display: none;
-    text-align: left;
-    border: 1px solid #999;
-    overflow: hidden;
-    height: 14em;
-    overflow-y: auto;
-    overflow-x: hidden;
-    position: absolute;
-    background: #f2f2f2;
-    list-style: none;
-    z-index: 10000;
-}
-
-#time_picker li {
-    *float: left;
-    text-indent: 0;
-    margin: 0;
-    padding: 0.1em 0.2em;
-    cursor: pointer;
-}
-
-.tpickr_li_over {
-    background: #1484E6;
-    color: #FFF;
-
-}
 
 #scheduler {
     margin: 2em 0;
@@ -93,10 +66,10 @@ div.position_slider {
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
 
-    height: 20px;
+    height: 28px;
     width: 100%;
     position: absolute;
-    top: 20px;
+    top: 28px;
     background: url("../images/details_bg.png") repeat-x bottom;
     
 
@@ -114,7 +87,7 @@ div.position {
     -webkit-border-radius: 0 0 4px 4px;
     width: 100%;
     position: absolute;
-    top: 20px;
+    top: 28px;
 
     background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
 
@@ -142,21 +115,16 @@ div.position-wrapper{
 
 }
 
-.position_actions a {
-    color: #FFF;
-
-}
-
-.skill_tag {
+span.skill_tag {
     border: 1px solid #CCCCCC;
-    margin: 0 4px 5px 0;
-    padding: 4px 10px;
+    margin: 2px 4px;
+    padding: 2px 8px;
     -moz-border-radius: 12px;
     -webkit-border-radius: 12px;
     display: inline-block;
     background: url("/images/glass.png") repeat-x scroll 0 50%
 }
-.skill_tag_active{
+span.skill_tag_active{
     background-color:#A82F5D;
     border:none;
 }

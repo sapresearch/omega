@@ -134,7 +134,11 @@ jQuery.showFlash = function(msg) {
 $(function() {
 
 
-
+$("#notification-flash-wrapper").bind("ajaxSend", function(){
+   $(this).find('div').html('loading').end().fadeIn();
+ }).bind("ajaxComplete", function(){
+   $(this).fadeOut();
+ });
 
     /**
      * menu
@@ -145,7 +149,7 @@ $(function() {
 
         $(this).find("div").slideDown('fast'); //Show the subnav
     }, function() { //on hover out...
-        
+
         $(this).find("div").slideUp('fast'); //Hide the subnav
     });
 

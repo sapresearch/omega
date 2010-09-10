@@ -1,7 +1,7 @@
 
 
 .user_image{
-	background:url("../images/contact_image_bg.png");
+	background:url("/images/contact_image_bg.png");
 	width:150px;
     height:155px;
 
@@ -11,27 +11,9 @@
 	padding: 10px;
 }
 
-
-#ajax_loading_img{
-	position:absolute;
-	top:50%;
-	background:url("../images/ajax-loader.gif");
-	left:50%;
-	display:block;
-	width:32px;
-	height:32px;
-	
-}
-#ajax_loading_wrapper{
-    
-	position: absolute;
-	background:#FFF ;
-	display:none;
-
-}
 #contact_filter_wrapper{
 	float:left;
-	background:url("../images/filterBg.png");
+	background:url("/images/filterBg.png");
 	width:148px;
 	height:24px;
 }
@@ -52,7 +34,7 @@
 	float:right;
 	width:16px;
 	height:16px;
-	background: url("../images/iconSprite.png") 0 -80px;
+	background: url("/images/iconSprite.png") 0 -80px;
 
 }
 #contact_filter:focus 
@@ -66,7 +48,7 @@
 
 	width:16px;
 	height:16px;
-	background: url("../images/iconSprite.png") 0 -96px;
+	background: url("/images/iconSprite.png") 0 -96px;
 
 }
 #filter_ctrl{
@@ -106,11 +88,10 @@ padding:1em;
 }
 #contacts_alphabet li span{
     display:block;
-    margin:0.3em;
+    margin:2px;
     text-align:center;
-    background: #421325;
-
-    padding:2px;
+    background: #002A5C;
+    padding:0;
     -webkit-border-radius:4px;
     -moz-border-radius:4px;
 

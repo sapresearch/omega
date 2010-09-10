@@ -6,19 +6,19 @@
   Volunteering Positions
   </span>
 
-<div class="right">
+  <div class="right">
    <span class="om-button">
 <span class="om-icon om-icon-sort-az"></span>
-    <%= link_to 'sort A-Z', volunteering_positions_path(:name => 'asc'), :class=> 'om-icon-space' %>
+     <%= link_to 'sort A-Z', volunteering_positions_path(:name => 'asc'), :class=> 'om-icon-space' %>
 </span>
   <span class="om-button">
 <span class="om-icon om-icon-sort-za"></span>
     <%= link_to 'sort Z-A', volunteering_positions_path(:name => 'desc'), :class=> 'om-icon-space' %>
 </span>
 
-</div>
+  </div>
 
-<div class="clear"></div>
+  <div class="clear"></div>
 </h1>
 
 <% if @skills_tags %>
@@ -38,7 +38,13 @@
           <div class="position_actions">
             <%= toggle_favorite(position) %>
             <img src="/images/icons/quill.png" alt="">
-            <%= link_to 'Apply for this Position', new_volunteering_record_url(:id=>position) %>
+
+            <span class="om-button">
+                <span class="om-icon om-icon-sort-az"></span>
+                    <%= link_to 'Apply for this Position', new_volunteering_record_url(:id=>position) , :class =>'om-icon-space' %>
+                </span>
+
+
           </div>
 
         </div>
@@ -52,11 +58,11 @@
               <%= truncate(position.description, :length=> 160) %>
 
               <% record = Volunteering::Record.find_by_position_id(position.id) %>
-            <% if !record.nil? && !current_user.is_anonymous? && Contact.for(current_user).id == record.contact_id%>
+              <% if !record.nil? && !current_user.is_anonymous? && Contact.for(current_user).id == record.contact_id %>
 
-                <%= link_to "Record Hours for this Position!", new_volunteering_time_entry_url(:id => record.id) %>
+                  <%= link_to "Record Hours for this Position!", new_volunteering_time_entry_url(:id => record.id) %>
 
-            <%end%>
+              <% end %>
 
             </p>
 
@@ -78,6 +84,11 @@
 
 
 <% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_positions" %>
+    <%= render :partial => "layouts/sidebar_positions_skills" %>
+
+<% end %>
+
+<% content_for :rows do %>
+    <%= render :partial => "layouts/sidebar_positions_interests" %>
 
 <% end %>

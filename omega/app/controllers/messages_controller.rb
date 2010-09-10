@@ -82,6 +82,7 @@ class MessagesController < ApplicationController
   private
     def _get_messages
       @messages = current_user.messages
+      breadcrumb "Inbox" => messages_path
     end
 
     def _get_sent_messages

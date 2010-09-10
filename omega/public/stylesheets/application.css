@@ -143,7 +143,7 @@ table.om-table  {
 }
 
 tr.even {
-    background: #FFF;
+    background: #f2f2f2;
 
 }
 
@@ -169,6 +169,7 @@ form table input {
 }
 
 #notification-flash-wrapper {
+    opacity: 0.90;
     display:none;
     width: 100%;
     position: absolute;
@@ -179,7 +180,7 @@ form table input {
 
 #notification-flash {
     text-align:center;
-    opacity: 0.95;
+
     font-size: 1.7em;
     padding: 1em;
     color: #FFF;
@@ -211,7 +212,7 @@ form table input {
 
 #content {
     text-align: left;
-    margin: 0 auto;
+    margin: 0 auto 4em;
     width: 950px;
     padding-bottom: 16em;
 }
@@ -278,10 +279,9 @@ ul#topnav li div {
     
     padding: 0 0 10px;
     position: absolute;
-
-    top: 34px;
+    top: 38px;
     display: none; /*--Hide by default--*/
-    width: 170px;
+    width: 200px;
     background: #0058C2;
     color: #fff; /*--Bottom right rounded corner--*/
     -moz-border-radius: 0 0 4px 4px;
@@ -293,9 +293,10 @@ ul#topnav li div {
 
 /*--Show subnav on hover--*/
 ul#topnav li div a {
+    text-transform: capitalize;
     border-bottom: 1px dotted #448BE2; /*background: url(../images/menu_bg.png) repeat-x;*/
     background: #0058C2;
-    padding: 5px;
+    padding: 3px 15px;
     display: block;
 }
 
@@ -831,13 +832,6 @@ div.footer_blocks {
     color: #FFF !important;
 }
 
-.odd {
-    background: #FFF;
-}
-
-.even {
-    background: #EDF3F4;
-}
 
 .head_bg {
     height: 24px;
@@ -1027,20 +1021,26 @@ dl.drop_down {
     height: 160px;
 }
 
-.sidebar-menu h1 {
+div.sidebar-menu {
+
+    margin: 0 0 1em;
+}
+
+div.sidebar-menu h1 {
+    margin: 0;
     background: #CF3A72;
     color: #FFF;
     padding: 5px 20px
 }
 
-.sidebar-menu-content {
+div.sidebar-menu-content {
     padding: 5px 20px;
     border-bottom: 1px solid #CF3A72;
     border-left: 1px solid #CF3A72;
     border-right: 1px solid #CF3A72;
 }
 
-.sidebar-menu-nav {
+div.sidebar-menu-nav {
     border-bottom: 1px solid #e3e3e3;
     color: #FFF;
     display: block;
@@ -1060,9 +1060,7 @@ li.item-list {
     border-bottom: 1px dotted #2D302D;
 }
 
-div.sidebar-menu h1 {
-    margin: 0;
-}
+
 
 .corners-bottom {
     -moz-border-radius-bottomleft: 4px;

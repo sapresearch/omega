@@ -26,6 +26,8 @@ class Volunteering::Position < ActiveRecord::Base
 
   before_save :combine_times
 
+  validates :name, :description, :hours, :start, :end, :volunteers_required, :presence => true
+
 
   def to_s
     "Volunteering Position: #{name}"

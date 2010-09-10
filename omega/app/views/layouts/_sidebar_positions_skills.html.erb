@@ -1,0 +1,23 @@
+<% if @skills %>
+    <div class="sidebar-menu">
+  <h1 class="corners-top">Skills</h1>
+
+  <div class="corners-bottom sidebar-menu-content">
+
+
+
+        <% @skills.each do |skill| %>
+           <span class="skill_tag">
+             <%= link_to skills_volunteering_positions_path(:skills => [params[:skills], skill.name].compact.join('+')) do %>
+                <%= skill.name %> x <%= skill.count %>
+            <% end %>
+           </span>
+        <% end %>
+
+
+
+  </div>
+</div>
+
+
+<% end %>

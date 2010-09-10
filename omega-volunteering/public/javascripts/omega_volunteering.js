@@ -17,13 +17,14 @@ $(function() {
 
     $('ul#positions_list').delegate('li', 'mouseleave', function(e) {
         if (!$(e.currentTarget).is('.details'))
-            $(this).find('div.position').removeClass('position_hover').siblings('div.position_slider').animate({ 'top' : '20px'});
+            $(this).find('div.position').removeClass('position_hover').siblings('div.position_slider').animate({ 'top' : '28px'});
 
     });
 
-    $('.remove-favorite').bind('ajax:success', function() {
-        $.showFlash('Succesfully removed from favorites')
-    }).bind('rails:created', function() {
+    $('.remove-favorite').bind('ajax:success',
+                              function() {
+                                  $.showFlash('Succesfully removed from favorites')
+                              }).bind('rails:created', function() {
         $.showFlash('Succesfully added to favorites')
     }
 

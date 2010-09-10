@@ -9,6 +9,9 @@ Omega::Volunteering::Tram.routes.draw do
 
         get :skills, :path => 'skills/:skills'
         get :interests, :path => 'interests/:interests'
+
+        resources :skills, :only => [:index, :edit, :update, :destroy]
+        resources :interests, :only => [:index, :edit, :update, :destroy]
       end
     end
     
@@ -18,4 +21,6 @@ Omega::Volunteering::Tram.routes.draw do
     resources :records
     resources :time_entries
   end
+
+  resource :volunteering, :only => [:show]
 end
