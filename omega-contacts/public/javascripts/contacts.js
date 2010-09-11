@@ -7,6 +7,14 @@
  */
 $(function() {
 
+$("#accordion").accordion({
+    fillSpace: true 
+});
+
+$("#contact_accordion").accordion({
+    
+});
+
 
     var contact_filter = $('#contact_filter')
 

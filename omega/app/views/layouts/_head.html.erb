@@ -14,7 +14,7 @@
             | <%= link_to content_tag(:span, t(:sign_up)), register_users_url %>
         <% else -%>
             <%= link_to content_tag(:span, "logout"), sessions_url, :method => :delete, :confirm => 'Are you sure?' %>
-            Hello <%= current_user.username %>
+             <%= current_user.username %>
         <% end -%>
 
       </div>

@@ -103,9 +103,9 @@ padding:1em;
     width:200px;
 }
 #contacts_contact_pane{
-    padding:0 1em;
+    padding:1em;
     position:absolute;
-    left:425px;
+    left:440px;
     right:0;
     width:auto;
  
@@ -119,33 +119,17 @@ padding:1em;
     font-weight:bold;
     color:#055F67;
 }
-li.header {
-    background:#162D3D;
-    color: #FFF;
 
-}
 #contacts_groups li, #contacts li {
-    margin:0.3em;
     padding:0.3em;
 }
 
-td.label{
-    
-    text-align:right;
 
-    text-transform:capitalize;
-    letter-spacing:0.03em;
-    line-height:1.2em;
-    padding-right: 30px;
-    
+#contacts_groups{
+    position:relative;
+    overflow-y: hidden;
 }
-td.bold{
-    color:#1F4256;
-    font-weight:bold;
-}
-#cm td {
-    line-height:1.8em ;
-}
-td.top{
-    vertical-align:top;
+#contacts_groups .ui-accordion-content{
+    margin:0;
+    padding:0;
 }

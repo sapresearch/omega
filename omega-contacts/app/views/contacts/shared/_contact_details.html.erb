@@ -1,17 +1,13 @@
-<div id="contact_mgm">
-
-    <span class="om-button">
-        <span class="om-icon om-icon-user-remove"></span>
-        <%= link_to 'delete', @contact, :method=> :delete,  :remote => true, :class=>'om-icon-space' %>
-   </span>
-
-  <span class="om-button">
-      <span class="om-icon om-icon-user-edit"></span>
-      <%= link_to 'edit', edit_contact_path(@contact),   :remote => true, :class=>'om-icon-space' %>
- </span>
+<div>
+  <%= om_button(:icon=>'user-remove') do %>
+      <%= link_to 'delete', @contact, :method=> :delete, :remote => true %>
+  <% end %>
+  <%= om_button(:icon=>'user-edit') do %>
+      <%= link_to 'edit', edit_contact_path(@contact), :remote => true %>
+  <% end %>
 
 
-  
+
   <dl id="contact_assign" class="drop_down">
     <dt><a href="#" class="corners"><span>Assign this contact</span></a></dt>
     <dd>
@@ -36,83 +32,68 @@
   </dl>
 
 </div>
-<table>
-  <tr>
-    <td>
-      <table>
-        <tr>
 
-<td class="label">Groups:</td>
-<td class="bold">
 
-  <span id="contact_ag">
+
+<div class="user_image">
+  <%= image_tag("profile.jpg", :width =>  '130') %>
+</div>
+<div class="clear"></div>
+
+
+Groups:
+
+
+<span id="contact_ag">
 
           <%= render :partial => 'contacts/partials/assigned_groups' %>
   </span>
-</td>
-      
-        </tr>
-        <tr>
-          <td class="label">
-            Email:
-          </td>
-          <td class="bold">
-            <%= @contact.email %>
-          </td>
-        </tr>
-        <% @contact.addresses.each do |address| %>
-            <tr>
-              <td class="label">
-                City:
-              </td>
-              <td class="bold">
-                <%= address.city.capitalize %>
-              </td>
-            </tr>
-            <tr>
-             <td class="label">
-                Street:
-              </td>
-              <td class="bold">
-                <%= address.street %></td>
-            </tr>
-            <tr>
-             <td class="label">
-                Postal Code:
-              </td>
-           <td class="bold">
-                <%= address.zip_code %>
-              </td>
+<br>
+First Name: <%= @contact.first_name %><br>
+Last Name: <%= @contact.last_name %><br>
 
-            </tr>
+Email: <%= @contact.email %><br>
+<br><br><br>
 
-        <% end %>
+<div id="contact_accordion">
+  <% @contact.addresses.each do |address| %>
+      <h3><a href="#">Address</a></h3>
 
-        <% @contact.phone_numbers.each do |phone| %>
+      <div>
 
-            <tr>
-             <td class="label">
-                Number (<%= phone.number_type %>):
-              </td>
-              <td class="bold">
-                <%= phone.number %>
-              </td>
-            </tr>
+        City:
 
-        <% end %>
+        <%= address.city.capitalize %>
+        <br>
+
+        Street:
+
+        <%= address.street %>
+        <br>
+        Postal Code:
 
 
-      </table>
+        <%= address.zip_code %>
 
-    </td>
-    <td class="top">
-      <div class="user_image">
-      <%= image_tag("profile.jpg", :width =>  '130') %>
-    </div>
-    </td>
-  </tr>
-</table>
+      </div>
 
 
+  <% end %>
 
 
+  <% @contact.phone_numbers.each do |phone| %>
+      <h3><a href="#">Phone Number </a></h3>
+
+      <div>
+        Number (<%= phone.number_type %>):
+        <%= phone.number %>
+
+   
+
+      </div>
+
+
+  <% end %>
+
+
+</div>

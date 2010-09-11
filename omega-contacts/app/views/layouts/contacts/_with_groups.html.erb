@@ -1,7 +1,11 @@
 <% require_javascript 'thirdParty/jquery.validate.js', 'thirdParty/jquery.jfilter.js', 'contacts.js', 'nested' %>
 <% require_stylesheet 'omega_contacts.css', 'thirdParty/jquery.autocomplete.css' %>
+<h1 class="page-content corners-top">
+  Contacts
+</h1>
 
-<div id="cm">
+<div id="cm" class="page-content corners-bottom">
+
   <div class="head_bg">
     <div id="contact_filter_wrapper">
 
@@ -15,22 +19,16 @@
     </div>
     <div style="float:right">
 
-   <span class="om-button">
-        <span class="om-icon om-icon-user-add"></span>
-        <%= link_to 'New Contact', new_contact_path, :remote => true, :class=>'om-icon-space' %>
-   </span>
+    <%= om_button(:icon=>'user-add') do %>
+        <%= link_to 'New Contact', new_contact_path, :remote => true %>
+    <% end %>
+      <%= om_button(:icon=>'household-add') do %>
+        <%= link_to 'New Household', new_contact_household_path, :remote => true %>
+    <% end %>
+      <%= om_button(:icon=>'organization-add') do %>
+        <%= link_to 'New organization', new_contact_organization_path, :remote => true %>
+    <% end %>
 
-    <span class="om-button">
-        <span class="om-icon om-icon-household-add"></span>
-        <%= link_to 'New Household', new_contact_household_path, :remote => true, :class=>'om-icon-space' %>
-   </span>
-
-    <span class="om-button">
-        <span class="om-icon om-icon-organization-add"></span>
-        <%= link_to 'New Organisation', new_contact_organization_path, :remote => true, :class=>'om-icon-space' %>
-   </span>
-
-      
     </div>
   </div>
 
@@ -44,26 +42,33 @@
   </div>
 
   <div id="contacts_groups" class="left">
-    <ul>
-      <li><%= link_to 'All Contacts', all_contacts_path, :remote => true, :id=> 'dummy' %></li>
+    <div id="accordion">
 
       <% @contact_groups.keys.each do |group_type| %>
-          <li class="header"><%= group_type.try(:pluralize) %></li>
-          <% @contact_groups[group_type].each do |group| %>
-              <li class="<%= cycle("even", "odd", :name => "group_rows") %>"><%= link_to truncate(group.name, :length => 20), group, :remote=> true %></li>
-          <% end %>
+          <h3>
+            <a>
+              <%= group_type.try(:pluralize) %>
+            </a>
+
+          </h3>
+
+          <div>
+            <ul>
+              <% @contact_groups[group_type].each do |group| %>
+                  <li class="<%= cycle("even", "odd", :name => "group_rows") %>"><%= link_to truncate(group.name, :length => 30), group, :remote=> true %></li>
+              <% end %>
+            </ul>
+          </div>
+
           <% reset_cycle("group_rows") %>
       <% end %>
-    </ul>
+
+    </div>
   </div>
 
-  <div id="contacts_group_pane">
+
     <%= yield %>
-  </div>
+  
 
 </div>
 
-
-<div id="ajax_loading_wrapper">
-  <div id="ajax_loading_img"></div>
-</div>
