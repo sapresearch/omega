@@ -20,7 +20,7 @@ Omega::Volunteering::Tram.routes.draw do
 
     resources :records
     resources :time_entries
-  end
 
-  resource :volunteering, :only => [:show]
+    root :to => 'volunteering#index', :as => ''
+  end
 end

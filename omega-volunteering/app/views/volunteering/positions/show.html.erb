@@ -2,69 +2,72 @@
 <% if notice != nil %><p class="notice"><%= notice %></p>
 <% end %>
 
-<h1>
+<h1 class="page-content corners-top">
   <%= @position.name %>
 </h1>
 
-
-<p>
-  <%= @position.description %>
-</p>
-
-<div class="articleDetails">
-  <% if @position.start %>
-      <p>
-        <span class="fieldDescribtion"> Start date:</span>
-        <%= @position.start.to_formatted_s(:long) %>
-      </p>
-  <% end %>
-  <% if @position.end %>
-      <p>
-        <span class="fieldDescribtion">End date:</span>
-        <%= @position.end.to_formatted_s(:long) %>
-      </p>
-  <% end %>
-
-  <!-- hours-->
-
-  <% if @position.schedule %>
-      <p>
-        <span class="fieldDescribtion"> Recurrence:</span>
-        <% if @position.schedule.schedule_type %>
-            every  <%= @position.schedule.value %> days
-        <% else %>
-            every day
-        <% end %>
-      </p>
-
-      <p>
-        <span class="fieldDescribtion"> This series starts:</span>
-        <%= @position.schedule.start_date.to_formatted_s(:long) %>
-      </p>
-
-      <p>
-        <span class="fieldDescribtion"> This series end:</span>
-        <%= @position.schedule.end_date.to_formatted_s(:long) %>
-      </p>
+<div class="page-content corners-bottom">
 
 
-  <% end %>
-  <div class="position_tags">
-    <% @position.skills.each do |skill| %>
-        <span class="skill_tag"><a href=""><%= skill.name %></a> </span>
+  <p>
+    <%= @position.description %>
+  </p>
+
+  <div class="articleDetails">
+    <% if @position.start %>
+        <p>
+          <span class="fieldDescribtion"> Start date:</span>
+          <%= @position.start.to_formatted_s(:long) %>
+        </p>
     <% end %>
+    <% if @position.end %>
+        <p>
+          <span class="fieldDescribtion">End date:</span>
+          <%= @position.end.to_formatted_s(:long) %>
+        </p>
+    <% end %>
+
+    <!-- hours-->
+
+    <% if @position.schedule %>
+        <p>
+          <span class="fieldDescribtion"> Recurrence:</span>
+          <% if @position.schedule.schedule_type %>
+              every  <%= @position.schedule.value %> days
+          <% else %>
+              every day
+          <% end %>
+        </p>
+
+        <p>
+          <span class="fieldDescribtion"> This series starts:</span>
+          <%= @position.schedule.start_date.to_formatted_s(:long) %>
+        </p>
+
+        <p>
+          <span class="fieldDescribtion"> This series end:</span>
+          <%= @position.schedule.end_date.to_formatted_s(:long) %>
+        </p>
+
+
+    <% end %>
+    <div class="position_tags">
+      <% @position.skills.each do |skill| %>
+          <span class="skill_tag"><a href=""><%= skill.name %></a> </span>
+      <% end %>
+    </div>
+
+    <% if @position.contacts.any? %>
+        <p>
+          <span class="fieldDescribtion"> Contact:</span>
+          <% @position.contacts.each do |contact| %>
+              <%= contact.first_name %>
+          <% end %>
+        </p>
+    <% end %>
+
+
   </div>
-
-  <% if @position.contacts.any? %>
-      <p>
-        <span class="fieldDescribtion"> Contact:</span>
-        <% @position.contacts.each do |contact| %>
-            <%= contact.first_name %>
-        <% end %>
-      </p>
-  <% end %>
-
-
 </div>
 
 

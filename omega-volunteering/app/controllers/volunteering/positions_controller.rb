@@ -4,15 +4,19 @@ class Volunteering::PositionsController < ApplicationController
   require_permission Volunteering::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 
   before_filter :get_positions, :only => [:index, :upcoming, :skills, :interests]
-  before_filter :get_skills, :only => [:index, :upcoming, :skills,]
-  before_filter :get_interests, :only => [:index, :upcoming, :interests]
+  before_filter :get_my_positions, :only => [:my_positions]
+  before_filter :get_skills, :only => [:index, :upcoming, :skills, :my_positions]
+  before_filter :get_interests, :only => [:index, :upcoming, :interests, :my_positions]
   before_filter :sort, :only => [:index]
 
   breadcrumb 'Volunteering' => :volunteering
   breadcrumb 'Positions' => :volunteering_positions
 
+
+
+
   def index
-    @positions = @positions.paginate(:page => params[:page], :per_page => 10)
+    @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
     respond_with(@positions)
   end
 
@@ -113,14 +117,7 @@ class Volunteering::PositionsController < ApplicationController
   end
 
    def my_positions
-
-    @positions = Array.new
-    
-    @records = Volunteering::Record.find_all_by_contact_id(Contact.for(current_user))
-    @records.each do |r|
-      @positions << Volunteering::Position.find_by_id(r.position_id)
-    end
-     
+     respond_with(@positions)
   end
 
   def my_time_sheets
@@ -157,6 +154,10 @@ class Volunteering::PositionsController < ApplicationController
               where('contact_interests.name IN (?)', interests).
               group("`volunteering_positions`.`id` HAVING `i_count` = #{interests.size}")
     end
+  end
+
+  def get_my_positions
+    @positions = Volunteering::Position.joins(:records).where('volunteering_records.contact_id = ?', Contact.for(current_user))
   end
 
   def get_skills

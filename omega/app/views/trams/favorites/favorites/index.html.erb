@@ -1,46 +1,50 @@
-<h1>
-  <span class="h1 left">
+<h1 class="page-content corners-top">
   Favorites
-  </span>
+</h1>
 
+<div class="page-content corners-bottom">
   <div class="right">
-   <span class="om-button">
-<span class="om-icon om-icon-sort-az"></span>
-     <%= link_to 'sort A-Z', messages_path(:subject => 'asc'), :class=> 'om-icon-space' %>
-</span>
-  <span class="om-button">
-<span class="om-icon om-icon-sort-za"></span>
-    <%= link_to 'sort Z-A', messages_path(:subject => 'desc'), :class=> 'om-icon-space' %>
-</span>
-
+    <%= om_button(:icon=>'sort-az') do %>
+        <%= link_to 'sort A-Z', messages_path(:subject => 'asc') %>
+    <% end %>
+    <%= om_button(:icon=>'sort-za') do %>
+        <%= link_to 'sort Z-A', messages_path(:subject => 'desc') %>
+    <% end %>
   </div>
 
   <div class="clear"></div>
-</h1>
 
-<ul id="favorites_list">
-<% @favorites.each do |favorite| %>
-      <li class="item-list clearfix">
+  <ul id="favorites_list">
+    <% @favorites.each do |favorite| %>
+        <li class="item-list clearfix">
 
-        <h2>
-          <%= link_to_favorite(favorite) %>
-        </h2>
+          <h2>
+            <%= link_to_favorite(favorite) %>
+          </h2>
 
-        <div class="">
-          <%= truncate(favorite.to_s, :length=> 160) %>
-        </div>
-        <div class="right">
-        <span class="om-button">
-<span class="om-icon om-icon-delete"></span>
-          <%= link_to 'Delete',favorite_path(favorite.item), :method=> :delete, :class=> 'om-icon-space' %>
-</span>
-        </div>
+          <div>
+            <%= truncate(favorite.to_s, :length=> 160) %>
+          </div>
+          <div class="right">
+            <%= om_button(:icon=>'delete') do %>
+                <%= link_to 'Delete', favorite_path(favorite.item), :method=> :delete %>
+            <% end %>
 
 
-      </li>
+          </div>
 
-  <% end %>
-</ul>
+
+        </li>
+
+    <% end %>
+  </ul>
+
+
+</div>
+
+
+
+
 
 
 

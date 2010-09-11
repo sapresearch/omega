@@ -1,5 +1,7 @@
 class Volunteering::Position < ActiveRecord::Base
 
+  MAX_POSITIONS_PER_PAGE = 4
+
   has_many :contact_positions
   has_many :contacts, :through => :contact_positions
 

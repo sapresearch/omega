@@ -29,8 +29,8 @@ body > #wrapper {
 html, body {
     background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
     color: #2D302D;
-  
-     font:12px/1.5em "Helvetica Neue",Helvetica,Arial,sans-serif;
+
+    font: 12px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 }
 
@@ -54,27 +54,24 @@ q:before, q:after {
 }
 
 h1, h2, h3, h4 {
-    text-transform: lowercase;
+
+    text-transform: capitalize;
     font: bold "Century Schoolbook", Georgia, Times, serif;
-    margin: 0.5em 0;
+
 }
 
 h1 {
-
-    font-size: 1.3em;
+    padding: 10px;
+    color: #fff;
     font-weight: normal;
-
 }
 
-h1 span.h1 {
-     z-index:1;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    padding: 0.5em;
-    display: inline-block;
-    color: #FFF;
-    background: #393D39;
+#left h1 {
+    font-size: 1.7em;
+}
+
+#right h1 {
+    font-size: 1.3em;
 }
 
 h2 a {
@@ -132,7 +129,7 @@ a:hover {
     margin-top: 10px;
 }
 
-table.om-table  {
+table.om-table {
     width: 100%;
     font-size: 1em;
     border-collapse: collapse;
@@ -170,7 +167,7 @@ form table input {
 
 #notification-flash-wrapper {
     opacity: 0.90;
-    display:none;
+    display: none;
     width: 100%;
     position: absolute;
     top: 20px;
@@ -179,7 +176,7 @@ form table input {
 }
 
 #notification-flash {
-    text-align:center;
+    text-align: center;
 
     font-size: 1.7em;
     padding: 1em;
@@ -204,10 +201,10 @@ form table input {
 }
 
 #head {
-        
+
     width: 950px;
     text-align: left;
-    margin: 0 auto;
+    margin: 0 auto 50px;
 }
 
 #content {
@@ -216,17 +213,26 @@ form table input {
     width: 950px;
     padding-bottom: 16em;
 }
-
+#breadcrumb{
+    padding:14px 0 0 0;
+    color:#646767;
+}
+#breadcrumb a {
+    text-shadow: #fff 1px 1px 1px;
+    text-decoration:underline;
+    padding: 0 10px;
+    color:#646767;
+}
 #left {
     text-align: left;
     float: left;
-    width: 70%;
+    width: 690px;
     margin: 0;
 }
 
 #right {
     text-align: left !important;
-    width: 25%;
+    width: 230px;
     margin: 0;
     float: right;
 }
@@ -237,12 +243,83 @@ form table input {
 
 }
 
-/* Styles for the entire  menu */
+h1.page-content {
+    background: #002A5C;
+}
+
+div.page-content {
+    background: #FFF;
+    border-bottom: 1px solid #002A5C;
+    border-left: 1px solid #002A5C;
+    border-right: 1px solid #002A5C;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+div.sidebar-menu {
+
+    margin: 0 0 1em;
+}
+
+h1.side-bar {
+    margin: 0;
+    background: #CF3A72;
+    color: #FFF;
+    padding: 5px;
+}
+
+div.sidebar-menu-content {
+    padding: 5px;
+    border-bottom: 1px solid #CF3A72;
+    border-left: 1px solid #CF3A72;
+    border-right: 1px solid #CF3A72;
+    margin-bottom: 20px;
+}
+
+div.sidebar-menu-nav {
+    border-bottom: 1px solid #e3e3e3;
+    color: #FFF;
+    display: block;
+    font-size: 1.2em;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0.2em 10px;
+}
+
+div.sidebar-menu-content li {
+    padding: 0.5em 0;
+    border-bottom: 1px dotted #191919;
+}
+
+li.item-list {
+    padding: 0.5em 0;
+    border-bottom: 1px dotted #2D302D;
+}
+
+.corners-bottom {
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -webkit-border-radius-bottomleft: 4px;
+    -webkit-border-radius-bottomright: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.corners-top {
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    -webkit-border-radius-topleft: 4px;
+    -webkit-border-radius-topright: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+/******************************* Styles for the entire  menu ******************************/
 div#navigation {
-    position:relative;
-    margin: 50px auto;
+    position: relative;
+    margin: 40px auto 0;
     width: 950px;
-z-index:1000;
+    z-index: 1000;
 }
 
 ul#topnav {
@@ -276,7 +353,7 @@ ul#topnav li a {
 
 /* submenu */
 ul#topnav li div {
-    
+
     padding: 0 0 10px;
     position: absolute;
     top: 38px;
@@ -288,8 +365,6 @@ ul#topnav li div {
     -webkit-border-radius: 4px 4px;
     border-radius: 4px;
 }
-
-
 
 /*--Show subnav on hover--*/
 ul#topnav li div a {
@@ -480,7 +555,7 @@ a {
 =                                                                                =
 =================================================================================*/
 
-.om-button a, .om-button input, .om-button button {
+.om-button a, .om-button input, .om-button button, .om-icon-button a, .om-icon-button input, .om-icon-button button {
     position: relative;
     text-transform: capitalize;
     line-height: 18px;
@@ -490,7 +565,6 @@ a {
     background: none;
     display: inline-block;
     font: 12px "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-
     white-space: nowrap;
     overflow: visible;
     cursor: pointer;
@@ -505,12 +579,8 @@ a {
     overflow: visible;
 }
 
-.om-icon-space {
-    padding: 4px 8px 4px 26px !important;
-}
-
-span.om-button {
-
+span.om-button,
+span.om-icon-button {
     position: relative;
     -moz-border-radius: 3px;
     -moz-webkit-radius: 2px;
@@ -522,6 +592,21 @@ span.om-button {
     border-style: solid;
     border-color: #ccc #bbb #a0a0a0;
     margin: 0px;
+}
+
+span.om-icon-button {
+    padding: 0 0 0 20px;
+}
+
+span.om-plain-button, span.om-plain-icon-button {
+
+    display: inline-block;
+    height: 20px;
+    margin: 0 0 0 30px;
+}
+
+span.om-plain-button a, span.om-plain-icon-button a {
+    color: #fff;
 }
 
 .om-icon-only {
@@ -553,16 +638,23 @@ input[type="button"]::-moz-focus-inner {
     padding: 0;
 }
 
-span.om-button span.om-icon {
+span.om-button span.om-icon,
+span.om-icon-button span.om-icon,
+span.om-plain-button span.om-icon,
+span.om-plain-icon-button span.om-icon {
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
     position: absolute;
     top: 2px;
-    margin: 0 0 0 4px;
+    margin: 0 0 0 -20px;
     display: inline-block;
     width: 16px;
     height: 16px;
 
+}
+
+span.om-icon-button span.om-icon {
+    margin-left: -16px;
 }
 
 .om-icon-date {
@@ -610,7 +702,7 @@ span.om-button span.om-icon {
     background-position: 0 -208px;
 }
 
-.om-icon-back {
+span.om-icon-back {
     background-position: 0 -224px;
 }
 
@@ -654,6 +746,14 @@ span.om-button span.om-icon {
     background-position: 0 -384px;
 }
 
+.om-icon-apply {
+    background-position: 0 -400px;
+}
+
+.om-icon-clock {
+    background-position: 0 -416px;
+}
+
 /*END BUTTONS*/
 
 form input.inputSmall {
@@ -679,11 +779,61 @@ form label {
 
 }
 
-div.form_submit_box {
-    padding: 1.5em;
-    text-shadow: 1px 1px 1px #999999;
+/*************************** End comments *********************************/
+
+/*************************** Pagination  *********************************/
+div.pagination {
+    color: #000000;
+    display: block;
+    float: left;
+    font-size: 12px;
+    line-height: 18px;
+    padding: 30px;
 
 }
+
+div.pagination a {
+    -moz-border-radius: 2px;
+    border: 1px solid #BBBBBB;
+    color: #002A5C !important;
+    margin-right: 4px;
+   padding: 2px 6px 1px;
+    text-decoration: none !important;
+    text-shadow: 0 1px 0 #FFFFFF;
+    background: url("/images/grad_light_grey.png") repeat-x scroll center bottom transparent;
+}
+
+div.pagination em {
+    font-weight: bold;
+    -moz-border-radius: 4px;
+    border: 1px solid #0063dc;
+    color: #fff !important;
+    margin-right: 4px;
+    padding: 2px 6px 1px;
+    text-decoration: none !important;
+
+    background: url("/images/details_bg.png") repeat-x scroll center bottom transparent;
+}
+
+div.pagination a:hover {
+    border:1px solid #0063dc;
+    text-shadow: none !important;
+    color: #fff !important;
+    background: url("/images/details_bg.png") repeat-x scroll center bottom transparent;
+}
+
+div.pagination span.disabled {
+    -moz-border-radius: 4px;
+    border: 1px solid #e3e3e3;
+    color: #999 !important;
+    margin-right: 4px;
+   padding: 2px 6px 1px;
+    text-decoration: none !important;
+    text-shadow: 0 1px 0 #FFFFFF;
+
+}
+
+/************************ End Pagination  *********************************/
 
 #loginPanel form label {
     float: none;
@@ -692,7 +842,7 @@ div.form_submit_box {
 form span.error {
 
     padding: 0 0 0 4px;
-    color: #FF0084;
+    color: #ED513B;
     font-size: 1em;
 }
 
@@ -808,31 +958,6 @@ div.footer_blocks {
     background-position: 0 -20px;
 }
 
-.notice {
-    font-weight: bold;
-    padding: 4px;
-    background: #58CC68;
-    color: #FFF;
-}
-
-.fieldDescribtion {
-    font-weight: bold;
-}
-
-.content li {
-    padding: 1em 0 1em 0;
-}
-
-.trHover {
-    background: #5BAAF0 !important;
-    color: #FFF !important;
-}
-
-.trHover a {
-    color: #FFF !important;
-}
-
-
 .head_bg {
     height: 24px;
     font-weight: bold;
@@ -843,11 +968,6 @@ div.footer_blocks {
     text-align: left;
     font-size: 12px;
 }
-
-.img_module {
-    margin-left: 2em;
-}
-
 
 .content {
     color: #0E5A9D;
@@ -1019,65 +1139,6 @@ dl.drop_down {
     margin: 2em;
     float: left;
     height: 160px;
-}
-
-div.sidebar-menu {
-
-    margin: 0 0 1em;
-}
-
-div.sidebar-menu h1 {
-    margin: 0;
-    background: #CF3A72;
-    color: #FFF;
-    padding: 5px 20px
-}
-
-div.sidebar-menu-content {
-    padding: 5px 20px;
-    border-bottom: 1px solid #CF3A72;
-    border-left: 1px solid #CF3A72;
-    border-right: 1px solid #CF3A72;
-}
-
-div.sidebar-menu-nav {
-    border-bottom: 1px solid #e3e3e3;
-    color: #FFF;
-    display: block;
-    font-size: 1.2em;
-    line-height: 1.4;
-    margin: 0;
-    padding: 0.2em 10px;
-}
-
-div.sidebar-menu-content li {
-    padding: 0.5em 0;
-    border-bottom: 1px dotted #191919;
-}
-
-li.item-list {
-    padding: 0.5em 0;
-    border-bottom: 1px dotted #2D302D;
-}
-
-
-
-.corners-bottom {
-    -moz-border-radius-bottomleft: 4px;
-    -moz-border-radius-bottomright: 4px;
-    -webkit-border-radius-bottomleft: 4px;
-    -webkit-border-radius-bottomright: 4px;
-    border-bottom-left-radius:4px;
-    border-bottom-right-radius:4px;
-}
-
-.corners-top {
-    -moz-border-radius-topleft: 4px;
-    -moz-border-radius-topright: 4px;
-    -webkit-border-radius-topleft: 4px;
-    -webkit-border-radius-topright: 4px;
-    border-top-left-radius:4px;
-    border-top-right-radius:4px;
 }
 
 

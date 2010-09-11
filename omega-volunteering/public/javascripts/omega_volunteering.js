@@ -17,7 +17,7 @@ $(function() {
 
     $('ul#positions_list').delegate('li', 'mouseleave', function(e) {
         if (!$(e.currentTarget).is('.details'))
-            $(this).find('div.position').removeClass('position_hover').siblings('div.position_slider').animate({ 'top' : '28px'});
+            $(this).find('div.position').removeClass('position_hover').siblings('div.position_slider').animate({ 'top' : '22px'});
 
     });
 

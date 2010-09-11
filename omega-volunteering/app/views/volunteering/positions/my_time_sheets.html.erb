@@ -1,87 +1,73 @@
+<h1 class="page-content corners-top">
+  My time sheets
+</h1>
 
-
-
-<h1>
-  <span class="h1 left">
-  My Time sheets
-  </span>
-
+<div class="page-content corners-bottom">
   <div class="right">
-   <span class="om-button">
-<span class="om-icon om-icon-sort-az"></span>
-     <%= link_to 'implement !!!!! sort A-Z', '', :class=> 'om-icon-space' %>
-</span>
-  <span class="om-button">
-<span class="om-icon om-icon-sort-za"></span>
-    <%= link_to 'implement !!!!! sort A-Z', '', :class=> 'om-icon-space' %>
-</span>
-
+    <%= om_button(:icon=>'sort-az') do %>
+        <a  href="">Implement Sort</a>
+    <% end %>
+    <%= om_button(:icon=>'sort-za') do %>
+        <a  href="">Implement sort</a>
+    <% end %>
   </div>
 
   <div class="clear"></div>
-</h1>
 
-<% if @timesheets.empty? %>
-    <br/>
-    <strong>You Don't Have Any Time Sheets Yet!</strong><br/><br/>
-    <p>
-      <%= link_to 'Record Hours Now!', my_positions_volunteering_positions_path %>
+  <% if @timesheets.empty? %>
+      <br/>
+      <strong>You Don't Have Any Time Sheets Yet!</strong><br/><br/>
+      <p>
+        <%= link_to 'Record Hours Now!', my_positions_volunteering_positions_path %>
+      </p>
+  <% else %>
 
-    </p>
-<% else %>
+      <% @timesheets.each do |timesheet| %>
+          <div id="timesheet">
+            <% timesheet.each do |t| %>
+                <h2><%= Volunteering::Position.find_by_id(Volunteering::Record.find_by_id(t.record_id).position_id).name %></h2>
+                <strong>Week: <%= start = t.week.strftime('%Y/%m/%d') %>
+                  > <%= Date.parse(start).advance(:days => 6).to_time.strftime('%Y/%m/%d') %></strong>
+                <% unless t.nil? %>
 
-    <% @timesheets.each do |timesheet| %>
-        <div id="timesheet">
+                    <table class="om-table">
+                      <thead>
+                      <th></th>
+                      <th>MON</th>
+                      <th>TUE</th>
+                      <th>WED</th>
+                      <th>THU</th>
+                      <th>FRI</th>
+                      <th>SAT</th>
+                      <th>SUN</th>
+                      </thead>
+                      <tr>
+                        <td>Hours</td>
 
-          <% timesheet.each do |t| %>
+                        <% @entry_days.each do |ed| %>
 
-              <h2><%= Volunteering::Position.find_by_id(Volunteering::Record.find_by_id(t.record_id).position_id).name %></h2>
-              <strong>Week: <%= start = t.week.strftime('%Y/%m/%d') %>
-                > <%= Date.parse(start).advance(:days => 6).to_time.strftime('%Y/%m/%d') %></strong>
+                            <% if t.id == ed.time_entry_id %>
 
-              <% unless t.nil? %>
+                                <td><%= ed.hours %></td>
 
+                            <% end %>
 
-                  <table class="om-table">
-                    <thead>
-                    <th></th>
-                    <th>MON</th>
-                    <th>TUE</th>
-                    <th>WED</th>
-                    <th>THU</th>
-                    <th>FRI</th>
-                    <th>SAT</th>
-                    <th>SUN</th>
-                    </thead>
+                        <% end %>
+                      </tr>
 
-                    <tr>
-                      <td>Hours</td>
-
-                      <% @entry_days.each do |ed| %>
-
-                          <% if t.id == ed.time_entry_id %>
-
-                              <td><%= ed.hours %></td>
-
-                          <% end %>
-
-                      <% end %>
-
-                    </tr>
-
-                  </table>
-                  <br/>
+                    </table>
+                    <br/>
 
 
-              <% end %>
+                <% end %>
 
-          <% end %>
+            <% end %>
 
-        </div>
-
-
-
-    <% end %>
+          </div>
+          </div>
 
 
-<% end %>
+      <% end %>
+
+
+  <% end %>

@@ -1,26 +1,7 @@
 <div id="left">
-
-
-          <%= yield %>
-
-
+  <%= yield %>
 </div>
 <div id="right">
-
-  <div>
-
-          
-          <%= yield(:sidebar) %>
-
-  </div>
-
-
-
-  <div >
-
-
-          <%= yield(:rows) %>
-
-  </div>
-
-    </div>
+  <%= yield(:sidebar) %>
+  <%= yield(:rows) %>
+</div>

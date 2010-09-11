@@ -1,29 +1,20 @@
-<div class="sidebar-menu">
-  <h1 class="corners-top">Menu</h1>
-
-  <div class="corners-bottom sidebar-menu-content">
+<%= side_bar_box('Menu') do %>
     <ul>
       <li>
-          <span class="om-button">
-             <span class="om-icon om-icon-mail"></span>
-            <%= link_to 'inbox', messages_path, :class => 'om-icon-space ' %>
-            </span>
-      </li>
-      <li>
-          <span class="om-button">
-            <span class="om-icon om-icon-mail-new"></span>
-            <%= link_to 'new', new_message_path, :class => 'om-icon-space ' %>
-            </span>
-      </li>
-      <li>
-          <span class="om-button">
-            <span class="om-icon om-icon-mail-sent"></span>
-            <%= link_to 'sent', sent_messages_path, :class => 'om-icon-space ' %>
-            </span>
-      </li>
 
+        <%= om_button(:icon=>'mail') do %>
+            <%= link_to 'inbox', messages_path %>
+        <% end %>
+      </li>
+      <li>
+        <%= om_button(:icon=>'mail-new') do %>
+            <%= link_to 'new', new_message_path %>
+        <% end %>
+      </li>
+      <li>
+        <%= om_button(:icon=>'mail-sent') do %>
+            <%= link_to 'sent', sent_messages_path %>
+        <% end %>
+      </li>
     </ul>
-
-  </div>
-</div>
-
+<% end %>

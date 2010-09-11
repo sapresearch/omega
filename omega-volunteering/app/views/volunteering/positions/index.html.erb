@@ -1,87 +1,79 @@
 <% require_stylesheet 'omega_volunteering_positions' %>
 <% require_javascript 'omega_volunteering' %>
 
-<h1>
-  <span class="h1 left">
+<h1 class="page-content corners-top">
   Volunteering Positions
-  </span>
+</h1>
 
+
+<div class="page-content corners-bottom">
   <div class="right">
-   <span class="om-button">
-<span class="om-icon om-icon-sort-az"></span>
-     <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')), :class=> 'om-icon-space' %>
-</span>
-  <span class="om-button">
-<span class="om-icon om-icon-sort-za"></span>
-    <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')), :class=> 'om-icon-space' %>
-</span>
+    <%= om_button(:icon=>'sort-az') do %>
+        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'asc')) %>
+    <% end %>
+    <%= om_button(:icon=>'sort-za') do %>
+        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+    <% end %>
 
   </div>
 
   <div class="clear"></div>
-</h1>
 
-<% if @skills_tags %>
-    <p>
-      <% @skills_tags.each do |skill| %>
-          <span class="skill_tag skill_tag_active"><a href=""><%= skill %></a> </span>
-      <% end %>
-    </p>
-<% end %>
+  <% if @skills_tags %>
+      <p>
+        <% @skills_tags.each do |skill| %>
+            <span class="skill_tag skill_tag_active"><a href=""><%= skill %></a> </span>
+        <% end %>
+      </p>
+  <% end %>
+  <ul id="positions_list">
+    <% @positions.each do |position| %>
+        <li class="clearfix">
 
-
-<ul id="positions_list">
-  <%= will_paginate @positions %>
-  <% @positions.each do |position| %>
-      <li class="clearfix">
-
-        <div class="position_slider">
-          <div class="position_actions">
-            <%= toggle_favorite(position) %>
-            <img src="/images/icons/quill.png" alt="">
-
-            <span class="om-button">
-                <span class="om-icon om-icon-sort-az"></span>
-                    <%= link_to 'Apply for this Position', new_volunteering_record_url(:id=>position) , :class =>'om-icon-space' %>
-                </span>
-
-
-          </div>
-
-        </div>
-        <div class="position">
-          <div class="position-wrapper">
-            <h2>
-              <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
-            </h2>
-
-            <p class="posDescribtion">
-              <%= truncate(position.description, :length=> 160) %>
+          <div class="position_slider">
+            <div class="position_actions">
 
               <% record = Volunteering::Record.find_by_position_id(position.id) %>
               <% if !record.nil? && !current_user.is_anonymous? && Contact.for(current_user).id == record.contact_id %>
-
-                  <%= link_to "Record Hours for this Position!", new_volunteering_time_entry_url(:id => record.id) %>
+                  <%= om_button(:plain => true, :icon => 'clock') do %>
+                      <%= link_to 'Log hours', new_volunteering_record_url(:id=>position) %>
+                  <% end %>
 
               <% end %>
-
-            </p>
-
-            <div class="position_tags">
-              <% position.skills.each do |skill| %>
-                  <span class="skill_tag"><a href=""><%= skill.name %></a> </span>
+              <%= toggle_favorite(position) %>
+              <%= om_button(:plain => true, :icon => 'apply') do %>
+                  <%= link_to 'Apply', new_volunteering_record_url(:id=>position) %>
               <% end %>
             </div>
           </div>
+          <div class="position">
+            <div class="position-wrapper">
+              <h2>
+                <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
+              </h2>
+              <p class="posDescribtion">
+                <%= truncate(position.description, :length=> 160) %>
+              </p>
 
+              <div class="position_tags">
+                <% position.skills.each do |skill| %>
+                    <span class="skill_tag"><a href=""><%= skill.name %></a> </span>
+                <% end %>
+              </div>
+            </div>
+         </div>
 
-        </div>
+        </li>
 
-
-      </li>
-
+    <% end %>
+  </ul>
+  <% if @positions.size >= Volunteering::Position::MAX_POSITIONS_PER_PAGE %>
+      <%= will_paginate @positions %>
   <% end %>
-</ul>
+  <div class="clear"></div>
+
+</div>
+
 
 
 <% content_for :sidebar do %>

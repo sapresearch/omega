@@ -55,4 +55,36 @@ module HtmlHelper
   def cust_button(text)
     content_tag(:span, text, :class => 'formBtn')
   end
+
+  # om_button(:plain => true, :icon => 'some-icon') do
+  #   link_to ...
+  # end
+  def om_button(options = {}, &block)
+    plain = options[:plain] ? 'plain' : nil
+
+    if options[:icon]
+      icon_class = 'icon'
+      icon = content_tag(:span, '', :class => "om-icon om-icon-#{options[:icon]}")
+    else
+      icon_class = nil
+      icon = ''
+    end
+
+    klass = ['om', plain, icon_class, 'button'].compact.join('-')
+
+    content_tag(:span, :class => klass) do
+      icon + capture(&block)
+    end
+  end
+
+  def side_bar_box(title, &block)
+    
+    content_tag(:h1, title, :class=>'side-bar corners-top') +
+    content_tag(:div, :class => 'corners-bottom sidebar-menu-content' ) do
+      capture(&block)
+    end
+      
+  end
+
+
 end

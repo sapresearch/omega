@@ -28,12 +28,7 @@
       <p>
         <%= f.label :skills %>
         <%= f.text_field :skills_values %>
-        <%= javascript_tag do %>
-            $(function () {
-                $('#contact_skills_values').autoSuggest('/contacts/skills', {selectedItemProp: "name", selectedValuesProp: "name"});
 
-            });
-        <% end %>
       </p>
 
       <div id="addresses">

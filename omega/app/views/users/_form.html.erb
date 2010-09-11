@@ -36,8 +36,9 @@
         <%= f.password_field :password_confirmation %>
       </p>
 
-       <span class="om-button">
+       <%= om_button(:icon => 'save') do  %>
       <%= f.submit %>
-    </span>
+        <% end %>
+
   <% end %>
 

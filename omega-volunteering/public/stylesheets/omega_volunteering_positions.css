@@ -55,7 +55,7 @@ h1 {
 }
 
 #positions_list li {
-    height: 180px;
+    height: 166px;
     position: relative;
 }
 
@@ -66,28 +66,29 @@ div.position_slider {
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
 
-    height: 28px;
+    height: 22px;
     width: 100%;
     position: absolute;
-    top: 28px;
+    top: 22px;
     background: url("../images/details_bg.png") repeat-x bottom;
-    
-
     color: #fff;
     display: none;
 
 }
 
 div.position_actions {
-    padding: 2px 20px 0 0;
+    padding: 1px 20px 0 0;
 }
 
 div.position {
+    -moz-box-shadow:4px 4px 10px #DDDDDD;
+    -webkit-box-shadow:4px 4px 10px #DDDDDD;
+    box-shadow:4px 4px 10px #DDDDDD;
     -moz-border-radius:  0 0 4px 4px;
     -webkit-border-radius: 0 0 4px 4px;
     width: 100%;
     position: absolute;
-    top: 28px;
+    top: 22px;
 
     background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
 

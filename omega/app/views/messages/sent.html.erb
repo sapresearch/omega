@@ -1,7 +1,37 @@
-<% @messages.each do |message| %>
-<%= message.subject %>	
-	
-<% end %>
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_messages_menu" %>
-<% end %>
+<h1 class="page-content corners-top">
+  Sent Messages
+</h1>
+<div class="page-content corners-bottom">
+
+  <ul id="messages_list">
+  <% @messages.each do |message| %>
+      <li class="item-list clearfix">
+
+        <h2>
+          <%= link_to truncate(message.subject, :length=>60), message_path(message) %>
+        </h2>
+
+        <div class="">
+          <%= truncate(message.subject, :length=> 160) %>
+        </div>
+        <div class="right">
+
+    <%= om_button(:icon=>'delete') do %>
+        <%= link_to 'Delete', message_path(message), :method=> :delete, %>
+    <% end %>
+    <%= om_button(:icon=>'mail-reply') do %>
+        <%= link_to 'IMPLEMENT !!!!  Restore', message_path(message), :method=> :delete  %>
+    <% end %>
+
+
+        </div>
+
+
+      </li>
+
+  <% end %>
+</ul>
+  </div>
+  <% content_for :sidebar do %>
+      <%= render :partial => "layouts/sidebar_messages_menu" %>
+  <% end %>

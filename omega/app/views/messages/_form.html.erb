@@ -1,9 +1,17 @@
-<%= form_for @message do |f| %>
-	<%= f.label :to %>: <%= f.text_field :to_id %><br />
-	<%= f.label :subject %>: <%= f.text_field :subject %><br />
-	<%= f.label :body %>: <%= f.text_area :body %><br />
- <span class="om-button">
-    <%= f.submit %>
-</span>
+<h1 class="page-content corners-top">
+  New Message
+</h1>
+<div class="page-content corners-bottom">
+  <%= form_for @message do |f| %>
+      <%= f.label :to %>: <%= f.text_field :to_id %>
+      <br/>
+      <%= f.label :subject %>: <%= f.text_field :subject %>
+      <br/>
+      <%= f.label :body %>: <%= f.text_area :body %>
+      <br/>
 
-<% end %>
+      <%= om_button do %>
+          <%= f.submit %>
+      <% end %>
+      </div>
+  <% end %>

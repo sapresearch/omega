@@ -1,18 +1,6 @@
-<div class="sidebar-menu">
-  <h1 class="round-top">Menu</h1>
+<%= side_bar_box('Manage your favorites') do %>
+    <%= om_button(:icon=>'favorite') do %>
+        <%= link_to 'favorites', '', :class => 'om-icon-space ' %>
+    <% end %>
 
-  <div class="round-bottom sidebar-menu-content">
-    <ul>
-      <li>
-          <span class="om-button">
-             <span class="om-icon om-icon-mail"></span>
-            <%= link_to 'favorites', '', :class => 'om-icon-space ' %>
-            </span>
-      </li>
-
-
-    </ul>
-
-  </div>
-</div>
-
+<% end %>
