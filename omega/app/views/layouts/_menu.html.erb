@@ -4,15 +4,14 @@
     <li>
       <%= link_to "Volunteering", volunteering_positions_url %>
       <div>
+        <%= link_to "All Volunteering Positions", volunteering_positions_url %>
         <%= link_to "Upcoming Events", upcoming_volunteering_positions_url %>
         <%= link_to "Create a position", new_volunteering_position_path %>
-        <%= link_to "All Volunteering Positions", volunteering_positions_url %>
+
 
         <% if !current_user.is_anonymous? %>
             <%= link_to "My Positions", my_positions_volunteering_positions_path %>
         <% end %>
-
-        <a href="#">Subnav Link</a>
       </div>
 
     </li>
@@ -26,6 +25,7 @@
           <div>
             <%= link_to 'inbox', messages_path %>
             <%= link_to 'new', new_message_path %>
+            <%= link_to 'Sent', sent_messages_path %>
           </div>
         </li>
     <% end %>
@@ -35,7 +35,14 @@
     <li>
       <%= link_to "My Time Sheets", my_time_sheets_volunteering_positions_path %>
     </li>
-    <li> <%= link_to "Contacts", contacts_url %></li>
+    <li> <%= link_to "Contacts", contacts_url %>
+      <div>
+        <%= link_to 'New Contact', new_contact_path %>
+        <%= link_to 'New Household', new_contact_household_path %>
+        <%= link_to 'New Organization', new_contact_organization_path %>
+      </div>
+
+    </li>
     <li> <%= link_to "Calendar", calendars_url %></li>
   </ul>
 

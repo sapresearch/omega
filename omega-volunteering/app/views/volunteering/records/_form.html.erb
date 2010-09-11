@@ -67,9 +67,9 @@
       <%= f.text_area :notes%>
     </p>
 
-    <p>
-      <%= cust_button f.submit %>
-    </p>
+    <%= om_button do %>
+      <%=  f.submit %>
+    <% end %>
 
 
 <% end %>
