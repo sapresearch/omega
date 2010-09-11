@@ -1,28 +1,59 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_javascript 'omega_volunteering' %>
 
-<h1>Listing positions</h1>
-<ul id="positions_list">
-  <% @positions.each do |position| %>
-      <li class="clearfix">
-        <div class="position">
-          <div class="position_actions">
-            <a href=""><span class="nav_em_show"></span>Delete</a>
+<h1 class="page-content corners-top">
+  Volunteering Positions
+</h1>
 
-            <div class="clear"></div>
-            <a href=""><span class="nav_em_show"></span>Read</a>
 
-            <div class="clear"></div>
-            <a href=""><span class="nav_em_show"></span>Delete</a>
+<div class="page-content corners-bottom">
+  <div class="right">
+    <%= om_button(:icon=>'sort-az') do %>
+        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'asc')) %>
+    <% end %>
+    <%= om_button(:icon=>'sort-za') do %>
+        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+    <% end %>
 
-            <div class="clear"></div>
+  </div>
+
+  <div class="clear"></div>
+
+  <% if @skills_tags %>
+      <p>
+        <% @skills_tags.each do |skill| %>
+            <span class="skill_tag skill_tag_active"><a href=""><%= skill %></a> </span>
+        <% end %>
+      </p>
+  <% end %>
+  <ul id="positions_list">
+    <% @positions.each do |position| %>
+        <li class="clearfix">
+
+          <div class="position_slider">
+            <div class="position_actions">
+
+              <% record = Volunteering::Record.find_by_position_id(position.id) %>
+              <% if !record.nil? && !current_user.is_anonymous? && Contact.for(current_user).id == record.contact_id %>
+                  <%= om_button(:plain => true, :icon => 'clock') do %>
+                      <%= link_to 'Log hours', new_volunteering_record_url(:id=>position) %>
+                  <% end %>
+
+              <% end %>
+              <%= toggle_favorite(position) %>
+              <%= om_button(:plain => true, :icon => 'apply') do %>
+                  <%= link_to 'Apply', new_volunteering_record_url(:id=>position) %>
+              <% end %>
+            </div>
           </div>
-
-          <% if position.start? %>
-              <div class="posDate">
-                <div class="posCalMonth">
+          <div class="position">
+            
+            <div class="position-wrapper">
+                <% if position.start? %>
+              <div class="pos-date">
+                <div class="pos-cal-month">
                   <%= position.start.strftime("%b") %></div>
-                <div class="posCalDay"> <%= position.start.day %></div>
+                <div class="pos-cal-day"> <%= position.start.day %></div>
               </div>
           <% else %>
               <div class="posDate">
@@ -33,54 +64,42 @@
                 <div class="posCalDay"></div>
               </div>
           <% end %>
-          <div>
-            <h2><%= truncate(position.name, :length=>80) %></h2>
+              <h2>
+                <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
+              </h2>
+              <p class="posDescribtion">
 
 
-            <div class="posDescribtion">
+                <%= truncate(position.description, :length=> 160) %>
+              </p>
 
-              <%= truncate(position.description, :length=> 200) %>
-            </div>
-            <div class="position_details">
-              <ul>
-                <% if position.start? %>
-                    <li>
-                      <span class="icon-date"></span>
-                      <b>Start:</b> <%= position.start.to_formatted_s(:short) %>
-                      <div class="clear"></div>
-                    </li>
-                    <li>
-                      <span class="icon-date"></span>
-                      <b>End:</b> <%= position.end.to_formatted_s(:short) %>
-                      <div class="clear"></div>
-
-                    </li>
+              <div class="position_tags">
+                <% position.skills.each do |skill| %>
+                    <span class="skill_tag"><a href=""><%= skill.name %></a> </span>
                 <% end %>
-              </ul>
-
-              <ul>
-                    
-                <% if position.schedule %>
-                    <li>
-                      <span class="icon-date"></span>
-                      <b>This event recurrs on:</b> <%= position.schedule.days %>
-                      <div class="clear"></div>
-                    </li>
-
-                <% end %>
-              </ul>
+              </div>
             </div>
+         </div>
 
-          </div>
+        </li>
 
-          <div class="clear"></div>
-        </div>
-        <%#= position.contact %>
-      </li>
-
+    <% end %>
+  </ul>
+  <% if @positions.size >= Volunteering::Position::MAX_POSITIONS_PER_PAGE %>
+      <%= will_paginate @positions %>
   <% end %>
-</ul>
+  <div class="clear"></div>
+
+</div>
+
+
+
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_positions_skills" %>
+
+<% end %>
+
+<% content_for :rows do %>
     <%= render :partial => "layouts/sidebar_positions_interests" %>
+
 <% end %>

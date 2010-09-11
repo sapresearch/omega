@@ -57,7 +57,7 @@ Email: <%= @contact.email %><br>
 
 <div id="contact_accordion">
   <% @contact.addresses.each do |address| %>
-      <h3><a href="#">Address</a></h3>
+      <h3><a href="#"> <%= address.city.capitalize %></a></h3>
 
       <div>
 

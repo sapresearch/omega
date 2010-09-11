@@ -29,30 +29,32 @@ h1 {
 .schedule {
     display: none;
 }
-
-.posDate {
-    background: url("../images/calBg.png") no-repeat;
+.pos-date {
+    margin:26px 10px 0;
+    background: url("/images/cal_bg.png") no-repeat;
     text-align: center;
-    font-size: 1.3em;
-    padding: 10px 0 0 0;
+    font-size:1.3em;
+    padding: 5px 0 0 0;
 
     float: left;
-    width: 59px;
+    width: 45px;
     height: 70px;
-    margin-right: 1em;
+    
 
 }
 
-.posCalMonth {
+.pos-cal-month {
 
     color: #FFF;
 }
 
-.posCalDay {
-    font-size: 1.7em;
-    padding-top: 8px;
-    color: #285370;
+.pos-cal-day {
+
+    padding-top: 4px;
+    font-size:0.8em;
+    color:#fff;
 }
+
 
 #positions_list li {
     height: 166px;
