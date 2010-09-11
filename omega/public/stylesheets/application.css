@@ -244,14 +244,14 @@ form table input {
 }
 
 h1.page-content {
-    background: #002A5C;
+    background: url("/images/details_bg.png") repeat-x scroll center bottom #448BE2;
 }
 
 div.page-content {
     background: #FFF;
-    border-bottom: 1px solid #002A5C;
-    border-left: 1px solid #002A5C;
-    border-right: 1px solid #002A5C;
+    border-bottom: 1px solid #448BE2;
+    border-left: 1px solid #448BE2;
+    border-right: 1px solid #448BE2;
     margin-bottom: 20px;
     padding: 15px;
 }
