@@ -1,7 +1,4 @@
 class Import < ActiveRecord::Base
-
-  require 'paperclip'
-  
   has_attached_file :csv
   validates_attachment_presence :csv
   validates_attachment_content_type :csv, :content_type =>

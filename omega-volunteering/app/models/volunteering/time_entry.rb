@@ -6,7 +6,7 @@ class Volunteering::TimeEntry < ActiveRecord::Base
 
   validates_uniqueness_of :record_id, :scope => :week
 
-  accepts_nested_attributes_for :days, :reject_if => proc { |att| att['hours'].blank? }
+  accepts_nested_attributes_for :days
 
   
 end
