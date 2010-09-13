@@ -1,0 +1,30 @@
+<h2>Your Registration Summary for
+    <%@services.each do |s|%>
+      <%if s.id == @registration.service_id%>
+        <%=s.service_name%>
+      <%end%>
+    <%end%>
+</h2>
+
+
+
+<table>
+      <tr>
+              <% @fields.each do |field| %>
+                <%@fieldvalues.each do |fieldv|%>
+                    <%if fieldv.registration_id == @registration.id%>
+                        <% if field.id == fieldv.field_id%>
+                            <%= field.field_name%>: <%=fieldv.field_value%><br/>
+                        <%end%>
+                    <%end%>
+                <%end%>
+              <%end%>
+      </tr>
+</table>
+
+
+
+<p>
+  <%= link_to 'All Services ', services_url%>
+</p>
+

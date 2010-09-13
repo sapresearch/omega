@@ -1,0 +1,85 @@
+<% require_stylesheet 'services.css'%>
+
+<div class="wrapper-services">
+
+
+<div class="container">
+  <div class="steps">
+    <div class="step3"></div>
+  </div>
+
+<div class="content-services" >
+
+<%= form_for @service, :action => "service_wizard" do |f| %>
+      <div>
+        <p class="left2">
+
+        <span class="style3">Customize the Srervice</span> <br/>
+        <br/>
+        <strong>Service Type:</strong>
+        <%=@service.service_type%><br/>
+        <%=f.hidden_field :service_type %>
+
+        <strong>Icon:</strong>
+        <%= image_tag @service.icon, :width =>  '65' %><br/>
+        <%=f.hidden_field :icon %>
+        <%=f.hidden_field :published %>
+
+        <br/>
+         </p>
+
+      </div>
+
+      <div class="split-line">
+        <p class="left2">
+         <strong>Please Enter a Name for your <%=@service.service_type%> Service</strong> <br/>
+
+        <br/>
+
+        <%=f.text_field :service_name %><br/>
+
+        <br/>
+
+        <strong>Select Fields You Want to Remove</strong>
+
+        <br/><br/>
+
+        <% @service.fields.each_with_index do |d| %>
+
+
+        <%= f.fields_for "fields", d do |ff|%>
+
+           <%=ff.check_box '_destroy' %> <%=d.field_name%>
+           <%=ff.hidden_field :field_name%>
+           <%=ff.hidden_field :field_type%>
+
+           <br/>
+
+        <%end%>
+
+      <%end%>
+        </p>
+        
+      </div>
+
+<div class="bottom-buttons">
+
+  <div class="button-first">
+     <%=f.submit "Save"%>
+  </div>
+
+  <div class="button-next">
+     <%= button_to 'Cancel', new_service_url%>
+  </div>
+
+  <div class="button-next">
+    <%= button_to 'Back', service_wizard_services_url(:step => 1, :id => @service)%>
+  </div>
+
+<%end%>
+</div>
+</div>
+
+</div>
+
+</div>

@@ -1,0 +1,53 @@
+<% require_stylesheet 'services.css'%>
+
+<div class="wrapper-services">
+
+<div class="container">
+  <div class="steps">
+    <div class="step4"></div>
+  </div>
+
+<div class="content-services" >
+<br/>
+<div class="review">
+
+  <p class="left-align">
+
+  <span class="heading1">SUMMARY</span><br/>
+  <br/>
+  <strong>Service Name :</strong> <%=@service.service_name%><br/>
+  <strong>Service Type : </strong><%=@service.service_type%><br/>
+  <strong>Icon:</strong><%= image_tag @service.icon, :width =>  '65' %><br/>
+  <br/>
+  <span class="heading2">Form Fields</span><br/>
+  <%Service::Field.all.each do |tt| %>
+        <%if @service.id == tt.service_id%>
+             <strong><%=tt.field_name%></strong><br/>
+        <%end%>
+<%end%>
+</p>
+
+<br/>
+</div>
+<div class="bottom-buttons">
+
+  <div class="button-first">
+    <%=button_to "Publish", finalize_services_url(:id => @service)%>
+  </div>
+
+  <div class="button-next">
+    <%= button_to 'Cancel', new_service_url%>
+  </div>
+
+  <div class="button-next">
+    <%= button_to 'Back', service_wizard_services_url(:step => 2, :id => @service)%>
+  </div>
+</div>
+</div>
+
+
+
+</div>
+
+
+</div>

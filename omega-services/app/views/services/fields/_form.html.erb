@@ -1,0 +1,18 @@
+<%= form_for @field do |f| %>
+
+  <p>
+    <%= f.hidden_field :service_id, :value => @service.id %>
+  </p>
+
+  <p>
+    <%= f.label :field_name %><br />
+    <%= f.text_field :field_name %>
+  </p>
+
+  <p>
+    <%=f.label :field_type %><br />
+    <%=f.select :field_type, options_for_select(%w{ TextArea TextField NumberField }) %>
+  </p>
+
+  <p><%= f.submit %></p>
+<% end %>

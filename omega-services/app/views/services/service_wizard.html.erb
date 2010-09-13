@@ -1,0 +1,96 @@
+<% require_stylesheet 'services.css'%>
+
+
+<div class="wrapper-services">
+
+<div class="container">
+
+
+<div class="steps">
+  <div class="step1"></div>
+</div>
+
+
+<div class="content-services" >
+
+  <div class="tips">
+
+    <p class="left-align">
+    <span class="style1">OVERVIEW</span> <br/>
+
+    <br/>
+    <span class="style2">
+      STEP 1:Introduction
+    </span>
+      <br/>Introduction to the process of creating <br/>a service.<br/>
+
+    <span class="style2">
+      STEP 2: Choose Service Type
+    </span>
+      <br/>Provides you with a list of typical types of <br/>services to choose from.<br/>
+      
+    <span class="style2">
+      STEP 3: Customize Service
+    </span>
+      <br/>Enables you to customize the service by <br/>choosing a name and list of fields you would<br/> like to remove.
+
+    <br/>
+    <span class="style2">
+      Last Step: Finalize
+    </span>
+      <br/>Gives you a summary of the service you are <br/>about to create and publish it to finish the<br/> process.
+
+    </p>
+    
+  </div>
+  <p class="left-align">
+    <span class="style1">Welcome to Add a Service Wizard</span> <br/>
+    
+   <br/> The Add a Service Wizard allows you to add a service from a list
+     of sample services in the library. This page introduces you to the
+     steps involved in this process.
+
+  <br/><br/>
+  <strong>What do I do next?</strong><br/>
+    When you are ready to continue, press the <b>Next</b> button to continue on to
+    the Select Service Type Page. If you would like to exit the Wizard without
+    creating a new Service, press the <b>Cancel</b> button.
+
+    <br/><br/>
+  <strong>How did I get here?</strong><br/>
+    The Add a Service Wizard: Introduction Page appears when you select
+    to add a service using a Wizard. The panel on the right gives an overview of each step in the process.
+  </p>
+
+
+  </div>
+<div class="intro-footer">
+  <div class="button-first" >
+
+    <%= button_to 'Next', service_wizard_services_url(:step => '1')%>
+
+
+  </div>
+
+  <div class="button-next" >
+
+    <%= button_to 'Cancel', new_service_url%>
+
+  </div>
+</div>
+</div>
+
+<div class="spacer">
+
+</div>
+
+  
+</div>
+
+
+
+
+
+
+
+

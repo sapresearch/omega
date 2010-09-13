@@ -1,0 +1,19 @@
+<h2><%=@service.service_type%> Service</h2>
+
+<h3>Form Fields</h3>
+      <% @fields.each do |field| %>
+          <% if field.service_id == @service.id%>
+              <%= field.field_name%><br/>
+           <%end%>
+      <%end%>
+
+<p>
+  <%= link_to 'Add a Field to '+@service.service_type+ ' Service', new_service_service_field_url(@service.id)%>
+</p>
+
+
+
+<p>
+  <%= link_to 'All Services ', services_url%>
+</p>
+

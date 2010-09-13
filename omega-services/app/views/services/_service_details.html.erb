@@ -1,0 +1,46 @@
+
+
+<%=form_for @service do |f| %>
+
+   <%= f.hidden_field :service_type, :value => @s.service_type%>
+   <%=f.hidden_field :icon, :value => @s.icon %>
+
+    <p class="left2">
+      <span class="style3">Preview Details</span>
+
+      <%Service::Typefield.all.each do |tt| %>
+        <%if @s.id == tt.service_type_id%>
+
+              <br/>
+              Field Name: <%=tt.field_name%><br/>
+              Field Type: <%=tt.field_type%><br/>
+
+
+
+            <%= f.fields_for :fields do |ff|%>
+
+                <%= ff.hidden_field :field_name, :value => tt.field_name %>
+                <%= ff.hidden_field :field_type, :value => tt.field_type %>
+
+            <%end%>
+
+        <%end%>
+    <%end%>
+    </p>
+
+    <br/>
+    <div class="bottom-buttons">
+
+    <div class="button-first">
+      <%=f.submit "Save & Proceed"%>
+    </div>
+
+    <div class="button-next">
+      <%= button_to 'Cancel', new_service_url%> &nbsp;
+    </div>
+    </div>
+
+
+<%end%>
+
+

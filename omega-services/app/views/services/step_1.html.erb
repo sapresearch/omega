@@ -1,0 +1,76 @@
+<% require_javascript 'prototype'%>
+<% require_stylesheet 'services.css'%>
+
+<div class="wrapper-services">
+
+<div class="container">
+  <div class="steps">
+    <div class="step2"></div>
+
+  </div>
+<div class="content-services" >
+
+  <br/>
+    <p class="left-align">
+      <span class="style3">Please Choose a Service Type</span> <br/>
+
+        <% Service::Type.all.each do |s| %>
+            <%= radio_button 'service', 'service_type', s.service_type,
+                    {:onchange =>  remote_function(:update => 'fields_list',
+                                                :method => :get,
+                                                :url => {:action => 'get_type_id'},
+                                                :with => "'service_type='+this.value"
+                                                )} %> <%= s.service_type %> <%= image_tag s.icon, :width =>  '65' %><br/>
+        <% end %>
+
+
+    </p>
+
+  <div class="list">
+
+      <div id="fields_list">
+
+        <%unless @service.nil? %>
+
+
+        <p class="left2">
+          <span class="style3">Preview Details</span>
+
+          <br/>
+         <%Service::Field.all.each do |f| %>
+              <%if @service.id == f.service_id%>
+
+                    <br/>
+                    Field Name: <%=f.field_name%><br/>
+                    Field Type: <%=f.field_type%><br/>
+
+
+              <%end%>
+        <%end%>
+        </p>
+
+            <div class="bottom-buttons">
+
+
+            <div class="button-first">
+              <%=button_to "Save",  service_wizard_services_url(:step => 2, :id => @service)%>
+            </div>
+
+            <div class="button-next">
+              <%=button_to 'Cancel', new_service_url%>
+            </div>
+
+           <%end%>
+           </div>
+
+      </div>
+
+  </div>
+
+  
+  </div>
+
+
+</div>
+
+</div>

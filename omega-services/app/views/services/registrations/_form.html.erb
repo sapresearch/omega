@@ -1,0 +1,17 @@
+<h1>Register for <%=@service.service_type%> Service</h1>
+
+<%= form_for @registration do |f| %>
+    <%= f.hidden_field :service_id, :value => @service.id %>
+    <% @fields.each do |field| %>
+
+    <%= f.fields_for :fieldvalues do |ff| %>
+
+        <%= render 'registration_form', :f => ff, :field => field %>
+        <%end%>
+
+	<% end %>
+
+  <p><%= f.submit %></p>
+<% end %>
+
+

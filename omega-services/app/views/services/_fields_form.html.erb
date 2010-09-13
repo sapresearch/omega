@@ -1,0 +1,13 @@
+<%= div_for f.object do %>
+    <%= errors_for_model f.object %>
+
+            <p>
+              Field Name: <%=t.field_name%><br/>
+              Field Type: <%=t.field_type%><br/>
+
+            </p>
+
+            <%= f.hidden_field :field_name, :value => t.field_name %>
+            <%= f.hidden_field :field_type, :value => t.field_type %>
+
+<%end%>
