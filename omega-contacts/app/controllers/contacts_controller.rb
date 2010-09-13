@@ -4,16 +4,18 @@ class ContactsController < ApplicationController
   crud_helper Contact, :all => [:all]
 
   contact_is_self = lambda { @contact.user == current_user }
-  require_permission Contact::PERM_VIEW,      :except => [:show, :edit]
-  require_permission Contact::PERM_VIEW,      :only => [:show, :edit],   :unless => contact_is_self
-  require_permission Contact::PERM_VIEW_SELF, :only => [:show, :edit],   :if     => contact_is_self
-  require_permission Contact::PERM_ADMIN,     :only => [:new, :create, :destroy]
-  require_permission Contact::PERM_ADMIN,     :only => [:edit, :update], :unless => contact_is_self
+  require_permission Contact::PERM_VIEW, :except => [:show, :edit]
+  require_permission Contact::PERM_VIEW, :only => [:show, :edit], :unless => contact_is_self
+  require_permission Contact::PERM_VIEW_SELF, :only => [:show, :edit], :if     => contact_is_self
+  require_permission Contact::PERM_ADMIN, :only => [:new, :create, :destroy]
+  require_permission Contact::PERM_ADMIN, :only => [:edit, :update], :unless => contact_is_self
   require_permission Contact::PERM_EDIT_SELF, :only => [:edit, :update], :if     => contact_is_self
+
+  breadcrumb 'Contacts' => :contacts
 
   def index
     @contact_groups = Contact::Group.all.group_by(&:group_type)
-    
+
     respond_with(@contacts) do |format|
       format.any(:html, :js) { render 'all' }
     end
@@ -78,16 +80,15 @@ class ContactsController < ApplicationController
     @contact.destroy
     respond_with(@contact)
   end
-  
 
 
-   private
-    def determine_sub_layout
-      case params[:action]
-        when 'index'
-          'contacts/with_groups'
-        else
-          nil
-      end
+  private
+  def determine_sub_layout
+    case params[:action]
+      when 'index'
+        'contacts/with_groups'
+      else
+        nil
     end
+  end
 end

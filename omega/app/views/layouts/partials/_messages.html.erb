@@ -1,7 +1,17 @@
 <% if not current_user.is_anonymous?
      unread_messages = current_user.messages.where('read_at is null') %>
-<%= link_to(messages_path) do %>
-	<img src="/images/icons/mail.png" alt="">
+
+
+
+
+
+
+   <%= om_button(:plain => true, :icon => 'mail') do %>
+                      <%= link_to(messages_path) do %>
+
 	<%= "(#{unread_messages.count}) " if unread_messages.any? %>Messages
 <% end %>
+                  <% end %>
+
+
 <% end %>

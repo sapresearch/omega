@@ -1,42 +1,16 @@
-<% require_stylesheet 'new_time_entry' %>
-
-
-
-
-
-
-<h1>
-  <span class="h1 left">
+<h1 class="page-content corners-top">
   <%= Volunteering::Position.find_by_id(Volunteering::Record.find_by_id(@entry.record.id).position_id).name %>
   Position Time Sheet
-  </span>
-
-  <div class="right">
-   <span class="om-button">
-<span class="om-icon om-icon-sort-az"></span>
-     <%= link_to 'implement !!!!! sort A-Z', '', :class=> 'om-icon-space' %>
-</span>
-  <span class="om-button">
-<span class="om-icon om-icon-sort-za"></span>
-    <%= link_to 'implement !!!!! sort A-Z', '', :class=> 'om-icon-space' %>
-</span>
-
-  </div>
-
-  <div class="clear"></div>
 </h1>
 
+<div class="page-content corners-bottom">
+
+  <h3>
+    Week: <%= start = @entry.week.strftime('%Y/%m/%d') %> -
+    <%= Date.parse(start).advance(:days => 6).to_time.strftime('%Y/%m/%d') %>
+  </h3>
 
 
-<div id="timesheet">
-
-  <p>
-
-    <strong>Week: <%= start = @entry.week.strftime('%Y/%m/%d') %>
-      > <%= Date.parse(start).advance(:days => 6).to_time.strftime('%Y/%m/%d') %></strong>
-
-  </p>
-  <br/>
   <table class="om-table">
     <thead>
     <th></th>
@@ -56,23 +30,26 @@
 
           <% if @entry.id == ed.time_entry_id %>
 
-              <td><%= ed.hours %></td>
+            <td>
+              <%= ed.hours %>
+            </td>
 
           <% end %>
 
+
+
       <% end %>
-
     </tr>
-
   </table>
 
-  <br/>
+  <p>
 
-  <p id="right">
 
-    <%= link_to "Add Hours for Another Week!", new_volunteering_time_entry_url(:id => @entry.record.id) %>
+    <%= om_button(:icon => 'clock') do %>
+        <%= link_to "Add Hours for Another Week", new_volunteering_time_entry_url(:id => @entry.record.id) %>
+    <% end %>
+
 
   </p>
 
 </div>
-

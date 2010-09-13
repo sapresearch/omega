@@ -1,4 +1,4 @@
-<% require_javascript 'thirdParty/jquery.validate.js', 'thirdParty/jquery.jfilter.js', 'contacts.js', 'nested' %>
+<% require_javascript  'contacts.js'%>
 <% require_stylesheet 'omega_contacts.css', 'thirdParty/jquery.autocomplete.css' %>
 <h1 class="page-content corners-top">
   Contacts
@@ -17,7 +17,7 @@
         <div id="clear_filter"></div>
       </div>
     </div>
-    <div style="float:right">
+    <div class="right">
 
     <%= om_button(:icon=>'user-add') do %>
         <%= link_to 'New Contact', new_contact_path, :remote => true %>

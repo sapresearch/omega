@@ -16,28 +16,27 @@ $("#contact_accordion").accordion({
 });
 
 
-    var contact_filter = $('#contact_filter')
-
-    contact_filter.keyup(function() {
-        this.value == '' ? $('#clear_filter').hide() : $('#clear_filter').show();
-    });
-    $('#clear_filter').click(function() {
-        contact_filter.val('');
-        $('#contacts li').show();
-        $(this).hide();
-    });
-
-    contact_filter.jfilter({
-        list: '#contacts',
-        speed: 100,
-        highlight: 'highlight' // Class name with no "."
-    });
+//    var contact_filter = $('#contact_filter');
+//
+//    contact_filter.keyup(function() {
+//        this.value == '' ? $('#clear_filter').hide() : $('#clear_filter').show();
+//    });
+//    $('#clear_filter').click(function() {
+//        contact_filter.val('');
+//        $('#contacts li').show();
+//        $(this).hide();
+//    });
+//
+//    contact_filter.jfilter({
+//        list: '#contacts',
+//        speed: 100,
+//        highlight: 'highlight' // Class name with no "."
+//    });
     $.ajax({
         url: '/contacts/all',
         dataType: 'json',
 
         success: function(data) {
-            
             $('#contacts').empty();
             var list = '<ul>';
             $(data).each(function(i) {

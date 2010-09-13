@@ -1,7 +1,15 @@
+<h1 class="page-content corners-top">
+  <%= @message.subject %>
+</h1>
+<div class="page-content corners-bottom">
+
 From: <%= @message.from %><br />
 To: <%= @message.to %><br />
 Subject: <%= @message.subject %><br />
 <%= @message.body %>
+
+</div>
+
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_messages_menu" %>
 <% end %>

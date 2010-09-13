@@ -1,7 +1,49 @@
-h1 {
-    position: relative;
+#time_picker {
+
+    display: none;
+
+    text-align: left;
+    border: 1px solid #999;
+
+    overflow: hidden;
+
+    height: 14em;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    position: absolute;
+
+    background: #f2f2f2;
+
+    list-style: none;
+
+    z-index: 10000;
+
 }
 
+#time_picker li {
+
+    *float: left;
+
+    text-indent: 0;
+
+    margin: 0;
+
+    padding: 0.1em 0.2em;
+
+    cursor: pointer;
+
+}
+
+.tpickr_li_over {
+
+    background: #1484E6;
+
+    color: #FFF;
+
+}
 
 #scheduler {
     margin: 2em 0;
@@ -29,17 +71,17 @@ h1 {
 .schedule {
     display: none;
 }
+
 .pos-date {
-    margin:26px 10px 0;
+    margin: 26px 10px 0;
     background: url("/images/cal_bg.png") no-repeat;
     text-align: center;
-    font-size:1.3em;
+    font-size: 1.3em;
     padding: 5px 0 0 0;
 
     float: left;
     width: 45px;
     height: 70px;
-    
 
 }
 
@@ -51,10 +93,9 @@ h1 {
 .pos-cal-day {
 
     padding-top: 4px;
-    font-size:0.8em;
-    color:#fff;
+    font-size: 0.8em;
+    color: #fff;
 }
-
 
 #positions_list li {
     height: 166px;
@@ -83,33 +124,30 @@ div.position_actions {
 }
 
 div.position {
-    background:#FFF;
-    -moz-box-shadow:4px 4px 10px #DDDDDD;
-    -webkit-box-shadow:4px 4px 10px #DDDDDD;
-    box-shadow:4px 4px 10px #DDDDDD;
-    -moz-border-radius:  0 0 4px 4px;
+    background: #FFF;
+    -moz-box-shadow: 4px 4px 10px #DDDDDD;
+    -webkit-box-shadow: 4px 4px 10px #DDDDDD;
+    box-shadow: 4px 4px 10px #DDDDDD;
+    -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 0 0 4px 4px;
     width: 100%;
     position: absolute;
     top: 22px;
 
-
-
 }
-div.position-wrapper{
+
+div.position-wrapper {
     margin: 0 2px 2px;
-    padding:0.5em;
-    
-    -moz-border-radius:4px;
-    -webkit-border-radius:4px;
-    border:1px solid #e3e3e3;
+    padding: 0.5em;
+
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border: 1px solid #e3e3e3;
     background: url("/images/position_bg.png") repeat-x bottom #f9f9f9;
 }
+
 .position_hover {
-    background:#0063dc!important;
-    /*background:#c9c9c9 !important;*/
-
-
+    background: #0063dc !important; /*background:#c9c9c9 !important;*/
 
 }
 
@@ -129,18 +167,22 @@ span.skill_tag {
     display: inline-block;
     background: url("/images/glass.png") repeat-x scroll 0 50%
 }
-span.skill_tag_active{
-    background-color:#A82F5D;
-    border:none;
+
+span.skill_tag_active {
+    background-color: #A82F5D;
+    border: none;
 }
-.skill_tag_active a{
-    color:#FFF !important;
+
+.skill_tag_active a {
+    color: #FFF !important;
 }
+
 .skill_tag a {
     letter-spacing: 0.04em;
     font-size: 0.9em;
     color: #2D302D;
 }
+
 .skill_tag a:hover {
 
     color: #0063dc;
@@ -164,6 +206,7 @@ span.skill_tag_active{
     margin: 0.5em 0;
     padding: 0.5em;
 }
+
 .position > h2 {
-    padding:1em;
+    padding: 1em;
 }

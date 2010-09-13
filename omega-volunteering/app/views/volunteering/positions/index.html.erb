@@ -36,14 +36,20 @@
               <% record = Volunteering::Record.find_by_position_id(position.id) %>
               <% if !record.nil? && !current_user.is_anonymous? && Contact.for(current_user).id == record.contact_id %>
                   <%= om_button(:plain => true, :icon => 'clock') do %>
-                      <%= link_to 'Log hours', new_volunteering_record_url(:id=>position) %>
+                      <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => record.id) %>
+                  <% end %>
+
+              <% end %>
+
+              <% record = Volunteering::Record.find_by_position_id(position.id) %>
+              <% if !record.nil? && !current_user.is_anonymous? && Contact.for(current_user).id == record.contact_id %>
+                  <%= om_button(:plain => true, :icon => 'apply') do %>
+                      <%= link_to 'Apply', new_volunteering_record_url(:id=>position) %>
                   <% end %>
 
               <% end %>
               <%= toggle_favorite(position) %>
-              <%= om_button(:plain => true, :icon => 'apply') do %>
-                  <%= link_to 'Apply', new_volunteering_record_url(:id=>position) %>
-              <% end %>
+
             </div>
           </div>
           <div class="position">
@@ -51,17 +57,24 @@
               <h2>
                 <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
               </h2>
+
               <p class="posDescribtion">
-                <%= truncate(position.description, :length=> 160) %>
+                <%= truncate(position.description, :length=> 160) %> <%= link_to '( read more ... )', volunteering_position_path(position) %>
               </p>
 
               <div class="position_tags">
                 <% position.skills.each do |skill| %>
-                    <span class="skill_tag"><a href=""><%= skill.name %></a> </span>
+                    <span class="skill_tag">
+
+                     <%= link_to skills_volunteering_positions_path(:skills => [params[:skills], skill.name].compact.join('+')) do %>
+                            <%= skill.name %> 
+                        <% end %>
+
+                    </span>
                 <% end %>
               </div>
             </div>
-         </div>
+          </div>
 
         </li>
 

@@ -1,7 +1,13 @@
 <% if not current_user.is_anonymous?
      favorites = current_user.favorites %>
-<%= link_to(trams_favorites_favorites_path) do %>
-	<img src="/images/icons/heart.png" alt="">
+
+
+    <%= om_button(:plain => true, :icon => 'favorite') do %>
+                      <%= link_to(trams_favorites_favorites_path) do %>
+	
 	<%= "(#{favorites.count}) " if favorites.any? %>Favorites
 <% end %>
+                  <% end %>
+
+
 <% end %>

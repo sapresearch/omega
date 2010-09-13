@@ -20,6 +20,7 @@ class Volunteering::PositionsController < ApplicationController
   def upcoming
     @positions = @positions.where('start is not null').order('start ASC')
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
+     breadcrumb 'Upcoming Positions' => :upcoming_volunteering_positions
     respond_with(@positions)
   end
 
@@ -117,6 +118,7 @@ class Volunteering::PositionsController < ApplicationController
   end
 
    def my_positions
+     breadcrumb 'My Positions' => :my_positions_volunteering_positions
      respond_with(@positions)
   end
 

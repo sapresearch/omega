@@ -3,142 +3,187 @@
  */
 
 
-(function($) {
-    function Timepicker() {
-
-        this.timesformat = {
-            24 : ['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30',
-                '06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30',
-                '13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30',
-                '21:00','21:30','20:00','22:30','23:00','23:30'],
-            ampm : ''
-        };
-
-        // run init once to create the timepicker div and append it to the body
-        this.init = function() {
-            var times_li = '';
-            $.each(this.timesformat['24'], function(k, v) {
-
-                var tp_li_id = v.replace(':', '');
-
-                times_li += '<li id="tp_' + tp_li_id + '">' + v + '</li>'
-            });
-            var f = '<div id="time_picker">';
-            f += times_li;
-            f += '</ul>';
-            f += '</div>';
-            $('body').append(f);
-
-        };
-
-    }
-
-    Timepicker.initialized = false;
-
-
-    $.fn.timepicker = function() {
-
-        if (!Timepicker.initialized && $(this).length != 0) {
-
-            var tp = new Timepicker();
-
-            tp.init();
-            jQuery.fn.timepicker.defaults.initialized = true;
-        }
-        //cache ref
-        var $timepicker = jQuery('#time_picker');
-
-        // listen if the user clicks anywhere else besides the current timepicker and hide the picker
-        $(document).mouseup(function(e) {
-            var $t = jQuery(e.target);
-            if ($timepicker.is(':visible')
-                    && $t.parent()[0].id != 'time_picker'
-                    && $t[0].id != 'time_picker'
-                    && !$t.hasClass('tpickr')) {
-                $timepicker.hide();
-                $timepicker.scrollTop(0);
-
-
-            }
-        });
-        // reference to the current timepicker
-        var current;
-        // insert the selected time from the list into the current timepicker field and hide the timepicker afterwards
-        $timepicker.delegate('li', 'click', function() {
-            var v = $(this).text();
-            current.val(v);
-            $timepicker.hide();
-
-        });
-        $timepicker.delegate('li', 'hover', function(e) {
-            if (e.type == 'mouseover') {
-                $(this).addClass('tpickr_li_over');
-            } else {
-                $(this).removeClass('tpickr_li_over');
-            }
-        });
-        return this.each(function () {
-            var jNode = $(this);
-
-
-            jNode.bind('focus',
-                      function(e) {
-                          // get ref to the current element
-                          current = $(e.target);
-                          var tp_p = current.position();
-                          var h = (tp_p.top + current.outerHeight() );
-                          // check if there is another datepciker already opened
-                          if ($timepicker.is(':visible')) {
-                              $timepicker.hide();
-                          }
-
-
-                          $('#time_picker').css({ position:'absolute', left: tp_p.left, top:(h + 1), width: current.outerWidth() }).show();
-
-
-                          var ct = new Date().getHours();
-                          if (ct < 10) ct = "0" + ct;
-                          var ct_id = $('#tp_' + ct + '00');
-                          var t = Math.floor(ct_id.position().top);
-                          if (t != 0) $timepicker.scrollTop(t);
-
-
-                      });
-            // listen for keydown in the input whether the user wants to insert custim values without the picker functionality
-            jNode.bind('keydown', function() {
-                $timepicker.hide();
-            });
-
-            return $(this)
-        });
-
-
-    };
-
-    $.fn.timepicker.defaults = {
-        initialized: false,
-        scrolled: false
-    }
-})
-
-
-        (jQuery);
-
-
 jQuery.showFlash = function(msg) {
     var msg_div = $('#notification-flash-wrapper');
     msg_div.find('div').html(msg);
     msg_div.fadeIn('fast').delay(2000).fadeOut('fast');
 };
 
+
+/*********** dom ready ! here we go ****************/
+
 $(function() {
 
+    /************** jrails adapter **********************/
 
-$("#notification-flash-wrapper").bind("ajaxSend", function(){
-   $(this).find('div').html('loading').end().fadeIn();
- }).bind("ajaxComplete", function(){
-   $(this).fadeOut();
- });
+    var csrf_token = $('meta[name=csrf-token]').attr('content'),
+            csrf_param = $('meta[name=csrf-param]').attr('content');
+
+    $.fn.extend({
+        /**
+         * Triggers a custom event on an element and returns the event result
+         * this is used to get around not being able to ensure callbacks are placed
+         * at the end of the chain.
+         *
+         * TODO: deprecate with jQuery 1.4.2 release, in favor of subscribing to our
+         *       own events and placing ourselves at the end of the chain.
+         */
+        triggerAndReturn: function (name, data) {
+            var event = new $.Event(name);
+            this.trigger(event, data);
+
+            return event.result !== false;
+        },
+
+        /**
+         * Handles execution of remote calls firing overridable events along the way
+         */
+        callRemote: function () {
+            var el = this,
+                    method = el.attr('method') || el.attr('data-method') || 'GET',
+                    url = el.attr('action') || el.attr('href'),
+                    dataType = el.attr('data-type') || 'script';
+            cache = el.attr('data-cache') || null;
+
+            if (url === undefined) {
+                throw "No URL specified for remote call (action or href must be present).";
+            } else {
+                if (el.triggerAndReturn('ajax:before')) {
+                    var data = el.is('form') ? el.serializeArray() : [];
+                    $.ajax({
+                        url: url,
+                        data: data,
+                        dataType: dataType,
+                        cache: cache,
+                        type: method.toUpperCase(),
+                        beforeSend: function (xhr) {
+                            el.trigger('ajax:loading', xhr);
+                        },
+                        success: function (data, status, xhr) {
+                            if (xhr.status == 201) {
+                                el.trigger('rails:created', data);
+
+                                return;
+                            }
+                            el.trigger('ajax:success', [data, status, xhr]);
+                        },
+                        complete: function (xhr) {
+                            el.trigger('ajax:complete', xhr);
+                        },
+                        error: function (xhr, status, error) {
+                            data = jQuery.httpData(xhr, this.dataType, this);
+                            el.trigger('ajax:failure', [data, xhr, status, error]);
+                        }
+                    });
+                }
+
+                el.trigger('ajax:after');
+            }
+        }
+    });
+
+    /**
+     *  confirmation handler
+     */
+    $('a[data-confirm],input[data-confirm]').live('click', function () {
+        var el = $(this);
+        if (el.triggerAndReturn('confirm')) {
+            if (!confirm(el.attr('data-confirm'))) {
+                return false;
+            }
+        }
+    });
+
+
+    /**
+     * remote handlers
+     */
+    var remote_form = function (e) {
+        $(this).closest('form').callRemote();
+        e.preventDefault();
+    };
+    $('form[data-remote]').live('submit', remote_form);
+    $('form[data-remote] input[type=submit]').live('click', remote_form);
+
+    $('a[data-remote],input[data-remote]').live('click', function (e) {
+        $(this).callRemote();
+        e.preventDefault();
+    });
+
+    $('a[data-method]:not([data-remote])').live('click', function (e) {
+        var link = $(this),
+                href = link.attr('href'),
+                method = link.attr('data-method'),
+                form = $('<form method="post" action="' + href + '"></form>'),
+                metadata_input = '<input name="_method" value="' + method + '" type="hidden" />';
+
+        if (csrf_param != null && csrf_token != null) {
+            metadata_input += '<input name="' + csrf_param + '" value="' + csrf_token + '" type="hidden" />';
+        }
+
+        form.hide()
+                .append(metadata_input)
+                .appendTo('body');
+
+        e.preventDefault();
+        form.submit();
+    });
+
+    /**
+     * disable-with handlers
+     */
+    var disable_with_input_selector = 'input[data-disable-with]';
+    var disable_with_form_selector = 'form[data-remote]:has(' + disable_with_input_selector + ')';
+
+    $(disable_with_form_selector).live('ajax:before', function () {
+        $(this).find(disable_with_input_selector).each(function () {
+            var input = $(this);
+            input.data('enable-with', input.val())
+                    .attr('value', input.attr('data-disable-with'))
+                    .attr('disabled', 'disabled');
+        });
+    });
+
+    $(disable_with_form_selector).live('ajax:complete', function () {
+        $(this).find(disable_with_input_selector).each(function () {
+            var input = $(this);
+            input.removeAttr('disabled')
+                    .val(input.data('enable-with'));
+        });
+    });
+
+
+    /*****************************   End jRails *************************/
+
+
+  /*******************************  Nested attribues   *******************/
+    	$('form a[data-new-nested]').live('click',function () {
+		var association = $(this).attr('data-new-nested');
+		var template    = $('#' + association + '_fields_template').html();
+		var new_id      = new Date().getTime();
+		var content     = template.replace(/_ID_/g, new_id);
+
+		var fields = $(content).insertBefore($(this));
+		fields.siblings('input[name*=_template]').remove();
+		return false;
+	});
+
+	// Use live('click') to fire for new nested fields' remove link
+	$('form a[data-remove-nested]').live('click', function() {
+		// There is a hidden input called _destroy for each nested item, set it to true to tell rails to destroy
+		var _destroy_field = $(this).prev('input[name*=_destroy]').val('true');
+
+		$(this).parent().hide();
+		return false;
+	});
+ /*****************************En d Nested attribues   *******************/     
+
+    $("#notification-flash-wrapper").bind("ajaxSend",
+                                         function() {
+                                             $(this).find('div').html('loading').end().fadeIn();
+                                         }).bind("ajaxComplete", function() {
+        $(this).fadeOut();
+    });
 
     /**
      * menu
@@ -154,7 +199,9 @@ $("#notification-flash-wrapper").bind("ajaxSend", function(){
     });
 
 
-    $("a[rel^='prettyPhoto']").prettyPhoto();
+    $("a[rel^='test']").click(function() {
+        $('body').append($('<div>')[0].id)
+    });
 
 
     $.datepicker.setDefaults({showAnim: '' });
@@ -201,34 +248,13 @@ $("#notification-flash-wrapper").bind("ajaxSend", function(){
     var loginWrapper = $('#loginWrapper');
     var loginPanel = $('#loginPanel');
 
-    //
-    //    trigger.click(
-    //                 function() {
-    //
-    //                     $('#ctlrBar a.btnLoginCtrl').toggle()
-    //                 }).toggle(function() {
-    //
-    //        loginWrapper.show()
-    //
-    //
-    //    }, function() {
-    //
-    //        loginWrapper.hide();
-    //        $('#loginFailed').empty();
-    //        $('#new_session input').not('input[type=submit]').val('')
-    //
-    //
-    //    });
-    //  init calandar plugin
-
-
-    $("#new_session").bind("ajax:failure",
-                          function(event, data, xhr, status, error) {
-                              var erroMsg = '<span class="error">' + data[0] + '</span>';
-                              $('#loginFailed').empty().append(erroMsg)
-
-                          }).bind("ajax:success", function(event, data, status, xhr) {
-        location = xhr.getResponseHeader("Location");
+    loginWrapper.dialog({
+        modal : true,
+        autoOpen: false,
+        title: 'Login'
+    });
+    trigger.click(function() {
+        loginWrapper.dialog('open')
     });
 
 
@@ -268,7 +294,7 @@ $("#notification-flash-wrapper").bind("ajaxSend", function(){
                                                       }).blur(function() {
         $(this).val('Search..').parent().removeClass('search_wrapper_focus');
     });
-    $.ajax
+
 
 });
 

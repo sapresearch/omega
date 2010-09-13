@@ -100,7 +100,7 @@ h3 {
 
 p {
     line-height: 2em;
-
+margin: 1em 0;
 }
 
 a {
@@ -129,6 +129,7 @@ a:hover {
 }
 
 table.om-table {
+    margin:1em 0;
     width: 100%;
     font-size: 1em;
     border-collapse: collapse;
@@ -188,11 +189,15 @@ form table input {
     height: 28px;
 
 }
+#user_custom_bar{
+    float:left;
+    position:relative;
+    top:8px;
 
+}
 #user_custom_bar a {
     color: #FFF;
-    padding-top: 5px;
-    float: left;
+    
 }
 
 #wrapper {
@@ -248,9 +253,9 @@ h1.page-content {
 
 div.page-content {
     background: #FFF;
-    border-bottom: 1px solid #448BE2;
-    border-left: 1px solid #448BE2;
-    border-right: 1px solid #448BE2;
+    border-bottom: 1px solid #0063dc;
+    border-left: 1px solid #0063dc;
+    border-right: 1px solid #0063dc;
     margin-bottom: 20px;
     padding: 15px;
 }
@@ -262,16 +267,16 @@ div.sidebar-menu {
 
 h1.side-bar {
     margin: 0;
-    background: #CF3A72;
+    background: url("/images/pink_grad_bg.png ")repeat-x ;
     color: #FFF;
     padding: 5px;
 }
 
 div.sidebar-menu-content {
     padding: 5px;
-    border-bottom: 1px solid #CF3A72;
-    border-left: 1px solid #CF3A72;
-    border-right: 1px solid #CF3A72;
+    border-bottom: 1px solid #c2366b;
+    border-left: 1px solid #c2366b;
+    border-right: 1px solid #c2366b;
     margin-bottom: 20px;
 }
 
@@ -554,6 +559,7 @@ a {
 =                                                                                =
 =================================================================================*/
 
+
 .om-button a, .om-button input, .om-button button, .om-icon-button a, .om-icon-button input, .om-icon-button button {
     position: relative;
     text-transform: capitalize;
@@ -582,7 +588,7 @@ span.om-button,
 span.om-icon-button {
     position: relative;
     -moz-border-radius: 3px;
-    -moz-webkit-radius: 2px;
+    -webkit-border-radius: 2px;
     border-radius: 2px;
     display: inline-block;
     height: 20px;
@@ -590,7 +596,7 @@ span.om-icon-button {
     border-width: 1px;
     border-style: solid;
     border-color: #ccc #bbb #a0a0a0;
-    margin: 0px;
+    margin: 0 4px;
 }
 
 span.om-icon-button {
@@ -751,6 +757,9 @@ span.om-icon-back {
 
 .om-icon-clock {
     background-position: 0 -416px;
+}
+.om-icon-favorite {
+    background-position: 0 -432px;
 }
 
 /*END BUTTONS*/
@@ -964,7 +973,6 @@ div.footer_blocks {
     padding: 2px;
     color: #0E5A9D;
     border-bottom: 1px solid #CACBD1;
-    background: url("/images/h1BgLight.png") repeat-x scroll center bottom transparent;
     text-align: left;
     font-size: 12px;
 }
@@ -985,7 +993,7 @@ td h4 {
 
 /** dropdown **/
 dl.drop_down {
-    float: right;
+    
 
     -moz-border-radius:3px 3px 3px 3px;
 background:url("../images/om_button_bg.png") repeat-x scroll center bottom transparent;
