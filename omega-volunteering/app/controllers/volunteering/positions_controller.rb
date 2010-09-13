@@ -12,9 +12,6 @@ class Volunteering::PositionsController < ApplicationController
   breadcrumb 'Volunteering' => :volunteering
   breadcrumb 'Positions' => :volunteering_positions
 
-
-
-
   def index
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
     respond_with(@positions)
@@ -22,6 +19,7 @@ class Volunteering::PositionsController < ApplicationController
 
   def upcoming
     @positions = @positions.where('start is not null').order('start ASC')
+    @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
     respond_with(@positions)
   end
 
@@ -109,10 +107,12 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def skills
+    @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
     render :index
   end
 
   def interests
+    @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
     render :index
   end
 
@@ -130,16 +130,12 @@ class Volunteering::PositionsController < ApplicationController
       @records.each do |r|
         @timesheets << Volunteering::TimeEntry.find_all_by_record_id(r.id)
       end
-      
   end
 
   
   private
   def get_positions
-
-
-    @positions = Volunteering::Position.includes(:skills)
-    @positions = @positions.started.not_ended
+    @positions = Volunteering::Position.includes(:skills, :records)
 
     if skills = params[:skills].try(:split, '+')
       @positions = @positions.select('`volunteering_positions`.*, count(`contact_skills`.`id`) as s_count').
