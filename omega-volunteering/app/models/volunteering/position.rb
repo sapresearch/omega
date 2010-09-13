@@ -16,19 +16,15 @@ class Volunteering::Position < ActiveRecord::Base
                                       :join_table => 'contact_interests_volunteering_positions'
 
   accepts_flattened_values_for :skills, :interests, :value => :name
-  accepts_nested_attributes_for :schedule
+  accepts_nested_attributes_for :schedule, :reject_if => proc { |att| att['start_time'].blank? }
   accepts_nested_attributes_for :contacts
 
   attr_accessor :starttime_nr, :start_date_nr, :endtime_nr, :end_date_nr
 
-  scope :started, where('start <= ?', Time.now)
-  scope :not_started, where('start > ?', Time.now)
-  scope :ended, where('end <= ?', Time.now)
-  scope :not_ended, where('end > ?', Time.now)
 
   before_save :combine_times
 
-  validates :name, :description, :hours, :start, :end, :volunteers_required, :presence => true
+  validates :name, :description, :hours, :volunteers_required, :presence => true
 
 
   def to_s

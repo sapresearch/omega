@@ -66,7 +66,6 @@ class Volunteering::PositionsController < ApplicationController
       when 'new'
         params[:volunteering_position].delete(:contact_ids)
       when 'none'
-      else
         params[:volunteering_position].delete(:contact_ids)
         params[:volunteering_position].delete(:contacts_attributes)
     end
@@ -82,7 +81,7 @@ class Volunteering::PositionsController < ApplicationController
           params[:volunteering_position][:schedule_attributes][:schedule_type] = 'daily'
 
           if params[:daily_type] == 'every_week_day'
-            params[:volunteering_position][:schedule_attributes][:every_value] = 'weekday'
+            params[:volunteering_position][:schedule_attributes][:value] = 'weekday'
           end
 
         when 'weekly'
