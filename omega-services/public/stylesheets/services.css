@@ -53,6 +53,13 @@ span.style3{
 
 }
 
+h1.index{
+    color: #38383F;
+    font-family: Tahoma;
+    font-weight: bold;
+    font-size: x-large;
+    letter-spacing:.02em;
+}
 div.wrapper-services{
     margin: 0 8px 45px;
     padding:0.9em;
