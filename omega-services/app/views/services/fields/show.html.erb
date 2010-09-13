@@ -1,19 +1,24 @@
-<h2><%=@service.service_type%> Service</h2>
+<% require_stylesheet "services"%>
 
-<h3>Form Fields</h3>
-      <% @fields.each do |field| %>
-          <% if field.service_id == @service.id%>
-              <%= field.field_name%><br/>
-           <%end%>
-      <%end%>
+<h1 class="index"><%=@service.service_type%> Service</h1>
 
-<p>
+<p class="left-align">
+  <span class="heading1">Form Fields</span>
+        <% @fields.each do |field| %>
+            <% if field.service_id == @service.id%>
+                <br/><%= field.field_name%>
+             <%end%>
+        <%end%>
+</p>
+
+
+<p class="left-align">
+  <br/>
   <%= link_to 'Add a Field to '+@service.service_type+ ' Service', new_service_service_field_url(@service.id)%>
-</p>
 
-
-
-<p>
+  <br/>
   <%= link_to 'All Services ', services_url%>
+
 </p>
+
 
