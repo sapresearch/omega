@@ -10,7 +10,7 @@
 <p class="left-align">
 
   <%@services.each do |s|%>
-    <strong><%=s.service_name%> <%=s.service_type%> Service</strong><br/>
+    <strong><%=s.service_name%> - <%=s.service_type%> Service</strong><br/>
     (<%= link_to "Show", service_service_fields_url(s.id) %>)
     <%if !current_user.is_anonymous? %>
         <%if s.published == false%>
