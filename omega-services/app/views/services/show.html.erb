@@ -1,7 +1,13 @@
 <% require_stylesheet "services"%>
 
-<h1 class="index"><%=@service.service_type%> Service</h1>
+<div class="wrapper-services">
 
+<div class="container-show">
+
+  <div class="header">
+
+<h2 class="index"><%=@service.service_name%> Service</h2>
+   </div>
 <p class="left-align">
   <span class="heading1">Form Fields</span>
         <% @fields.each do |field| %>
@@ -14,11 +20,13 @@
 
 <p class="left-align">
   <br/>
-  <%= link_to 'Add a Field to '+@service.service_type+ ' Service', new_service_service_field_url(@service.id)%>
+  <strong><%= link_to 'Add a Field to '+@service.service_type+ ' Service', new_service_service_field_url(@service.id)%>
 
   <br/>
   <%= link_to 'All Services ', services_url%>
-
+  </strong>
 </p>
 
 
+</div>
+    </div>

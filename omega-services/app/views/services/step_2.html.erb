@@ -11,10 +11,12 @@
 <div class="content-services" >
 
 <%= form_for @service, :action => "service_wizard" do |f| %>
+      <%= errors_for_form(@service, 'service') %>
+      
       <div>
         <p class="left2">
 
-        <span class="style3">Customize the Srervice</span> <br/>
+        <span class="style3">Customize Your Service</span> <br/>
         <br/>
         <strong>Service Type:</strong>
         <%=@service.service_type%><br/>

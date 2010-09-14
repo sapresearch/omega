@@ -1,18 +1,15 @@
-<%= div_for f.object do %>
+  <%= div_for f.object do %>
     <%= errors_for_model f.object %>
         <%if @service.id == field.service_id%>
-        <p>
+
             <%= f.hidden_field :field_id, :value => field.id %>
-        </p>
-
-        <p>
             <%= f.hidden_field :registration_id, :value => @registration.id %>
-        </p>
+          <p class="left-align">
 
-        <p>
-            <%=field.field_name%>
-            <%= f.text_field :field_value%> 
-        </p>
+            <strong><%=field.field_name%></strong>
+            <%= f.text_field :field_value%>
+          </p>
+
         <%end%>
 
 <%end%>
