@@ -33,20 +33,16 @@
           <div class="position_slider">
             <div class="position_actions">
 
-              <% record = Volunteering::Record.find_by_position_id(position.id) %>
-              <% if !record.nil? && !current_user.is_anonymous? && Contact.for(current_user).id == record.contact_id %>
+              <% if position.status_of(Contact.for(current_user)) == :valid %>
                   <%= om_button(:plain => true, :icon => 'clock') do %>
-                      <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => record.id) %>
+                      <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user))) %>
                   <% end %>
-
               <% end %>
 
-              <% record = Volunteering::Record.find_by_position_id(position.id) %>
-              <% if !record.nil? && !current_user.is_anonymous? && Contact.for(current_user).id == record.contact_id %>
+              <% if position.status_of(Contact.for(current_user)) != :valid %>
                   <%= om_button(:plain => true, :icon => 'apply') do %>
                       <%= link_to 'Apply', new_volunteering_record_url(:id=>position) %>
                   <% end %>
-
               <% end %>
               <%= toggle_favorite(position) %>
 
