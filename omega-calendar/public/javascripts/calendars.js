@@ -42,9 +42,9 @@ $(document).ready(function() {
         eventClick: function(event, jsEvent, view) {
             curent_event = event;
             event_id = event.id;
-            var ed = '<h1>';
+            var ed = '<h4>';
             ed += event.title;
-            ed += '</h1>';
+            ed += '</h4>';
 
             ed += 'Start: ';
             ed += $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd HH:mm');

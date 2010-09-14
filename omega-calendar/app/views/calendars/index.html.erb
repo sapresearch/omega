@@ -1,17 +1,32 @@
-<% require_javascript 'thirdParty/jquery.fullcalendar.js' , 'calendars.js' %>
+<% require_javascript 'thirdParty/jquery.timepicker.js','thirdParty/jquery.fullcalendar.js' , 'calendars.js' %>
 <% require_stylesheet 'thirdParty/jquery.fullcalendar.css', 'omega_calendars.css' %>
 
-<h1>Calendar Name</h1>
+<h1 class="page-content corners-top">
+  Calendar
+</h1>
+
+<div class="page-content corners-bottom">
 <div id="cal">
 </div>
+</div>
+
+
 
 <div id="create_event">
+  <h1 class="page-content corners-top">
+  Calendar
+</h1>
+
+<div class="page-content corners-bottom">
+
+
     <%= render "/events/form", :event => Event.new(:calendar_id => 1)  %>
+  </div>
 </div>
 <% content_for :sidebar do %>
-	<%= render :partial => "layouts/sidebox_calendars" %>
+	<%= render :partial => "layouts/sidebar_calendars" %>
 <% end %>
 
 <% content_for :rows do %>
-	<%= render :partial => "layouts/sidebox_events" %>
+	<%= render :partial => "layouts/sidebar_events" %>
 <% end %>

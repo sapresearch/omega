@@ -1,0 +1,12 @@
+<%= side_bar_box('Calendars') do %>
+<ul>
+   <%  @calendars.each do |calendar| %>
+        <li>
+          <%= link_to calendar.calendar_name, calendar , {:remote => true,   :class => 'corners' + " " +cycle('o_08D9CD','o_023431','o_0AF3E7','o_07B3AA','o_05736E') }  %>
+          <%= link_to 'edit', edit_calendar_path(calendar), :class => 'right' %>
+        </li>
+
+  <% end %>
+
+</ul>
+<% end %>

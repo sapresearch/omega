@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   include Trams::Assets::Dependencies
   
-  self.responder = Omega::ApplicationResponder
+#  self.responder = Omega::ApplicationResponder
 
   protect_from_forgery
   layout 'application'

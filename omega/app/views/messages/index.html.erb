@@ -33,7 +33,7 @@
         <div class="right">
 
     <%= om_button(:icon=>'delete') do %>
-        <%= link_to 'Delete', message_path(message), :method=> :delete, %>
+        <%= link_to 'Delete', message_path(message), :method=> :delete %>
     <% end %>
     <%= om_button(:icon=>'mail-reply') do %>
         <%= link_to 'Reply', reply_message_path(message) %>
