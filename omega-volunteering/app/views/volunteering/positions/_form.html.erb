@@ -4,6 +4,7 @@
 
 <%= form_for(@position) do |f| %>
     <%= errors_for_form(@position, 'position') %>
+
     <p>
       <%= f.label :name %>
       <%= f.text_field :name %>
@@ -43,7 +44,7 @@
       <label for="volunteering_position[schedule_type]">Pattern</label>
 
       <%= f.fields_for :schedule do |ff| %>
-
+          <%= errors_for_model f.object%>
           <% ['daily', 'weekly', 'monthly', 'yearly'].each do |d| %>
               <%= ff.radio_button :schedule_type, d %> <%= d %>
           <% end %>
@@ -74,7 +75,7 @@
 
     <div id="vp_contact">
       <% [[:none, 'no contact'], [:existing, 'existing contact'], [:new, 'new contact']].each do |value, text| %>
-          <%= radio_button_tag 'contact_assignment', value, false %><%= text %>
+          <%= radio_button_tag 'contact_assignment', value, true %><%= text %>
       <% end %>
 
       <fieldset id="position_exisiting_contact" class="hide">
