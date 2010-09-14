@@ -1,12 +1,17 @@
 <% require_stylesheet 'services'%>
 
-<h1 class="index">Services Offered</h1>
+<div class="wrapper-services">
 
+<div class="container-show">
+  <div class="header">
+
+<h2 class="index">Services Offered</h2>
+  </div>
 <p class="left-align">
 
   <%@services.each do |s|%>
-    <strong><%=s.service_type%></strong>
-    (<%= link_to "Show", service_service_fields_url(s.id) %>)<br/>
+    <strong><%=s.service_name%> <%=s.service_type%> Service</strong><br/>
+    (<%= link_to "Show", service_service_fields_url(s.id) %>)
     <%if !current_user.is_anonymous? %>
         <%if s.published == false%>
             |(<%= link_to "Publish", service_wizard_services_url(:step => 3, :id => s.id) %>) <br/>
@@ -17,13 +22,15 @@
   <%end%>
     <%if !current_user.is_anonymous? %>
     <br/>
-        <%= link_to 'Add a New Service', service_wizard_services_url%>
+       <strong> <%= link_to 'Add a New Service', service_wizard_services_url%>
 
     <br/>
-        <%= link_to 'Export Services to a File', export_to_csv_services_path%>
+        <%#= link_to 'Export Services to a File', export_to_csv_services_path%>
 
   <%end%>
-    
+     </strong>
 </p>
 
 
+</div>
+    </div>

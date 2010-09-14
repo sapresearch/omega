@@ -60,6 +60,14 @@ h1.index{
     font-size: x-large;
     letter-spacing:.02em;
 }
+
+h2.index{
+    color: #FFFFFF;
+    font-family: Tahoma;
+    font-weight: bold;
+    font-size: large;
+    letter-spacing:.02em;
+}
 div.wrapper-services{
     margin: 0 8px 45px;
     padding:0.9em;
@@ -81,6 +89,36 @@ div.container{
     -html-border-radius:8px;
     border-radius:8px;
 }
+
+div.header{
+    height: 35px;
+    width: auto;
+    background-color: rgba(11, 106, 221, 0.9);
+    padding:0.5em;
+      border-radius:8px;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    -opera-border-radius:8px;
+    -khtml-border-radius:8px;
+}
+
+div.container-show{
+    height: auto;
+    min-height: 100%;
+    width: 760px;
+    text-align: left;
+    overflow: hidden;
+    padding:0.5em;
+    background-color: rgba(255, 255, 255, 0.9);
+    border:1px solid #0B6ADD;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    -opera-border-radius:8px;
+    -html-border-radius:8px;
+    border-radius:8px;
+}
+
+
 div.steps{
     height: auto;
     width: 761px;

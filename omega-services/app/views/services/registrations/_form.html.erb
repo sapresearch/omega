@@ -1,6 +1,18 @@
-<h1>Register for <%=@service.service_type%> Service</h1>
+<% require_stylesheet 'services' %>
 
+
+<div class="wrapper-services">
+
+<div class="container-show">
+
+<div class="header">
+
+<h2 class="index">Register for <%=@service.service_type%> Service</h2>
+
+  </div>
 <%= form_for @registration do |f| %>
+    <%=errors_for_form(@registration, 'registration')%>
+
     <%= f.hidden_field :service_id, :value => @service.id %>
     <% @fields.each do |field| %>
 
@@ -14,4 +26,5 @@
   <p><%= f.submit %></p>
 <% end %>
 
-
+</div>
+    </div>

@@ -23,9 +23,12 @@ class ServicesController < ApplicationController
 
      def service_wizard
 
-       @services = get_services_list
 
        @service = Service.find_by_id(params[:id])
+
+       @services = get_services_list
+
+
        @step = params[:step]
 
         case params[:step]

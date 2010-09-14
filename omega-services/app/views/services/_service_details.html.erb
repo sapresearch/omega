@@ -1,5 +1,5 @@
 <%=form_for @service do |f| %>
-
+   <%= errors_for_model @service%>
    <%= f.hidden_field :service_type, :value => @s.service_type%>
    <%=f.hidden_field :icon, :value => @s.icon %>
 
