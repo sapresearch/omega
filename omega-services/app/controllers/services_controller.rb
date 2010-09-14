@@ -98,6 +98,11 @@ class ServicesController < ApplicationController
        render :partial => 'service_details'
      end
 
+
+  def delete
+    Service.delete(params[:id])
+    redirect_to services_url
+  end
   #--------------------------------------------------------------------------------------------------
     private
   

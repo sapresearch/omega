@@ -14,10 +14,11 @@
     (<%= link_to "Show", service_service_fields_url(s.id) %>)
     <%if !current_user.is_anonymous? %>
         <%if s.published == false%>
-            |(<%= link_to "Publish", service_wizard_services_url(:step => 3, :id => s.id) %>) <br/>
+            |(<%= link_to "Publish", service_wizard_services_url(:step => 3, :id => s.id) %>) 
         <%else %>
-            (<%= link_to "Register", new_service_service_registration_url(s.id) %>) <br/>
+            (<%= link_to "Register", new_service_service_registration_url(s.id) %>)
         <%end%>
+          |(<%=link_to "Delete", :action => 'delete', :id => s %>)<br/>
     <%end%>
   <%end%>
     <%if !current_user.is_anonymous? %>

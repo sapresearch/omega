@@ -26,6 +26,7 @@ Omega::Services::Tram.routes.draw do |map|
       get :get_type_id
       get :service_wizard
       get :finalize
+      get :delete
     end
 
   end
