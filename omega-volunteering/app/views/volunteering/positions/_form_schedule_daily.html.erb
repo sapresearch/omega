@@ -3,7 +3,7 @@
   <h4> Please select when this event occurs</h4>
   <%= f.fields_for :schedule do |s| %>
   <%= s.fields_for :daily do |d| %>
-      
+
       <%= radio_button_tag 'daily_type', 'every_week_day' %>Every weekday
 
       <br>
