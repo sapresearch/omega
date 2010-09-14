@@ -42,7 +42,7 @@ $(function() {
             $(data).each(function(i) {
 
 
-                list += '<li id="contact_' + data[i].id + '"><a data-remote="true" href="/contacts/' + data[i].id + '">' + data[i].first_name + ', ' + data[i].last_name + '</a></li>';
+                list += '<li id="contact_' + data[i].id + '"><a data-remote="true" href="/contacts/' + data[i].id + '">' + data[i].last_name + ', ' + data[i].first_name + '</a></li>';
             });
             list += '</ul>';
             $('#contacts').append(list);
