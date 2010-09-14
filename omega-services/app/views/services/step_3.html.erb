@@ -35,12 +35,9 @@
     <%=button_to "Publish", finalize_services_url(:id => @service)%>
   </div>
 
-  <div class="button-next">
-    <%= button_to 'Cancel', new_service_url%>
-  </div>
 
   <div class="button-next">
-    <%= button_to 'Delete', delete_services_url(:id => @service)%>
+    <%= button_to 'Cancel', delete_services_url(:id => @service)%>
   </div>
 
   <div class="button-next">
