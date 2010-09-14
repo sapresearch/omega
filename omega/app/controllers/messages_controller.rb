@@ -59,13 +59,17 @@ class MessagesController < ApplicationController
   def destroy
     if @message.from == current_user
       @message.touch(:deleted_by_from_at)
-    elsif @message.to == current_user
-      @message.touch(:deleted_by_to_at)
-    else
-      # require_permission !!
-      @message.destroy
     end
-    respond_with(@message)
+
+    if @message.to == current_user
+      @message.touch(:deleted_by_to_at)
+    end
+
+#    else
+#      # require_permission !!
+#      @message.destroy
+#    end
+    redirect_to(messages_url)
   end
 
   SORT_KEYS = ['subject']

@@ -76,9 +76,9 @@
 
     <% end %>
   </ul>
-  <% if @positions.size >= Volunteering::Position::MAX_POSITIONS_PER_PAGE %>
+  
       <%= will_paginate @positions %>
-  <% end %>
+
   <div class="clear"></div>
 
 </div>
