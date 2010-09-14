@@ -36,13 +36,27 @@
     <ul>
       <% ('A'..'Z').each do |l| %>
           <li>
-            <span><%= link_to l, "/contacts/#{l}", :remote => true, :class => 'link_btn' %></span></li>
+            <span><%= link_to l, "/contacts/#{l}", :remote => true %></span></li>
       <% end %>
     </ul>
   </div>
 
   <div id="contacts_groups" class="left">
     <div id="accordion">
+      <h3>
+            <a>
+             All Contacts
+            </a>
+
+          </h3>
+      <div>
+        <ul>
+          <li>
+        <%= link_to 'Show All', "/contacts/", :remote => true %>    
+          </li>
+        </ul>
+
+      </div>
 
       <% @contact_groups.keys.each do |group_type| %>
           <h3>
@@ -60,7 +74,7 @@
             </ul>
           </div>
 
-          <% reset_cycle("group_rows") %>
+
       <% end %>
 
     </div>

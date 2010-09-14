@@ -60,7 +60,7 @@ function update_contacts(contacts) {
     $(contacts).each(function(i) {
 
 
-        list += '<li id="contact_' + contacts[i].id + '"><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].first_name + ', ' + contacts[i].last_name + '</a></li>';
+        list += '<li id="contact_' + contacts[i].id + '"><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', ' + contacts[i].first_name + '</a></li>';
     })
     list += '</ul>';
     $('#contacts').append(list);
