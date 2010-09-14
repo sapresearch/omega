@@ -39,6 +39,18 @@ class Volunteering::Position < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
 
+  def status_of(contact)
+    if record = record_for(contact)
+      :valid
+    else
+      :none
+    end
+  end
+
+  def record_for(contact)
+    contact.nil? ? nil : records.where('contact_id = ?', contact).first
+  end
+
   private
     def combine_times
       self.start = start_date_nr + " " + starttime_nr

@@ -199,9 +199,6 @@ $(function() {
     });
 
 
-    $("a[rel^='test']").click(function() {
-        $('body').append($('<div>')[0].id)
-    });
 
 
     $.datepicker.setDefaults({showAnim: '' });
