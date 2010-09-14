@@ -21,6 +21,9 @@
       <li class="item-list clearfix">
 
         <h2>
+          <% if !message.read? %>
+              dfdf
+              <% end %>
           <%= link_to truncate(message.subject, :length=>60), message_path(message) %>
         </h2>
 
