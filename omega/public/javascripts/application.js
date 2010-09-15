@@ -3,16 +3,31 @@
  */
 
 
-jQuery.showFlash = function(msg) {
+jQuery.showFlash = function(msg, n) {
     var msg_div = $('#notification-flash-wrapper');
     msg_div.find('div').html(msg);
-    msg_div.fadeIn('fast').delay(2000).fadeOut('fast');
+    msg_div.css('top', ($(window).height() / 2) + 'px');
+    if (n === 'ajax') {
+
+        msg_div.fadeIn('fast');
+    } else if (n === undefined) {
+
+        msg_div.fadeIn('fast').delay(2000).fadeOut();
+    }
+
+    $(window).resize(function() {
+        msg_div.css('top', ($(window).height() / 2) - (msg_div.height() / 2) + 'px');
+    });
 };
 
 
 /*********** dom ready ! here we go ****************/
 
 $(function() {
+
+//    $(document).click(function(){
+//        $.showFlash()
+//    });
 
     /************** jrails adapter **********************/
 
@@ -156,33 +171,35 @@ $(function() {
     /*****************************   End jRails *************************/
 
 
-  /*******************************  Nested attribues   *******************/
-    	$('form a[data-new-nested]').live('click',function () {
-		var association = $(this).attr('data-new-nested');
-		var template    = $('#' + association + '_fields_template').html();
-		var new_id      = new Date().getTime();
-		var content     = template.replace(/_ID_/g, new_id);
+    /*******************************  Nested attribues   *******************/
+    $('form a[data-new-nested]').live('click', function () {
+        var association = $(this).attr('data-new-nested');
+        var template = $('#' + association + '_fields_template').html();
+        var new_id = new Date().getTime();
+        var content = template.replace(/_ID_/g, new_id);
 
-		var fields = $(content).insertBefore($(this));
-		fields.siblings('input[name*=_template]').remove();
-		return false;
-	});
+        var fields = $(content).insertBefore($(this));
+        fields.siblings('input[name*=_template]').remove();
+        return false;
+    });
 
-	// Use live('click') to fire for new nested fields' remove link
-	$('form a[data-remove-nested]').live('click', function() {
-		// There is a hidden input called _destroy for each nested item, set it to true to tell rails to destroy
-		var _destroy_field = $(this).prev('input[name*=_destroy]').val('true');
+    // Use live('click') to fire for new nested fields' remove link
+    $('form a[data-remove-nested]').live('click', function() {
+        // There is a hidden input called _destroy for each nested item, set it to true to tell rails to destroy
+        var _destroy_field = $(this).prev('input[name*=_destroy]').val('true');
 
-		$(this).parent().hide();
-		return false;
-	});
- /*****************************En d Nested attribues   *******************/     
+        $(this).parent().hide();
+        return false;
+    });
+    /*****************************En d Nested attribues   *******************/
 
-    $("#notification-flash-wrapper").bind("ajaxSend",
+    $('#notification-flash-wrapper').bind("ajaxSend",
                                          function() {
-                                             $(this).find('div').html('loading').end().fadeIn();
+                                             $.showFlash('Loading', 'ajax')
                                          }).bind("ajaxComplete", function() {
         $(this).fadeOut();
+    }).bind("ajaxError",function(){
+        $.showFlash('Error')
     });
 
     /**
@@ -197,8 +214,6 @@ $(function() {
 
         $(this).find("div").slideUp('fast'); //Hide the subnav
     });
-
-
 
 
     $.datepicker.setDefaults({showAnim: '' });
@@ -251,7 +266,8 @@ $(function() {
         title: 'Login'
     });
     trigger.click(function() {
-        loginWrapper.dialog('open')
+        loginWrapper.dialog('open');
+        $('#session_username').focus();
     });
 
 

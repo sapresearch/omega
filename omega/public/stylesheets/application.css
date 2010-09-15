@@ -167,17 +167,16 @@ form table input {
 
 #notification-flash-wrapper {
     opacity: 0.90;
-    display: none;
+    display:none;
     width: 100%;
     position: absolute;
-    top: 20px;
     left: 0;
     z-index: 999999;
 }
 
 #notification-flash {
     text-align: center;
-
+    
     font-size: 1.7em;
     padding: 1em;
     color: #FFF;
@@ -605,7 +604,7 @@ span.om-icon-button {
 }
 
 span.om-plain-button, span.om-plain-icon-button {
-
+position:relative;
     display: inline-block;
     height: 20px;
     margin: 0 0 0 30px;
@@ -615,10 +614,18 @@ span.om-plain-button a, span.om-plain-icon-button a {
     color: #fff;
 }
 
+span.om-button span.om-icon,
+span.om-icon-button span.om-icon,
+span.om-plain-button span.om-icon,
+span.om-plain-icon-button span.om-icon,
+    .om-icon-only {
+    background-image: url(../images/icons/iconSprite.png);
+    background-repeat: no-repeat;
+}
+
 .om-icon-only {
     margin: 0 0.5em;
     cursor: pointer;
-    background-image: url(../images/icons/iconSprite.png);
     display: inline-block;
     height: 16px;
     width: 16px;
@@ -626,7 +633,6 @@ span.om-plain-button a, span.om-plain-icon-button a {
 }
 
 span.om-button-active {
-
     background: url("../images/om_button_bg_active.png") repeat-x bottom transparent;
     border-width: 1px;
     border-style: solid;
@@ -648,8 +654,8 @@ span.om-button span.om-icon,
 span.om-icon-button span.om-icon,
 span.om-plain-button span.om-icon,
 span.om-plain-icon-button span.om-icon {
-    background-image: url(../images/icons/iconSprite.png);
-    background-repeat: no-repeat;
+
+
     position: absolute;
     top: 2px;
     margin: 0 0 0 -20px;
@@ -674,9 +680,12 @@ span.om-icon-button span.om-icon {
 .om-icon-edit {
     background-position: 0 -48px;
 }
-
-.om-icon-delete {
+.om-icon-delete-icon {
     background-position: 0 -64px;
+
+}
+.om-icon-delete-small {
+    background-position: 0 -80px;
 
 }
 
@@ -762,6 +771,9 @@ span.om-icon-back {
 .om-icon-favorite {
     background-position: 0 -432px;
 }
+.om-icon-arrow-move {
+    background-position: 0 -448px;
+}
 
 /*END BUTTONS*/
 
@@ -778,7 +790,7 @@ form input.datepicker {
 }
 
 form label {
-    color: #1F4256;
+    color: #C2366B;
     display: inline-block;
     font-weight: bold;
     min-width: 130px;
