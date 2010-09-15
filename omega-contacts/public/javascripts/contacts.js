@@ -11,8 +11,32 @@ $(function() {
         fillSpace: true
     });
 
-    $("#contact_accordion").accordion({
+    $('#contacts').delegate("li", "hover", function() {
+        $(this).draggable({
+            helper: 'clone'
 
+        }).find('.mgm-contact').toggleClass('hide');
+    });
+    $('#accordion').find('li').droppable({
+        drop: function(event, ui) {
+            $(this).effect('pulsate');
+            var a_group = $(this).find('a').attr('href');
+            var a_contact = ui.draggable.find('a').attr('href');
+            var reg = /(\d+)/, g_id = reg.exec(a_group),c_id = reg.exec(a_contact);
+            if (g_id !== null && c_id !== null) {
+                g_id = parseInt(g_id, 10);
+                c_id = parseInt(c_id, 10);
+            } else {
+                $.showFlash('Error')
+            }
+
+            
+
+            $.ajax({
+                url : 'http://ymqdomega1:9001/contacts/' + c_id + '/groups/' + g_id + '/assign',
+                type: 'PUT'
+            })
+        }
     });
 
 
@@ -32,25 +56,19 @@ $(function() {
 //        speed: 100,
 //        highlight: 'highlight' // Class name with no "."
 //    });
+
+
     $.ajax({
         url: '/contacts/all',
         dataType: 'json',
 
         success: function(data) {
-            $('#contacts').empty();
-            var list = '<ul>';
-            $(data).each(function(i) {
 
-
-                list += '<li id="contact_' + data[i].id + '"><a data-remote="true" href="/contacts/' + data[i].id + '">' + data[i].last_name + ', ' + data[i].first_name + '</a></li>';
-            });
-            list += '</ul>';
-            $('#contacts').append(list);
+            update_contacts(data)
 
         }
     });
 
-    
 
 });
 
@@ -60,8 +78,9 @@ function update_contacts(contacts) {
     $(contacts).each(function(i) {
 
 
-        list += '<li id="contact_' + contacts[i].id + '"><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', ' + contacts[i].first_name + '</a></li>';
-    })
+        list += '<li id="contact_' + contacts[i].id + '"><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', ' + contacts[i].first_name + '</a>' +
+                '<span class="mgm-contact hide"><span class="om-icon-only om-icon-delete-small"></span><span class="om-icon-only om-icon-arrow-move"></span></span></li>';
+    });
     list += '</ul>';
     $('#contacts').append(list);
 }

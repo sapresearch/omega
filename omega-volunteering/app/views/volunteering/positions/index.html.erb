@@ -33,6 +33,10 @@
           <div class="position_slider">
             <div class="position_actions">
 
+              <%= om_button(:plain => true, :icon => 'delete') do %>
+                      <%= link_to 'Delete', volunteering_position_path(position), :method => :delete %>
+                  <% end %>
+
               <% if position.status_of(Contact.for(current_user)) == :valid %>
                   <%= om_button(:plain => true, :icon => 'clock') do %>
                       <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user))) %>
