@@ -43,7 +43,8 @@ $(function() {
 
             $.ajax({
                 url : '/contacts/' + c_id + '/groups/' + g_id + '/assign',
-                type: 'PUT'
+                type: 'PUT',
+                dataType : 'json'
             })
         }
     });

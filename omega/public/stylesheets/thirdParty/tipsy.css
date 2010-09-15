@@ -7,8 +7,9 @@
 
 .tipsy-inner {
     padding: 5px 8px 4px 8px;
-    background-color: black;
-    color: white;
+    background-color: #002A5C;
+    color: #FFF;
+    border: 1px solid #002A5C;
     max-width: 200px;
     text-align: center;
 }

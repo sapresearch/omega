@@ -26,7 +26,7 @@ $.fn.tipsy.defaults = {
     delayOut: 0,     // delay before hiding tooltip (ms)
     fade: false,     // fade tooltips in/out?
     fallback: '',    // fallback text to use when no tooltip text
-    gravity: 'n',    // gravity
+    gravity: 's',    // gravity
     html: false,     // is tooltip content HTML?
     live: false,     // use live event support?
     offset: 0,       // pixel offset of tooltip from element
@@ -39,6 +39,7 @@ $.fn.tipsy.defaults = {
 /*********** dom ready ! here we go ****************/
 
 $(function() {
+jQuery.ajaxSetup({ dataFilter: function(data, type){ return (!data || jQuery.trim(data)=='') ? '{}' : data; } });
 
 //    $(document).click(function(){
 //        $.showFlash()
@@ -210,9 +211,10 @@ $(function() {
     $('#notification-flash-wrapper').bind("ajaxSend",
                                          function() {
                                              $.showFlash('Loading', 'ajax')
-                                         }).bind("ajaxComplete", function() {
-        $(this).fadeOut();
-    }).bind("ajaxError",function(){
+                                         }).bind("ajaxComplete",
+                                                function() {
+                                                    $(this).fadeOut();
+                                                }).bind("ajaxError", function(e, xhr, settings, exception) {
         $.showFlash('Error')
     });
 
