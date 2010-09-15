@@ -6,7 +6,7 @@
   <% if Rails.env.development? %>
       <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui','thirdParty/jquery.tipsy', 'application' %>
   <% elsif Rails.env.production? %>
-          <% require_javascript 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'thirdParty/jquery-ui', 'application' %>
+          <% require_javascript 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js','thirdParty/jquery.tipsy', 'thirdParty/jquery-ui', 'application' %>
       <% end %>
 
 
