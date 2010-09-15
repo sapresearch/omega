@@ -1,4 +1,4 @@
-function foo(service_type) {
+function service_type(service_type) {
 
          $.ajax({
            type: "GET",

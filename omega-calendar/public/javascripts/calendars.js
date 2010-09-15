@@ -18,8 +18,7 @@ $(document).ready(function() {
     var left_pos = $left.position();
     //$create_event.css({ 'left': left_pos.left, 'top': left_pos.top, 'width' : $left.width() });
 
-    var csrf_token = $('meta[name=csrf-token]').attr('content'),
-            csrf_param = $('meta[name=csrf-param]').attr('content');
+    
 
     $('#cal').fullCalendar({
         height: 550,
@@ -31,12 +30,9 @@ $(document).ready(function() {
         editable: true,
         events: "/calendars/1/events.json",
         dayClick: function(date, allDay, jsEvent, view) {
-
-
             $('#cal').hide();
             $create_event.show();
             $('#event_start, #event_end').val($.fullCalendar.formatDate(date, 'yyyy-MM-dd'));
-
 
         },
         eventClick: function(event, jsEvent, view) {
@@ -45,7 +41,6 @@ $(document).ready(function() {
             var ed = '<h4>';
             ed += event.title;
             ed += '</h4>';
-
             ed += 'Start: ';
             ed += $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd HH:mm');
             ed += '<br>';
@@ -56,8 +51,6 @@ $(document).ready(function() {
             ed += '<br>';
             ed += '<a><span id="btn_edit_event">edit</span></a>';
             ed += '<br>';
-
-
             $('#sidebox_events').hide('slide', {direction : 'down'}, 500).empty().append(ed).show('slide', { direction : 'up' }, 500)
 
 
