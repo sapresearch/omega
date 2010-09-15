@@ -31,8 +31,7 @@ $(function() {
 
     /************** jrails adapter **********************/
 
-    var csrf_token = $('meta[name=csrf-token]').attr('content'),
-            csrf_param = $('meta[name=csrf-param]').attr('content');
+    var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta[name=csrf-param]').attr('content');
 
     $.fn.extend({
         /**

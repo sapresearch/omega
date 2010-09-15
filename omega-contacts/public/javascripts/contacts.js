@@ -6,6 +6,22 @@
  * To change this template use File | Settings | File Templates.
  */
 $(function() {
+    $('.om-icon-delete-small').tipsy({
+        live : true,
+        title: function() { return 'remove this contact from the group'},
+        trigger: 'hover',
+        gravity : 'n'
+    });
+
+
+    $('.om-icon-arrow-move').tipsy({
+           live : true,
+           title: function() { return 'Assign this contact to a group by dragging it to the corresponding group on the left'},
+           trigger: 'hover',
+           gravity : 'n'
+       });
+
+
 
     $("#accordion").accordion({
         fillSpace: true
@@ -30,7 +46,6 @@ $(function() {
                 $.showFlash('Error')
             }
 
-            
 
             $.ajax({
                 url : 'http://ymqdomega1:9001/contacts/' + c_id + '/groups/' + g_id + '/assign',

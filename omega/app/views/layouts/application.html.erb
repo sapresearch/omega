@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <title>THIS IS ANFIELD<%= controller.action_name %></title>
-  <% require_stylesheet 'application', 'thirdParty/jquery-ui-1.8.4.custom' %>
+  <% require_stylesheet 'application', 'thirdParty/jquery-ui-1.8.4.custom', 'thirdParty/tipsy.css' %>
   <% if Rails.env.development? %>
-      <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui', 'application' %>
+      <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui','thirdParty/jquery.tipsy', 'application' %>
   <% elsif Rails.env.production? %>
           <% require_javascript 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'thirdParty/jquery-ui', 'application' %>
       <% end %>
