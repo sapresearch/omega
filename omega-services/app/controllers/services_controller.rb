@@ -25,7 +25,6 @@ class ServicesController < ApplicationController
 
 
        @service = Service.find_by_id(params[:id])
-
        @services = get_services_list
 
 
