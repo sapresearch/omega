@@ -67,9 +67,9 @@
         });
         $timepicker.delegate('li', 'hover', function(e) {
             if (e.type == 'mouseover') {
-                $(this).addClass('tpickr_li_over');
+                $(this).addClass('li-over');
             } else {
-                $(this).removeClass('tpickr_li_over');
+                $(this).removeClass('li-over');
             }
         });
         return this.each(function () {

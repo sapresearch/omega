@@ -247,7 +247,7 @@
     background-image: url(/images/ui-icons_ffffff_256x240.png);
 }
 
-.ui-state-active .ui-icon {
+.ui-state-active .ui-icon, .om-mono-icon {
     background-image: url(/images/ui-icons_ffffff_256x240.png);
 }
 

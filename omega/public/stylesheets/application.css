@@ -11,25 +11,26 @@ table, tbody, tfoot, thead, tr, th, td {
     outline: 0;
     vertical-align: baseline;
     background: transparent;
+    font: 12px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 html, body, #wrapper {
     height: 100%;
+    color: #2D302D;
+
 
 }
+
 
 body > #wrapper {
 
     height: auto;
     min-height: 100%;
-
     background: url('../images/bg_light.png') repeat-x;
 }
 
-html, body {
+body {
     background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
-    color: #2D302D;
-    font: 12px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 }
 
@@ -63,11 +64,10 @@ h1 {
     padding: 10px;
     color: #fff;
     font-weight: normal;
-}
-
-#left h1 {
     font-size: 1.7em;
 }
+
+
 
 #right h1 {
     font-size: 1.3em;
@@ -239,7 +239,9 @@ form table input {
     margin: 0;
     float: right;
 }
-
+.text-right{
+    text-align:right;
+}
 .center-content {
     width: 950px;
     margin: 0 auto;
@@ -247,7 +249,7 @@ form table input {
 }
 
 h1.page-content {
-    background: url("/images/details_bg.png") repeat-x scroll center bottom #448BE2;
+    background: #0063dc;
 }
 
 div.page-content {
@@ -266,7 +268,7 @@ div.sidebar-menu {
 
 h1.side-bar {
     margin: 0;
-    background: url("/images/pink_grad_bg.png ")repeat-x ;
+    background: url("/images/pink_grad_bg.png ") repeat-x ;
     color: #FFF;
     padding: 5px;
 }
@@ -397,9 +399,13 @@ ul#topnav li div a:hover {
 
 /* Errors and validation */
 .fieldWithErrors input {
+    background:#F09183;
+    color:#fff;
     border: 1px solid #ed513b;
 }
-
+.fieldWithErrors label{
+    color: #ed513b;
+}
 span.error {
 
     color: #ed513b;
@@ -408,7 +414,7 @@ span.error {
 
 #errorExplanation h2 {
 
-    padding: 1em;
+    padding: 0.5em;
     color: #ed513b;
 
 }
@@ -418,7 +424,8 @@ span.error {
 }
 
 #errorExplanation li {
-    padding: 0px;
+    margin: 4px 0;
+    padding: 0;
     text-indent: 1em;
     border-left: 4px solid #ed513b;
     font-style: italic;
@@ -624,9 +631,11 @@ span.om-plain-icon-button span.om-icon,
 }
 
 .om-icon-only {
-    margin: 0 0.5em;
+    margin: 0 2px;
     cursor: pointer;
     display: inline-block;
+    *display:inline;
+    *zoom: 1;
     height: 16px;
     width: 16px;
 
@@ -1095,6 +1104,15 @@ margin:0;
     display: none;
 }
 
+.li-over {
+    background: #1484E6;
+    color: #FFF;
+}
+
+.li-over a {
+    background: #1484E6;
+    color: #FFF !important;
+}
 .search_wrapper_l {
     display: inline-table;
     color: #fff;
@@ -1177,4 +1195,7 @@ margin:0;
 }
 .ui-widget-content a{
     color:#162D3D ;
+}
+.ui-icon{
+    display:inline-block !important; 
 }

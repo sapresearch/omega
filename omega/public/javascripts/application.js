@@ -31,7 +31,7 @@ $.fn.tipsy.defaults = {
     live: false,     // use live event support?
     offset: 0,       // pixel offset of tooltip from element
     opacity: 0.8,    // opacity of tooltip
-    title: 'title',  // attribute/callback containing tooltip text
+    title: function(){ return this.getAttribute('data-tooltip') },  // attribute/callback containing tooltip text
     trigger: 'hover' // how tooltip is triggered - hover | focus | manual
 };
 
@@ -216,6 +216,7 @@ jQuery.ajaxSetup({ dataFilter: function(data, type){ return (!data || jQuery.tri
                                                     $(this).fadeOut();
                                                 }).bind("ajaxError", function(e, xhr, settings, exception) {
         $.showFlash('Error')
+       alert(xhr.statusText + '\n'+  xhr.responseText);
     });
 
     /**
