@@ -71,7 +71,12 @@
   </div>
 
   <div class="button-next">
-    <%= button_to 'Back', service_wizard_services_url(:step => 1, :id => @service)%>
+    <%= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete%>
+  </div>
+
+
+  <div class="button-next">
+    <%= link_to 'Back', service_wizard_services_url(:step => 1, :id => @service)%>
   </div>
 
 <%end%>

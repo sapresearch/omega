@@ -1,4 +1,4 @@
-<% require_stylesheet 'services'%>
+<% require_stylesheet 'services' %>
 
 <div class="wrapper-services">
 
@@ -11,14 +11,14 @@
 
   <%@services.each do |s|%>
     <strong><%=s.service_name%> - <%=s.service_type%> Service</strong><br/>
-    (<%= link_to "Show", service_service_fields_url(s.id) %>)
+    (<%= link_to "Show", service_url(s)%>)
     <%if !current_user.is_anonymous? %>
         <%if s.published == false%>
-            |(<%= link_to "Publish", service_wizard_services_url(:step => 3, :id => s.id) %>) 
+            |(<%= link_to "Publish", service_wizard_services_url(:step => 3, :id => s.id) %>)
         <%else %>
             (<%= link_to "Register", new_service_service_registration_url(s.id) %>)
         <%end%>
-          |(<%=link_to "Delete", :action => 'delete', :id => s %>)<br/>
+          | (<%= link_to "Delete", s , :confirm => 'Are You Sure?', :method => :delete%>)<br/>
     <%end%>
   <%end%>
     <%if !current_user.is_anonymous? %>

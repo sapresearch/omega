@@ -4,7 +4,7 @@ class ServicesController < ApplicationController
 
      def index
        @services = Service.all
-       respond_with(@services)
+       respond_with(@services) 
      end
 
      def show
@@ -25,7 +25,6 @@ class ServicesController < ApplicationController
 
 
        @service = Service.find_by_id(params[:id])
-
        @services = get_services_list
 
 
@@ -99,10 +98,12 @@ class ServicesController < ApplicationController
      end
 
 
-  def delete
-    Service.delete(params[:id])
+  def destroy
+    @service = Service.find(params[:id])
+    @service.destroy
     redirect_to services_url
   end
+
   #--------------------------------------------------------------------------------------------------
     private
   

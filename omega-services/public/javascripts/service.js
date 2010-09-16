@@ -1,13 +1,15 @@
-$(document).ready(function() {
+function service_type(service_type) {
 
-    var service_type_id = document.getElementById('service_type_id');
-    var service_type = document.getElementById('service_service_type');
+         $.ajax({
+           type: "GET",
+           url: "/services/get_type_id",
 
+           data: "service_type="+service_type,
 
-    service_type_id.onchange = function(){
-    service_type.value = service_type_id.value
+           success: function(html){
 
-     };
+         $("#fields_list").html(html);
+          }
+        });
 
-
-});
+}
