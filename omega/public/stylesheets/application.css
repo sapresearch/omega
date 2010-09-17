@@ -61,7 +61,7 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    padding: 10px;
+    padding: 6px 10px;
     color: #fff;
     font-weight: normal;
     font-size: 1.7em;
@@ -74,7 +74,7 @@ h1 {
 }
 
 h2 a {
-
+    font-size:22px;
     color: #00469C;
 }
 
@@ -99,7 +99,9 @@ h3 {
 }
 
 p {
-    line-height: 2em;
+
+    font-size:1.2em;
+    letter-spacing:1px;
 margin: 1em 0;
 }
 
@@ -398,7 +400,7 @@ ul#topnav li div a:hover {
 }
 
 /* Errors and validation */
-.fieldWithErrors input {
+.fieldWithErrors input, .inputInvalid {
     background:#F09183;
     color:#fff;
     border: 1px solid #ed513b;
@@ -513,10 +515,6 @@ fieldset {
 .inputActive {
     border: 1px solid #148bf3;
 
-}
-
-.inputInvalid {
-    border: 1px solid #ed513b !important;
 }
 
 .inputValid {
@@ -896,18 +894,35 @@ form span.error {
 
 #footer {
     width: 950px;
-    color: #646767;
     margin: 0 auto;
     background: #191919;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    padding-top: 1em;
+    
+}
+#footer table{
+    width:100%;
+
+    text-align:center;
+}
+#footer h1 {
+    color:#ddd;
+        text-shadow: #333 1px 1px 0px;
+}
+#footer table td {
+
+    vertical-align:top;
+    color:#666;
 }
 
-div.footer_blocks {
-    margin: 0 2em;
+#footer div.footer-content{
+    padding:1em;
+    text-align:left;
 }
-
+#footer span.date{
+    padding:0 10px 0 0;
+    color:#C7CCCD;
+}
 /* CLEAR FIX*/
 .clearfix:after {
     content: ".";
@@ -928,20 +943,6 @@ div.footer_blocks {
 
 /* End hide from IE-mac */
 
-#footer li {
-    text-align: left;
-
-    padding: 0.5em;
-
-}
-
-#footer h1 {
-    font-size: 1.3em;
-    padding: 0.3em 0 1em;
-    -moz-border-radius: 4px;
-    color: #ECF2F4;
-    border: none;
-}
 
 #loginWrapper {
     display: none;
@@ -1190,6 +1191,32 @@ margin:0;
     float: left;
     height: 160px;
 }
+
+
+/************ calendar list ********************/
+.pos-date {
+   margin: 0 10px 0 0 ;
+    background: url("/images/cal_bg.png") no-repeat;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 5px 0 0 0;
+    float: left;
+    width: 45px;
+    height: 40px;
+
+}
+.pos-cal-month {
+
+    color: #FFF;
+}
+
+.pos-cal-day {
+
+    padding-top: 4px;
+    font-size: 0.8em;
+    color: #fff;
+}
+
 
 /******************************** overwrite jquery ui **************/
 .ui-wdiget {

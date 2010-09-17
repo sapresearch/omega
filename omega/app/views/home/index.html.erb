@@ -21,14 +21,13 @@
   need(s) or volunteer to help us grow. Change your life is always looking for energetic members that want to have a
   positive impact on their community.
 
-<span class="om-icon-only om-icon-mail">
-  
-</span>
-
-
 </p>
 </div>
 
 <% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_volunteering_positions" %>
+<% end %>
+
+<% content_for :rows do %>
     <%= render :partial => "layouts/sidebar_home" %>
 <% end %>
