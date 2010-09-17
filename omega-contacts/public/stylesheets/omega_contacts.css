@@ -121,9 +121,23 @@ padding:1em;
     color:#055F67;
 }
 
-#contacts_groups li, #contacts li {
-    line-height:24px;
+#contacts_groups li {
+
     padding:0  0  0 4px;
+}
+#contacts table {
+    
+    width:180px;
+    border-collapse: collapse;
+}
+#cm table tr {
+
+
+    height:25px;
+}
+#cm table td{
+
+    padding:2px;
 }
 
 
@@ -134,7 +148,4 @@ padding:1em;
 #contacts_groups .ui-accordion-content{
     margin:0;
     padding:0;
-}
-.dragged{
-    background:red; 
 }

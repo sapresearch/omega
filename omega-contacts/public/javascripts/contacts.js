@@ -6,46 +6,47 @@
  * To change this template use File | Settings | File Templates.
  */
 $(function() {
-    $('.om-icon-delete-small').tipsy({
-        live : true,
-        title: function() { return 'remove this contact from the group'}
+
+    $.ajax({
+        url: '/contacts/all',
+        dataType: 'json',
+        success: function(data) {
+            update_contacts(data)
+
+        }
     });
-
-
-    $('.om-icon-arrow-move').tipsy({
-           live : true,
-           title: function() { return 'Assign this contact to a group by dragging it to the corresponding group on the left'}
-       });
-
+    $('span[data-tooltip]').tipsy({
+        live : true
+    });
     $("#accordion").accordion({
         fillSpace: true
     });
 
-    $('#contacts').delegate("li", "hover", function() {
+
+    $('#contacts').delegate("tr", "hover", function() {
+        $(this).find('td').toggleClass('li-over');
         $(this).draggable({
             helper: 'clone'
 
         }).find('.mgm-contact').toggleClass('hide');
     });
     $('#accordion').find('li').droppable({
+
         drop: function(event, ui) {
             $(this).effect('pulsate');
-            var a_group = $(this).find('a').attr('href');
-            var a_contact = ui.draggable.find('a').attr('href');
-            var reg = /(\d+)/, g_id = reg.exec(a_group),c_id = reg.exec(a_contact);
-            if (g_id !== null && c_id !== null) {
-                g_id = parseInt(g_id, 10);
-                c_id = parseInt(c_id, 10);
-            } else {
-                $.showFlash('Error')
-            }
-
+            var group_id = this.getAttribute('data-id');
+            var contact_id = ui.draggable.attr('data-id');
 
             $.ajax({
-                url : '/contacts/' + c_id + '/groups/' + g_id + '/assign',
+                url : '/contacts/' + contact_id + '/groups/' + group_id + '/assign',
                 type: 'PUT',
-                dataType : 'json'
+                dataType : 'json',
+                success: function() {
+                    $('#contacts').find('tr[data-id=\'' + contact_id + '\']').remove();
+                }
             })
+
+
         }
     });
 
@@ -68,30 +69,52 @@ $(function() {
 //    });
 
 
-    $.ajax({
-        url: '/contacts/all',
-        dataType: 'json',
+    $('#contacts').find('a.remove-contact').live("ajax:success", function() {
 
-        success: function(data) {
 
-            update_contacts(data)
+        var t = $(this).find('span').data('tipsy');
+        t.hide();
+        $(this).closest('tr').remove();
 
-        }
     });
-
 
 });
 
-function update_contacts(contacts) {
+function update_contacts(contacts, group_id) {
+    var mgm_span_begin = '<td class="text-right" width="40px"><span class="mgm-contact hide">'
+            + '<span data-tooltip="Assign me by dragging into a group on the left" class="om-icon-only om-mono-icon ui-icon-arrow-4-diag"></span>'
+    var mgm_span_end = '</span></td>';
+
     $('#contacts').empty();
-    var list = '<ul>';
-    $(contacts).each(function(i) {
+    var list = '<table>';
+    if (group_id !== undefined) {
+        $(contacts).each(function(i) {
 
 
-        list += '<li id="contact_' + contacts[i].id + '"><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', ' + contacts[i].first_name + '</a>' +
-                '<span class="mgm-contact hide"><span class="om-icon-only om-icon-delete-small"></span><span class="om-icon-only om-icon-arrow-move"></span></span></li>';
-    });
-    list += '</ul>';
+            list += '<tr data-id="' + contacts[i].id + '"><td><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
+                    + contacts[i].first_name + '</a>'
+                    + mgm_span_begin
+                    + '<a href="/contacts/' + contacts[i].id + '/groups/' + group_id + '/remove" '
+                    + 'class="remove-contact" data-remote="true" data-method="put">'
+                    + '<span class="om-icon-only om-mono-icon ui-icon-trash" data-tooltip="remove this contact from assigned group"></span></a>'
+                    + mgm_span_end
+                    + '</td></tr>';
+
+        });
+    } else {
+        $(contacts).each(function(i) {
+
+
+            list += '<tr data-id="' + contacts[i].id + '"><td><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
+                    + contacts[i].first_name + '</a>'
+                    + mgm_span_begin
+                    + mgm_span_end
+                    + '</td></tr>';
+
+        });
+    }
+
+    list += '</table>';
     $('#contacts').append(list);
 }
 

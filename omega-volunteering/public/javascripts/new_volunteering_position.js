@@ -96,18 +96,32 @@ $(function() {
     var $vp_contact_id = $('#volunteering_position_contact_ids');
 
 
-    $("#ac_contacts").autocomplete('/contacts/autocomplete.psv', {
-        multiple: true,
-        formatItem: function(data, i, n, value) {
-            return '<img src="/images/user.png"/> ' + value;
+
+    $('#ac_contacts').autocomplete({
+        source : '/contacts/autocomplete',
+        minlength: 2,
+        select: function(event, ui) {
+
+            $(this).val('');
+            $('<li />').append(ui.item.label + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', ui.item.id);
+            update_cid_values()
+            return false;
         }
-    }).result(function(e, data) {
-        $(this).val('');
-        $('<li />').append(data[0] + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', data[1]);
-
-        update_cid_values()
-
+        
     });
+
+//    $("#ac_contacts").autocomplete('/contacts/autocomplete.psv', {
+//        multiple: true,
+//        formatItem: function(data, i, n, value) {
+//            return '<img src="/images/user.png"/> ' + value;
+//        }
+//    }).result(function(e, data) {
+//        $(this).val('');
+//        $('<li />').append(data[0] + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', data[1]);
+//
+//        update_cid_values()
+//
+//    });
 
     $assigned_contacts.find('.delete-user').live('click', function(e) {
         $(this).parent('li').remove();

@@ -67,6 +67,7 @@
         },
         
         hide: function() {
+            alert('laeuft')
             if (this.options.fade) {
                 this.tip().stop().fadeOut(function() { $(this).remove(); });
             } else {
@@ -144,7 +145,7 @@
                 tipsy.fixTitle();
                 setTimeout(function() { if (tipsy.hoverState == 'in') tipsy.show(); }, options.delayIn);
             }
-        };
+        }
         
         function leave() {
             var tipsy = get(this);
@@ -154,7 +155,7 @@
             } else {
                 setTimeout(function() { if (tipsy.hoverState == 'out') tipsy.hide(); }, options.delayOut);
             }
-        };
+        }
         
         if (!options.live) this.each(function() { get(this); });
         

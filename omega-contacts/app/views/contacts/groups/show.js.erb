@@ -1,5 +1,5 @@
-//$('#contacts_group_pane').empty().append('<%#= escape_javascript(render('show')) %>');
+$('#contacts_contact_pane').empty().append('<%= escape_javascript(render('show')) %>');
 
 var contacts = <%= @contact_group.contacts.to_json.html_safe %>;
 
-update_contacts(contacts);
+update_contacts(contacts, <%= @contact_group.id %>);

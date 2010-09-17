@@ -215,8 +215,8 @@ jQuery.ajaxSetup({ dataFilter: function(data, type){ return (!data || jQuery.tri
                                                 function() {
                                                     $(this).fadeOut();
                                                 }).bind("ajaxError", function(e, xhr, settings, exception) {
-        $.showFlash('Error')
-       alert(xhr.statusText + '\n'+  xhr.responseText);
+        $.showFlash('Error :' + xhr.responseText )
+       
     });
 
     /**
