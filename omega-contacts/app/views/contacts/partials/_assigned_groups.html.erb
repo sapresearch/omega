@@ -1,4 +1,4 @@
 
     <% @contact.groups.each do |g| %>
-      <%= g.name %>
+     <li><%= g.name %> <%= link_to '<span class="om-icon-only om-blue-icon ui-icon-trash"></span>'.html_safe, remove_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %></li> 
   <% end %>

@@ -67,11 +67,11 @@
           </h3>
 
           <div>
-            <ul>
+            <table>
               <% @contact_groups[group_type].each do |group| %>
-                  <li data-id=<%= group.id %> ><%= link_to truncate(group.name, :length => 30), group, :remote=> true %></li>
+                  <tr data-id=<%= group.id %> ><td> <%= link_to truncate(group.name, :length => 30), group, :remote=> true %></td></tr>
               <% end %>
-            </ul>
+            </table>
           </div>
 
           

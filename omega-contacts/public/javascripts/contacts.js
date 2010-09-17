@@ -24,13 +24,13 @@ $(function() {
 
 
     $('#contacts').delegate("tr", "hover", function() {
-        $(this).find('td').toggleClass('li-over');
+//        $(this).find('td').toggleClass('li-over');
         $(this).draggable({
             helper: 'clone'
 
         }).find('.mgm-contact').toggleClass('hide');
     });
-    $('#accordion').find('li').droppable({
+    $('#accordion').find('tr').droppable({
 
         drop: function(event, ui) {
             $(this).effect('pulsate');
@@ -71,7 +71,6 @@ $(function() {
 
     $('#contacts').find('a.remove-contact').live("ajax:success", function() {
 
-
         var t = $(this).find('span').data('tipsy');
         t.hide();
         $(this).closest('tr').remove();
@@ -82,7 +81,7 @@ $(function() {
 
 function update_contacts(contacts, group_id) {
     var mgm_span_begin = '<td class="text-right" width="40px"><span class="mgm-contact hide">'
-            + '<span data-tooltip="Assign me by dragging into a group on the left" class="om-icon-only om-mono-icon ui-icon-arrow-4-diag"></span>'
+            + '<span data-tooltip="Assign me by dragging into a group on the left" class="om-icon-only om-blue-icon ui-icon-arrow-4-diag"></span>'
     var mgm_span_end = '</span></td>';
 
     $('#contacts').empty();
@@ -96,7 +95,7 @@ function update_contacts(contacts, group_id) {
                     + mgm_span_begin
                     + '<a href="/contacts/' + contacts[i].id + '/groups/' + group_id + '/remove" '
                     + 'class="remove-contact" data-remote="true" data-method="put">'
-                    + '<span class="om-icon-only om-mono-icon ui-icon-trash" data-tooltip="remove this contact from assigned group"></span></a>'
+                    + '<span class="om-icon-only om-blue-icon ui-icon-trash" data-tooltip="remove this contact from assigned group"></span></a>'
                     + mgm_span_end
                     + '</td></tr>';
 

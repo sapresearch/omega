@@ -131,12 +131,10 @@ padding:1em;
     border-collapse: collapse;
 }
 #cm table tr {
-
-
-    height:25px;
+    height:20px;
 }
 #cm table td{
-
+    vertical-align:top;
     padding:2px;
 }
 
