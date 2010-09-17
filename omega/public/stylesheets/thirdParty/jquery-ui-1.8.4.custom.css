@@ -255,8 +255,11 @@
     background-image: url(/images/ui-icons_448be2_256x240.png);
 }
 .om-pink-icon  {
+    
     background-image: url(/images/ui-icons_c2366b_256x240.png);
+
 }
+
 
 .ui-state-error .ui-icon, .ui-state-error-text .ui-icon {
     background-image: url(/images/ui-icons_ed513b_256x240.png);
