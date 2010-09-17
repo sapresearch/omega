@@ -67,7 +67,6 @@
         },
         
         hide: function() {
-            alert('laeuft')
             if (this.options.fade) {
                 this.tip().stop().fadeOut(function() { $(this).remove(); });
             } else {
