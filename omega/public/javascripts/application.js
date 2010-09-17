@@ -31,7 +31,9 @@ $.fn.tipsy.defaults = {
     live: false,     // use live event support?
     offset: 0,       // pixel offset of tooltip from element
     opacity: 0.8,    // opacity of tooltip
-    title: function(){ return this.getAttribute('data-tooltip') },  // attribute/callback containing tooltip text
+    title: function() {
+        return this.getAttribute('data-tooltip')
+    },  // attribute/callback containing tooltip text
     trigger: 'hover' // how tooltip is triggered - hover | focus | manual
 };
 
@@ -39,7 +41,9 @@ $.fn.tipsy.defaults = {
 /*********** dom ready ! here we go ****************/
 
 $(function() {
-jQuery.ajaxSetup({ dataFilter: function(data, type){ return (!data || jQuery.trim(data)=='') ? '{}' : data; } });
+    jQuery.ajaxSetup({ dataFilter: function(data, type) {
+        return (!data || jQuery.trim(data) == '') ? '{}' : data;
+    } });
 
 //    $(document).click(function(){
 //        $.showFlash()
@@ -208,6 +212,14 @@ jQuery.ajaxSetup({ dataFilter: function(data, type){ return (!data || jQuery.tri
     });
     /*****************************En d Nested attribues   *******************/
 
+    /**
+     * Applicationwide - tooltip  
+     */
+    $('span[data-tooltip]').tipsy();
+    $('form').find('input[data-tooltip]').tipsy({gravity: 'w',
+        trigger : 'focus'
+    });
+
     $('#notification-flash-wrapper').bind("ajaxSend",
                                          function() {
                                              $.showFlash('Loading', 'ajax')
@@ -215,8 +227,8 @@ jQuery.ajaxSetup({ dataFilter: function(data, type){ return (!data || jQuery.tri
                                                 function() {
                                                     $(this).fadeOut();
                                                 }).bind("ajaxError", function(e, xhr, settings, exception) {
-        $.showFlash('Error :' + xhr.responseText )
-       
+        $.showFlash('Error :' + xhr.responseText)
+
     });
 
     /**

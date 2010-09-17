@@ -7,22 +7,22 @@
       <%= hidden_field_tag :registration, params['registration'] %>
       <p>
         <%= f.label :user %>
-        <%= f.text_field :username %>
+        <%= f.text_field( :username, :'data-tooltip' => 'Plese provide username with at least 2 characters') %>
       </p>
 
       <p>
         <%= f.label :first_name %>
-        <%= f.text_field :first_name %>
+        <%= f.text_field(:first_name,:'data-tooltip' => 'Plese provide lastname') %>
       </p>
 
       <p>
         <%= f.label :last_name %>
-        <%= f.text_field :last_name %>
+        <%= f.text_field(:last_name,:'data-tooltip' => 'Plese provide lastname') %>
       </p>
 
       <p>
         <%= f.label :email %>
-        <%= f.text_field :email %>
+        <%= f.text_field(:email,:'data-tooltip' => 'Plese provide email') %>
       </p>
 
 

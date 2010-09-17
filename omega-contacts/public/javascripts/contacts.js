@@ -15,21 +15,19 @@ $(function() {
 
         }
     });
-    $('span[data-tooltip]').tipsy({
-        live : true
-    });
+
     $("#accordion").accordion({
         fillSpace: true
     });
 
 
-    $('#contacts').delegate("tr", "hover", function() {
-//        $(this).find('td').toggleClass('li-over');
-        $(this).draggable({
-            helper: 'clone'
-
-        }).find('.mgm-contact').toggleClass('hide');
-    });
+//    $('#contacts').delegate("tr", "hover", function() {
+////        $(this).find('td').toggleClass('li-over');
+//        $(this).draggable({
+//            helper: 'clone'
+//
+//        }).find('.mgm-contact').toggleClass('hide');
+//    });
     $('#accordion').find('tr').droppable({
 
         drop: function(event, ui) {
@@ -79,14 +77,20 @@ $(function() {
 
 });
 
-function update_contacts(contacts, group_id) {
+function update_contacts(contacts, group_id, group_name) {
+
+
     var mgm_span_begin = '<td class="text-right" width="40px"><span class="mgm-contact hide">'
             + '<span data-tooltip="Assign me by dragging into a group on the left" class="om-icon-only om-blue-icon ui-icon-arrow-4-diag"></span>'
     var mgm_span_end = '</span></td>';
 
     $('#contacts').empty();
+
+
     var list = '<table>';
-    if (group_id !== undefined) {
+
+    if (group_id !== undefined && typeof group_id == "number") {
+
         $(contacts).each(function(i) {
 
 
@@ -95,18 +99,18 @@ function update_contacts(contacts, group_id) {
                     + mgm_span_begin
                     + '<a href="/contacts/' + contacts[i].id + '/groups/' + group_id + '/remove" '
                     + 'class="remove-contact" data-remote="true" data-method="put">'
-                    + '<span class="om-icon-only om-blue-icon ui-icon-trash" data-tooltip="remove this contact from assigned group"></span></a>'
+                    + '<span class="om-icon-only om-blue-icon ui-icon-shuffle" data-tooltip="remove this contact from: ' + group_name + '"></span></a>'
                     + mgm_span_end
                     + '</td></tr>';
 
         });
     } else {
         $(contacts).each(function(i) {
-
-
             list += '<tr data-id="' + contacts[i].id + '"><td><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
                     + contacts[i].first_name + '</a>'
                     + mgm_span_begin
+                    + '<a  data-remote="true" data-method="delete" href="/contacts/' + contacts[i].id + '" class="remove-contact">'
+                    + '<span class="om-icon-only om-blue-icon ui-icon-trash" data-tooltip="Delete this contact from the database"></span></a>'
                     + mgm_span_end
                     + '</td></tr>';
 
@@ -114,7 +118,17 @@ function update_contacts(contacts, group_id) {
     }
 
     list += '</table>';
-    $('#contacts').append(list);
+    $('#contacts').append(list).find("tr").hover(function() {
+
+        $(this).draggable({
+            helper: 'clone',
+            start: function(event, ui) {
+               $(this).find('span[data-tooltip]').data('tipsy').hide();
+
+
+            }
+        }).find('.mgm-contact').toggleClass('hide');
+    });
 }
 
 
