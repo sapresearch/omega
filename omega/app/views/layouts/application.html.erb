@@ -3,40 +3,37 @@
 <head>
   <title>THIS IS ANFIELD<%= controller.action_name %></title>
   <% require_stylesheet 'application', 'thirdParty/jquery-ui-1.8.4.custom', 'thirdParty/tipsy.css' %>
-  <% if Rails.env.development? %>
-      <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui','thirdParty/jquery.tipsy', 'application' %>
-  <% elsif Rails.env.production? %>
-          <% require_javascript 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js','thirdParty/jquery.tipsy', 'thirdParty/jquery-ui', 'application' %>
-      <% end %>
+  <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.tipsy', 'application' %>
 
 
-      <%= csrf_meta_tag %>
-      <!--[if IE]>
+
+  <%= csrf_meta_tag %>
+  <!--[if IE]>
             <%= stylesheet_link_tag "ie" %>
         <![endif]-->
-      </head>
-      <body>
+</head>
+<body>
 
-      <div id="notification-flash-wrapper">
-        <div id="notification-flash" class="center-content corners-top corners-bottom">
+<div id="notification-flash-wrapper">
+  <div id="notification-flash" class="center-content corners-top corners-bottom">
 
-        </div>
+  </div>
 
-      </div>
+</div>
 
-      <div id="wrapper">
+<div id="wrapper">
 
-        <%= render :partial => "layouts/head" %>
-        <div id="content" class="clearfix center_content">
+  <%= render :partial => "layouts/head" %>
+  <div id="content" class="clearfix center_content">
 
-          <%= render(:layout => "layouts/columns") do
-              render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
-                  yield
-              end
-          end %>
-        </div>
-      </div>
-      <%= render :partial => "layouts/footer" %>
+    <%= render(:layout => "layouts/columns") do
+        render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
+            yield
+        end
+    end %>
+  </div>
+</div>
+<%= render :partial => "layouts/footer" %>
 
-      </body>
-      </html>
+</body>
+</html>

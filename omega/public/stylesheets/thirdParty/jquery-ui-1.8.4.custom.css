@@ -247,11 +247,11 @@
     background-image: url(/images/ui-icons_ffffff_256x240.png);
 }
 
-.ui-state-active .ui-icon, .om-mono-icon {
+.ui-state-active .ui-icon, .om-white-icon {
     background-image: url(/images/ui-icons_ffffff_256x240.png);
 }
 
-.ui-state-highlight .ui-icon {
+.ui-state-highlight .ui-icon, .om-blue-icon  {
     background-image: url(/images/ui-icons_448be2_256x240.png);
 }
 
