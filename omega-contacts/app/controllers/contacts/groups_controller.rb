@@ -6,6 +6,12 @@ class Contacts::GroupsController < ApplicationController
   require_permission Contact::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 
   def index
+    if params[:contact_id]
+      @contact = Contact.find(params[:contact_id])
+      @contact_groups = @contact.groups
+    else
+      @contact_groups = Contact::Group.scoped
+    end
     respond_with(@contact_groups)
   end
 
@@ -54,6 +60,15 @@ class Contacts::GroupsController < ApplicationController
 
     @group_positions = @contact.group_positions.where('group_id = ?', @contact_group).destroy_all
     respond_with(@group_positions)
+  end
+
+  def move
+    @contact = Contact.find(params[:contact_id])
+    @group_position = @contact.group_positions.find_by_group_id!(params[:id])
+    @group_position.group_id = params[:to_id]
+    @group_position.save
+
+    respond_with(@group_position)
   end
 
   private

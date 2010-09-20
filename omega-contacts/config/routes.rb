@@ -21,6 +21,7 @@ Omega::Contacts::Tram.routes.draw do
         member do
           put :assign
           put :remove
+          put :move, :path => 'move/:to_id'
         end
       end
     end
