@@ -15,8 +15,6 @@ class Service < ActiveRecord::Base
                             :url => "/images/icons/services/:basename.:extension",
                             :path => ":rails_root/public/images/icons/services/:basename.:extension"
 
-   validates_attachment_presence :icon
-   validates_attachment_size :icon, :less_than => 1.megabytes
    validates_attachment_content_type :icon, :content_type => ['image/png']
 
 end

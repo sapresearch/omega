@@ -11,7 +11,7 @@
 
 <div class="content-services" >
 
-<%= form_for @service, :action => "service_wizard", :onsubmit => 'alert($(this).serialize());' do |f| %>
+<%= form_for @service, :action => "service_wizard" do |f| %>
       <%= errors_for_form(@service, 'service') %>
 
       <div>

@@ -82,13 +82,17 @@ class ServicesController < ApplicationController
       if (params[:commit] == "Save & Proceed")
           @current_step = session[:current_step]
           @incomplete_service = Service.find_by_id(session[:service_id])
+          
           unless @incomplete_service.nil?
             @incomplete_service.destroy
           end
+
           @service = Service.create(params[:service])
           redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => @service.id)
 
       end
+
+
 
      end
 
