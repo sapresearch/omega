@@ -10,20 +10,32 @@
 <p class="left-align">
 
   <%@services.each do |s|%>
+
+   <%if (s.published == true)%>
+
     <strong><%=s.service_name%> - <%=s.service_type%> Service</strong><br/>
-    (<%= link_to "Show", service_url(s)%>)
-    <%if !current_user.is_anonymous? %>
-        <%if (s.published != true)%>
-            |(<%= link_to "Saved Draft", service_wizard_services_url(:step => 2, :id => s) %>)
-             <% else if Service::Registration.find_by_user_id_and_service_id(current_user.id,s).nil? %>
-                (<%= link_to "Register", new_service_service_registration_url(s) %>)
+          (<%= link_to "Show", service_url(s)%>)
+          
+          <%if !current_user.is_anonymous? %>
+
+             <% if Service::Registration.find_by_user_id_and_service_id(current_user.id,s).nil? %>
+                | (<%= link_to "Register", new_service_service_registration_url(s) %>)
+            
              <%end%>
-        <%end%>
-          | (<%= link_to "Delete", s , :confirm => 'Are You Sure?', :method => :delete%>)<br/>
+          | (<%= link_to "Delete", s , :confirm => 'Are You Sure?', :method => :delete%>)
+          <%end%>
+        
     <%end%>
+      <br/>
+    <%if (s.published !=true) and !current_user.is_anonymous?%>
+    <strong><%=s.service_name%> - <%=s.service_type%> Service</strong><br/>
+      (<%= link_to "Saved Draft", service_wizard_services_url(:step => 2, :id => s) %>)
+      | (<%= link_to "Delete", s , :confirm => 'Are You Sure?', :method => :delete%>)
+    <%end%>
+
   <%end%>
     <%if !current_user.is_anonymous? %>
-    <br/>
+    <br/> <br/>
        <strong> <%= link_to 'Add a New Service', service_wizard_services_url%>
 
     <br/>

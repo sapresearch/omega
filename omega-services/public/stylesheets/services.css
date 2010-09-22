@@ -104,7 +104,7 @@ div.header{
 
 div.container-show{
     height: auto;
-    min-height: 100%;
+    min-height: 50px;
     width: 760px;
     text-align: left;
     overflow: hidden;
@@ -237,7 +237,7 @@ div.review{
     position:relative;
     height: auto;
     overflow:hidden;
-    min-height:100%;
+    min-height:70px;
     width: 400px;
     background: #E0E8F8;
     border-radius:4px;
