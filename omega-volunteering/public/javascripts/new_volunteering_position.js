@@ -97,9 +97,9 @@ $(function() {
 
 
 
-    $('#ac_contacts').autocomplete({
+    $('#ac-contacts').autocomplete({
         source : '/contacts/autocomplete',
-        minlength: 2,
+        minLength: 2,
         
         select: function(event, ui) {
 

@@ -19,7 +19,7 @@
 	width:148px;
 	height:24px;
 }
-#contact_filter{
+#ac-contacts{
 	float:left;
 	width:80px;
 	position:relative;
@@ -39,7 +39,7 @@
 	background: url("/images/iconSprite.png") 0 -80px;
 
 }
-#contact_filter:focus 
+#ac-contacts:focus 
 {
     outline:none;
 }

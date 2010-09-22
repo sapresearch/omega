@@ -70,12 +70,6 @@ h1 {
     padding: 6px 10px;
     color: #333333;
     font-weight: normal;
-    font-size: 1.7em;
-}
-
-
-
-#right h1 {
     font-size: 1.3em;
 }
 
@@ -182,7 +176,7 @@ form table input {
 
 #notification-flash {
     text-align: center;
-    
+
     font-size: 1.7em;
     padding: 1em;
     color: #FFF;
@@ -202,7 +196,7 @@ form table input {
 }
 #user_custom_bar a {
     color: #FFF;
-    
+
 }
 
 #wrapper {
@@ -255,7 +249,11 @@ form table input {
 }
 
 h1.page-content {
-    background: #ddd;
+    background: url("/images/bg_light.png") repeat-x bottom #ecf2f4;
+border-color:#DDDDDD #DDDDDD #C3C3C3;
+border-style:solid;
+border-width:1px;
+    text-shadow: #FFF 1px 1px 1px;
 }
 
 div.page-content {
@@ -273,18 +271,19 @@ div.sidebar-menu {
 }
 
 h1.side-bar {
+    text-shadow: #FFF 1px 1px 1px;
     margin: 0;
-    background: #C2366B ;
-    color: #FFF;
+    background: url("/images/bg_dark.png") bottom repeat-x #C3C3C3 ;
+    color: #5E5E5E;
     padding: 5px;
 }
 
 div.sidebar-menu-content {
+    margin: 0 0 20px;
     padding: 5px;
-    border-bottom: 1px solid #c2366b;
-    border-left: 1px solid #c2366b;
-    border-right: 1px solid #c2366b;
-    margin-bottom: 20px;
+    border-color: #9D9D9D #DDD #DDD;
+border-style:solid;
+border-width:1px;
     background:#f2f2f2;
 }
 
@@ -924,7 +923,7 @@ form span.error {
     background: #191919;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    
+
 }
 #footer table{
     width:100%;
@@ -1044,7 +1043,7 @@ td h4 {
 
 /** dropdown **/
 dl.drop_down {
-    
+
 
     -moz-border-radius:3px 3px 3px 3px;
 background:url("../images/om_button_bg.png") repeat-x scroll center bottom transparent;
@@ -1125,7 +1124,7 @@ margin:0;
 }
 
 .drop_down dd ul li a:hover {
-    
+
     background-color: #ddd;
 }
 
@@ -1252,7 +1251,7 @@ margin:0;
     color:#162D3D ;
 }
 .ui-icon{
-    display:inline-block !important; 
+    display:inline-block !important;
 }
 .ui-autocomplete {
 		max-height: 140px;
