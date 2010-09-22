@@ -257,7 +257,7 @@ border-width:1px;
 }
 
 div.page-content {
-    background: #FFF;
+    background:  url("/images/content_bg.png") repeat-x top #fff;;
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
