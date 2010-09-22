@@ -12,8 +12,8 @@ class Service < ActiveRecord::Base
 
 
    has_attached_file :icon, :styles => { :small => "65x65>" },
-                            :url => "/images/icons/services/:id/:style/:basename.:extension",
-                            :path => ":rails_root/public/images/icons/services/:id/:style/:basename.:extension"
+                            :url => "/images/icons/services/:basename.:extension",
+                            :path => ":rails_root/public/images/icons/services/:basename.:extension"
 
    validates_attachment_presence :icon
    validates_attachment_size :icon, :less_than => 1.megabytes
