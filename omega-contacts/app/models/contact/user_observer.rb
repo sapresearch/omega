@@ -6,6 +6,7 @@ class Contact
       return unless Contact.table_exists?
 
       ensure_user_has_contact(user)
+      sync_user_with_contact(user)
     end
 
     private
@@ -15,6 +16,11 @@ class Contact
             c.user = user
           end.save(:validate => false)
         end
+      end
+
+      def sync_user_with_contact(user)
+        contact = Contact.for(user)
+        contact.sync_from_user unless contact.synced?
       end
   end
 end

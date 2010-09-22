@@ -11,23 +11,47 @@ $(function() {
         url: '/contacts/all',
         dataType: 'json',
         success: function(data) {
-            update_contacts(data)
+            update_contacts(data);
 
         }
     });
+
+        var $ac_contacts = $('#ac-contacts');
+                $ac_contacts.autocomplete({
+        source : '/contacts/autocomplete',
+        minLength: 3,
+        select: function(event, ui) {
+
+
+
+              $.ajax({
+                  url: '/contacts/' + ui.item.id,
+                  dataType: 'script',
+                  cache : false
+              });
+           
+            return false;
+        }
+
+    });
+
+
+
+    $ac_contacts.keyup(function() {
+        this.value == '' ? $('#clear_filter').hide() : $('#clear_filter').show();
+    });
+    $('#clear_filter').click(function() {
+        $ac_contacts.val('');
+        $(this).hide();
+    });
+
 
     $("#accordion").accordion({
         fillSpace: true
     });
 
 
-//    $('#contacts').delegate("tr", "hover", function() {
-////        $(this).find('td').toggleClass('li-over');
-//        $(this).draggable({
-//            helper: 'clone'
-//
-//        }).find('.mgm-contact').toggleClass('hide');
-//    });
+
     $('#accordion').find('tr').droppable({
 
         drop: function(event, ui) {

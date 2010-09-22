@@ -44,16 +44,22 @@ class Contact < ActiveRecord::Base
                          :length    => 1..80,
                          :unless    => :has_user?
 
-  %w(email first_name last_name).each do |attr|
-    class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
-      def #{attr}
-        user.try(:#{attr}) || super
-      end
-      def #{attr}=(value)
-        user.send(:#{attr}=, value) if user.present?
-        super
-      end
-    RUBY_EVAL
+  after_save :sync_to_user, :unless => :synced?
+
+  SYNC_FIELDS = %w(email first_name last_name)
+
+  def sync_from_user
+    SYNC_FIELDS.each { |attr| send("#{attr}=", user.send(attr)) }
+    save(:validate => false)
+  end
+
+  def sync_to_user
+    SYNC_FIELDS.each { |attr| user.send("#{attr}=", send(attr)) }
+    user.save(:validate => false)
+  end
+
+  def synced?
+    SYNC_FIELDS.all? { |attr| send(attr) == user.send(attr) }
   end
 
   private
