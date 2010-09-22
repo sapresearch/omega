@@ -1,8 +1,11 @@
 <%=form_for @service do |f| %>
    <%= errors_for_model @service%>
+
    <%= f.hidden_field :service_type, :value => @s.service_type%>
-   <%= f.hidden_field :service_category, :value => @s.service_category%>    
-   <%=f.hidden_field :icon, :value => @s.icon %>
+   <%= f.hidden_field :service_category, :value => @s.service_category%>
+   <%=f.hidden_field :icon_file_name, :value => @s.icon_file_name %>
+   <%=f.hidden_field :icon_content_type, :value => @s.icon_content_type %>
+   <%=f.hidden_field :icon_file_size, :value => @s.icon_file_size %>
    <%=f.hidden_field :description, :value => @s.description %>
 
     <p class="left2">
