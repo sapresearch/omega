@@ -17,7 +17,7 @@
         <br/>
         <% [ ["I'll Choose From the Library","checked"],["I'll Create My Own Type",""]].each do |choice, check| %>
         <%= radio_button 'service','service_type', choice,
-                             {:onchange => "javascript: service_type_choice(this.value)", :checked => check}%>
+                             {:onclick => "javascript: service_type_choice(this.value)", :checked => check}%>
         <%=choice%> <br/>
 
         <%end%>
@@ -33,7 +33,7 @@
 
         <% Service::Type.all.each do |s| %>
             <%= radio_button 'service_library','service_type', s.service_type,
-                             {:onchange => "javascript: service_type(this.value)"}%>
+                             {:onclick => "javascript: service_type(this.value)"}%>
 
             <%= s.service_type %> <%= image_tag s.icon.url, :width =>  '65' %><br/>
         <%end%>
