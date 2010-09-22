@@ -1,11 +1,9 @@
 <%= side_bar_box('Volunteering Positions') do %>
-
-          <% @positions.each do |p| %>
-          <h2>
-            <span class="om-icon-only om-pink-icon ui-icon-heart"></span>
-    <%= p.name %>
-          </h2>
-
+    <% @positions.each do |p| %>
+        <h2>
+          <span class="om-icon-only om-pink-icon ui-icon-heart"></span>
+          <%= p.name %>
+        </h2>
     <% end %>
 
 <% end %>

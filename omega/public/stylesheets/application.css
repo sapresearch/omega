@@ -20,17 +20,23 @@ html, body, #wrapper {
 
 
 }
+body > #wrapper {
+    background-image: url("/images/om_sprite.png");
+
+}
+
 
 
 body > #wrapper {
-
+    background-position: 48px 0;
+    background-repeat:repeat-x;
     height: auto;
     min-height: 100%;
-    background: url('../images/bg_light.png') repeat-x;
+
 }
 
 body {
-    background: url("/images/tile.gif") repeat scroll -70% 0 #F0F0F0;
+    background:  #FFF;
 
 }
 
@@ -62,7 +68,7 @@ h1, h2, h3, h4 {
 
 h1 {
     padding: 6px 10px;
-    color: #fff;
+    color: #333333;
     font-weight: normal;
     font-size: 1.7em;
 }
@@ -84,9 +90,7 @@ h2 a:hover {
 
 h2 {
 
-    color: #822448;
-    display: block;
-
+    color: #0063DC;
     font-size: 1.3em;
     font-weight: normal;
     letter-spacing: 0;
@@ -251,14 +255,14 @@ form table input {
 }
 
 h1.page-content {
-    background: #0063dc;
+    background: #ddd;
 }
 
 div.page-content {
     background: #FFF;
-    border-bottom: 1px solid #0063dc;
-    border-left: 1px solid #0063dc;
-    border-right: 1px solid #0063dc;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
     margin-bottom: 20px;
     padding: 15px;
 }
@@ -270,7 +274,7 @@ div.sidebar-menu {
 
 h1.side-bar {
     margin: 0;
-    background: url("/images/pink_grad_bg.png ") repeat-x ;
+    background: #C2366B ;
     color: #FFF;
     padding: 5px;
 }
@@ -323,14 +327,14 @@ li.item-list {
 }
 
 /******************************* Styles for the entire  menu ******************************/
-div#navigation {
+#navigation {
     position: relative;
     margin: 40px auto 0;
     width: 950px;
     z-index: 1000;
 }
 
-ul#topnav {
+#topnav {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
@@ -345,13 +349,13 @@ ul#topnav {
     background: #0058C2;
 }
 
-ul#topnav li {
+#topnav li {
     float: left;
     margin: 0;
     padding: 0; /*border-right: 1px solid #d1d1d1; *//*--Divider for each parent level links--*/
 }
 
-ul#topnav li a {
+#topnav li a {
     text-transform: capitalize;
     padding: 10px 15px;
     display: block;
@@ -360,7 +364,7 @@ ul#topnav li a {
 }
 
 /* submenu */
-ul#topnav li div {
+#topnav li div {
 
     padding: 0 0 10px;
     position: absolute;
@@ -375,7 +379,7 @@ ul#topnav li div {
 }
 
 /*--Show subnav on hover--*/
-ul#topnav li div a {
+#topnav li div a {
     text-transform: capitalize;
     border-bottom: 1px dotted #448BE2; /*background: url(../images/menu_bg.png) repeat-x;*/
     background: #0058C2;
@@ -384,7 +388,7 @@ ul#topnav li div a {
 }
 
 /*--Since we declared a link style on the parent list link, we will correct it back to its original state--*/
-ul#topnav li div a:hover {
+#topnav li div a:hover {
     background: url(../images/nav_a_hover.png) repeat-x;
     text-decoration: none;
 }
@@ -465,6 +469,10 @@ fieldset {
 
 .left {
     float: left;
+}
+
+.absolute{
+    position:absolute;
 }
 
 .fieldset_active {
@@ -570,7 +578,7 @@ a {
     text-transform: capitalize;
     line-height: 18px;
     height: 18px;
-    color: #191919;
+    color: #002A5C;
     vertical-align: middle;
     background: none;
     display: inline-block;
@@ -623,10 +631,28 @@ span.om-button span.om-icon,
 span.om-icon-button span.om-icon,
 span.om-plain-button span.om-icon,
 span.om-plain-icon-button span.om-icon,
-    .om-icon-only {
+    .om-icon-only, .om-footer-symbol {
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
+
+.om-footer-symbol{
+    display: inline-block;
+    width:64px;
+    height:48px;
+}
+.om-footer-twitter{
+    background-position:0 -464px;
+}
+.om-footer-rss{
+    background-position:0 -512px;
+}
+.om-footer-calendar{
+    background-position:0 -560px;
+}
+
+
+
 
 .om-icon-only {
     margin: 0 2px;
@@ -1228,3 +1254,7 @@ margin:0;
 .ui-icon{
     display:inline-block !important; 
 }
+.ui-autocomplete {
+		max-height: 140px;
+		overflow-y: auto;
+	}

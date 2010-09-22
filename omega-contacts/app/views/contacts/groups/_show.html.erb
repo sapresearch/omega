@@ -1,6 +1,32 @@
+<h2>
+  <%= @contact_group.name %>
+</h2>
+<div class="group-members">
+  <table>
+    <% @contact_group.contacts.each do |c| %>
+        <tr>
+          <td>
+            <%= c.last_name %>, <%= c.first_name %>
+          </td>
+          <td>
+            <a data-method="put" data-remote="true" class="remove-contact" href="<%= %Q{/contacts/#{c.id}/groups/#{@contact_group.id}/remove} %>">
+              <span data-tooltip="remove this contact from: <%= @contact_group.name %>" class="om-icon-only om-blue-icon ui-icon-shuffle" ></span>
+            </a>
 
-<%= @contact_group.name %>
+            <a  data-method="delete" data-remote="true" class="remove-contact" href="<%= %Q{/contacts/#{c.id}} %>">
+              <span data-tooltip="Delete this contact from database" class="om-icon-only om-blue-icon ui-icon-trash" >
 
+              </span></a>
+
+          </td>
+
+
+        </tr>
+
+    <% end %>
+  </table>
+
+</div>
 
 
 <div id="contact_accordion">
@@ -37,11 +63,18 @@
         <%= phone.number %>
 
 
-
       </div>
 
 
   <% end %>
 
 
+</div>
+<div>
+  <%= om_button(:icon=>'user-remove') do %>
+      <%= link_to 'delete', @contact_group, :method=> :delete, :remote => true %>
+  <% end %>
+  <%= om_button(:icon=>'user-edit') do %>
+      <%= link_to 'edit', edit_contact_group_path(@contact_group), :remote => true %>
+  <% end %>
 </div>

@@ -1,6 +1,6 @@
 /**
- * @author I823626
- */
+* @author I823626
+*/
 
 
 jQuery.showFlash = function(msg, n) {
@@ -213,9 +213,9 @@ $(function() {
     /*****************************En d Nested attribues   *******************/
 
     /**
-     * Applicationwide - tooltip  
+     * Applicationwide - tooltip
      */
-    $('span[data-tooltip]').tipsy();
+    $('span[data-tooltip]').tipsy({live:true});
     $('form').find('input[data-tooltip]').tipsy({gravity: 'w',
         trigger : 'focus'
     });

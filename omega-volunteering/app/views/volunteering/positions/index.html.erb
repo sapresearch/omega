@@ -32,14 +32,17 @@
 
           <div class="position_slider">
             <div class="position_actions">
-
-              <%= om_button(:plain => true, :icon => 'delete') do %>
+              <% if !current_user.is_anonymous? %>
+                  <%= om_button(:plain => true, :icon => 'delete') do %>
                       <%= link_to 'Delete', volunteering_position_path(position), :method => :delete %>
                   <% end %>
+              <% end %>
+              <% if !current_user.is_anonymous? %>
 
-              <% if position.status_of(Contact.for(current_user)) == :valid %>
-                  <%= om_button(:plain => true, :icon => 'clock') do %>
-                      <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user))) %>
+                  <% if position.status_of(Contact.for(current_user)) == :valid %>
+                      <%= om_button(:plain => true, :icon => 'clock') do %>
+                          <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user))) %>
+                      <% end %>
                   <% end %>
               <% end %>
 
@@ -48,7 +51,8 @@
                       <%= link_to 'Apply', new_volunteering_record_url(:id=>position) %>
                   <% end %>
               <% end %>
-              <%= toggle_favorite(position) %>
+
+              <%= toggle_favorite(position) if !current_user.is_anonymous? %>
 
             </div>
           </div>
@@ -56,20 +60,20 @@
             <div class="position-wrapper">
 
               <% if position.start? %>
-              <div class="pos-date">
-                <div class="pos-cal-month">
-                  <%= position.start.strftime("%b") %></div>
-                <div class="pos-cal-day"> <%= position.start.day %></div>
-              </div>
-          <% else %>
-              <div class="posDate">
-                <div class="posCalMonth">
+                  <div class="pos-date">
+                    <div class="pos-cal-month">
+                      <%= position.start.strftime("%b") %></div>
+                    <div class="pos-cal-day"> <%= position.start.day %></div>
+                  </div>
+              <% else %>
+                  <div class="posDate">
+                    <div class="posCalMonth">
 
-                </div>
+                    </div>
 
-                <div class="posCalDay"></div>
-              </div>
-          <% end %>
+                    <div class="posCalDay"></div>
+                  </div>
+              <% end %>
               <h2>
                 <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
               </h2>
@@ -96,8 +100,8 @@
 
     <% end %>
   </ul>
-  
-      <%= will_paginate @positions %>
+
+  <%= will_paginate @positions %>
 
   <div class="clear"></div>
 
@@ -107,10 +111,6 @@
 
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_positions_skills" %>
-
+<%= render :partial => "layouts/sidebar_positions_interests" %>
 <% end %>
 
-<% content_for :rows do %>
-    <%= render :partial => "layouts/sidebar_positions_interests" %>
-
-<% end %>
