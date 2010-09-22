@@ -1,0 +1,33 @@
+<% require_stylesheet 'services' %>
+
+<div class="wrapper-services">
+
+<div class="container-show">
+  <div class="header">
+
+<h2 class="index">My Registered Services</h2>
+  </div>
+<p class="left-align">
+<%if !current_user.is_anonymous? %>
+  <%@services.each do |s|%>
+    <strong><%=s.service_name%> - <%=s.service_type%> Service</strong><br/>
+    (<%= link_to "Show", service_url(s)%>)
+          | (<%= link_to "Remove", s , :confirm => 'Are You Sure?', :method => :delete%>)<br/>
+    <%end%>
+<%end%>
+
+
+<%if !current_user.is_anonymous? %>
+  <br/>
+    <strong> <%= link_to 'Register For a Service', services_url%>
+
+  <br/>
+        <%#= link_to 'Export Services to a File', export_to_csv_services_path%>
+
+<%end%>
+     </strong>
+</p>
+
+
+</div>
+    </div>
