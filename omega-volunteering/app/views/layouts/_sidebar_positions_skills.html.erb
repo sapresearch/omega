@@ -1,5 +1,8 @@
 <% if @skills %>
     <%= side_bar_box(:skills) do %>
+        <div class="help-explanation">To look at positions by skill click one of
+  the skill tags
+</div>
         <% @skills.each do |skill| %>
             <span class="skill_tag">
              <%= link_to skills_volunteering_positions_path(:skills => [params[:skills], skill.name].compact.join('+')) do %>

@@ -861,7 +861,7 @@ div.pagination a {
    padding: 2px 6px 1px;
     text-decoration: none !important;
     text-shadow: 0 1px 0 #FFFFFF;
-    background: url("/images/grad_light_grey.png") repeat-x scroll center bottom transparent;
+    background: url("/images/om_button_bg.png") repeat-x scroll center bottom transparent;
 }
 
 div.pagination em {
@@ -872,7 +872,6 @@ div.pagination em {
     margin-right: 4px;
     padding: 2px 6px 1px;
     text-decoration: none !important;
-
     background: url("/images/details_bg.png") repeat-x scroll center bottom transparent;
 }
 

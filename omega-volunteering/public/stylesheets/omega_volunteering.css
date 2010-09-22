@@ -167,3 +167,8 @@ span.skill_tag_active {
 .contacts-hover {
 
 }
+
+.sidebar-menu-content > div.help-explanation{
+    font-style:italic;
+    color:333;
+}
