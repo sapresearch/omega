@@ -176,11 +176,11 @@ form table input {
 
 #notification-flash {
     text-align: center;
-
     font-size: 1.7em;
     padding: 1em;
     color: #FFF;
     background: #191919;
+    z-index: 999999;
 }
 
 #top-pane {
@@ -472,6 +472,10 @@ fieldset {
 
 .absolute{
     position:absolute;
+}
+.relative {
+    position:relative;
+
 }
 
 .fieldset_active {
@@ -806,6 +810,10 @@ span.om-icon-back {
 .om-icon-arrow-move {
     background-position: 0 -448px;
 }
+.om-icon-magnifier-m {
+    background-position: 0 -720px;
+}
+
 
 /*END BUTTONS*/
 

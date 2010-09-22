@@ -21,7 +21,7 @@
 }
 #ac-contacts{
 	float:left;
-	width:80px;
+	width:110px;
 	position:relative;
 	top:4px;
 	left:4px;
@@ -29,30 +29,18 @@
 	padding:0;
 	background:transparent;
 }
-#clear_filter{
+#clear-filter{
 	cursor:pointer;
 	display:none;
-	position:relative;
-	float:right;
-	width:16px;
-	height:16px;
-	background: url("/images/iconSprite.png") 0 -80px;
+	position:absolute;
+	right:14px;
 
 }
 #ac-contacts:focus 
 {
     outline:none;
 }
-.magnifier{
-	float:right;
-	display:block;
-	position:relative;
 
-	width:16px;
-	height:16px;
-	background: url("/images/iconSprite.png") 0 -96px;
-
-}
 #filter_ctrl{
 	position:relative;
 	top:4px;

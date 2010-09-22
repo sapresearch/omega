@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 <h2 class="absolute">
 
   <%= @contact.first_name %>  <%= @contact.last_name %>
@@ -15,45 +7,33 @@
 </div>
 <div class="clear"></div>
 
-
 Email: <%= @contact.email %><br>
-
-
 <div id="contact_accordion">
-  <h3><a href="#">Group Assignments</a></h3>
-
-  <div>
-
-    <ul id="assigned_groups">
-      <%= render :partial => 'contacts/partials/assigned_groups' %>
-    </ul>
-
-  </div>
-
-  <% @contact.addresses.each do |address| %>
-      <h3><a href="#"> <%= address.city.capitalize %></a></h3>
+  <% if @contact.groups.any? %>
+      <h3><a href="#">Group Assignments</a></h3>
 
       <div>
-        City:
-
-        <%= address.city.capitalize %>
-        <br>
-
-        Street:
-
-        <%= address.street %>
-        <br>
-        Postal Code:
-
-
-        <%= address.zip_code %>
-
+        <ul id="assigned_groups">
+          <%= render :partial => 'contacts/partials/assigned_groups' %>
+        </ul>
       </div>
-
-
   <% end %>
+  <% if @contact.addresses.any? then
+         @contact.addresses.each do |address| %>
+          <h3><a href="#"> <%= address.city.capitalize %></a></h3>
 
-
+          <div>
+            City:
+            <%= address.city.capitalize %>
+            <br>
+            Street:
+            <%= address.street %>
+            <br>
+            Postal Code:
+            <%= address.zip_code %>
+          </div>
+      <% end %>
+  <% end %>
   <% @contact.phone_numbers.each do |phone| %>
       <h3><a href="#">Phone Number <%= phone.number_type %></a></h3>
 
@@ -62,33 +42,27 @@ Email: <%= @contact.email %><br>
         <%= phone.number %>
       </div>
   <% end %>
-
-
 </div>
 <div>
-
-<%= om_button(:icon=>'user-remove') do %>
-    <%= link_to 'delete', @contact, :method=> :delete, :remote => true %>
-<% end %>
-<%= om_button(:icon=>'user-edit') do %>
-    <%= link_to 'edit', edit_contact_path(@contact), :remote => true %>
-<% end %>
-<dl id="contact_assign" class="drop_down">
-  <dt><a href="#" class="corners"><span>Assign this contact</span></a></dt>
-  <dd>
-    <ul class="corners">
-      <div>
-        <li>Assign</li>
-
-        <% Contact::Group.without_contact(@contact).each do |g| %>
-            <li>
-              <%= link_to g.name, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
-            </li>
-        <% end %>
-
-
-      </div>
-    </ul>
-  </dd>
-</dl>
+  <%= om_button(:icon=>'user-remove') do %>
+      <%= link_to 'delete', @contact, :method=> :delete, :remote => true %>
+  <% end %>
+  <%= om_button(:icon=>'user-edit') do %>
+      <%= link_to 'edit', edit_contact_path(@contact), :remote => true %>
+  <% end %>
+  <dl id="contact_assign" class="drop_down">
+    <dt><a href="#" class="corners"><span>Assign this contact</span></a></dt>
+    <dd>
+      <ul class="corners">
+        <div>
+          <li>Assign</li>
+          <% Contact::Group.without_contact(@contact).each do |g| %>
+              <li>
+                <%= link_to g.name, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
+              </li>
+          <% end %>
+        </div>
+      </ul>
+    </dd>
+  </dl>
 </div>
