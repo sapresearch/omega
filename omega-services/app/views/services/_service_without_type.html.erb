@@ -1,0 +1,64 @@
+<%=form_for @service, :html => {:multipart => true} do |f| %>
+   <%= errors_for_model @service%>
+
+
+    <p class="left2">
+      <span class="style2">Please Define Your Custom Type</span><br/>
+    </p>
+
+      <strong><%= f.label :service_type%></strong>
+      <%= f.text_field :service_type%>
+
+      <br/>
+      <strong><%= f.label :service_category%></strong>
+              <%= f.select :service_category,
+                                     options_for_select(%w{ Enrollable Requestable Other }) %> <br/>
+
+
+      <br/>
+      <strong><%#=f.label :icon%></strong>
+      <%#=f.text_field :icon%>
+
+      <strong><%=f.label :icon%></strong>
+      <%=f.file_field :icon%>
+
+     <br/>
+      <strong><%= f.label :description%></strong>
+      <%= f.text_area :description%>
+
+     <br/>
+
+     <div>
+       <%= f.fields_for :type do |s| %>
+
+              <%= s.hidden_field :service_type%>
+
+              <%= s.hidden_field :service_category%> <br/>
+
+              <%=s.hidden_field :icon%>
+
+              <%= s.hidden_field :description%>
+
+
+     <%end%>
+     </div>
+
+
+    <div class="bottom-buttons">
+
+    <div class="button-first">
+      <%=f.submit "Save & Proceed"%>
+    </div>
+
+    <div class="button-next">
+      <%= button_to 'Cancel', new_service_url%>
+    </div>
+
+
+
+    </div>
+
+
+<%end%>
+
+

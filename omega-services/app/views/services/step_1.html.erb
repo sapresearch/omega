@@ -1,4 +1,4 @@
-<% require_javascript 'service.js' %>
+<% require_javascript 'service.js', 'service_type.js' %>
 <% require_stylesheet 'services.css'%>
 
 <div class="wrapper-services">
@@ -12,39 +12,78 @@
 
   <br/>
     <p class="left-align">
-      <span class="style3">Please Choose a Service Type</span> <br/>
+      <span class="style3">Please Choose:</span> <br/>
 
-        <% Service::Type.all.each do |s| %>
-            <%= radio_button 'service','service_type', s.service_type,
-                             {:onchange => "javascript: service_type(this.value)"}%>
+        <br/>
+        <% [ ["I'll Choose From the Library","checked"],["I'll Create My Own Type",""]].each do |choice, check| %>
+        <%= radio_button 'service','service_type', choice,
+                             {:onchange => "javascript: service_type_choice(this.value)", :checked => check}%>
+        <%=choice%> <br/>
 
-            <%= s.service_type %> <%= image_tag s.icon, :width =>  '65' %><br/>
         <%end%>
-
     </p>
 
-  <div class="list">
+      <div id="service_with_type">
+
+
+        <p class="left-align">
+
+        <span class="style3">Choose a Type:</span> <br/>
+
+
+        <% Service::Type.all.each do |s| %>
+            <%= radio_button 'service_library','service_type', s.service_type,
+                             {:onchange => "javascript: service_type(this.value)"}%>
+
+            <%= s.service_type %> <%= image_tag s.icon.url, :width =>  '65' %><br/>
+        <%end%>
+
+        </p>
+      </div>
+
+      <div id="service_without_type">
+
+      </div>
+
+      
+
+
+  <div id="list">
 
       <div id="fields_list">
 
         <%unless @service.nil? %>
 
-
+        
         <p class="left2">
           <span class="style3">Preview Details</span>
 
           <br/>
-         <%Service::Field.all.each do |f| %>
-              <%if @service.id == f.service_id%>
 
-                    <br/>
-                    Field Name: <%=f.field_name%><br/>
-                    Field Type: <%=f.field_type%><br/>
+      <strong>Service Category: </strong><%=@service.service_category%> <br/>
+      <strong>Description:</strong><%=@service.description %><br/>
 
+    <%Service::Field.find_all_by_field_category_and_service_id("Details", @service.id).each do |s|%>
 
-              <%end%>
-        <%end%>
-        </p>
+     <strong><%=s.field_name%></strong>:
+             <%=Service::Detail.find_by_field_id(s.id).field_value%>
+     <br/>
+
+  <%end%>
+
+    <br/>
+  <span class="style2">Registration Details</span><br/>
+
+     <%Service::Field.find_all_by_field_category_and_service_id("Registration",@service.id).each do |s|%>
+
+     <br/>
+
+     <strong><%=s.field_name%></strong>  <strong>(Field Type: <%=s.field_type%>)</strong>
+
+     <br/>
+
+  <%end%>
+  </p>
 
             <div class="bottom-buttons">
 
@@ -53,9 +92,12 @@
               <%=button_to "Save",  service_wizard_services_url(:step => 2, :id => @service)%>
             </div>
 
+              <div class="button-next">
+                <%= link_to 'Back', service_wizard_services_url(:step => 'introduction')%>
+             </div>
 
              <div class="button-next">
-                <%= button_to 'Cancel', @service, :confirm => 'Are You Sure?', :method => :delete%>
+                <%= link_to 'Cancel', @service, :confirm => 'Are You Sure?', :method => :delete%>
              </div>
 
 

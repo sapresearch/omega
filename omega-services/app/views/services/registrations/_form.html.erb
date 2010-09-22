@@ -9,22 +9,54 @@
 
 <h2 class="index">Register for <%=@service.service_type%> Service</h2>
 
+</div>
+
+<p class="left-align">
+
+  <span class="style1"> Service Details </span>
+
+<br/>
+  <%@service_fields.each do |s|%>
+
+     <br/>
+
+     <strong><%=s.field_name%></strong>:
+             <%=Service::Detail.find_by_field_id(s.id).field_value%>
+     <br/>
+
+  <%end%>
+
+</p>
+
+  <div class="split-line">
+
+    <p class="left-align">
+
+      <span class="style2"> Registration Information </span>
+
+      <%= form_for @registration do |f| %>
+          <%=errors_for_form(@registration, 'registration')%>
+
+          <%= f.hidden_field :service_id, :value => @service.id %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+
+          <% @registration_fields.each do |field| %>
+
+          <%= f.fields_for :fieldvalues do |ff| %>
+
+              <%= render 'registration_form', :f => ff, :field => field %>
+
+          <%end%>
+
+          <% end %>
+
+        <%= f.submit "Register!" %>
+      <% end %>
+
+    </p>
+
   </div>
-<%= form_for @registration do |f| %>
-    <%=errors_for_form(@registration, 'registration')%>
 
-    <%= f.hidden_field :service_id, :value => @service.id %>
-    <% @fields.each do |field| %>
-
-    <%= f.fields_for :fieldvalues do |ff| %>
-
-        <%= render 'registration_form', :f => ff, :field => field %>
-        <%end%>
-
-	<% end %>
-
-  <p><%= f.submit %></p>
-<% end %>
 
 </div>
     </div>

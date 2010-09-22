@@ -4,7 +4,8 @@ class CreateServices < ActiveRecord::Migration
 
       t.string :service_name, :default => 'XYZ Service'
       t.string :service_type, :null => false
-      t.string :icon
+      t.string :service_category, :null => false
+      t.text :description, :null => false
       t.boolean :published
 
       t.timestamps

@@ -2,53 +2,126 @@
 
 <div class="wrapper-services">
 
+
 <div class="container">
   <div class="steps">
-    <div class="step4"></div>
+    <div class="step3"></div>
   </div>
 
 <div class="content-services" >
-<br/>
-<div class="review">
 
-  <p class="left-align">
+  <div>
+    <p class="left2">
+      <span class="style1">Service Details</span><br/>
 
-  <span class="heading1">SUMMARY</span><br/>
-  <br/>
-  <strong>Service Name :</strong> <%=@service.service_name%><br/>
-  <strong>Service Type : </strong><%=@service.service_type%><br/>
-  <strong>Icon:</strong><%= image_tag @service.icon, :width =>  '65' %><br/>
-  <br/>
-  <span class="heading2">Form Fields</span><br/>
-  <%Service::Field.all.each do |tt| %>
-        <%if @service.id == tt.service_id%>
-             <strong><%=tt.field_name%></strong><br/>
+    <%Service::Field.find_all_by_field_category_and_service_id("Details",@service.id).each do |s|%>
+
+     <br/>
+
+     <strong><%=s.field_name%></strong>:
+             <%=Service::Detail.find_by_field_id_and_service_id(s.id,@service.id).field_value%>
+     <br/>
+
+  <%end%>
+    </p>
+
+  </div>
+
+  
+<%= form_for @service, :action => "service_wizard" do |f| %>
+      <%= errors_for_form(@service, 'service') %>
+
+
+      <div class="split-line">
+
+        <p class="left2">
+
+
+        <span class="style1">Customize Registration Details</span> <br/>
+
+        <%unless @fields.empty?%>
+
+         <%@fields.each_with_index do |field, index|%>
+            <%=f.fields_for "fields_attributes[#{index}]", field do |ff|%>
+
+              <%= ff.hidden_field :id %>
+
+               <%= ff.hidden_field :service_id %>
+               <%= ff.hidden_field :field_category%>
+                      <br/>
+
+               <%= ff.label :field_name%>:
+               <%= field.field_name %>
+                      <br/>
+               <%= ff.label :field_type%>:
+               <%= field.field_type %>
+
+              
+            <%end%>
+         <%end%>
+      <%end%>
+
+      <%= render 'add_registration_field_link',:index => @service.fields.size  %>
+      </p>
+
+      <div id="service_registration_fields">
+
+      </div>
+      <%unless @fields.empty?%>
+        <p class="left2">
+
+        <strong>Select Fields You Would Want to Remove</strong>
+
+        <br/><br/>
+
+        <% @fields.each_with_index do |d| %>
+
+
+        <%= f.fields_for "fields", d do |ff|%>
+
+           <%=ff.check_box '_destroy' %> <%=d.field_name%>
+           <%=ff.hidden_field :field_name%>
+           <%=ff.hidden_field :field_type%>
+
+           <br/>
+
         <%end%>
-<%end%>
-</p>
 
-<br/>
-</div>
+      <%end%>
+
+      <%end%>
+
+      </p>
+
+
+      </div>
+
+
+
 <div class="bottom-buttons">
 
   <div class="button-first">
-    <%=button_to "Publish", finalize_services_url(:id => @service)%>
+       <%=f.submit "Save"%>
+    </div>
+
+     <div class="button-next">
+       <%=f.submit "Proceed"%>
+    </div>
+
+
+  <div class="button-next">
+    <%= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete%>
   </div>
 
 
   <div class="button-next">
-    <%= button_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete%>
+    <%= link_to 'Back', service_wizard_services_url(:step => 2, :id => @service)%>
   </div>
 
-  <div class="button-next">
-    <%= button_to 'Back', service_wizard_services_url(:step => 2, :id => @service)%>
-  </div>
+<%end%>
 </div>
 </div>
 
-
-
 </div>
-
 
 </div>

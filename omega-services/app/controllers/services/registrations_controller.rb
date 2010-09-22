@@ -4,6 +4,10 @@ class Services::RegistrationsController < ApplicationController
 
   before_filter :get_service
 
+  breadcrumb 'Services' => :services
+  breadcrumb 'My Registrations' => :my_registrations_service_registrations
+
+
   def index
     @services = Service.all
     @fields = Service::Field.all
@@ -19,9 +23,16 @@ class Services::RegistrationsController < ApplicationController
     @registration = Service::Registration.find(params[:id])
     respond_with(@registration)
   end
-  
+
+  def my_registrations
+
+    @services = Service.joins(:registrations).where('service_registrations.user_id = ?', current_user.id)
+
+  end
+
   def new
-     @fields = Service::Field.all
+     @service_fields = Service::Field.find_all_by_field_category("Details")
+     @registration_fields = Service::Field.find_all_by_field_category("Registration")
      @registration = Service::Registration.new
      @registration.fieldvalues.build
      respond_with(@registration)
@@ -46,6 +57,12 @@ class Services::RegistrationsController < ApplicationController
        @field = Service::Field.find(params[:id])
        @field.update_attributes(params[:field])
        respond_with(@field)
+  end
+
+  def destroy
+    @registration = Service::Registration.find_by_service_id_and_user_id(params[:id],current_user.id)
+    @registration.destroy
+    redirect_to my_registrations_service_registrations_url
   end
 
   private

@@ -3,7 +3,8 @@ class CreateServiceTypes < ActiveRecord::Migration
     create_table :service_types do |t|
 
       t.string :service_type, :null => false
-      t.string :icon
+      t.string :service_category, :null => false
+      t.text :description, :null => false
       t.timestamps
 
     end
