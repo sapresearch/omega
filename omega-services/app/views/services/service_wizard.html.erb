@@ -22,23 +22,30 @@
     <span class="style2">
       STEP 1:Introduction
     </span>
-      <br/>Introduction to the process of creating <br/>a service.<br/>
+      <br/>Introduction to the process of <br/>creating a service.<br/>
 
     <span class="style2">
       STEP 2: Choose Service Type
     </span>
-      <br/>Provides you with a list of typical types of <br/>services to choose from.<br/>
+      <br/>Provides you with a list of typical <br/>types of services to choose from.<br/>
       
     <span class="style2">
-      STEP 3: Customize Service
+      STEP 3: Service Details
     </span>
-      <br/>Enables you to customize the service by <br/>choosing a name and list of fields you would<br/> like to remove.
+      <br/>Enables you to customize the service<br/> by choosing a name and list of fields <br/>you would like to add.
+
+    <br/>
+
+    <span class="style2">
+      STEP 4: Registration Form
+    </span>
+      <br/>Enables you to customize the service<br/> registration by adding/removing <br/>a list of fields.
 
     <br/>
     <span class="style2">
       Last Step: Finalize
     </span>
-      <br/>Gives you a summary of the service you are <br/>about to create and publish it to finish the<br/> process.
+      <br/>Gives you a summary of the service<br/> you are about to create and publish <br/>it to finish the process.
 
     </p>
     
@@ -67,7 +74,7 @@
 <div class="intro-footer">
   <div class="button-first" >
 
-    <%= button_to 'Next', service_wizard_services_url(:step => '1')%>
+    <%= button_to 'Next', service_wizard_services_url(:step => '1', :id => @current_service)%>
 
 
   </div>

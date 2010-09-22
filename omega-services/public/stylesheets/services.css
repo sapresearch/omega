@@ -76,7 +76,7 @@ div.wrapper-services{
 
 div.container{
     height: auto;
-    min-height: 100%;
+    min-height: 550px;
     width: 760px;
     text-align: left;
     overflow: hidden;    
@@ -192,7 +192,7 @@ div.content-services{
 
 div.tips{
     position:absolute;
-    top: 35px;
+    top: 20px;
     right: 30px;
     height: auto;
     width: 280px;
@@ -218,12 +218,13 @@ div.split-line{
     -khtml-border-radius:4px;
 }
 
-div.list{
+div #list{
     position:absolute;
-    top: 80px;
-    left: 300px;
-    height: auto;
+    top: 90px;
+    right: 10px;
+    height: 350px;
     width: 400px;
+    overflow: auto;
     background: #E0E8F8;
     border-radius:4px;
     -moz-border-radius:4px;

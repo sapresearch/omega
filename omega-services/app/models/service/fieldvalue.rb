@@ -1,4 +1,4 @@
-class Service::Registration::Fieldvalue < ActiveRecord::Base
+class Service::Fieldvalue < ActiveRecord::Base
 
   belongs_to :registration
   belongs_to :field

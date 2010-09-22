@@ -13,10 +13,11 @@
     <strong><%=s.service_name%> - <%=s.service_type%> Service</strong><br/>
     (<%= link_to "Show", service_url(s)%>)
     <%if !current_user.is_anonymous? %>
-        <%if s.published == false%>
-            |(<%= link_to "Publish", service_wizard_services_url(:step => 3, :id => s.id) %>)
-        <%else %>
-            (<%= link_to "Register", new_service_service_registration_url(s.id) %>)
+        <%if (s.published != true)%>
+            |(<%= link_to "Saved Draft", service_wizard_services_url(:step => 2, :id => s) %>)
+             <% else if Service::Registration.find_by_user_id_and_service_id(current_user.id,s).nil? %>
+                (<%= link_to "Register", new_service_service_registration_url(s) %>)
+             <%end%>
         <%end%>
           | (<%= link_to "Delete", s , :confirm => 'Are You Sure?', :method => :delete%>)<br/>
     <%end%>

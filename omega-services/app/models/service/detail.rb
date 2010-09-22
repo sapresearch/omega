@@ -1,9 +1,9 @@
 class Service::Detail < ActiveRecord::Base
 
-  belongs_to :service  
-  has_many :fieldvalues, :as => :detail, :dependent => :destroy
+  belongs_to :service
+  belongs_to :field
 
-  accepts_nested_attributes_for :fieldvalues
+
 
 
 end

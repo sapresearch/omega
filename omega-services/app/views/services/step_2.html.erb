@@ -1,5 +1,6 @@
 <% require_stylesheet 'services.css'%>
 
+
 <div class="wrapper-services">
 
 
@@ -10,22 +11,25 @@
 
 <div class="content-services" >
 
-<%= form_for @service, :action => "service_wizard" do |f| %>
+<%= form_for @service, :action => "service_wizard", :onsubmit => 'alert($(this).serialize());' do |f| %>
       <%= errors_for_form(@service, 'service') %>
-      
+
       <div>
         <p class="left2">
 
-        <span class="style3">Customize Your Service</span> <br/>
+        <span class="style3">Customize Your Service Details</span> <br/>
         <br/>
         <strong>Service Type:</strong>
         <%=@service.service_type%><br/>
         <%=f.hidden_field :service_type %>
 
         <strong>Icon:</strong>
-        <%= image_tag @service.icon, :width =>  '65' %><br/>
+        <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
         <%=f.hidden_field :icon %>
         <%=f.hidden_field :published %>
+
+        <strong>Category:</strong>
+         <%=@service.service_category%><br/>
 
         <br/>
          </p>
@@ -34,40 +38,50 @@
 
       <div class="split-line">
         <p class="left2">
-         <strong>Please Enter a Name for your <%=@service.service_type%> Service</strong> <br/>
+         <strong>Enter a Name for your <%=@service.service_type%> Service</strong> <br/>
 
         <br/>
 
         <%=f.text_field :service_name %><br/>
 
         <br/>
+        <strong>Describe Your Service</strong> <br/>
 
-        <strong>Select Fields You Want to Remove</strong>
+        <%=f.text_area :description, :value => @service.description %><br/>
 
-        <br/><br/>
+         <% unless @details.empty? %>
+         <%@details.each_with_index do |detail, index|%>
+            <%=f.fields_for "details_attributes[#{index}]", detail do |ff|%>
 
-        <% @service.fields.each_with_index do |d| %>
+              <%= ff.hidden_field :id %>
 
+               <%= ff.hidden_field :service_id %>
+               <%= ff.hidden_field :field_id%>
 
-        <%= f.fields_for "fields", d do |ff|%>
+              <p class="left-align">
+               <strong><%=Service::Field.find_by_id(detail.field_id).field_name %></strong>
+               <%= ff.text_field :field_value%>
+              </p>
+            <%end%>
+         <%end%>
+         <%end%>
+        <%= render 'add_field_link',:index => @service.fields.size  %>
 
-           <%=ff.check_box '_destroy' %> <%=d.field_name%>
-           <%=ff.hidden_field :field_name%>
-           <%=ff.hidden_field :field_type%>
+      <div id="service_details_fields">
 
-           <br/>
-
-        <%end%>
-
-      <%end%>
-        </p>
-        
       </div>
+  </div>
+
 
 <div class="bottom-buttons">
 
+
   <div class="button-first">
-     <%=f.submit "Save & Proceed"%>
+     <%=f.submit "Save"%>
+  </div>
+
+   <div class="button-next">
+     <%=f.submit "Proceed"%>
   </div>
 
   <div class="button-next">

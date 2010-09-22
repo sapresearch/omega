@@ -1,0 +1,10 @@
+<% require_stylesheet 'services.css'%>
+
+
+<div id="add_task_link">
+  <p class="left2">
+    <%= link_to 'Add Another Service Detail', add_field_services_url(:index => @service.fields.size, :id => @service), :remote => true%>
+
+  </p>
+
+</div>

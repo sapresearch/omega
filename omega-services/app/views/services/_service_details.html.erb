@@ -1,29 +1,40 @@
 <%=form_for @service do |f| %>
    <%= errors_for_model @service%>
    <%= f.hidden_field :service_type, :value => @s.service_type%>
+   <%= f.hidden_field :service_category, :value => @s.service_category%>    
    <%=f.hidden_field :icon, :value => @s.icon %>
+   <%=f.hidden_field :description, :value => @s.description %>
 
     <p class="left2">
-      <span class="style3">Preview Details</span>
+      <span class="style3">Preview Details</span><br/>
 
-      <%Service::Typefield.all.each do |tt| %>
-        <%if @s.id == tt.service_type_id%>
+      <br/>
+   <strong>Service Category: </strong><%=@s.service_category%> <br/>
+      <strong>Description:</strong><%=@s.description %><br/>
 
-              <br/>
-              Field Name: <%=tt.field_name%><br/>
-              Field Type: <%=tt.field_type%><br/>
+      <% unless @fields.empty? %>
 
+        <%Service::Typefield.find_all_by_field_category_and_service_id("Details", @s.id).each do |s|%>
 
-
-            <%= f.fields_for :fields do |ff|%>
-
-                <%= ff.hidden_field :field_name, :value => tt.field_name %>
-                <%= ff.hidden_field :field_type, :value => tt.field_type %>
-
-            <%end%>
+        <strong><%=s.field_name%></strong>
+        <br/>
 
         <%end%>
-    <%end%>
+
+        <br/>
+
+        <span class="style2">Registration Details</span><br/>
+
+        <%Service::Typefield.find_all_by_field_category_and_service_id("Registration",@s.id).each do |s|%>
+
+        <br/>
+
+        <strong><%=s.field_name%></strong>  <strong>(Field Type: <%=s.field_type%>)</strong>
+
+        <br/>
+
+        <%end%>
+      <%end%>
     </p>
 
     <br/>
@@ -32,10 +43,13 @@
     <div class="button-first">
       <%=f.submit "Save & Proceed"%>
     </div>
-
     <div class="button-next">
-      <%= button_to 'Cancel', new_service_url%>
+      <%= link_to 'Back', service_wizard_services_url%>
     </div>
+    <div class="button-next">
+      <%= link_to 'Cancel', new_service_url%>
+    </div>
+
 
 
 

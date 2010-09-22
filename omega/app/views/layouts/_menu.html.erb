@@ -20,6 +20,15 @@
     </li>
     <li>
       <%= link_to "Services", services_url %>
+      <div>
+        <%= link_to "All Offered Services", services_url %>
+
+        <%= link_to "Create a Service", service_wizard_services_url %>
+
+        <% if !current_user.is_anonymous? %>
+            <%= link_to "My Service Registrations", my_registrations_service_registrations_url%>
+        <% end %>
+      </div>
 
     </li>
     <% if !current_user.is_anonymous? %>
