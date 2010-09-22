@@ -38,9 +38,9 @@ $(function() {
 
 
     $ac_contacts.keyup(function() {
-        this.value == '' ? $('#clear_filter').hide() : $('#clear_filter').show();
+        this.value == '' ? $('#clear-filter').hide() : $('#clear-filter').show();
     });
-    $('#clear_filter').click(function() {
+    $('#clear-filter').click(function() {
         $ac_contacts.val('');
         $(this).hide();
     });
@@ -122,7 +122,7 @@ function update_contacts(contacts, group_id, group_name) {
             helper: 'clone',
             start: function(event, ui) {
                 var to = $(this).find('span[data-tooltip]').data('tipsy');
-                to.hide();
+                if(to != null) to.hide();
             }
         }).find('.mgm-contact').toggleClass('hide');
     });
