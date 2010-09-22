@@ -86,7 +86,9 @@ class ServicesController < ApplicationController
             @incomplete_service.destroy
           end
 
-          logger.debug "Content Type is  #{params[:service][:icon].content_type}"
+          unless params[:service][:icon].nil?
+            logger.debug "Content Type is  #{params[:service][:icon].content_type}"
+          end
 
           @service = Service.create(params[:service])
 
