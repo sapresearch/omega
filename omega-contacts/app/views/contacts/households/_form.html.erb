@@ -9,9 +9,9 @@
 
 
 			<div id="addresses">
-              <% puts "Debug: #{@contact_group.addresses.inspect}" %>
+
 				<%= f.fields_for :addresses do |a| %>
-              <% puts "Debug 2: #{a.object.inspect}" %>
+              
 					<%= render '/contacts/address_form', :f => a %>
 				<% end %>
 				<%= link_to_new_nested f, :addresses do |a| %>

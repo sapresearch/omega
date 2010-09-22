@@ -1,10 +1,12 @@
 
 
+
 .user_image{
 	background:url("/images/contact_image_bg.png");
 	width:150px;
     height:155px;
-
+    position:relative;
+    top:0;
 	float:right;
 }
 .user_image img{

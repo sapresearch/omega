@@ -100,6 +100,7 @@ $(function() {
     $('#ac_contacts').autocomplete({
         source : '/contacts/autocomplete',
         minlength: 2,
+        
         select: function(event, ui) {
 
             $(this).val('');
