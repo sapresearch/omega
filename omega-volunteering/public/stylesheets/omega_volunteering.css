@@ -118,7 +118,7 @@ span.skill_tag {
     -moz-border-radius: 12px;
     -webkit-border-radius: 12px;
     display: inline-block;
-    background: url("/images/glass.png") repeat-x scroll 0 50%
+    background: url("/images/om_button_bg.png") repeat-x bottom;
 }
 
 span.skill_tag_active {
