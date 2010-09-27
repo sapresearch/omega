@@ -1,0 +1,27 @@
+<h1><%=@calendar.calendar_name%> Calendar</h1>
+
+
+
+<table>
+  <tr>
+    <th>Events</th>
+  </tr>
+  <% for event in @events %>
+      <%if @calendar.id == event.calendar_id%>
+        <tr>
+            <td><%= link_to event.title, :controller => 'events', :action => 'show', :id => event.id %><br/>
+            </td>
+      </tr>
+      <%end%>
+  <% end %>
+</table>
+
+<p>
+  <%= link_to 'Show All Events in '+ @calendar.calendar_name+ ' Calendar', calendar_events_path(@calendar) %>
+</p>
+
+<p>
+  <%= link_to 'Add an Event to '+@calendar.calendar_name+ ' Calendar', calendar_events_path(@calendar) %>
+</p>
+
+

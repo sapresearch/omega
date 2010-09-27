@@ -250,7 +250,7 @@ $(function() {
     /**
      * visual highlight methods
      */
-    $('fieldset input[type=text],fieldset input[type=password],textarea').focus(
+    $('input[type=text],fieldset input[type=password],textarea').focus(
                                                                                function() {
                                                                                    $(this).addClass('inputActive');
                                                                                }).blur(function() {

@@ -1,0 +1,25 @@
+<% require_javascript 'Common.js','datepicker_lang_US.js','jquery.alert.js','jquery.ifrmdailog.js','wdCalendar_lang_US.js','jquery.calendar.js',  'calendars.js' %>
+<% require_stylesheet 'dailog.css','calendar.css','dp.css','alert.css','main.css', 'omega_calendars.css' %>
+
+<h1 class="page-content corners-top">
+  Calendar
+</h1>
+
+<div class="page-content corners-bottom">
+  <div id="cal">
+  </div>
+  <div id="create_event">
+
+    <%= render "/events/form", :event => Event.new(:calendar_id => 1) %>
+  </div>
+
+</div>
+
+
+
+
+
+
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_events" %>
+<% end %>

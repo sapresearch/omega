@@ -80,15 +80,15 @@
                       function(e) {
                           // get ref to the current element
                           current = $(e.target);
-                          var tp_p = current.position();
-                          var h = (tp_p.top + current.outerHeight() );
+
+                          var h = (current.offset().top + current.outerHeight() );
                           // check if there is another datepciker already opened
                           if ($timepicker.is(':visible')) {
                               $timepicker.hide();
                           }
 
 
-                          $('#time_picker').css({ position:'absolute', left: tp_p.left, top:(h + 1), width: current.outerWidth() }).show();
+                          $('#time_picker').css({ position:'absolute', left: current.offset().left , top:(h + 1), width: current.outerWidth() }).show();
 
 
                           var ct = new Date().getHours();

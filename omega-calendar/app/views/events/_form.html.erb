@@ -8,30 +8,23 @@
       <%= f.check_box :allday, :checked => true %>
     </p>
 
-
-
     <p>
       <%= f.label :start %>
-
       <%= f.text_field :start_date, :class => 'datepickr', :size => 20 %>
       <%= f.text_field :start_time, :class => 'tpickr', :size => 7 %>
     </p>
-
     <p>
       <%= f.label :end %>
       <%= f.text_field :end_date, :class => 'datepickr', :size=> 20 %>
       <%= f.text_field :end_time, :class => 'tpickr', :size => 7 %>
     </p>
-
-
     <p>
       <%= f.label :event_description %>
       <%= f.text_area :event_description %>
     </p>
     <%= f.hidden_field(:calendar_id) %>
 
-
-    <p><%= f.submit %>
-      <span id="cancel">cancel</span>
-    </p>
+ <%= om_button(:icon => 'save') do  %>
+      <%= f.submit %>
+        <% end %>
 <% end %>
