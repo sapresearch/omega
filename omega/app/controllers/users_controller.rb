@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   respond_to :html, :xml, :js, :json
   crud_helper User, :new => [:register]
-  require_permission User::PERM_VIEW,  :except => [:register]
+  require_permission User::PERM_VIEW,  :except => [:register, :create]
   require_permission User::PERM_ADMIN, :only   => [:new, :edit, :update, :destroy]
 
   def index
@@ -26,12 +26,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    case params['registration'] ? :register : :create
-      when :register
-        @user = User.register(params[:user])
-      when :create
-        require_permission User::PERM_ADMIN
-        @user = User.create(params[:user])
+    if params['registration']
+      @user = User.register(params[:user])
+    else
+      require_permission User::PERM_ADMIN
+      @user = User.create(params[:user])
     end
 
     respond_with(@user)

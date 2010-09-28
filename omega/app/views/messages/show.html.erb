@@ -2,11 +2,18 @@
   <%= @message.subject %>
 </h1>
 <div class="page-content corners-bottom">
+  <p>
+    From: <%= @message.from.first_name %> <%= @message.from.last_name %>
+  </p>
+<p>
+  Subject: <%= @message.subject %>
+</p>
+  <p>
 
-From: <%= @message.from %><br />
-To: <%= @message.to %><br />
-Subject: <%= @message.subject %><br />
-<%= @message.body %>
+  <%= @message.body %>  
+  </p>
+
+
 
 </div>
 

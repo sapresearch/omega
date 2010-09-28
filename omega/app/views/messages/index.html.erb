@@ -1,4 +1,3 @@
-
 <h1 class="page-content corners-top">
   Messages
 </h1>
@@ -17,37 +16,45 @@
   <div class="clear"></div>
 
 
-<ul id="messages_list">
-  <% @messages.each do |message| %>
-      <li class="item-list clearfix">
+  <ul id="messages_list">
+    <% @messages.each do |message| %>
+        <li class="item-list clearfix">
 
-        <h2>
+
           <% if !message.read? %>
-              dfdf
-              <% end %>
-          <%= link_to truncate(message.subject, :length=>60), message_path(message) %>
-        </h2>
+              <h3>
+                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class=> 'cf3a72 italic' %>
+              </h3>
 
-        <div class="">
-          <%= truncate(message.subject, :length=> 160) %>
-        </div>
-        <div class="right">
+          <% else %>
+              <h3>
+                <%= link_to truncate(message.subject, :length=>60), message_path(message) %>
 
-    <%= om_button(:icon=>'delete') do %>
-        <%= link_to 'Delete', message_path(message), :method=> :delete %>
+              </h3>
+          <% end %>
+
+
+
+          <div class="">
+            <%= truncate(message.body, :length=> 160) %>
+          </div>
+          <div class="right">
+
+            <%= om_button(:icon=>'delete') do %>
+                <%= link_to 'Delete', message_path(message), :method=> :delete %>
+            <% end %>
+            <%= om_button(:icon=>'mail-reply') do %>
+                <%= link_to 'Reply', reply_message_path(message) %>
+            <% end %>
+
+
+          </div>
+
+
+        </li>
+
     <% end %>
-    <%= om_button(:icon=>'mail-reply') do %>
-        <%= link_to 'Reply', reply_message_path(message) %>
-    <% end %>
- 
-
-        </div>
-
-
-      </li>
-
-  <% end %>
-</ul>
+  </ul>
 
 
 </div>

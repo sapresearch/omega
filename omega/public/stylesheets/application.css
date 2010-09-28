@@ -18,25 +18,23 @@ html, body, #wrapper {
     height: 100%;
     color: #002F67;
 
-
 }
+
 body > #wrapper {
     background-image: url("/images/om_sprite.png");
 
 }
 
-
-
 body > #wrapper {
     background-position: 48px 0;
-    background-repeat:repeat-x;
+    background-repeat: repeat-x;
     height: auto;
     min-height: 100%;
 
 }
 
 body {
-    background:  #FFF;
+    background: #FFF;
 
 }
 
@@ -70,11 +68,19 @@ h1 {
     padding: 6px 10px;
     color: #333333;
     font-weight: normal;
-    font-size: 1.3em;
+    font-size: 1.6em;
+}
+
+h1.page-content {
+    background: url("/images/bg_light.png") repeat-x bottom #f1f2f1;
+    border-color: #DDDDDD #DDDDDD #C3C3C3;
+    border-style: solid;
+    border-width: 1px;
+    text-shadow: #FFF 1px 1px 1px;
 }
 
 h2 a {
-    font-size:22px;
+    font-size: 1.5em;
     color: #00469C;
 }
 
@@ -85,7 +91,7 @@ h2 a:hover {
 h2 {
 
     color: #0063DC;
-    font-size: 1.3em;
+    font-size: 1.5em;
     font-weight: normal;
     letter-spacing: 0;
     padding: 0.2em;
@@ -93,14 +99,18 @@ h2 {
 
 h3 {
     color: #016390;
-
+    font-size: 1.1em;
+}
+h3 a {
+    font-size: 1.1em;
+    color: #187CF3;
 }
 
 p {
 
-    font-size:1.2em;
-    letter-spacing:1px;
-margin: 1em 0;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    margin: 1em 0;
 }
 
 a {
@@ -129,7 +139,7 @@ a:hover {
 }
 
 table.om-table {
-    margin:1em 0;
+    margin: 1em 0;
     width: 100%;
     font-size: 1em;
     border-collapse: collapse;
@@ -165,9 +175,17 @@ form table input {
     border: 1px solid #A2A6A7;
 }
 
+.cf3a72 {
+    color: #cf3a72;
+}
+
+.italic {
+    font-style: italic;
+}
+
 #notification-flash-wrapper {
     opacity: 0.90;
-    display:none;
+    display: none;
     width: 100%;
     position: absolute;
     left: 0;
@@ -188,12 +206,14 @@ form table input {
     height: 28px;
 
 }
-#user_custom_bar{
-    float:left;
-    position:relative;
-    top:8px;
+
+#user_custom_bar {
+    float: left;
+    position: relative;
+    top: 8px;
 
 }
+
 #user_custom_bar a {
     color: #FFF;
 
@@ -216,16 +236,19 @@ form table input {
     width: 950px;
     padding-bottom: 16em;
 }
-#breadcrumb{
-    padding:14px 0 0 0;
-    color:#646767;
+
+#breadcrumb {
+    padding: 14px 0 0 0;
+    color: #646767;
 }
+
 #breadcrumb a {
     text-shadow: #fff 1px 1px 1px;
-    text-decoration:underline;
+    text-decoration: underline;
     padding: 0 10px;
-    color:#646767;
+    color: #646767;
 }
+
 #left {
     text-align: left;
     float: left;
@@ -239,25 +262,19 @@ form table input {
     margin: 0;
     float: right;
 }
-.text-right{
-    text-align:right;
+
+.text-right {
+    text-align: right;
 }
+
 .center-content {
     width: 950px;
     margin: 0 auto;
 
 }
 
-h1.page-content {
-    background: url("/images/bg_light.png") repeat-x bottom #ecf2f4;
-border-color:#DDDDDD #DDDDDD #C3C3C3;
-border-style:solid;
-border-width:1px;
-    text-shadow: #FFF 1px 1px 1px;
-}
-
 div.page-content {
-    background:  url("/images/content_bg.png") repeat-x top #fff;;
+    background: url("/images/content_bg.png") repeat-x top #fff;;
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
@@ -273,7 +290,7 @@ div.sidebar-menu {
 h1.side-bar {
     text-shadow: #FFF 1px 1px 1px;
     margin: 0;
-    background: url("/images/bg_dark.png") bottom repeat-x #C3C3C3 ;
+    background: url("/images/bg_dark.png") bottom repeat-x #dddddd;
     color: #5E5E5E;
     padding: 5px;
 }
@@ -282,9 +299,9 @@ div.sidebar-menu-content {
     margin: 0 0 20px;
     padding: 5px;
     border-color: #9D9D9D #DDD #DDD;
-border-style:solid;
-border-width:1px;
-    background:#f2f2f2;
+    border-style: solid;
+    border-width: 1px;
+    background: #f2f2f2;
 }
 
 div.sidebar-menu-nav {
@@ -404,13 +421,15 @@ li.item-list {
 
 /* Errors and validation */
 .fieldWithErrors input, .inputInvalid {
-    background:#F09183;
-    color:#fff;
+    background: #F09183;
+    color: #fff;
     border: 1px solid #ed513b;
 }
-.fieldWithErrors label{
+
+.fieldWithErrors label {
     color: #ed513b;
 }
+
 span.error {
 
     color: #ed513b;
@@ -470,11 +489,12 @@ fieldset {
     float: left;
 }
 
-.absolute{
-    position:absolute;
+.absolute {
+    position: absolute;
 }
+
 .relative {
-    position:relative;
+    position: relative;
 
 }
 
@@ -525,7 +545,7 @@ fieldset {
 
 .inputActive {
     border: 1px solid #999;
-    background:#fff5ca;
+    background: #fff5ca;
 
 }
 
@@ -536,13 +556,12 @@ fieldset {
 
 /*========================= Form elements =====================================*/
 
-
 legend {
     margin: 1em;
 }
 
 form input, textarea, select {
-    
+
     padding: 8px;
     border: 1px solid #dedede;
     color: #191919;
@@ -567,12 +586,11 @@ a {
 =                                                                                =
 =================================================================================*/
 
-
 .om-button a, .om-button input, .om-button button, .om-icon-button a, .om-icon-button input, .om-icon-button button {
     position: relative;
     text-transform: capitalize;
     line-height: 18px;
-    height:18px;
+    height: 18px;
     color: #002A5C;
     background: none;
     display: inline-block;
@@ -582,17 +600,18 @@ a {
     padding: 3px 6px;
     outline: none;
     border: none;
-    vertical-align:bottom;
-
-   
+    vertical-align: bottom;
 
 }
-.om-button input,.om-icon-button input{
-    
+
+.om-button input, .om-icon-button input {
+
 }
-.om-icon-button a{
-   padding: 1px 8px;
+
+.om-icon-button a {
+    padding: 1px 8px;
 }
+
 .om-button button {
     width: auto;
     overflow: visible;
@@ -618,7 +637,7 @@ span.om-icon-button {
 }
 
 span.om-plain-button, span.om-plain-icon-button {
-position:relative;
+    position: relative;
     display: inline-block;
     height: 16px;
     margin: 0 0 0 30px;
@@ -632,34 +651,34 @@ span.om-button span.om-icon,
 span.om-icon-button span.om-icon,
 span.om-plain-button span.om-icon,
 span.om-plain-icon-button span.om-icon,
-    .om-icon-only, .om-footer-symbol {
+.om-icon-only, .om-footer-symbol {
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
 
-.om-footer-symbol{
+.om-footer-symbol {
     display: inline-block;
-    width:64px;
-    height:48px;
-}
-.om-footer-twitter{
-    background-position:0 -464px;
-}
-.om-footer-rss{
-    background-position:0 -512px;
-}
-.om-footer-calendar{
-    background-position:0 -560px;
+    width: 64px;
+    height: 48px;
 }
 
+.om-footer-twitter {
+    background-position: 0 -464px;
+}
 
+.om-footer-rss {
+    background-position: 0 -512px;
+}
 
+.om-footer-calendar {
+    background-position: 0 -560px;
+}
 
 .om-icon-only {
     margin: 0 2px;
     cursor: pointer;
     display: inline-block;
-    *display:inline;
+    *display: inline;
     *zoom: 1;
     height: 14px;
     width: 14px;
@@ -689,7 +708,6 @@ span.om-icon-button span.om-icon,
 span.om-plain-button span.om-icon,
 span.om-plain-icon-button span.om-icon {
 
-
     position: absolute;
     top: 2px;
     margin: 0 0 0 -20px;
@@ -714,10 +732,12 @@ span.om-icon-button span.om-icon {
 .om-icon-edit {
     background-position: 0 -48px;
 }
+
 .om-icon-delete-icon {
     background-position: 0 -64px;
 
 }
+
 .om-icon-delete-small {
     background-position: 0 -80px;
 
@@ -802,18 +822,23 @@ span.om-icon-back {
 .om-icon-clock {
     background-position: 0 -416px;
 }
+
 .om-icon-favorite {
     background-position: 0 -432px;
 }
+
 .om-icon-arrow-move {
     background-position: 0 -448px;
 }
+
 .om-icon-magnifier-m {
     background-position: 0 -720px;
 }
+
 .om-icon-calendar-next {
     background-position: 0 -736px;
 }
+
 .om-icon-calendar-prev {
     background-position: 0 -752px;
 }
@@ -836,7 +861,7 @@ form label {
     color: #0063dc;
     display: inline-block;
     *zoom: 1;
-    *display:inline;
+    *display: inline;
 
     font-weight: bold;
     min-width: 120px;
@@ -864,7 +889,7 @@ div.pagination a {
     border: 1px solid #BBBBBB;
     color: #002A5C !important;
     margin-right: 4px;
-   padding: 2px 6px 1px;
+    padding: 2px 6px 1px;
     text-decoration: none !important;
     text-shadow: 0 1px 0 #FFFFFF;
     background: url("/images/om_button_bg.png") repeat-x scroll center bottom transparent;
@@ -882,7 +907,7 @@ div.pagination em {
 }
 
 div.pagination a:hover {
-    border:1px solid #0063dc;
+    border: 1px solid #0063dc;
     text-shadow: none !important;
     color: #fff !important;
     background: url("/images/details_bg.png") repeat-x scroll center bottom transparent;
@@ -893,7 +918,7 @@ div.pagination span.disabled {
     border: 1px solid #e3e3e3;
     color: #999 !important;
     margin-right: 4px;
-   padding: 2px 6px 1px;
+    padding: 2px 6px 1px;
     text-decoration: none !important;
     text-shadow: 0 1px 0 #FFFFFF;
 
@@ -916,8 +941,8 @@ form span.error {
     border: 4px solid #056136;
     padding: 1em;
     font-weight: bold;
-    background:#3EB17B;
-    color:#fff;
+    background: #3EB17B;
+    color: #fff;
 }
 
 /* must be same height as the footer */
@@ -938,29 +963,34 @@ form span.error {
     -webkit-border-radius: 4px;
 
 }
-#footer table{
-    width:100%;
 
-    text-align:center;
+#footer table {
+    width: 100%;
+
+    text-align: center;
 }
+
 #footer h1 {
-    color:#ddd;
-        text-shadow: #333 1px 1px 0px;
+    color: #ddd;
+    text-shadow: #333 1px 1px 0px;
 }
+
 #footer table td {
 
-    vertical-align:top;
-    color:#666;
+    vertical-align: top;
+    color: #666;
 }
 
-#footer div.footer-content{
-    padding:1em;
-    text-align:left;
+#footer div.footer-content {
+    padding: 1em;
+    text-align: left;
 }
-#footer span.date{
-    padding:0 10px 0 0;
-    color:#C7CCCD;
+
+#footer span.date {
+    padding: 0 10px 0 0;
+    color: #C7CCCD;
 }
+
 /* CLEAR FIX*/
 .clearfix:after {
     content: ".";
@@ -981,7 +1011,6 @@ form span.error {
 
 /* End hide from IE-mac */
 
-
 #loginWrapper {
     display: none;
 
@@ -994,7 +1023,7 @@ form span.error {
 }
 
 #ctlrBar {
-    color:#448BE2;
+    color: #448BE2;
     margin-left: 1em;
     height: 28px;
     line-height: 28px;
@@ -1057,15 +1086,14 @@ td h4 {
 /** dropdown **/
 dl.drop_down {
 
-
-    -moz-border-radius:3px 3px 3px 3px;
-background:url("../images/om_button_bg.png") repeat-x scroll center bottom transparent;
-border-color:#CCCCCC #BBBBBB #A0A0A0;
-border-style:solid;
-border-width:1px;
-display:inline-block;
-height:20px;
-margin:0;
+    -moz-border-radius: 3px 3px 3px 3px;
+    background: url("../images/om_button_bg.png") repeat-x scroll center bottom transparent;
+    border-color: #CCCCCC #BBBBBB #A0A0A0;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+    height: 20px;
+    margin: 0;
 }
 
 .drop_down dd, .drop_down dt, .drop_down ul {
@@ -1077,14 +1105,11 @@ margin:0;
     position: relative;
 }
 
-
-
-
 .drop_down dt a {
 
     display: block;
     padding-right: 20px;
-color:#191919;
+    color: #191919;
     width: 150px;
 }
 
@@ -1094,12 +1119,9 @@ color:#191919;
     display: block;
     padding: 2px;
 
-
 }
 
 .drop_down dd ul {
-
-
 
     display: none;
     left: 0px;
@@ -1109,13 +1131,13 @@ color:#191919;
     width: auto;
     min-width: 170px;
     list-style: none;
-        -moz-border-radius:3px 3px 3px 3px;
-background:#e9e9e9;
-border-color:#CCCCCC #BBBBBB #A0A0A0;
-border-style:solid;
-border-width:1px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    background: #e9e9e9;
+    border-color: #CCCCCC #BBBBBB #A0A0A0;
+    border-style: solid;
+    border-width: 1px;
 
-margin:0;
+    margin: 0;
 
 }
 
@@ -1154,6 +1176,7 @@ margin:0;
     background: #1484E6;
     color: #FFF !important;
 }
+
 .search_wrapper_l {
     display: inline-table;
     color: #fff;
@@ -1230,10 +1253,9 @@ margin:0;
     height: 160px;
 }
 
-
 /************ calendar list ********************/
 .pos-date {
-   margin: 0 10px 0 0 ;
+    margin: 0 10px 0 0;
     background: url("/images/cal_bg.png") no-repeat;
     text-align: center;
     font-size: 1.3em;
@@ -1243,6 +1265,7 @@ margin:0;
     height: 40px;
 
 }
+
 .pos-cal-month {
 
     color: #FFF;
@@ -1255,27 +1278,31 @@ margin:0;
     color: #fff;
 }
 
-
 /******************************** overwrite jquery ui **************/
 .ui-widget {
     font: 12px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.ui-widget-content a{
-    color:#162D3D ;
+
+.ui-widget-content a {
+    color: #162D3D;
 }
-.ui-icon{
-    display:inline-block !important;
+
+.ui-icon {
+    display: inline-block !important;
 }
+
 .ui-autocomplete {
-		max-height: 140px;
-		overflow-y: auto;
-	}
-/* reset */
-.ui-dialog fieldset{
-border:none;
-    margin:0px;
-padding:4px;
+    max-height: 140px;
+    overflow-y: auto;
 }
-.ui-widget select, .ui-widget input{
-    padding:2px;
+
+/* reset */
+.ui-dialog fieldset {
+    border: none;
+    margin: 0px;
+    padding: 4px;
+}
+
+.ui-widget select, .ui-widget input {
+    padding: 2px;
 }
