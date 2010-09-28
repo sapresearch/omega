@@ -8,6 +8,7 @@ Omega::Tram.routes.draw do
   resources :users do
     collection do
       get :register
+       get :autocomplete
     end
   end
 
