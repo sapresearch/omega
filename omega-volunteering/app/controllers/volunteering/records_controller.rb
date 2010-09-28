@@ -2,8 +2,7 @@ class Volunteering::RecordsController < ApplicationController
   respond_to :html, :xml, :json, :js
 
   require_permission Volunteering::PERM_VIEW
-  require_permission Volunteering::PERM_ADMIN, :only => [:new_all, :pending_all, :complete_all, :admin_actions, :admin_page ]
-
+  require_permission Volunteering::PERM_ADMIN
 
    def index
       @records = Volunteering::Record.all
