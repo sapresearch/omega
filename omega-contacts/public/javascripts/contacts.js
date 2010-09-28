@@ -129,15 +129,7 @@ function update_contacts(contacts, group_id, group_name) {
 
 
         $contacts.find('a.remove-contact').bind("ajax:success", function() {
-
-        var t = $(this).find('span').data('tipsy');
-        if (t.hoverState == 'in') {
-            t.hide();
-        }
-
-
         $(this).closest('tr').remove();
-
     });
 
 

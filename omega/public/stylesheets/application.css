@@ -811,7 +811,12 @@ span.om-icon-back {
 .om-icon-magnifier-m {
     background-position: 0 -720px;
 }
-
+.om-icon-calendar-next {
+    background-position: 0 -736px;
+}
+.om-icon-calendar-prev {
+    background-position: 0 -752px;
+}
 
 /*END BUTTONS*/
 

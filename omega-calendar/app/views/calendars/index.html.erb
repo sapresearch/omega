@@ -6,14 +6,20 @@
 </h1>
 
 <div class="page-content corners-bottom">
-  		<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
-			<button id="BtnPreviousMonth">Previous Month</button>
-			<button id="BtnNextMonth">Next Month</button>
-			&nbsp;&nbsp;&nbsp;
-			Date: <input type="text" id="dateSelect" size="20"/>
-			&nbsp;&nbsp;&nbsp;
-			<button id="BtnDeleteAll">Delete All</button>
-		</div>
+  <div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
+    <%= om_button(:plain => true, :icon => 'calendar-prev' ) do %>
+        <span id='BtnPreviousMonth'>Previous Month</span>
+    <% end %>
+    <%= om_button(:plain => true, :icon => 'calendar-next') do %>
+        <span id="BtnNextMonth">Next Month</span>
+    <% end %>
+    &nbsp;&nbsp;&nbsp;
+    Date: <input type="text" id="dateSelect" size="20"/>
+
+
+
+
+  </div>
   <div id="cal">
   </div>
   <div id="create_event">
