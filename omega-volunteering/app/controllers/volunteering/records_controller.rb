@@ -15,17 +15,17 @@ class Volunteering::RecordsController < ApplicationController
     end
 
     def new_all
-      @records = Volunteering::Record.find_all_by_status('New')
+      @records = Volunteering::Record.find(:all, :conditions => ['status = ?', "Applied"])
       respond_with(@records)
     end
 
     def pending_all
-      @records = Volunteering::Record.find_all_by_status('Pending')
+      @records = Volunteering::Record.find(:all, :conditions => ['status = ?', "Pending"])
       respond_with(@records)
     end
 
     def complete_all
-      @records = Volunteering::Record.find_all_by_status('Complete')
+      @records = Volunteering::Record.find(:all, :conditions => ['status = ?', "Complete"])
       respond_with(@records)
     end
 
