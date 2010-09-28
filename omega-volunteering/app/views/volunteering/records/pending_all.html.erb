@@ -11,15 +11,9 @@
 
 <% @records.each do |a| %>
 
-
-
     <strong><%=a.contact.first_name%> <%=a.contact.last_name%></strong>
     <%= link_to "(Show)", volunteering_record_url(a) %><br/>
     <%= a.position.name %> <br/>
-
-
-    
-
 
     
 <%end%>

@@ -15,7 +15,7 @@ class Volunteering::RecordsController < ApplicationController
     end
 
     def new_all
-      @records = Volunteering::Record.find_all_by_status('Applied')
+      @records = Volunteering::Record.find_all_by_status('New')
       respond_with(@records)
     end
 
