@@ -10,13 +10,12 @@
 
 <% @records.each do |a| %>
 
-  <% position = Volunteering::Position.find_by_id(a.position_id) %>
-  <% contact = Contact.find_by_id(a.contact_id) %>
+
 
     <p>
-      <strong><%=contact.first_name%> <%=contact.last_name%></strong>
+      <strong><%=@record.contact.first_name%> <%=@record.contact.last_name%></strong>
       <%= link_to "(Show)", volunteering_record_url(a) %><br/>
-    <%= position.name %> <br/>
+    <%= @record.position.name %> <br/>
 
 
   </p>
