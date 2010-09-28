@@ -65,7 +65,7 @@ Style for previous month and next month day cells.
 .JFrontierCal .JFrontierCal-NextMonth-Day-Cell-Last {
 	background-color: #cccccc;
 	color: #999999;
-	background-image:url('images/dayCellOtherMonth.png');
+
 	background-repeat:repeat-y;
 }
 /*
@@ -89,7 +89,7 @@ Style for current date day cell
 	background-color: #d6e2ff;
 	color: #444444;
 	/*background-image: none;*/
-	background-image:url('images/dayCellToday.png');
+
 }
 /*
 Style for header cells (day name cells at top of calendar)
@@ -165,6 +165,11 @@ Style for agenda items. These are simply default values. Some values can be conf
 	white-space: nowrap;
 	text-align: left;
 }
+.JFrontierCal-Agenda-Item > span{
+    text-indent:4px;
+    font-size:11px;
+}
+
 /*
 Style for the "more" link seen when not all agenda items fit within a day cell.
 */

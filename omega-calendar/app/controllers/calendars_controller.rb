@@ -1,6 +1,7 @@
 class CalendarsController < ApplicationController
 
   respond_to :html, :xml, :js, :json
+  breadcrumb 'Calendar' => :calendars
 
   
 

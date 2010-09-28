@@ -7,13 +7,11 @@
  */
 
 $(document).ready(function() {
-    $('form').find('.tpickr').timepicker()
-
-    // store the current event object
-    var curent_event;
-
-
-    var $create_event = $('#create_event');
+    $('form').find('.tpickr').timepicker();
+    // jquery selector caching
+    $addeventform = $('#add-event-form');
+    $dateSelect  = $('#dateSelect');
+    $displayeventform = $('#display-event-form');
 
 
     /**
@@ -42,7 +40,7 @@ $(document).ready(function() {
         // store date in our global js variable for access later
         clickDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         // open our add event dialog
-        $('#add-event-form').dialog('open');
+        $addeventform.dialog('open');
     }
 
     ;
@@ -58,11 +56,9 @@ $(document).ready(function() {
         // pull agenda item from calendar
         var agendaItem = jfcalplugin.getAgendaItemById("#cal", agendaId);
         clickAgendaItem = agendaItem;
-        $("#display-event-form").dialog('open');
-    }
 
-    ;
-    ;
+        $displayeventform.dialog('open');
+    };
     /**
      * get the agenda item that was dropped. It's start and end dates will be updated.
      */
@@ -88,7 +84,7 @@ $(document).ready(function() {
         var cmonth = calDate.getMonth();
         var cday = calDate.getDate();
         // jquery datepicker month starts at 1 (1=January) so we add 1
-        $("#dateSelect").datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
+        $dateSelect.datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
 
         var startDate = jfcalplugin.getStartDate('#cal');
         var endDate = jfcalplugin.getEndDate('#cal');
@@ -110,28 +106,12 @@ $(document).ready(function() {
         var cmonth = calDate.getMonth();
         var cday = calDate.getDate();
         // jquery datepicker month starts at 1 (1=January) so we add 1
-        $("#dateSelect").datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
+        $dateSelect.datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
         var startDate = jfcalplugin.getStartDate('#cal');
         var endDate = jfcalplugin.getEndDate('#cal');
 
         jfcalplugin.loadICalSource("#cal", "calendars/1/events.ics?startDate=" + startDate + '&endDate=' + endDate, "application/octet-stream");
         return false;
-    });
-
-
-    function reset_form(em) {
-        em.find('input[type="text"]').attr('value', '');
-        em.find('input[type="checkbox"]').attr('checked', true);
-        em.find('.tpickr').hide();
-        $('time_picker').remove();
-    }
-
-
-    $('#new_event').bind('ajax:success', function() {
-
-        reset_form($(this))
-
-
     });
 
 
@@ -145,7 +125,7 @@ $(document).ready(function() {
     /**
      * Initialize jquery ui datepicker. set date format to yyyy-mm-dd for easy parsing
      */
-    $("#dateSelect").datepicker({
+    $dateSelect.datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
         changeMonth: true,
@@ -156,14 +136,14 @@ $(document).ready(function() {
     /**
      * Set datepicker to current date
      */
-    $("#dateSelect").datepicker('setDate', new Date());
+    $dateSelect.datepicker('setDate', new Date());
 
 
     /**
      * Use reference to plugin object to a specific year/month
      */
-    $("#dateSelect").bind('change', function() {
-        var selectedDate = $("#dateSelect").val();
+    $dateSelect.bind('change', function() {
+        var selectedDate = $dateSelect.val();
         var dtArray = selectedDate.split("-");
         var year = dtArray[0];
         // jquery datepicker months start at 1 (1=January)
@@ -181,7 +161,7 @@ $(document).ready(function() {
     /**
      * Initialize add event modal form
      */
-    $("#add-event-form").dialog({
+    $addeventform.dialog({
         autoOpen: false,
         height: 400,
         width: 500,
@@ -215,20 +195,28 @@ $(document).ready(function() {
             $("#what").focus();
         },
         close: function() {
-            // reset form elements when we close so they are fresh when the dialog is opened again.
-            $("#event_start_date").datepicker("destroy");
-            $("#event_end_date").datepicker("destroy");
-            $("#event_start_date").val("");
-            $("#event_end_date").val("");
-            $('#event_title').val('');
-            $('#event_event_description').val('');
+            $('#new_event').find('input[typen!=hidden]').val('')
+
+//            // reset form elements when we close so they are fresh when the dialog is opened again.
+//            $("#event_start_date").datepicker("destroy");
+//            $("#event_end_date").datepicker("destroy");
+//            $("#event_start_date").val("");
+//            $("#event_end_date").val("");
+//            $('#event_title').val('');
+//            $('#event_event_description').val('');
+//            $('#event_start_time').val('')
         }
+    });
+
+
+    $('#new_event').bind('ajax:success', function() {
+        $addeventform.dialog('close');
     });
 
     /**
      * Initialize display event form.
      */
-    $("#display-event-form").dialog({
+    $displayeventform.dialog({
         autoOpen: false,
         height: 500,
         width: 500,
@@ -252,33 +240,35 @@ $(document).ready(function() {
         },
         open: function(event, ui) {
             if (clickAgendaItem != null) {
+                var data = clickAgendaItem.data;
                 var title = clickAgendaItem.title;
                 var startDate = clickAgendaItem.startDate;
                 var endDate = clickAgendaItem.endDate;
                 var allDay = clickAgendaItem.allDay;
-                var data = clickAgendaItem.data;
+
                 // in our example add agenda modal form we put some fake data in the agenda data. we can retrieve it here.
-                $("#display-event-form").append(
-                        "<br><b>" + title + "</b><br><br>"
-                        );
+                var append = '';
+
+                        append += "<h2>" + title + "</h2>";
+
                 if (allDay) {
-                    $("#display-event-form").append(
-                            "(All day event)<br><br>"
-                            );
+
+                          append +=  "(All day event)<br><br>"
+
                 } else {
-                    $("#display-event-form").append(
-                            "<b>Starts:</b> " + startDate + "<br>" +
-                                    "<b>Ends:</b> " + endDate + "<br><br>"
-                            );
+
+                           append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Starts:' + startDate + "<br>"
+                           append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Ends:' + endDate + "<br><br>"
+
                 }
-                for (var propertyName in data) {
-                    $("#display-event-form").append("<b>" + propertyName + ":</b> " + data[propertyName] + "<br>");
-                }
+                $displayeventform.append( append);
+
+
             }
         },
         close: function() {
             // clear agenda data
-            $("#display-event-form").html("");
+            $displayeventform.html("");
         }
     });
 
