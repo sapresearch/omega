@@ -250,7 +250,7 @@ $(function() {
     /**
      * visual highlight methods
      */
-    $('fieldset input[type=text],fieldset input[type=password],textarea').focus(
+    $('input[type=text],fieldset input[type=password],textarea').focus(
                                                                                function() {
                                                                                    $(this).addClass('inputActive');
                                                                                }).blur(function() {
@@ -312,9 +312,7 @@ $(function() {
         $(".drop_down dd ul").hide();
 
     });
-    function getSelectedValue(id) {
-        return id;
-    }
+
 
     $(document).bind('click', function(e) {
         var $clicked = $(e.target);
@@ -323,20 +321,7 @@ $(function() {
     });
 
 
-    $('.search_wrapper_l').hover(
-                                function() {
-                                    $(this).addClass('search_wrapper_hover');
-                                },
-                                function() {
-                                    $(this).removeClass('search_wrapper_hover').find('input').blur();
 
-                                }).find('input').focus(
-                                                      function() {
-
-                                                          $(this).val('').parent().removeClass('search_wrapper_hover').addClass('search_wrapper_focus');
-                                                      }).blur(function() {
-        $(this).val('Search..').parent().removeClass('search_wrapper_focus');
-    });
 
 
 });

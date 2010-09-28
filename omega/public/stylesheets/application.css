@@ -524,7 +524,8 @@ fieldset {
 }
 
 .inputActive {
-    border: 1px solid #148bf3;
+    border: 1px solid #999;
+    background:#fff5ca;
 
 }
 
@@ -535,25 +536,16 @@ fieldset {
 
 /*========================= Form elements =====================================*/
 
-form p {
-    padding: 0.5em;
-}
-
-div.form {
-    background: url("../images/form_bg.gif") bottom repeat-x;
-    margin: 0 1em;
-
-}
 
 legend {
     margin: 1em;
 }
 
 form input, textarea, select {
-    background: url("../images/textinputbg.gif") repeat-x scroll 0 0 #FFFFFF;
-    padding: 0.3em;
+    
+    padding: 8px;
     border: 1px solid #dedede;
-    color: #284966;
+    color: #191919;
 }
 
 input {
@@ -580,21 +572,27 @@ a {
     position: relative;
     text-transform: capitalize;
     line-height: 18px;
-    height: 18px;
+    height:18px;
     color: #002A5C;
-    vertical-align: middle;
     background: none;
     display: inline-block;
-    font: 12px "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
     white-space: nowrap;
     overflow: visible;
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 3px 6px;
     outline: none;
     border: none;
+    vertical-align:bottom;
+
+   
 
 }
-
+.om-button input,.om-icon-button input{
+    
+}
+.om-icon-button a{
+   padding: 1px 8px;
+}
 .om-button button {
     width: auto;
     overflow: visible;
@@ -622,7 +620,7 @@ span.om-icon-button {
 span.om-plain-button, span.om-plain-icon-button {
 position:relative;
     display: inline-block;
-    height: 20px;
+    height: 16px;
     margin: 0 0 0 30px;
 }
 
@@ -813,7 +811,12 @@ span.om-icon-back {
 .om-icon-magnifier-m {
     background-position: 0 -720px;
 }
-
+.om-icon-calendar-next {
+    background-position: 0 -736px;
+}
+.om-icon-calendar-prev {
+    background-position: 0 -752px;
+}
 
 /*END BUTTONS*/
 
@@ -830,10 +833,13 @@ form input.datepicker {
 }
 
 form label {
-    color: #C2366B;
+    color: #0063dc;
     display: inline-block;
+    *zoom: 1;
+    *display:inline;
+
     font-weight: bold;
-    min-width: 130px;
+    min-width: 120px;
     text-align: right;
 
     text-transform: capitalize;
@@ -1251,7 +1257,7 @@ margin:0;
 
 
 /******************************** overwrite jquery ui **************/
-.ui-wdiget {
+.ui-widget {
     font: 12px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .ui-widget-content a{
@@ -1264,3 +1270,12 @@ margin:0;
 		max-height: 140px;
 		overflow-y: auto;
 	}
+/* reset */
+.ui-dialog fieldset{
+border:none;
+    margin:0px;
+padding:4px;
+}
+.ui-widget select, .ui-widget input{
+    padding:2px;
+}

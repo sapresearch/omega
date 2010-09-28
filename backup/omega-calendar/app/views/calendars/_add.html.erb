@@ -1,0 +1,40 @@
+<%= form_for @event do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.hidden_field :calendar_id, :value => @calendar.id %>
+  </p>
+
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :start %>
+    <%= f.text_field :start %> Format: YYYY-MM-DD
+  </p>
+
+  <p>
+    <%= f.label :end %>
+    <%= f.text_field :end%> Format: YYYY-MM-DD
+  </p>
+
+  <p>
+   <%= f.label :allday %>
+    <%= f.text_area :allday%>
+  </p>
+
+   <p>
+   <%= f.label :url %>
+    <%= f.text_area :url%>
+  </p>
+
+  <p>
+   <%= f.label :event_description %>
+    <%= f.text_area :event_description%>
+  </p>
+
+
+  <p><%= f.submit %></p>
+<% end %>

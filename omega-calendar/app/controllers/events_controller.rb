@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 
   respond_to :html, :xml, :js, :json
+  respond_to :ics, :only => [:index]
   
 
  def index

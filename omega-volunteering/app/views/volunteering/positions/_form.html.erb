@@ -30,14 +30,14 @@
 
       <p>
         <%= f.label :start_date %>
-        <%= f.text_field :start_date_nr, :class=>'datepickr', :size=>10 %>
-        <%= f.text_field :starttime_nr, :class=>'tpickr', :size=>10 %>
+        <%= f.text_field :start_date_nr, :class=>'datepickr', :size=>10 , :autocomplete => 'off'%>
+        <%= f.text_field :starttime_nr, :class=>'tpickr', :size=>10 , :autocomplete => 'off'%>
       </p>
 
       <p>
         <%= f.label :end_date %>
-        <%= f.text_field :end_date_nr, :class=>'datepickr', :size=>10 %>
-        <%= f.text_field :endtime_nr, :class=>'tpickr', :size=>10 %>
+        <%= f.text_field :end_date_nr, :class=>'datepickr', :size=>10 , :autocomplete => 'off'%>
+        <%= f.text_field :endtime_nr, :class=>'tpickr', :size=>10 , :autocomplete => 'off'%>
       </p>
     </div>
     <div id="scheduler">

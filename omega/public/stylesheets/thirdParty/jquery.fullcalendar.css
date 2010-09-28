@@ -167,14 +167,14 @@ h2.fc-header-title{
 	
 .fc-header .fc-state-default,
 .fc-header .fc-state-default a {
-	border-color: #777; /* outer border */
+	border-color: #ddd; /* outer border */
 	color: #333;
     float:left;
 	}
 
 .fc-header .fc-state-default span {
-	border-color: #fff #fff #d1d1d1; /* inner border */
-	background: #e8e8e8;
+	border-color: #fff #fff #f2f2f2; /* inner border */
+	background: url("/images/om_button_bg.png") repeat-x scroll center bottom transparent;
 	}
 	
 /* PRESSED button COLORS (down and active) */
