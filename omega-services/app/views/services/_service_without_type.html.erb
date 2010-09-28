@@ -1,5 +1,5 @@
 <%=form_for @service, :html => {:multipart => true} do |f| %>
-   <%= errors_for_model @service%>
+   <%= errors_for_form @service%>
 
 
     <p class="left2">
@@ -16,8 +16,6 @@
 
 
       <br/>
-      <strong><%#=f.label :icon%></strong>
-      <%#=f.text_field :icon%>
 
       <strong><%=f.label :icon%></strong>
       <%=f.file_field :icon%>
@@ -32,11 +30,8 @@
        <%= f.fields_for :type do |s| %>
 
               <%= s.hidden_field :service_type%>
-
               <%= s.hidden_field :service_category%> <br/>
-
               <%=s.hidden_field :icon%>
-
               <%= s.hidden_field :description%>
 
 

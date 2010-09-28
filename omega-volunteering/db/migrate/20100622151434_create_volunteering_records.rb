@@ -5,6 +5,9 @@ class CreateVolunteeringRecords < ActiveRecord::Migration
       t.references :contact,  :null => false
       t.string     :status,   :null => false
       t.text       :notes
+      t.string     :action
+      t.text       :more_information
+      t.text       :admin_notes
       t.timestamps
     end
   end

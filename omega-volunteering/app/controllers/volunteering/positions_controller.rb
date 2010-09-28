@@ -1,5 +1,6 @@
 class Volunteering::PositionsController < ApplicationController
   respond_to :html, :xml, :json, :js
+  
   require_permission Volunteering::PERM_VIEW
   require_permission Volunteering::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 

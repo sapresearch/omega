@@ -1,0 +1,29 @@
+<h2><strong>Admin Actions</strong></h2>
+
+<%=form_for @record do |f| %>
+
+    <%= f.hidden_field :id%>
+
+    <br/>
+    <strong>Action </strong> <br/>
+
+    <% ["Accept","Reject","More Information"].each do |v| %>
+        <%= f.radio_button :action, v, {:checked => "checked"} %> <%=v%> <br/>
+    <%end%>
+
+    <br/>
+
+    <br/>
+    <strong>More Information </strong> <br/>
+
+    <%=f.text_area :more_information%> <br/>
+
+    <br/>
+    <strong>Notes </strong> <br/>
+    
+    <%=f.text_area :admin_notes%> <br/>
+
+    <br/>
+    <%=f.submit "Submit"%>
+
+<%end%>

@@ -9,12 +9,18 @@
         <%= link_to "Create a position", new_volunteering_position_path %>
 
 
+        <% if (!current_user.is_anonymous?)%>
+
+              <%= link_to "My Positions", my_positions_volunteering_positions_path %>
+              <%= link_to "My Time Sheets", my_time_sheets_volunteering_positions_path %>
 
 
-        <% if !current_user.is_anonymous? %>
-            <%= link_to "My Positions", my_positions_volunteering_positions_path %>
-            <%= link_to "My Time Sheets", my_time_sheets_volunteering_positions_path %>
+            <%if current_user.has_permission?("users_admin") %>
+               <%= link_to "Applications", admin_page_volunteering_records_path %>
+            <%end%>
+
         <% end %>
+
       </div>
 
     </li>
