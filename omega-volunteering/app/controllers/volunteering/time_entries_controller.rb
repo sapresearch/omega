@@ -2,8 +2,7 @@ class Volunteering::TimeEntriesController < ApplicationController
 
   respond_to :html, :xml, :json, :js
 
-  require_permission Volunteering::PERM_VIEW
-  require_permission Volunteering::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
+  PERM_RECORD_OWN_HOURS = 'users_view'
 
   breadcrumb 'Volunteering' => :volunteering
   breadcrumb 'Time Entries' => :my_time_sheets_volunteering_positions

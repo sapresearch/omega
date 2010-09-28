@@ -1,0 +1,33 @@
+<h2> <strong> New Applications </strong> </h2>
+
+<br/>
+
+<% if @records.empty? %>
+
+    <h3> <strong> No New Applications Yet! </strong> </h3>
+
+<%end%>
+
+
+<% @records.each do |a| %>
+
+  <% position = Volunteering::Position.find_by_id(a.position_id) %>
+  <% contact = Contact.find_by_id(a.contact_id) %>
+
+   <p>
+      <strong><%=contact.first_name%> <%=contact.last_name%></strong>
+     <%= link_to "(Show)", volunteering_record_url(a) %><br/>
+      <%= position.name %> <br/>
+
+
+  
+   </p>
+
+
+    
+<%end%>
+
+<p>
+  <%= link_to "Back", admin_page_volunteering_records_url %>
+<br/>
+</p>

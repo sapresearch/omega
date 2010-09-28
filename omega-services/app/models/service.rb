@@ -7,8 +7,11 @@ class Service < ActiveRecord::Base
 
    has_one :type
 
+   has_one :event
 
-   accepts_nested_attributes_for :fields, :details, :type, :allow_destroy => true
+   validates_presence_of :service_type
+
+   accepts_nested_attributes_for :fields, :details, :type, :event, :allow_destroy => true
 
 
    has_attached_file :icon, :styles => { :small => "65x65>" },

@@ -18,8 +18,17 @@ Omega::Volunteering::Tram.routes.draw do
     resources :schedules
     resources :days
 
-    resources :records
+    resources :records do
+      collection do
+        get :new_all
+        get :pending_all
+        get :complete_all
+        get :admin_page
+        get :admin_action
+      end
+    end
     resources :time_entries
+
 
     root :to => 'volunteering#index', :as => ''
   end

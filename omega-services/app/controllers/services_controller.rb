@@ -36,7 +36,6 @@ class ServicesController < ApplicationController
        end
 
        @current_service = session[:service_id]
-
        session[:service_id] = params[:id]
 
        unless @service.nil?
@@ -76,9 +75,7 @@ class ServicesController < ApplicationController
          @current_step = session[:current_step]
          redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => session[:service_id])
 
-
-
-      else if (params[:commit] == "Save & Proceed")
+       else if (params[:commit] == "Save & Proceed")
           @current_step = session[:current_step]
           @incomplete_service = Service.find_by_id(session[:service_id])
 
@@ -92,15 +89,16 @@ class ServicesController < ApplicationController
 
           @service = Service.create(params[:service])
 
-          redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => @service.id)
-            
+          if @service.valid?
+            redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => @service.id)
+          else
+            logger.debug "Errors:  #{@service.errors}"
+            redirect_to service_wizard_services_url(:step => @current_step, :id => @service.id)
 
-      end
-
-      end
-
+          end
+       end
+       end
      end
-
 
      def edit
        @service = Service.find(params[:id])
@@ -116,20 +114,16 @@ class ServicesController < ApplicationController
       }
       end
 
-
       @current_step = session[:current_step]
 
         if (params[:commit] == "Save")
-          
           @service.save
           redirect_to service_wizard_services_url(:step => @current_step, :id => @service.id)
-
         end
         if (params[:commit] == "Proceed")
           redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => @service.id)
 
         end
-
      end
 
      def finalize
@@ -164,9 +158,7 @@ class ServicesController < ApplicationController
        @service = Service.new
        @service.build_type
        render :partial => 'service_without_type'
-
      end
-
 
      def get_type
        @service = Service.new

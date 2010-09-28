@@ -30,21 +30,20 @@
   
 <%= form_for @service, :action => "service_wizard" do |f| %>
       <%= errors_for_form(@service, 'service') %>
-
-
+      
       <div class="split-line">
 
         <p class="left2">
-
 
         <span class="style1">Customize Registration Details</span> <br/>
 
         <%unless @fields.empty?%>
 
          <%@fields.each_with_index do |field, index|%>
+
             <%=f.fields_for "fields_attributes[#{index}]", field do |ff|%>
 
-              <%= ff.hidden_field :id %>
+               <%= ff.hidden_field :id %>
 
                <%= ff.hidden_field :service_id %>
                <%= ff.hidden_field :field_category%>

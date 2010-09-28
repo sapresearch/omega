@@ -70,8 +70,8 @@ class User < ActiveRecord::Base
   end
 
   def has_permission?(permission)
-    true
-    #permissions.collect(&:value).include?(permission)
+    permissions.map(&:value).include?(permission)
+
   end
 
   def is_anonymous?
