@@ -61,14 +61,10 @@ class Volunteering::RecordsController < ApplicationController
       case params[:volunteering_record][:action]
         when 'More Information'
           params[:volunteering_record][:status] = 'Pending'
-          params[:volunteering_record][:action] = 'More Information Required!'
-
         when 'Reject'
           params[:volunteering_record][:status] = 'Complete'
-          params[:volunteering_record][:action] = 'Rejected'
         when 'Accept'
           params[:volunteering_record][:status] = 'Complete'
-          params[:volunteering_record][:action] = 'Accepted'
       end
       
       @record.update_attributes(params[:volunteering_record])
