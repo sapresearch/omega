@@ -18,13 +18,12 @@
     <% @favorites.each do |favorite| %>
         <li class="item-list clearfix">
 
-          <h2>
-            <%= link_to_favorite(favorite) %>
-          </h2>
 
-          <div>
-            <%= truncate(favorite.to_s, :length=> 160) %>
-          </div>
+          <%= link_to favorite_path(favorite.item) do %>
+              <%= truncate( favorite.item.to_s , :length=> 160)  %>
+          <% end %>
+
+
           <div class="right">
             <%= om_button(:icon=>'delete') do %>
                 <%= link_to 'Delete', favorite_path(favorite.item), :method=> :delete %>

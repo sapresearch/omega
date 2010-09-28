@@ -195,7 +195,7 @@ $(document).ready(function() {
             $("#what").focus();
         },
         close: function() {
-            $('#new_event').find('input[typen!=hidden]').val('')
+            $('#new_event').find('input:not(:hidden),input:not(:submit)').val('');
 
 //            // reset form elements when we close so they are fresh when the dialog is opened again.
 //            $("#event_start_date").datepicker("destroy");

@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   # only an admin should be able to do.)
   REGISTRATION_FIELDS = [:username, :password, :password_confirmation, :email, :first_name, :last_name]
 
+  scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
+
   class << self
     def anonymous
       @anonymous ||= User.new do |anon|
