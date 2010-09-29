@@ -59,7 +59,7 @@ class Contact < ActiveRecord::Base
   end
 
   def synced?
-    SYNC_FIELDS.all? { |attr| send(attr) == user.send(attr) }
+    SYNC_FIELDS.all? { |attr| send(attr) == user.try(attr) }
   end
 
   private
