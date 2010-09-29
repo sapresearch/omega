@@ -1,21 +1,18 @@
 <% require_stylesheet 'services' %>
+<h1 class="page-content corners-top">
+Register for <%=@service.service_type%> Service
+</h1>
+<div class="page-content corners-bottom">
 
 
-<div class="wrapper-services">
 
-<div class="container-show">
+<p>
 
-<div class="header">
 
-<h2 class="index">Register for <%=@service.service_type%> Service</h2>
-
-</div>
-
-<p class="left-align">
 
   <span class="style1"> Service Details </span>
 
-<br/>
+
   <%@service_fields.each do |s|%>
 
      <br/>
@@ -25,14 +22,11 @@
      <br/>
 
   <%end%>
-
 </p>
 
-  <div class="split-line">
+    <p>
 
-    <p class="left-align">
-
-      <span class="style2"> Registration Information </span>
+      Registration Information
 
       <%= form_for @registration do |f| %>
           <%=errors_for_form(@registration, 'registration')%>
@@ -50,7 +44,11 @@
 
           <% end %>
 
-        <%= f.submit "Register!" %>
+          <%= om_button(:icon=>'apply') do %>
+        <%= link_to 'Register!', url_for(params.merge(:name => 'desc')) %>
+    <% end %>
+
+
       <% end %>
 
     </p>
@@ -58,5 +56,3 @@
   </div>
 
 
-</div>
-    </div>
