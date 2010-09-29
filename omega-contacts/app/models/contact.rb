@@ -49,12 +49,12 @@ class Contact < ActiveRecord::Base
   SYNC_FIELDS = %w(email first_name last_name)
 
   def sync_from_user
-    SYNC_FIELDS.each { |attr| send("#{attr}=", user.send(attr)) }
+    SYNC_FIELDS.each { |attr| send("#{attr}=", user.try(attr)) }
     save(:validate => false)
   end
 
   def sync_to_user
-    SYNC_FIELDS.each { |attr| user.send("#{attr}=", send(attr)) }
+    SYNC_FIELDS.each { |attr| user.try("#{attr}=", send(attr)) }
     user.save(:validate => false)
   end
 
