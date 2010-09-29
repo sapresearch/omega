@@ -18,4 +18,6 @@ class Contact::Group < ActiveRecord::Base
 
   validate :group_type, :presence  => true,
                         :inclusion => { :in => GROUP_TYPES }
+  scope :named, lambda { |name| where('name like ? ', "%#{name}%") }
+
 end

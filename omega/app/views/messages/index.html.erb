@@ -1,7 +1,6 @@
 <h1 class="page-content corners-top">
   Messages
 </h1>
-
 <div class="page-content corners-bottom">
   <div class="right">
     <%= om_button(:icon=>'sort-az') do %>
@@ -11,19 +10,13 @@
         <%= link_to 'sort Z-A', messages_path(:subject => 'desc') %>
     <% end %>
   </div>
-
-
   <div class="clear"></div>
-
-
   <ul id="messages_list">
     <% @messages.each do |message| %>
         <li class="item-list clearfix">
-
-
           <% if !message.read? %>
               <h3>
-                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class=> 'cf3a72 italic' %>
+                <%= link_to truncate(message.subject, :length=>60), message_path(message) , :class => 'italic' %>
               </h3>
 
           <% else %>
@@ -32,9 +25,6 @@
 
               </h3>
           <% end %>
-
-
-
           <div class="">
             <%= truncate(message.body, :length=> 160) %>
           </div>
@@ -46,21 +36,11 @@
             <%= om_button(:icon=>'mail-reply') do %>
                 <%= link_to 'Reply', reply_message_path(message) %>
             <% end %>
-
-
           </div>
-
-
         </li>
-
     <% end %>
   </ul>
-
-
 </div>
-
-
-
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_messages_menu" %>
 <% end %>

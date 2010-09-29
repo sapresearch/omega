@@ -7,3 +7,4 @@ module Omega
     end
   end
 end
+

@@ -362,7 +362,7 @@ li.item-list {
     list-style: none;
     position: relative;
     font-size: 1em;
-    background: #0058C2;
+    background: url("/images/bg_menu.png") repeat-x #0058C2;
 }
 
 #topnav li {
@@ -387,7 +387,7 @@ li.item-list {
     top: 38px;
     display: none; /*--Hide by default--*/
     width: 200px;
-    background: #0058C2;
+    background: #0365dc;
     color: #fff; /*--Bottom right rounded corner--*/
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 4px 4px;
@@ -398,7 +398,7 @@ li.item-list {
 #topnav li div a {
     text-transform: capitalize;
     border-bottom: 1px dotted #448BE2; /*background: url(../images/menu_bg.png) repeat-x;*/
-    background: #0058C2;
+    background: #0365dc;
     padding: 3px 15px;
     display: block;
 }
@@ -1023,7 +1023,9 @@ form span.error {
 }
 
 #ctlrBar {
-    color: #448BE2;
+    font-weight:bold;
+    text-transform:capitalize;
+    color: #cf3a72;
     margin-left: 1em;
     height: 28px;
     line-height: 28px;
