@@ -1,50 +1,68 @@
-<% require_stylesheet 'services' %>
-
-<div class="wrapper-services">
-
-<div class="container-show">
-  <div class="header">
-
-<h2 class="index">Services Offered</h2>
+<% require_stylesheet 'omega_services' %>
+<% require_javascript 'omega_services' %>
+<h1 class="page-content corners-top">
+  Services Offered
+</h1>
+<div class="page-content corners-bottom">
+  <div class="right">
+    <%= om_button(:icon=>'sort-az') do %>
+        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'asc')) %>
+    <% end %>
+    <%= om_button(:icon=>'sort-za') do %>
+        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+    <% end %>
   </div>
-<p class="left-align">
+  <div class="clear"></div>
 
-  <%@services.each do |s|%>
+  <ul id="positions_list">
+    <% @services.each do |s| %>
+        <li class="clearfix">
+          <div class="position_slider">
+            <div class="position_actions">
+              <% if !current_user.is_anonymous? %>
+                  <%= om_button(:plain => true, :icon => 'delete') do %>
+                      <%= link_to 'Delete', s, :method => :delete, :'data-tooltip' => 'Delete this Service' %>
+                  <% end %>
+              <% end %>
+              <%= om_button(:plain => true, :icon => 'apply') do %>
+                  <% if Service::Registration.find_by_user_id_and_service_id(current_user.id, s).nil? %>
+                      <%= link_to "Register", new_service_service_registration_url(s), :'data-tooltip' => 'register for this position' %>
 
-   <%if (s.published == true)%>
+                  <% end %>
+              <% end %>
+              <%= toggle_favorite(s) if !current_user.is_anonymous? %>
+            </div>
+          </div>
+          <div class="position">
+            <div class="position-wrapper">
 
-    <strong><%=s.service_name%> - <%=s.service_type%> Service</strong><br/>
-          (<%= link_to "Show", service_url(s)%>)
-          
-          <%if !current_user.is_anonymous? %>
+              <h2>
+                <% if (s.published == true) %>
 
-             <% if Service::Registration.find_by_user_id_and_service_id(current_user.id,s).nil? %>
-                | (<%= link_to "Register", new_service_service_registration_url(s) %>)
-            
-             <%end%>
-          | (<%= link_to "Delete", s , :confirm => 'Are You Sure?', :method => :delete%>)
-          <%end%>
-        
-    <%end%>
-      <br/>
-    <%if (s.published !=true) and !current_user.is_anonymous?%>
-    <strong><%=s.service_name%> - <%=s.service_type%> Service</strong><br/>
-      (<%= link_to "Saved Draft", service_wizard_services_url(:step => 2, :id => s) %>)
-      | (<%= link_to "Delete", s , :confirm => 'Are You Sure?', :method => :delete%>)
-    <%end%>
 
-  <%end%>
-    <%if !current_user.is_anonymous? %>
-    <br/> <br/>
-       <strong> <%= link_to 'Add a New Service', service_wizard_services_url%>
+                    <%= link_to s.service_name, service_url(s) %>
 
-    <br/>
-        <%#= link_to 'Export Services to a File', export_to_csv_services_path%>
 
-  <%end%>
-     </strong>
-</p>
+                <% end %>
+              </h2>
 
+              <p>
+                <%= s.service_type %> Service
+              </p>
+
+            </div>
+          </div>
+
+        </li>
+
+    <% end %>
+  </ul>
+
+<%#= will_paginate @services %>
+
+  <div class="clear"></div>
 
 </div>
-    </div>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/services_menu" %>
+<% end %>

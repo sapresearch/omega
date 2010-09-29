@@ -1,0 +1,174 @@
+#time_picker {
+
+    display: none;
+    text-align: left;
+    border: 1px solid #999;
+    overflow: hidden;
+    height: 14em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    background: #f2f2f2;
+    list-style: none;
+    z-index: 10000;
+}
+
+#time_picker li {
+    *float: left;
+    text-indent: 0;
+    margin: 0;
+    padding: 0.1em 0.2em;
+    cursor: pointer;
+}
+
+#scheduler {
+    margin: 2em 0;
+    display: none;
+}
+
+#scheduler table {
+    width: auto;
+}
+
+#time_slider {
+    width: 300px;
+}
+
+#scheduler li {
+    background: none;
+    padding: 0;
+}
+
+.sel_wday {
+    width: 100px;
+    padding: 0.5em;
+}
+
+.schedule {
+    display: none;
+}
+
+
+
+#positions_list li {
+    height: 166px;
+    position: relative;
+}
+
+div.position_slider {
+
+    text-align: right;
+    border: none;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+
+    height: 22px;
+    width: 100%;
+    position: absolute;
+    top: 22px;
+    background: url("../images/details_bg.png") repeat-x bottom;
+    color: #fff;
+    display: none;
+
+}
+
+div.position_actions {
+    padding: 1px 20px 0 0;
+}
+
+div.position {
+    background: #FFF;
+    -moz-box-shadow: 4px 4px 10px #DDDDDD;
+    -webkit-box-shadow: 4px 4px 10px #DDDDDD;
+    box-shadow: 4px 4px 10px #DDDDDD;
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    width: 100%;
+    position: absolute;
+    top: 22px;
+
+}
+
+div.position-wrapper {
+    margin: 0 2px 2px;
+    padding: 0.5em;
+
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border: 1px solid #e3e3e3;
+    background: url("/images/position_bg.png") repeat-x bottom #f9f9f9;
+}
+
+.position_hover {
+    background: #0063dc !important; /*background:#c9c9c9 !important;*/
+
+}
+
+#positions_list .position_details li {
+
+    background: none !important;
+    padding: 5px;
+
+}
+
+span.skill_tag {
+    border: 1px solid #CCCCCC;
+    margin: 2px 4px;
+    padding: 2px 8px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    display: inline-block;
+    background: url("/images/om_button_bg.png") repeat-x bottom;
+}
+
+span.skill_tag_active {
+    background-color: #A82F5D;
+    border: none;
+}
+
+.skill_tag_active a {
+    color: #FFF !important;
+}
+
+.skill_tag a {
+    letter-spacing: 0.04em;
+    font-size: 0.9em;
+    color: #2D302D;
+}
+
+.skill_tag a:hover {
+
+    color: #0063dc;
+}
+
+.position_list_crl {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0.5em;
+}
+
+#position_search {
+    padding: 1em;
+    border-bottom: 4px solid #EBEBEB;
+}
+
+.position_r {
+    border-bottom: 1px solid #EBEBEB;
+    background: url("../images/h1BgLight.png") repeat-x bottom #FFF;
+    margin: 0.5em 0;
+    padding: 0.5em;
+}
+
+.position > h2 {
+    padding: 1em;
+}
+
+.contacts-hover {
+
+}
+
+.sidebar-menu-content > div.help-explanation{
+    font-style:italic;
+    color:333;
+}

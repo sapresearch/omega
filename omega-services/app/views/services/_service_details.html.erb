@@ -1,64 +1,65 @@
-<%=form_for @service do |f| %>
-   <%= errors_for_model @service%>
+<%= form_for @service do |f| %>
+    <%= errors_for_model @service %>
 
-   <%= f.hidden_field :service_type, :value => @s.service_type%>
-   <%= f.hidden_field :service_category, :value => @s.service_category%>
-   <%=f.hidden_field :icon_file_name, :value => @s.icon_file_name %>
-   <%=f.hidden_field :icon_content_type, :value => @s.icon_content_type %>
-   <%=f.hidden_field :icon_file_size, :value => @s.icon_file_size %>
-   <%=f.hidden_field :description, :value => @s.description %>
+    <%= f.hidden_field :service_type, :value => @s.service_type %>
+    <%= f.hidden_field :service_category, :value => @s.service_category %>
+    <%= f.hidden_field :icon_file_name, :value => @s.icon_file_name %>
+    <%= f.hidden_field :icon_content_type, :value => @s.icon_content_type %>
+    <%= f.hidden_field :icon_file_size, :value => @s.icon_file_size %>
+    <%= f.hidden_field :description, :value => @s.description %>
 
     <p class="left2">
       <span class="style3">Preview Details</span><br/>
 
       <br/>
-   <strong>Service Category: </strong><%=@s.service_category%> <br/>
-      <strong>Description:</strong><%=@s.description %><br/>
+      <strong>Service Category: </strong><%= @s.service_category %> <br/>
+      <strong>Description:</strong><%= @s.description %><br/>
 
       <% unless @fields.empty? %>
 
-        <%Service::Typefield.find_all_by_field_category_and_service_id("Details", @s.id).each do |s|%>
+          <% Service::Typefield.find_all_by_field_category_and_service_id("Details", @s.id).each do |s| %>
 
-        <strong><%=s.field_name%></strong>
-        <br/>
+              <strong><%= s.field_name %></strong>
+              <br/>
 
-        <%end%>
+          <% end %>
 
-        <br/>
+          <br/>
 
-        <span class="style2">Registration Details</span><br/>
+          <span class="style2">Registration Details</span><br/>
 
-        <%Service::Typefield.find_all_by_field_category_and_service_id("Registration",@s.id).each do |s|%>
+          <% Service::Typefield.find_all_by_field_category_and_service_id("Registration", @s.id).each do |s| %>
 
-        <br/>
+              <br/>
 
-        <strong><%=s.field_name%></strong>  <strong>(Field Type: <%=s.field_type%>)</strong>
+              <strong><%= s.field_name %></strong> <strong>(Field Type: <%= s.field_type %>)</strong>
 
-        <br/>
+              <br/>
 
-        <%end%>
-      <%end%>
+          <% end %>
+      <% end %>
     </p>
 
     <br/>
     <div class="bottom-buttons">
 
-    <div class="button-first">
-      <%=f.submit "Save & Proceed"%>
+
+
+      <%= om_button(:icon=>'save') do %>
+          <%= f.submit "Save & Proceed" %>
+      <% end %>
+
+      <%= om_button(:icon=>'prev-step') do %>
+          <%= link_to 'Back', service_wizard_services_url %>
+      <% end %>
+
+      <%= om_button(:icon=>'cancel') do %>
+          <%= link_to 'Cancel', new_service_url %>
+      <% end %>
+
     </div>
-    <div class="button-next">
-      <%= link_to 'Back', service_wizard_services_url%>
-    </div>
-    <div class="button-next">
-      <%= link_to 'Cancel', new_service_url%>
-    </div>
 
 
-
-
-    </div>
-
-
-<%end%>
+<% end %>
 
 

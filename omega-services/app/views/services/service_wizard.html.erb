@@ -1,97 +1,103 @@
-<% require_stylesheet 'services.css'%>
+<% require_stylesheet 'services.css' %>
 
 
-<div class="wrapper-services">
-
-<div class="container">
-
-
-<div class="steps">
-  <div class="step1"></div>
-</div>
+<h1 class="page-content corners-top">
+  Volunteering Positions
+</h1>
 
 
-<div class="content-services" >
+<div class="page-content corners-bottom">
 
-  <div class="tips">
 
-    <p class="left-align">
-    <span class="style1">OVERVIEW</span> <br/>
+  <div class="wrapper-services">
 
-    <br/>
+
+    <div class="steps">
+      <div class="step1"></div>
+    </div>
+
+
+    <div class="content-services">
+
+      <div class="tips">
+
+        <p class="left-align">
+          <span class="style1">OVERVIEW</span> <br/>
+
+          <br/>
     <span class="style2">
       STEP 1:Introduction
     </span>
-      <br/>Introduction to the process of <br/>creating a service.<br/>
+          <br/>Introduction to the process of <br/>creating a service.<br/>
 
     <span class="style2">
       STEP 2: Choose Service Type
     </span>
-      <br/>Provides you with a list of typical <br/>types of services to choose from.<br/>
+          <br/>Provides you with a list of typical <br/>types of services to choose from.<br/>
       
     <span class="style2">
       STEP 3: Service Details
     </span>
-      <br/>Enables you to customize the service<br/> by choosing a name and list of fields <br/>you would like to add.
+          <br/>Enables you to customize the service<br/> by choosing a name and list of fields <br/>you would like to
+          add.
 
-    <br/>
+          <br/>
 
     <span class="style2">
       STEP 4: Registration Form
     </span>
-      <br/>Enables you to customize the service<br/> registration by adding/removing <br/>a list of fields.
+          <br/>Enables you to customize the service<br/> registration by adding/removing <br/>a list of fields.
 
-    <br/>
+          <br/>
     <span class="style2">
       Last Step: Finalize
     </span>
-      <br/>Gives you a summary of the service<br/> you are about to create and publish <br/>it to finish the process.
+          <br/>Gives you a summary of the service<br/> you are about to create and publish <br/>it to finish the
+          process.
 
-    </p>
-    
+        </p>
+
+      </div>
+      <p class="left-align">
+        <span class="style1">Welcome to Add a Service Wizard</span> <br/>
+
+        <br/> The Add a Service Wizard allows you to add a service from a list
+        of sample services in the library. This page introduces you to the
+        steps involved in this process.
+
+        <br/><br/>
+        <strong>What do I do next?</strong><br/>
+        When you are ready to continue, press the <b>Next</b> button to continue on to
+        the Select Service Type Page. If you would like to exit the Wizard without
+        creating a new Service, press the <b>Cancel</b> button.
+
+        <br/><br/>
+        <strong>How did I get here?</strong><br/>
+        The Add a Service Wizard: Introduction Page appears when you select
+        to add a service using a Wizard. The panel on the right gives an overview of each step in the process.
+      </p>
+
+
+    </div>
+    <div class="intro-footer">
+
+      <%= om_button(:icon=>'next-step') do %>
+          <%= button_to 'Next', service_wizard_services_url(:step => '1', :id => @current_service) %>
+      <% end %>
+
+    <%= om_button(:icon=>'cancel') do %>
+          <%= button_to 'Cancel', new_service_url%>
+      <% end %>
+
+        
+
+      </div>
+    </div>
   </div>
-  <p class="left-align">
-    <span class="style1">Welcome to Add a Service Wizard</span> <br/>
-    
-   <br/> The Add a Service Wizard allows you to add a service from a list
-     of sample services in the library. This page introduces you to the
-     steps involved in this process.
 
-  <br/><br/>
-  <strong>What do I do next?</strong><br/>
-    When you are ready to continue, press the <b>Next</b> button to continue on to
-    the Select Service Type Page. If you would like to exit the Wizard without
-    creating a new Service, press the <b>Cancel</b> button.
-
-    <br/><br/>
-  <strong>How did I get here?</strong><br/>
-    The Add a Service Wizard: Introduction Page appears when you select
-    to add a service using a Wizard. The panel on the right gives an overview of each step in the process.
-  </p>
-
+  <div class="spacer">
 
   </div>
-<div class="intro-footer">
-  <div class="button-first" >
-
-    <%= button_to 'Next', service_wizard_services_url(:step => '1', :id => @current_service)%>
-
-
-  </div>
-
-  <div class="button-next" >
-
-    <%= button_to 'Cancel', new_service_url%>
-
-  </div>
-</div>
-</div>
-
-<div class="spacer">
-
-</div>
-
-  
 </div>
 
 

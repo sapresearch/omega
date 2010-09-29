@@ -16,37 +16,29 @@ p.left2{
 
 span.heading1{
     color: #A30052;
-    font-family:Tahoma, sans-serif;
-    font-size: medium;
-    font-weight:bold;
 }
 
 span.heading2{
     color: #A30052;
-    font-family:Tahoma, sans-serif;
-    font-size: small;
-    font-weight:bold;
 }
 
 span.style1{
     color: #38383F;
-    font-family:"Lucida Sans Unicode", Tahoma, sans-serif;
-    font-weight: bold;
-    font-size: medium;
-    letter-spacing:.02em;
+
+
+
 }
 
 span.style2{
     color: #A30052;
-    font-family:"Lucida Sans Unicode", Tahoma, sans-serif;
-    font-weight: bold;
-    font-size: small;
+
+
 
 }
 
 span.style3{
     color: #38383F;
-    font-family:Sans-serif;
+
     font-weight: bold;
     font-size: medium;
     letter-spacing:.02em;
@@ -55,18 +47,12 @@ span.style3{
 
 h1.index{
     color: #38383F;
-    font-family: Tahoma;
-    font-weight: bold;
-    font-size: x-large;
-    letter-spacing:.02em;
+
 }
 
 h2.index{
     color: #FFFFFF;
-    font-family: Tahoma;
-    font-weight: bold;
-    font-size: large;
-    letter-spacing:.02em;
+
 }
 div.wrapper-services{
     margin: 0 8px 45px;
@@ -120,11 +106,10 @@ div.container-show{
 
 
 div.steps{
+    margin:0 auto;
     height: auto;
     width: 761px;
-    text-align: left;
-    font-family:"Lucida Grande","Lucida Sans Unicode", Tahoma, sans-serif;
-	letter-spacing:.01em;
+
 }
 
 div.step1{
@@ -219,12 +204,7 @@ div.split-line{
 }
 
 div #list{
-    position:absolute;
-    top: 90px;
-    right: 10px;
-    height: 350px;
-    width: 400px;
-    overflow: auto;
+    margin:1em;
     background: #E0E8F8;
     border-radius:4px;
     -moz-border-radius:4px;
