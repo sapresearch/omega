@@ -49,17 +49,23 @@ class Contact < ActiveRecord::Base
   SYNC_FIELDS = %w(email first_name last_name)
 
   def sync_from_user
-    SYNC_FIELDS.each { |attr| send("#{attr}=", user.try(attr)) }
+    return unless has_user?
+
+    SYNC_FIELDS.each { |attr| send("#{attr}=", user.send(attr)) }
     save(:validate => false)
   end
 
   def sync_to_user
-    SYNC_FIELDS.each { |attr| user.try("#{attr}=", send(attr)) }
-    user.save(:validate => false)
+    return unless has_user?
+
+    SYNC_FIELDS.each { |attr| user.send("#{attr}=", send(attr)) }
+    user.send(:save, :validate => false)
   end
 
   def synced?
-    SYNC_FIELDS.all? { |attr| send(attr) == user.try(attr) }
+    return true unless has_user?
+
+    SYNC_FIELDS.all? { |attr| send(attr) == user.send(attr) }
   end
 
   private
