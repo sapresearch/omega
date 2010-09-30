@@ -1,5 +1,28 @@
-<h2 class="absolute">
+<div> <%= om_button(:icon=>'user-remove') do %>
+      <%= link_to 'delete', @contact, :method=> :delete, :remote => true %>
+  <% end %>
+  <%= om_button(:icon=>'user-edit') do %>
+      <%= link_to 'edit', edit_contact_path(@contact), :remote => true %>
+  <% end %>
 
+ <dl id="contact_assign" class="drop_down">
+    <dt><a href="#" class="corners"><span>Assign this contact</span></a></dt>
+    <dd>
+      <ul class="corners">
+        <div>
+          <li>Assign</li>
+          <% Contact::Group.without_contact(@contact).each do |g| %>
+              <li>
+                <%= link_to g.name, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
+              </li>
+          <% end %>
+        </div>
+      </ul>
+    </dd>
+  </dl>
+</div>
+
+<h2 class="absolute">
   <%= @contact.first_name %>  <%= @contact.last_name %>
 </h2>
 <div class="user_image">
@@ -8,6 +31,7 @@
 <div class="clear"></div>
 
 Email: <%= @contact.email %><br>
+
 <div id="contact_accordion">
   <% if @contact.groups.any? %>
       <h3><a href="#">Group Assignments</a></h3>
@@ -44,25 +68,6 @@ Email: <%= @contact.email %><br>
   <% end %>
 </div>
 <div>
-  <%= om_button(:icon=>'user-remove') do %>
-      <%= link_to 'delete', @contact, :method=> :delete, :remote => true %>
-  <% end %>
-  <%= om_button(:icon=>'user-edit') do %>
-      <%= link_to 'edit', edit_contact_path(@contact), :remote => true %>
-  <% end %>
-  <dl id="contact_assign" class="drop_down">
-    <dt><a href="#" class="corners"><span>Assign this contact</span></a></dt>
-    <dd>
-      <ul class="corners">
-        <div>
-          <li>Assign</li>
-          <% Contact::Group.without_contact(@contact).each do |g| %>
-              <li>
-                <%= link_to g.name, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
-              </li>
-          <% end %>
-        </div>
-      </ul>
-    </dd>
-  </dl>
+ 
+
 </div>

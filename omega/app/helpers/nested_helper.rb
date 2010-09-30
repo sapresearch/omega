@@ -2,22 +2,29 @@ module NestedHelper
   REJECT_TEMPLATE = lambda { |v| v.key?('_template') }
 
   def link_to_new_nested(builder, association, options = {}, &block)
-    name = options[:name] || "New #{association.to_s.singularize.humanize}"
+    text = options[:text] || "New #{association.to_s.singularize.humanize}"
     url  = options[:url]  || "#new-#{association.to_s.singularize.underscore.dasherize}"
     link_options    = (options.delete(:link) || {}).merge(:'data-new-nested' => association)
     builder_options = options.delete(:builder) || {}
 
+    text = capture(&text) if text.respond_to?(:call)
 
-    link_to(name, url, link_options) +
+    link_to(text, url, link_options) +
     new_nested_template(builder, association, builder_options, &block)
   end
 
-  def link_to_remove_nested(builder, options = {})
-    name = options[:name] || "Remove"
+  def link_to_remove_nested(builder, options = {}, &block)
     url  = options[:url]  || "#remove"#"#remove-#{builder.object.class.to_s.singularize.underscore.dasherize}"
     link_options = (options.delete(:link) || {}).merge(:'data-remove-nested' => true)
 
-    builder.hidden_field(:_destroy) + link_to(name, url, link_options)
+    if block_given?
+      link = link_to(url, link_options, &block)
+    else
+      text = options[:text] || "Remove"
+      link = link_to(text, url, link_options)
+    end
+
+    builder.hidden_field(:_destroy) + link
   end
 
   private

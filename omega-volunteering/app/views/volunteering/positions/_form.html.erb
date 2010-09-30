@@ -4,7 +4,7 @@
 
 <%= form_for(@position) do |f| %>
     <%= errors_for_form(@position, 'position') %>
-
+<fieldset>
     <p>
       <%= f.label :name %>
       <%= f.text_field :name %>
@@ -40,6 +40,7 @@
         <%= f.text_field :endtime_nr, :class=>'tpickr', :size=>10 , :autocomplete => 'off'%>
       </p>
     </div>
+
     <div id="scheduler">
       <label for="volunteering_position[schedule_type]">Pattern</label>
 
@@ -59,13 +60,13 @@
       <%= f.label :volunteers %>
       <%= f.text_field :volunteers_required, :size=>10 %>
     </p>
+</fieldset>
 
-    <p>
       <%#= f.label :skills_values %>
 
       <%#= f.text_field :skills_values %>
 
-    <p>
+
       <%#= f.label :interests_values %>
 
       <%#= f.text_field :interests_values %>
@@ -74,10 +75,11 @@
 
 
     <div id="vp_contact">
+      <fieldset>
       <% [[:none, 'no contact'], [:existing, 'existing contact'], [:new, 'new contact']].each do |value, text| %>
           <%= radio_button_tag 'contact_assignment', value, true %><%= text %>
       <% end %>
-
+</fieldset>
       <fieldset id="position_exisiting_contact" class="hide">
         <legend>Assign an existing contact</legend>
         <%= f.label "contact_name(s)" %>
@@ -97,6 +99,7 @@
       </fieldset>
 
     </div>
+    <fieldset>
     <p>
       <%= f.label :skills %>
       <%= f.text_field :skills_values %>
@@ -106,12 +109,14 @@
       <%= f.label :interests %>
       <%= f.text_field :interests_values %>
     </p>
+</fieldset>
 
 
+<%= om_button(:icon=>'save') do %>
 
-   <span class="om-button">
-<%= f.submit %>
-</span>
+
+          <%= f.submit %>
+      <% end %>
 
 
 

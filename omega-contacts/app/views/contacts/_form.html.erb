@@ -1,59 +1,87 @@
-<% require_javascript 'thirdParty/jquery.validate.js',  'thirdParty/jquery.validate.js', 'validations/new_contact.js' %>
+<% require_javascript 'thirdParty/jquery.validate.js', 'thirdParty/jquery.validate.js', 'validations/new_contact.js' %>
 
 
-  <%= form_for @contact, :remote => true do |f| %>
-      <%= errors_for_form @contact %>
-      <div id="contact_image">
-        please choose an image
-      </div>
+<%= form_for @contact, :remote => true do |f| %>
+    <%= errors_for_form @contact %>
+    <fieldset>
+    <p>
+      <%= f.label t(:title) %>
+      <%= f.select :title, options_for_select(Contact::TITLES) %>
+    </p>
+    <p>
+      <%= f.label t(:first_name) %>
+      <%= f.text_field :first_name %>
+    </p>
+
+    <p>
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+    </p>
+
+    <p>
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </p>
+
+    <p>
+      <%= f.label :skills %>
+      <%= f.text_field :skills_values %>
+
+    </p>
+</fieldset>
+    <fieldset>
+    <div id="addresses">
       <p>
-        <%= f.label t(:title) %>
-        <%= f.select :title, options_for_select(Contact::TITLES) %>
-      </p>
-      <p>
-        <%= f.label t(:first_name) %>
-        <%= f.text_field :first_name %>
-      </p>
-
-      <p>
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name %>
-      </p>
-
-      <p>
-        <%= f.label :email %>
-        <%= f.email_field :email %>
-      </p>
-
-      <p>
-        <%= f.label :skills %>
-        <%= f.text_field :skills_values %>
-
-      </p>
-
-      <div id="addresses">
         <%= f.fields_for :addresses do |a| %>
             <%= render 'address_form', :f => a %>
         <% end %>
-        <%= link_to_new_nested f, :addresses do |a| %>
+      </p>
+
+      <p>
+        <% new_text = lambda do %>
+        <span data-tooltip="By clicking on this icon you will be able to add another address. Feel free to add as many addresses as you want">Add another address
+            <span class="om-icon-only om-blue-icon ui-icon-home"></span>
+        </span>
+        <% end %>
+        <%= link_to_new_nested f, :addresses, :text => new_text do |a| %>
             <%= render 'address_form', :f => a %>
         <% end %>
-      </div>
-
-      <div id="phone_numbers">
+      </p>
+    </div>
+</fieldset>
+    <fieldset>
+    <div id="phone_numbers">
+      <p>
         <%= f.fields_for :phone_numbers do |pn| %>
             <%= render 'phone_number_form', :f => pn %>
         <% end %>
-        <%= link_to_new_nested f, :phone_numbers do |pn| %>
+      </p>
+
+      <p>
+        <% new_text = lambda do %>
+        <span data-tooltip="By clicking on this icon you will be able to add another phone number. Feel free to add as many phone numbers as you want">Add another phone number
+            <span class="om-icon-only om-blue-icon ui-icon-contact"></span>
+        </span>
+        <% end %>
+        <%= link_to_new_nested f, :phone_numbers, :text =>  new_text do |pn| %>
             <%= render 'phone_number_form', :f => pn %>
         <% end %>
-      </div>
+      </p>
+    </div>
+      </fieldset>
+    <p>
 
-         <span class="om-button">
-      <%= f.submit %>
-    </span>
+
+      <%= om_button(:icon=>'save') do %>
+
+
+          <%= f.submit %>
+      <% end %>
+    </p>
+
+
     <div class="clear"></div>
 
 
-  <% end %>
+<% end %>
 

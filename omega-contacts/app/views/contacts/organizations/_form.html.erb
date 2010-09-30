@@ -2,11 +2,13 @@
 	<%= form_for @contact_group, :url => contact_organizations_path, :remote => true do |f| %>
 		<%= errors_for_form @contact_group %>
             <%= f.hidden_field :group_type, :value => 'Organization' %>
+      <fieldset>
 			<p>
 				<%= f.label :name %>
 				<%= f.text_field :name %>
 			</p>
-
+</fieldset>
+      <fieldset>
 
 			<div id="addresses">
 
@@ -18,7 +20,8 @@
 					<%= render '/contacts/address_form', :f => a %>
 				<% end %>
 			</div>
-
+</fieldset>
+      <fieldset>
 			<div id="phone_numbers">
 				<%= f.fields_for :phone_numbers do |pn| %>
 					<%= render '/contacts/phone_number_form', :f => pn %>
@@ -27,8 +30,11 @@
 					<%= render '/contacts/phone_number_form', :f => pn %>
 				<% end %>
 			</div>
+</fieldset>
+			<%= om_button(:icon=>'save') do %>
 
-			<%= f.submit %>
+          <%= f.submit %>
+      <% end %>
 
 	<% end %>
 </div>
