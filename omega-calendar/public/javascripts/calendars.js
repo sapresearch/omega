@@ -10,7 +10,7 @@ $(document).ready(function() {
     $('form').find('.tpickr').timepicker();
     // jquery selector caching
     $addeventform = $('#add-event-form');
-    $dateSelect  = $('#dateSelect');
+    $dateSelect = $('#dateSelect');
     $displayeventform = $('#display-event-form');
 
 
@@ -58,7 +58,9 @@ $(document).ready(function() {
         clickAgendaItem = agendaItem;
 
         $displayeventform.dialog('open');
-    };
+    }
+
+    ;
     /**
      * get the agenda item that was dropped. It's start and end dates will be updated.
      */
@@ -88,7 +90,7 @@ $(document).ready(function() {
 
         var startDate = jfcalplugin.getStartDate('#cal');
         var endDate = jfcalplugin.getEndDate('#cal');
-
+        jfcalplugin.deleteAllAgendaItems('#cal')
         jfcalplugin.loadICalSource("#cal", "calendars/1/events.ics?startDate=" + startDate + '&endDate=' + endDate, "application/octet-stream");
 
         return false;
@@ -109,7 +111,7 @@ $(document).ready(function() {
         $dateSelect.datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
         var startDate = jfcalplugin.getStartDate('#cal');
         var endDate = jfcalplugin.getEndDate('#cal');
-
+        jfcalplugin.deleteAllAgendaItems('#cal');
         jfcalplugin.loadICalSource("#cal", "calendars/1/events.ics?startDate=" + startDate + '&endDate=' + endDate, "application/octet-stream");
         return false;
     });
@@ -224,18 +226,26 @@ $(document).ready(function() {
         buttons: {
             Cancel: function() {
                 $(this).dialog('close');
+                $addeventform.dialog('open');
             },
             'Edit': function() {
-                alert("Make your own edit screen or dialog!");
+                $.showFlash('Coming Soon :)')
+                $(this).dialog('close');
+
             },
             'Delete': function() {
-                if (confirm("Are you sure you want to delete this agenda item?")) {
-                    if (clickAgendaItem != null) {
-                        jfcalplugin.deleteAgendaItemById("#cal", clickAgendaItem.agendaId);
-                        //jfcalplugin.deleteAgendaItemByDataAttr("#mycal","myNum",42);
+                var self = $(this);
+                $.ajax({
+                    url : '/events/' + clickAgendaItem.data.UID ,
+                    type : 'DELETE',
+                    dataType : 'json',
+                    success: function() {
+                        var agendaId = clickAgendaItem.agendaId;
+                        jfcalplugin.deleteAgendaItemById("#cal", agendaId);
+                        self.dialog('close');
                     }
-                    $(this).dialog('close');
-                }
+                })
+
             }
         },
         open: function(event, ui) {
@@ -249,21 +259,17 @@ $(document).ready(function() {
                 // in our example add agenda modal form we put some fake data in the agenda data. we can retrieve it here.
                 var append = '';
 
-                        append += "<h2>" + title + "</h2>";
+                append += "<h2>" + title + "</h2>";
 
                 if (allDay) {
 
-                          append +=  "(All day event)<br><br>"
-
+                    append += "(All day event)<br><br>"
                 } else {
-
-                           append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Starts:' + startDate + "<br>"
-                           append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Ends:' + endDate + "<br><br>"
-
+                    append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Starts:' + startDate + "<br>"
+                    append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Ends:' + endDate + "<br><br>"
                 }
-                $displayeventform.append( append);
-
-
+                append += data.DESCRIPTION;
+                $displayeventform.append(append);
             }
         },
         close: function() {
@@ -271,7 +277,4 @@ $(document).ready(function() {
             $displayeventform.html("");
         }
     });
-
-
-})
-        ;
+});
