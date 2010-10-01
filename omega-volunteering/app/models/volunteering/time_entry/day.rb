@@ -1,4 +1,4 @@
-class Volunteering::TimeEntry::Day < ActiveRecord::Base
+class Volunteering::TimeEntry::Day < Omega::Model
 
   belongs_to :time_entry
 

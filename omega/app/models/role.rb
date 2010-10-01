@@ -1,4 +1,4 @@
-class Role < ActiveRecord::Base
+class Role < Omega::Model
   ANONYMOUS          = 'anonymous'
   AUTHENTICATED_USER = 'authenticated_user'
 

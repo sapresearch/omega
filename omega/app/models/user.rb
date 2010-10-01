@@ -1,6 +1,6 @@
 require 'digest/sha2'
 
-class User < ActiveRecord::Base
+class User < Omega::Model
   PERM_ADMIN               = 'users_admin'
   PERM_ADMIN_PERMISSIONS   = 'users_admin_permissions'
   PERM_VIEW                = 'users_view'

@@ -1,4 +1,4 @@
-class Volunteering::Day < ActiveRecord::Base
+class Volunteering::Day < Omega::Model
 
   belongs_to :schedule
 

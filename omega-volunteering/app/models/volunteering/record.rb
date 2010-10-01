@@ -1,4 +1,4 @@
-class Volunteering::Record < ActiveRecord::Base
+class Volunteering::Record < Omega::Model
   belongs_to :position
   belongs_to :contact
   has_many :time_entries

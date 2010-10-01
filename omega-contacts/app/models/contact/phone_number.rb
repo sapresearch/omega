@@ -1,4 +1,4 @@
-class Contact::PhoneNumber < ActiveRecord::Base
+class Contact::PhoneNumber < Omega::Model
   NUMBER_TYPES = %w{home work}
 
   belongs_to :contact, :polymorphic => true
