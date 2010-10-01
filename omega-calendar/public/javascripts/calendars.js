@@ -238,7 +238,7 @@ $(document).ready(function() {
                 var self = $(this);
                 $.ajax({
                     global : false,
-                    url : '/calendars/1/events/' + clickAgendaItem.agendaId + '/edit',
+                    url : '/calendars/1/events/' + clickAgendaItem.data.UID + '/edit',
                     type : 'GET',
                     dataType : 'script',
                     success: function() {
