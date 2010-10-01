@@ -1,5 +1,2 @@
-<% if @event.valid? %>
-$('#add-event-form').dialog('close');
-<% else %>
+
 $('#add-event-form').html('<%= escape_javascript(render "/events/form", :event => @event) %>');
-<% end %>

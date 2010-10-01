@@ -7,6 +7,7 @@
  */
 
 $(document).ready(function() {
+    var clickDate = "";
     $('form').find('.tpickr').timepicker();
     // jquery selector caching
     $addeventform = $('#add-event-form');
@@ -169,44 +170,40 @@ $(document).ready(function() {
         width: 500,
         modal: false,
         open: function(event, ui) {
-            // initialize start date picker
-            $("#startDate").datepicker({
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'yy-mm-dd'
-            });
-            // initialize end date picker
-            $("#endDate").datepicker({
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'yy-mm-dd'
-            });
-            // initialize with the date that was clicked
-            $("#startDate").val(clickDate);
-            $("#endDate").val(clickDate);
-            // initialize color pickers
 
-            //$("#colorForeground").val("#ffffff");
-            // put focus on first form input element
-            $("#what").focus();
+            // initialize start date picker
+            $("#event_start_date").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'yy-mm-dd'
+            }).val(clickDate);
+            // initialize end date picker
+            $("#event_end_date").datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'yy-mm-dd'
+            }).val(clickDate);
+            // initialize with the date that was clicked
+
+
         },
         close: function() {
-            $('#new_event').find('input:not(:hidden),input:not(:submit)').val('');
 
-//            // reset form elements when we close so they are fresh when the dialog is opened again.
-//            $("#event_start_date").datepicker("destroy");
-//            $("#event_end_date").datepicker("destroy");
-//            $("#event_start_date").val("");
-//            $("#event_end_date").val("");
-//            $('#event_title').val('');
-//            $('#event_event_description').val('');
-//            $('#event_start_time').val('')
+            $.ajax({
+                url : '/calendars/1/events/new' ,
+                global: false,
+                dataType : 'script'
+
+            });
+
+            $('#new_event')[0].reset();
+            
         }
     });
 
@@ -214,11 +211,20 @@ $(document).ready(function() {
     $('#new_event').bind('ajax:success', function() {
         $addeventform.dialog('close');
     });
+    $('#event_allday').live('change',function() {
+        if (!$(this).is(':checked')) {
+
+            $('#new_event').find('.tpickr').removeClass('hide')
+        } else {
+            $('#new_event').find('.tpickr').addClass('hide')
+        }
+    });
 
     /**
      * Initialize display event form.
      */
     $displayeventform.dialog({
+
         autoOpen: false,
         height: 500,
         width: 500,
@@ -226,16 +232,24 @@ $(document).ready(function() {
         buttons: {
             Cancel: function() {
                 $(this).dialog('close');
-                $addeventform.dialog('open');
+                
             },
             'Edit': function() {
-                $.showFlash('Coming Soon :)')
-                $(this).dialog('close');
+                var self = $(this);
+                $.ajax({
+                    global : false,
+                    url : '/calendars/1/events/' + clickAgendaItem.agendaId + '/edit',
+                    type : 'GET',
+                    dataType : 'script',
+                    success: function() {
 
+                    }
+                })
             },
             'Delete': function() {
                 var self = $(this);
                 $.ajax({
+                    global : false,
                     url : '/events/' + clickAgendaItem.data.UID ,
                     type : 'DELETE',
                     dataType : 'json',
@@ -266,7 +280,7 @@ $(document).ready(function() {
                     append += "(All day event)<br><br>"
                 } else {
                     append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Starts:' + startDate + "<br>"
-                    append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Ends:' + endDate + "<br><br>"
+                    append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Ends:' + endDate + "<br>"
                 }
                 append += data.DESCRIPTION;
                 $displayeventform.append(append);
@@ -274,6 +288,7 @@ $(document).ready(function() {
         },
         close: function() {
             // clear agenda data
+
             $displayeventform.html("");
         }
     });

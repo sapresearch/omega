@@ -1,11 +1,12 @@
 <%= form_for(event, :remote => true) do |f| %>
+      <%= errors_for_form event %>
     <p>
       <%= f.label :title %>
       <%= f.text_field :title %>
     </p>
     <p>
       <%= f.label :allday %>
-      <%= f.check_box :allday, :checked => true %>
+      <%= f.check_box :allday, :checked => false %>
     </p>
 
     <p>

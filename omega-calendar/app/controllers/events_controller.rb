@@ -29,7 +29,7 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @calendar = Calendar.find(params[:id])
+    @calendar = Calendar.find(params[:calendar_id])
     @event = Event.find(params[:id])
     respond_with(@event)
   end
