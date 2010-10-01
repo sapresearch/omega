@@ -29,13 +29,12 @@ $(document).ready(function() {
     var startDate = jfcalplugin.getStartDate('#cal');
     var endDate = jfcalplugin.getEndDate('#cal');
 
-    jfcalplugin.loadICalSource("#cal", "calendars/1/events.ics?startDate=" + startDate + '&endDate=' + endDate, "application/octet-stream");
-
 
     /**
      * Get the date (Date object) of the day that was clicked from the event object
      */
     function myDayClickHandler(eventObj) {
+
         // Get the Date of the day that was clicked from the event object
         var date = eventObj.data.calDayDate;
         // store date in our global js variable for access later
@@ -44,9 +43,9 @@ $(document).ready(function() {
         $addeventform.dialog('open');
     }
 
-    ;
+    
 
-    ;
+
     /**
      * Called when user clicks and agenda item
      * use reference to plugin object to edit agenda item
@@ -57,7 +56,7 @@ $(document).ready(function() {
         // pull agenda item from calendar
         var agendaItem = jfcalplugin.getAgendaItemById("#cal", agendaId);
         clickAgendaItem = agendaItem;
-
+ 
         $displayeventform.dialog('open');
     }
 
@@ -92,7 +91,7 @@ $(document).ready(function() {
         var startDate = jfcalplugin.getStartDate('#cal');
         var endDate = jfcalplugin.getEndDate('#cal');
         jfcalplugin.deleteAllAgendaItems('#cal')
-        jfcalplugin.loadICalSource("#cal", "calendars/1/events.ics?startDate=" + startDate + '&endDate=' + endDate, "application/octet-stream");
+        retrieveData(startDate,endDate);
 
         return false;
     });
@@ -113,7 +112,7 @@ $(document).ready(function() {
         var startDate = jfcalplugin.getStartDate('#cal');
         var endDate = jfcalplugin.getEndDate('#cal');
         jfcalplugin.deleteAllAgendaItems('#cal');
-        jfcalplugin.loadICalSource("#cal", "calendars/1/events.ics?startDate=" + startDate + '&endDate=' + endDate, "application/octet-stream");
+        retrieveData(startDate,endDate);
         return false;
     });
 
@@ -159,7 +158,7 @@ $(document).ready(function() {
         var startDate = jfcalplugin.getStartDate('#cal');
         var endDate = jfcalplugin.getEndDate('#cal');
 
-        jfcalplugin.loadICalSource("#cal", "calendars/1/events.ics?startDate=" + startDate + '&endDate=' + endDate, "application/octet-stream");
+        retrieveData(startDate,endDate);
     });
     /**
      * Initialize add event modal form
@@ -203,7 +202,7 @@ $(document).ready(function() {
             });
 
             $('#new_event')[0].reset();
-            
+
         }
     });
 
@@ -211,7 +210,7 @@ $(document).ready(function() {
     $('#new_event').bind('ajax:success', function() {
         $addeventform.dialog('close');
     });
-    $('#event_allday').live('change',function() {
+    $('#event_allday').live('change', function() {
         if (!$(this).is(':checked')) {
 
             $('#new_event').find('.tpickr').removeClass('hide')
@@ -232,13 +231,13 @@ $(document).ready(function() {
         buttons: {
             Cancel: function() {
                 $(this).dialog('close');
-                
+
             },
             'Edit': function() {
                 var self = $(this);
                 $.ajax({
                     global : false,
-                    url : '/calendars/1/events/' + clickAgendaItem.data.UID + '/edit',
+                    url : '/calendars/1/events/' + clickAgendaItem.data.egendaId  + '/edit',
                     type : 'GET',
                     dataType : 'script',
                     success: function() {
@@ -282,7 +281,7 @@ $(document).ready(function() {
                     append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Starts:' + startDate + "<br>"
                     append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Ends:' + endDate + "<br>"
                 }
-                append += data.DESCRIPTION;
+                append += '<p>' + data.description + '</p>';
                 $displayeventform.append(append);
             }
         },
@@ -292,4 +291,36 @@ $(document).ready(function() {
             $displayeventform.html("");
         }
     });
+
+
+    var addAgendaItems = function(jso) {
+        var l = jso.length, i = 0,jsi;
+        for (i; i < l; i++) {
+            jsi = jso[i];
+            var desc = (typeof jsi.event_description != 'undefined') ? jsi.event_description : ''
+var alld = jsi.allDay || false;
+            jfcalplugin.addAgendaItem(
+                    "#cal",
+                    jsi.title,
+                    new Date(jsi.start),
+                    new Date(jsi.end),
+                    alld,
+            {
+                description:  desc
+            });
+
+
+        }
+    };
+
+    function retrieveData(startDate, endDate) {
+        $.ajax({
+            url: "calendars/1/events.json?startDate=" + startDate + '&endDate=' + endDate,
+            success: addAgendaItems
+        });
+    }
+
+    retrieveData(startDate,endDate);
+
+
 });

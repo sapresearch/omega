@@ -26,7 +26,6 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def show
-
     @position = Volunteering::Position.find(params[:id])
     breadcrumb @position.name => volunteering_position_path(@position)
     respond_with(@position)
@@ -34,66 +33,20 @@ class Volunteering::PositionsController < ApplicationController
 
   def edit
     @position = Volunteering::Position.find(params[:id])
+    fix_model_to_view
     respond_with(@position)
   end
 
   def new
     @position = Volunteering::Position.new
-    @position.contacts.build do |c|
-      c.phone_numbers.build
-    end
-    schedule = @position.build_schedule
-    ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day|
-      schedule.days.build(:day => day)
-    end
-    @position.interests.build
-    @position.skills.build
-  end
-
-
-  def scheduler
-    @position = Volunteering::Position.new
-    @position.build_contact.phone_numbers.build
-    schedule = @position.build_schedule
-    ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day|
-      schedule.days.build(:day => day)
-    end
+    fix_model_to_view
+    respond_with(@position)
   end
 
   def create
-    case params[:contact_assignment]
-      when 'existing'
-        params[:volunteering_position].delete(:contacts_attributes)
-      when 'new'
-        params[:volunteering_position].delete(:contact_ids)
-      when 'none'
-        params[:volunteering_position].delete(:contact_ids)
-        params[:volunteering_position].delete(:contacts_attributes)
-    end
-
-    if contact_ids = params[:volunteering_position][:contact_ids]
-      params[:volunteering_position][:contact_ids] = contact_ids.split(',')
-    end
-
-    if schedule = params[:volunteering_position].delete(:schedule_attributes)
-      case schedule[:schedule_type]
-        when 'daily'
-          params[:volunteering_position][:schedule_attributes] = schedule[:daily]
-          params[:volunteering_position][:schedule_attributes][:schedule_type] = 'daily'
-
-          if params[:daily_type] == 'every_week_day'
-            params[:volunteering_position][:schedule_attributes][:value] = 'weekday'
-          end
-
-        when 'weekly'
-          params[:volunteering_position][:schedule_attributes] = schedule[:weekly]
-          params[:volunteering_position][:schedule_attributes][:schedule_type] = 'weekly'
-          params[:volunteering_position][:schedule_attributes][:start_time] = "00:00"
-          params[:volunteering_position][:schedule_attributes][:end_time] = "00:00"
-      end
-    end
-
+    fix_view_to_model
     @position = Volunteering::Position.create(params[:volunteering_position])
+    fix_model_to_view
 
     @position.starttime_nr = params[:starttime_nr]
     @position.start_date_nr = params[:start_date_nr]
@@ -103,7 +56,10 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def update
+    fix_view_to_model
     @position = Volunteering::Position.find(params[:id])
+    @position.update_attributes(params[:volunteering_position])
+    fix_model_to_view
     respond_with(@position)
   end
 
@@ -202,4 +158,49 @@ class Volunteering::PositionsController < ApplicationController
     end
   end
 
+  def fix_view_to_model
+    case params[:contact_assignment]
+      when 'existing'
+        params[:volunteering_position].delete(:contacts_attributes)
+      when 'new'
+        params[:volunteering_position].delete(:contact_ids)
+      when 'none'
+        params[:volunteering_position].delete(:contact_ids)
+        params[:volunteering_position].delete(:contacts_attributes)
+    end
+
+    if contact_ids = params[:volunteering_position][:contact_ids]
+      params[:volunteering_position][:contact_ids] = contact_ids.split(',')
+    end
+
+    if schedule = params[:volunteering_position].delete(:schedule_attributes)
+      case schedule[:schedule_type]
+        when 'daily'
+          params[:volunteering_position][:schedule_attributes] = schedule[:daily]
+          params[:volunteering_position][:schedule_attributes][:schedule_type] = 'daily'
+
+          if params[:daily_type] == 'every_week_day'
+            params[:volunteering_position][:schedule_attributes][:value] = 'weekday'
+          end
+
+        when 'weekly'
+          params[:volunteering_position][:schedule_attributes] = schedule[:weekly]
+          params[:volunteering_position][:schedule_attributes][:schedule_type] = 'weekly'
+          params[:volunteering_position][:schedule_attributes][:start_time] = "00:00"
+          params[:volunteering_position][:schedule_attributes][:end_time] = "00:00"
+      end
+    end
+  end
+
+  def fix_model_to_view
+    @position.contacts.build do |c|
+      c.phone_numbers.build
+    end if @position.contacts.empty?
+
+    @position.build_schedule unless @position.schedule
+
+    ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day|
+      @position.schedule.days.build(:day => day) unless @position.schedule.days.any? { |d| d.day == day }
+    end
+  end
 end

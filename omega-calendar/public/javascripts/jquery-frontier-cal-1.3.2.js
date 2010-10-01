@@ -3190,8 +3190,8 @@
                         if (endSec == "") {
                             endSec = "0";
                         }
-                        console.log((parseInt(startHour) -1) +   ' ' + startHour )
-                        startDt = new Date(parseInt(startYear), parseInt(startMonth) - 1, parseInt(startDay), parseInt(startHour), parseInt(startMin), parseInt(startSec), 0);
+
+                        startDt = new Date(parseInt(startYear), parseInt(startMonth) - 1, parseInt(startDay), parseInt(startHour) -1 , parseInt(startMin), parseInt(startSec), 0);
 
                         endDt = new Date(parseInt(endYear), parseInt(endMonth) - 1, parseInt(endDay),parseInt(endHour) , parseInt(endMin), parseInt(endSec), 0);
                         if (DateUtil.secondsDifferenceDirection(startDt, endDt) >= 0) {
