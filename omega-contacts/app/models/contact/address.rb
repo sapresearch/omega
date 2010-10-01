@@ -1,4 +1,4 @@
-class Contact::Address < ActiveRecord::Base
+class Contact::Address < Omega::Model
   ADDRESS_TYPES = %w{home work billing}
 
   belongs_to :contact, :polymorphic => true

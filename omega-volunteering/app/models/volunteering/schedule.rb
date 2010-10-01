@@ -1,4 +1,4 @@
-class Volunteering::Schedule < ActiveRecord::Base
+class Volunteering::Schedule < Omega::Model
 
   validates_presence_of :schedule_type
 

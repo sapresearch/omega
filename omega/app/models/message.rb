@@ -1,4 +1,4 @@
-class Message < ActiveRecord::Base
+class Message < Omega::Model
   belongs_to :to,   :class_name => 'User', :inverse_of => :messages
   belongs_to :from, :class_name => 'User', :inverse_of => :sent_messages
 

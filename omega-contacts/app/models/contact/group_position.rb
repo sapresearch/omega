@@ -1,4 +1,4 @@
-class Contact::GroupPosition < ActiveRecord::Base
+class Contact::GroupPosition < Omega::Model
   belongs_to :contact
   belongs_to :group
 

@@ -1,4 +1,4 @@
-class Volunteering::Position < ActiveRecord::Base
+class Volunteering::Position < Omega::Model
 
   MAX_POSITIONS_PER_PAGE = 4
 
@@ -56,5 +56,4 @@ class Volunteering::Position < ActiveRecord::Base
       self.start = start_date_nr + " " + starttime_nr
       self.end = end_date_nr + " " + endtime_nr
     end
-  
 end

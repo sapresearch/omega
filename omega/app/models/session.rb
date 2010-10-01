@@ -1,4 +1,4 @@
-class Session < ActiveRecord::Base
+class Session < Omega::Model
   PERM_ADMIN = 'system_admin_sessions'
   PERM_VIEW  = 'system_view_sessions'
   

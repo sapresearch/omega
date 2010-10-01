@@ -1,4 +1,4 @@
-class Permission < ActiveRecord::Base
+class Permission < Omega::Model
   has_and_belongs_to_many :roles
 
   validates :name,  :presence => true

@@ -10,7 +10,7 @@
 #end
 
 
-class Event < ActiveRecord::Base
+class Event < Omega::Model
 
   belongs_to :calendar
   validates_presence_of :title

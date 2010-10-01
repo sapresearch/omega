@@ -1,4 +1,4 @@
-class Volunteering::ContactPosition < ActiveRecord::Base
+class Volunteering::ContactPosition < Omega::Model
 
   belongs_to :contact
   belongs_to :position
