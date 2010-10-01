@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    @event = Event.new(:calendar_id => 1)
     respond_with(@event)
   end
 

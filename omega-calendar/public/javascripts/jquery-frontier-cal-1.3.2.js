@@ -84,7 +84,7 @@
         this.titleValue = title;
         // start date & time
         this.startDt = startDate;
-        // end date and time
+        // end date and timeo
         this.endDt = endDate;
         // by default we show the start time on the agenda div element. If allDayEvent is set to true we won't show the time.
         this.allDayEvent = allDay;
@@ -3190,8 +3190,10 @@
                         if (endSec == "") {
                             endSec = "0";
                         }
-                        startDt = new Date(parseInt(startYear), parseInt(startMonth) - 1, parseInt(startDay), parseInt(startHour) - 1, parseInt(startMin), parseInt(startSec), 0);
-                        endDt = new Date(parseInt(endYear), parseInt(endMonth) - 1, parseInt(endDay), parseInt(endHour) - 1, parseInt(endMin), parseInt(endSec), 0);
+                        console.log((parseInt(startHour) -1) +   ' ' + startHour )
+                        startDt = new Date(parseInt(startYear), parseInt(startMonth) - 1, parseInt(startDay), parseInt(startHour), parseInt(startMin), parseInt(startSec), 0);
+
+                        endDt = new Date(parseInt(endYear), parseInt(endMonth) - 1, parseInt(endDay),parseInt(endHour) , parseInt(endMin), parseInt(endSec), 0);
                         if (DateUtil.secondsDifferenceDirection(startDt, endDt) >= 0) {
                             // continue if start date is before or on end date
                             var hashData = new Hashtable();
