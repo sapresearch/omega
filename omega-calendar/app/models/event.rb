@@ -32,6 +32,7 @@ class Event < Omega::Model
             :end => self.end,
             :allDay => allday,
             :url => url,
+    :id => id,
             :event_description => event_description
     }
   end

@@ -4,28 +4,28 @@
 <div class="page-content corners-bottom">
   <div class="right">
     <%= om_button(:icon=>'sort-az') do %>
-        <%= link_to 'sort A-Z', messages_path(:subject => 'asc') %>
+        <%= link_to 'sort Asc', messages_path(:created_at => 'asc') %>
     <% end %>
     <%= om_button(:icon=>'sort-za') do %>
-        <%= link_to 'sort Z-A', messages_path(:subject => 'desc') %>
+        <%= link_to 'sort Desc', messages_path(:created_at => 'desc') %>
     <% end %>
   </div>
   <div class="clear"></div>
   <ul id="messages_list">
     <% @messages.each do |message| %>
         <li class="item-list clearfix">
+           <h3>
           <% if !message.read? %>
-              <h3>
                 <%= link_to truncate(message.subject, :length=>60), message_path(message) , :class => 'italic' %>
-              </h3>
 
           <% else %>
-              <h3>
+
                 <%= link_to truncate(message.subject, :length=>60), message_path(message) %>
 
-              </h3>
           <% end %>
-          <div class="">
+          <span class="right">  <%= message.created_at %></span>
+              </h3>
+          <div >
             <%= truncate(message.body, :length=> 160) %>
           </div>
           <div class="right">

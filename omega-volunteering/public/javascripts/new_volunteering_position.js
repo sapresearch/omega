@@ -4,10 +4,11 @@
 
 
 $(function() {
+
     $('.tpickr').timepicker();
 
-
-    $('#new_volunteering_position').find(".datepickr").datepicker({
+    /* jqueryui datepicker defaults */
+    $('#volunteer_position_form').find(".datepickr").datepicker({
         dateFormat: 'yy-mm-dd',
         showButtonPanel: true,
         changeMonth: true,
@@ -16,18 +17,15 @@ $(function() {
     });
 
 
-    var $recurrent = $('#volunteering_position_recurrence');
+    var $recurrent = $('input[name=volunteering_position[recurrence]]');
     var $scheduler = $('#scheduler');
     var $vp_contact = $('#vp_contact');
 
-    $recurrent.click(function() {
-        if ($(this).is(':checked')) {
-            $('#scheduler').slideDown('fast');
-            $('#non_recurrent').slideUp('fast');
+    $recurrent.change(function() {
+        if ($(this).val() == 1) {
+            $scheduler.slideDown('fast');
         } else {
-            $('#scheduler').slideUp('fast');
-            $('#non_recurrent').slideDown('fast');
-
+            $scheduler.slideUp('fast');
         }
 
     });
@@ -42,17 +40,14 @@ $(function() {
 
     });
 
-    // restore the dom states on page refresh
+    // restore the dom state on page refresh
     if ($recurrent.is(':checked')) {
         $('#scheduler').show();
         $('#non_recurrent').hide();
 
     }
-
-
     var v = $scheduler.find('input:radio:checked').val();
     $scheduler.find('#' + v + '_schedule').show();
-
 
     $scheduler.find('input[name="volunteering_position[schedule_attributes][schedule_type]"]').change(function() {
 
@@ -95,12 +90,11 @@ $(function() {
     var $assigned_contacts = $('#assigned_contacts');
     var $vp_contact_id = $('#volunteering_position_contact_ids');
 
-
-
+    /* jqueryui autocomplete for contacts */
     $('#ac-contacts').autocomplete({
         source : '/contacts/autocomplete',
         minLength: 2,
-        
+
         select: function(event, ui) {
 
             $(this).val('');
@@ -108,21 +102,8 @@ $(function() {
             update_cid_values()
             return false;
         }
-        
-    });
 
-//    $("#ac_contacts").autocomplete('/contacts/autocomplete.psv', {
-//        multiple: true,
-//        formatItem: function(data, i, n, value) {
-//            return '<img src="/images/user.png"/> ' + value;
-//        }
-//    }).result(function(e, data) {
-//        $(this).val('');
-//        $('<li />').append(data[0] + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', data[1]);
-//
-//        update_cid_values()
-//
-//    });
+    });
 
     $assigned_contacts.find('.delete-user').live('click', function(e) {
         $(this).parent('li').remove();

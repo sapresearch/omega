@@ -1,77 +1,85 @@
 <% require_stylesheet 'omega_volunteering' %>
-<% require_javascript 'thirdParty/jquery.timepicker' ,'new_volunteering_position' %>
+<% require_javascript 'thirdParty/jquery.timepicker', 'new_volunteering_position' %>
 
 
-<%= form_for(@position) do |f| %>
+<%= form_for(@position, :html => {:id => 'volunteer_position_form' })  do |f|%>
     <%= errors_for_form(@position, 'position') %>
-<fieldset>
-    <p>
-      <%= f.label :name %>
-      <%= f.text_field :name, :'data-tooltip '=> 'descriptive name for position' %>
-    </p>
-    <p>
-      <%= f.label :description %>
-      <%= f.text_area :description, :rows => 6 , :'data-tooltip '=> 'describe what work the volunteer will be doing in this position' %>
-    </p>
-    <p>
-      <%= f.label :hours %>
-      <%= f.text_field :hours, :class => "inputSmall", :'data-tooltip '=> 'approximate number of hours per week needed' %>
-    </p>
-    <p>
-      <%#= f.label :volunteers_required %>
-      <%#= f.text_field :volunteers_required, :class => "inputSmall" %>
-    </p>
-    <p>
-      <%= f.label :recurrent %>
-      <%= f.check_box :recurrence %>
-
-    </p>
-    <div id="non_recurrent">
+    <fieldset>
+      <p>
+        <%= f.label :name %>
+        <%= f.text_field :name, :'data-tooltip '=> 'descriptive name for position' %>
+      </p>
 
       <p>
-        <%= f.label :start_date %>
-        <%= f.text_field :start_date_nr, :class=>'datepickr', :size=>10 , :autocomplete => 'off'%>
+        <%= f.label :description %>
+        <%= f.text_area :description, :rows => 6, :'data-tooltip '=> 'describe what work the volunteer will be doing in this position' %>
+      </p>
+
+      <p>
+        <%= f.label :hours %>
+        <%= f.text_field :hours, :class => "inputSmall", :'data-tooltip '=> 'approximate number of hours per week needed' %>
+      </p>
+
+      <p>
+        <%#= f.label :volunteers_required %>
+        <%#= f.text_field :volunteers_required, :class => "inputSmall" %>
+      </p>
+
+      <div id="non_recurrent">
+
+        <p>
+          <%= f.label :start_date %>
+          <%= f.text_field :start_date_nr, :class=>'datepickr', :size=>10, :autocomplete => 'off' %>
+          <%= f.label :end_date %>
+          <%= f.text_field :end_date_nr, :class=>'datepickr', :size=>10, :autocomplete => 'off' %>
+        </p>
+
+        <p>
+
           <%= f.label :start_time %>
-        <%= f.text_field :starttime_nr, :class=>'tpickr', :size=>10 , :autocomplete => 'off'%>
-      </p>
+          <%= f.text_field :starttime_nr, :class=>'tpickr', :size=>10, :autocomplete => 'off' %>
+          <%= f.label :end_time %>
+          <%= f.text_field :endtime_nr, :class=>'tpickr', :size=>10, :autocomplete => 'off' %>
+        </p>
+
+        <p>
+          <%= f.label :reoccurs %>
+          <%= f.radio_button :recurrence, 1 %>
+          <%= f.label :one_time_only %>
+          <%= f.radio_button :recurrence, 0 %>
+
+        </p>
+      </div>
+
+      <div id="scheduler">
+        <label for="volunteering_position[schedule_type]">Pattern</label>
+
+        <%= f.fields_for :schedule do |ff| %>
+            <%= errors_for_model f.object %>
+            <% ['daily', 'weekly', 'monthly', 'yearly'].each do |d| %>
+                <%= ff.radio_button :schedule_type, d %> <%= d %>
+            <% end %>
+        <% end %>
+
+
+        <%= render('form_schedule_weekly', :f => f) %>
+        <%= render('form_schedule_daily', :f => f) %>
+      </div>
 
       <p>
-        <%= f.label :end_date %>
-        <%= f.text_field :end_date_nr, :class=>'datepickr', :size=>10 , :autocomplete => 'off'%>
-          <%= f.label :end_time %>
-        <%= f.text_field :endtime_nr, :class=>'tpickr', :size=>10 , :autocomplete => 'off'%>
+        <%= f.label :Num_Volunteers %>
+        <%= f.text_field :volunteers_required, :size=>10 %>
       </p>
-    </div>
+    </fieldset>
 
-    <div id="scheduler">
-      <label for="volunteering_position[schedule_type]">Pattern</label>
+    <%#= f.label :skills_values %>
 
-      <%= f.fields_for :schedule do |ff| %>
-          <%= errors_for_model f.object%>
-          <% ['daily', 'weekly', 'monthly', 'yearly'].each do |d| %>
-              <%= ff.radio_button :schedule_type, d %> <%= d %>
-          <% end %>
-      <% end %>
+    <%#= f.text_field :skills_values %>
 
 
-      <%= render('form_schedule_weekly', :f => f) %>
-      <%= render('form_schedule_daily', :f => f) %>
-    </div>
+    <%#= f.label :interests_values %>
 
-    <p>
-      <%= f.label :Num_Volunteers %>
-      <%= f.text_field :volunteers_required, :size=>10 %>
-    </p>
-</fieldset>
-
-      <%#= f.label :skills_values %>
-
-      <%#= f.text_field :skills_values %>
-
-
-      <%#= f.label :interests_values %>
-
-      <%#= f.text_field :interests_values %>
+    <%#= f.text_field :interests_values %>
 
 
 
@@ -79,10 +87,10 @@
     <div id="vp_contact">
       <fieldset>
         <legend>Contact for this position</legend>
-      <% [[:none, 'no contact'], [:existing, 'existing contact'], [:new, 'new contact']].each do |value, text| %>
-          <%= radio_button_tag 'contact_assignment', value, true %><%= text %>
-      <% end %>
-</fieldset>
+        <% [[:none, 'no contact'], [:existing, 'existing contact'], [:new, 'new contact']].each do |value, text| %>
+            <%= radio_button_tag 'contact_assignment', value, true %><%= text %>
+        <% end %>
+      </fieldset>
       <fieldset id="position_exisiting_contact" class="hide">
         <legend>Assign an existing contact</legend>
         <%= f.label "contact_name(s)" %>
@@ -104,23 +112,23 @@
     </div>
     <fieldset>
       <legend>Skills and Interests</legend>
-    <p>
-      <%= f.label :skills %>
-      <%= f.text_field :skills_values %>
-    </p>
+      <p>
+        <%= f.label :skills %>
+        <%= f.text_field :skills_values %>
+      </p>
 
-    <p>
-      <%= f.label :interests %>
-      <%= f.text_field :interests_values %>
-    </p>
-</fieldset>
-
-
-<%= om_button(:icon=>'save') do %>
+      <p>
+        <%= f.label :interests %>
+        <%= f.text_field :interests_values %>
+      </p>
+    </fieldset>
 
 
-          <%= f.submit %>
-      <% end %>
+    <%= om_button(:icon=>'save') do %>
+
+
+        <%= f.submit %>
+    <% end %>
 
 
 

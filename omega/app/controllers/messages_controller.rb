@@ -72,7 +72,7 @@ class MessagesController < ApplicationController
     redirect_to(messages_url)
   end
 
-  SORT_KEYS = ['subject']
+  SORT_KEYS = ['created_at']
   SORT_DIRECTIONS = ['asc', 'desc']
 
   def sort

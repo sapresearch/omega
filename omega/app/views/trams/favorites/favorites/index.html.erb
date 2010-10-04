@@ -26,7 +26,7 @@
 
           <div class="right">
             <%= om_button(:icon=>'delete') do %>
-                <%= link_to 'Delete', favorite_path(favorite.item), :method=> :delete %>
+                <%= link_to 'Remove as favorite', favorite_path(favorite.item), :method=> :delete %>
             <% end %>
 
 

@@ -43,8 +43,6 @@ $(document).ready(function() {
         $addeventform.dialog('open');
     }
 
-    
-
 
     /**
      * Called when user clicks and agenda item
@@ -56,7 +54,7 @@ $(document).ready(function() {
         // pull agenda item from calendar
         var agendaItem = jfcalplugin.getAgendaItemById("#cal", agendaId);
         clickAgendaItem = agendaItem;
- 
+
         $displayeventform.dialog('open');
     }
 
@@ -91,7 +89,7 @@ $(document).ready(function() {
         var startDate = jfcalplugin.getStartDate('#cal');
         var endDate = jfcalplugin.getEndDate('#cal');
         jfcalplugin.deleteAllAgendaItems('#cal')
-        retrieveData(startDate,endDate);
+        retrieveData(startDate, endDate);
 
         return false;
     });
@@ -112,7 +110,7 @@ $(document).ready(function() {
         var startDate = jfcalplugin.getStartDate('#cal');
         var endDate = jfcalplugin.getEndDate('#cal');
         jfcalplugin.deleteAllAgendaItems('#cal');
-        retrieveData(startDate,endDate);
+        retrieveData(startDate, endDate);
         return false;
     });
 
@@ -158,7 +156,7 @@ $(document).ready(function() {
         var startDate = jfcalplugin.getStartDate('#cal');
         var endDate = jfcalplugin.getEndDate('#cal');
 
-        retrieveData(startDate,endDate);
+        retrieveData(startDate, endDate);
     });
     /**
      * Initialize add event modal form
@@ -237,7 +235,7 @@ $(document).ready(function() {
                 var self = $(this);
                 $.ajax({
                     global : false,
-                    url : '/calendars/1/events/' + clickAgendaItem.data.egendaId  + '/edit',
+                    url : '/calendars/1/events/' + clickAgendaItem.data.id + '/edit',
                     type : 'GET',
                     dataType : 'script',
                     success: function() {
@@ -249,7 +247,7 @@ $(document).ready(function() {
                 var self = $(this);
                 $.ajax({
                     global : false,
-                    url : '/events/' + clickAgendaItem.data.UID ,
+                    url : '/events/' + clickAgendaItem.data.id ,
                     type : 'DELETE',
                     dataType : 'json',
                     success: function() {
@@ -298,7 +296,7 @@ $(document).ready(function() {
         for (i; i < l; i++) {
             jsi = jso[i];
             var desc = (typeof jsi.event_description != 'undefined') ? jsi.event_description : ''
-var alld = jsi.allDay || false;
+            var alld = jsi.allDay || false;
             jfcalplugin.addAgendaItem(
                     "#cal",
                     jsi.title,
@@ -306,6 +304,7 @@ var alld = jsi.allDay || false;
                     new Date(jsi.end),
                     alld,
             {
+                id: jsi.id,
                 description:  desc
             });
 
@@ -320,7 +319,7 @@ var alld = jsi.allDay || false;
         });
     }
 
-    retrieveData(startDate,endDate);
+    retrieveData(startDate, endDate);
 
 
 });

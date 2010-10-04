@@ -42,7 +42,6 @@ function service_type_choice(choice) {
                 $('#service_with_type').hide();
                 $('#list').hide();
                 $('#service_without_type').show();
-
                 $("#service_without_type").html(html);
                  }
             });

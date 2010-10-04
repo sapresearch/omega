@@ -1,8 +1,3 @@
-/**
-* @author I823626
-*/
-
-
 jQuery.showFlash = function(msg, n) {
     var msg_div = $('#notification-flash-wrapper');
     msg_div.find('div').html(msg);
@@ -20,7 +15,7 @@ jQuery.showFlash = function(msg, n) {
     });
 };
 
-
+/* jquery plugin - default settings */
 $.fn.tipsy.defaults = {
     delayIn: 0,      // delay before showing tooltip (ms)
     delayOut: 0,     // delay before hiding tooltip (ms)
@@ -38,18 +33,17 @@ $.fn.tipsy.defaults = {
 };
 
 
-/*********** dom ready ! here we go ****************/
+/* dom ready! here we go */
 
 $(function() {
+
+    /* jquery fix for empty string or empty return data handling  e.g. http status 200 without responsetext after xhr */
+
     jQuery.ajaxSetup({ dataFilter: function(data, type) {
         return (!data || jQuery.trim(data) == '') ? '{}' : data;
     } });
 
-//    $(document).click(function(){
-//        $.showFlash()
-//    });
-
-    /************** jrails adapter **********************/
+    /* jrails adapter for jquery ajax support in rails */
 
     var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta[name=csrf-param]').attr('content');
 
@@ -187,16 +181,15 @@ $(function() {
     });
 
 
-    /*****************************   End jRails *************************/
+    /* End jRails */
 
 
-    /*******************************  Nested attribues   *******************/
+    /* Nested attribues support for rails*/
     $('form a[data-new-nested]').live('click', function () {
         var association = $(this).attr('data-new-nested');
         var template = $('#' + association + '_fields_template').html();
         var new_id = new Date().getTime();
         var content = template.replace(/_ID_/g, new_id);
-
         var fields = $(content).insertBefore($(this));
         fields.siblings('input[name*=_template]').remove();
         return false;
@@ -210,17 +203,15 @@ $(function() {
         $(this).parent().hide();
         return false;
     });
-    /*****************************En d Nested attribues   *******************/
+    /* End Nested attribues */
 
-    /**
-     * Applicationwide - tooltip
-     */
+    /* Applicationwide - tooltip */
     $('span[data-tooltip]').tipsy({live:true});
     $('a[data-tooltip]').tipsy();
     $('form').find('input[data-tooltip],textarea[data-tooltip] ').tipsy({gravity: 'w',
         trigger : 'focus'
     });
-
+    /* bind default beahvior for ajax calls */
     $('#notification-flash-wrapper').bind("ajaxSend",
                                          function() {
                                              $.showFlash('Loading', 'ajax')
@@ -232,10 +223,7 @@ $(function() {
 
     });
 
-    /**
-     * menu
-     */
-
+    /* menu */
 
     $("ul#topnav li").hover(function() { //Hover over event on list item
 
@@ -245,14 +233,13 @@ $(function() {
         $(this).find("div").slideUp('fast'); //Hide the subnav
     });
 
-
+    /* jquerui datepicker defaults */
     $.datepicker.setDefaults({showAnim: '' });
-    /**
-     * visual highlight methods
-     */
-    $('input[type=text],fieldset input[type=password],textarea').live('focus',function(){
-        $(this).addClass('inputActive');
-                                                                               }).live('blur',function() {
+    /* visual highlight methods */
+    $('input[type=text],fieldset input[type=password],textarea').live('focus',
+                                                                     function() {
+                                                                         $(this).addClass('inputActive');
+                                                                     }).live('blur', function() {
         $(this).removeClass('inputActive');
     });
 
@@ -264,30 +251,14 @@ $(function() {
     });
 
 
-    var search = $("#search");
-
-    search.hover(function() {
-        $(this).addClass("searchHover")
-    }, function() {
-        $(this).removeClass("searchHover")
-    });
-    $("#searchInput").focus(
-                           function() {
-
-                               search.addClass("searchActive")
-                           }).blur(function() {
-        search.removeClass("searchActive")
-    });
-
-
     $('[data-link-to]').click(function() {
         location.href = $(this).attr('data-link-to');
     });
 
-
+    /* jquery selector caching */
     var trigger = $('#trigger');
     var loginWrapper = $('#loginWrapper');
-    var loginPanel = $('#loginPanel');
+    
 
     loginWrapper.dialog({
         modal : true,
@@ -311,16 +282,11 @@ $(function() {
         $(".drop_down dd ul").hide();
 
     });
-
-
     $(document).bind('click', function(e) {
         var $clicked = $(e.target);
         if (! $clicked.parents().hasClass("drop_down"))
             $(".drop_down dd ul").hide();
     });
-
-
-
 
 
 });

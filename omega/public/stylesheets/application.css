@@ -1,3 +1,6 @@
+/* Put all global style rules in here */
+
+/* css reset */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, code, em, font, img, kbd, q, tt, var,
@@ -14,10 +17,13 @@ table, tbody, tfoot, thead, tr, th, td {
     font: 12px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+body {
+    background: #FFF;
+}
+
 html, body, #wrapper {
     height: 100%;
     color: #666;
-
 }
 
 body > #wrapper {
@@ -30,33 +36,19 @@ body > #wrapper {
     background-repeat: repeat-x;
     height: auto;
     min-height: 100%;
-
 }
 
-body {
-    background: #FFF;
-
-}
-
+/* reset */
 ol, ul {
     list-style: none;
 }
 
-blockquote, q {
-    quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-
-/* remember to define focus styles! */
+/* reset */
 :focus {
     outline: 0;
 }
 
+/* BEGIN Element stylerules */
 h1, h2, h3, h4 {
 
     text-transform: capitalize;
@@ -101,6 +93,7 @@ h3 {
     color: #016390;
     font-size: 1.1em;
 }
+
 h3 a {
     font-size: 1.1em;
     color: #187CF3;
@@ -116,27 +109,102 @@ p {
 a {
     color: #162D3D;
     text-decoration: none;
+    list-style-type: none;
 }
 
 a:hover {
     color: #0063dc;
 }
 
-.om-table thead {
+input {
+    font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    text-align: left;
 
-    color: #FFF;
-    border: 1px solid #00469C;
 }
 
-.om-table th {
-    background: #00469C;
-    font-size: 1.2em;
-    padding: 0.2em;
+form input, textarea, select {
+
+    padding: 8px;
+    border: 1px solid #dedede;
+    color: #191919;
 }
 
-.om-table tbody {
-    margin-top: 10px;
+input[type="submit"]::-moz-focus-inner, button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
 }
+
+input[type="button"]::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+form table input {
+    height: 22px;
+    padding: 0;
+    background: #F2F2F2;
+    border: 1px solid #A2A6A7;
+}
+
+form input.inputSmall {
+    width: 4em;
+}
+
+form input.inputMid {
+    width: 8em;
+}
+
+form input.datepicker {
+    width: 8em;
+}
+
+form label {
+    color: #0063dc;
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+
+    font-weight: bold;
+    min-width: 120px;
+    text-align: right;
+
+    text-transform: capitalize;
+
+}
+
+fieldset {
+    margin: 1.3em;
+    padding: 1.3em;
+    background: #F2F2F2;
+    border: 4px solid #E2E2E2;
+
+}
+
+legend {
+    text-transform: uppercase;
+    font-size: 1.4em;
+    color: #00469C;
+    padding: 0 0.5em;
+    font-style: italic;
+
+}
+
+* html .clearfix {
+    height: 1%;
+}
+td h4 {
+
+    border-bottom: 4px solid #09F3E4;
+    color: #055F67;
+    font-size: 1.3em;
+    font-weight: bolder;
+    margin: 0.5em 0;
+    text-transform: capitalize;
+}
+/* End Element stylerules */
+
+
 
 table.om-table {
     margin: 1em 0;
@@ -145,9 +213,6 @@ table.om-table {
     border-collapse: collapse;
 }
 
-.om-table tr {
-    height: 20px;
-}
 
 tr.even {
     background: #f2f2f2;
@@ -159,29 +224,7 @@ tr.odd {
 
 }
 
-.om-table td {
-    border: 1px solid #DFE5E7;
-    color: #191919;
-    padding: 0 10px;
-    height: 28px;
-    vertical-align: middle;
-}
 
-form table input {
-    height: 22px;
-
-    padding: 0;
-    background: #F2F2F2;
-    border: 1px solid #A2A6A7;
-}
-
-.cf3a72 {
-    color: #cf3a72;
-}
-
-.italic {
-    font-style: italic;
-}
 
 #notification-flash-wrapper {
     opacity: 0.90;
@@ -229,12 +272,25 @@ form table input {
     text-align: left;
     margin: 0 auto 50px;
 }
+#loginWrapper {
+    display: none;
+}
 
-#content {
-    text-align: left;
-    margin: 0 auto 4em;
-    width: 950px;
-    padding-bottom: 16em;
+#loginFailed {
+
+    font-size: 0.8em;
+    position: relative;
+}
+
+#ctlrBar {
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #cf3a72;
+    margin-left: 1em;
+    height: 28px;
+    line-height: 28px;
+    float: right;
+    vertical-align: bottom
 }
 
 #breadcrumb {
@@ -249,6 +305,13 @@ form table input {
     color: #646767;
 }
 
+#content {
+    text-align: left;
+    margin: 0 auto 4em;
+    width: 950px;
+    padding-bottom: 16em;
+}
+
 #left {
     text-align: left;
     float: left;
@@ -261,10 +324,6 @@ form table input {
     width: 230px;
     margin: 0;
     float: right;
-}
-
-.text-right {
-    text-align: right;
 }
 
 .center-content {
@@ -385,19 +444,18 @@ li.item-list {
     padding: 0 0 10px;
     position: absolute;
     top: 38px;
-    display: none; /*--Hide by default--*/
+    display: none;
     width: 200px;
     background: #0365dc;
-    color: #fff; /*--Bottom right rounded corner--*/
+    color: #fff;
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 4px 4px;
     border-radius: 4px;
 }
 
-/*--Show subnav on hover--*/
 #topnav li div a {
     text-transform: capitalize;
-    border-bottom: 1px dotted #448BE2; /*background: url(../images/menu_bg.png) repeat-x;*/
+    border-bottom: 1px dotted #448BE2;
     background: #0365dc;
     padding: 3px 15px;
     display: block;
@@ -421,7 +479,7 @@ li.item-list {
 
 /* Errors and validation */
 .fieldWithErrors input, .inputInvalid {
-    padding:8px;
+    padding: 8px;
     background: #F09183;
     color: #fff;
     border: 1px solid #ed513b;
@@ -456,23 +514,6 @@ span.error {
     font-style: italic;
 }
 
-legend {
-    text-transform: uppercase;
-    font-size: 1.4em;
-    color: #00469C;
-    padding: 0 0.5em;
-    font-style: italic;
-
-}
-
-fieldset {
-    margin: 1.3em;
-    padding: 1.3em;
-   background: #F2F2F2;
-border:4px solid #E2E2E2;
-
-}
-
 #warning {
     padding: 1em;
     font-size: 1.4em;
@@ -483,26 +524,34 @@ border:4px solid #E2E2E2;
     position: absolute;
 }
 
-.right {
-    float: right;
-
-}
-
-.left {
-    float: left;
-}
-
-.absolute {
-    position: absolute;
-}
-
-.relative {
-    position: relative;
-
-}
 
 .fieldset_active {
     border: 4px solid #285370;
+}
+.om-table td {
+    border: 1px solid #DFE5E7;
+    color: #191919;
+    padding: 0 10px;
+    height: 28px;
+    vertical-align: middle;
+}
+.om-table thead {
+
+    color: #FFF;
+    border: 1px solid #00469C;
+}
+
+.om-table th {
+    background: #00469C;
+    font-size: 1.2em;
+    padding: 0.2em;
+}
+
+.om-table tbody {
+    margin-top: 10px;
+}
+.om-table tr {
+    height: 20px;
 }
 
 #search_wrapper {
@@ -529,22 +578,7 @@ border:4px solid #E2E2E2;
     float: right;
 }
 
-.clear:after {
-    content: ".";
-    display: block;
-    clear: both;
-    visibility: hidden;
-    line-height: 0;
-    height: 0;
-}
 
-.clear {
-    clear: both;
-}
-
-* html .clearfix {
-    height: 1%;
-}
 
 .inputActive {
     border: 1px solid #999;
@@ -557,38 +591,7 @@ border:4px solid #E2E2E2;
 
 }
 
-/*========================= Form elements =====================================*/
-
-legend {
-    margin: 1em;
-}
-
-form input, textarea, select {
-
-    padding: 8px;
-    border: 1px solid #dedede;
-    color: #191919;
-}
-
-input {
-    font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    text-align: left;
-
-}
-
-a {
-    list-style-type: none;
-
-}
-
-/* ======================================= BUTTONS  =================================
-=                                                                                =
-=                                                                                =
-=                                                                                =
-=                                                                                =
-=================================================================================*/
-
+/* Buttons */
 .om-button a, .om-button input, .om-button button, .om-icon-button a, .om-icon-button input, .om-icon-button button {
     position: relative;
     text-transform: capitalize;
@@ -628,7 +631,7 @@ span.om-icon-button {
     border-radius: 2px;
     display: inline-block;
     height: 20px;
-    background: url("../images/om_button_bg.png") repeat-x bottom transparent;
+    background: url("/images/om_button_bg.png") repeat-x bottom transparent;
     border-width: 1px;
     border-style: solid;
     border-color: #ccc #bbb #a0a0a0;
@@ -689,21 +692,11 @@ span.om-plain-icon-button span.om-icon,
 }
 
 span.om-button-active {
-    background: url("../images/om_button_bg_active.png") repeat-x bottom transparent;
+    background: url("/images/om_button_bg_active.png") repeat-x bottom transparent;
     border-width: 1px;
     border-style: solid;
     border-color: #ccc #bbb #a0a0a0;
     color: #0063dc;
-}
-
-input[type="submit"]::-moz-focus-inner, button::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-}
-
-input[type="button"]::-moz-focus-inner {
-    border: 0;
-    padding: 0;
 }
 
 span.om-button span.om-icon,
@@ -720,10 +713,11 @@ span.om-plain-icon-button span.om-icon {
 
 }
 
-.om-white-icon, .om-blue-icon{
+.om-white-icon, .om-blue-icon {
     height: 14px;
     width: 14px;
 }
+
 span.om-icon-button span.om-icon {
     margin-left: -16px;
 }
@@ -778,7 +772,7 @@ span.om-icon-button span.om-icon {
     background-position: 0 -208px;
 }
 
-span.om-icon-back {
+.om-icon-back {
     background-position: 0 -224px;
 }
 
@@ -852,35 +846,7 @@ span.om-icon-back {
 
 /*END BUTTONS*/
 
-form input.inputSmall {
-    width: 4em;
-}
-
-form input.inputMid {
-    width: 8em;
-}
-
-form input.datepicker {
-    width: 8em;
-}
-
-form label {
-    color: #0063dc;
-    display: inline-block;
-    *zoom: 1;
-    *display: inline;
-
-    font-weight: bold;
-    min-width: 120px;
-    text-align: right;
-
-    text-transform: capitalize;
-
-}
-
-/*************************** End comments *********************************/
-
-/*************************** Pagination  *********************************/
+/*Pagination */
 div.pagination {
     color: #000000;
     display: block;
@@ -931,11 +897,8 @@ div.pagination span.disabled {
 
 }
 
-/************************ End Pagination  *********************************/
+/*End Pagination */
 
-#loginPanel form label {
-    float: none;
-}
 
 form span.error {
 
@@ -1018,27 +981,7 @@ form span.error {
 
 /* End hide from IE-mac */
 
-#loginWrapper {
-    display: none;
 
-}
-
-#loginFailed {
-
-    font-size: 0.8em;
-    position: relative;
-}
-
-#ctlrBar {
-    font-weight:bold;
-    text-transform:capitalize;
-    color: #cf3a72;
-    margin-left: 1em;
-    height: 28px;
-    line-height: 28px;
-    float: right;
-    vertical-align: bottom
-}
 
 #ctlrBar a {
     color: #FFF;
@@ -1082,15 +1025,7 @@ form span.error {
     color: #0E5A9D;
 }
 
-td h4 {
 
-    border-bottom: 4px solid #09F3E4;
-    color: #055F67;
-    font-size: 1.3em;
-    font-weight: bolder;
-    margin: 0.5em 0;
-    text-transform: capitalize;
-}
 
 /** dropdown **/
 dl.drop_down {
@@ -1172,9 +1107,6 @@ dl.drop_down {
     background-color: #ddd;
 }
 
-.hide {
-    display: none;
-}
 
 .li-over {
     background: #1484E6;
@@ -1186,6 +1118,8 @@ dl.drop_down {
     color: #FFF !important;
 }
 
+
+/* search box */
 .search_wrapper_l {
     display: inline-table;
     color: #fff;
@@ -1210,57 +1144,6 @@ dl.drop_down {
 
 }
 
-.center {
-    text-align: center !important;
-}
-
-/** TODO  source it out to a different file **/
-#mkt_present {
-    padding: 5em 0 0 0;
-}
-
-#landing_list li {
-    border-bottom: none;
-    color: #421325;
-    text-shadow: #FFF 1px 1px 1px;
-    width: 500px;
-    background: url("../images/marketing/bullet.png") left no-repeat;
-    font-size: 24px;
-    font-weight: bold;
-    padding: 1em 0 0 45px;
-}
-
-#landing_list li span.explanation {
-    font-size: 16px;
-    color: #2D302D;
-}
-
-#mkt_carousel {
-    -moz-box-shadow: 0 0 20px #646767;
-    -webkit-box-shadow: 0 0 20px #646767;
-    box-shadow: 0 0 20px #646767;
-
-}
-
-#mkt_try {
-    padding: 2em 2em 0 0;
-    font-size: 24px;
-
-    color: #162D3D;
-}
-
-#mkt_bubbles {
-    padding-top: 4em;
-}
-
-#mkt_bubbles .bubble {
-    color: #0063dc;
-    font-size: 2em;
-    text-align: center;
-    margin: 2em;
-    float: left;
-    height: 160px;
-}
 
 /************ calendar list ********************/
 .pos-date {
@@ -1272,11 +1155,9 @@ dl.drop_down {
     float: left;
     width: 45px;
     height: 40px;
-
 }
 
 .pos-cal-month {
-
     color: #FFF;
 }
 
@@ -1315,7 +1196,6 @@ dl.drop_down {
 .ui-widget select, .ui-widget input {
     padding: 2px;
 }
-
 
 /************************************* tipsy tooltip **********************/
 .tipsy {
@@ -1399,5 +1279,54 @@ dl.drop_down {
     height: 9px;
 }
 
-
 /**********************************End tipsy tooltip **********************/
+
+.clear:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.hide {
+    display: none;
+}
+
+.center {
+    text-align: center !important;
+}
+
+.cf3a72 {
+    color: #cf3a72;
+}
+
+.italic {
+    font-style: italic;
+}
+.text-right {
+    text-align: right;
+}
+
+.right {
+    float: right;
+
+}
+
+.left {
+    float: left;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+
+}
