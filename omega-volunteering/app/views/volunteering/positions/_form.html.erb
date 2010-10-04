@@ -7,15 +7,15 @@
 <fieldset>
     <p>
       <%= f.label :name %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, :'data-tooltip '=> 'descriptive name for position' %>
     </p>
     <p>
       <%= f.label :description %>
-      <%= f.text_area :description, :rows => 6 %>
+      <%= f.text_area :description, :rows => 6 , :'data-tooltip '=> 'describe what work the volunteer will be doing in this position' %>
     </p>
     <p>
       <%= f.label :hours %>
-      <%= f.text_field :hours, :class => "inputSmall" %>
+      <%= f.text_field :hours, :class => "inputSmall", :'data-tooltip '=> 'approximate number of hours per week needed' %>
     </p>
     <p>
       <%#= f.label :volunteers_required %>
@@ -31,12 +31,14 @@
       <p>
         <%= f.label :start_date %>
         <%= f.text_field :start_date_nr, :class=>'datepickr', :size=>10 , :autocomplete => 'off'%>
+          <%= f.label :start_time %>
         <%= f.text_field :starttime_nr, :class=>'tpickr', :size=>10 , :autocomplete => 'off'%>
       </p>
 
       <p>
         <%= f.label :end_date %>
         <%= f.text_field :end_date_nr, :class=>'datepickr', :size=>10 , :autocomplete => 'off'%>
+          <%= f.label :end_time %>
         <%= f.text_field :endtime_nr, :class=>'tpickr', :size=>10 , :autocomplete => 'off'%>
       </p>
     </div>
@@ -57,7 +59,7 @@
     </div>
 
     <p>
-      <%= f.label :volunteers %>
+      <%= f.label :Num_Volunteers %>
       <%= f.text_field :volunteers_required, :size=>10 %>
     </p>
 </fieldset>
@@ -76,6 +78,7 @@
 
     <div id="vp_contact">
       <fieldset>
+        <legend>Contact for this position</legend>
       <% [[:none, 'no contact'], [:existing, 'existing contact'], [:new, 'new contact']].each do |value, text| %>
           <%= radio_button_tag 'contact_assignment', value, true %><%= text %>
       <% end %>
@@ -100,6 +103,7 @@
 
     </div>
     <fieldset>
+      <legend>Skills and Interests</legend>
     <p>
       <%= f.label :skills %>
       <%= f.text_field :skills_values %>

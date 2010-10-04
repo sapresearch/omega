@@ -25,6 +25,7 @@ class Volunteering::Position < Omega::Model
 
   validates :name, :description, :hours, :volunteers_required, :presence => true
 
+
   validate do |p|
       p.errors.add_to_base("Start can't be blank") if((!p.recurrence?) and ((p.starttime_nr.blank?) or (p.start_date_nr.blank?)))
       p.errors.add_to_base("End can't be blank") if((p.recurrence.blank?) and ((p.endtime_nr.blank?) or (p.start_date_nr.blank?)))

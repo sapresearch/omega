@@ -217,7 +217,7 @@ $(function() {
      */
     $('span[data-tooltip]').tipsy({live:true});
     $('a[data-tooltip]').tipsy();
-    $('form').find('input[data-tooltip]').tipsy({gravity: 'w',
+    $('form').find('input[data-tooltip],textarea[data-tooltip] ').tipsy({gravity: 'w',
         trigger : 'focus'
     });
 

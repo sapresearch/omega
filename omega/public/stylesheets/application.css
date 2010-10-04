@@ -16,7 +16,7 @@ table, tbody, tfoot, thead, tr, th, td {
 
 html, body, #wrapper {
     height: 100%;
-    color: #002F67;
+    color: #666;
 
 }
 
@@ -421,7 +421,7 @@ li.item-list {
 
 /* Errors and validation */
 .fieldWithErrors input, .inputInvalid {
-    padding:2px;
+    padding:8px;
     background: #F09183;
     color: #fff;
     border: 1px solid #ed513b;
@@ -683,8 +683,8 @@ span.om-plain-icon-button span.om-icon,
     display: inline-block;
     *display: inline;
     *zoom: 1;
-    height: 14px;
-    width: 14px;
+    height: 16px;
+    width: 16px;
 
 }
 
@@ -720,6 +720,10 @@ span.om-plain-icon-button span.om-icon {
 
 }
 
+.om-white-icon, .om-blue-icon{
+    height: 14px;
+    width: 14px;
+}
 span.om-icon-button span.om-icon {
     margin-left: -16px;
 }

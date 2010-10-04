@@ -38,6 +38,7 @@ class Contact < Omega::Model
                          :length    => 6..80,
                          :email     => true,
                          :unless    => :has_user?
+
   validates :first_name, :length    => 0..80,
                          :unless    => :has_user?
   validates :last_name,  :presence  => true,
