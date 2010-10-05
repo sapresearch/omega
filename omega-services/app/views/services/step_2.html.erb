@@ -35,7 +35,7 @@
         </p>
 
 
-        <p>
+        <p class="left2">
           <strong>Enter a Name for your <%= @service.service_type %> Service</strong> <br/>
 
           <br/>
@@ -68,10 +68,12 @@
         <div id="service_details_fields">
 
         </div>
-
-
         <div class="bottom-buttons">
 
+
+          <%= om_button(:icon=>'next-step') do %>
+              <%= f.submit "Save" %>
+          <% end %>
 
           <%= om_button(:icon=>'next-step') do %>
               <%= f.submit "Proceed" %>
@@ -88,8 +90,9 @@
 
     <% end %>
     </div>
+
+
   </div>
 
 </div>
 
-</div>

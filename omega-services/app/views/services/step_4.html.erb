@@ -10,12 +10,13 @@
 
 
 <br/>
-<div class="review">   
+<div class="content-services">
 
   <p class="left-align">
 
   <span class="style1">Finalize Service Creation - Summary </span><br/>
   <br/>
+    <br/>
   <strong>Service Name :</strong> <%=@service.service_name%><br/>
   <strong>Service Type : </strong><%=@service.service_type%><br/>
   <strong>Icon:</strong><%= image_tag @service.icon.url, :width =>  '65' %><br/>
@@ -52,18 +53,18 @@
 </div>
 <div class="bottom-buttons">
 
-  <div class="button-first">
+  <%= om_button(:icon=>'next-step') do %>
     <%=button_to "Publish", finalize_services_url(:id => @service)%>
-  </div>
 
+  <%end%>
 
-  <div class="button-next">
+  <%= om_button(:icon=>'cancel') do %>
     <%= button_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete%>
-  </div>
+  <%end%>
 
-  <div class="button-next">
+  <%= om_button(:icon=>'prev-step') do %>
     <%= button_to 'Back', service_wizard_services_url(:step => 3, :id => @service)%>
-  </div>
+  <%end%>
 </div>
 </div>
 
