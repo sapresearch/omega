@@ -1,7 +1,12 @@
+<% require_stylesheet 'services.css' %>
+
+
 <h1 class="page-content corners-top">
   <%= @service.service_name %> Service
 </h1>
 <div class="page-content corners-bottom">
+
+  <span class="style2">Service Details </span> <br/>
 
   <% Service::Field.find_all_by_field_category_and_service_id("Details", @service.id).each do |s| %>
       <p>
@@ -11,7 +16,7 @@
       </p>
   <% end %>
 
-  Registration Details
+  <br/><span class="style2">Registration Details </span>
 
   <% Service::Field.find_all_by_field_category_and_service_id("Registration", @service.id).each do |s| %>
       <p>
