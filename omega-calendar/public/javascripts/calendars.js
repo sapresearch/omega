@@ -115,13 +115,7 @@ $(document).ready(function() {
     });
 
 
-    $('.datepickr').datepicker({
-        dateFormat: 'yy-mm-dd',
-        showButtonPanel: true,
-        changeMonth: true,
-        changeYear: true,
-        yearRange: '2010:2020'
-    });
+
     /**
      * Initialize jquery ui datepicker. set date format to yyyy-mm-dd for easy parsing
      */

@@ -4,8 +4,9 @@
     <ul>
 
       <% @services.each do |s| %>
-          <li>
+
             <% if (s.published !=true) and !current_user.is_anonymous? %>
+              <li>
                 <h3>  <%= s.service_name %> - <%= s.service_type %> Service </h3>
 
 
@@ -16,10 +17,10 @@
                 <%= om_button(:icon=>'delete') do %>
                     <%= link_to "Delete", s, :confirm => 'Are You Sure?', :method => :delete %>
                 <% end %>
-
+</li>
 
             <% end %>
-          </li>
+
       <% end %>
 
     </ul>

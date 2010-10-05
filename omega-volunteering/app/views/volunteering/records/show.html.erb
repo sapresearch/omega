@@ -1,74 +1,82 @@
-<h2> <strong> Position </strong> </h2>
-
-<p>
-
-<strong> Title: </strong> <%=@record.position.name%> <br/>
-<strong> Description: </strong> <%=@record.position.description%> <br/>
-<strong> Skills : </strong> <%= @record.position.skills.map(&:name).join(", ") %> <br/>
-<strong> Interests : </strong> <%= @record.position.interests.map(&:name).join(", ") %> <br/>
-</p>
-
-<h2> <strong> Volunteer </strong> </h2>
-
-<p>
-
- <strong> Name: </strong> <%=@record.contact.first_name%> <%=@record.contact.last_name%>
-
-</p>
-
-<h2> <strong> Contact Information </strong> </h2>
-
-<p>
-<%@record.contact.phone_numbers.each do |p|%>
-
-    <strong><%=p.number_type%> Phone : </strong><%=p.number%> <br/>
-
-<%end%>
-
-<strong>Email:</strong> <%=@record.contact.email%> <br/>
-
-<%@record.contact.addresses.each do |a|%>
-
-   <strong> <%=a.address_type%> Address : </strong> <%=a.street%>,<%= a.city%>, <%=a.state%> <%= a.zip_code%> <%=a.country%> <br/>
-
-<%end%>
-</p>
-
-<h2> <strong> Additional Information </strong></h2>
-
-<p>
-  <strong>Skills: </strong> <%= @record.contact.skills.map(&:name).join(", ") %> <br/>
-  <strong> Interests: </strong> <%= @record.contact.interests.map(&:name).join(", ") %> <br/>
-</p>
+<h1 class="page-content corners-top">
+  Volunteering Positions
+</h1>
 
 
-<% if current_user.has_permission?("users_admin") %>
+<div class="page-content corners-bottom">
 
-<h2> <strong> Admin Space </strong> </h2>
+  <p>
 
-<p>
+    <strong> Title: </strong> <%= @record.position.name %> <br/>
+    <strong> Description: </strong> <%= @record.position.description %> <br/>
+    <strong> Skills : </strong> <%= @record.position.skills.map(&:name).join(", ") %> <br/>
+    <strong> Interests : </strong> <%= @record.position.interests.map(&:name).join(", ") %> <br/>
+  </p>
 
-<strong> Status: </strong> <%=@record.status%> <br/>
-<strong> Action: </strong> <%=@record.action%> <br/>
-<strong> More Information: </strong> <%=@record.more_information%> <br/>
-<strong> Notes: </strong> <%=@record.admin_notes%>
+  <h2><strong> Volunteer </strong></h2>
 
-</p>
+  <p>
 
-<p>
+    <strong> Name: </strong> <%= @record.contact.first_name %> <%= @record.contact.last_name %>
 
-  <%= link_to "Admin Actions", admin_action_volunteering_records_url(:id => @record) %>
+  </p>
+
+  <h2><strong> Contact Information </strong></h2>
+
+  <p>
+    <% @record.contact.phone_numbers.each do |p| %>
+
+        <strong><%= p.number_type %> Phone : </strong><%= p.number %> <br/>
+
+    <% end %>
+
+    <strong>Email:</strong> <%= @record.contact.email %> <br/>
+
+    <% @record.contact.addresses.each do |a| %>
+
+        <strong> <%= a.address_type %> Address : </strong> <%= a.street %>,<%= a.city %>
+        , <%= a.state %> <%= a.zip_code %> <%= a.country %> <br/>
+
+    <% end %>
+  </p>
+
+  <h2><strong> Additional Information </strong></h2>
+
+  <p>
+    <strong>Skills: </strong> <%= @record.contact.skills.map(&:name).join(", ") %> <br/>
+    <strong> Interests: </strong> <%= @record.contact.interests.map(&:name).join(", ") %> <br/>
+  </p>
 
 
-</p>
+  <% if current_user.has_permission?("users_admin") %>
 
-<%else%>
+      <h2><strong> Admin Space </strong></h2>
 
-<p>
+      <p>
 
-  <%= link_to "Record Hours for this Position ", new_volunteering_time_entry_url(:id => @record) %> <br/>
+        <strong> Status: </strong> <%= @record.status %> <br/>
+        <strong> Action: </strong> <%= @record.action %> <br/>
+        <strong> More Information: </strong> <%= @record.more_information %> <br/>
+        <strong> Notes: </strong> <%= @record.admin_notes %>
+
+      </p>
+
+      <p>
+
+        
+        <%= om_button(:icon => 'next') do %>
+            <%= link_to "Admin Actions", admin_action_volunteering_records_url(:id => @record), :'data-tooltip' => 'Delete this position' %>
+        <% end %>
+
+      </p>
+
+  <% else %>
+
+      <p>
+
+        <%= link_to "Record Hours for this Position ", new_volunteering_time_entry_url(:id => @record) %> <br/>
 
 
-
-</p>
-<%end%>
+      </p>
+  <% end %>
+</div>

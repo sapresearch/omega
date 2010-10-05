@@ -1,25 +1,4 @@
-#time_picker {
 
-    display: none;
-    text-align: left;
-    border: 1px solid #999;
-    overflow: hidden;
-    height: 14em;
-    overflow-y: auto;
-    overflow-x: hidden;
-    position: absolute;
-    background: #f2f2f2;
-    list-style: none;
-    z-index: 10000;
-}
-
-#time_picker li {
-    *float: left;
-    text-indent: 0;
-    margin: 0;
-    padding: 0.1em 0.2em;
-    cursor: pointer;
-}
 
 #scheduler {
     margin: 2em 0;
