@@ -172,6 +172,7 @@ div.content-services{
     position: relative;
     padding:0.5em;
     height: auto;
+    min-height: 550px;
 
 }
 
@@ -204,7 +205,7 @@ div.split-line{
 }
 
 div #list{
-    margin:1em;
+    margin:0.1em;
     background: #E0E8F8;
     border-radius:4px;
     -moz-border-radius:4px;
