@@ -1,6 +1,7 @@
 class Service < ActiveRecord::Base
     
    has_many :fields, :dependent => :destroy
+   
    has_many :registrations, :dependent => :destroy
 
    has_many :details, :dependent => :destroy
