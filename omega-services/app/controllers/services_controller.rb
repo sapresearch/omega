@@ -89,13 +89,10 @@ class ServicesController < ApplicationController
 
           @service = Service.create(params[:service])
 
-          if @service.valid?
-            redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => @service.id)
-          else
-            logger.debug "Errors:  #{@service.errors}"
-            redirect_to service_wizard_services_url(:step => @current_step, :id => @service.id)
+          redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => @service.id)
 
-          end
+
+
        end
        end
      end
