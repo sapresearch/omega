@@ -27,8 +27,9 @@
 
               <% if !s.published.nil? %>
 
-              <%= om_button(:plain => true, :icon => 'apply') do %>
                   <% if Service::Registration.find_by_user_id_and_service_id(current_user.id, s).nil? %>
+                      <%= om_button(:plain => true, :icon => 'apply') do %>
+                      
                       <%= link_to "Register", new_service_service_registration_url(s), :'data-tooltip' => 'register for this position' %>
 
                   <% end %>
