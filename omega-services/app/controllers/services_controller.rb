@@ -91,8 +91,6 @@ class ServicesController < ApplicationController
 
           redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => @service.id)
 
-
-
        end
        end
      end
