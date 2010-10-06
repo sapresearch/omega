@@ -6,20 +6,22 @@
     </h2>
     <p>
       <%= f.label :service_type %>
-      <%= f.text_field :service_type %>
+      <%= f.text_field :service_type, :value => "My Custom Type"%>
     </p>
     <p>
       <%= f.label :service_category %>
       <%= f.select :service_category,
                    options_for_select(%w{ Enrollable Requestable Other }) %>
     </p>
+
     <p>
       <%= f.label :icon %>
       <%= f.file_field :icon%>
     </p>
+    
     <p>
       <%= f.label :description %>
-      <%= f.text_area :description %>
+      <%= f.text_area :description , :value => "Some Description for Custom Type Service"%>
 
     </p>
     <%= f.fields_for :type do |s| %>
@@ -32,7 +34,9 @@
     <% end %>
     <p>
       <%= om_button(:icon=>'next-step') do %>
-          <%= f.submit "Save & Proceed" %>
+          <%#= f.submit "Save & Proceed", :name => 'save_proceed' %>
+          <%= f.submit "Save & Proceed"%>
+          
       <% end %>
       <%= om_button(:icon=>'cancel') do %>
           <%= link_to 'Cancel', new_service_url %>

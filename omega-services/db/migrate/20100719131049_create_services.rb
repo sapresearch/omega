@@ -3,7 +3,7 @@ class CreateServices < ActiveRecord::Migration
     create_table :services do |t|
 
       t.string :service_name, :default => 'XYZ Service'
-      t.string :service_type, :null => false
+      t.string :service_type, :null => false, :default => 'My Custom Type'
       t.string :service_category, :null => false
       t.text :description, :null => false
       t.boolean :published

@@ -19,7 +19,15 @@
     <br/>
   <strong>Service Name :</strong> <%=@service.service_name%><br/>
   <strong>Service Type : </strong><%=@service.service_type%><br/>
-  <strong>Icon:</strong><%= image_tag @service.icon.url, :width =>  '65' %><br/>
+  <strong>Icon:</strong>
+    <% if @service.icon_file_name != 'missing.png'%>
+
+             <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
+
+          <%else%>
+             <%= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
+
+    <%end%>
   <br/>
   <span class="style2">Service Details</span><br/>
 

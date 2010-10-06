@@ -36,6 +36,7 @@ class ServicesController < ApplicationController
        end
 
        @current_service = session[:service_id]
+       
        session[:service_id] = params[:id]
 
        unless @service.nil?
@@ -64,6 +65,7 @@ class ServicesController < ApplicationController
      end
   
      def create
+
        unless params[:service][:type_attributes].nil?
         params[:service][:type_attributes][:service_type] = params[:service][:service_type]
         params[:service][:type_attributes][:service_category] = params[:service][:service_category]
@@ -71,6 +73,10 @@ class ServicesController < ApplicationController
         params[:service][:type_attributes][:description] = params[:service][:description]
        end
 
+      # if params[:save_proceed]
+         
+       #end
+       
        if (params[:commit] == "Save")
          @current_step = session[:current_step]
          redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => session[:service_id])
@@ -80,14 +86,11 @@ class ServicesController < ApplicationController
           @incomplete_service = Service.find_by_id(session[:service_id])
 
           unless @incomplete_service.nil?
-            @incomplete_service.destroy
-          end
-
-          unless params[:service][:icon].nil?
-            logger.debug "Content Type is  #{params[:service][:icon].content_type}"
+              @incomplete_service.destroy
           end
 
           @service = Service.create(params[:service])
+
 
           redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => @service.id)
 
@@ -158,6 +161,11 @@ class ServicesController < ApplicationController
      def get_type
        @service = Service.new
        @s = Service::Type.find_by_service_type(params[:service_type])
+       if @s.icon_file_name.nil?
+         @s.icon_file_name = "missing.png"
+         @s.icon_content_type = "image/png"
+
+       end
        @fields = Service::Typefield.all
        render :partial => 'service_details'
      end

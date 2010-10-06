@@ -29,7 +29,8 @@ Omega::Services::Tram.routes.draw do |map|
       get :new_custom_service
       get :get_type
       get :type_def
-      get :service_wizard
+#      get :service_wizard
+      match :service_wizard, :to => 'services#service_wizard', :path => 'wizard/step/:step'
       get :finalize
       get :add_field
       get :add_registration_field
