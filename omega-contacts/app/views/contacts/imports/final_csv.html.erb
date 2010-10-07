@@ -1,0 +1,99 @@
+<% require_stylesheet 'csv_import' %>
+<% require_javascript 'csv_import' %>
+
+
+<h1 class="page-content corners-top">
+
+  Field Mapping
+
+</h1>
+
+<div class="page-content corners-bottom">
+
+  <div class="csv-container">
+
+    <div class="content">
+
+      <table>
+        <tr>
+          <td>
+
+            <table class="csv-table">
+
+               <th class="csv-table">CSV Field</th> <th class="csv-table">Discard</th> <th class="omega-table">Omega Field</th>
+              
+                   <%@rows.each do |c|%>
+
+                      <tr class="csv-table">
+
+                         <td class="csv-table">
+                            <%=c%>
+                         </td>
+
+                         <td class="csv-table">
+                            <%@flag = true%>
+                           
+                            <%@mapping.each do |k,v| %>
+
+                               <% if v.include?(c) %>
+                                   <% c = k %>
+                                   <% @flag = false %>
+                               <%end%>
+
+                            <%end%>
+
+                           <%=check_box 'discard', c, {:checked => @flag} %>
+
+
+                         </td>
+
+                         <td class="csv-table">
+
+                            <%= select 'csv_field',c,
+                                options_from_collection_for_select(@contact_fields,"name","name",c)
+                            %>
+
+                          </td>
+                      </tr>
+
+                      <%end%>
+
+            </table>
+          </td>
+
+          <td>
+
+
+          </td>
+
+
+
+        </tr>
+      </table>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

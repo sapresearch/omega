@@ -1,16 +1,17 @@
-<% require_stylesheet "services"%>
+<% require_stylesheet 'services.css' %>
 
-<div class="wrapper-services">
 
-<div class="container-show">
+<h1 class="page-content corners-top">
+  <%=@service.service_name%> Service
+</h1>
 
-<div class="header">
+<div class="page-content corners-bottom">
 
-<h2 class="index"><%=@service.service_name%> Service</h2>
 
-  </div>
+
+
 <p class="left-align">
-  <span class="heading1">Enrollment Information</span>
+  <span class="style2">Enrollment Information</span>
         <% @fields.each do |field| %>
             <% if field.service_id == @service.id%>
                 <br/><%= field.field_name%>
@@ -32,4 +33,4 @@
 <%end%>
 
     </div>
-    </div>
+

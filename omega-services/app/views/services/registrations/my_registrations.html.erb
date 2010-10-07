@@ -1,18 +1,18 @@
 <% require_stylesheet 'services' %>
 
-<div class="wrapper-services">
+<h1 class="page-content corners-top">
 
-<div class="container-show">
-  <div class="header">
+  My Registered Services</h1>
 
-<h2 class="index">My Registered Services</h2>
-  </div>
+<div class="page-content corners-bottom">
+
+
 <p class="left-align">
 <%if !current_user.is_anonymous? %>
   <%@services.each do |s|%>
     <strong><%=s.service_name%> - <%=s.service_type%> Service</strong><br/>
     (<%= link_to "Show", service_url(s)%>)
-          | (<%= link_to "Remove", s , :confirm => 'Are You Sure?', :method => :delete%>)<br/>
+          | (<%= link_to "Remove", service_registration_url(s) , :confirm => 'Are You Sure?', :method => :delete%>)<br/>
     <%end%>
 <%end%>
 
@@ -30,4 +30,3 @@
 
 
 </div>
-    </div>

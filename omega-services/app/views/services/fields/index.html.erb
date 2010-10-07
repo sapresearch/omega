@@ -1,25 +1,35 @@
-<% require_stylesheet "services"%>
+<% require_stylesheet 'services.css' %>
 
-<div class="wrapper-services">
 
-<div class="container-show">
-  <div class="header">
+<h1 class="page-content corners-top">
+  <%=@service.service_name%> Service
+</h1>
 
-<h2 class="index"><%=@service.service_name%> Service</h2>
-  </div>
+<div class="page-content corners-bottom">
+
+
+
+
 <p class="left-align">
-  <span class="heading1">Enrollment Information</span>
-        <% @fields.each do |field| %>
-            <% if field.service_id == @service.id%>
+  <span class="style2">Service Details</span><br/>
+        <% @detail_fields.each do |field| %>
                 <br/><%= field.field_name%>
-             <%end%>
         <%end%>
+
+</p>
+
+<p class="left-align">
+  <span class="style2">Registration Details</span><br/>
+        <% @registration_fields.each do |field| %>
+                <br/><%= field.field_name%>
+        <%end%>
+
 </p>
 
 <%if !current_user.is_anonymous?%>
 <p class="left-align">
   <br/>
-  <strong><%= link_to 'Add a Field to '+@service.service_type+ ' Service', new_service_service_field_url(@service.id)%>
+  <strong><%= link_to 'Add another Registration Field', new_service_service_field_url(@service.id)%>
 
   <br/>
   <%= link_to 'All Services ', services_url%>
@@ -30,4 +40,4 @@
 <%end%>
 
     </div>
-    </div>
+

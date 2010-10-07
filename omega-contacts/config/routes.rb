@@ -5,6 +5,12 @@ Omega::Contacts::Tram.routes.draw do
     resources :organizations
     resources :skills
     resources :interests
+    resources :imports do
+      collection do
+        get :csv_import_wizard
+      end
+    end
+
   end
 
   resources :contacts do
@@ -24,8 +30,14 @@ Omega::Contacts::Tram.routes.draw do
           put :move, :path => 'move/:to_id'
         end
       end
-    end
+
+      
+
+
   end
+  end
+
+
 
   match 'contacts/:action' => 'contacts#search'
 
