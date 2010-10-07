@@ -34,24 +34,28 @@
             <div class="position_actions">
               <% if !current_user.is_anonymous? %>
                   <%= om_button(:plain => true, :icon => 'delete') do %>
-                      <%= link_to 'Delete', volunteering_position_path(position), :method => :delete , :'data-tooltip' => 'Delete this position'%>
+                      <%= link_to 'Delete', volunteering_position_path(position), :method => :delete, :'data-tooltip' => 'Delete this position' %>
                   <% end %>
-              <% end %>
-              <% if !current_user.is_anonymous? %>
+                  <%= om_button(:plain => true, :icon=>'edit') do %>
+                      <%= link_to 'Edit', edit_volunteering_position_path(position) %>
+                  <% end %>
+                  <%= om_button(:plain => true, :icon=>'edit') do %>
+                      <%= link_to 'Applications', history_volunteering_position_path(position) %>
+                  <% end %>
 
                   <% if position.status_of(Contact.for(current_user)) == :valid %>
                       <%= om_button(:plain => true, :icon => 'clock') do %>
-                          <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user)) , :'data-tooltip' => 'Log hours for this position') %>
+                          <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user)), :'data-tooltip' => 'Log hours for this position') %>
                       <% end %>
                   <% end %>
 
 
-              <% if position.status_of(Contact.for(current_user)) != :valid %>
-                  <%= om_button(:plain => true, :icon => 'apply') do %>
-                      <%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
+                  <% if position.status_of(Contact.for(current_user)) != :valid %>
+                      <%= om_button(:plain => true, :icon => 'apply') do %>
+                          <%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
+                      <% end %>
                   <% end %>
               <% end %>
-<% end %>
               <%= toggle_favorite(position) if !current_user.is_anonymous? %>
 
             </div>
@@ -78,7 +82,7 @@
                 <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
               </h2>
 
-              <p >
+              <p>
                 <%= truncate(position.description, :length=> 140) %> <%= link_to '( read more ... )', volunteering_position_path(position) %>
               </p>
 
@@ -112,6 +116,6 @@
 
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_positions_skills" %>
-<%= render :partial => "layouts/sidebar_positions_interests" %>
+    <%= render :partial => "layouts/sidebar_positions_interests" %>
 <% end %>
 

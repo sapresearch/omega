@@ -31,11 +31,15 @@ $(function() {
             );
 
     var $records_list = document.getElementById('records-list');
-    $('li', $records_list).mouseenter(
-                                     function(e) {
-                                         $(this).find('div.item-list-actions-wrapper').fadeIn()
-                                     }).mouseleave(function() {
-        $(this).find('div.item-list-actions-wrapper').fadeOut()
+    $($records_list).delegate('li.list-item','mouseenter',function(){
+            $(this).find('div.item-list-actions-wrapper').fadeIn()
+
     });
+    $($records_list).delegate('li.list-item','mouseleave',function(){
+            $(this).find('div.item-list-actions-wrapper').fadeOut()
+
+    });
+
+
 
 });

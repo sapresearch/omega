@@ -40,6 +40,8 @@ class Volunteering::RecordsController < ApplicationController
     @record = Volunteering::Record.find(params[:id])
     respond_with(@record)
   end
+  
+
 
   def admin_page
 

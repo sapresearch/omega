@@ -1,6 +1,6 @@
 class Volunteering::PositionsController < ApplicationController
   respond_to :html, :xml, :json, :js
-  
+
   require_permission Volunteering::PERM_VIEW
   require_permission Volunteering::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 
@@ -12,7 +12,7 @@ class Volunteering::PositionsController < ApplicationController
 
   breadcrumb 'Volunteering' => :volunteering
   breadcrumb 'Positions' => :volunteering_positions
-  
+
 
   def index
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
@@ -22,7 +22,7 @@ class Volunteering::PositionsController < ApplicationController
   def upcoming
     @positions = @positions.where('start is not null').order('start ASC')
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
-     breadcrumb 'Upcoming Positions' => :upcoming_volunteering_positions
+    breadcrumb 'Upcoming Positions' => :upcoming_volunteering_positions
     respond_with(@positions)
   end
 
@@ -70,22 +70,26 @@ class Volunteering::PositionsController < ApplicationController
     render :index
   end
 
-   def mine
-      @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
-     breadcrumb 'My Positions' => :mine_volunteering_positions
-     respond_with(@positions)
+  def mine
+    @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
+    breadcrumb 'My Positions' => :mine_volunteering_positions
+    respond_with(@positions)
   end
 
   def my_time_sheets
-      @entry_days = Volunteering::TimeEntry::Day.all
-      @timesheets = Array.new
-      @records = Volunteering::Record.find_all_by_contact_id(Contact.for(current_user))
-      @records.each do |r|
-        @timesheets << Volunteering::TimeEntry.find_all_by_record_id(r.id)
-      end
+    @entry_days = Volunteering::TimeEntry::Day.all
+    @timesheets = Array.new
+    @records = Volunteering::Record.find_all_by_contact_id(Contact.for(current_user))
+    @records.each do |r|
+      @timesheets << Volunteering::TimeEntry.find_all_by_record_id(r.id)
+    end
   end
 
-  
+  def history
+   @position = Volunteering::Position.find(params[:id])
+    respond_with(@position)
+  end
+
   private
   def get_positions
     @positions = Volunteering::Position.includes(:skills, :records)
@@ -138,9 +142,6 @@ class Volunteering::PositionsController < ApplicationController
   end
 
 
-
-
-  
   SORT_KEYS = ['name']
   SORT_DIRECTIONS = ['asc', 'desc']
 

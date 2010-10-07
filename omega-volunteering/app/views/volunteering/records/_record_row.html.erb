@@ -1,0 +1,49 @@
+<li class="list-item relative" id="record-<%= record.id %>">
+  <div class="item-list-actions-wrapper corners">
+    <div class="item-list-actions">
+      <%= om_button(:plain => true, :icon => 'folder-edit') do %>
+          <%= link_to "Process", administer_volunteering_record_url(record), :remote => 'true' %>
+      <% end %>
+      <br>
+      <%= om_button(:plain => true, :icon => 'next') do %>
+          <%= link_to 'Application Details', volunteering_record_url(record) %>
+      <% end %>
+      <br>
+      <%= om_button(:plain => true, :icon => 'next') do %>
+          <%= link_to 'Position History', history_volunteering_position_path(record.position) %>
+      <% end %>
+      <br>
+    </div>
+  </div>
+  <h2>
+    <%= record.position.name %>
+  </h2>
+
+  <ul>
+    <li>
+      <%= om_button(:plain => true, :icon => 'user') do %>
+          <span>From:  <%= record.contact.first_name %> <%= record.contact.last_name %></span>
+      <% end %>
+    </li>
+    <li>
+      <%= om_button(:plain => true, :icon => 'mail-sent') do %>
+          <span> Sent: <%= record.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
+      <% end %>
+    </li>
+    <li>
+      <%= om_button(:plain => true, :icon => 'folder-open') do %>
+          <span> Status:  <%= record.action %></span>
+      <% end %>
+    </li>
+    <li>
+      <%= om_button(:plain => true, :icon => 'counter') do %>
+          Active Volunteers: <span class="green">   <%= record.position.active_volunteers.count %></span>
+      <% end %>
+    </li>
+    <li>
+      <%= om_button(:plain => true, :icon => 'counter') do %>
+          Missing Volunteers: <span class="red">   <%= record.position.missing_volunteers %></span>
+      <% end %>
+    </li>
+  </ul>
+</li>
