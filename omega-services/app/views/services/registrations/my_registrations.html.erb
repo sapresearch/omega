@@ -1,7 +1,8 @@
 <% require_stylesheet 'services' %>
 
 <h1 class="page-content corners-top">
-My Registered Services</h1>
+
+  My Registered Services</h1>
 
 <div class="page-content corners-bottom">
 
@@ -11,7 +12,7 @@ My Registered Services</h1>
   <%@services.each do |s|%>
     <strong><%=s.service_name%> - <%=s.service_type%> Service</strong><br/>
     (<%= link_to "Show", service_url(s)%>)
-          | (<%= link_to "Remove", s , :confirm => 'Are You Sure?', :method => :delete%>)<br/>
+          | (<%= link_to "Remove", service_registration_url(s) , :confirm => 'Are You Sure?', :method => :delete%>)<br/>
     <%end%>
 <%end%>
 
