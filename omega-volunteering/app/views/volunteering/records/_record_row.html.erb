@@ -22,7 +22,8 @@
   <ul>
     <li>
       <%= om_button(:plain => true, :icon => 'user') do %>
-          <span>From:  <%= record.contact.first_name %> <%= record.contact.last_name %></span>
+          From:  <%= link_to "#{record.contact.first_name} #{record.contact.last_name}", contact_path(record.contact), :class => 'blue' %>
+
       <% end %>
     </li>
     <li>

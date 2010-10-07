@@ -7,11 +7,9 @@
   <ul id="records-list" class="item-list">
     <% @records.each do |a| %>
         <%= render 'record_row', :record => a %>
-
     <% end %>
   </ul>
-
 </div>
 <% content_for :sidebar do %>
-    <%= render  "sidebar_records" %>
+    <%= render "sidebar_records" %>
 <% end %>
