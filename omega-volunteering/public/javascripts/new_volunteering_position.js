@@ -109,7 +109,24 @@ $(function() {
         }
 
     });
-    
+    var contact_val = $('#volunteering_position_contact_ids').val();
+    if (contact_val != '') {
+        var contacts = $('#volunteering_position_contact_ids').val().replace(/[\[\]']+/g, '').split(',');
+        $.each(contacts, function(k, v) {
+            $.ajax({
+                global: false,
+                url : '/contacts/' + v ,
+                dataType : 'json',
+                success: function(data) {
+                    $('<li />').append(data.first_name + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', data.id);
+
+                    return false;
+                }
+
+            });
+        })
+    }
+
 
     $assigned_contacts.find('.delete-user').live('click', function(e) {
         $(this).parent('li').remove();
