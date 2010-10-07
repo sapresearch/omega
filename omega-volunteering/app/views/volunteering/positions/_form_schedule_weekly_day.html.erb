@@ -1,9 +1,10 @@
 <tr class="<%= cycle('even','odd') %>">
   <td>
     <%= d.object.day %>
+    <%= d.hidden_field :day %>
   </td>
   <td>
-    <%= d.check_box :day, :id => nil %>
+    <%= d.check_box :enabled, :id => nil %>
 
   </td>
   <td>

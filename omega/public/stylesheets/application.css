@@ -58,7 +58,7 @@ h1 {
     padding: 6px 10px;
     color: #333333;
     font-weight: normal;
-    font-size: 1.6em;
+    font-size: 1.5em;
 }
 
 h1.page-content {
@@ -70,7 +70,7 @@ h1.page-content {
 }
 
 h2 a {
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: #00469C;
 }
 
@@ -81,7 +81,7 @@ h2 a:hover {
 h2 {
 
     color: #0063DC;
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: normal;
     letter-spacing: 0;
     padding: 0.2em;
@@ -101,7 +101,7 @@ p {
 
     font-size: 1.2em;
     letter-spacing: 1px;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 a {
@@ -364,7 +364,7 @@ div.sidebar-menu-content {
 div.sidebar-menu-nav {
     border-bottom: 1px solid #e3e3e3;
     color: #FFF;
-    display: block;
+    display: none;
     font-size: 1.2em;
     line-height: 1.4;
     margin: 0;
@@ -376,9 +376,27 @@ div.sidebar-menu-content li {
     border-bottom: 1px dotted #191919;
 }
 
-li.item-list {
-    padding: 0.5em 0;
-    border-bottom: 1px dotted #2D302D;
+ul.item-list{
+    
+}
+
+li.list-item {
+   padding:10px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+.item-list-actions-wrapper {
+    position: absolute;
+    background:#191919;
+    opacity: 0.8;
+    right:0;
+    display:none;
+
+}
+.item-list-actions{
+    margin:5px;
+    height:100%;
+    
 }
 
 .corners-bottom {
@@ -397,6 +415,12 @@ li.item-list {
     -webkit-border-radius-topright: 4px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+}
+.corners {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+
 }
 #time_picker {
 
@@ -508,12 +532,12 @@ li.item-list {
     color: #ed513b;
 }
 
-span.error {
-
+span.error, .red {
     color: #ed513b;
-
 }
-
+.green {
+    color:#61bd68;
+}
 #errorExplanation h2 {
 
     padding: 0.5em;
@@ -543,7 +567,10 @@ span.error {
     position: absolute;
 }
 
+.inputValid {
+    border: 1px solid #61bd68;
 
+}
 .fieldset_active {
     border: 4px solid #285370;
 }
@@ -605,10 +632,7 @@ span.error {
 
 }
 
-.inputValid {
-    border: 1px solid #61bd68;
 
-}
 
 /* Buttons */
 .om-button a, .om-button input, .om-button button, .om-icon-button a, .om-icon-button input, .om-icon-button button {
@@ -865,9 +889,24 @@ span.om-icon-button span.om-icon {
 .om-icon-next {
     background-position: 0 -768px;
 }
-
-
-
+.om-icon-folder-stamped {
+    background-position: 0 -784px;
+}
+.om-icon-folder-stack {
+    background-position: 0 -800px;
+}
+.om-icon-folder-open {
+    background-position: 0 -816px;
+}
+.om-icon-folder-edit {
+    background-position: 0 -832px;
+}
+.om-icon-counter {
+    background-position: 0 -848px;
+}
+.om-icon-tick-small {
+    background-position: 0 -864px;
+}
 /*END BUTTONS*/
 
 /*Pagination */

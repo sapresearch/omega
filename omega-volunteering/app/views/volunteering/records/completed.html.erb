@@ -1,0 +1,13 @@
+<h1 class="page-content corners-top">
+  Hello  <%= current_user.username %>
+</h1>
+<div class="page-content corners-bottom">
+  <% if @records.empty? %>
+      <h2> No Completed Applications to Show!</h2>
+  <% end %>
+  <%= render "records" %>
+</div>
+
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_records" %>
+<% end %>

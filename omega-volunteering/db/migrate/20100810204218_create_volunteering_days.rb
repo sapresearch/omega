@@ -3,6 +3,7 @@ class CreateVolunteeringDays < ActiveRecord::Migration
      create_table :volunteering_days do |t|
       t.integer :schedule_id, :null => false
       t.string :day
+      t.boolean :enabled
       t.datetime :start_time
       t.datetime :end_time
       t.integer :volunteers

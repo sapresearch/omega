@@ -1,0 +1,14 @@
+<ul>
+  <% @records.each do |a| %>
+      <li class="item-list clearfix">
+        <p>
+          Contact Name: <%= a.contact.first_name %> <%= a.contact.last_name %>
+        </p>
+
+        <p>
+          Position: <%= link_to a.position.name, volunteering_record_url(a) %>
+
+        </p>
+      </li>
+  <% end %>
+</ul>

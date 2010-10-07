@@ -1,0 +1,12 @@
+<h1 class="page-content corners-top">
+ Pending  Applications
+</h1>
+<div class="page-content corners-bottom">
+<% if @records.empty? %>
+    <h2> No Pending Applications to Show!</h2>
+<%end%>
+<%= render "records" %>
+</div>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_records" %>
+<% end %>

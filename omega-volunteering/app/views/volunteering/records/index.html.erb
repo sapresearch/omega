@@ -1,0 +1,64 @@
+<% require_stylesheet 'omega_volunteering' %>
+<% require_javascript 'omega_volunteering' %>
+<h1 class="page-content corners-top">
+  Hello <%= current_user.username %>
+</h1>
+<div class="page-content corners-bottom">
+  <ul id="records-list" class="item-list">
+    <% @records.each do |a| %>
+        <li class="list-item relative" id="record-<%= a.id %>">
+          <div class="item-list-actions-wrapper corners">
+            <div class="item-list-actions">
+              <%= om_button(:plain => true, :icon => 'folder-edit') do %>
+                  <%= link_to "Process", administer_volunteering_record_url(a), :remote => 'true' %>
+              <% end %>
+              <br>
+              <%= om_button(:plain => true, :icon => 'next') do %>
+                  <%= link_to 'Application Details', volunteering_record_url(a) %>
+              <% end %>
+              <br>
+              <%= om_button(:plain => true, :icon => 'next') do %>
+                  <%= link_to 'Position History', volunteering_record_url(a) %>
+              <% end %>
+              <br>
+            </div>
+          </div>
+          <h2>
+            <%= a.position.name %>
+          </h2>
+
+          <ul>
+            <li>
+              <%= om_button(:plain => true, :icon => 'user') do %>
+                <span>From:  <%= a.contact.first_name %> <%= a.contact.last_name %></span>
+            <% end %>
+            </li>
+            <li>
+              <%= om_button(:plain => true, :icon => 'calendar') do %>
+                <span> Sent: <%= a.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
+            <% end %>
+            </li>
+            <li>
+              <%= om_button(:plain => true, :icon => 'folder-open') do %>
+                <span> Status:  <%= a.action %></span>
+            <% end %>
+            </li>
+            <li>
+               <%= om_button(:plain => true, :icon => 'counter') do %>
+                Active Volunteers: <span class="green">   <%= a.position.active_volunteers.count %></span>
+            <% end %>
+            </li>
+            <li>
+              <%= om_button(:plain => true, :icon => 'counter') do %>
+                Missing Volunteers: <span class="red">   <%= a.position.missing_volunteers %></span>
+            <% end %>
+            </li>
+          </ul>
+        </li>
+    <% end %>
+  </ul>
+
+</div>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_records" %>
+<% end %>
