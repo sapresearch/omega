@@ -5,8 +5,8 @@ class Services::FieldsController < ApplicationController
     before_filter :get_service
 
      def index
-       @detail_fields = Service::Detail.find_all_by_service_id(@service.id)
-       @registration_fields = Service::Field.find_all_by_service_id(@service.id)
+       @detail_fields = Service::Field.find_all_by_service_id_and_field_category(@service.id,"Details")
+       @registration_fields = Service::Field.find_all_by_service_id_and_field_category(@service.id,"Registration")
 
        respond_with(@fields)
      end
