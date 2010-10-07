@@ -23,6 +23,8 @@ span.heading2{
 }
 
 span.style1{
+
+    font-size: 18px;
     color: #38383F;
 
 
@@ -30,6 +32,8 @@ span.style1{
 }
 
 span.style2{
+    font-size: 14px;
+    font-weight:bold;
     color: #A30052;
 
 
@@ -169,10 +173,17 @@ div.step4{
 }
 
 div.content-services{
+    margin: 1em;
     position: relative;
+    background: #E0E8F8;
     padding:0.5em;
     height: auto;
     min-height: 550px;
+       border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    -opera-border-radius:4px;
+    -khtml-border-radius:4px;
 
 }
 
@@ -206,12 +217,8 @@ div.split-line{
 
 div #list{
     margin:0.1em;
-    background: #E0E8F8;
-    border-radius:4px;
-    -moz-border-radius:4px;
-    -webkit-border-radius:4px;
-    -opera-border-radius:4px;
-    -khtml-border-radius:4px;
+    height: inherit;
+
 }
 
 div.review{
@@ -229,7 +236,6 @@ div.review{
 }
 
 div.bottom-buttons{
-    position: relative;
     float: left;
     padding-top: 25px;
     padding-left: 25px;

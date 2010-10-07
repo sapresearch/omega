@@ -42,8 +42,9 @@
                 <%= radio_button 'service_library', 'service_type', s.service_type,
                                  {:onclick => "javascript: service_type(this.value)"} %>
 
-                <%= s.service_type %> <%= image_tag s.icon.url, :width =>  '65' %><br/>
-            <% end %>
+                <%= s.service_type %>  <%= image_tag s.icon.url, :width =>  '65' %><br/>
+
+                <%end%>
 
           </p>
         </div>
@@ -94,11 +95,8 @@
 
                 <div class="bottom-buttons">
 
-
-
-
                   <%= om_button(:icon=>'next-step') do %>
-                      <%= button_to 'Save', service_wizard_services_url(:step => '2', :id => @current_service) %>
+                      <%= link_to 'Save', service_wizard_services_url(:step => '2', :id => @service.id) %>
                   <% end %>
 
                   <%= om_button(:icon=>'prev-step') do %>

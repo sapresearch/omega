@@ -42,8 +42,8 @@ class Contact < Omega::Model
   validates :first_name, :length    => 0..80,
                          :unless    => :has_user?
   validates :last_name,  :presence  => true,
-                         :length    => 1..80,
-                         :unless    => :has_user?
+                         :length    => 1..80
+#                         :unless    => :has_user?
 
   after_save :sync_to_user, :unless => :synced?
 

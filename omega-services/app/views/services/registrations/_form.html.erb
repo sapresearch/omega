@@ -45,7 +45,7 @@ Register for <%=@service.service_type%> Service
           <% end %>
 
           <%= om_button(:icon=>'apply') do %>
-        <%= link_to 'Register!', url_for(params.merge(:name => 'desc')) %>
+        <%= button_to 'Register!', url_for(params.merge(:name => 'desc')) %>
     <% end %>
 
 

@@ -2,7 +2,7 @@
 
 
 <h1 class="page-content corners-top">
-  Step 3 - Customize Your Service Details
+  Step 3 - Customize Your Service Registration Details
 </h1>
 
 
@@ -106,12 +106,13 @@
 
 
             <%= om_button(:icon=>'next-step') do %>
-                <%= f.submit "Proceed" %>
-            <% end %>
-            <%= om_button(:icon=>'next-step') do %>
                 <%= f.submit "Save" %>
             <% end %>
 
+
+            <%= om_button(:icon=>'next-step') do %>
+                <%= f.submit "Proceed" %>
+            <% end %>
 
             <%= om_button(:icon=>'prev-step') do %>
                 <%= link_to 'Back', service_wizard_services_url(:step => 2, :id => @service) %>

@@ -24,7 +24,14 @@
           <%= f.hidden_field :service_type %>
 
           <strong>Icon:</strong>
-          <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
+          <% if @service.icon_file_name != 'missing.png'%>
+
+             <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
+
+          <%else%>
+             <%= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
+              
+          <%end%>
           <%= f.hidden_field :icon %>
           <%= f.hidden_field :published %>
 
@@ -35,7 +42,7 @@
         </p>
 
 
-        <p>
+        <p class="left2">
           <strong>Enter a Name for your <%= @service.service_type %> Service</strong> <br/>
 
           <br/>
@@ -68,10 +75,12 @@
         <div id="service_details_fields">
 
         </div>
-
-
         <div class="bottom-buttons">
 
+
+          <%= om_button(:icon=>'next-step') do %>
+              <%= f.submit "Save" %>
+          <% end %>
 
           <%= om_button(:icon=>'next-step') do %>
               <%= f.submit "Proceed" %>
@@ -88,8 +97,9 @@
 
     <% end %>
     </div>
+
+
   </div>
 
 </div>
 
-</div>
