@@ -1,4 +1,4 @@
-class Contact < Omega::Model
+class Contact < ActiveRecord::Base
   PERM_ADMIN     = 'contacts_admin'
   PERM_EDIT_SELF = 'contacts_edit_self'
   PERM_VIEW      = 'contacts_view'

@@ -1,12 +1,11 @@
 <% require_stylesheet 'services' %>
 
-<div class="wrapper-services">
+<h1 class="page-content corners-top">
+My Registered Services</h1>
 
-<div class="container-show">
-  <div class="header">
+<div class="page-content corners-bottom">
 
-<h2 class="index">My Registered Services</h2>
-  </div>
+
 <p class="left-align">
 <%if !current_user.is_anonymous? %>
   <%@services.each do |s|%>
@@ -30,4 +29,3 @@
 
 
 </div>
-    </div>

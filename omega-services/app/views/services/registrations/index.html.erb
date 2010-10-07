@@ -1,20 +1,11 @@
 <% require_stylesheet 'services' %>
 
-<div class="wrapper-services">
+<h1 class="page-content corners-top">
+   Service Registration Summary
+</h1>
 
-<div class="container-show">
+<div class="page-content corners-bottom">
 
-<div class="header">
-
-<h2 class="index">Your Registration Summary for
-    <%@services.each do |s|%>
-      <%if s.id == @registration.service_id%>
-        <%=s.service_name%> Service
-      <%end%>
-    <%end%>
-</h2>
-
-</div>
 
 <p class="left-align">
 
@@ -34,4 +25,3 @@
 </p>
 
 </div>
-    </div>

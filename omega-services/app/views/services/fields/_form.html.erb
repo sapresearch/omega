@@ -1,14 +1,11 @@
-<% require_stylesheet "services"%>
+<% require_stylesheet 'services.css' %>
 
 
-<div class="wrapper-services">
+<h1 class="page-content corners-top">
+  Add another Service Detail to <%= @service.service_name %>
+</h1>
+<div class="page-content corners-bottom">
 
-<div class="container-show">
-
-<div class="header">
-
-<h2 class="index"> Add a Field to <%= @service.service_name %></h2>
-</div>
   <%= form_for @field do |f| %>
 
       <%= errors_for_form(@field, 'field') %>
@@ -20,12 +17,16 @@
 
       <br/>
       <strong>Field Type</strong><br/>
-      <%=f.select :field_type, options_for_select(%w{ TextArea TextField NumberField }) %> <br/>
+      <%=f.select :field_type, options_for_select(%w{ Text String Number Date Time }) %> <br/>
 
       <br/>
+
+       <%= f.hidden_field :field_type_class, :value => "default"%>
+       <%= f.hidden_field :field_category, :value => "Registration" %> <br/>
+
+
       <%= f.submit %>
   <% end %>
 
 </p>
 </div>
-    </div>

@@ -16,18 +16,15 @@ class ServicesController < ApplicationController
      end
 
      def new
-     end
+       @service = Service.new
+       respond_with(@service)
 
-     def new_import
-        @import = Import.create(params[:import])
-        respond_with(@import)
      end
 
      def service_wizard
 
        @service = Service.find_by_id(params[:id])
        @services = get_services_list
-
 
        session[:current_step] = params[:step]
 
@@ -73,7 +70,7 @@ class ServicesController < ApplicationController
         params[:service][:type_attributes][:description] = params[:service][:description]
        end
 
-      # if params[:save_proceed]
+       # if params[:save_proceed]
          
        #end
        
@@ -90,7 +87,6 @@ class ServicesController < ApplicationController
           end
 
           @service = Service.create(params[:service])
-
 
           redirect_to service_wizard_services_url(:step => @current_step.to_i+1, :id => @service.id)
 
@@ -130,27 +126,6 @@ class ServicesController < ApplicationController
        redirect_to service_url(@service)
      end
 
-     def export_to_csv
-       @fields = Service::Field.all
-       @services = Service.all
-
-         services_csv = FasterCSV.generate do |csv|
-           # header row
-           csv << ["Service Type", "Field Name", "Field Type"]
-
-           # data rows
-           @fields.each do |f|
-             @services.each do |s|
-               if s.id == f.service_id
-                   csv << [s.service_type, f.field_name, f.field_type]
-               end
-             end
-           end
-         end
-
-         send_data(services_csv, :type => 'text/csv', :filename => 'services.csv')
-     end
-
      def type_def
 
        @service = Service.new
@@ -161,6 +136,7 @@ class ServicesController < ApplicationController
      def get_type
        @service = Service.new
        @s = Service::Type.find_by_service_type(params[:service_type])
+       
        if @s.icon_file_name.nil?
          @s.icon_file_name = "missing.png"
          @s.icon_content_type = "image/png"
@@ -169,7 +145,6 @@ class ServicesController < ApplicationController
        @fields = Service::Typefield.all
        render :partial => 'service_details'
      end
-
 
      def add_field
        @service = Service.find_by_id(params[:id])
@@ -180,7 +155,7 @@ class ServicesController < ApplicationController
 
     def add_registration_field
        @field = Service::Field.new
-     end
+    end
 
 
   def destroy

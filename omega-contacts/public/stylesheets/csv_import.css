@@ -1,0 +1,53 @@
+div.csv-container{
+    height: auto;
+    min-height: 550px;
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+    padding:0.5em;
+
+}
+
+div.content{
+    height: auto;
+    overflow:hidden;
+    min-height:70px;
+    width: 100%;
+   
+}
+
+.csv-table tr {
+    height: 50px;
+}
+
+.csv-table thead {
+    color: #FFF;
+    border: 1px solid #00469C;
+}
+
+.csv-table th {
+    background: #00469C;
+    font-size: 1.2em;
+    color: #FFFFFF;
+    padding: 0.5em;
+}
+
+.csv-table tbody {
+    margin-top: 10px;
+}
+
+.csv-table td {
+    border: 1px solid #DFE5E7;
+    color: #191919;
+    padding: 0 10px;
+    text-align: center;
+    width : auto;
+}
+
+table.csv-table {
+    margin:1em 0;
+    width: 100%;
+    font-size: 1em;
+    border-collapse: collapse;
+}
+
