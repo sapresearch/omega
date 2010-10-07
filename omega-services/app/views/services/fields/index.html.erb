@@ -12,11 +12,18 @@
 
 <p class="left-align">
   <span class="style2">Service Details</span><br/>
-        <% @fields.each do |field| %>
-            <% if field.service_id == @service.id%>
+        <% @detail_fields.each do |field| %>
                 <br/><%= field.field_name%>
-             <%end%>
         <%end%>
+
+</p>
+
+<p class="left-align">
+  <span class="style2">Registration Details</span><br/>
+        <% @registration_fields.each do |field| %>
+                <br/><%= field.field_name%>
+        <%end%>
+
 </p>
 
 <%if !current_user.is_anonymous?%>
