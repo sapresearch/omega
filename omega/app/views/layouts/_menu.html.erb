@@ -11,12 +11,12 @@
 
         <% if (!current_user.is_anonymous?)%>
 
-              <%= link_to "My Positions", my_positions_volunteering_positions_path %>
+              <%= link_to "My Positions", mine_volunteering_positions_path %>
               <%= link_to "My Time Sheets", my_time_sheets_volunteering_positions_path %>
 
 
             <%if current_user.has_permission?("users_admin") %>
-               <%= link_to "Applications", admin_page_volunteering_records_path %>
+               <%= link_to "Applications", volunteering_records_path %>
             <%end%>
 
         <% end %>
@@ -57,14 +57,7 @@
 
     </li>
 
-    <li> <%= link_to "Contacts", contacts_url %>
-      <div>
-        <%= link_to 'New Contact', new_contact_path %>
-        <%= link_to 'New Household', new_contact_household_path %>
-        <%= link_to 'New Organization', new_contact_organization_path %>
-      </div>
-
-    </li>
+    <li> <%= link_to "Contacts", contacts_url %></li>
     <li> <%= link_to "Calendar", calendars_url %></li>
     <li> <%#= link_to "Groups", groups_url %></li>
   </ul>

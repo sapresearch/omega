@@ -19,16 +19,21 @@ class Volunteering::Position < Omega::Model
   accepts_nested_attributes_for :schedule, :reject_if => proc { |att| att['start_time'].blank? }
   accepts_nested_attributes_for :contacts
 
-  attr_accessor :starttime_nr, :start_date_nr, :endtime_nr, :end_date_nr
-
-  before_save :combine_times
+#  attr_accessor :starttime_nr, :start_date_nr, :endtime_nr, :end_date_nr
+#
+#  before_save :combine_times
 
   validates :name, :description, :hours, :volunteers_required, :presence => true
 
+  validates :start, :end, :presence => true,
+                          :unless   => :recurrence?
 
-  validate do |p|
-      p.errors.add_to_base("Start can't be blank") if((!p.recurrence?) and ((p.starttime_nr.blank?) or (p.start_date_nr.blank?)))
-      p.errors.add_to_base("End can't be blank") if((p.recurrence.blank?) and ((p.endtime_nr.blank?) or (p.start_date_nr.blank?)))
+  def active_volunteers
+    records.includes(:contact).where('action = ?', 'Accept').collect(&:contact)
+  end
+
+  def missing_volunteers
+    volunteers_required - active_volunteers.count
   end
 
 
@@ -52,9 +57,35 @@ class Volunteering::Position < Omega::Model
     contact.nil? ? nil : records.where('contact_id = ?', contact).first
   end
 
-  private
-    def combine_times
-      self.start = start_date_nr + " " + starttime_nr
-      self.end = end_date_nr + " " + endtime_nr
-    end
+  def start_date
+    start.try(:to_date)
+  end
+
+  def start_date=(value)
+    self.start = "#{value} #{start_time}"
+  end
+
+  def start_time
+    start.try(:to_s, :time)
+  end
+
+  def start_time=(value)
+    self.start = "#{start_date} #{value}"
+  end
+
+  def end_date
+    self.end.try(:to_date)
+  end
+
+  def end_date=(value)
+    self.end = "#{value} #{end_time}"
+  end
+
+  def end_time
+    self.end.try(:to_s, :time)
+  end
+
+  def end_time=(value)
+    self.end = "#{end_date} #{value}"
+  end
 end

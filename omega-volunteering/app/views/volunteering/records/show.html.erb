@@ -1,8 +1,6 @@
 <h1 class="page-content corners-top">
   Volunteering Positions
 </h1>
-
-
 <div class="page-content corners-bottom">
 
   <p>
@@ -64,8 +62,8 @@
       <p>
 
         
-        <%= om_button(:icon => 'next') do %>
-            <%= link_to "Admin Actions", admin_action_volunteering_records_url(:id => @record), :'data-tooltip' => 'Delete this position' %>
+        <%= om_button(:icon => 'folder-edit') do %>
+            <%= link_to "Administer", administer_volunteering_record_url(@record) %>
         <% end %>
 
       </p>

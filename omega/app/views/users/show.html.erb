@@ -1,2 +1,15 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+<h1 class="page-content corners-top">
+ Hello  <%= current_user.username %>
+</h1>
+<div class="page-content corners-bottom">
+
+  <p>
+    
+  </p>
+
+</div>
+
+
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_user" %>
+<% end %>

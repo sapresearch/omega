@@ -20,34 +20,30 @@
         <%= f.text_field :hours, :class => "inputSmall", :'data-tooltip '=> 'approximate number of hours per week needed' %>
       </p>
 
-      <p>
-        <%#= f.label :volunteers_required %>
-        <%#= f.text_field :volunteers_required, :class => "inputSmall" %>
-      </p>
+        <p>
+          <%= f.label :reoccurs %>
+          <%= f.radio_button :recurrence, true %>
+          <%= f.label :one_time_only %>
+          <%= f.radio_button :recurrence, false %>
+
+        </p>
+
 
       <div id="non_recurrent">
 
         <p>
           <%= f.label :start_date %>
-          <%= f.text_field :start_date_nr, :class=>'datepickr', :size=>10, :autocomplete => 'off' %>
+          <%= f.text_field :start_date, :class=>'datepickr', :size=>10, :autocomplete => 'off' %>
           <%= f.label :end_date %>
-          <%= f.text_field :end_date_nr, :class=>'datepickr', :size=>10, :autocomplete => 'off' %>
+          <%= f.text_field :end_date, :class=>'datepickr', :size=>10, :autocomplete => 'off' %>
         </p>
 
         <p>
 
           <%= f.label :start_time %>
-          <%= f.text_field :starttime_nr, :class=>'tpickr', :size=>10, :autocomplete => 'off' %>
+          <%= f.text_field :start_time, :class=>'tpickr', :size=>10, :autocomplete => 'off' %>
           <%= f.label :end_time %>
-          <%= f.text_field :endtime_nr, :class=>'tpickr', :size=>10, :autocomplete => 'off' %>
-        </p>
-
-        <p>
-          <%= f.label :reoccurs %>
-          <%= f.radio_button :recurrence, 1 %>
-          <%= f.label :one_time_only %>
-          <%= f.radio_button :recurrence, 0 %>
-
+          <%= f.text_field :end_time, :class=>'tpickr', :size=>10, :autocomplete => 'off' %>
         </p>
       </div>
 

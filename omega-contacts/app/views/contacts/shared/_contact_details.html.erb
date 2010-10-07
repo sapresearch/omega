@@ -1,3 +1,4 @@
+
 <div> <%= om_button(:icon=>'user-remove') do %>
       <%= link_to 'delete', @contact, :method=> :delete, :remote => true %>
   <% end %>
@@ -5,7 +6,7 @@
       <%= link_to 'edit', edit_contact_path(@contact), :remote => true %>
   <% end %>
 
- <dl id="contact_assign" class="drop_down">
+  <dl id="contact_assign" class="drop_down">
     <dt><a href="#" class="corners"><span>Assign this contact</span></a></dt>
     <dd>
       <ul class="corners">
@@ -68,6 +69,9 @@ Email: <%= @contact.email %><br>
   <% end %>
 </div>
 <div>
- 
+
 
 </div>
+<%= javascript_tag do %>
+    $("#contact_accordion").accordion();
+<% end %>

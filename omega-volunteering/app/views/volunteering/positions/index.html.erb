@@ -44,14 +44,14 @@
                           <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user)) , :'data-tooltip' => 'Log hours for this position') %>
                       <% end %>
                   <% end %>
-              <% end %>
+
 
               <% if position.status_of(Contact.for(current_user)) != :valid %>
                   <%= om_button(:plain => true, :icon => 'apply') do %>
                       <%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
                   <% end %>
               <% end %>
-
+<% end %>
               <%= toggle_favorite(position) if !current_user.is_anonymous? %>
 
             </div>
