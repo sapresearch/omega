@@ -1,4 +1,4 @@
-Omega::Services::Tram.routes.draw do |map|
+Omega::Services::Tram.routes.draw do
 
   scope :path => 'services', :name_prefix => 'service', :module => 'services' do
     resources :fields
@@ -24,25 +24,18 @@ Omega::Services::Tram.routes.draw do |map|
       resources :services_types
     end
     collection do
-      get :export_to_csv
-      get :new_import
-      get :new_custom_service
       get :get_type
       get :type_def
-#      get :service_wizard
       match :service_wizard, :to => 'services#service_wizard', :path => 'wizard/step/:step'
-      get :finalize
-      get :add_field
+      match :finalize, :to => 'services#finalize', :path => 'finalize/:id'
+      match :modify_service, :to => 'services#modify_service', :path => 'modify_service/:id'
+      get :show_drafts
+      get :add_service_field
       get :add_registration_field
       get :remove_field
     end
 
   end
-
-  resources :imports
-
-  map.connect 'services/:action/:id', :controller => 'services'
-
 
   
 end

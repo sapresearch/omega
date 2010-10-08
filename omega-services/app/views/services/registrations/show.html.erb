@@ -8,19 +8,43 @@
 
 <p class="left-align">
 
- <% @fields.each do |field| %>
-   <%@fieldvalues.each do |fieldv|%>
-         <%if fieldv.registration_id == @registration.id%>
-             <% if field.id == fieldv.field_id%>
-                <strong><%= field.field_name%>:</strong> <%=fieldv.field_value%><br/>
-             <%end%>
-         <%end%>
-   <%end%>
-<%end%>
-
+<span class="style1" >
+  Service Details
+</span>
 
 <br/>
-  <strong><%= link_to 'All Services ', services_url%></strong>
+<br/>
+
+<strong>Service: </strong><%= @registration.service.service_name%> <br/>
+<strong>Type: </strong><%= @registration.service.service_type%> <br/>
+
+<% @registration.service.fields.each do |f| %>
+
+  <strong> <%= f.field_name%> :</strong> <%= f.detail.field_value%> <br/>
+
+<%end%>
+
+<strong>Questions:</strong> <%=@registration.questions%> <br/> <br/>
+
+<span class="style1" >
+  Contact Information
+</span>
+
+  <br/>
+  <br/>
+
+<strong>First Name: </strong><%= @registration.contact.first_name %> <br/>
+<strong>Last Name: </strong><%= @registration.contact.first_name %> <br/>
+<strong>Email: </strong><%= @registration.contact.email %> <br/>
+
+<br/>
+
+<strong><%= link_to 'My Service Registrations', my_registrations_service_registrations_url%></strong>
+
+<br/>
+
+<strong><%= link_to 'All Services ', services_url%></strong>
+
 </p>
 
 </div>

@@ -1,27 +1,14 @@
 <% require_stylesheet 'services' %>
 
 <h1 class="page-content corners-top">
-   Service Registration Summary
+   All Registrations
 </h1>
 
 <div class="page-content corners-bottom">
 
 
-<p class="left-align">
-
- <% @fields.each do |field| %>
-   <%@fieldvalues.each do |fieldv|%>
-         <%if fieldv.registration_id == @registration.id%>
-             <% if field.id == fieldv.field_id%>
-                <strong><%= field.field_name%>:</strong> <%=fieldv.field_value%><br/>
-             <%end%>
-         <%end%>
-   <%end%>
-<%end%>
-
 
 <br/>
   <strong><%= link_to 'All Services ', services_url%></strong>
-</p>
 
 </div>

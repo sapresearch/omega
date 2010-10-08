@@ -4,41 +4,42 @@ class Services::FieldsController < ApplicationController
 
     before_filter :get_service
 
-     def index
-       @detail_fields = Service::Field.find_all_by_service_id_and_field_category(@service.id,"Details")
-       @registration_fields = Service::Field.find_all_by_service_id_and_field_category(@service.id,"Registration")
-
-       respond_with(@fields)
-     end
-
      def new
+
        @field = Service::Field.new
+       @field.build_detail
+
        respond_with(@field)
+
      end
 
      def create
+
        @field = Service::Field.create(params[:service_field])
-       if @field.save
-         redirect_to service_service_fields_url(@field.service_id)
-       else
-         render :action => 'new'
-       end
+       @field.save
+       redirect_to service_url(@field.service_id)
+
+
      end
 
      def edit
+
        @field = Service::Field.find(params[:id])
        respond_with(@field)
+
      end
 
      def update
-       @field = Service::Field.find(params[:id])
-       @field.update_attributes(params[:field])
-       respond_with(@field)
+
+       @field.update_attributes(params[:service_field])
+       redirect_to service_url(@field.service_id)
+
      end
 
     private
 
     def get_service
+
       if params[:service_id]
         @service = Service.find(params[:service_id])
       end

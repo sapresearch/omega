@@ -2,7 +2,7 @@
 <% require_javascript 'omega_services' %>
 
 <h1 class="page-content corners-top">
-  Services Offered
+  Drafts/Incomplete Services 
 </h1>
 <div class="page-content corners-bottom">
   <div class="right">
@@ -26,21 +26,16 @@
                   <% end %>
               <% end %>
 
-              <% if s.published == true %>
+              <% if s.published != true %>
 
                   <% if Service::Registration.find_by_contact_id_and_service_id(Contact.for(current_user), s).nil? %>
                       <%= om_button(:plain => true, :icon => 'apply') do %>
                       
-                      <%= link_to "Register", new_service_service_registration_url(s), :'data-tooltip' => 'register for this position' %>
+                      <%= link_to "Open Draft", service_wizard_services_url(:step => 2, :id => s), :'data-tooltip' => 'register for this position' %>
 
                   <% end %>
               <% end %>
 
-              <%else%>
-
-               <%= om_button(:plain => true, :icon => 'apply') do %>
-                  <%= link_to "Publish", finalize_services_url(:id => s), :'data-tooltip' => 'publish this position' %>
-               <%end%>
               <%end%>
               <%= toggle_favorite(s) if !current_user.is_anonymous? %>
             </div>
@@ -49,7 +44,7 @@
             <div class="position-wrapper">
 
               <h2>
-                <% if (s.published == true) %>
+                <% if (s.published != true) %>
 
 
                     <%= link_to s.service_name, service_url(s) %>

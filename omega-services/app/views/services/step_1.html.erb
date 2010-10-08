@@ -2,7 +2,6 @@
 <% require_stylesheet 'services.css' %>
 
 
-
 <h1 class="page-content corners-top">
   Volunteering Positions
 </h1>
@@ -22,9 +21,8 @@
           <span class="style3">Please Choose:</span> <br/>
 
           <br/>
-          <% [["I'll Choose From the Library", "checked"], ["I'll Create My Own Type", ""]].each do |choice, check| %>
-              <%= radio_button 'service', 'service_type', choice,
-                               {:onclick => "javascript: service_type_choice(this.value)", :checked => check} %>
+          <% [["Choose From the Library", "checked"], ["Create New Type", ""]].each do |choice, check| %>
+              <%= radio_button 'service', 'service_type', choice, {:checked => check} %>
               <%= choice %> <br/>
 
           <% end %>
@@ -42,9 +40,9 @@
                 <%= radio_button 'service_library', 'service_type', s.service_type,
                                  {:onclick => "javascript: service_type(this.value)"} %>
 
-                <%= s.service_type %>  <%= image_tag s.icon.url, :width =>  '65' %><br/>
+                <%= s.service_type %><%= image_tag s.icon.url, :width =>  '65' %><br/>
 
-                <%end%>
+            <%end%>
 
           </p>
         </div>
@@ -56,8 +54,7 @@
 </div>
 
         <div id="list">
-        
-
+       
           <div id="fields_list">
 
             <% unless @service.nil? %>
@@ -72,7 +69,7 @@
                   <strong>Service Category: </strong><%= @service.service_category %> <br/>
                   <strong>Description:</strong><%= @service.description %><br/>
 
-                  <% Service::Field.find_all_by_field_category_and_service_id("Details", @service.id).each do |s| %>
+                  <% Service::Field.find_all_by_field_category_and_service_id("Service Details", @service.id).each do |s| %>
 
                       <strong><%= s.field_name %></strong>:
                       <%= Service::Detail.find_by_field_id(s.id).field_value %>
@@ -83,7 +80,7 @@
                   <br/>
                   <span class="style2">Registration Details</span><br/>
 
-                  <% Service::Field.find_all_by_field_category_and_service_id("Registration", @service.id).each do |s| %>
+                  <% Service::Field.find_all_by_field_category_and_service_id("Registration Details", @service.id).each do |s| %>
 
                       <br/>
 
@@ -97,7 +94,7 @@
                 <div class="bottom-buttons">
 
                   <%= om_button(:icon=>'next-step') do %>
-                      <%= link_to 'Save', service_wizard_services_url(:step => '2', :id => @service.id) %>
+                      <%= link_to 'Save', service_wizard_services_url(:step => '2') %>
                   <% end %>
 
                   <%= om_button(:icon=>'prev-step') do %>

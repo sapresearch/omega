@@ -2,22 +2,19 @@
 
 
 <h1 class="page-content corners-top">
-  Step 2 - Customize Your Service Details
-</h1>
 
+  Edit <%= @service.service_name %> - <%= @service.service_type %>
+
+</h1>
 
 <div class="page-content corners-bottom">
 
-  <div class="steps">
-    <div class="step2"></div>
-  </div>
+ <%= form_for @service do |f| %>
 
-  <div class="content-services">
-
-    <%= form_for @service, :action => "service_wizard" do |f| %>
         <%= errors_for_form(@service, 'service') %>
 
         <p class="left2">
+
           <strong>Service Type:</strong>
           <%= @service.service_type %><br/>
           <%= f.hidden_field :service_type %>
@@ -30,26 +27,29 @@
           <%else%>
 
              <%= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
-              
-          <%end%>
-          <%= f.hidden_field :icon %>
-          <%= f.hidden_field :published %>
 
+          <%end%>
+
+          <%= f.hidden_field :icon %>
+
+          <br/>
+          <strong>Published</strong><br/>
+          <%=f.select :published, {'Yes' => true , 'No' => false }, :selected => @service.published.to_s %> <br/>
+
+          <br/>
           <strong>Category:</strong>
           <%= @service.service_category %><br/>
 
           <br/>
-        </p>
 
-        <p class="left2">
-          <strong>Enter a Name for your <%= @service.service_type %> Service</strong> <br/>
+          <strong>Name/Title - <%= @service.service_type %> Service</strong> <br/>
 
           <br/>
 
           <%= f.text_field :service_name %><br/>
 
           <br/>
-          <strong>Describe Your Service</strong> <br/>
+          <strong>Description</strong> <br/>
 
           <%= f.text_area :description, :value => @service.description %><br/>
 
@@ -63,29 +63,13 @@
                       <%= ff.hidden_field :service_id %>
                       <%= ff.hidden_field :field_id %>
 
-                    <p class="left-align">
+                      <strong><%= Service::Field.find_by_id(detail.field_id).field_name %></strong> <br/>
 
-                      <strong><%= Service::Field.find_by_id(detail.field_id).field_name %></strong>
-
-                      <%= ff.text_field :field_value %>
-
-                    </p>
+                      <%= ff.text_field :field_value %> <br/>
 
                 <% end %>
             <% end %>
         <% end %>
-
-        
-        <%= link_to 'Add Another Service Detail', add_service_field_services_url(:index => @service.fields.size ), :remote => true%>
-
-
-        <div id="service_details_fields">
-
-
-        </div>
-
-
-
 
         <% unless @service_fields.empty? %>
 
@@ -117,27 +101,12 @@
 
 
           <%= om_button(:icon=>'next-step') do %>
-              <%= f.submit "Save", :name => "save" %>
+              <%= f.submit "Update", :name => "update" %>
           <% end %>
 
-          <%= om_button(:icon=>'next-step') do %>
-              <%= f.submit "Next", :name => "next" %>
-          <% end %>
 
-          <%= om_button(:icon=>'cancel') do %>
-              <%= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
-          <% end %>
-
-          <%= om_button(:icon=>'prev-step') do %>
-              <%= link_to 'Back', service_wizard_services_url(:step => 1) %>
-          <% end %>
-
+        </div>
 
     <% end %>
-    </div>
-
-
-  </div>
 
 </div>
-

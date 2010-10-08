@@ -9,13 +9,14 @@
                                  options_for_select(%w{ Text String Number Date Time }) %> <br/>
 
                      <%= f.hidden_field :field_type_class, :value => "default"%>
-                     <%= f.hidden_field :field_category, :value => "Registration" %> <br/>
+                     <%= f.hidden_field :field_category, :value => "Registration Details" %> <br/>
 
 
 <%end%>
 <br/>
   <%= link_to 'Cancel', remove_field_services_url(:index => index), :remote => true%>
 
+  <br/>
 
 
 </div>

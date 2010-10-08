@@ -8,7 +8,41 @@
 
   <span class="style2">Service Details </span> <br/>
 
-  <% Service::Field.find_all_by_field_category_and_service_id("Details", @service.id).each do |s| %>
+  <br/>
+  <strong>Service Type:</strong>
+           <%= @service.service_type %><br/>
+
+           <strong>Icon:</strong>
+           <% if @service.icon_file_name != 'missing.png'%>
+
+              <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
+
+           <%else%>
+
+              <%= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
+
+           <%end%>
+
+           <br/>
+           <strong>Published: </strong>
+           <% if @service.published.to_s == "true" %>
+
+              Yes
+
+           <%else%>
+
+              No
+
+           <%end%><br/>
+
+           <br/>
+           <strong>Category:</strong>
+           <%= @service.service_category %><br/>
+
+           <br/>
+
+
+  <% Service::Field.find_all_by_field_category_and_service_id("Service Details", @service.id).each do |s| %>
       <p>
 
         <%= s.field_name %>:
@@ -18,15 +52,13 @@
 
   <br/><span class="style2">Registration Details </span>
 
-  <% Service::Field.find_all_by_field_category_and_service_id("Registration", @service.id).each do |s| %>
+  <% Service::Field.find_all_by_field_category_and_service_id("Registration Details", @service.id).each do |s| %>
       <p>
         <%= s.field_name %>
       </p>
   <% end %>
 
 </div>
-
-
 
 
 <% content_for :sidebar do %>
