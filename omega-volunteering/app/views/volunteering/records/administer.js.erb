@@ -1,0 +1,6 @@
+var close = '<span id="close-<%= @record.id %>">Close Form<span class="om-icon-only om-blue-icon ui-icon-close"></span></span>';
+
+        $("#record-<%= @record.id %>").append('<%= escape_javascript(render('administer')) %>').append(close).effect('highlight');
+        $('#close-<%= @record.id %>').click(function() {
+            $(this).prev('.edit_volunteering_record').remove().end().remove().effect('highlight');
+        });

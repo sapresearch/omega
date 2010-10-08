@@ -1,6 +1,6 @@
-class CreateImports < ActiveRecord::Migration
+class CreateContactImports < ActiveRecord::Migration
   def self.up
-    create_table :imports do |t|
+    create_table :contact_imports do |t|
 
       t.string :datatype
 	  t.integer :processed, :default => 0
@@ -13,6 +13,6 @@ class CreateImports < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :imports
+    drop_table :contact_imports
   end
 end

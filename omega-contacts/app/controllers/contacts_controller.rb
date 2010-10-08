@@ -26,6 +26,7 @@ class ContactsController < ApplicationController
   end
 
   def show
+    @contact_groups = Contact::Group.all.group_by(&:group_type)
     respond_with(@contact)
   end
 

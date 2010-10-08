@@ -24,7 +24,14 @@
           <%= f.hidden_field :service_type %>
 
           <strong>Icon:</strong>
-          <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
+          <% if @service.icon_file_name != 'missing.png'%>
+
+             <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
+
+          <%else%>
+             <%= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
+              
+          <%end%>
           <%= f.hidden_field :icon %>
           <%= f.hidden_field :published %>
 

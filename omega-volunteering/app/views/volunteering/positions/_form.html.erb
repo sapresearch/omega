@@ -2,7 +2,7 @@
 <% require_javascript 'thirdParty/jquery.timepicker', 'new_volunteering_position' %>
 
 
-<%= form_for(@position, :html => {:id => 'volunteer_position_form' })  do |f|%>
+<%= form_for(@position, :html => {:id => 'volunteer_position_form'}) do |f| %>
     <%= errors_for_form(@position, 'position') %>
     <fieldset>
       <p>
@@ -21,33 +21,29 @@
       </p>
 
       <p>
-        <%#= f.label :volunteers_required %>
-        <%#= f.text_field :volunteers_required, :class => "inputSmall" %>
+        <%= f.label :reoccurs %>
+        <%= f.radio_button :recurrence, true %>
+        <%= f.label :one_time_only %>
+        <%= f.radio_button :recurrence, false %>
+
       </p>
+
 
       <div id="non_recurrent">
 
         <p>
           <%= f.label :start_date %>
-          <%= f.text_field :start_date_nr, :class=>'datepickr', :size=>10, :autocomplete => 'off' %>
+          <%= f.text_field :start_date, :class=>'datepickr', :size=>10, :autocomplete => 'off' %>
           <%= f.label :end_date %>
-          <%= f.text_field :end_date_nr, :class=>'datepickr', :size=>10, :autocomplete => 'off' %>
+          <%= f.text_field :end_date, :class=>'datepickr', :size=>10, :autocomplete => 'off' %>
         </p>
 
         <p>
 
           <%= f.label :start_time %>
-          <%= f.text_field :starttime_nr, :class=>'tpickr', :size=>10, :autocomplete => 'off' %>
+          <%= f.text_field :start_time, :class=>'tpickr', :size=>10, :autocomplete => 'off' %>
           <%= f.label :end_time %>
-          <%= f.text_field :endtime_nr, :class=>'tpickr', :size=>10, :autocomplete => 'off' %>
-        </p>
-
-        <p>
-          <%= f.label :reoccurs %>
-          <%= f.radio_button :recurrence, 1 %>
-          <%= f.label :one_time_only %>
-          <%= f.radio_button :recurrence, 0 %>
-
+          <%= f.text_field :end_time, :class=>'tpickr', :size=>10, :autocomplete => 'off' %>
         </p>
       </div>
 
@@ -87,8 +83,8 @@
     <div id="vp_contact">
       <fieldset>
         <legend>Contact for this position</legend>
-        <% [[:none, 'no contact'], [:existing, 'existing contact'], [:new, 'new contact']].each do |value, text| %>
-            <%= radio_button_tag 'contact_assignment', value, true %><%= text %>
+        <% [['none', 'no contact'], ['existing', 'existing contact'], ['new', 'new contact']].each do |value, text| %>
+            <%= radio_button_tag 'contact_assignment', value, value == params[:contact_assignment] %><%= text %>
         <% end %>
       </fieldset>
       <fieldset id="position_exisiting_contact" class="hide">

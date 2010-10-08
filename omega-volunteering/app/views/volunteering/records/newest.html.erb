@@ -1,0 +1,17 @@
+<h1 class="page-content corners-top">
+ Newest Applications
+</h1>
+<div class="page-content corners-bottom">
+<% if @records.empty? %>
+    <h2> No Pending Applications to Show!</h2>
+<%end%>
+
+  <ul id="records-list" class="item-list">
+    <% @records.each do |a| %>
+        <%= render 'record_row', :record => a %>
+    <% end %>
+  </ul>
+</div>
+<% content_for :sidebar do %>
+    <%= render "sidebar_records" %>
+<% end %>

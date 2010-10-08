@@ -20,13 +20,11 @@
 
   <% Service::Field.find_all_by_field_category_and_service_id("Registration", @service.id).each do |s| %>
       <p>
-        <%= s.field_name %>Field Type: <%= s.field_type %>
+        <%= s.field_name %>
       </p>
   <% end %>
 
 </div>
-
-
 
 
 

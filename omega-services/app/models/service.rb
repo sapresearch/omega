@@ -18,9 +18,9 @@ class Service < ActiveRecord::Base
    has_attached_file :icon, :styles => { :small => "65x65>" },
                             :url => "/images/icons/services/:basename.:extension",
                             :path => ":rails_root/public/images/icons/services/:basename.:extension",
-                            :allow_destroy => false
+                            :default_url => "/images/icons/services/default/missing.png"
 
 
-   validates_attachment_content_type :icon, :content_type => ['image/x-png', 'image/png']
+   validates_attachment_content_type :icon, :content_type => ['image/x-png', 'image/png', 'image/jpg', 'images/jpeg', 'image/gif', 'image/bmp']
 
 end

@@ -1,3 +1,5 @@
+<% require_javascript 'omega_favorites' %>
+
 <h1 class="page-content corners-top">
   Favorites
 </h1>
@@ -13,24 +15,26 @@
   </div>
 
   <div class="clear"></div>
-
-  <ul id="favorites_list">
+  <ul id="favorites-list">
     <% @favorites.each do |favorite| %>
-        <li class="item-list clearfix">
+        <li class="list-item relative">
+          <div class="item-list-actions-wrapper corners">
+            <div class="item-list-actions">
+              <%= om_button(:plain => true, :icon=>'delete') do %>
+                  <%= link_to 'Remove as favorite', favorite_path(favorite.item), :method=> :delete %>
+              <% end %>
+
+              <%= om_button(:plain => true, :icon=>'next') do %>
+                  <%= link_to_favorite(favorite) %>
+
+              <% end %>
 
 
-          <%= link_to favorite_path(favorite.item) do %>
-              <%= truncate( favorite.item.to_s , :length=> 160)  %>
-          <% end %>
-
-
-          <div class="right">
-            <%= om_button(:icon=>'delete') do %>
-                <%= link_to 'Remove as favorite', favorite_path(favorite.item), :method=> :delete %>
-            <% end %>
-
-
+            </div>
           </div>
+
+
+          <%= truncate(favorite.item.to_s, :length=> 160) %>
 
 
         </li>

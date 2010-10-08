@@ -10,6 +10,7 @@
 
     <p class="left2">
       <span class="style3">Preview Details</span><br/>
+      <br/>
 
       <br/>
       <strong>Service Category: </strong><%= @s.service_category %> <br/>
@@ -50,7 +51,7 @@
       <% end %>
 
       <%= om_button(:icon=>'prev-step') do %>
-          <%= link_to 'Back', service_wizard_services_url %>
+          <%= link_to 'Back', service_wizard_services_url(:step => "introduction") %>
       <% end %>
 
       <%= om_button(:icon=>'cancel') do %>

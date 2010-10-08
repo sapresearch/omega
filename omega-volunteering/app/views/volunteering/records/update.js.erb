@@ -1,0 +1,13 @@
+    /**
+     * Created by IntelliJ IDEA.
+     * User: I823626
+     * Date: 10/6/10
+     * Time: 5:58 PM
+     * To change this template use File | Settings | File Templates.
+     */
+
+            <% if @record.valid?  %>
+            $('#record-<%= @record.id %>').replaceWith('<%= escape_javascript(render 'record_row', :record => @record) %>');
+            <% else %>
+            $("#edit_volunteering_record_<%= @record.id %>").replaceWith('<%= escape_javascript(render 'administer') %>');
+            <% end %>

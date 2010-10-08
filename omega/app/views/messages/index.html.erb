@@ -1,3 +1,5 @@
+<% require_javascript 'omega_messages' %>
+
 <h1 class="page-content corners-top">
   Messages
 </h1>
@@ -11,32 +13,36 @@
     <% end %>
   </div>
   <div class="clear"></div>
-  <ul id="messages_list">
+  <ul id="messages-list">
     <% @messages.each do |message| %>
-        <li class="item-list clearfix">
-           <h3>
-          <% if !message.read? %>
-                <%= link_to truncate(message.subject, :length=>60), message_path(message) , :class => 'italic' %>
+        <li class="list-item relative">
+          <div class="item-list-actions-wrapper corners">
+            <div class="item-list-actions">
+            <%= om_button(:plain=> true, :icon=>'delete') do %>
+                <%= link_to 'Delete', message_path(message), :method=> :delete %>
+            <% end %>
+            <%= om_button(:plain=> true, :icon=>'mail-reply') do %>
+                <%= link_to 'Reply', reply_message_path(message) %>
+            <% end %>
+            </div>
+          </div>
+          <h3>
+            <% if !message.read? %>
+                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class => 'italic' %>
 
-          <% else %>
+            <% else %>
 
                 <%= link_to truncate(message.subject, :length=>60), message_path(message) %>
 
-          <% end %>
-          <span class="right">  <%= message.created_at %></span>
-              </h3>
-          <div >
+            <% end %>
+
+          </h3>
+
+          <div>
+            <%= message.created_at.strftime("%m/%d/%Y at %I:%M%p") %><br>
             <%= truncate(message.body, :length=> 160) %>
           </div>
-          <div class="right">
 
-            <%= om_button(:icon=>'delete') do %>
-                <%= link_to 'Delete', message_path(message), :method=> :delete %>
-            <% end %>
-            <%= om_button(:icon=>'mail-reply') do %>
-                <%= link_to 'Reply', reply_message_path(message) %>
-            <% end %>
-          </div>
         </li>
     <% end %>
   </ul>
