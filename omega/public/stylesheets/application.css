@@ -107,8 +107,11 @@ a {
     list-style-type: none;
 }
 
-a:hover {
-    color: #0063dc;
+a:hover{
+    color: #0063dc ;
+}
+a.blue {
+    color: #0063dc !important;
 }
 
 input {
@@ -912,6 +915,10 @@ span.om-icon-back {
 .om-icon-tick-small {
     background-position: 0 -864px;
 }
+.om-icon-clipboard-list {
+    background-position: 0 -880px;
+}
+
 /*END BUTTONS*/
 
 /*Pagination */

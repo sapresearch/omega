@@ -1,0 +1,39 @@
+<% require_stylesheet 'omega_volunteering' %>
+<% require_javascript 'omega_volunteering' %>
+<h1 class="page-content corners-top">
+  <%= @position.name %> Appliaction history
+</h1>
+<div class="page-content corners-bottom">
+
+
+  <%= om_button(:plain => true, :icon => 'counter') do %>
+      Active Volunteers: <span class="green">   <%= @position.active_volunteers.count %></span>
+  <% end %>
+  <%= om_button(:plain => true, :icon => 'counter') do %>
+      Missing Volunteers: <span class="red">   <%= @position.missing_volunteers %></span>
+  <% end %>
+
+  <% unless @position.records.empty? %>
+      <ul>
+        <% @position.records.each do |r| %>
+            <li>
+              <%= om_button(:plain => true, :icon => 'user') do %>
+                  From:  <%= link_to "#{r.contact.first_name} #{r.contact.last_name}", contact_path(r.contact), :class => 'blue' %>
+
+              <% end %>
+            </li>
+            <li>
+              <%= om_button(:plain => true, :icon => 'mail-sent') do %>
+                  <span> Sent: <%= r.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
+              <% end %>
+            </li>
+            <li>
+              <%= om_button(:plain => true, :icon => 'folder-open') do %>
+                  <span> Status:  <%= r.action %></span>
+              <% end %>
+            </li>
+
+        <% end %>
+      </ul>
+  <% end %>
+</div>

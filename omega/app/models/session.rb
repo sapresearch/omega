@@ -1,6 +1,6 @@
 class Session < Omega::Model
-  PERM_ADMIN = 'system_admin_sessions'
-  PERM_VIEW  = 'system_view_sessions'
+  PERM_ADMIN = 'sessions_admin'
+  PERM_VIEW  = 'sessions_view'
   
   self.table_name = 'user_sessions'
   

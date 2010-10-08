@@ -6,7 +6,6 @@ Omega::Volunteering::Tram.routes.draw do
         get :upcoming
         get :mine
         get :my_time_sheets
-
         get :skills, :path => 'skills/:skills'
         get :interests, :path => 'interests/:interests'
 
@@ -15,6 +14,7 @@ Omega::Volunteering::Tram.routes.draw do
 
       end
       member do
+        get :history
       end
     end
 
@@ -23,6 +23,7 @@ Omega::Volunteering::Tram.routes.draw do
 
     resources :records do
       collection do
+
         get :pending
         get :newest
         get :completed

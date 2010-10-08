@@ -1,6 +1,11 @@
 class Role < Omega::Model
+  PERM_ADMIN = 'roles_admin'
+  PERM_VIEW  = 'roles_view'
+
   ANONYMOUS          = 'anonymous'
   AUTHENTICATED_USER = 'authenticated_user'
+  EDITOR             = 'editor'
+  ADMINISTRATOR      = 'administrator'
 
   class << self
     def for_anonymous; where('internal_name = ?', ANONYMOUS).first end

@@ -2,9 +2,10 @@ require 'digest/sha2'
 
 class User < Omega::Model
   PERM_ADMIN               = 'users_admin'
-  PERM_ADMIN_PERMISSIONS   = 'users_admin_permissions'
-  PERM_VIEW                = 'users_view'
+  PERM_ASSIGN_TO_ROLE      = 'users_assign_to_role'
   PERM_CHANGE_OWN_USERNAME = 'users_change_own_username'
+  PERM_REGISTER            = 'users_register'
+  PERM_VIEW                = 'users_view'
   
   # These are the fields that are allowed when a user is registering (which is different from creating a user which
   # only an admin should be able to do.)
@@ -72,8 +73,7 @@ class User < Omega::Model
   end
 
   def has_permission?(permission)
-#    permissions.map(&:value).include?(permission)
-true
+    permissions.map(&:value).include?(permission)
   end
 
   def is_anonymous?

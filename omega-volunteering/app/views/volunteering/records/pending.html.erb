@@ -5,8 +5,13 @@
 <% if @records.empty? %>
     <h2> No Pending Applications to Show!</h2>
 <%end%>
-<%= render "records" %>
+
+  <ul id="records-list" class="item-list">
+    <% @records.each do |a| %>
+        <%= render 'record_row', :record => a %>
+    <% end %>
+  </ul>
 </div>
 <% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_records" %>
+    <%= render :partial => "sidebar_records" %>
 <% end %>
