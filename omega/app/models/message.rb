@@ -1,4 +1,8 @@
 class Message < Omega::Model
+  PERM_ADMIN = 'messages_admin'
+  PERM_SEND  = 'messages_send'
+  PERM_VIEW  = 'messages_view'
+
   belongs_to :to,   :class_name => 'User', :inverse_of => :messages
   belongs_to :from, :class_name => 'User', :inverse_of => :sent_messages
 
