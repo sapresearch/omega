@@ -1,6 +1,7 @@
 class Contact < ActiveRecord::Base
   PERM_ADMIN     = 'contacts_admin'
   PERM_EDIT_SELF = 'contacts_edit_self'
+  PERM_EXPORT    = 'contacts_export'
   PERM_VIEW      = 'contacts_view'
   PERM_VIEW_SELF = 'contacts_view_self'
 
