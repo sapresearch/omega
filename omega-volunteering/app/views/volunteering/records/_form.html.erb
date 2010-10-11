@@ -4,6 +4,7 @@
 
     <%= f.hidden_field :position_id %>
 
+    <% if @record.contact.new_record? %>
     <%= f.fields_for :contact do |c| %>
 
         <%= c.hidden_field :id %>
@@ -50,6 +51,9 @@
 
         <% end %>
 
+    <% end %>
+    <% else %>
+        <%= f.hidden_field :contact_id %>
     <% end %>
       <%= f.hidden_field :status, :value => 'Applied' %>
       <%= f.hidden_field :action, :value => 'To be Taken!' %>

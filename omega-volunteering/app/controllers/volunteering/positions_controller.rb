@@ -1,8 +1,8 @@
 class Volunteering::PositionsController < ApplicationController
   respond_to :html, :xml, :json, :js
 
-  require_permission Volunteering::PERM_VIEW
-  require_permission Volunteering::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
+#  require_permission Volunteering::PERM_VIEW
+#  require_permission Volunteering::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 
   before_filter :get_positions, :only => [:index, :upcoming, :skills, :interests]
   before_filter :get_my_positions, :only => [:mine]
@@ -39,6 +39,7 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def new
+    params[:contact_assignment] = 'new'
     @position = Volunteering::Position.new
     fix_model_to_view
     respond_with(@position)

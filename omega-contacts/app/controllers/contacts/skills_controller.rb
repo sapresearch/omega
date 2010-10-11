@@ -1,14 +1,33 @@
 class Contacts::SkillsController < ApplicationController
   respond_to :html, :xml, :json
   crud_helper Contact::Skill
-  require_permission Contact::PERM_VIEW
-  require_permission Contact::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
+#  require_permission Contact::PERM_VIEW
+#  require_permission Contact::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 
   def index
     if q = params[:q]
       @contact_skills = Contact::Skill.where('name like ?', "%#{q}%")
     end
     respond_with(@contact_skills)
+  end
+
+  def suggest
+    @contact_skills = Contact::Skill.scoped
+
+    if q = params[:q]
+      @contact_skills = @contact_skills.where('name like ?', "%#{q}%")
+    end
+
+    respond_with(@contact_skills) do |format|
+      format.json do
+        begin
+          old_irij, Contact::Skill.include_root_in_json = Contact::Skill.include_root_in_json, false
+          render :json => @contact_skills.to_json(:only => :name)
+        ensure
+          Contact::Skill.include_root_in_json = old_irij
+        end
+      end
+    end
   end
 
   def show
