@@ -1,34 +1,66 @@
 <h1 class="page-content corners-top">
-  Volunteering Positions
+  Application for <%= @record.position.name %>
+
 </h1>
 <div class="page-content corners-bottom">
+  <h2>Description</h2>
 
   <p>
-
-    <strong> Title: </strong> <%= @record.position.name %> <br/>
-    <strong> Description: </strong> <%= @record.position.description %> <br/>
-    <strong> Skills : </strong> <%= @record.position.skills.map(&:name).join(", ") %> <br/>
-    <strong> Interests : </strong> <%= @record.position.interests.map(&:name).join(", ") %> <br/>
+    <%= @record.position.description %>
   </p>
 
-  <h2><strong> Volunteer </strong></h2>
 
-  <p>
+  <% if @record.position.start %>
+      <h2>Date</h2>
 
-    <strong> Name: </strong> <%= @record.contact.first_name %> <%= @record.contact.last_name %>
+      <p>
+        <span class="om-icon-only ui-icon-date"></span> <span> Start date:</span>
+        <%= @record.position.start.to_formatted_s(:long) %>
+      </p>
+  <% end %>
+  <% if @record.position.end %>
+      <p>
+        <span class="om-icon-only ui-icon-date"></span> <span>End date:</span>
+        <%= @record.position.end.to_formatted_s(:long) %>
+      </p>
+  <% end %>
 
-  </p>
+  <!-- hours-->
 
-  <h2><strong> Contact Information </strong></h2>
+  <% if @record.position.schedule %>
+      <p>
+        <span> Recurrence:</span>
+        <% if @record.position.schedule.schedule_type %>
+            every  <%= @record.position.schedule.value %> days
+        <% else %>
+            every day
+        <% end %>
+      </p>
+
+      <p>
+        <span> This series starts:</span>
+        <%= @record.position.schedule.start_date.to_formatted_s(:long) %>
+      </p>
+
+      <p>
+        <span class> This series end:</span>
+        <%= @record.position.schedule.end_date.to_formatted_s(:long) %>
+      </p>
+  <% end %>
+  <h2>Volunteer </h2>
+
+  <%= @record.contact.first_name %> <%= @record.contact.last_name %>
+
+  <h2> Contact Information</h2>
 
   <p>
     <% @record.contact.phone_numbers.each do |p| %>
 
-        <strong><%= p.number_type %> Phone : </strong><%= p.number %> <br/>
+        <%= p.number_type %> Phone <%= p.number %> <br/>
 
     <% end %>
 
-    <strong>Email:</strong> <%= @record.contact.email %> <br/>
+    Email:<%= @record.contact.email %> <br/>
 
     <% @record.contact.addresses.each do |a| %>
 
@@ -38,17 +70,17 @@
     <% end %>
   </p>
 
-  <h2><strong> Additional Information </strong></h2>
+  <h2>Additional Information</h2>
 
   <p>
-    <strong>Skills: </strong> <%= @record.contact.skills.map(&:name).join(", ") %> <br/>
-    <strong> Interests: </strong> <%= @record.contact.interests.map(&:name).join(", ") %> <br/>
+    Skills: <%= @record.contact.skills.map(&:name).join(", ") %> <br/>
+    Interests:  <%= @record.contact.interests.map(&:name).join(", ") %> <br/>
   </p>
 
 
   <% if current_user.has_permission?("users_admin") %>
 
-      <h2><strong> Admin Space </strong></h2>
+      <h2>Admin Space</h2>
 
       <p>
 
@@ -61,7 +93,7 @@
 
       <p>
 
-        
+
         <%= om_button(:icon => 'folder-edit') do %>
             <%= link_to "Administer", administer_volunteering_record_url(@record) %>
         <% end %>
@@ -70,11 +102,5 @@
 
   <% else %>
 
-      <p>
-
-        <%= link_to "Record Hours for this Position ", new_volunteering_time_entry_url(:id => @record) %> <br/>
-
-
-      </p>
   <% end %>
 </div>

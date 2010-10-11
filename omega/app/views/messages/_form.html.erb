@@ -2,7 +2,7 @@
 <div class="page-content corners-bottom">
   <%= form_for @message do |f| %>
       <p>
-        <%= f.label :to %>: <%= text_field_tag :ac %>
+        <%= f.label :to %>: <%= text_field_tag :'ac-users' %>
         <%= f.hidden_field :to_id %>
       </p>
 

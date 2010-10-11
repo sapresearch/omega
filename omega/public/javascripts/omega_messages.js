@@ -6,14 +6,26 @@
  * To change this template use File | Settings | File Templates.
  */
 
-$(function(){
+$(function() {
+    /* jqueryui autocomplete for users */
+    $('#ac-users').autocomplete({
+        source : '/users/autocomplete',
+        minLength: 2,
 
+        select: function(event, ui) {
+
+            $('#message_to_id').val(ui.item.id)
+        },
+        change: function(event, ui) {
+            $('#ac-users').val(ui.item.label)
+        }
+
+    });
     var $list = document.getElementById('messages-list');
     $('li', $list).mouseenter(
-                                     function() {
-
-                                         $(this).find('div.item-list-actions-wrapper').fadeIn()
-                                     }).mouseleave(function() {
+                             function() {
+                                 $(this).find('div.item-list-actions-wrapper').fadeIn()
+                             }).mouseleave(function() {
         $(this).find('div.item-list-actions-wrapper').fadeOut()
     });
 });
