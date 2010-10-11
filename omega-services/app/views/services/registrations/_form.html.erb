@@ -1,40 +1,113 @@
 <% require_stylesheet 'services' %>
+
 <h1 class="page-content corners-top">
 Register for <%=@service.service_type%> Service
 </h1>
 <div class="page-content corners-bottom">
 
-
-
 <p>
-
-
-
   <span class="style1"> Service Details </span>
-
+<br/>
 
   <%@service_fields.each do |s|%>
 
      <br/>
 
-     <strong><%=s.field_name%></strong>:
-             <%=Service::Detail.find_by_field_id(s.id).field_value%>
-     <br/>
+     <strong><%=s.field_name%></strong>: <%=Service::Detail.find_by_field_id(s.id).field_value%>
 
   <%end%>
 </p>
 
-    <p>
+<p>
 
-      Registration Information
+<br/>
+      <span class="style1"> Registration Information </span>
+<br/>
+
+<br/>
 
       <%= form_for @registration do |f| %>
+
           <%=errors_for_form(@registration, 'registration')%>
 
           <%= f.hidden_field :service_id, :value => @service.id %>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
 
-          <% @registration_fields.each do |field| %>
+          <%= f.fields_for :contact do |c| %>
+
+                <%= c.hidden_field :id %>
+                <%= c.hidden_field :title%>
+
+              <% if @service.service_category.eql?("Enrollable") %>
+
+                <p>
+
+                <strong> First Name </strong><br/>
+                  <%= c.text_field :first_name%>
+
+                  <br/>
+
+                <strong> Last Name </strong><br/>
+                  <%= c.text_field :last_name%>
+                  <br/>
+
+                <strong> Email </strong><br/>
+                  <%= c.text_field :email %>
+                </p>
+              <%else%>
+
+                <%= c.hidden_field :first_name%>
+                <%= c.hidden_field :last_name%>
+
+
+
+              <%end%>
+
+
+              <p>
+
+              <strong>Phone Numbers </strong><br/>
+
+              <%= c.fields_for :phone_numbers do |p| %>
+
+                    <%= p.hidden_field :id %>
+
+		            <%= p.hidden_field :number_type %>
+
+
+                    <%= p.text_field :number %>
+                  <br/>
+
+              <%end%>
+
+              </p>
+
+
+
+              
+          <%end%>
+
+
+         <p>
+
+         <strong>Notes </strong><br/>
+
+         <%= f.text_area :notes %>
+
+         </p>
+
+
+        <p>
+
+        <strong>Questions </strong><br/>
+
+         <%= f.text_area :questions %>
+
+         </p>
+
+
+
+
+         <% @registration_fields.each do |field| %>
 
           <%= f.fields_for :fieldvalues do |ff| %>
 
@@ -44,14 +117,21 @@ Register for <%=@service.service_type%> Service
 
           <% end %>
 
+          <br/>
+
+          <p>
+
+          <br/>
           <%= om_button(:icon=>'apply') do %>
-        <%= button_to 'Register!', url_for(params.merge(:name => 'desc')) %>
+          <%= button_to 'Register!', url_for(params.merge(:name => 'desc')) %>
+
+          </p>
+
     <% end %>
 
 
-      <% end %>
+    <% end %>
 
-    </p>
 
   </div>
 

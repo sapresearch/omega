@@ -1,32 +1,42 @@
+<% require_javascript 'add_field.js' %>
 <% require_stylesheet 'services.css' %>
 
 
 <h1 class="page-content corners-top">
-  Add another Service Detail to <%= @service.service_name %>
+
+  Add More Fields to <%= @service.service_name %> - <%= @service.service_type %>
+
 </h1>
+
 <div class="page-content corners-bottom">
 
-  <%= form_for @field do |f| %>
+  <p class="left-align">
+           <span class="style3">Please Choose:</span> <br/>
 
-      <%= errors_for_form(@field, 'field') %>
-      <%= f.hidden_field :service_id, :value => @service.id %>
-      <p class="left-align">
+           <br/>
+           <% [["Add a Service Detail", "checked"], ["Add a Registration Detail", ""]].each do |choice, check| %>
+               <%= radio_button 'service', 'service_field', choice, {:checked => check} %>
+               <%= choice %> <br/>
 
-      <strong>Field Name</strong><br/>
-      <%= f.text_field :field_name %><br/>
-
-      <br/>
-      <strong>Field Type</strong><br/>
-      <%=f.select :field_type, options_for_select(%w{ Text String Number Date Time }) %> <br/>
-
-      <br/>
-
-       <%= f.hidden_field :field_type_class, :value => "default"%>
-       <%= f.hidden_field :field_category, :value => "Registration" %> <br/>
+           <% end %>
+         </p>
 
 
-      <%= f.submit "Add!" %>
-  <% end %>
 
-</p>
+  <div id="service_fields">
+
+    <%= render :partial => "service_field_form" %>
+
+  </div>
+
+
+  <div id="registration_fields">
+
+    <%= render :partial => "registration_field_form" %>
+
+
+  </div>
+
+
+
 </div>

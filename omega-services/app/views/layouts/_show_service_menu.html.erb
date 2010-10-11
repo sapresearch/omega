@@ -3,15 +3,17 @@
   <li>
 
     <%= om_button(:icon=>'') do %>
-            <%= link_to 'Add a Registration Detail', new_service_service_field_url(@service.id) %>
+            <%= link_to 'Add a Field', new_service_service_field_url(@service.id) %>
         <% end %>
   </li>
-  <li>
+
+   <li>
 
     <%= om_button(:icon=>'') do %>
-            <%= link_to 'Add a Service Detail' %>
+            <%= link_to 'Edit', modify_service_services_url(@service.id) %>
         <% end %>
   </li>
+
   <li>
     <%= om_button(:icon=>'') do %>
             <%= link_to 'All Services ', services_url %>

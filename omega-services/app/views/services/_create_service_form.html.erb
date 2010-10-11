@@ -1,0 +1,83 @@
+<%= form_for @service do |f| %>
+
+    <%= errors_for_model @service %>
+
+    <%= f.hidden_field :service_type, :value => @typed_service.service_type %>
+    <%= f.hidden_field :service_category, :value => @typed_service.service_category %>
+    <%= f.hidden_field :icon_file_name, :value => @typed_service.icon_file_name %>
+    <%= f.hidden_field :icon_content_type, :value => @typed_service.icon_content_type %>
+    <%= f.hidden_field :icon_file_size, :value => @typed_service.icon_file_size %>
+    <%= f.hidden_field :description, :value => @typed_service.description %>
+    <%= f.hidden_field :published, :value => 0 %>
+
+    <% Service::Typefield.find_all_by_service_id(@typed_service.id).each do |t|%>
+
+    <%= f.fields_for :fields do |ff| %>
+
+            <%= ff.hidden_field :field_name, :value => t.field_name%>
+            <%= ff.hidden_field :field_type, :value => t.field_type%>
+            <%= ff.hidden_field :field_type_class, :value => t.field_type_class%>
+            <%= ff.hidden_field :field_category, :value => t.field_category%>
+
+            <%= ff.fields_for :detail do |d|%>
+                <%= d.hidden_field :field_value, :value => "Enter Value" %>
+            <%end%>
+
+        <%end%>
+
+    <%end%>
+
+
+    <p class="left2">
+      <span class="style3">Preview Details</span><br/>
+      <br/>
+
+      <br/>
+      <strong>Service Category: </strong><%= @typed_service.service_category %> <br/>
+      <strong>Description:</strong><%= @typed_service.description %><br/>
+
+      <% unless @fields.empty? %>
+
+          <% Service::Typefield.find_all_by_field_category_and_service_id("Service Details", @typed_service.id).each do |s| %>
+
+              <strong><%= s.field_name %></strong>
+              <br/>
+
+          <% end %>
+          <br/>
+
+          <span class="style2">Registration Details</span><br/>
+
+          <% Service::Typefield.find_all_by_field_category_and_service_id("Registration Details", @typed_service.id).each do |s| %>
+
+              <br/>
+              <strong><%= s.field_name %></strong> <strong>(Field Type: <%= s.field_type %>)</strong>
+              <br/>
+
+          <% end %>
+      <% end %>
+
+    </p>
+
+    <br/>
+    <div class="bottom-buttons">
+
+
+      <%= om_button(:icon=>'save') do %>
+          <%= f.submit "Save & Proceed", :name => "next" %>
+      <% end %>
+
+      <%= om_button(:icon=>'prev-step') do %>
+          <%= link_to 'Back', service_wizard_services_url(:step => "introduction") %>
+      <% end %>
+
+      <%= om_button(:icon=>'cancel') do %>
+          <%= link_to 'Cancel', new_service_url %>
+      <% end %>
+
+    </div>
+
+
+<% end %>
+
+
