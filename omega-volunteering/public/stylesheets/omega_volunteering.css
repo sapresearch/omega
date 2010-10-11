@@ -45,7 +45,7 @@ div.position-slider {
     width: 100%;
     position: absolute;
     top: 22px;
-    background: url("../images/details_bg.png") repeat-x bottom;
+    background: url("/images/details_bg.png") repeat-x bottom;
     color: #fff;
     display: none;
 
@@ -146,6 +146,6 @@ span.skill-tag_active {
 
 .sidebar-menu-content > div.help-explanation{
     font-style:italic;
-    color:333;
+    color:#333;
 }
 

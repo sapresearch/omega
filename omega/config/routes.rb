@@ -4,11 +4,11 @@ Omega::Tram.routes.draw do
       delete :destroy
     end
   end
-  
+
   resources :users do
     collection do
       get :register
-       get :autocomplete
+      get :autocomplete
     end
   end
 
@@ -25,7 +25,6 @@ Omega::Tram.routes.draw do
       get :forward
     end
   end
-  
+
   root :to => 'home#index'
-  match 'product' => 'home#product'
 end

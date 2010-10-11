@@ -1,5 +1,20 @@
-<%= form_for @session do |f| %>
-	<%= f.label :username %><%= f.text_field :username %><br />
-	<%= f.label :password %><%= f.password_field :password %><br />
-	<%= f.submit %>
+<% require_javascript 'omega_messages' %>
+
+<h1 class="page-content corners-top">
+Login
+</h1>
+<div class="page-content corners-bottom">
+  <%= form_for @session do |f| %>
+      <p>
+    <%= f.label :username %><%= f.text_field :username %>
+      </p>
+	<p>
+    <%= f.label :password %><%= f.password_field :password %>
+	</p>
+	 <%= om_button(:icon=>'next') do %>
+                <%= f.submit %>
+            <% end %>
+
 <% end %>
+</div>
+

@@ -28,8 +28,7 @@
   <% end %>
   <ul id="positions-list">
     <% @positions.each do |position| %>
-        <li class="clearfix">
-
+        <li>
           <div class="position-slider">
             <%= render 'volunteering/positions/partials/position_actions', :position => position %>
           </div>
@@ -54,7 +53,6 @@
               <h2>
                 <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
               </h2>
-
               <p>
                 <%= truncate(position.description, :length=> 140) %> <%= link_to '( read more ... )', volunteering_position_path(position) %>
               </p>

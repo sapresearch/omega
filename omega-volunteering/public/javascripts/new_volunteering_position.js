@@ -110,7 +110,8 @@ $(function() {
 
     });
     var contact_val = $('#volunteering_position_contact_ids').val();
-    if (contact_val != '') {
+    if (contact_val != "[]" && typeof contact_val != 'undefined' ) {
+
         var contacts = $('#volunteering_position_contact_ids').val().replace(/[\[\]']+/g, '').split(',');
         $.each(contacts, function(k, v) {
             $.ajax({

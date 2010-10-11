@@ -1,0 +1,37 @@
+<li class="list-item relative" id="record-<%= record.id %>">
+  <div class="item-list-actions-wrapper corners">
+    <div class="item-list-actions">
+      <%= om_button(:plain => true, :icon => 'folder-edit') do %>
+          <%= link_to "Withdraw Application", withdraw_volunteering_record_path(record)%>
+      <% end %>
+      <br>
+      <%= om_button(:plain => true, :icon => 'next') do %>
+          <%= link_to 'Application Details', volunteering_record_url(record) %>
+      <% end %>
+      <br>
+    </div>
+  </div>
+  <h2>
+    <%= record.position.name %>
+  </h2>
+
+  <ul>
+    <li>
+      <%= om_button(:plain => true, :icon => 'user') do %>
+          From:  <%= link_to "#{record.contact.first_name} #{record.contact.last_name}", contact_path(record.contact), :class => 'blue' %>
+
+      <% end %>
+    </li>
+    <li>
+      <%= om_button(:plain => true, :icon => 'mail-sent') do %>
+          <span> Sent: <%= record.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
+      <% end %>
+    </li>
+    <li>
+      <%= om_button(:plain => true, :icon => 'folder-open') do %>
+          <span> Status:  <%= record.action %></span>
+      <% end %>
+    </li>
+    
+  </ul>
+</li>

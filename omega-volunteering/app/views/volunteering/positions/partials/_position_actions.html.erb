@@ -1,7 +1,7 @@
 <div id="actions-<%= position.id %>" class="position-actions">
   <% if !current_user.is_anonymous? %>
       <%= om_button(:plain => true, :icon => 'delete') do %>
-          <%= link_to 'Delete', volunteering_position_path(position), :method => :delete, :'data-tooltip' => 'Delete this position' %>
+          <%= link_to 'Delete', volunteering_position_path(position),  :method=>:delete, :'data-tooltip' => 'Delete this position' %>
       <% end %>
       <%= om_button(:plain => true, :icon=>'edit') do %>
           <%= link_to 'Edit', edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>

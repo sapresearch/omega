@@ -1,4 +1,3 @@
-
 <div> <%= om_button(:icon=>'user-remove') do %>
       <%= link_to 'delete', @contact, :method=> :delete, :remote => true %>
   <% end %>
@@ -34,6 +33,7 @@
 Email: <%= @contact.email %><br>
 
 <div id="contact_accordion">
+
   <% if @contact.groups.any? %>
       <h3><a href="#">Group Assignments</a></h3>
 
@@ -41,6 +41,28 @@ Email: <%= @contact.email %><br>
         <ul id="assigned_groups">
           <%= render :partial => 'contacts/partials/assigned_groups' %>
         </ul>
+      </div>
+  <% end %>
+    <% if @contact.skills.any? or @contact.interests.any? %>
+      <h3><a href="#">Skills and Interests </a></h3>
+
+      <div>
+        <% if @contact.skills.any? %>
+          <h4>Skills</h4>
+            <ul>
+              <% @contact.skills.each do |skill| %>
+                  <li> <%= skill.name %> </li>
+              <% end %>
+            </ul>
+        <% end %>
+        <% if @contact.interests.any? %>
+           <h4>Interests</h4> 
+            <ul>
+              <% @contact.interests.each do |interest| %>
+                  <li> <%= interest.name %> </li>
+              <% end %>
+            </ul>
+        <% end %>
       </div>
   <% end %>
   <% if @contact.addresses.any? then

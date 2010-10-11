@@ -93,6 +93,11 @@ h3 a {
     font-size: 1.1em;
     color: #187CF3;
 }
+h4{
+    padding:2px;
+    border: 1px dotted #0063dc;
+    color:#0063dc;
+}
 
 p {
 
@@ -1383,6 +1388,9 @@ dl.drop_down {
 
 .italic {
     font-style: italic;
+}
+.bold{
+    font-weight:bold;
 }
 .text-right {
     text-align: right;

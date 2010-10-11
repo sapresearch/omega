@@ -26,7 +26,12 @@ class Volunteering::RecordsController < ApplicationController
     @records = Volunteering::Record.find(:all, :conditions => ['status = ?', "Pending"])
     breadcrumb 'Pending Applications' => :pending_volunteering_records
     respond_with(@records)
+  end
 
+  def my_applications
+    @records = Volunteering::Record.where('volunteering_records.contact_id = ?', Contact.for(current_user))
+    breadcrumb 'Pending Applications' => :pending_volunteering_records
+    respond_with(@records)
   end
 
   def completed
@@ -89,17 +94,21 @@ class Volunteering::RecordsController < ApplicationController
     # todo implement check for empty contact
     contact = Contact.find(@record.contact_id)
 
-      @message = Message.new()
-      @message.subject = status
-      @message.body = msg
-      @message.to_id = contact.user_id
-      @message.from = current_user
-      @message.save
-
+    @message = Message.new()
+    @message.subject = status
+    @message.body = msg
+    @message.to_id = contact.user_id
+    @message.from = current_user
+    @message.save
 
 
     @record.update_attributes(params[:volunteering_record])
     respond_with(@record)
+  end
+
+  def withdraw
+    logger.debug "============================================================================= Implement update attributes"
+    render :my_applications
   end
 
   def destroy

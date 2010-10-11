@@ -87,7 +87,7 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def history
-   @position = Volunteering::Position.find(params[:id])
+    @position = Volunteering::Position.find(params[:id])
     respond_with(@position)
   end
 
@@ -111,7 +111,8 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def get_my_positions
-    @positions = Volunteering::Position.joins(:records).where('volunteering_records.contact_id = ?', Contact.for(current_user))
+    @positions = Volunteering::Position.joins(:records).where('volunteering_records.contact_id = ?', Contact.for(current_user)).where('volunteering_records.action = ?', 'accept')
+
   end
 
   def get_skills
