@@ -1,6 +1,8 @@
-require 'role'
-
 class AddRoles < ActiveRecord::Migration
+  class Role < ActiveRecord::Record
+
+  end
+
   ROLES = {
     'anonymous' => {
       :name        => 'Anonymous',

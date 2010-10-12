@@ -1,7 +1,12 @@
-require 'user'
-require 'role'
-
 class AddAdminUser < ActiveRecord::Migration
+  class Role < ActiveRecord::Record
+
+  end
+
+  class User < ActiveRecord::Record
+    has_and_belongs_to_many :roles
+  end
+
   def self.up
     User.new do |u|
       u.username = 'admin'

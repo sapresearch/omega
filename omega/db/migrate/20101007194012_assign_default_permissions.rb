@@ -1,7 +1,12 @@
-require 'role'
-require 'permission'
-
 class AssignDefaultPermissions < ActiveRecord::Migration
+  class Permission < ActiveRecord::Record
+
+  end
+
+  class Role < ActiveRecord::Record
+    has_and_belongs_to :permissions
+  end
+
   ASSIGNMENTS = {
     'anonymous' => ['users_register'],
     'authenticated_user' => ['users_change_own_username', 'users_register', 'users_view',
