@@ -3,7 +3,7 @@ class CreateServiceDetails < ActiveRecord::Migration
      create_table :service_details do |t|
 
       t.references :field, :null => false
-      t.integer :service_id, :null => false
+      t.integer :service_id
       t.string :field_value, :null => false
 
 
