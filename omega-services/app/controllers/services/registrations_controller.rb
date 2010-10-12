@@ -5,6 +5,8 @@ class Services::RegistrationsController < ApplicationController
   breadcrumb 'Services' => :services
   breadcrumb 'My Registrations' => :my_registrations_service_registrations
 
+  before_filter :get_service
+
 
   def index
 
@@ -67,5 +69,15 @@ class Services::RegistrationsController < ApplicationController
     redirect_to my_registrations_service_registrations_url
 
   end
+
+
+   private
+
+    def get_service
+
+      if params[:service_id]
+        @service = Service.find(params[:service_id])
+      end
+    end
 
 end
