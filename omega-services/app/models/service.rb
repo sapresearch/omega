@@ -6,9 +6,10 @@ class Service < ActiveRecord::Base
 
    has_many :details, :dependent => :destroy
 
-   has_one :type
+   belongs_to :type
 
    has_one :event
+
 
    validates_presence_of :service_type
 
