@@ -94,7 +94,7 @@ $(function() {
  * @param group_name
  */
 function update_contacts(contacts, group_id, group_name) {
-    alert(group_id)
+
     var $contacts = $('#contacts');
 
     var mgm_span_end = '</span></td>';
@@ -109,7 +109,7 @@ function update_contacts(contacts, group_id, group_name) {
             list += '<tr data-id="' + contacts[i].id + '" data-group-id="' + group_id + '"><td><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
                     + contacts[i].first_name + '</a>'
                     + '<td class="text-right" width="40px"><span class="mgm-contact hide">'
-                    + '<span data-tooltip="Move me into another group me by dragging into a group on the left" class="om-icon-only om-blue-icon ui-icon-arrow-4-diag"></span>'
+                    + '<span data-tooltip="Move me into another group by dragging me into a group on the left" class="om-icon-only om-blue-icon ui-icon-arrow-4-diag"></span>'
                     + '<a href="/contacts/' + contacts[i].id + '/groups/' + group_id + '/remove" '
                     + 'class="remove-contact" data-remote="true" data-method="put">'
                     + '<span class="om-icon-only om-blue-icon ui-icon-shuffle" data-tooltip="remove this contact from: ' + group_name + '"></span></a>'

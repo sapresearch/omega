@@ -55,7 +55,7 @@ class ContactsController < ApplicationController
         if @contacts.any?
           render :json  =>   @contacts.map { |c| {:id => c.id, :label => "#{c.last_name}  #{c.first_name}", :value => c.id} }
         else
-          render :json =>  [{:label => "No records founds", :value => "sds" }]
+          render :json =>  [{:label => "No records founds", :value => "sds"}]
         end
       end
     end
