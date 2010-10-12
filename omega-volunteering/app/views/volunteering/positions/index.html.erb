@@ -28,7 +28,7 @@
   <% end %>
   <ul id="positions-list">
     <% @positions.each do |position| %>
-        <li>
+        <li id="position-<%= position.id %>">
           <div class="position-slider">
             <%= render 'volunteering/positions/partials/position_actions', :position => position %>
           </div>

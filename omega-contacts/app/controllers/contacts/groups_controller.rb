@@ -2,8 +2,8 @@ class Contacts::GroupsController < ApplicationController
   respond_to :html, :xml, :js, :json
   sub_layout :determine_sub_layout
   crud_helper Contact::Group, :find => [:assign, :remove]
-  require_permission Contact::PERM_VIEW
-  require_permission Contact::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
+#  require_permission Contact::PERM_VIEW
+#  require_permission Contact::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 
   def index
     if params[:contact_id]
