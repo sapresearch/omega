@@ -12,11 +12,13 @@ class MessagesController < ApplicationController
   before_filter :_new_message, :only => [:new]
 
   def index
+    @messages = @messages.paginate(:page => params[:page], :per_page => Message::MAX_MESSAGES_PER_PAGE)
 
     respond_with(@messages)
   end
 
   def sent
+    @messages = @messages.paginate(:page => params[:page], :per_page => Message::MAX_MESSAGES_PER_PAGE)
     respond_with(@messages)
   end
 
@@ -78,12 +80,8 @@ class MessagesController < ApplicationController
 
   def sort
     params.each do |attr, direction|
-      if !params.empty?
-        next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
-        @messages = @messages.order("#{attr} #{direction}")
-      else
-        @messages = @messages.all(:order => 'created_at desc')
-      end
+      next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
+      @messages = @messages.order("#{attr} #{direction}")
     end
   end
 
@@ -96,6 +94,7 @@ class MessagesController < ApplicationController
 
   def _get_sent_messages
     @messages = current_user.sent_messages
+    
     breadcrumb "Sent" => sent_messages_path
   end
 

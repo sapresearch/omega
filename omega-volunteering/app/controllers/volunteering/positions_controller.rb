@@ -61,6 +61,12 @@ class Volunteering::PositionsController < ApplicationController
     respond_with(@position)
   end
 
+  def destroy
+    @position = Volunteering::Position.find(params[:id])
+    @position.destroy
+    respond_with(@position)
+  end
+
   def skills
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
     render :index
@@ -86,10 +92,6 @@ class Volunteering::PositionsController < ApplicationController
     end
   end
 
-  def history
-    @position = Volunteering::Position.find(params[:id])
-    respond_with(@position)
-  end
 
   private
   def get_positions
@@ -111,8 +113,9 @@ class Volunteering::PositionsController < ApplicationController
   end
 
   def get_my_positions
-    @positions = Volunteering::Position.joins(:records).where('volunteering_records.contact_id = ?', Contact.for(current_user)).where('volunteering_records.action = ?', 'accept')
-
+    @positions = Volunteering::Position.joins(:records).
+            where('volunteering_records.contact_id = ?', Contact.for(current_user)).
+            where('volunteering_records.action = ?', 'accept')
   end
 
   def get_skills

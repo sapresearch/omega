@@ -6,6 +6,8 @@ class Volunteering::RecordsController < ApplicationController
 
   def index
     @records = Volunteering::Record.all()
+ @records =    @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
+
 
     respond_with(@records)
   end
@@ -17,6 +19,7 @@ class Volunteering::RecordsController < ApplicationController
 
   def newest
     @records = Volunteering::Record.find(:all, :conditions => ['status = ?', "Applied"])
+   @records =  @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
     breadcrumb 'Newest Applications' => :newest_volunteering_records
     respond_with(@records)
 
@@ -30,12 +33,14 @@ class Volunteering::RecordsController < ApplicationController
 
   def my_applications
     @records = Volunteering::Record.where('volunteering_records.contact_id = ?', Contact.for(current_user))
+    @records = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
     breadcrumb 'Pending Applications' => :pending_volunteering_records
     respond_with(@records)
   end
 
   def completed
     @records = Volunteering::Record.find(:all, :conditions => ['status = ?', "Complete"])
+    @records = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
     breadcrumb 'Completed Applications' => :completed_volunteering_records
     respond_with(@records)
 
@@ -43,12 +48,20 @@ class Volunteering::RecordsController < ApplicationController
 
   def administer
     @record = Volunteering::Record.find(params[:id])
+    
     respond_with(@record)
   end
 
 
   def admin_page
 
+  end
+
+  #this method is meant to show a history of applications. therefore we need to create new records on update instedad of updating them
+  def history
+    record    = Volunteering::Record.find(params[:id])
+    @records  = Volunteering::Record.where('position_id = ?', record.position_id).order('created_at desc')
+    respond_with(@records)
   end
 
   def new
@@ -90,14 +103,10 @@ class Volunteering::RecordsController < ApplicationController
       msg = params[:volunteering_record][:more_information]
     end
 
-    # find contact by user_id
-    # todo implement check for empty contact
-    contact = Contact.find(@record.contact_id)
-
     @message = Message.new()
     @message.subject = status
     @message.body = msg
-    @message.to_id = contact.user_id
+    @message.to = @record.contact.user
     @message.from = current_user
     @message.save
 
@@ -107,7 +116,9 @@ class Volunteering::RecordsController < ApplicationController
   end
 
   def withdraw
-    logger.debug "============================================================================= Implement update attributes"
+    @record = Volunteering::Record.find(params[:id])
+    @record.update_attributes(:status => 'withdrawn')
+    
     render :my_applications
   end
 
@@ -115,6 +126,8 @@ class Volunteering::RecordsController < ApplicationController
     @record = Volunteering::Record.find(params[:id])
     @record.destroy
   end
+
+
 
 
 end

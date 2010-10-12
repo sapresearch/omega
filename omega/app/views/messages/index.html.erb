@@ -18,12 +18,12 @@
         <li class="list-item relative">
           <div class="item-list-actions-wrapper corners">
             <div class="item-list-actions">
-            <%= om_button(:plain=> true, :icon=>'delete') do %>
-                <%= link_to 'Delete', message_path(message), :method=> :delete %>
-            <% end %>
-            <%= om_button(:plain=> true, :icon=>'mail-reply') do %>
-                <%= link_to 'Reply', reply_message_path(message) %>
-            <% end %>
+              <%= om_button(:plain=> true, :icon=>'delete') do %>
+                  <%= link_to 'Delete', message_path(message), :method=> :delete %>
+              <% end %>
+              <%= om_button(:plain=> true, :icon=>'mail-reply') do %>
+                  <%= link_to 'Reply', reply_message_path(message) %>
+              <% end %>
             </div>
           </div>
           <h3>
@@ -39,13 +39,20 @@
           </h3>
 
           <div>
-            <%= message.created_at.strftime("%a %m/%d/%Y at %I:%M %p") %><br>
+            <%= om_button(:plain => true, :icon => 'user') do %>
+                From:  <%= link_to "#{message.from.first_name} #{message.from.last_name}", contact_path(message.from), :class => 'blue' %>
+            <% end %>
+            <%= message.created_at.strftime("%a %m/%d/%Y at %I:%M %p") %>
+            <br>
             <%= truncate(message.body, :length=> 160) %>
           </div>
 
         </li>
     <% end %>
   </ul>
+  <%= will_paginate @messages %>
+
+  <div class="clear"></div>
 </div>
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_messages_menu" %>

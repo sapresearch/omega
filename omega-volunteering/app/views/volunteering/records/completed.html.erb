@@ -10,6 +10,9 @@
         <%= render 'record_row', :record => a %>
     <% end %>
   </ul>
+      <%= will_paginate @records %>
+
+  <div class="clear"></div>
 </div>
 <% content_for :sidebar do %>
     <%= render "sidebar_records" %>

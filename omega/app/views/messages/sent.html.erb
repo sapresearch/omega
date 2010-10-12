@@ -1,36 +1,46 @@
+<% require_javascript 'omega_messages' %>
 <h1 class="page-content corners-top">
   Sent Messages
 </h1>
 <div class="page-content corners-bottom">
 
-  <ul id="messages_list">
-  <% @messages.each do |message| %>
-      <li class="item-list clearfix">
+  <ul id="messages-list">
+    <% @messages.each do |message| %>
+        <li class="list-item relative">
+          <div class="item-list-actions-wrapper corners">
+            <div class="item-list-actions">
+              <%= om_button(:plain=> true, :icon=>'delete') do %>
+                  <%= link_to 'Delete', message_path(message), :method=> :delete %>
+              <% end %>
+            </div>
+          </div>
+          <h3>
+            <% if !message.read? %>
+                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class => 'bold' %>
 
-        <h2>
-          <%= link_to truncate(message.subject, :length=>60), message_path(message) %>
-        </h2>
+            <% else %>
 
-        <div class="">
-          <%= truncate(message.subject, :length=> 160) %>
-        </div>
-        <div class="right">
+                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class => 'italic' %>
 
-    <%= om_button(:icon=>'delete') do %>
-        <%= link_to 'Delete', message_path(message), :method=> :delete, %>
+            <% end %>
+
+          </h3>
+
+          <div>
+            <%= om_button(:plain => true, :icon => 'user') do %>
+                To:  <%= link_to "#{message.to.first_name} #{message.to.last_name}", contact_path(message.to), :class => 'blue' %>
+            <% end %>
+            <%= message.created_at.strftime("%a %m/%d/%Y at %I:%M %p") %>
+            <br>
+            <%= truncate(message.body, :length=> 160) %>
+          </div>
+
+        </li>
     <% end %>
-    <%= om_button(:icon=>'mail-reply') do %>
-        <%= link_to 'IMPLEMENT !!!!  Restore', message_path(message), :method=> :delete  %>
-    <% end %>
+  </ul>
+  <%= will_paginate @messages %>
 
-
-        </div>
-
-
-      </li>
-
-  <% end %>
-</ul>
+  <div class="clear"></div>
   </div>
   <% content_for :sidebar do %>
       <%= render :partial => "layouts/sidebar_messages_menu" %>
