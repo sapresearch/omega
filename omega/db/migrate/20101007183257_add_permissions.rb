@@ -1,3 +1,5 @@
+require 'permission'
+
 class AddPermissions < ActiveRecord::Migration
   PERMISSIONS = {
     'permissions_assign_to_role' => {},

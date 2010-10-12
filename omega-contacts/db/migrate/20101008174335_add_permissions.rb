@@ -1,3 +1,5 @@
+require 'permission'
+
 class AddPermissions < ActiveRecord::Migration
   PERMISSIONS = {
     'contacts_admin' => {},

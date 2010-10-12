@@ -1,3 +1,6 @@
+require 'user'
+require 'role'
+
 class AddAdminUser < ActiveRecord::Migration
   def self.up
     User.new do |u|

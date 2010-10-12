@@ -1,3 +1,6 @@
+require 'role'
+require 'permission'
+
 class AssignDefaultPermissions < ActiveRecord::Migration
   ASSIGNMENTS = {
     'anonymous' => ['users_register'],
