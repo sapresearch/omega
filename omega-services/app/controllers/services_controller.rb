@@ -83,9 +83,14 @@ class ServicesController < ApplicationController
         params[:service][:type_attributes][:description] = params[:service][:description]
        end
 
-       if params[:save]
+       if params[:save_proceed]
 
           @current_step = session[:current_step]
+
+          @service = Service.create(params[:service])
+
+          session[:service_id] = @service.id         
+
           redirect_to service_wizard_services_url(:step => @current_step.to_i+1)
 
        end
