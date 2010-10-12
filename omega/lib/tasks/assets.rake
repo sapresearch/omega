@@ -18,7 +18,7 @@ Trams::Tasks.define do
 end
 
 Trams::Tasks.each_tram do |tram, name|
-  if ::Assets.has_assets?(tram)
+  if Omega::Assets.has_assets?(tram)
     namespace :assets do
       desc "Delete all assets from the #{name} tram."
       task :delete => :environment do
