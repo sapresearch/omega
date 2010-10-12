@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include Omega::Mixins::Controllers::Permissions
   include Omega::Mixins::Controllers::SubLayouts
 
-  include Assets::Dependencies
+  include Omega::Assets::Dependencies
   
 #  self.responder = Omega::ApplicationResponder
 
