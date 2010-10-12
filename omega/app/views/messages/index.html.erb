@@ -28,18 +28,18 @@
           </div>
           <h3>
             <% if !message.read? %>
-                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class => 'italic' %>
+                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class => 'bold' %>
 
             <% else %>
 
-                <%= link_to truncate(message.subject, :length=>60), message_path(message) %>
+                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class => 'italic' %>
 
             <% end %>
 
           </h3>
 
           <div>
-            <%= message.created_at.strftime("%m/%d/%Y at %I:%M%p") %><br>
+            <%= message.created_at.strftime("%a %m/%d/%Y at %I:%M %p") %><br>
             <%= truncate(message.body, :length=> 160) %>
           </div>
 

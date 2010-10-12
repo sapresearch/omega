@@ -26,41 +26,11 @@
         <% end %>
       </p>
   <% end %>
-  <ul id="positions_list">
+  <ul id="positions-list">
     <% @positions.each do |position| %>
-        <li class="clearfix">
-
-          <div class="position_slider">
-            <div class="position_actions">
-              <% if !current_user.is_anonymous? %>
-                  <%= om_button(:plain => true, :icon => 'delete') do %>
-                      <%= link_to 'Delete', volunteering_position_path(position), :method => :delete, :'data-tooltip' => 'Delete this position' %>
-                  <% end %>
-                  <%= om_button(:plain => true, :icon=>'edit') do %>
-                      <%= link_to 'Edit', edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>
-                  <% end %>
-                  <% if current_user.has_permission?('view_application_history') %>
-                      <%= om_button(:plain => true, :icon=>'clipboard-list ') do %>
-                          <%= link_to 'Applications', history_volunteering_position_path(position), :'data-tooltip' => 'See all the applications for this position' %>
-                      <% end %>
-                  <% end %>
-
-                  <% if position.status_of(Contact.for(current_user)) == :valid %>
-                      <%= om_button(:plain => true, :icon => 'clock') do %>
-                          <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user)), :'data-tooltip' => 'Log hours for this position') %>
-                      <% end %>
-                  <% end %>
-
-
-                  <% if position.status_of(Contact.for(current_user)) != :valid %>
-                      <%= om_button(:plain => true, :icon => 'apply') do %>
-                          <%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
-                      <% end %>
-                  <% end %>
-              <% end %>
-              <%= toggle_favorite(position) if !current_user.is_anonymous? %>
-
-            </div>
+        <li>
+          <div class="position-slider">
+            <%= render 'volunteering/positions/partials/position_actions', :position => position %>
           </div>
           <div class="position">
             <div class="position-wrapper">
@@ -83,14 +53,13 @@
               <h2>
                 <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
               </h2>
-
               <p>
                 <%= truncate(position.description, :length=> 140) %> <%= link_to '( read more ... )', volunteering_position_path(position) %>
               </p>
 
               <span>
                 <% position.skills.each do |skill| %>
-                    <span class="skill_tag">
+                    <span class="skill-tag">
 
                      <%= link_to skills_volunteering_positions_path(:skills => [params[:skills], skill.name].compact.join('+')) do %>
                             <%= skill.name %> 

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <title>THIS IS ANFIELD<%= controller.action_name %></title>
+  <title><%= "#{params[:controller] } #{controller.action_name}" %> </title>
   <% require_stylesheet 'application', 'thirdParty/jquery-ui-1.8.4.custom' %>
   <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.tipsy', 'application' %>
 

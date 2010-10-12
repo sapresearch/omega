@@ -23,7 +23,7 @@ Omega::Volunteering::Tram.routes.draw do
 
     resources :records do
       collection do
-
+        get :my_applications
         get :pending
         get :newest
         get :completed
@@ -32,6 +32,9 @@ Omega::Volunteering::Tram.routes.draw do
       end
       member do
         get :administer
+      end
+      member do
+        get :withdraw
       end
     end
     resources :time_entries

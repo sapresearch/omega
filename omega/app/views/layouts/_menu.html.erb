@@ -18,6 +18,7 @@
             <%if current_user.has_permission?("users_admin") %>
                <%= link_to "Applications", volunteering_records_path %>
             <%end%>
+            <%= link_to "My Applications", my_applications_volunteering_records_path %>
 
         <% end %>
 

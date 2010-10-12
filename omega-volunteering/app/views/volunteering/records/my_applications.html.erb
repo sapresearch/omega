@@ -5,14 +5,11 @@
 </h1>
 <div class="page-content corners-bottom">
   <ul id="records-list" class="item-list">
-  <% if @records.empty? %>
-    <h2> No Applications to Show!</h2>
-<%end%>
+    <% if @records.empty? %>
+        <h2> No Applications to Show!</h2>
+    <% end %>
     <% @records.each do |a| %>
-        <%= render 'record_row', :record => a %>
+        <%= render 'user_record_row', :record => a %>
     <% end %>
   </ul>
 </div>
-<% content_for :sidebar do %>
-    <%= render "sidebar_records" %>
-<% end %>

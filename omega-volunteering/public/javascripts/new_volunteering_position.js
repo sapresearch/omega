@@ -110,7 +110,8 @@ $(function() {
 
     });
     var contact_val = $('#volunteering_position_contact_ids').val();
-    if (contact_val != '') {
+    if (contact_val != "[]" && typeof contact_val != 'undefined' ) {
+
         var contacts = $('#volunteering_position_contact_ids').val().replace(/[\[\]']+/g, '').split(',');
         $.each(contacts, function(k, v) {
             $.ajax({
@@ -126,25 +127,35 @@ $(function() {
             });
         })
     }
+//    var sv = $('input[name=volunteering_position[skills_values]]').val();
+//
+//    $('#volunteering_position_skills_values').autoSuggest('/contacts/skills/suggest', {
+//        searchObjProps: 'name',
+//        selectedItemProp : 'name',
+//        selectedValuesProp : 'name',
+//        preFill: sv
+//    });
 
+    
 
-    $assigned_contacts.find('.delete-user').live('click', function(e) {
-        $(this).parent('li').remove();
-        update_cid_values();
+$assigned_contacts.find('.delete-user').live('click', function(e) {
+    $(this).parent('li').remove();
+    update_cid_values();
 
-    });
-    /**
-     * update #assigned_contacts hidden field with the values from the assigned contact list
-     * the corresponding contact id is stored in the dom with the $.data method
-     * on update action (add or remove) we iterate over the list items and build a string which cointains all the cids from li elements
-     */
-    function update_cid_values() {
-        var serialized_cids = '', separator = '';
-        $assigned_contacts.find('li').each(function() {
-            serialized_cids += separator + $(this).data('cid');
-            separator = ',';
-        });
-        $vp_contact_id.val(serialized_cids);
-    }
 });
+/**
+ * update #assigned_contacts hidden field with the values from the assigned contact list
+ * the corresponding contact id is stored in the dom with the $.data method
+ * on update action (add or remove) we iterate over the list items and build a string which cointains all the cids from li elements
+ */
+function update_cid_values() {
+    var serialized_cids = '', separator = '';
+    $assigned_contacts.find('li').each(function() {
+        serialized_cids += separator + $(this).data('cid');
+        separator = ',';
+    });
+    $vp_contact_id.val(serialized_cids);
+}
+})
+;
 

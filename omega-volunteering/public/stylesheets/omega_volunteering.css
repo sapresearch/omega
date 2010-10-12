@@ -29,12 +29,12 @@
 
 
 
-#positions_list li {
+#positions-list li {
     height: 166px;
     position: relative;
 }
 
-div.position_slider {
+div.position-slider {
 
     text-align: right;
     border: none;
@@ -45,13 +45,13 @@ div.position_slider {
     width: 100%;
     position: absolute;
     top: 22px;
-    background: url("../images/details_bg.png") repeat-x bottom;
+    background: url("/images/details_bg.png") repeat-x bottom;
     color: #fff;
     display: none;
 
 }
 
-div.position_actions {
+div.position-actions {
     padding: 1px 20px 0 0;
 }
 
@@ -78,19 +78,19 @@ div.position-wrapper {
     background: url("/images/position_bg.png") repeat-x bottom #f9f9f9;
 }
 
-.position_hover {
+.position-hover {
     background: #0063dc !important; /*background:#c9c9c9 !important;*/
 
 }
 
-#positions_list .position_details li {
+#positions-list .position-details li {
 
     background: none !important;
     padding: 5px;
 
 }
 
-span.skill_tag {
+span.skill-tag {
     border: 1px solid #CCCCCC;
     margin: 2px 4px;
     padding: 2px 8px;
@@ -100,39 +100,36 @@ span.skill_tag {
     background: url("/images/om_button_bg.png") repeat-x bottom;
 }
 
-span.skill_tag_active {
+span.skill-tag_active {
     background-color: #A82F5D;
     border: none;
 }
 
-.skill_tag_active a {
+.skill_tag-active a {
     color: #FFF !important;
 }
 
-.skill_tag a {
+.skill-tag a {
     letter-spacing: 0.04em;
     font-size: 0.9em;
     color: #2D302D;
 }
 
-.skill_tag a:hover {
+.skill-tag a:hover {
 
     color: #0063dc;
 }
 
-.position_list_crl {
+.position-list-crl {
     position: absolute;
     right: 0;
     top: 0;
     padding: 0.5em;
 }
 
-#position_search {
-    padding: 1em;
-    border-bottom: 4px solid #EBEBEB;
-}
 
-.position_r {
+
+.position-r {
     border-bottom: 1px solid #EBEBEB;
     background: url("../images/h1BgLight.png") repeat-x bottom #FFF;
     margin: 0.5em 0;
@@ -149,6 +146,6 @@ span.skill_tag_active {
 
 .sidebar-menu-content > div.help-explanation{
     font-style:italic;
-    color:333;
+    color:#333;
 }
 

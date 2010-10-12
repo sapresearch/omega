@@ -7,17 +7,17 @@
  */
 
 $(function() {
-    var $positions_list = document.getElementById('positions_list');
+    var $positions_list = document.getElementById('positions-list');
     $('.position', $positions_list).mouseenter(function(e) {
 
-        $(this).addClass("position_hover").siblings("div.position_slider").show().animate({ "top" : "0px"}, "fast");
+        $(this).addClass("position-hover").siblings("div.position-slider").show().animate({ "top" : "0px"}, "fast");
 
 
     });
 
     $($positions_list).find('li').mouseleave(function(e) {
         if (!$(e.currentTarget).is('.details'))
-            $(this).find('div.position').removeClass('position_hover').siblings('div.position_slider').animate({ 'top' : '22px'});
+            $(this).find('div.position').siblings('div.position-slider').animate({ 'top' : '22px'},100).end().removeClass('position-hover');
 
     });
 

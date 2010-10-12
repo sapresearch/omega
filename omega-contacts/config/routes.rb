@@ -3,7 +3,11 @@ Omega::Contacts::Tram.routes.draw do
     resources :groups
     resources :households
     resources :organizations
-    resources :skills
+    resources :skills do
+      collection do
+        get :suggest
+      end
+    end
     resources :interests
     resources :imports do
       collection do

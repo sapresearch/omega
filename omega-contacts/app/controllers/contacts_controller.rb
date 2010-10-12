@@ -4,12 +4,12 @@ class ContactsController < ApplicationController
   crud_helper Contact, :all => [:all]
 
   contact_is_self = lambda { @contact.user == current_user }
-  require_permission Contact::PERM_VIEW, :except => [:show, :edit]
-  require_permission Contact::PERM_VIEW, :only => [:show, :edit], :unless => contact_is_self
-  require_permission Contact::PERM_VIEW_SELF, :only => [:show, :edit], :if     => contact_is_self
-  require_permission Contact::PERM_ADMIN, :only => [:new, :create, :destroy]
-  require_permission Contact::PERM_ADMIN, :only => [:edit, :update], :unless => contact_is_self
-  require_permission Contact::PERM_EDIT_SELF, :only => [:edit, :update], :if     => contact_is_self
+#  require_permission Contact::PERM_VIEW, :except => [:show, :edit]
+#  require_permission Contact::PERM_VIEW, :only => [:show, :edit], :unless => contact_is_self
+#  require_permission Contact::PERM_VIEW_SELF, :only => [:show, :edit], :if     => contact_is_self
+#  require_permission Contact::PERM_ADMIN, :only => [:new, :create, :destroy]
+#  require_permission Contact::PERM_ADMIN, :only => [:edit, :update], :unless => contact_is_self
+#  require_permission Contact::PERM_EDIT_SELF, :only => [:edit, :update], :if     => contact_is_self
 
   breadcrumb 'Contacts' => :contacts
 

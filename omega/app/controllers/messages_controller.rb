@@ -5,13 +5,14 @@ class MessagesController < ApplicationController
 
   breadcrumb 'Messages' => :messages
 
-  before_filter :_get_messages, :sort,      :only => [:index]
-  before_filter :_get_sent_messages,        :only => [:sent]
-  before_filter :_get_message,              :only => [:show, :update, :destroy]
-  before_filter :_get_original_message,     :only => [:reply, :forward]
-  before_filter :_new_message,              :only => [:new]
+  before_filter :_get_messages, :sort, :only => [:index]
+  before_filter :_get_sent_messages, :only => [:sent]
+  before_filter :_get_message, :only => [:show, :update, :destroy]
+  before_filter :_get_original_message, :only => [:reply, :forward]
+  before_filter :_new_message, :only => [:new]
 
   def index
+
     respond_with(@messages)
   end
 
@@ -77,35 +78,39 @@ class MessagesController < ApplicationController
 
   def sort
     params.each do |attr, direction|
-      next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
-      @messages = @messages.order("#{attr} #{direction}")
+      if !params.empty?
+        next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
+        @messages = @messages.order("#{attr} #{direction}")
+      else
+        @messages = @messages.all(:order => 'created_at desc')
+      end
     end
   end
 
 
   private
-    def _get_messages
-      @messages = current_user.messages
-      breadcrumb "Inbox" => messages_path
-    end
+  def _get_messages
+    @messages = current_user.messages
+    breadcrumb "Inbox" => messages_path
+  end
 
-    def _get_sent_messages
-      @messages = current_user.sent_messages
-      breadcrumb "Sent" => sent_messages_path
-    end
+  def _get_sent_messages
+    @messages = current_user.sent_messages
+    breadcrumb "Sent" => sent_messages_path
+  end
 
-    def _get_message
-      @message = Message.find(params[:id])
-      breadcrumb "#{@message.subject}" => message_path(@message)
-    end
+  def _get_message
+    @message = Message.find(params[:id])
+    breadcrumb "#{@message.subject}" => message_path(@message)
+  end
 
-    def _get_original_message
-      @original_message = Message.find(params[:id])
-      breadcrumb "#{@original_message.subject}" => message_path(@original_message)
-    end
+  def _get_original_message
+    @original_message = Message.find(params[:id])
+    breadcrumb "#{@original_message.subject}" => message_path(@original_message)
+  end
 
-    def _new_message
-      @message = Message.new
-      breadcrumb "New" => new_message_path
-    end
+  def _new_message
+    @message = Message.new
+    breadcrumb "New" => new_message_path
+  end
 end
