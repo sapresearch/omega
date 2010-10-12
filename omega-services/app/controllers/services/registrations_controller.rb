@@ -36,9 +36,7 @@ class Services::RegistrationsController < ApplicationController
      @registration = Service::Registration.new
 
      @registration.fieldvalues.build
-     @registration.build_contact.phone_numbers.build
-
-     @registration.contact = Contact.for(current_user)
+     @registration.build_contact unless @registration.contact = Contact.for(current_user)
 
      respond_with(@registration)
 
