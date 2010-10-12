@@ -6,7 +6,8 @@ class Service::Field < ActiveRecord::Base
     
     validates_presence_of :field_name, :field_type
 
-   accepts_nested_attributes_for :detail
+
+    accepts_nested_attributes_for :detail
   
 end
 

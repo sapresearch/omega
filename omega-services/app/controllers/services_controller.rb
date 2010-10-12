@@ -34,20 +34,20 @@ class ServicesController < ApplicationController
 
      def service_wizard
 
+       # --- Reset the Service Id Variable in the Session should the "introduction" step be approached
        if (params[:step].eql?("introduction"))
          session[:service_id] = nil
        end
 
-       unless params[:id].nil?
-         session[:service_id] = params[:id]
-       end
+       #---------------------------
 
-       @services = get_services_list
+       @services = get_services_list  # Populates the List of Service Types Existing in the Library
 
-       @service = Service.find_by_id(session[:service_id])
+       @service = Service.find_by_id(session[:service_id])  # Retrieve the Service Object to work on in the Wizard 
 
        session[:current_step] = params[:step]
-       @current_service = session[:service_id]
+
+       # ------------ Retrieve the Registration and Service Detail Fields in Step 2,3 and 4 -----------
 
        unless @service.nil?
 
@@ -58,6 +58,8 @@ class ServicesController < ApplicationController
          session[:service_id] = @service.id
 
        end
+
+       # ------------------------------------------
 
        case params[:step]
 
@@ -71,11 +73,11 @@ class ServicesController < ApplicationController
             render "services/step_4"
        end
 
-
      end
  
      def create
-       
+
+       # ---- Create a Service Type and Create a Service of that Type --------------------------
        unless params[:service][:type_attributes].nil?
         params[:service][:type_attributes][:service_type] = params[:service][:service_type]
         params[:service][:type_attributes][:service_category] = params[:service][:service_category]
@@ -83,32 +85,31 @@ class ServicesController < ApplicationController
         params[:service][:type_attributes][:description] = params[:service][:description]
        end
 
-       if params[:save_proceed]
+       #------------------------------------------------------
+
+       if params[:save_proceed]  # Creates the Service and Proceeds to Next Step in the Wizard
 
           @current_step = session[:current_step]
 
-          @service = Service.create(params[:service])
+          #--------- Delete a service currently working on in the wizard if user should choose to create a new service ---------
 
-          session[:service_id] = @service.id         
-
-          redirect_to service_wizard_services_url(:step => @current_step.to_i+1)
-
-       end
-
-       if params[:next]
-
-          @current_step = session[:current_step]
           @incomplete_service = Service.find_by_id(session[:service_id])
 
           unless @incomplete_service.nil?
               @incomplete_service.destroy
           end
 
+          #-------------------------------
+
           @service = Service.create(params[:service])
+
+          # --------------- Assign the Service Id to the Detail Nested Attribute --------------
 
           @service.fields.each do |f|
             f.detail.service_id = @service.id
           end
+
+          #--------------------
 
           @service.save
 
@@ -120,7 +121,7 @@ class ServicesController < ApplicationController
        
      end
 
-     def modify_service
+     def modify_service  # Edit Action
 
        @service = Service.find(params[:id])
 
@@ -138,30 +139,34 @@ class ServicesController < ApplicationController
       @service = Service.find_by_id(session[:service_id])
       @service.update_attributes(params[:service])
 
+      # build the nested fields ----------
+
       unless params[:fields].nil?
         params[:fields].each_value { |field| @service.fields.build(field)
       }
       end
 
+      #-----------------
+
       @current_step = session[:current_step]
 
-      if params[:save]
+      if params[:save]  # Update the object in the wizard and remain on the current step
 
           @service.save
+
           session[:service_id] = @service.id
           redirect_to service_wizard_services_url(:step => @current_step)
 
       end
 
-      if params[:next]
+      if params[:next] # Proceed to next step in the wizard
 
          session[:service_id] = @service.id
          redirect_to service_wizard_services_url(:step => @current_step.to_i+1)
 
       end
 
-
-      if params[:update]
+      if params[:update]  # Update after an edit action
 
           @service.save
           respond_with(@service)
@@ -170,7 +175,7 @@ class ServicesController < ApplicationController
 
      end
 
-     def finalize
+     def finalize  # Publish the Service
 
        @service = Service.find(params[:id])
        @service.update_attributes(:published => '1')
@@ -178,35 +183,42 @@ class ServicesController < ApplicationController
 
      end
 
-     def type_def
+     def type_def  # Define a new Service Type and Create a New Service of that Type
 
        @service = Service.new
+
        @service.build_type
        render :partial => 'service_without_type'
 
      end
 
-     def get_type
+     def get_type  # Retrieve An Existing Service Type and Create a New Service of that Type
 
        @typed_service = Service::Type.find_by_service_type(params[:service_type])
 
        @service = Service.new
+       @fields = Service::Typefield.all
+
+       # build nested fields for the service and further nested detail for each field -----------
        @service.fields.build do |f|
            f.build_detail
         end if @service.fields.empty?
 
+       # ------------------------
+
+       # If no Icon uploaded, use the default -----------------
        if @typed_service.icon_file_name.nil?
           @typed_service.icon_file_name    = "missing.png"
           @typed_service.icon_content_type = "image/png"
        end
-      
-       @fields = Service::Typefield.all
+
+       # ------------------------
 
        render :partial => 'create_service_form'
 
      end
 
-     def add_service_field
+     def add_service_field   # Adds a Service Detail Field to an Existing Service
 
        @service = Service.find_by_id(session[:service_id])
 
@@ -215,7 +227,7 @@ class ServicesController < ApplicationController
 
      end
 
-     def add_registration_field
+     def add_registration_field # Adds a Service Registration Field to an Existing Service
 
        @field = Service::Field.new
 
@@ -225,6 +237,7 @@ class ServicesController < ApplicationController
 
        @service = Service.find(params[:id])
        @service.destroy
+
        redirect_to services_url
        
      end
@@ -232,7 +245,8 @@ class ServicesController < ApplicationController
   #--------------------------------------------------------------------------------------------------
      private
   
-     def get_services_list
+     def get_services_list  # Retrieves All Service Types in the Library
+
         Service::Type.all.collect {|s| [s.service_type, s.service_type]}
      end
 end
