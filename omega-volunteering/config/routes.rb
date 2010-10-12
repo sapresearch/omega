@@ -13,9 +13,7 @@ Omega::Volunteering::Tram.routes.draw do
         resources :interests, :only => [:index, :edit, :update, :destroy]
 
       end
-      member do
-        get :history
-      end
+
     end
 
     resources :schedules
@@ -35,6 +33,9 @@ Omega::Volunteering::Tram.routes.draw do
       end
       member do
         get :withdraw
+      end
+      member do
+        get :history
       end
     end
     resources :time_entries

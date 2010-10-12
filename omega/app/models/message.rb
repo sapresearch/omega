@@ -1,4 +1,7 @@
 class Message < Omega::Model
+
+  MAX_MESSAGES_PER_PAGE = 10
+
   PERM_ADMIN = 'messages_admin'
   PERM_SEND  = 'messages_send'
   PERM_VIEW  = 'messages_view'
@@ -8,6 +11,7 @@ class Message < Omega::Model
 
   scope :read, where('read_at <= ?', Time.now)
   scope :unread, where('read_at > ?', Time.now)
+  default_scope order('created_at desc')
 
   validates :subject, :presence  => true,
                       :length    => 3..255,

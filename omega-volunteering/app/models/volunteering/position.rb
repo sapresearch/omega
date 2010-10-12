@@ -1,12 +1,12 @@
 class Volunteering::Position < Omega::Model
 
-  MAX_POSITIONS_PER_PAGE = 4
+  MAX_POSITIONS_PER_PAGE = 5
 
   has_many :contact_positions
   has_many :contacts, :through => :contact_positions
 
 #  belongs_to :contact
-  has_many :records
+  has_many :records, :dependent => :destroy
   has_one :schedule
   
   has_and_belongs_to_many :skills,    :class_name => '::Contact::Skill',
