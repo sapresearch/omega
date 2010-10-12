@@ -1,7 +1,12 @@
-require 'role'
-require 'permission'
-
 class AssignDefaultPermissions < ActiveRecord::Migration
+  class Permission < ActiveRecord::Base
+
+  end
+
+  class Role < ActiveRecord::Base
+    has_and_belongs_to_many :permissions
+  end
+
   ASSIGNMENTS = {
 #    'anonymous' => [],
     'authenticated_user' => ['contacts_edit_self', 'contacts_view', 'contacts_view_self'],

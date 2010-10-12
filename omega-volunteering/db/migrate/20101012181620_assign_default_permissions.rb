@@ -1,7 +1,12 @@
-require 'role'
-require 'permission'
-
 class AssignDefaultPermissions < ActiveRecord::Migration
+  class Permission < ActiveRecord::Base
+
+  end
+
+  class Role < ActiveRecord::Base
+    has_and_belongs_to_many :permissions
+  end
+
   ASSIGNMENTS = {
     'anonymous' => ['volunteering_view'],
     'authenticated_user' => ['volunteering_apply', 'volunteering_record_own_hours', 'volunteering_view'],

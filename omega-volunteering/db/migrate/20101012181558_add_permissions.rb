@@ -1,6 +1,8 @@
-require 'permission'
-
 class AddPermissions < ActiveRecord::Migration
+  class Permission < ActiveRecord::Base
+
+  end
+
   PERMISSIONS = {
     'volunteering_admin' => {},
     'volunteering_apply' => {},
