@@ -1,5 +1,5 @@
 $('#contacts_contact_pane').empty().append('<%= escape_javascript(render('show')) %>');
-
+$('#contact-assignment').dialog('close')
 var contacts = <%= @contact_group.contacts.to_json.html_safe %>;
 
 update_contacts(contacts, <%= @contact_group.id %>, "<%= @contact_group.name %>");

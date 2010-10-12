@@ -1,5 +1,6 @@
-//$('#contacts_group_pane').empty().append('<%#= escape_javascript(render('all.html')) %>');
-
 var contacts = <%= @contacts.to_json.html_safe %>;
 
-update_contacts(contacts);
+    /**
+     * invoke update contacts in omega_contacts.js to update the conact list
+     */
+        update_contacts(contacts);

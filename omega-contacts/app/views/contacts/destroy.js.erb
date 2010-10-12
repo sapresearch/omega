@@ -1,2 +1,7 @@
-$('#contact_' + '<%= @contact.id %>' ).remove();
-$('#contacts_contact_pane').empty().append('<div class="cmd_success"><span class="left ui_icon icon-tick "></span>Successfully deleted <%= "#{@contact.first_name} #{@contact.last_name }"%></div>')        
+    /**
+     * destroy the contact
+     * remocve it from dom
+     * show success msg
+     */
+            $('#contact_' + '<%= @contact.id %>').remove();
+            $('#contacts_contact_pane').empty().append('<div class="cmd_success"><span class="left ui_icon icon-tick "></span>Successfully deleted <%= "#{@contact.first_name} #{@contact.last_name }"%></div>')

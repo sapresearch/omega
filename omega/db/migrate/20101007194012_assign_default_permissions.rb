@@ -3,19 +3,18 @@ class AssignDefaultPermissions < ActiveRecord::Migration
     'anonymous' => ['users_register'],
     'authenticated_user' => ['users_change_own_username', 'users_register', 'users_view',
                              'messages_send', 'messages_view'],
-    'editor' => :all,
-    'administrator' => :all
+    'editor' => ['permissions_assign_to_role', 'permissions_view', 'roles_admin', 'roles_view', 'users_admin',
+                 'users_assign_to_role', 'users_change_own_username', 'users_register', 'users_view', 'sessions_admin',
+                 'sessions_view', 'messages_admin', 'messages_send', 'messages_view'],
+    'administrator' => ['permissions_assign_to_role', 'permissions_view', 'roles_admin', 'roles_view', 'users_admin',
+                        'users_assign_to_role', 'users_change_own_username', 'users_register', 'users_view',
+                        'sessions_admin', 'sessions_view', 'messages_admin', 'messages_send', 'messages_view']
   }
 
   def self.up
     ASSIGNMENTS.each do |role, permissions|
       role = Role.find_by_internal_name(role)
-      case permissions
-        when :all
-          role.permissions << Permission.all
-        when Array
-          role.permissions << Permission.where('value IN (?)', permissions)
-      end
+      role.permissions << Permission.where('value IN (?)', permissions)
       role.save!
     end
   end
@@ -23,12 +22,7 @@ class AssignDefaultPermissions < ActiveRecord::Migration
   def self.down
     ASSIGNMENTS.each do |role, permissions|
       role = Role.find_by_internal_name(role)
-      case permissions
-        when :all
-          # TODO
-        when Array
-          # TODO
-      end
+      # TODO
       role.save!
     end
   end

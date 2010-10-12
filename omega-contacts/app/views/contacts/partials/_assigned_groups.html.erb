@@ -1,3 +1,7 @@
 <% @contact.groups.each do |g| %>
-     <li><%= g.name %> <%= link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-shuffle" data-tooltip="remove this contact from: #{g.name} "></span>}.html_safe, remove_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %></li> 
- <% end %>
+    <li>
+      <%= link_to remove_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true do %>
+      <span class="om-icon-only om-blue-icon ui-icon-minus" data-tooltip="remove <%= "#{@contact.first_name} #{@contact.last_name}"  %>  from: <%= g.name %>"></span>
+      <% end %><%= g.name %>
+    </li>
+<% end %>

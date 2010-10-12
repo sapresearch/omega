@@ -4,22 +4,6 @@
   <%= om_button(:icon=>'user-edit') do %>
       <%= link_to 'edit', edit_contact_path(@contact), :remote => true %>
   <% end %>
-
-  <dl id="contact_assign" class="drop_down">
-    <dt><a href="#" class="corners"><span>Assign this contact</span></a></dt>
-    <dd>
-      <ul class="corners">
-        <div>
-          <li>Assign</li>
-          <% Contact::Group.without_contact(@contact).each do |g| %>
-              <li>
-                <%= link_to g.name, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
-              </li>
-          <% end %>
-        </div>
-      </ul>
-    </dd>
-  </dl>
 </div>
 
 <h2 class="absolute">
@@ -38,38 +22,30 @@ Email: <%= @contact.email %><br>
       <h3><a href="#">Group Assignments</a></h3>
 
       <div>
-        <ul id="assigned_groups">
+        <ul class="assigned-groups">
           <%= render :partial => 'contacts/partials/assigned_groups' %>
         </ul>
+        <a href="#" id="assign-trigger">
+          <span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Assign this contact"></span>Assign
+          <%= @contact.first_name %> <%= @contact.last_name %> to desired groups
+        </a>
+
       </div>
   <% end %>
-    <% if @contact.skills.any? or @contact.interests.any? %>
+  <% if @contact.skills.any? or @contact.interests.any? %>
       <h3><a href="#">Skills and Interests </a></h3>
 
       <div>
-        <% if @contact.skills.any? %>
-          <h4>Skills</h4>
-            <ul>
-              <% @contact.skills.each do |skill| %>
-                  <li> <%= skill.name %> </li>
-              <% end %>
-            </ul>
-        <% end %>
-        <% if @contact.interests.any? %>
-           <h4>Interests</h4> 
-            <ul>
-              <% @contact.interests.each do |interest| %>
-                  <li> <%= interest.name %> </li>
-              <% end %>
-            </ul>
-        <% end %>
+        <%= render :partial => 'contacts/partials/skills_and_interests' %>
+        
       </div>
   <% end %>
-  <% if @contact.addresses.any? then
-         @contact.addresses.each do |address| %>
-          <h3><a href="#"> <%= address.city.capitalize %></a></h3>
+  <% if @contact.addresses.any? %>
+      <h3><a href="#"> Addresses</a></h3>
 
-          <div>
+      <div>
+        <% @contact.addresses.each do |address| %>
+
             City:
             <%= address.city.capitalize %>
             <br>
@@ -78,22 +54,61 @@ Email: <%= @contact.email %><br>
             <br>
             Postal Code:
             <%= address.zip_code %>
-          </div>
-      <% end %>
+            <br>
+            <br>
+
+        <% end %>
+      </div>
   <% end %>
-  <% @contact.phone_numbers.each do |phone| %>
-      <h3><a href="#">Phone Number <%= phone.number_type %></a></h3>
+  <% if @contact.phone_numbers.any? %>
+      <h3><a href="#">Phone Numbers</a></h3>
 
       <div>
-        Number (<%= phone.number_type %>):
-        <%= phone.number %>
-      </div>
+        <% @contact.phone_numbers.each do |phone| %>
+
+            Number (<%= phone.number_type %>):
+            <%= phone.number %>
+            <br>
+            <br>
+
+        <% end %>
+        </div>
   <% end %>
 </div>
 <div>
 
 
 </div>
+<div id="contact-assignment">
+  <table class="width-100">
+    <tr>
+      <th class="text-left width-50">
+        Available Groups
+      </th>
+      <th class="text-left width-50">
+        Currently Assigned to
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <ul class="group-list">
+
+
+          <% Contact::Group.without_contact(@contact).each do |g| %>
+              <li> <%= link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add  #{@contact.first_name} #{@contact.last_name} to: #{g.name} "></span>}.html_safe, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %><%= g.name %></li>
+          <% end %>
+
+        </ul>
+      </td>
+      <td>
+        <ul class="assigned-groups group-list">
+          <%= render :partial => 'contacts/partials/assigned_groups' %>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</div>
+
 <%= javascript_tag do %>
     $("#contact_accordion").accordion();
 <% end %>

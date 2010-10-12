@@ -17,6 +17,7 @@ $(function() {
     });
 
 
+    // selector caching
     var $recurrent = $('input[name=volunteering_position[recurrence]]');
     var $scheduler = $('#scheduler');
     var $vp_contact = $('#vp_contact');
@@ -34,7 +35,6 @@ $(function() {
 
     });
     $('#create_new_contact').change(function() {
-
         if ($(this).is(':checked')) {
             $('#position_exisiting_contact').hide();
             $('#new_contact').show();
@@ -109,6 +109,10 @@ $(function() {
         }
 
     });
+
+    /**
+     * when the form gets displayed again because  of errors we have to make sure that we restore the state as it was before
+     */
     var contact_val = $('#volunteering_position_contact_ids').val();
     if (contact_val != "[]" && typeof contact_val != 'undefined' ) {
 
@@ -120,23 +124,13 @@ $(function() {
                 dataType : 'json',
                 success: function(data) {
                     $('<li />').append(data.first_name + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', data.id);
-
                     return false;
                 }
 
             });
         })
     }
-//    var sv = $('input[name=volunteering_position[skills_values]]').val();
-//
-//    $('#volunteering_position_skills_values').autoSuggest('/contacts/skills/suggest', {
-//        searchObjProps: 'name',
-//        selectedItemProp : 'name',
-//        selectedValuesProp : 'name',
-//        preFill: sv
-//    });
 
-    
 
 $assigned_contacts.find('.delete-user').live('click', function(e) {
     $(this).parent('li').remove();
