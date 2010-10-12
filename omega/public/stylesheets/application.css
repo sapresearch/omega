@@ -220,7 +220,9 @@ table.om-table {
     font-size: 1em;
     border-collapse: collapse;
 }
-
+table.om-table th {
+    color:#fff;
+}
 .om-table tr {
     height: 20px;
 }

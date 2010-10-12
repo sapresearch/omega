@@ -7,7 +7,7 @@
           <%= link_to 'Edit', edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>
       <% end %>
       <%= om_button(:plain => true, :icon=>'clipboard-list ') do %>
-          <%= link_to 'Applications', history_volunteering_position_path(position), :'data-tooltip' => 'See all the applications for this position' %>
+          <%= link_to 'Applications', history_volunteering_record_path(position), :'data-tooltip' => 'See all the applications for this position' %>
       <% end %>
   <% end %>
   <% if !current_user.is_anonymous? %>

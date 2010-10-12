@@ -17,11 +17,11 @@
   <% if @timesheets.empty? %>
       <br/>
       <strong>You Don't Have Any Time Sheets Yet!</strong><br/><br/>
-      <p>
+
+  <% else %>
+<p>
         <%= link_to 'Record Hours Now!', my_positions_volunteering_positions_path %>
       </p>
-  <% else %>
-
       <% @timesheets.each do |timesheet| %>
           <div id="timesheet">
             <% timesheet.each do |t| %>
