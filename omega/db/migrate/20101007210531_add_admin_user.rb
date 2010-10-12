@@ -1,9 +1,9 @@
 class AddAdminUser < ActiveRecord::Migration
-  class Role < ActiveRecord::Record
+  class Role < ActiveRecord::Base
 
   end
 
-  class User < ActiveRecord::Record
+  class User < ActiveRecord::Base
     has_and_belongs_to_many :roles
   end
 

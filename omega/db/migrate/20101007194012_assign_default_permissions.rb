@@ -1,9 +1,9 @@
 class AssignDefaultPermissions < ActiveRecord::Migration
-  class Permission < ActiveRecord::Record
+  class Permission < ActiveRecord::Base
 
   end
 
-  class Role < ActiveRecord::Record
+  class Role < ActiveRecord::Base
     has_and_belongs_to :permissions
   end
 

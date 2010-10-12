@@ -1,5 +1,5 @@
 class AddPermissions < ActiveRecord::Migration
-  class Permission < ActiveRecord::Record
+  class Permission < ActiveRecord::Base
 
   end
 

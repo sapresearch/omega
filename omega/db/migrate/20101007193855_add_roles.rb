@@ -1,5 +1,5 @@
 class AddRoles < ActiveRecord::Migration
-  class Role < ActiveRecord::Record
+  class Role < ActiveRecord::Base
 
   end
 
