@@ -166,7 +166,6 @@ class ServicesController < ApplicationController
 
       end
 
-
       if params[:update]  # Update after an edit action
 
           @service.save
