@@ -3,9 +3,9 @@ VERSION:2.0
 <% @events.each do |event| %>
 BEGIN:VEVENT
 UID:<%= event.id %>
-DTSTAMP:<%= event.created_at.try(:to_s, :icalendar) %>
-DTSTART:<%= event.start.try(:to_s, :icalendar) %>
-DTEND:<%= event.end.try(:to_s, :icalendar) %>
+DTSTAMP:<%= event.created_at.try(:utc).try(:to_s, :icalendar) %>
+DTSTART:<%= event.start.try(:utc).try(:to_s, :icalendar) %>
+DTEND:<%= event.end.try(:utc).try(:to_s, :icalendar) %>
 SUMMARY:<%= event.title %>
 DESCRIPTION:<%= event.event_description %>
 URL:<%= event.url %>

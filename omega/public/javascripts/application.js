@@ -35,10 +35,7 @@ $.fn.tipsy.defaults = {
 
 /* dom ready! here we go */
 
-$(function() {
-
-    /* jquery fix for empty string or empty return data handling  e.g. http status 200 without responsetext after xhr */
-
+jQuery(function($) {
     jQuery.ajaxSetup({ dataFilter: function(data, type) {
         return (!data || jQuery.trim(data) == '') ? '{}' : data;
     } });
@@ -207,7 +204,7 @@ $(function() {
 
     /* Applicationwide - tooltip */
     $('span[data-tooltip]').tipsy({live:true});
-    $('a[data-tooltip]').tipsy({live:true});
+    $('a[data-tooltip]').tipsy();
     $('form').find('input[data-tooltip],textarea[data-tooltip] ').tipsy({gravity: 'w',
         trigger : 'focus'
     });
@@ -282,13 +279,52 @@ $(function() {
         $(".drop_down dd ul").hide();
 
     });
+
+
     $(document).bind('click', function(e) {
         var $clicked = $(e.target);
         if (! $clicked.parents().hasClass("drop_down"))
             $(".drop_down dd ul").hide();
     });
 
+	var uploadifyScriptData = {};
+	uploadifyScriptData['uploadify'] = true;
+	uploadifyScriptData[csrf_param]  = csrf_token;
 
+	$('input[type=file]').each(function() {
+		var input = $(this);
+
+		var id   = input.attr('id'),
+			name = input.attr('name');
+
+		input.attr('name', null);
+
+		var newInput = $(document.createElement('input'))
+		                  .attr('id', id + '_upload')
+		                  .attr('name', name)
+		                  .attr('disabled', 'true')
+		                  .css('display', 'none');
+
+		input.uploadify({
+			auto: true,
+			uploader: '/uploadify/uploadify.swf',
+			script: '/uploads.json',
+			cancelImg: '/uploadify/cancel.png',
+			buttonText: 'Upload',
+			scriptData: uploadifyScriptData,
+			onComplete: function(event, queue, file, response, data) {
+				var result = $.parseJSON(response);
+				var upload = result.upload;
+				newInput.val(upload.id + ' - ' + upload.filename);
+				newInput.show();
+			},
+			onError: function(event, queue, file, error) {
+				alert("onError");
+			}
+		});
+
+		input.after(newInput);
+	});
 });
 
 

@@ -4,7 +4,7 @@ module Omega
       config.omega.volunteering = ActiveSupport::OrderedOptions.new
 
       initializer :'omega.volunteering.add_favorite_paths' do
-        Trams::Favorites::Paths['Volunteering::Position'] = :volunteering_position_path
+        Favorite::Paths['Volunteering::Position'] = :volunteering_position_path
       end
     end
   end
