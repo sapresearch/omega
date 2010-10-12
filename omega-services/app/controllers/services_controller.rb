@@ -14,7 +14,6 @@ class ServicesController < ApplicationController
      def show
 
        @service = Service.find(params[:id])
-       @fields = Service::Field.all
        respond_with(@service)
 
      end
@@ -35,6 +34,7 @@ class ServicesController < ApplicationController
      def service_wizard
 
        # --- Reset the Service Id Variable in the Session should the "introduction" step be approached
+
        if (params[:step].eql?("introduction"))
          session[:service_id] = nil
        end
@@ -188,6 +188,7 @@ class ServicesController < ApplicationController
        @service = Service.new
 
        @service.build_type
+       
        render :partial => 'service_without_type'
 
      end
@@ -203,14 +204,6 @@ class ServicesController < ApplicationController
        @service.fields.build do |f|
            f.build_detail
         end if @service.fields.empty?
-
-       # ------------------------
-
-       # If no Icon uploaded, use the default -----------------
-       if @typed_service.icon_file_name.nil?
-          @typed_service.icon_file_name    = "missing.png"
-          @typed_service.icon_content_type = "image/png"
-       end
 
        # ------------------------
 
@@ -249,4 +242,5 @@ class ServicesController < ApplicationController
 
         Service::Type.all.collect {|s| [s.service_type, s.service_type]}
      end
+
 end
