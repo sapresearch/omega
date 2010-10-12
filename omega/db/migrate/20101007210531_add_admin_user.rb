@@ -1,3 +1,5 @@
+require 'digest/sha2'
+
 class AddAdminUser < ActiveRecord::Migration
   class Role < ActiveRecord::Base
 
@@ -10,7 +12,8 @@ class AddAdminUser < ActiveRecord::Migration
   def self.up
     User.new do |u|
       u.username = 'admin'
-      u.password = 'admin'
+      u.password_salt = 128.times.inject('') { |salt,| salt << rand(93) + 33 }
+      u.password_hash = Digest::SHA512.hexdigest('admin' + u.password_salt)
       u.roles << Role.find_by_internal_name('administrator')
     end.save(:validate => false)
   end
