@@ -1,4 +1,4 @@
-Omega::Tram.routes.draw do
+Omega::Module.routes.draw do
   resources :favorites, :only => [:index, :show] do
     collection do
       match :add,    :path => 'add/*klass/:id',    :as => 'add_to'

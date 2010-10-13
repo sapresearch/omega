@@ -1,4 +1,4 @@
 # autorequired file by rubygems/bundler
 
-require 'omega/groups/tram'
+require 'omega/groups/module'
 

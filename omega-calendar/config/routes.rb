@@ -1,4 +1,4 @@
-Omega::Calendar::Tram.routes.draw do
+Omega::Calendar::Module.routes.draw do
 
   #match 'calendars' => 'calendars#index'
 

@@ -1,4 +1,4 @@
-Omega::Services::Tram.routes.draw do
+Omega::Services::Module.routes.draw do
 
   scope :path => 'services', :name_prefix => 'service', :module => 'services' do
     resources :fields

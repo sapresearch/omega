@@ -1,31 +1,31 @@
 module Omega
   module Assets
     class << self
-      def has_assets?(tram)
-        File.exists?(tram.paths.public.first)
+      def has_assets?(mod)
+        File.exists?(mod.paths.public.first)
       end
 
-      def delete(trams)
-        options = trams.extract_options!
-        trams = _normalize_trams(trams)
+      def delete(mods)
+        options = modules.extract_options!
+        mods = _normalize_modules(mods)
 
-        trams.each do |t|
-          next unless File.exists?(path = t.paths.public.first)
+        mods.each do |mod|
+          next unless File.exists?(path = mod.paths.public.first)
           delete_public(path)
         end
       end
 
-      def refresh!(*trams)
-        options = trams.extract_options!
-        refresh(*(trams << options.merge(:force => true)))
+      def refresh!(*mods)
+        options = mods.extract_options!
+        refresh(*(mods << options.merge(:force => true)))
       end
 
-      def refresh(*trams)
-        options = trams.extract_options!
-        trams = _normalize_trams(trams)
+      def refresh(*mods)
+        options = mods.extract_options!
+        mods = _normalize_modules(mods)
 
-        trams.each do |t|
-          next unless File.exists?(path = t.paths.public.first)
+        mods.each do |mod|
+          next unless File.exists?(path = mod.paths.public.first)
 
           block = options[:force] ? nil :
                                     lambda { |s, d| not File.exists?(d) or File.mtime(s) > File.mtime(d) }
@@ -35,15 +35,13 @@ module Omega
       end
 
       private
-        def _normalize_trams(trams)
-          case trams
+        def _normalize_modules(mods)
+          case mods
             when []
-              trams = Trams::Base.subclasses
-            when Trams::Base
-              trams = Array.wrap(trams)
+              Omega::Module::Base.subclasses
+            when Omega::Module::Base
+              Array.wrap(mods)
           end
-
-          trams
         end
 
         def copy_public(source, destination = Rails.application.paths.public.first, &block)

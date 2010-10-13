@@ -1,3 +1,3 @@
 # autorequired file by rubygems/bundler
 
-require 'omega/services/tram'
+require 'omega/services/module'

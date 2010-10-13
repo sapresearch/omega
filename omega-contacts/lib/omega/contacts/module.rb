@@ -1,6 +1,6 @@
 module Omega
   module Contacts
-    class Tram < Trams::Base
+    class Module < Omega::Module::Base
       config.omega.contacts = ActiveSupport::OrderedOptions.new
       
       observer :'contact/user_observer'
