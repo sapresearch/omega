@@ -1,9 +1,4 @@
 require 'trams'
-require 'trams/assets/tram'
-require 'trams/custom_fields/tram'
-require 'trams/favorites/tram'
-require 'trams/logs/tram'
-require 'trams/migrations/tram'
 
 require 'accepts_flattened_values'
 require 'will_paginate'
@@ -28,6 +23,17 @@ module Omega
       ActiveSupport.on_load(:action_view) do
         # Override the default error message layout
         ActionView::Base.field_error_proc = Proc.new { |html_tag, instance| %Q{<span class="fieldWithErrors">#{html_tag}</span>}.html_safe }
+      end
+    end
+
+    config.omega.assets = ActiveSupport::OrderedOptions.new
+    config.omega.assets.use_dependencies = true
+
+    initializer :'omega.assets.middleware' do |app|
+      if Rails.env == 'development'
+        app.config.middleware.insert(0, Assets::Refresher, config.omega.assets)
+      else
+        Assets.refresh
       end
     end
   end

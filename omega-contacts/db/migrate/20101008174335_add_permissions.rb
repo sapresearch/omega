@@ -1,4 +1,8 @@
 class AddPermissions < ActiveRecord::Migration
+  class Permission < ActiveRecord::Base
+
+  end
+
   PERMISSIONS = {
     'contacts_admin' => {},
     'contacts_edit_self' => {},

@@ -119,7 +119,7 @@ class Volunteering::RecordsController < ApplicationController
     @record = Volunteering::Record.find(params[:id])
     @record.update_attributes(:status => 'withdrawn')
     
-    render :my_applications
+    redirect_to my_applications_volunteering_records_url
   end
 
   def destroy

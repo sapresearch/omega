@@ -1,0 +1,34 @@
+<table width="100%">
+<tr>
+  <th class="text-left">
+    Skills
+  </th>
+  <th class="text-left">
+    Interests
+  </th>
+</tr>
+  <tr>
+    <td>
+      <% if @contact.skills.any? %>
+
+    <ul>
+      <% @contact.skills.each do |skill| %>
+          <li> <%= skill.name %> </li>
+      <% end %>
+    </ul>
+<% end %>
+    </td>
+    <td>
+      <% if @contact.interests.any? %>
+
+    <ul>
+      <% @contact.interests.each do |interest| %>
+          <li> <%= interest.name %> </li>
+      <% end %>
+    </ul>
+<% end %>
+    </td>
+
+  </tr>
+</table>
+

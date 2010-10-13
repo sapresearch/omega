@@ -1,4 +1,8 @@
 class AddRoles < ActiveRecord::Migration
+  class Role < ActiveRecord::Base
+
+  end
+
   ROLES = {
     'anonymous' => {
       :name        => 'Anonymous',
