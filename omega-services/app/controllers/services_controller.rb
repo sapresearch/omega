@@ -111,6 +111,7 @@ class ServicesController < ApplicationController
 
           #--------------------
 
+          
           @service.save
 
           session[:service_id] = @service.id
@@ -139,14 +140,14 @@ class ServicesController < ApplicationController
       @service = Service.find_by_id(session[:service_id])
       @service.update_attributes(params[:service])
 
-      # build the nested fields ----------
+      # build nested attributes - fields ----------
 
       unless params[:fields].nil?
         params[:fields].each_value { |field| @service.fields.build(field)
       }
       end
 
-      #-----------------
+      #-------------------------------------------------------
 
       @current_step = session[:current_step]
 
@@ -154,14 +155,12 @@ class ServicesController < ApplicationController
 
           @service.save
 
-          session[:service_id] = @service.id
           redirect_to service_wizard_services_url(:step => @current_step)
 
       end
 
       if params[:next] # Proceed to next step in the wizard
 
-         session[:service_id] = @service.id
          redirect_to service_wizard_services_url(:step => @current_step.to_i+1)
 
       end
@@ -179,33 +178,43 @@ class ServicesController < ApplicationController
 
        @service = Service.find(params[:id])
        @service.update_attributes(:published => '1')
+       
        redirect_to service_url(@service)
 
      end
 
-     def type_def  # Define a new Service Type and Create a New Service of that Type
+     def define_service_type  # Define a new Service Type and Create a New Service of that Type
 
        @service = Service.new
 
-       @service.build_type
-       
-       render :partial => 'service_without_type'
+       @service.fields.build do |f|
+           f.build_detail
+       end if @service.fields.empty?
+
+       @service.build_type.typefields.build
+
+       if params[:service_category] == "New Enrollable Type"
+         render :partial => 'enrollable_service'
+       else
+         render :partial => 'requestable_service'
+         
+       end
 
      end
 
-     def get_type  # Retrieve An Existing Service Type and Create a New Service of that Type
+     def retrieve_existing_type  # Retrieve An Existing Service Type and Create a New Service of that Type
 
-       @typed_service = Service::Type.find_by_service_type(params[:service_type])
+       @service_type = Service::Type.find_by_service_type(params[:service_type])
 
        @service = Service.new
-       @fields = Service::Typefield.all
-
+       
        # build nested fields for the service and further nested detail for each field -----------
+
        @service.fields.build do |f|
            f.build_detail
         end if @service.fields.empty?
 
-       # ------------------------
+       # ------------------------   
 
        render :partial => 'create_service_form'
 
@@ -239,7 +248,6 @@ class ServicesController < ApplicationController
      private
   
      def get_services_list  # Retrieves All Service Types in the Library
-
         Service::Type.all.collect {|s| [s.service_type, s.service_type]}
      end
 

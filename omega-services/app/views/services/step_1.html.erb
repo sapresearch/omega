@@ -21,7 +21,7 @@
           <span class="style3">Please Choose:</span> <br/>
 
           <br/>
-          <% [["Choose From the Library", "checked"], ["Create New Type", ""]].each do |choice, check| %>
+          <% [["Select From Existing Types", "checked"], ["New Enrollable Type", ""], ["New Requestable Type", ""]].each do |choice, check| %>
               <%= radio_button 'service', 'service_type', choice, {:checked => check} %>
               <%= choice %> <br/>
 
@@ -51,6 +51,8 @@
 
 
         </div>
+
+
 </div>
 
         <div id="list">
@@ -82,11 +84,7 @@
 
                   <% Service::Field.find_all_by_field_category_and_service_id("Registration Details", @service.id).each do |s| %>
 
-                      <br/>
-
-                      <strong><%= s.field_name %></strong> <strong>(Field Type: <%= s.field_type %>)</strong>
-
-                      <br/>
+                      <strong><%= s.field_name %></strong> <br/>
 
                   <% end %>
                 </p>

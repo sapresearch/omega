@@ -1,6 +1,6 @@
 module Omega
   module Groups
-    class Tram < Trams::Base
+    class Module < Omega::Module::Base
     end
   end
 end

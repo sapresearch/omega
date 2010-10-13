@@ -1,4 +1,4 @@
-Omega::Volunteering::Tram.routes.draw do
+Omega::Volunteering::Module.routes.draw do
   namespace :volunteering do
     resources :positions do
       collection do

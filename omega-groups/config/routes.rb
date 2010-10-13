@@ -1,4 +1,4 @@
-Omega::Groups::Tram.routes.draw do
+Omega::Groups::Module.routes.draw do
   resources :groups do
     
   end

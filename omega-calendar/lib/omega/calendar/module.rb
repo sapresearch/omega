@@ -1,6 +1,6 @@
 module Omega
   module Calendar
-    class Tram < Trams::Base
+    class Module < Omega::Module::Base
       config.omega.calendar = ActiveSupport::OrderedOptions.new
 
       initializer :'omega.calendar.add_icalendar_date_format' do

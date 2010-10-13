@@ -1,38 +1,38 @@
-Trams::Tasks.define do
+Omega::Tasks.define do
   namespace :assets do
-    desc "Delete all assets from installed trams."
+    desc "Delete all assets from installed modules."
     task :delete => :environment do
       Omega::Assets.delete
     end
 
-    desc 'Refresh all assets from installed trams'
+    desc 'Refresh all assets from installed modules'
     task :refresh => :environment do
       Omega::Assets.refresh
     end
 
-    desc 'Override all changes made to assets from trams'
+    desc 'Override all changes made to assets from modules'
     task :refresh! => :environment do
       Omega::Assets.refresh!
     end
   end
 end
 
-Trams::Tasks.each_tram do |tram, name|
-  if Omega::Assets.has_assets?(tram)
+Omega::Tasks.each_tram do |mod, name|
+  if Omega::Assets.has_assets?(mod)
     namespace :assets do
-      desc "Delete all assets from the #{name} tram."
+      desc "Delete all assets from the #{name} module."
       task :delete => :environment do
-        Omega::Assets.delete(tram)
+        Omega::Assets.delete(mod)
       end
 
-      desc "Refresh all assets from the #{name} tram."
+      desc "Refresh all assets from the #{name} module."
       task :refresh => :environment do
-        Omega::Assets.refresh(tram)
+        Omega::Assets.refresh(mod)
       end
 
-      desc "Override all changes made to the assets from the #{name} tram."
+      desc "Override all changes made to the assets from the #{name} module."
       task :refresh! => :environment do
-        Omega::Assets.refresh!(tram)
+        Omega::Assets.refresh!(mod)
       end
     end
   end

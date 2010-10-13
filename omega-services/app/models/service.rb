@@ -11,8 +11,6 @@ class Service < ActiveRecord::Base
    has_one :event
 
 
-   validates_presence_of :service_type
-
    accepts_nested_attributes_for :fields, :details, :type, :event, :allow_destroy => true
 
 

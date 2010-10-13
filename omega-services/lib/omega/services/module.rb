@@ -4,7 +4,7 @@ require 'omega/services'
 
 module Omega
   module Services
-    class Tram < Trams::Base
+    class Module < Omega::Module::Base
       
     end
   end
