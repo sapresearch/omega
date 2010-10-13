@@ -1,6 +1,6 @@
 Omega::Services::Tram.routes.draw do
 
-  scope :path => 'services', :name_prefix => 'service', :module => 'services' do
+  scope :path => 'services', :as => 'service', :module => 'services' do
     resources :fields
     resources :fieldvalues
     resources :registrations do
@@ -15,7 +15,7 @@ Omega::Services::Tram.routes.draw do
   end
 
   resources :services do
-    scope :name_prefix => 'service', :module => 'services' do
+    scope :as => 'service', :module => 'services' do
       resources :fields
       resources :fieldvalues
       resources :registrations

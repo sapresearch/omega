@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   breadcrumb 'Omega' => :root
 
-  before_filter :set_user_time_zone
+#  before_filter :set_user_time_zone
 
   private
     def set_user_time_zone
