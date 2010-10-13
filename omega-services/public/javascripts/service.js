@@ -61,7 +61,7 @@ function service_type(service_type) {
 
          $.ajax({
            type: "GET",
-           url: "/services/retrieve_service_type",
+           url: "/services/retrieve_existing_type",
 
            data: "service_type="+service_type,
 
