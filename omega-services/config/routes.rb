@@ -24,8 +24,8 @@ Omega::Services::Tram.routes.draw do
       resources :services_types
     end
     collection do
-      get :get_type
-      get :type_def
+      get :retrieve_existing_type
+      get :define_service_type
       match :service_wizard, :to => 'services#service_wizard', :path => 'wizard/step/:step'
       match :finalize, :to => 'services#finalize', :path => 'finalize/:id'
       match :modify_service, :to => 'services#modify_service', :path => 'modify_service/:id'

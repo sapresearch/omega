@@ -21,7 +21,7 @@
           <span class="style3">Please Choose:</span> <br/>
 
           <br/>
-          <% [["Choose From the Library", "checked"], ["Create New Type", ""]].each do |choice, check| %>
+          <% [["Select From Existing Types", "checked"], ["New Enrollable Type", ""], ["New Requestable Type", ""]].each do |choice, check| %>
               <%= radio_button 'service', 'service_type', choice, {:checked => check} %>
               <%= choice %> <br/>
 
@@ -51,6 +51,8 @@
 
 
         </div>
+
+
 </div>
 
         <div id="list">

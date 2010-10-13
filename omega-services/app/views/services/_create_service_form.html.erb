@@ -2,11 +2,15 @@
 
     <%= errors_for_model @service %>
 
-    <%= f.hidden_field :service_type, :value => @typed_service.service_type %>
-    <%= f.hidden_field :service_category, :value => @typed_service.service_category %>
+    <%= f.hidden_field :service_type, :value => @service_type.service_type %>
+    <%= f.hidden_field :service_category, :value => @service_type.service_category %>
+    <%= f.hidden_field :icon_file_name, :value => @service_type.icon_file_name%>
+    <%= f.hidden_field :icon_content_type, :value => @service_type.icon_content_type%>
+
+
     <%= f.hidden_field :published, :value => 0 %>
 
-    <% Service::Typefield.find_all_by_service_id(@typed_service.id).each do |t|%>
+    <% Service::Typefield.find_all_by_service_id(@service_type.id).each do |t|%>
 
     <%= f.fields_for :fields do |ff| %>
 
@@ -29,12 +33,12 @@
       <br/>
 
       <br/>
-      <strong>Service Category: </strong><%= @typed_service.service_category %> <br/>
-      <strong>Description:</strong><%= @typed_service.description %><br/>
+      <strong>Service Category: </strong><%= @service_type.service_category %> <br/>
+      <strong>Description:</strong><%= @service_type.description %><br/>
 
-      <% unless @fields.empty? %>
+      <% unless Service::Typefield.all.empty? %>
 
-          <% Service::Typefield.find_all_by_field_category_and_service_id("Service Details", @typed_service.id).each do |s| %>
+          <% Service::Typefield.find_all_by_field_category_and_service_id("Service Details", @service_type.id).each do |s| %>
 
               <strong><%= s.field_name %></strong>
               <br/>
@@ -44,7 +48,7 @@
 
           <span class="style2">Registration Details</span><br/>
 
-          <% if @typed_service.service_category.eql?("Enrollable") %>
+          <% if @service_type.service_category.eql?("Enrollable") %>
 
               <strong> First Name <br/>
               Last Name <br/>
@@ -67,7 +71,7 @@
 
           <%end%>
 
-          <% Service::Typefield.find_all_by_field_category_and_service_id("Registration Details", @typed_service.id).each do |s| %>
+          <% Service::Typefield.find_all_by_field_category_and_service_id("Registration Details", @service_type.id).each do |s| %>
 
               <br/>
               <strong><%= s.field_name %></strong> <strong>(Field Type: <%= s.field_type %>)</strong>
