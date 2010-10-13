@@ -10,7 +10,7 @@
 
     <%= f.hidden_field :published, :value => 0 %>
 
-    <% Service::Typefield.find_all_by_service_id(@service_type.id).each do |t|%>
+    <% Service::Typefield.find_all_by_type_id(@service_type.id).each do |t|%>
 
     <%= f.fields_for :fields do |ff| %>
 
@@ -38,7 +38,7 @@
 
       <% unless Service::Typefield.all.empty? %>
 
-          <% Service::Typefield.find_all_by_field_category_and_service_id("Service Details", @service_type.id).each do |s| %>
+          <% Service::Typefield.find_all_by_field_category_and_type_id("Service Details", @service_type.id).each do |s| %>
 
               <strong><%= s.field_name %></strong>
               <br/>
@@ -71,7 +71,7 @@
 
           <%end%>
 
-          <% Service::Typefield.find_all_by_field_category_and_service_id("Registration Details", @service_type.id).each do |s| %>
+          <% Service::Typefield.find_all_by_field_category_and_type_id("Registration Details", @service_type.id).each do |s| %>
 
               <br/>
               <strong><%= s.field_name %></strong> <strong>(Field Type: <%= s.field_type %>)</strong>
