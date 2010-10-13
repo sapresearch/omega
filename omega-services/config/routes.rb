@@ -15,15 +15,7 @@ Omega::Services::Tram.routes.draw do
   end
 
   resources :services do
-    scope :as => 'service', :module => 'services' do
-      resources :fields
-      resources :fieldvalues
-      resources :registrations
-      resources :types
-      resources :typefields
-      resources :services_types
-    end
-    collection do
+     collection do
       get :retrieve_existing_type
       get :define_service_type
       match :service_wizard, :to => 'services#service_wizard', :path => 'wizard/step/:step'
@@ -33,7 +25,18 @@ Omega::Services::Tram.routes.draw do
       get :add_service_field
       get :add_registration_field
       get :remove_field
+       
+     end
+
+    scope :as => 'service', :module => 'services' do
+      resources :fields
+      resources :fieldvalues
+      resources :registrations
+      resources :types
+      resources :typefields
+      resources :services_types
     end
+
 
   end
 
