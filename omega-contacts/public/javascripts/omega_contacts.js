@@ -18,7 +18,7 @@ $(function() {
 
         }
     });
-    // select caching
+    // selector caching
     var $ac_contacts = $('#ac-contacts');
     /**
      * autocomplete for contacts
@@ -36,11 +36,11 @@ $(function() {
         }
     });
 
-
+var $clear_filter = $('#clear-filter');
     $ac_contacts.keyup(function() {
-        this.value == '' ? $('#clear-filter').hide() : $('#clear-filter').show();
+        this.value == '' ? $clear_filter.hide() : $clear_filter.show();
     });
-    $('#clear-filter').click(function() {
+    $clear_filter.click(function() {
         $ac_contacts.val('');
         $(this).hide();
     });
@@ -119,7 +119,6 @@ function update_contacts(contacts, group_id, group_name) {
         });
     } else {
         $(contacts).each(function(i) {
-
 
             list += '<tr data-id="' + contacts[i].id + '"><td><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
                     + contacts[i].first_name + '</a>'

@@ -104,7 +104,7 @@ $(function() {
 
             $(this).val('');
             $('<li />').append(ui.item.label + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', ui.item.id);
-            update_cid_values()
+            update_cid_values();
             return false;
         }
 

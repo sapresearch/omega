@@ -27,7 +27,7 @@ html, body, #wrapper {
 }
 
 body > #wrapper {
-    background: url("/images/glow.png") top center no-repeat;
+    /*background: url("/images/abstract.png") top  no-repeat;*/
 
     height: auto;
     min-height: 100%;
@@ -393,7 +393,11 @@ div.sidebar-menu-nav {
 
 div.sidebar-menu-content li {
     padding: 0.5em 0;
-    border-bottom: 1px dotted #191919;
+    border-bottom: 1px dotted #ddd;
+}
+
+li.menu-li-last-divider {
+    border-bottom-width:0 !important;
 }
 
 ul.item-list{
@@ -417,6 +421,12 @@ li.list-item {
     margin:5px;
     height:100%;
     
+}
+
+.first-l{
+    color:#666;
+    font-size:1.7em;
+    font-weight:bold
 }
 
 .corners-bottom {

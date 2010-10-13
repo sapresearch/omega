@@ -268,17 +268,6 @@ jQuery(function($) {
     });
 
 
-    /**
-     * customized drop_down
-     */
-    $(".drop_down dt a").live('click', function() {
-        $(".drop_down dd ul").toggle();
-    });
-    $(".drop_down dd ul li a").live('click', function() {
-
-        $(".drop_down dd ul").hide();
-
-    });
 
 
     $(document).bind('click', function(e) {
@@ -325,6 +314,8 @@ jQuery(function($) {
 
 		input.after(newInput);
 	});
+
+   $('#right').find('div.sidebar-menu-content li:last-child').addClass('menu-li-last-divider')
 });
 
 

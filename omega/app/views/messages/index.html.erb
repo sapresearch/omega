@@ -15,11 +15,11 @@
   <div class="clear"></div>
   <ul id="messages-list">
     <% @messages.each do |message| %>
-        <li class="list-item relative">
+        <li id="message-<%= message.id %>" class="list-item relative">
           <div class="item-list-actions-wrapper corners">
             <div class="item-list-actions">
               <%= om_button(:plain=> true, :icon=>'delete') do %>
-                  <%= link_to 'Delete', message_path(message), :method=> :delete %>
+                  <%= link_to 'Delete', message_path(message), :method=> :delete, :remote=> true %>
               <% end %>
               <%= om_button(:plain=> true, :icon=>'mail-reply') do %>
                   <%= link_to 'Reply', reply_message_path(message) %>

@@ -72,7 +72,7 @@ class MessagesController < ApplicationController
 #      # require_permission !!
 #      @message.destroy
 #    end
-    redirect_to(messages_url)
+    respond_with(@message)
   end
 
   SORT_KEYS = ['created_at']

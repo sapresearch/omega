@@ -6,6 +6,10 @@ class Volunteering::Record < Omega::Model
   belongs_to  :contact, :validate => false
   has_many    :time_entries
 
+  before_validation( :on => :create) do
+      self.status = "Applied"
+  end
+
   default_scope order('created_at desc')
 
   accepts_nested_attributes_for :contact
