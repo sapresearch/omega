@@ -9,6 +9,6 @@ class Service::Type < ActiveRecord::Base
                             :path => ":rails_root/public/images/icons/services/types/:basename.:extension",
                             :default_url => "/images/icons/services/types/default/missing.png"
 
-   
+  accepts_nested_attributes_for :typefields
   
 end

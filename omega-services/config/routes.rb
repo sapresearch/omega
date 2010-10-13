@@ -1,6 +1,6 @@
 Omega::Services::Module.routes.draw do
 
-  scope :path => 'services', :name_prefix => 'service', :module => 'services' do
+  scope :path => 'services', :as => 'service', :module => 'services' do
     resources :fields
     resources :fieldvalues
     resources :registrations do
@@ -15,7 +15,23 @@ Omega::Services::Module.routes.draw do
   end
 
   resources :services do
-    scope :name_prefix => 'service', :module => 'services' do
+     collection do
+
+      match :service_wizard, :to => 'services#service_wizard', :path => 'wizard/step/:step'
+      match :finalize, :to => 'services#finalize', :path => 'finalize/:id'
+      match :modify_service, :to => 'services#modify_service', :path => 'modify_service/:id'
+
+      get :retrieve_existing_type
+      get :define_service_type
+      get :show_drafts
+      get :add_service_field
+      get :add_registration_field
+      get :remove_field
+       
+     end
+
+    scope :as => 'service', :module => 'services' do
+      
       resources :fields
       resources :fieldvalues
       resources :registrations
@@ -23,19 +39,10 @@ Omega::Services::Module.routes.draw do
       resources :typefields
       resources :services_types
     end
-    collection do
-      get :get_type
-      get :type_def
-      match :service_wizard, :to => 'services#service_wizard', :path => 'wizard/step/:step'
-      match :finalize, :to => 'services#finalize', :path => 'finalize/:id'
-      match :modify_service, :to => 'services#modify_service', :path => 'modify_service/:id'
-      get :show_drafts
-      get :add_service_field
-      get :add_registration_field
-      get :remove_field
-    end
+
 
   end
+
 
   
 end
