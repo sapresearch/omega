@@ -16,11 +16,13 @@ Omega::Services::Tram.routes.draw do
 
   resources :services do
      collection do
-      match :retrieve_existing_type, :to => 'services#retrieve_existing_type'
-      match :define_service_type, :to => 'services#define_service_type'
+
       match :service_wizard, :to => 'services#service_wizard', :path => 'wizard/step/:step'
       match :finalize, :to => 'services#finalize', :path => 'finalize/:id'
       match :modify_service, :to => 'services#modify_service', :path => 'modify_service/:id'
+
+      get :retrieve_existing_type
+      get :define_service_type
       get :show_drafts
       get :add_service_field
       get :add_registration_field
@@ -29,6 +31,7 @@ Omega::Services::Tram.routes.draw do
      end
 
     scope :as => 'service', :module => 'services' do
+      
       resources :fields
       resources :fieldvalues
       resources :registrations
@@ -39,6 +42,7 @@ Omega::Services::Tram.routes.draw do
 
 
   end
+
 
   
 end
