@@ -9,7 +9,7 @@ class User < Omega::Model
   
   # These are the fields that are allowed when a user is registering (which is different from creating a user which
   # only an admin should be able to do.)
-  REGISTRATION_FIELDS = [:username, :password, :password_confirmation, :email, :first_name, :last_name]
+  REGISTRATION_FIELDS = [:username, :password, :password_confirmation, :email, :first_name, :last_name, :time_zone]
 
   scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
 
