@@ -1,4 +1,4 @@
-var contacts = <%= @contact_group.contacts.to_json.html_safe %>;
+
         $('tr[data-id=<%= @contact.id %>]').remove();
         $('.assigned-groups').empty().append('<%= escape_javascript(render :partial => 'contacts/partials/assigned_groups') %>');
         $('div.tipsy').remove();
