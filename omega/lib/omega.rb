@@ -21,4 +21,7 @@ module Omega
   end
 end
 
+require 'patches/fix_5243'
+require 'patches/namespaced_validators'
+
 require 'omega/module'
