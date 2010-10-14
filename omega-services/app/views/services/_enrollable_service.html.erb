@@ -39,10 +39,10 @@
 
              <%= s.fields_for :typefields do |ff| %>
 
-             <%= ff.hidden_field :field_name, :value => c.field_name%>
-             <%= ff.hidden_field :field_type, :value => c.field_type%>
-             <%= ff.hidden_field :field_type_class, :value => c.field_type_class%>
-             <%= ff.hidden_field :field_category, :value => c.field_category%>
+                <%= ff.hidden_field :field_name, :value => c.field_name%>
+                <%= ff.hidden_field :field_type, :value => c.field_type%>
+                <%= ff.hidden_field :field_type_class, :value => c.field_type_class%>
+                <%= ff.hidden_field :field_category, :value => c.field_category%>
 
              <%end%>
            <%end%>
@@ -53,14 +53,14 @@
 
              <%= f.fields_for :fields do |ff| %>
 
-             <%= ff.hidden_field :field_name, :value => e.field_name%>
-             <%= ff.hidden_field :field_type, :value => e.field_type%>
-             <%= ff.hidden_field :field_type_class, :value => e.field_type_class%>
-             <%= ff.hidden_field :field_category, :value => e.field_category%>
+                <%= ff.hidden_field :field_name, :value => e.field_name%>
+                <%= ff.hidden_field :field_type, :value => e.field_type%>
+                <%= ff.hidden_field :field_type_class, :value => e.field_type_class%>
+                <%= ff.hidden_field :field_category, :value => e.field_category%>
 
-             <%= ff.fields_for :detail do |d|%>
-                <%= d.hidden_field :field_value, :value => "Enter Value" %>
-             <%end%>
+                <%= ff.fields_for :detail do |d|%>
+                    <%= d.hidden_field :field_value, :value => "Enter Value" %>
+                <%end%>
 
              <%end%>
     <%end%>

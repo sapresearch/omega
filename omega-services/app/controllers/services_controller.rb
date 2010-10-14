@@ -87,6 +87,8 @@ class ServicesController < ApplicationController
 
        #------------------------------------------------------
 
+
+
        if params[:save_proceed]  # Creates the Service and Proceeds to Next Step in the Wizard
 
           @current_step = session[:current_step]
@@ -101,6 +103,7 @@ class ServicesController < ApplicationController
 
           #-------------------------------
 
+          
           @service = Service.create(params[:service])
 
           # --------------- Assign the Service Id to the Detail Nested Attribute --------------
@@ -111,11 +114,14 @@ class ServicesController < ApplicationController
 
           #--------------------
 
-          
+          unless params[:service_icon].nil?
+            @service.icon = File.new(params[:service_icon].at(0))
+          end
+
           @service.save
 
           session[:service_id] = @service.id
-          
+
           redirect_to service_wizard_services_url(:step => @current_step.to_i+1)
 
        end
@@ -194,8 +200,11 @@ class ServicesController < ApplicationController
        @service.build_type.typefields.build
 
        if params[:service_category] == "New Enrollable Type"
+         
          render :partial => 'enrollable_service'
+
        else
+
          render :partial => 'requestable_service'
          
        end

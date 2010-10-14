@@ -146,7 +146,6 @@ class Volunteering::PositionsController < ApplicationController
     end
   end
 
-
   SORT_KEYS = ['name']
   SORT_DIRECTIONS = ['asc', 'desc']
 

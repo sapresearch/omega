@@ -4,9 +4,8 @@
 
     <%= f.hidden_field :service_type, :value => @service_type.service_type %>
     <%= f.hidden_field :service_category, :value => @service_type.service_category %>
-    <%= f.hidden_field :icon_file_name, :value => @service_type.icon_file_name%>
-    <%= f.hidden_field :icon_content_type, :value => @service_type.icon_content_type%>
 
+    <%= hidden_field 'service_icon', '', :value => @service_type.icon.path %>
 
     <%= f.hidden_field :published, :value => 0 %>
 

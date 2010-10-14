@@ -10,6 +10,7 @@ class Service < ActiveRecord::Base
 
    has_one :event
 
+   validates :service_type, :presence => true
 
    accepts_nested_attributes_for :fields, :details, :type, :event, :allow_destroy => true
 
@@ -21,5 +22,7 @@ class Service < ActiveRecord::Base
 
 
    validates_attachment_content_type :icon, :content_type => ['image/x-png', 'image/png', 'image/jpg', 'images/jpeg', 'image/gif', 'image/bmp']
+
+
 
 end
