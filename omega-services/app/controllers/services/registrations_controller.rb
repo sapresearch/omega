@@ -4,7 +4,7 @@ class Services::RegistrationsController < ApplicationController
 
   breadcrumb 'Services' => :services
   breadcrumb 'My Registrations' => :my_registrations_service_registrations
-
+  
   before_filter :get_service
 
 

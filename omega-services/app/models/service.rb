@@ -1,5 +1,11 @@
 class Service < ActiveRecord::Base
-    
+
+   PERM_ADMIN       = 'service_admin'
+   PERM_APPLY       = 'service_apply'
+   PERM_EDIT_ADMIN  = 'service_edit_admin'
+   PERM_EDIT_USER   = 'service_edit_user'
+   PERM_VIEW        = 'service_view'
+
    has_many :fields, :dependent => :destroy
    
    has_many :registrations, :dependent => :destroy

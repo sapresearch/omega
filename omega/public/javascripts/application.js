@@ -276,7 +276,7 @@ jQuery(function($) {
             $(".drop_down dd ul").hide();
     });
 
-	var uploadifyScriptData = {};
+/*	var uploadifyScriptData = {};
 	uploadifyScriptData['uploadify'] = true;
 	uploadifyScriptData[csrf_param]  = csrf_token;
 
@@ -313,7 +313,7 @@ jQuery(function($) {
 		});
 
 		input.after(newInput);
-	});
+	});*/
 
    $('#right').find('div.sidebar-menu-content li:last-child').addClass('menu-li-last-divider')
 });

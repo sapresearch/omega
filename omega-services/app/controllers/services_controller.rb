@@ -2,9 +2,9 @@ class ServicesController < ApplicationController
 
   respond_to :html, :xml, :js, :json
 
-  breadcrumb 'Services' => :services      
+  breadcrumb 'Services' => :services
 
-     def index
+      def index
 
        @services = Service.all
        respond_with(@services)
@@ -56,11 +56,7 @@ class ServicesController < ApplicationController
 
        # --- Reset the Service Id Variable in the Session should the "introduction" step be approached
 
-       if (params[:step].eql?("introduction"))
-         session[:service_id] = nil
-       end
-
-       #---------------------------
+       session[:current_step] = params[:step]
 
        @services = get_service_types  # Populates the List of Service Types Existing in the Library
 
@@ -100,7 +96,9 @@ class ServicesController < ApplicationController
        unless params[:service][:type_attributes].nil?
         params[:service][:type_attributes][:service_type] = params[:service][:service_type]
         params[:service][:type_attributes][:service_category] = params[:service][:service_category]
-        params[:service][:type_attributes][:icon] = params[:service][:icon]
+        unless params[:service][:icon].nil?
+          params[:service][:type_attributes][:icon] = params[:service][:icon]
+        end
         params[:service][:type_attributes][:description] = params[:service][:description]
        end
 
@@ -131,7 +129,9 @@ class ServicesController < ApplicationController
           #--------------------
 
           unless params[:service_icon].nil?
+            
             @service.icon = File.new(params[:service_icon].at(0))
+
           end
 
           @service.save

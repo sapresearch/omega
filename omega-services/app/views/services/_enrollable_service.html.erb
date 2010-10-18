@@ -42,7 +42,7 @@
         <%= s.hidden_field :icon %>
         <%= s.hidden_field :description %>
 
-           <% Service::CategoryField.find_all_by_service_category("Enrollable").each do |c|%>
+           <% Service::CategoryField.find_all_by_service_category_and_field_category("Enrollable","Service Details").each do |c|%>
 
              <%= s.fields_for :typefields do |ff| %>
 

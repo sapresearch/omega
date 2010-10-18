@@ -1,8 +1,7 @@
 class Contact < ActiveRecord::Base
-  PERM_ADMIN     = 'contacts_admin'
+  PERM_ADMIN     = 'users_admin'
   PERM_EDIT_SELF = 'contacts_edit_self'
-  PERM_EXPORT    = 'contacts_export'
-  PERM_VIEW      = 'contacts_view'
+  PERM_VIEW      = 'users_view'
   PERM_VIEW_SELF = 'contacts_view_self'
 
   TITLES = %w{ mr. dr. ms. mrs.}
@@ -51,22 +50,16 @@ class Contact < ActiveRecord::Base
   SYNC_FIELDS = %w(email first_name last_name)
 
   def sync_from_user
-    return unless has_user?
-
     SYNC_FIELDS.each { |attr| send("#{attr}=", user.send(attr)) }
     save(:validate => false)
   end
 
   def sync_to_user
-    return unless has_user?
-
     SYNC_FIELDS.each { |attr| user.send("#{attr}=", send(attr)) }
-    user.send(:save, :validate => false)
+    user.save(:validate => false)
   end
 
   def synced?
-    return true unless has_user?
-
     SYNC_FIELDS.all? { |attr| send(attr) == user.send(attr) }
   end
 

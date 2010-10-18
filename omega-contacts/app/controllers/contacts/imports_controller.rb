@@ -1,7 +1,5 @@
 require 'csv'
-
 require 'array.rb'
-
 
 class Contacts::ImportsController < ApplicationController
 
@@ -41,9 +39,11 @@ class Contacts::ImportsController < ApplicationController
 
   end
 
-  def create
+  def new
+    @import = Contact::Import.new
 
-     if (params[:commit] == "Import")
+  end
+  def create
 
        @import = Contact::Import.create(params[:contact_import])
        process_csv(@import)
@@ -51,8 +51,8 @@ class Contacts::ImportsController < ApplicationController
        @current_step = session[:current_step]
        redirect_to csv_import_wizard_contact_imports_url(:step => @current_step.to_i+1, :id => @import)
 
-     end
-    
+
+
   end
 
   def edit

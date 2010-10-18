@@ -1,4 +1,4 @@
-Omega::Contacts::Module.routes.draw do
+Omega::Contacts::Tram.routes.draw do
   scope :path => 'contacts', :as => 'contact', :module => 'contacts' do
     resources :groups
     resources :households

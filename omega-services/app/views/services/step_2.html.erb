@@ -2,7 +2,7 @@
 
 
 <h1 class="page-content corners-top">
-  Step 2 - Customize Your Service Details
+  Create a Service Wizard - Step 2
 </h1>
 
 <div class="page-content corners-bottom">
@@ -64,10 +64,13 @@
 
                     <p class="left-align">
 
-                      <strong><%= Service::Field.find_by_id(detail.field_id).field_name %></strong>
+                      <% @field =  Service::Field.find_by_id_and_field_category(detail.field_id,"Service Details") %>
 
-                      <%= ff.text_field :field_value %>
+                      <% unless @field.nil?%>
 
+                      <strong><%=@field.field_name%></strong> <%= ff.text_field :field_value %>
+
+                      <%end%>
                     </p>
 
                 <% end %>

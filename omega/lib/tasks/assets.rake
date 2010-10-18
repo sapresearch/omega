@@ -17,7 +17,7 @@ Omega::Tasks.define do
   end
 end
 
-Omega::Tasks.each_tram do |mod, name|
+Omega::Tasks.each_module do |mod, name|
   if Omega::Assets.has_assets?(mod)
     namespace :assets do
       desc "Delete all assets from the #{name} module."
