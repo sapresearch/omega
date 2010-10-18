@@ -4,6 +4,7 @@
 
     <%= f.hidden_field :service_type, :value => @service_type.service_type %>
     <%= f.hidden_field :service_category, :value => @service_type.service_category %>
+    <%= f.hidden_field :description, :value => @service_type.description %>
 
     <%= hidden_field 'service_icon', '', :value => @service_type.icon.path %>
 

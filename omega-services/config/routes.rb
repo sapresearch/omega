@@ -23,11 +23,12 @@ Omega::Services::Module.routes.draw do
 
       get :retrieve_existing_type
       get :define_service_type
+      get :set_session
       get :show_drafts
       get :add_service_field
       get :add_registration_field
       get :remove_field
-       
+
      end
 
     scope :as => 'service', :module => 'services' do

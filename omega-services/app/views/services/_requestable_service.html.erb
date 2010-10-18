@@ -5,7 +5,15 @@
 
     <p class="left2">
 
+    <%unless @errors.nil?%>
     <span class="style2">
+      Oops! <%@errors.each do |e|%>
+          <%= e%>      <br/>
+      <%end%>
+    </span>
+   <%end%>
+      
+    <span class="style1">
       Define Your Requestable Type <br/>
     </span>
 

@@ -6,7 +6,6 @@
   Volunteering Positions
 </h1>
 
-
 <div class="page-content corners-bottom">
 
       <div class="steps">
@@ -21,11 +20,16 @@
           <span class="style3">Please Choose:</span> <br/>
 
           <br/>
+          
+
           <% [["Select From Existing Types", "checked"], ["New Enrollable Type", ""], ["New Requestable Type", ""]].each do |choice, check| %>
-              <%= radio_button 'service', 'service_type', choice, {:checked => check} %>
+              <%= radio_button_tag 'service_type', choice, false,   {:onclick => "javascript: clicked(this.id)"} %>
               <%= choice %> <br/>
 
           <% end %>
+
+          <%= hidden_field "step1_choice", '', :value => session[:step1_choice]%>
+          
         </p>
 
         <div id="service_with_type">
@@ -38,7 +42,7 @@
 
             <% Service::Type.all.each do |s| %>
                 <%= radio_button 'service_library', 'service_type', s.service_type,
-                                 {:onclick => "javascript: service_type(this.value)"} %>
+                                 {:onclick => "javascript: service_types(this.value)"} %>
 
                 <%= s.service_type %><%= image_tag s.icon.url, :width =>  '65' %><br/>
 
@@ -114,6 +118,5 @@
 
 
       </div>
-
 
 </div>

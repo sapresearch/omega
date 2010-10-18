@@ -1,11 +1,18 @@
 <%= form_for @service, :html => {:multipart => true} do |f| %>
 
-    <%= errors_for_form @service %>
-
+    <%#= errors_for_form @service %>
 
     <p class="left2">
 
+   <%unless @errors.nil?%>
     <span class="style2">
+      Oops! <%@errors.each do |e|%>
+          <%= e%>      <br/>
+      <%end%>
+    </span>
+   <%end%>
+
+    <span class="style1">
       Define Your Enrollable Type <br/>
     </span>
 

@@ -20,7 +20,7 @@ class ServicesController < ApplicationController
 
      def show_drafts
 
-       @services = Service.find(:all, :conditions => ['published =? ', 0])
+       @services = Service.where('published =? ', 0)
 
      end
 
@@ -28,6 +28,27 @@ class ServicesController < ApplicationController
 
        @service = Service.new
        respond_with(@service)
+
+     end
+
+
+     def set_session
+       
+       case params[:choice]
+
+         when 'service_type_Select_From_Existing_Types'
+           session[:step1_choice] = "service_type_Select_From_Existing_Types"
+
+         when 'service_type_New_Enrollable_Type'
+            session[:step1_choice] = "service_type_New_Enrollable_Type"
+
+         when 'service_type_New_Requestable_Type'
+            session[:step1_choice] = "service_type_New_Requestable_Type"
+
+       end
+       
+       session.delete(:errors)
+       redirect_to service_wizard_services_url(:step => session[:current_step])
 
      end
 
@@ -41,7 +62,7 @@ class ServicesController < ApplicationController
 
        #---------------------------
 
-       @services = get_services_list  # Populates the List of Service Types Existing in the Library
+       @services = get_service_types  # Populates the List of Service Types Existing in the Library
 
        @service = Service.find_by_id(session[:service_id])  # Retrieve the Service Object to work on in the Wizard 
 
@@ -51,12 +72,10 @@ class ServicesController < ApplicationController
 
        unless @service.nil?
 
-         @registration_fields = Service::Field.find_all_by_service_id_and_field_category(session[:service_id], "Registration Details")
-         @service_fields = Service::Field.find_all_by_service_id_and_field_category(session[:service_id], "Service Details")
-         @details = Service::Detail.find_all_by_service_id(session[:service_id])
+         get_service_fields
 
          session[:service_id] = @service.id
-
+         
        end
 
        # ------------------------------------------
@@ -87,8 +106,6 @@ class ServicesController < ApplicationController
 
        #------------------------------------------------------
 
-
-
        if params[:save_proceed]  # Creates the Service and Proceeds to Next Step in the Wizard
 
           @current_step = session[:current_step]
@@ -103,7 +120,6 @@ class ServicesController < ApplicationController
 
           #-------------------------------
 
-          
           @service = Service.create(params[:service])
 
           # --------------- Assign the Service Id to the Detail Nested Attribute --------------
@@ -122,8 +138,14 @@ class ServicesController < ApplicationController
 
           session[:service_id] = @service.id
 
-          redirect_to service_wizard_services_url(:step => @current_step.to_i+1)
+          if @service.valid?
+               session[:step1_choice] = nil
+               redirect_to service_wizard_services_url(:step => @current_step.to_i+1)
 
+          else
+               session[:errors] = @service.errors.full_messages
+               redirect_to service_wizard_services_url(:step => @current_step)
+          end
        end
        
      end
@@ -132,10 +154,8 @@ class ServicesController < ApplicationController
 
        @service = Service.find(params[:id])
 
-       @registration_fields = Service::Field.find_all_by_service_id_and_field_category(session[:service_id], "Registration Details")
-       @service_fields = Service::Field.find_all_by_service_id_and_field_category(session[:service_id], "Service Details")
-       @details = Service::Detail.find_all_by_service_id(session[:service_id])
-
+       get_service_fields
+       
        respond_with(@service)
 
      end
@@ -158,26 +178,21 @@ class ServicesController < ApplicationController
       @current_step = session[:current_step]
 
       if params[:save]  # Update the object in the wizard and remain on the current step
-
           @service.save
-
           redirect_to service_wizard_services_url(:step => @current_step)
 
       end
 
       if params[:next] # Proceed to next step in the wizard
-
          redirect_to service_wizard_services_url(:step => @current_step.to_i+1)
 
       end
 
       if params[:update]  # Update after an edit action
-
           @service.save
           respond_with(@service)
 
       end
-
      end
 
      def finalize  # Publish the Service
@@ -191,6 +206,8 @@ class ServicesController < ApplicationController
 
      def define_service_type  # Define a new Service Type and Create a New Service of that Type
 
+       @errors = session[:errors]
+
        @service = Service.new
 
        @service.fields.build do |f|
@@ -199,17 +216,16 @@ class ServicesController < ApplicationController
 
        @service.build_type.typefields.build
 
-       if params[:service_category] == "New Enrollable Type"
-         
-         render :partial => 'enrollable_service'
+       case params[:service_category]
 
-       else
+        when 'service_type_New_Enrollable_Type'
+            render :partial => 'enrollable_service'
 
-         render :partial => 'requestable_service'
-         
-       end
-
+        when 'service_type_New_Requestable_Type'
+            render :partial => 'requestable_service'
+        end
      end
+
 
      def retrieve_existing_type  # Retrieve An Existing Service Type and Create a New Service of that Type
 
@@ -256,8 +272,15 @@ class ServicesController < ApplicationController
   #--------------------------------------------------------------------------------------------------
      private
   
-     def get_services_list  # Retrieves All Service Types in the Library
+     def get_service_types  # Retrieves All Service Types in the Library
         Service::Type.all.collect {|s| [s.service_type, s.service_type]}
      end
 
+     def get_service_fields  # Retrieves Service Fields based on a Service Category
+
+       @registration_fields = Service::Field.find_all_by_service_id_and_field_category(session[:service_id], "Registration Details")
+       @service_fields = Service::Field.find_all_by_service_id_and_field_category(session[:service_id], "Service Details")
+       @details = Service::Detail.find_all_by_service_id(session[:service_id])
+
+     end
 end

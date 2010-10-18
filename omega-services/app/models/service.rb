@@ -9,8 +9,7 @@ class Service < ActiveRecord::Base
    belongs_to :type
 
    has_one :event
-
-   validates :service_type, :presence => true
+   
 
    accepts_nested_attributes_for :fields, :details, :type, :event, :allow_destroy => true
 
