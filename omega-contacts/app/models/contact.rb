@@ -45,7 +45,7 @@ class Contact < ActiveRecord::Base
                          :length    => 1..80
 #                         :unless    => :has_user?
 
-  after_save :sync_to_user, :unless => :synced?
+ # after_save :sync_to_user, :unless => :synced?
 
   SYNC_FIELDS = %w(email first_name last_name)
 

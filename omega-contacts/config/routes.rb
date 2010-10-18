@@ -1,4 +1,4 @@
-Omega::Contacts::Tram.routes.draw do
+Omega::Contacts::Module.routes.draw do
   scope :path => 'contacts', :as => 'contact', :module => 'contacts' do
     resources :groups
     resources :households
@@ -9,6 +9,7 @@ Omega::Contacts::Tram.routes.draw do
       end
     end
     resources :interests
+
     resources :imports do
       collection do
         get :csv_import_wizard
@@ -40,7 +41,6 @@ Omega::Contacts::Tram.routes.draw do
 
   end
   end
-
 
 
   match 'contacts/:action' => 'contacts#search'

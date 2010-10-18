@@ -15,6 +15,7 @@
     <div class="content">
 
       <%= form_for @import do |f| %>
+          
       <table>
         <tr>
           <td>
@@ -23,7 +24,9 @@
 
                <th class="csv-table">CSV Field</th> <th class="csv-table">Discard</th> <th class="omega-table">Omega Field</th>
 
-                   <%$rows[0].each do |c|%>
+                  <%$rows[0].each do |c|%>
+
+                    <% unless c.nil? %>
 
                       <tr class="csv-table">
 
@@ -33,18 +36,20 @@
 
                          <td class="csv-table">
 
-                            <%@flag = true%>
+                            <% @flag = true %>
 
-                            <%@mapping.each do |k,v| %>
+                            <% @mapping.each do |k,v| %>
 
                                <% if v.include?(c) %>
+
                                    <% c = k %>
                                    <% @flag = false %>
+
                                <%end%>
 
                             <%end%>
 
-                           <%=check_box 'discard', c, {:checked => @flag} %>
+                           <%= check_box 'discard', c, {:checked => @flag} %>
 
 
                          </td>
@@ -57,8 +62,9 @@
 
                           </td>
                       </tr>
+                    <%end%>
 
-                      <%end%>
+                  <%end%>
 
             </table>
           </td>
@@ -69,19 +75,24 @@
 
                   <th class="csv-table">Imported Data Preview</th>
 
-                             <%$rows[1].each do |d|%>
-                                  <tr class="csv-table">
+                      <% $rows[1].each do |d| %>
 
-                                        <td class="csv-table">
-                                           <%=d%>
-                                        </td>
-                                  </tr>
-                             <%end%>
+                          <% unless d.nil?%>
+                                 <tr class="csv-table">
 
+                                     <td class="csv-table">
+                                         <%=d%>
+                                     </td>
+                                 </tr>
+                          <%end%>
+
+
+                      <%end%>
             </table>
-          </td>
 
+          </td>
         </tr>
+        
       </table>
 
       <%=f.submit "Update"%>

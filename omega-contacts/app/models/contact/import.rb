@@ -1,4 +1,4 @@
-class Import < Omega::Model
+class Contact::Import < Omega::Model
 
   has_attached_file :csv,
                     :url => "/csvs/contacts/:basename.:extension",

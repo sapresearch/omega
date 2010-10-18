@@ -77,24 +77,26 @@ class Contacts::ImportsController < ApplicationController
 
          #end
 
-      logger.debug($rows.safe_transpose)
+      $rows = $rows.safe_transpose
 
 
-         params[:discard].each do |k,v|
+      params[:discard].each do |k|
 
-         if (v!=0)
-           
          $rows.each do |row|
 
-            row.slice!(0) if row.include?(k)
+            row.slice!(0..row.length) if row.include?(k)
 
+
+        end
          end
 
-         end
+      logger.debug("Before: #{$rows}")
 
-         end
+      $rows = $rows.safe_transpose
 
       redirect_to csv_import_wizard_contact_imports_url(:step => @current_step, :id => @import)
+
+      logger.debug("After: #{$rows}")
 
     end
 
