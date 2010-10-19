@@ -48,8 +48,6 @@
     display: none;
 }
 
-
-
 #positions_list li {
     height: 166px;
     position: relative;
@@ -168,7 +166,76 @@ span.skill_tag_active {
 
 }
 
-.sidebar-menu-content > div.help-explanation{
-    font-style:italic;
-    color:333;
+.sidebar-menu-content > div.help-explanation {
+    font-style: italic;
+    color: #333;
+}
+
+#services-sidebar {
+
+}
+
+#services-sidebar li {
+    color: #333;
+    
+    border: 1px solid #ddd;
+    height: 90px;
+
+    margin: 20px 4px;
+    padding: 10px 10px 10px 30px;
+    background: url("/images/omega_services.png") top left no-repeat #fff;
+}
+
+#services-sidebar li.active {
+    font-weight:bold;
+    color: #cf3a72;
+    border: 1px solid #cf3a72;
+    background-position: 0 -110px
+}
+
+div.step-nail {
+    background-image: url("/images/omega_services.png");
+    background-repeat: no-repeat;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+}
+
+div.step-1-active {
+    background-position: 0 -224px
+}
+
+div.step-2-active {
+    background-position: 0 -246px
+}
+
+div.step-3-active {
+    background-position: 0 -268px
+}
+div.step-4-active {
+    background-position: 0 -290px
+}
+
+div.step-5-active {
+    background-position: 0 -312px
+}
+div.step-1{
+    background-position: 0 -334px
+}
+
+div.step-2 {
+    background-position: 0 -356px
+}
+
+div.step-3{
+    background-position: 0 -378px
+}
+div.step-4 {
+    background-position: 0 -402px
+}
+
+div.step-5 {
+    background-position: 0 -424px
 }

@@ -67,10 +67,7 @@ var $clear_filter = $('#clear-filter');
                 $.ajax({
                     url :  '/contacts/' + contact_id + '/groups/' + group_id + '/assign/',
                     type: 'PUT',
-                    dataType : 'json',
-                    success: function() {
-
-                    }
+                    dataType : 'json'
                 })
             } else {
                 $.ajax({
@@ -82,30 +79,25 @@ var $clear_filter = $('#clear-filter');
                     }
                 })
             }
-
         }
     });
 });
 
 /**
- * update the contact list
+ * retrieve contacts obejct. create the html structure for the contact list
+ * empty the current contact list and append the new contacts
+ * if we get a group id passed in we show the contacts of a particular group, if not we show all contacts 
  * @param contacts
  * @param group_id
  * @param group_name
  */
 function update_contacts(contacts, group_id, group_name) {
-
+    //selector caching
     var $contacts = $('#contacts');
-
-    var mgm_span_end = '</span></td>';
     $contacts.empty();
-
     var list = '<table>';
-
     if (group_id !== undefined && typeof group_id == "number") {
-
         $(contacts).each(function(i) {
-
             list += '<tr data-id="' + contacts[i].id + '" data-group-id="' + group_id + '"><td><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
                     + contacts[i].first_name + '</a>'
                     + '<td class="text-right" width="40px"><span class="mgm-contact hide">'
@@ -113,7 +105,7 @@ function update_contacts(contacts, group_id, group_name) {
                     + '<a href="/contacts/' + contacts[i].id + '/groups/' + group_id + '/remove" '
                     + 'class="remove-contact" data-remote="true" data-method="put">'
                     + '<span class="om-icon-only om-blue-icon ui-icon-shuffle" data-tooltip="remove this contact from: ' + group_name + '"></span></a>'
-                    + mgm_span_end
+                    + '</span></td>'
                     + '</td></tr>';
 
         });
@@ -126,12 +118,11 @@ function update_contacts(contacts, group_id, group_name) {
                     + '<span data-tooltip="Add me to another group me by dragging into a group on the left" class="om-icon-only om-blue-icon ui-icon-arrow-4-diag"></span>'
                     + '<a  data-remote="true" data-method="delete" href="/contacts/' + contacts[i].id + '" class="remove-contact">'
                     + '<span class="om-icon-only om-blue-icon ui-icon-trash" data-tooltip="Delete this contact from the database"></span></a>'
-                    + mgm_span_end
+                    + '</span></td>'
                     + '</td></tr>';
 
         });
     }
-
     list += '</table>';
     $contacts.append(list);
     $contacts.find('table').delegate("tr", 'hover', function() {
@@ -139,15 +130,14 @@ function update_contacts(contacts, group_id, group_name) {
         $(this).draggable({
             helper: 'clone',
             start: function(event, ui) {
-                var to = $(this).find('span[data-tooltip]').data('tipsy');
-                if (to != null) to.hide();
+                // remove tipsy tooltip otherwise it wont get removed anymore
+                $("div.tipsy").remove();
             }
         }).find('.mgm-contact').toggleClass('hide');
     });
     $contacts.find('a.remove-contact').bind("ajax:success", function() {
         $(this).closest('tr').remove();
     });
-
 }
 
 

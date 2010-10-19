@@ -77,9 +77,12 @@
 
 
       <%= om_button(:icon=>'save') do %>
-
-
           <%= f.submit %>
+      <% end %>
+      <% if @contact.id %>
+       <%= om_button(:icon=>'back') do %>
+          <%= link_to 'Cancel' , contact_path(@contact), :remote=> true %>
+      <% end %>
       <% end %>
     </p>
 
