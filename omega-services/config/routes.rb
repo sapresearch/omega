@@ -4,10 +4,10 @@ Omega::Services::Module.routes.draw do
     resources :fields
     resources :fieldvalues
     resources :registrations do
-        collection do
-          get :my_registrations
-        end
+      collection do
+        get :my_registrations
       end
+    end
     resources :types
     resources :typefields
     resources :services_types
@@ -15,12 +15,10 @@ Omega::Services::Module.routes.draw do
   end
 
   resources :services do
-     collection do
-
+    collection do
       match :service_wizard, :to => 'services#service_wizard', :path => 'wizard/step/:step'
       match :finalize, :to => 'services#finalize', :path => 'finalize/:id'
       match :modify_service, :to => 'services#modify_service', :path => 'modify_service/:id'
-
       get :retrieve_existing_type
       get :define_service_type
       get :set_session
@@ -28,11 +26,10 @@ Omega::Services::Module.routes.draw do
       get :add_service_field
       get :add_registration_field
       get :remove_field
-
-     end
+      
+    end
 
     scope :as => 'service', :module => 'services' do
-      
       resources :fields
       resources :fieldvalues
       resources :registrations
@@ -45,5 +42,4 @@ Omega::Services::Module.routes.draw do
   end
 
 
-  
 end

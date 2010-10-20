@@ -1,0 +1,71 @@
+<% require_stylesheet 'omega_services.css' %>
+<% require_javascript 'service_wizard.js' %>
+<h1 class="page-content corners-top">
+ Welcome to Add a Service Wizard
+</h1>
+<div class="page-content corners-bottom">
+
+
+
+      <ul id="services-intro">
+      <li class="relative">
+        <div class="step-nail step-1"></div>
+        Introduction
+        Introduction to the process of creating a service.
+      </li>
+      <li class="relative">
+        <div class="step-nail step-2"></div>
+        Choose Service Type
+        Provides you with a list of typical types of services to choose from.
+      </li>
+      <li class="relative">
+        <div class="step-nail step-3"></div>
+        Service Details
+        Enables you to customize the service by choosing a name and list of fields you would like to
+        add.
+      </li>
+      <li class="relative">
+        <div class="step-nail step-4"></div>
+        Registration Form
+        Enables you to customize the service registration by adding/removinga list of fields.
+      </li>
+      <li class="relative ">
+        <div class="step-nail step-5"></div>
+        Finalize
+        Gives you a summary of the service you are about to create and publishit to finish the
+        process.
+      </li>
+    </ul>
+  <div class="clear"></div>
+  <p>
+   <span class="first-l">T</span>he Add a Service Wizard allows you to add a service from a list
+    of sample services in the library. This page introduces you to the
+    steps involved in this process.
+  </p>
+  <p>
+    <span class="first-l">W</span>hat do I do next?
+    When you are ready to continue, press the Next button to continue on to
+    the Select Service Type Page. If you would like to exit the Wizard without
+    creating a new Service, press the Cancel button.
+  </p>
+  <p>
+  <span class="first-l">H</span>ow did I get here?
+    The Add a Service Wizard: Introduction Page appears when you select
+    to add a service using a Wizard. The panel on the right gives an overview of each step in the process.
+  </p>
+
+
+    <%= om_button(:icon=>'next') do %>
+        <%= button_to 'Next', service_wizard_services_url(:step => '1') %>
+    <% end %>
+
+
+
+
+
+</div>
+
+
+
+
+

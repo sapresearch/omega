@@ -174,19 +174,24 @@ span.skill_tag_active {
 #services-sidebar {
 
 }
+#services-intro li{
+    font-weight:bold;
+    float:left;
+    width:240px;
+    margin:10px !important;
 
-#services-sidebar li {
+}
+
+#services-sidebar li,#services-intro li {
     color: #333;
-    
     border: 1px solid #ddd;
     height: 90px;
-
     margin: 20px 4px;
     padding: 10px 10px 10px 30px;
     background: url("/images/omega_services.png") top left no-repeat #fff;
 }
 
-#services-sidebar li.active {
+#services-sidebar li.active,#services-intro li.active {
     font-weight:bold;
     color: #cf3a72;
     border: 1px solid #cf3a72;
