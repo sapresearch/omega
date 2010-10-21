@@ -110,21 +110,15 @@ class ServicesController < ApplicationController
 
     @service = Service.new
 
-    @service.type = Service::Type.find_by_service_type(params[:service_library][:service_type])
+    @type = Service::Type.find_by_service_type(params[:service_library][:service_type])
 
-    @service.service_category = @service.type.service_category
-    @service.description = @service.type.description
+    @service.service_category = @type.service_category
+    @service.description = @type.description
+    @service.service_type = @type.service_type
     @service.published = '0'
-
-    Service::Typefield.find_all_by_type_id(@service.type.id).each do |st|
-        @service.field = st
-    end
+    @service.icon = File.new(@type.icon.path)
 
     @service.save
-
-    @service.fields.each do |f|
-        f.detail.service_id = @service.id
-    end
 
     session[:service_id] = @service.id
 
