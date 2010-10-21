@@ -3,8 +3,7 @@
 <% end %>
 
 <%= render :layout => 'layouts/services_wizard' do %>
-    <%= form_tag :action=> 'service_wizard' do %>
-        <%= hidden_field 'step', 'value', :value => '2' %>
+    <%= form_tag :action=> 'create' do %>
         <ul id="service_types">
           <% @service_types.each do |s| %>
               <li>

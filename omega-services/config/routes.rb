@@ -21,6 +21,7 @@ Omega::Services::Module.routes.draw do
       match :modify_service, :to => 'services#modify_service', :path => 'modify_service/:id'
       get :retrieve_existing_type
       get :define_service_type
+      get :service_create
       get :set_session
       get :show_drafts
       get :add_service_field
