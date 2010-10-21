@@ -22,7 +22,7 @@ class Service < ActiveRecord::Base
 
    has_attached_file :icon, :styles => { :small => "65x65>" },
                             :url => "/images/icons/services/:basename.:extension",
-                            :path => ":rails_root/public/images/icons/services/:basename.:extension",
+                            :path => ":rails_root/public/images/icons/services/types/:basename.:extension",
                             :default_url => "/images/icons/services/default/missing.png"
 
 

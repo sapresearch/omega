@@ -4,7 +4,7 @@ module Omega
       config.omega.volunteering = ActiveSupport::OrderedOptions.new
 
       initializer :'omega.volunteering.add_favorite_paths' do
-        Favorite::Paths['Volunteering::Position'] = :volunteering_position_path
+        Omega::FavoritePaths['Volunteering::Position'] = :volunteering_position_path
       end
     end
   end

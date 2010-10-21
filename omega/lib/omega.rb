@@ -12,6 +12,8 @@ module Omega
   autoload :Migrations
   autoload :Tasks
 
+  autoload :FavoritePaths
+
   autoload :Observers
   autoload :UndecoratedName
 

@@ -244,3 +244,10 @@ div.step-4 {
 div.step-5 {
     background-position: 0 -424px
 }
+#form-builder{
+    width:900px;
+    height:100px;
+    display:block;
+    position:static;
+    bottom:0
+}

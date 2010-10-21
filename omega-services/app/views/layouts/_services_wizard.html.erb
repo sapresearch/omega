@@ -1,15 +1,11 @@
+<% require_javascript 'service_wizard.js' %>
 <% require_stylesheet 'omega_services.css' %>
+
 <h1 class="page-content corners-top">
- Welcome to Add a Service Wizard
+  Create a Service Wizard - Step <%= params[:step] || '1' %>
 </h1>
 <div class="page-content corners-bottom">
-SDDDDDDDDDDDDDDDD
+  
   <%= yield %>
-
 </div>
 
-
-
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_services_introduction" %>
-<% end %>

@@ -1,0 +1,133 @@
+<%= render :layout => 'layouts/services_wizard' do %>
+
+
+
+  <div class="content-services">
+
+    <%= form_for @service, :action => "service_wizard" do |f| %>
+        <%= errors_for_form(@service, 'service') %>
+
+        <p class="left2">
+          <strong>Service Type:</strong>
+          <%= @service.service_type %><br/>
+          <%= f.hidden_field :service_type %>
+
+          <strong>Icon:</strong>
+          <% if @service.icon_file_name != 'missing.png'%>
+
+             <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
+
+          <%else%>
+
+             <%= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
+              
+          <%end%>
+          <%= f.hidden_field :icon %>
+          <%= f.hidden_field :published %>
+
+          <strong>Category:</strong>
+          <%= @service.service_category %><br/>
+
+          <br/>
+        </p>
+
+        <p class="left2">
+          <strong>Enter a Name for your <%= @service.service_type %> Service</strong> <br/>
+
+          <br/>
+
+          <%= f.text_field :service_name %><br/>
+
+          <br/>
+          <strong>Describe Your Service</strong> <br/>
+
+          <%= f.text_area :description, :value => @service.description %><br/>
+
+          <% unless @details.empty? %>
+
+              <% @details.each_with_index do |detail, index| %>
+
+                  <%= f.fields_for "details_attributes[#{index}]", detail do |ff| %>
+
+                      <%= ff.hidden_field :id %>
+                      <%= ff.hidden_field :service_id %>
+                      <%= ff.hidden_field :field_id %>
+
+                    <p class="left-align">
+
+                      <% @field =  Service::Field.find_by_id_and_field_category(detail.field_id,"Service Details") %>
+
+                      <% unless @field.nil?%>
+
+                      <strong><%=@field.field_name%></strong> <%= ff.text_field :field_value %>
+
+                      <%end%>
+                    </p>
+
+                <% end %>
+            <% end %>
+        <% end %>
+
+        
+        <%= link_to 'Add Another Service Detail', add_service_field_services_url(:index => @service.fields.size ), :remote => true%>
+
+
+        <div id="service_details_fields">
+
+
+        </div>
+
+
+        <% unless @service_fields.empty? %>
+
+        <p class="left2">
+
+             <strong>Select Fields You Would Want to Remove</strong>
+
+             <br/><br/>
+
+             <% @service_fields.each_with_index do |d| %>
+
+
+                <%= f.fields_for "fields", d do |ff| %>
+
+                    <%= ff.check_box '_destroy' %> <%= d.field_name %>
+                    <%= ff.hidden_field :field_name %>
+                    <%= ff.hidden_field :field_type %>
+
+                    <br/>
+
+                <% end %>
+
+             <% end %>
+
+        <% end %>
+
+
+        <div class="bottom-buttons">
+
+
+          <%= om_button(:icon=>'next-step') do %>
+              <%= f.submit "Save", :name => "save" %>
+          <% end %>
+
+          <%= om_button(:icon=>'next-step') do %>
+              <%= f.submit "Next", :name => "next" %>
+          <% end %>
+
+          <%= om_button(:icon=>'cancel') do %>
+              <%= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
+          <% end %>
+
+          <%= om_button(:icon=>'prev-step') do %>
+              <%= link_to 'Back', service_wizard_services_url(:step => 1) %>
+          <% end %>
+
+
+    <% end %>
+    </div>
+
+
+</div>
+
+ <% end %>

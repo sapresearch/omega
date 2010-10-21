@@ -1,4 +1,6 @@
+<% explanation = content_for?(:explanation) ? "_explanation" : "" %>
+
 <% columns = content_for?(:sidebar) ? "two" : "one" %>
 <% rows = content_for?(:rows) ? "two" : "one" %>
 <% content = yield %>
-<%= render(:layout => "layouts/#{columns}col_#{rows}rows") { content } %>
+<%= render(:layout => "layouts/#{columns}col_#{rows}rows#{explanation}") { content } %>

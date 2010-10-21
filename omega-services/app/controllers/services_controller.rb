@@ -56,13 +56,18 @@ class ServicesController < ApplicationController
 
     # --- Reset the Service Id Variable in the Session should the "introduction" step be approached
 
-    session[:current_step] = params[:step]
+   session[:current_step] = params[:step]
 
     @services = get_service_types # Populates the List of Service Types Existing in the Library
 
     @service = Service.find_by_id(session[:service_id]) # Retrieve the Service Object to work on in the Wizard
 
-    session[:current_step] = params[:step]
+
+   @service_types = Service::Type.all
+
+
+
+
 
     # ------------ Retrieve the Registration and Service Detail Fields in Step 2,3 and 4 -----------
 
@@ -78,11 +83,22 @@ class ServicesController < ApplicationController
 
     case params[:step]
       when 'introduction'
+
         render "services/wizard_introduction"
+
       when '1'
+
+
         render "services/step_1"
       when '2'
+
+
+        @service_type = Service::Type.find_by_service_type(params[:service_library][:service_type])
+        
+
         render "services/step_2"
+
+
       when '3'
         render "services/step_3"
       when '4'
