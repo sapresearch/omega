@@ -171,18 +171,16 @@ span.skill_tag_active {
     color: #333;
 }
 
-#services-sidebar {
 
-}
 #services-intro li{
-    font-weight:bold;
+    
     float:left;
     width:240px;
     margin:10px !important;
 
 }
 
-#services-sidebar li,#services-intro li {
+#services-intro li {
     color: #333;
     border: 1px solid #4096ee;
     height: 90px;
@@ -191,13 +189,15 @@ span.skill_tag_active {
     background: url("/images/omega_services.png") top left no-repeat #fff;
 }
 
-#services-sidebar li.active,#services-intro li.active {
+#services-intro li.active {
     font-weight:bold;
     color: #cf3a72;
     border: 1px solid #cf3a72;
     background-position: 0 -110px
 }
-
+#services-intro li.active h3{
+    color:#421325;
+}
 div.step-nail {
     background-image: url("/images/omega_services.png");
     background-repeat: no-repeat;

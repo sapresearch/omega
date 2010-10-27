@@ -15,16 +15,19 @@ module HtmlHelper
   def iiii(content)
     indent_by(content, 4)
   end
+
   alias_method :iv, :iiii
 
   def iiiii(content)
     indent_by(content, 5)
   end
+
   alias_method :v, :iiiii
 
   def iiiiii(content)
     indent_by(content, 6)
   end
+
   alias_method :vi, :iiiiii
 
   def indent_by(content, num)
@@ -40,18 +43,18 @@ module HtmlHelper
   def render(*args)
     partial_strip(super(*args))
   end
-  
+
   def cancel_button(options = {})
     name = options.delete(:name) || 'Cancel'
     data_link_to = options.delete(:url)
-    
+
     tag :input, options.merge(:value => name, :'data-link-to' => data_link_to, :class => 'btnCtrl')
   end
-  
+
   def text_area(name, content = nil, options = {})
-    super(name, content, { :rows => 5 }.merge(options))
+    super(name, content, {:rows => 5}.merge(options))
   end
-  
+
   def cust_button(text)
     content_tag(:span, text, :class => 'formBtn')
   end
@@ -78,12 +81,14 @@ module HtmlHelper
   end
 
   def side_bar_box(title, &block)
-    
-    content_tag(:h1, title, :class=>'side-bar corners-top') +
-    content_tag(:div, :class => 'corners-bottom sidebar-menu-content' ) do
-      capture(&block)
+    content_tag(:div, :class => 'box-shadow') do
+      content_tag(:h1, title, :class=>'side-bar corners-top') +
+              content_tag(:div, :class => 'corners-bottom sidebar-menu-content') do
+                capture(&block)
+              end
     end
-      
+
+
   end
 
 
