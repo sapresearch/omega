@@ -1,7 +1,7 @@
 $(function() {
 
     $("ul.thumb li").hover(function() {
-        
+
         $(this).css({'z-index' : '10'});
         /*Add a higher z-index value so this image stays on top*/
         $(this).find('img').stop()/* Add class of "hover", then stop animation queue buildup*/
