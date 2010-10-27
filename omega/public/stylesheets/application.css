@@ -15,7 +15,7 @@ table, tbody, tfoot, thead, tr, th, td {
 }
 
 body {
-    background: #FFF;
+    background: #f2f2f2;
         background-image: url("/images/om_sprite.png");
     background-position: 48px 0;
     background-repeat: repeat-x;
@@ -23,7 +23,7 @@ body {
 
 html, body, #wrapper {
     height: 100%;
-    color: #00469C;
+    color: #4096ee;
 }
 
 body > #wrapper {
@@ -85,13 +85,13 @@ h2 {
 }
 
 h3 {
-    color: #016390;
-    font-size: 1.1em;
+    color: #4096ee;
+    font-size: 1.2em;
 }
 
 h3 a {
-    font-size: 1.1em;
-    color: #187CF3;
+    font-size: 1.2em;
+    color: #4096ee;
 }
 h4{
     padding:2px;
@@ -351,7 +351,7 @@ tr.odd {
 }
 
 div.page-content {
-    background: url("/images/content_bg.png") repeat-x top #fff;;
+    background:#fff;
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
@@ -365,20 +365,18 @@ div.sidebar-menu {
 }
 
 h1.side-bar {
-    text-shadow: #FFF 1px 1px 1px;
+    text-shadow: #333 1px 1px 1px;
     margin: 0;
-    background: url("/images/bg_dark.png") bottom repeat-x #dddddd;
-    color: #5E5E5E;
+    background: url("/images/bg_dark.png") bottom repeat-x #80bdfb;
+    color: #fff;
     padding: 5px;
 }
 
 div.sidebar-menu-content {
     margin: 0 0 20px;
     padding: 5px;
-    border-color: #9D9D9D #DDD #DDD;
-    border-style: solid;
-    border-width: 1px;
-    background: #f2f2f2;
+    border: 1px solid #4096ee;
+    background: #fff;
 }
 
 div.sidebar-menu-nav {
@@ -424,7 +422,7 @@ li.list-item {
 }
 
 .first-l{
-    color:#00469C;
+    color:#4096ee;
     font-size:1.7em;
     font-weight:bold
 }
@@ -1050,8 +1048,7 @@ form span.error {
 }
 
 #footer h1 {
-    color: #ddd;
-    text-shadow: #333 1px 1px 0px;
+    color: #4096ee;
 }
 
 #footer table td {

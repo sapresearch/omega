@@ -49,17 +49,17 @@
             <div class="position-wrapper">
 
               <h2>
-                <% if (s.published == true) %>
+               
 
 
                     <%= link_to s.service_name, service_url(s) %>
 
 
-                <% end %>
               </h2>
 
               <p>
                 <%= s.service_type %> Service
+                <%= s.description%>
               </p>
 
             </div>

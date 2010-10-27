@@ -27,11 +27,8 @@
 
 
 </div>
-
 <% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_wheretofind" %>
     <%= render :partial => "layouts/sidebar_volunteering_positions" %>
 <% end %>
 
-<% content_for :rows do %>
-    <%= render :partial => "layouts/sidebar_upcoming" %>
-<% end %>

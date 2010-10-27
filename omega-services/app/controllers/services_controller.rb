@@ -80,6 +80,8 @@ class ServicesController < ApplicationController
     case params[:step]
 
       when 'introduction'
+         @services = Service.all
+    
 
         render "services/wizard_introduction"
 
