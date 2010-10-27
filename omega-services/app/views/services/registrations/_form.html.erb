@@ -5,7 +5,7 @@
     <%= f.fields_for :contact do |c| %>
         <%= c.hidden_field :id %>
         <%= c.hidden_field :title %>
-        <% if @service.service_category.eql?("Enrollable") %>
+
             <p>
               <%= c.label :first_name %>
               <%= c.text_field :first_name %>
@@ -13,22 +13,20 @@
               <%= c.label :last_name %>
               <%= c.text_field :last_name %>
             <p>
-              <%= c.label :emai; %>
+              <%= c.label :email; %>
               <%= c.text_field :email %>
               
 
-        <% else %>
-            <%= c.hidden_field :first_name %>
-            <%= c.hidden_field :last_name %>
-        <% end %>
-        
+            
+
     <% end %>
+    <% unless @registration_fields.nil? %>
     <% @registration_fields.each do |field| %>
         <%= f.fields_for :fieldvalues do |ff| %>
             <%= render 'registration_form', :f => ff, :field => field %>
         <% end %>
     <% end %>
-
+    <%end%>
 
     <div class="bottom-buttons">
       <%= om_button(:icon=>'apply') do %>
