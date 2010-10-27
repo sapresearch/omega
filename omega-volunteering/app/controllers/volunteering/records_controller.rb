@@ -1,4 +1,4 @@
-class Volunteering::RecordsController < ApplicationController
+class Volunteering::RecordsController < Omega::Controller
   respond_to :html, :xml, :json, :js
   breadcrumb 'Volunteering' => :volunteering
   breadcrumb 'Volunteering Applications' => :volunteering_records

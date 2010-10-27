@@ -1,4 +1,4 @@
-class FavoritesController < ApplicationController
+class FavoritesController < Omega::Controller
   respond_to :html, :js, :xml, :json
 
   def index

@@ -1,4 +1,4 @@
-class ServicesController < ApplicationController
+class ServicesController < Omega::Controller
 
   respond_to :html, :xml, :js, :json
 

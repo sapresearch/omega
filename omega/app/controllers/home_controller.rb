@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < Omega::Controller
   respond_to :html
 
   def index

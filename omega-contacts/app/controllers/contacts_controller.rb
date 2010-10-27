@@ -1,4 +1,4 @@
-class ContactsController < ApplicationController
+class ContactsController < Omega::Controller
   respond_to :html, :xml, :js, :json
   sub_layout :determine_sub_layout
   crud_helper Contact, :all => [:all]

@@ -1,6 +1,10 @@
-module Omega::Mixins::Controllers
+module Omega
   module SubLayouts
     extend ActiveSupport::Concern
+
+    included do
+      hide_action :sub_layout
+    end
 
     module ClassMethods
       def sub_layout(sub_layout)

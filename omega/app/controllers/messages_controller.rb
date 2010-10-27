@@ -1,4 +1,4 @@
-class MessagesController < ApplicationController
+class MessagesController < Omega::Controller
   respond_to :html, :js
 
 #  sub_layout 'messages'

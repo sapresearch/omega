@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionsController < Omega::Controller
   respond_to :html, :xml, :json, :js
 
   def index

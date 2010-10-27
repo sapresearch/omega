@@ -1,4 +1,4 @@
-class Contacts::InterestsController < ApplicationController
+class Contacts::InterestsController < Omega::Controller
   respond_to :html, :xml, :json
   crud_helper Contact::Interest
   require_permission Contact::PERM_VIEW

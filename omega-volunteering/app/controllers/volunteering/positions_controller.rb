@@ -1,4 +1,4 @@
-class Volunteering::PositionsController < ApplicationController
+class Volunteering::PositionsController < Omega::Controller
   respond_to :html, :xml, :json, :js
 
   require_permission Volunteering::PERM_VIEW

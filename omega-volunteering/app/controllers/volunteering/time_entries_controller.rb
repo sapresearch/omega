@@ -1,4 +1,4 @@
-class Volunteering::TimeEntriesController < ApplicationController
+class Volunteering::TimeEntriesController < Omega::Controller
 
   respond_to :html, :xml, :json, :js
 

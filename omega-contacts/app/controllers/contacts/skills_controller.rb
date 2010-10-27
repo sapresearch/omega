@@ -1,4 +1,4 @@
-class Contacts::SkillsController < ApplicationController
+class Contacts::SkillsController < Omega::Controller
   respond_to :html, :xml, :json
   crud_helper Contact::Skill
 #  require_permission Contact::PERM_VIEW
