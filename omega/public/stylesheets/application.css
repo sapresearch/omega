@@ -313,7 +313,7 @@ tr.odd {
 
 #breadcrumb {
     padding: 14px 0 0 0;
-    color: #646767;
+    color: #fff;
 }
 
 #breadcrumb a {
@@ -528,15 +528,15 @@ li.list-item {
 
 #topnav li div a {
     text-transform: capitalize;
-    border-bottom: 1px dotted #a32d5a;
-    background: #0365dc;
+    border-bottom: 1px dotted #cf3a72;
+    background: #A32D5A;
     padding: 3px 15px;
     display: block;
 }
 
 /*--Since we declared a link style on the parent list link, we will correct it back to its original state--*/
 #topnav li div a:hover {
-    background: url(../images/nav_a_hover.png) repeat-x;
+    background: url(/images/bg_menu.png) repeat-x;
     text-decoration: none;
 }
 
@@ -666,6 +666,11 @@ span.error, .red {
     -moz-box-shadow: 0 0 10px #ddd;
     -webkit-box-shadow: 0 0 10px #ddd;
     box-shadow: 0 0 10px #ddd;
+}
+.box-shadow-dark{
+    -moz-box-shadow: 0 0 10px #333;
+    -webkit-box-shadow: 0 0 10px #333;
+    box-shadow: 0 0 10px #333;
 }
 
 
