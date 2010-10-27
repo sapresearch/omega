@@ -6,6 +6,7 @@ class User < Omega::Model
   PERM_CHANGE_OWN_USERNAME = 'users_change_own_username'
   PERM_REGISTER            = 'users_register'
   PERM_VIEW                = 'users_view'
+  MAX_USERS_PER_PAGE        = 30
   
   # These are the fields that are allowed when a user is registering (which is different from creating a user which
   # only an admin should be able to do.)

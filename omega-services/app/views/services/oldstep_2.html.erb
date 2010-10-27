@@ -1,7 +1,5 @@
 <%= render :layout => 'layouts/services_wizard' do %>
 
-
-
   <div class="content-services">
 
     <%= form_for @service, :action => "service_wizard" do |f| %>
@@ -83,26 +81,17 @@
         <p class="left2">
 
              <strong>Select Fields You Would Want to Remove</strong>
-
              <br/><br/>
-
              <% @service_fields.each_with_index do |d| %>
 
-
                 <%= f.fields_for "fields", d do |ff| %>
-
                     <%= ff.check_box '_destroy' %> <%= d.field_name %>
                     <%= ff.hidden_field :field_name %>
                     <%= ff.hidden_field :field_type %>
 
-                    <br/>
-
                 <% end %>
-
              <% end %>
-
         <% end %>
-
 
         <div class="bottom-buttons">
 

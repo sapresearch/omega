@@ -1,16 +1,11 @@
   <%= div_for f.object do %>
-      <p class="left-align">
-
     <%= errors_for_model f.object %>
         <%if @service.id == field.service_id%>
-
             <%= f.hidden_field :field_id, :value => field.id %>
-
-
-            <strong><%=field.field_name%></strong>
+        <%=field.field_name%>
             <%= f.text_field :field_value%>
 
         <%end%>
-      </p>
+   
 
 <%end%>

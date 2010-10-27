@@ -13,14 +13,12 @@
         <%= f.hidden_field :service_type %>
         <%= f.hidden_field :icon %>
         <%= f.hidden_field :published %>
-
         <fieldset>
           <legend><%= @service.service_type %></legend>
           <p>
             <%= f.label :category %>
             <%= @service.service_category %>
           </p>
-
           <ul id="service-details" class="elements-list">
             <li class="list-item relative">
               <div class="item-list-actions-wrapper corners">
@@ -53,34 +51,17 @@
                 <%= f.hidden_field :description, :class=>'field-value' %>
               </div>
             </li>
-
-
-
             <% unless @details.empty? %>
-
                 <% @details.each_with_index do |detail, index| %>
                     <% @field =  Service::Field.find_by_id_and_field_category(detail.field_id, "Service Details") %>
-
                         <%= render "form_builder/partials/#{@field.field_type_class}", :index => @field.id %>
-
-                   
-
-
                 <% end %>
             <% end %>
-
-
           </ul>
-
         </fieldset>
-
         <fieldset>
           <legend>Registration Details</legend>
-
-
           <ul id="registration-details" class="elements-list">
-
-
             <% if @service.service_category.eql?("Enrollable") %>
                 <li class="list-item">
                   <label>First Name</label><input type="text" disabled="disabled">
@@ -90,76 +71,42 @@
                 <li class="list-item"><label>Phone</label><input type="text" disabled="disabled"></li>
                 <li class="list-item">
                   <label>Notest</label><textarea disabled="disabled"></textarea></li>
-
-
             <% else %>
-
                 <strong>
                   Email <br/>
                   Phone Numbers <br/>
                   Notes <br/>
                   Questions <br/>
-
-
                 </strong>
-
             <% end %>
           </ul>
-
           <% unless @registration_fields.empty? %>
-
               <% @registration_fields.each_with_index do |field, index| %>
-
                   <%= f.fields_for "fields_attributes[#{index}]", field do |ff| %>
-
                       <%= ff.hidden_field :id %>
-
                       <%= ff.hidden_field :service_id %>
                       <%= ff.hidden_field :field_category %>
-
                       <strong><%= field.field_name %> </strong>
-
-
                   <% end %>
               <% end %>
           <% end %>
-
-
         </fieldset>
-
-
         <div class="bottom-buttons">
-
           <%= om_button(:icon=>'back') do %>
               <%= link_to 'Back', service_wizard_services_url(:step => 1) %>
           <% end %>
           <%= om_button(:icon=>'save') do %>
               <%= f.submit "Save", :name => "save" %>
           <% end %>
-
           <%= om_button(:icon=>'next') do %>
               <%= f.submit "Next", :name => "next" %>
           <% end %>
-
           <%#= om_button(:icon=>'cancel') do %>
           <%#= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
           <%# end %>
-
-
-
-
     <% end %>
     </div>
-
-
-
-
-
 <% end %>
-<div id="form-builder">
-
-</div>
-
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_form_builder_elements" %>
     <%= render :partial => "layouts/sidebar_form_builder_edit" %>

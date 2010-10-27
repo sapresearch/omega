@@ -1,5 +1,29 @@
-<h1>User#index</h1>
-<p>Find me in app/views/user/index.html.erb</p>
 
-<%= debug @users %>
-<%= debug @user %>
+<h1 class="page-content corners-top">
+User Listr
+</h1>
+<div class="page-content corners-bottom">
+  <ul id="users-list">
+    <% @users.each do |user| %>
+        <li class="list-item relative">
+          <div class="item-list-actions-wrapper corners">
+            <div class="item-list-actions">
+              <%= om_button(:plain => true, :icon=>'edit') do %>
+                 sdsds
+              <% end %>
+            </div>
+          </div>
+          <div>
+            <%= om_button(:plain => true, :icon => 'user') do %>
+                <%= link_to "#{user.username} - #{user.first_name} #{user.last_name}", edit_user_path(user), :class => 'blue' %>
+            <% end %>
+
+          </div>
+
+        </li>
+    <% end %>
+  </ul>
+    <%= will_paginate @users %>
+
+  <div class="clear"></div>
+</div>

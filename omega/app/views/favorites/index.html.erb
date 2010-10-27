@@ -1,9 +1,7 @@
 <% require_javascript 'omega_favorites' %>
-
 <h1 class="page-content corners-top">
   Favorites
 </h1>
-
 <div class="page-content corners-bottom">
   <div class="right">
     <%= om_button(:icon=>'sort-az') do %>
@@ -13,7 +11,6 @@
         <%= link_to 'sort Z-A', messages_path(:subject => 'desc') %>
     <% end %>
   </div>
-
   <div class="clear"></div>
   <ul id="favorites-list">
     <% @favorites.each do |favorite| %>
@@ -23,37 +20,16 @@
               <%= om_button(:plain => true, :icon=>'delete') do %>
                   <%= link_to 'Remove as favorite', favorite_path(favorite.item), :method=> :delete %>
               <% end %>
-
               <%= om_button(:plain => true, :icon=>'next') do %>
                   <%= link_to_favorite(favorite) %>
-
               <% end %>
-
-
             </div>
           </div>
-
-
           <%= truncate(favorite.item.to_s, :length=> 160) %>
-
-
         </li>
-
     <% end %>
   </ul>
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_favorites_menu" %>
 <% end %>

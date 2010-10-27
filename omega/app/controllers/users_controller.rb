@@ -3,12 +3,15 @@ class UsersController < Omega::Controller
   crud_helper User
   require_permission User::PERM_VIEW, :except => [:register, :create]
   require_permission User::PERM_ADMIN, :only  => [:new, :edit, :create, :update, :destroy]
+   breadcrumb 'Users' => :users
 
   def index
+    @users = @users.paginate(:page => params[:page], :per_page => User::MAX_USERS_PER_PAGE)
     respond_with(@users)
   end
 
   def show
+     
     respond_with(@user)
   end
 
