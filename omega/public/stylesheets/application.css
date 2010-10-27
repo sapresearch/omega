@@ -519,7 +519,7 @@ li.list-item {
     top: 38px;
     display: none;
     width: 200px;
-    background: #0365dc;
+    background: #a32d5a;
     color: #fff;
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 4px 4px;
@@ -528,7 +528,7 @@ li.list-item {
 
 #topnav li div a {
     text-transform: capitalize;
-    border-bottom: 1px dotted #448BE2;
+    border-bottom: 1px dotted #a32d5a;
     background: #0365dc;
     padding: 3px 15px;
     display: block;
