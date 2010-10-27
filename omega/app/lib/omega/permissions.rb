@@ -18,7 +18,7 @@ module Omega
     end
     
     def require_permissions(*permissions)
-      unless (lacked_permissions = permissions.reject { |p| current_user.has_permission?(permission) }).empty?
+      unless (lacked_permissions = permissions.reject { |p| current_user.has_permission?(p) }).empty?
         raise PermissionsRequiredError.new(lacked_permissions, params)
       end
 
