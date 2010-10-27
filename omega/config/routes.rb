@@ -22,7 +22,7 @@ Omega::Module.routes.draw do
 
   resources :users do
     collection do
-      get :register
+      match :register
       get :autocomplete
     end
   end

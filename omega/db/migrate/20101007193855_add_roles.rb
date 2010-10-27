@@ -10,9 +10,10 @@ class AddRoles < ActiveRecord::Migration
       :locked      => true
     },
     'authenticated_user' => {
-      :name        => 'Authenticated User',
-      :description => '',
-      :locked      => true
+      :name         => 'Authenticated User',
+      :description  => '',
+      :default_role => true,
+      :locked       => true
     },
     'editor' => {
       :name        => 'Editor',

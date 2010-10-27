@@ -1,8 +1,8 @@
 class UsersController < Omega::Controller
   respond_to :html, :xml, :js, :json
-  crud_helper User, :new => [:register]
+  crud_helper User
   require_permission User::PERM_VIEW, :except => [:register, :create]
-  require_permission User::PERM_ADMIN, :only   => [:new, :edit, :update, :destroy]
+  require_permission User::PERM_ADMIN, :only  => [:new, :edit, :create, :update, :destroy]
 
   def index
     respond_with(@users)
@@ -17,7 +17,12 @@ class UsersController < Omega::Controller
   end
 
   def register
-    params['registration'] = true
+    if request.post?
+      @user = User.register(params[:user])
+    else
+      @user = User.new
+    end
+
     respond_with(@user)
   end
 
@@ -26,12 +31,7 @@ class UsersController < Omega::Controller
   end
 
   def create
-    if params['registration']
-      @user = User.register(params[:user])
-    else
-      require_permission User::PERM_ADMIN
-      @user = User.create(params[:user])
-    end
+    @user = User.create(params[:user])
 
     respond_with(@user)
   end
@@ -52,13 +52,8 @@ class UsersController < Omega::Controller
     @users.limit(params[:limit]) if params[:limit]
 
     respond_with(@users) do |format|
-      #format.psv { render :text => @contacts.map { |c| "#{c.last_name} #{c.first_name}|#{c.id}" }.join("\n") }
       format.json do
-        if @users.any?
-          render :json  =>   @users.map { |c| {:id => c.id, :label => "#{c.last_name}  #{c.first_name}", :value => c.id} }
-        else
-          render :json =>  [{:label => "No records founds", :value => "sds"}]
-        end
+        render :json  =>   @users.map { |c| {:id => c.id, :label => "#{c.last_name}  #{c.first_name}", :value => c.id} }
       end
     end
   end

@@ -1,6 +1,6 @@
-<%= form_for @user do |f| %>
+<%= form_for @user, :url => register_users_path do |f| %>
     <%= errors_for_form @user %>
-
+	
     <p>
       <%= f.label :user %>
       <%= f.text_field(:username, :'data-tooltip' => 'Plese provide username with at least 2 characters') %>
@@ -36,8 +36,6 @@
 	  <%= f.label :time_zone %>
 	  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
 	</p>
-
-	<%= render 'role_assignments', :form => f %>
 
     <%= om_button(:icon => 'save') do %>
         <%= f.submit %>
