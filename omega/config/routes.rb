@@ -43,13 +43,12 @@ Omega::Module.routes.draw do
 
   root :to => 'home#index'
 
-  
-  scope :module => 'omega' do
-    match '*url' => '#not_found'
-  end
-
   scope :path => 'form_builder', :controller => :form_builder do
     get :dispatch_ui_element, :path => 'dispatch_ui_element/:element'
     get :dispatch_element_properties, :path => 'dispatch_element_properties/:element'
+  end
+  
+  scope :module => 'omega' do
+    match '*url' => '#not_found'
   end
 end

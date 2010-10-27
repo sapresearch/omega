@@ -27,8 +27,9 @@ module Omega
       included do
         helper HandlerHelper
 
-
-        rescue_from Exception, :with => :handle_error if Rails.env.production?
+        unless Rails.env.development?
+          rescue_from Exception, :with => :handle_error
+        end
       end
 
       def inherited(base)
