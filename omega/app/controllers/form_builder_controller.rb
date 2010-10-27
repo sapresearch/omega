@@ -1,4 +1,4 @@
-class FormBuilderController < ApplicationController
+class FormBuilderController < Omega::Controller
 
   respond_to :html, :xml, :js, :json
 

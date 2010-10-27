@@ -1,144 +1,114 @@
 require 'csv'
+
 require 'array.rb'
 
-class Contacts::ImportsController < ApplicationController
+
+class Contacts::ImportsController < Omega::Controller
 
   respond_to :html, :js, :json, :xml
   
   def csv_import_wizard
 
-     if session[:import_id] == nil
-
+    if params[:id].nil?
       @import = Contact::Import.new
+    else
+      @import = Contact::Import.find_by_id(params[:id])
+    end
 
-     else
-
-      @import = Contact::Import.find_by_id(session[:import_id])
-
-     end
-
-     session[:current_step] = params[:step]
+    session[:current_step] = params[:step]
+    session[:import_id] = params[:id]
 
     @contact_fields = get_omega_contact_fields
     @mapping = get_mapping_hash
+
+
 
     case params[:step]
       
       when '1'
         render "contacts/imports/step_1"
-        session[:current_page] = "upload"
       when '2'
         render "contacts/imports/step_2"
-        session[:current_page] = "mapping"
       when '3'
         render "contacts/imports/step_3"
-        session[:current_page] = "import"
-      when ''
-        session[:import_id] == nil
-
+      when '4'
+        render "contacts/imports/step_4"
     end
+
  end
 
   def show
 
   end
 
-  def new
-    @import = Contact::Import.new
-  end
-
   def create
 
+     if (params[:commit] == "Import")
+
        @import = Contact::Import.create(params[:contact_import])
-       session[:import_id] = @import.id
-       
        process_csv(@import)
 
-       if session[:current_page] == 'upload'
-       redirect_to csv_import_wizard_contact_imports_url(:step => session[:current_step].to_i+1)
-       else
+       @current_step = session[:current_step]
+       redirect_to csv_import_wizard_contact_imports_url(:step => @current_step.to_i+1, :id => @import)
 
-       end
-
+     end
+    
   end
 
   def edit
-    @import = Contact::Import.find(session[:import_id])
+
+    @import = Contact::Import.find(params[:id])
+
   end
 
   def update
 
-    @import = Contact::Import.find(session[:import_id])
-
+    @import = Contact::Import.find(params[:id])
     @import.update_attributes(params[:contact_import])
+
+
+    @current_step = session[:current_step]
 
     if (params[:commit] == "Update")
 
-      $rows = $rows.safe_transpose
+       #  params[:discard].each do |k,v|
+           
+        #      $rows[0].delete(k)
 
-      params[:discard].each do |k,v|
+         #end
 
-        if (v=='1')
+      logger.debug($rows.safe_transpose)
+
+
+         params[:discard].each do |k,v|
+
+         if (v!=0)
+           
          $rows.each do |row|
-            row.slice!(0..row.length) if row.include?(k)
+
+            row.slice!(0) if row.include?(k)
+
          end
-        end
-      end
 
-      $rows = $rows.safe_transpose
+         end
 
-      redirect_to csv_import_wizard_contact_imports_url(:step => session[:current_step])
+         end
+
+      redirect_to csv_import_wizard_contact_imports_url(:step => @current_step, :id => @import)
 
     end
 
     if (params[:commit] == "Finalize")
-
-
-      $rows[0].each do |column|
-
-      unless column.nil?
-
-      params[:csv_field].each do |k,v|
-
-       if k.include?(column)
-          index = $rows[0].index(k)
-          $rows[0][index] = v
-       end
-
-      end
-      end
-      end
-
-      redirect_to csv_import_wizard_contact_imports_url(:step => session[:current_step].to_i+1)
-    end
-
-    if (params[:commit] == "Import")
-
-      $rows.each do |row|
-
-        row.delete_if {|x| x == nil}
+          redirect_to csv_import_wizard_contact_imports_url(:step => @current_step.to_i+1, :id => @import)
 
     end
 
-
-    heading_row = $rows.shift.map { |heading| Contact.connection.quote_column_name(heading) }.join(",")
-
-    $rows.each do |row|
-
-    unless row.empty?
-
-        row_data = row.map { |item| Contact.connection.quote(item) }.join(",")
-        Contact.connection.execute("INSERT INTO %s(%s) VALUES (%s);" % ["contacts", heading_row, row_data])
-    end
-    end
-
-    redirect_to contact_imports_url()
-      
-    end
-
+    
   end
 
-  private #---------------------------------------------------------------------------------------------------
+
+
+  private #-----------------------------------------------------
 
   def process_csv(import)
 
@@ -166,6 +136,23 @@ class Contacts::ImportsController < ApplicationController
     
   end
 
+  def new_contact(column)
+
+
+     @contact = Contact.new
+
+     @contact.email = column[0]
+     @contact.title = column[1]
+     @contact.first_name = column[2]
+     @contact.last_name = column[3]
+     @contact.phone_numbers.build
+     @contact.phone_numbers.first.number_type = column[5]
+     @contact.phone_numbers.first.number = column[4]
+
+     @contact.save
+
+  end
+
   def get_omega_contact_fields
 
     @contacts = Contact.columns()
@@ -177,7 +164,6 @@ class Contacts::ImportsController < ApplicationController
   end
 
   def get_mapping_hash
-    
     @mapping = {     "title" => ['Individual Prefix', 'Prefix', 'Salutation', 'Title', 'prefix', 'individual prefix'],
                      "first_name" => ['First Name', 'First name', 'First_name', 'first_Name', 'first name', 'firstname', 'Firstname'],
                      "last_name" => ['Last Name', 'Last name', 'Last_name', 'last_Name', 'last name', 'lastname', 'Lastname'],
@@ -189,6 +175,9 @@ class Contacts::ImportsController < ApplicationController
                      "state" => [ 'State', 'Province', 'province'],
                      "country" => ['Country'],
                      "email" => ['Email', 'e-mail', 'E-mail']
+
     }
   end
+
+
 end

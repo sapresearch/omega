@@ -43,9 +43,10 @@ Omega::Module.routes.draw do
 
   root :to => 'home#index'
 
-#  namespace :form_builder do
-#    resources :custom_fields
-#  end
+  
+  scope :module => 'omega' do
+    match '*url' => '#not_found'
+  end
 
   scope :path => 'form_builder', :controller => :form_builder do
     get :dispatch_ui_element, :path => 'dispatch_ui_element/:element'

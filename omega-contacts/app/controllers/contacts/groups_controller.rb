@@ -1,4 +1,4 @@
-class Contacts::GroupsController < ApplicationController
+class Contacts::GroupsController < Omega::Controller
   respond_to :html, :xml, :js, :json
   sub_layout :determine_sub_layout
   crud_helper Contact::Group, :find => [:assign, :remove]

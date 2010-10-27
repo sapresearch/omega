@@ -1,9 +1,11 @@
-module Omega::Mixins::Controllers
+module Omega
   module CurrentUser
     extend ActiveSupport::Concern
 
     included do
       before_filter :get_current_user
+
+      hide_action :current_user
     end
 
     def current_user

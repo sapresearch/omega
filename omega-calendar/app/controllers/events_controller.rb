@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+class EventsController < Omega::Controller
 
   respond_to :html, :xml, :js, :json
   respond_to :ics, :only => [:index]

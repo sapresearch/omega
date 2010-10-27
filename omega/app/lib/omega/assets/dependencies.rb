@@ -53,8 +53,8 @@ module Omega
           self.response_body = Array.wrap(response_body).collect do |part|
             if head = part.index('</head>') # try head first
               part.insert(head, _get_dependencies_for_html + "\n")
-  #            elsif body = part.index('</body>') # try body second
-  #              part.insert(body, _get_dependencies_for_html + "\n")
+#            elsif body = part.index('</body>') # try body second
+#              part.insert(body, _get_dependencies_for_html + "\n")
             end
             part
           end

@@ -30,11 +30,19 @@ module Omega
     config.omega.assets.use_dependencies = true
 
     initializer :'omega.assets.middleware' do |app|
-      if Rails.env == 'development'
+      if Rails.env.development?
         app.config.middleware.insert(0, Assets::Refresher, config.omega.assets)
       else
         Assets.refresh
       end
     end
+
+#    initializer :'omega.errors.middleware' do |app|
+#      middleware = app.config.middleware
+#
+#      unless Rails.env.test?
+#        middleware.swap(ActionDispatch::ShowExceptions, Omega::HandleErrors)
+#      end
+#    end
   end
 end

@@ -1,8 +1,4 @@
-<%# require_javascript 'thirdParty/jquery.validate.js' %>
-<%# require_javascript 'validations/new_user.js' %>
-
-
-<%= form_for @user, :'data-validations' => 'user[contact,role]' do |f| %>
+<%= form_for @user do |f| %>
     <%= errors_for_form @user %>
     <%= hidden_field_tag :registration, params['registration'] %>
     <p>

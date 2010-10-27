@@ -1,4 +1,4 @@
-class CalendarsController < ApplicationController
+class CalendarsController < Omega::Controller
 
   respond_to :html, :xml, :js, :json
   breadcrumb 'Calendar' => :calendars

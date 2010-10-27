@@ -1,4 +1,4 @@
-class Services::FieldsController < ApplicationController
+class Services::FieldsController < Omega::Controller
 
     respond_to :html, :xml, :js, :json
 

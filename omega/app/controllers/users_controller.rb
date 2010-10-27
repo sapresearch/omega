@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < Omega::Controller
   respond_to :html, :xml, :js, :json
   crud_helper User, :new => [:register]
   require_permission User::PERM_VIEW, :except => [:register, :create]

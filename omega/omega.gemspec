@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.executables        = ['omega']
   s.default_executable = 'omega'
 
-  s.add_dependency('accepts-flattened-values', '>=0.1.3')
-
-  s.add_dependency('will_paginate', '~>3.0')
+  s.add_dependency('rails', '~>3.0.1')
+  s.add_dependency('accepts-flattened-values', '~>0.1.3')
+  s.add_dependency('will_paginate', '~>3.0.pre2')
 end

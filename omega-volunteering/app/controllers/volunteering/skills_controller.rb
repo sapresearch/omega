@@ -1,4 +1,4 @@
-class Volunteering::SkillsController < ApplicationController
+class Volunteering::SkillsController < Omega::Controller
   def index
     
   end
