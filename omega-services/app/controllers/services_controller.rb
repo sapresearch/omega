@@ -109,14 +109,15 @@ class ServicesController < ApplicationController
     end
 
     @service = Service.new
-
+    
     @type = Service::Type.find_by_service_type(params[:service_library][:service_type])
 
     @service.service_category = @type.service_category
+    
     @service.description = @type.description
     @service.service_type = @type.service_type
     @service.published = '0'
-    @service.icon = File.new(@type.icon.path)
+#    @service.icon = File.new(@type.icon.path)
 
     @service.save
 
@@ -143,18 +144,31 @@ class ServicesController < ApplicationController
     @service.update_attributes(params[:service])
 
     # build nested attributes - fields ----------
+    if fields = params[:fields]
+      @service.fields_attributes = fields
 
-    unless params[:fields].nil?
-      params[:fields].each_value { |field| @service.fields.build(field)
-      }
+      @service.fields.each do |field|
+        field.build_detail unless field.detail
+        field.detail.service_id ||= @service.id
+      end
     end
 
+#    unless params[:fields].nil?
+#      params[:fields].each_value { |field| @service.fields.build(field)
+#        @service.fields.each do |s|
+#          s.service_id = session[:service_id]
+#          s.detail.service_id = session[:service_id]
+#        end
+#      }
+#    end
     #-------------------------------------------------------
 
     @current_step = session[:current_step]
 
     if params[:save] # Update the object in the wizard and remain on the current step
+
       @service.save
+
       redirect_to service_wizard_services_url(:step => 2)
 
     end
@@ -226,6 +240,7 @@ class ServicesController < ApplicationController
 
     @field = Service::Field.new
     @field.build_detail
+    
 
   end
 

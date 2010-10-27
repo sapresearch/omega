@@ -8,7 +8,7 @@ $('#contacts_contact_pane').empty().append('<%= escape_javascript(render(:partia
         $('#assign-trigger').click(function() {
             $('#contact-assignment').dialog('open');
         });
-$('#contact-assignment').dialog('close')
+        $('#contact-assignment').dialog('close');
         <% if request.post? %>
         $('#contacts ul').append('<%= escape_javascript(render('contact_row', :contact_row => @contact)) %>');
         <% elsif request.put? %>

@@ -1,0 +1,8 @@
+<%= hidden_field_tag "fields[#{index}][id]", @field.id if @field.id? %>
+<%= hidden_field_tag "fields[#{index}][field_name]", @field.field_name %>
+<%= hidden_field_tag "fields[#{index}][field_type]", @field.field_type %>
+<%= hidden_field_tag "fields[#{index}][field_type_class]", @field.field_type_class %>
+<%= hidden_field_tag "fields[#{index}][detail_attributes][id]", @field.detail.id if @field.detail.id? %>
+<%= hidden_field_tag "fields[#{index}][detail_attributes][field_value]", @field.detail.field_value %>
+<%= hidden_field_tag "fields[#{index}][_destroy]", 'false' %>
+<%= hidden_field_tag "fields[#{index}][field_category]", "Service Details" %>

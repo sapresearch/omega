@@ -1,0 +1,55 @@
+<%= side_bar_box('Ui Elements') do %>
+
+    <ul id="ui-elements">
+      <li>
+        just click on one of the elements below to add it to the form
+      </li>
+      <li>
+        <%= om_button(:plain => true, :icon => 'ui-label') do %>
+            <span class="blue add-ui-em" ui-data="labelfield">
+            Field with label aside 
+            </span>
+
+        <% end %>
+
+      </li>
+      <li>
+        <%= om_button(:plain => true, :icon => 'ui-textarea') do %>
+            <span class="blue add-ui-em" ui-data="text">
+            Text
+            </span>
+
+        <% end %>
+
+      </li>
+      <li>
+        <%= om_button(:plain => true, :icon => 'ui-textfield') do %>
+            <span class="blue add-ui-em" ui-data="input">
+            Input
+            </span>
+
+        <% end %>
+
+      </li>
+      <li>
+        <%= om_button(:plain => true, :icon => 'ui-selectbox') do %>
+            <span class="blue add-ui-em" ui-data="selectbox">
+            Selectbox
+            </span>
+
+        <% end %>
+
+      </li>
+      <li>
+        <%= om_button(:plain => true, :icon => 'calendar') do %>
+            <span class="blue add-ui-em" ui-data="date">
+            Date
+            </span>
+
+        <% end %>
+
+      </li>
+
+    </ul>
+
+<% end %>

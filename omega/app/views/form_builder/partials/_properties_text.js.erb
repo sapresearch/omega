@@ -1,0 +1,11 @@
+$('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "form_builder/partials/properties_text.html") %>').effect('highlight');   
+        $('#ui-em-<%="#{@em_id}"%>').append('<input type="hidden" value="Service Details" name="fields[<%="#{@em_id}"%>][field_category]" >');
+
+        var field_value_preview = $("#<%="value-preview-#{@em_id}"%>");
+        var field_value_submit = $('#fields_<%=@em_id%>_detail_attributes_field_value');
+
+        $('#edit-field-value').keyup(function() {
+            var v = $(this).val();
+            field_value_preview.empty().append(v)
+            field_value_submit.val(v);
+        });

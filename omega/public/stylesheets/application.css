@@ -171,7 +171,7 @@ form label {
     font-weight: bold;
     min-width: 120px;
     text-align: right;
-
+    margin:0 10px;
     text-transform: capitalize;
 
 }
@@ -185,11 +185,11 @@ fieldset {
 }
 
 legend {
-    text-transform: uppercase;
+
     font-size: 1.4em;
-    color: #00469C;
+    color: #333;
     padding: 0 0.5em;
-    font-style: italic;
+
 
 }
 
@@ -941,7 +941,18 @@ span.om-icon-back {
 .om-icon-clipboard-list {
     background-position: 0 -880px;
 }
-
+.om-icon-ui-textfield {
+    background-position: 0 -896px;
+}
+.om-icon-ui-textarea {
+    background-position: 0 -912px;
+}
+.om-icon-ui-label {
+    background-position: 0 -928px;
+}
+.om-icon-ui-selectbox {
+    background-position: 0 -944px;
+}
 /*END BUTTONS*/
 
 /*Pagination */

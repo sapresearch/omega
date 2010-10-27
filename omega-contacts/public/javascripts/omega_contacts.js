@@ -36,7 +36,7 @@ $(function() {
         }
     });
 
-var $clear_filter = $('#clear-filter');
+    var $clear_filter = $('#clear-filter');
     $ac_contacts.keyup(function() {
         this.value == '' ? $clear_filter.hide() : $clear_filter.show();
     });
@@ -52,6 +52,18 @@ var $clear_filter = $('#clear-filter');
         fillSpace: true
     });
 
+    /**
+     * show the panel to add or remove a contact from a group
+     */
+    $('#contact-assignment').dialog({ autoOpen: false,
+        title: 'Assign Contacts',
+        height:400,
+        width:600
+    });
+    $('#assign-trigger').click(function() {
+        $('#contact-assignment').dialog('open');
+    });
+    $('#contact-assignment').dialog('close');
 
     /**
      * contact group assignment by draging and dropping
@@ -86,7 +98,7 @@ var $clear_filter = $('#clear-filter');
 /**
  * retrieve contacts obejct. create the html structure for the contact list
  * empty the current contact list and append the new contacts
- * if we get a group id passed in we show the contacts of a particular group, if not we show all contacts 
+ * if we get a group id passed in we show the contacts of a particular group, if not we show all contacts
  * @param contacts
  * @param group_id
  * @param group_name
