@@ -1,5 +1,5 @@
 module FormBuilder
-  class CustomFieldsController < ApplicationController
+  class CustomFieldsController < Omega::Controller
     respond_to :html, :js
 
     def create
