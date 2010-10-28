@@ -6,16 +6,16 @@
         <%= c.hidden_field :id %>
         <%= c.hidden_field :title %>
         <% if @service.service_category.eql?("Enrollable") %>
+            <%= contact.first_name %>
             <p>
               <%= c.label :first_name %>
-              <%= c.text_field :first_name %>
+              <%= c.text_field :first_name  %>
             <p>
               <%= c.label :last_name %>
               <%= c.text_field :last_name %>
             <p>
               <%= c.label :emai; %>
               <%= c.text_field :email %>
-              
 
         <% else %>
             <%= c.hidden_field :first_name %>
@@ -28,8 +28,6 @@
             <%= render 'registration_form', :f => ff, :field => field %>
         <% end %>
     <% end %>
-
-
     <div class="bottom-buttons">
       <%= om_button(:icon=>'apply') do %>
           <%= button_to 'Register!', url_for(params.merge(:name => 'desc')) %>

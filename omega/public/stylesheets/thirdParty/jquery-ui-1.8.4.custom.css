@@ -117,7 +117,7 @@
 }
 
 .ui-widget-content {
-    border: 1px solid #00469c;
+    border: 1px solid #421325;
     background: #ffffff url(/images/ui-bg_flat_1000_ffffff_40x100.png) 50% 50% repeat-x;
     color: #2d302d;
 }
@@ -127,8 +127,8 @@
 }
 
 .ui-widget-header {
-    border: 1px solid #00469c;
-    background: #00469c url(/images/ui-bg_flat_100_00469c_40x100.png) 50% 50% repeat-x;
+    border: 1px solid #cf3a72;
+    background: #cf3a72 url(/images/ui-bg_flat_100_cf3a72_40x100.png) 50% 50% repeat-x;
     color: #ffffff;
     font-weight: bold;
 }
@@ -140,8 +140,8 @@
 /* Interaction states
 ----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-    border: 1px solid #00469c;
-    background: #00469c url(/images/ui-bg_flat_100_00469c_40x100.png) 50% 50% repeat-x;
+    border: 1px solid #cf3a72;
+    background: #cf3a72 url(/images/ui-bg_flat_100_cf3a72_40x100.png) 50% 50% repeat-x;
     font-weight: normal;
     color: #ffffff;
 }
@@ -164,8 +164,8 @@
 }
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-    border: 1px solid #002a5c;
-    background: #002a5c url(/images/ui-bg_flat_100_002a5c_40x100.png) 50% 50% repeat-x;
+    border: 1px solid #421325;
+    background: #421325 url(/images/ui-bg_flat_100_421325_40x100.png) 50% 50% repeat-x;
     font-weight: normal;
     color: #fff;
 }
