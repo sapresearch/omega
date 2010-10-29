@@ -3,8 +3,8 @@ module Omega
     extend ActiveSupport::Concern
 
     module ClassMethods
-      def undecorated_name(tram = self)
-        tram.to_s.gsub(/::Tram$/, '')
+      def undecorated_name(mod = self)
+        mod.to_s.gsub(/::Module$/, '')
       end
     end
 
