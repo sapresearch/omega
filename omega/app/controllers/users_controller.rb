@@ -1,7 +1,7 @@
 class UsersController < Omega::Controller
   respond_to :html, :xml, :js, :json
   crud_helper User
-  require_permission User::PERM_VIEW, :except => [:register, :create]
+  require_permission User::PERM_VIEW, :except => [:register, :create, :lost_username, :lost_password]
   require_permission User::PERM_ADMIN, :only  => [:new, :edit, :create, :update, :destroy]
   breadcrumb 'Users' => :users
 
@@ -30,6 +30,10 @@ class UsersController < Omega::Controller
   end
 
   def edit
+    unless @user == current_user
+      require_permission User::PERM_ADMIN
+    end
+
     respond_with(@user)
   end
 
@@ -68,6 +72,20 @@ class UsersController < Omega::Controller
         render :json  =>   @users.map { |c| {:id => c.id, :label => "#{c.last_name}  #{c.first_name}", :value => c.id} }
       end
     end
+  end
+
+  def lost_username
+    @users = User.where('email = ?', params[:email])
+
+    if @users.any?
+      
+    end
+
+    respond_with(@users)
+  end
+
+  def lost_password
+    
   end
 
 end

@@ -43,6 +43,8 @@ jQuery(function($) {
     /* jrails adapter for jquery ajax support in rails */
 
     var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta[name=csrf-param]').attr('content');
+	var flash_session_key = $('meta[name=flash-session-key]').attr('content'),
+		flash_session_cookie = $('meta[name=flash-session-cookie]').attr('content');
 
     $.fn.extend({
         /**
@@ -276,46 +278,65 @@ jQuery(function($) {
             $(".drop_down dd ul").hide();
     });
 
-/*	var uploadifyScriptData = {};
-	uploadifyScriptData['uploadify'] = true;
-	uploadifyScriptData[csrf_param]  = csrf_token;
+   $('#right').find('div.sidebar-menu-content li:last-child').addClass('menu-li-last-divider');
 
-	$('input[type=file]').each(function() {
-		var input = $(this);
+	$.fn.extend({
+		liveUpload: function() {
+			var uploadifyScriptData = {};
+			uploadifyScriptData['uploadify']       = true;
+			uploadifyScriptData[flash_session_key] = flash_session_cookie;
+			uploadifyScriptData[csrf_param]        = encodeURIComponent(encodeURIComponent(csrf_token));
+			uploadifyScriptData['_accept']         = 'application/json';
 
-		var id   = input.attr('id'),
-			name = input.attr('name');
+			return $(this).each(function() {
+				var input = $(this);
 
-		input.attr('name', null);
+				if (input.data('liveUploaded')) return; // continue
+				else input.data('liveUploaded', true);
 
-		var newInput = $(document.createElement('input'))
-		                  .attr('id', id + '_upload')
-		                  .attr('name', name)
-		                  .attr('disabled', 'true')
-		                  .css('display', 'none');
 
-		input.uploadify({
-			auto: true,
-			uploader: '/uploadify/uploadify.swf',
-			script: '/uploads.json',
-			cancelImg: '/uploadify/cancel.png',
-			buttonText: 'Upload',
-			scriptData: uploadifyScriptData,
-			onComplete: function(event, queue, file, response, data) {
-				var result = $.parseJSON(response);
-				var upload = result.upload;
-				newInput.val(upload.id + ' - ' + upload.filename);
-				newInput.show();
-			},
-			onError: function(event, queue, file, error) {
-				alert("onError");
-			}
-		});
+				var id   = input.attr('id'),
+					name = input.attr('name');
 
-		input.after(newInput);
-	});*/
+				input.attr('name', null);
 
-   $('#right').find('div.sidebar-menu-content li:last-child').addClass('menu-li-last-divider')
+				var newInput = $(document.createElement('input'))
+								  .attr('id', id + '_upload')
+								  .attr('type', 'hidden')
+								  .attr('name', name)
+								  .css('display', 'none');
+				var displayInput = $(document.createElement('input'))
+									   .attr('id', id + '_display')
+									   .attr('type', 'text')
+									   .attr('disabled', 'true')
+									   .css('display', 'none');
+
+				input.uploadify({
+					auto: true,
+					uploader: '/uploadify/uploadify.swf',
+					script: '/uploads',
+					cancelImg: '/uploadify/cancel.png',
+					buttonText: 'Upload',
+					scriptData: uploadifyScriptData,
+					onComplete: function(event, queue, file, response, data) {
+						var result = $.parseJSON(response);
+						var upload = result.upload;
+
+						newInput.val(upload.id);
+						displayInput.val(upload.upload_file_name);
+						displayInput.show();
+					},
+					onError: function(event, queue, file, error) {
+						alert("onError");
+					}
+				});
+
+				input.after(newInput).after(displayInput);
+			});
+		}
+	});
+
+	$('input[type=file]').liveUpload();
 });
 
 

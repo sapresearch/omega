@@ -5,10 +5,12 @@
 <p>
     <%= f.label :user %>
     <%= f.text_field :username, :class => 'inputMid' %>
+    <%= link_to 'Lost your username?', lost_username_path %>
 </p>
 <p>
     <%= f.label :password %>
     <%= f.password_field :password, :class => 'inputMid' %>
+    <%= link_to 'Lost your password?', lost_password_path %>
 </p>
 
     <span class="om-button">

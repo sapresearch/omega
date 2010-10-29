@@ -29,6 +29,9 @@ Omega::Module.routes.draw do
     end
   end
 
+  match 'lost_username' => 'users#lost_username'
+  match 'lost_password' => 'users#lost_password'
+
   resources :roles
   resources :permissions, :only => [:index, :show]
 

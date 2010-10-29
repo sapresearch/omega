@@ -1,4 +1,4 @@
-class Contact < ActiveRecord::Base
+class Contact < Omega::Model
   PERM_ADMIN     = 'users_admin'
   PERM_EDIT_SELF = 'contacts_edit_self'
   PERM_VIEW      = 'users_view'
@@ -21,6 +21,8 @@ class Contact < ActiveRecord::Base
 
   has_many :addresses,     :as => :contact, :dependent => :destroy
   has_many :phone_numbers, :as => :contact, :dependent => :destroy
+
+  has_upload :photo
 
   accepts_flattened_values_for :interests, :skills, :value => :name
 

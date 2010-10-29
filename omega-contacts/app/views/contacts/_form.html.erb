@@ -1,9 +1,14 @@
 <% require_javascript 'thirdParty/jquery.validate.js', 'thirdParty/jquery.validate.js', 'validations/new_contact.js' %>
+<% require_stylesheet 'uploadify/uploadify' %>
+<% require_javascript 'uploadify/swfobject', 'uploadify/jquery.uploadify.v2.1.0' %>
 
-
-<%= form_for @contact, :remote => true do |f| %>
+<%= form_for @contact, :remote => true, :html => { :multipart => true } do |f| %>
     <%= errors_for_form @contact %>
     <fieldset>
+	<p>
+	  <%= f.label :photo %>
+	  <%= f.file_field :photo %>
+	</p>
     <p>
       <%= f.label t(:title) %>
       <%= f.select :title, options_for_select(Contact::TITLES) %>
