@@ -4,6 +4,9 @@ class CreateServiceRegistrations < ActiveRecord::Migration
 
       t.integer :contact_id, :null => false
       t.integer :service_id, :null => false
+      t.string :first_name, :null => false
+      t.string :last_name, :null => false
+      t.string :email, :null => false
       t.text :notes
       t.text :questions
 

@@ -1,26 +1,32 @@
 <% require_stylesheet 'services' %>
+
 <%= form_for @registration do |f| %>
+
     <%= errors_for_form(@registration, 'registration') %>
+
     <%= f.hidden_field :service_id, :value => params[:service_id] %>
-    <%= f.fields_for :contact do |c| %>
-        <%= c.hidden_field :id %>
-        <%= c.hidden_field :title %>
+    <%= f.hidden_field :contact_id, :value => @contact.id %>
 
-            <p>
-              <%= c.label :first_name %>
-              <%= c.text_field :first_name %>
-            <p>
-              <%= c.label :last_name %>
-              <%= c.text_field :last_name %>
-            <p>
-              <%= c.label :email; %>
-              <%= c.text_field :email %>
-              
+    <p>
+      <%= f.label :first_name%>
+      <%= f.text_field :first_name, :value => @contact.first_name%>
+    </p>
 
-            
+    <p>
+      <%= f.label :last_name%>
+      <%= f.text_field :last_name, :value => @contact.last_name%>
+    </p>
 
-    <% end %>
+    <p>
+      <%= f.label :email%>
+      <%= f.text_field :email, :value => @contact.email%>
+
+    </p>
+
+
+
     <% unless @registration_fields.nil? %>
+
     <% @registration_fields.each do |field| %>
         <%= f.fields_for :fieldvalues do |ff| %>
             <%= render 'registration_form', :f => ff, :field => field %>
