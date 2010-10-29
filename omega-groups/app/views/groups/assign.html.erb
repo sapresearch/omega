@@ -1,0 +1,60 @@
+<%= require_javascript 'omega_groups' %>
+<%= require_javascript 'thirdParty/jquery.jscrollpane.min.js' %>
+<%= require_stylesheet 'omega_groups' %>
+<%= require_stylesheet 'thirdParty/jquery.jscrollpane.css' %>
+<h1 class="page-content corners-top">
+  <%= @group.name %>
+</h1>
+
+<div class="page-content corners-bottom">
+  <div id="contact-assignment">
+    <table class="width-100">
+      <tr>
+        <th class="text-left width-50">
+          All Users
+        </th>
+        <th class="text-left width-50">
+          Currently Assigned to  <%= @group.name %>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <div class="filter-wrapper">
+
+            <input type="text" id="user-filter">
+
+          </div>
+        </td>
+        <td>
+          <div class="filter-wrapper">
+
+            <input type="text" id="member-filter">
+
+          </div>
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+
+          <ul id="user-list">
+            <% @users.each do |user| %>
+                <li> <%= link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add  #{user.username} to: #{@group.name} "></span>}.html_safe, assign_user_to_group_path(@group, :user_id => user), :method => :put, :remote => true %><%= user.username %></li>
+            <% end %>
+          </ul>
+
+        </td>
+        <td>
+          <ul id="member-list">
+            <%= render :partial => 'partials/member_list' %>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+</div>
+<% content_for :sidebar do %>
+    <%= render :partial => "partials/sidebar_group" %>
+<% end %>

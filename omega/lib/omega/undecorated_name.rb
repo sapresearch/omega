@@ -4,7 +4,7 @@ module Omega
 
     module ClassMethods
       def undecorated_name(tram = self)
-        tram.to_s.gsub(/::Tram$/, '')
+        tram.to_s.gsub(/::Module$/, '')
       end
     end
 

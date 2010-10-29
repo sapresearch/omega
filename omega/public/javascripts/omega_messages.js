@@ -21,8 +21,8 @@ $(function() {
         }
 
     });
-    var $list = document.getElementById('messages-list');
-    $('li', $list).mouseenter(
+    
+    $('messages-list').find('li').mouseenter(
                              function() {
                                  $(this).find('div.item-list-actions-wrapper').fadeIn()
                              }).mouseleave(function() {

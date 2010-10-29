@@ -3,14 +3,7 @@
 User List
 </h1>
 <div class="page-content corners-bottom">
-  <ul id="letter-list">
-      <% ('A'..'Z').each do |l| %>
-          <li>
-            <span><%= link_to l, "/users/#{l}"%></span>
-          </li>
-      <% end %>
-    </ul>
-  <div class="clear"></div>
+  
   <ul id="users-list">
     <% @users.each do |user| %>
         <li class="list-item relative">
@@ -35,3 +28,7 @@ User List
 
   <div class="clear"></div>
 </div>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_users" %>
+
+<% end %>
