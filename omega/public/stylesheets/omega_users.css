@@ -1,0 +1,17 @@
+#letter-list li {
+  float:left;
+
+}
+#letter-list li span {
+    -moz-border-radius: 4px 4px 4px 4px;
+    background: none repeat scroll 0 0 #CF3A72;
+    display: block;
+    margin: 2px;
+    padding: 0;
+    text-align: center;
+     width:20px;
+    height:20px;
+}
+#letter-list  a {
+    color:#fff;
+}
