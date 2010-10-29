@@ -963,6 +963,9 @@ span.om-icon-back {
 .om-icon-ui-selectbox {
     background-position: 0 -944px;
 }
+.om-icon-document-share {
+    background-position: 0 -960px;
+}
 /*END BUTTONS*/
 
 /*Pagination */
@@ -1047,7 +1050,7 @@ form span.error {
 #footer {
     width: 950px;
     margin: 0 auto;
-    background: #191919;
+    background: #333;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
 
@@ -1458,4 +1461,127 @@ dl.drop_down {
 }
 .width-100{
     width:100%;
+}
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+
+.jspContainer
+{
+	overflow: hidden;
+	position: relative;
+}
+
+.jspPane
+{
+	position: absolute;
+}
+
+.jspVerticalBar
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 16px;
+	height: 100%;
+	background: transparent;
+}
+
+.jspHorizontalBar
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 16px;
+	background: transparent;
+}
+
+.jspVerticalBar *,
+.jspHorizontalBar *
+{
+	margin: 0;
+	padding: 0;
+}
+
+.jspCap
+{
+	display: none;
+}
+
+.jspHorizontalBar .jspCap
+{
+	float: left;
+}
+
+.jspTrack
+{
+	background: #FFF;
+	position: relative;
+}
+
+.jspDrag
+{
+    border:1px solid #448be2;
+	background: #fff;
+	position: relative;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag
+{
+	float: left;
+	height: 100%;
+}
+
+.jspArrow
+{
+	background: url("/images/ui-icons_448be2_256x240.png") no-repeat scroll 0 0 #fff;
+	text-indent: -20000px;
+	display: block;
+	cursor: pointer;
+}
+.jspArrowDown {
+background-position:-64px 0 !important;
+}
+.jspArrow.jspDisabled
+{
+	cursor: default;
+	background: transparent;
+}
+
+.jspVerticalBar .jspArrow
+{
+	height: 16px;
+}
+
+.jspHorizontalBar .jspArrow
+{
+	width: 16px;
+	float: left;
+	height: 100%;
+}
+
+.jspVerticalBar .jspArrow:focus
+{
+	outline: none;
+}
+
+.jspCorner
+{
+	background: #eeeef4;
+	float: left;
+	height: 100%;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner
+{
+	margin: 0 -3px 0 0;
 }

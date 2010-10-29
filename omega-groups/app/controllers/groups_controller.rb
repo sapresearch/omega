@@ -3,6 +3,8 @@ class GroupsController < Omega::Controller
   respond_to :html, :xml, :json, :js
   crud_helper Group
 
+  breadcrumb 'Groups' => :groups
+
   def index
     @groups = @groups.paginate(:page => params[:page], :per_page => Group::MAX_GROUPS_PER_PAGE)
     respond_with(@groups)
@@ -21,6 +23,7 @@ class GroupsController < Omega::Controller
   def show
     @group = Group.find(params[:id])
     @users = @group.users
+    breadcrumb @group.name => group_path(@group)
     respond_with(@group)
   end
 
@@ -28,6 +31,7 @@ class GroupsController < Omega::Controller
     @group = Group.find(params[:id])
     @assigned_users = @group.users
     @users = User.all
+     breadcrumb @group.name => group_path(@group)
     respond_with(@group)
   end
 
@@ -37,9 +41,19 @@ class GroupsController < Omega::Controller
 
     @group.users << @user
     @group.save
-     @assigned_users = @group.users
-    respond_with(@assigned_users)
+
+    respond_with(@group)
   end
+  
+  def remove_user_from
+    @group = Group.find(params[:id])
+    @user = User.find(params[:user_id])
+
+    @group_memberships = GroupMembership.where('group_id = ?', @group).where('user_id = ?', @user).destroy_all
+    respond_with(@group)
+  end
+
+
 
   def autocomplete
     @q = params[:term]

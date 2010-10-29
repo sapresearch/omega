@@ -50,7 +50,8 @@ jQuery.fn.jfilter = function(o) {
 
 $(function() {
 
-    $('#user-list,#member-list').jScrollPane({showArrows: true});
+    $('#user-list,#member-list,#sidebar-member-list').jScrollPane({showArrows: true});
+    
 
     $('#user-filter').jfilter({
     list: '#user-list',

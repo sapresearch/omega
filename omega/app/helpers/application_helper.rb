@@ -7,6 +7,6 @@ module ApplicationHelper
     session_key    = Rails.application.config.session_options[:key]
     session_cookie = cookies[session_key]
 
-    %(<meta name="flash-session-key" content="#{session_key}"/>\n<meta name="flash-session-cookie" content="#{session_cookie}"/).html_safe
+    %(<meta name="flash-session-key" content="#{session_key}"/>\n<meta name="flash-session-cookie" content="#{session_cookie}"/>).html_safe
   end
 end

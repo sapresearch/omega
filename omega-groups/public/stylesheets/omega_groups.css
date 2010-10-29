@@ -46,7 +46,9 @@
     height: 400px;
 
 }
-
+#sidebar-member-list{
+    height: 200px;
+}
 .filter-wrapper {
     background: url("/images/filterBg.png") repeat scroll 0 0 transparent;
     float: left;
