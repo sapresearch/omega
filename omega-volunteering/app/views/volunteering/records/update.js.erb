@@ -8,6 +8,11 @@
 
             <% if @record.valid?  %>
             $('#record-<%= @record.id %>').replaceWith('<%= escape_javascript(render 'record_row', :record => @record) %>');
+            $("#edit_volunteering_record_<%= @record.id %>").remove();
             <% else %>
-            $("#edit_volunteering_record_<%= @record.id %>").replaceWith('<%= escape_javascript(render 'administer') %>');
+            $("#edit_volunteering_record_<%= @record.id %>").replaceWith('<%= escape_javascript(render 'administer') %>').dialog({
+            autoOpen: true ,
+            width:600,
+            title: 'Administer'
+        });
             <% end %>

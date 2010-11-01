@@ -12,12 +12,12 @@ $(function() {
      * Volunteering positions  hover effect to show the corresponding actions for a position
      */
     // selectot caching
-    var $positions_list = document.getElementById('positions-list');
-    $('.position', $positions_list).mouseenter(function(e) {
+    var $positions_list = $('#positions-list');
+    $positions_list.find('.position').mouseenter(function(e) {
         $(this).addClass("position-hover").siblings("div.position-slider").show().animate({ "top" : "0px"}, "fast");
     });
 
-    $($positions_list).find('li').mouseleave(function(e) {
+    $positions_list.find('li').mouseleave(function(e) {
         if (!$(e.currentTarget).is('.details'))
             $(this).find('div.position').siblings('div.position-slider').animate({ 'top' : '22px'}, 100).end().removeClass('position-hover');
     });
@@ -30,20 +30,7 @@ $(function() {
     }
 
             );
-    /**
-     * Volunteering records hover effect to show the corresponding actions for a position
-     */
 
-    // selectot caching
-    var $records_list = document.getElementById('records-list');
-    $($records_list).delegate('li.list-item', 'mouseenter', function() {
-        $(this).find('div.item-list-actions-wrapper').fadeIn()
-
-    });
-    $($records_list).delegate('li.list-item', 'mouseleave', function() {
-        $(this).find('div.item-list-actions-wrapper').fadeOut()
-
-    });
 
 
 });

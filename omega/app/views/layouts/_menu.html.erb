@@ -15,7 +15,7 @@
             <%= link_to "My Time Sheets", my_time_sheets_volunteering_positions_path %>
 
 
-            <% if current_user.has_permission?("users_staff_member") %>
+             <%= with_permission(Volunteering::PERM_ADMIN) do %>
                 <%= link_to "Applications", volunteering_records_path %>
             <% end %>
             <%= link_to "My Applications", my_applications_volunteering_records_path %>

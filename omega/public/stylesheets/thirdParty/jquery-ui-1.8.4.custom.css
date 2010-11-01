@@ -126,8 +126,8 @@
     }
 
     .ui-widget-header {
-        border: 1px solid #cf3a72;
-        background: #cf3a72 url(/images/ui-bg_flat_100_cf3a72_40x100.png) 50% 50% repeat-x;
+        border: 1px solid #4196ee;
+        background: #cf3a72 url(/images/ui-bg_flat_100_4196ee_40x100.png) 50% 50% repeat-x;
         color: #ffffff;
         font-weight: bold;
     }
@@ -139,8 +139,8 @@
     /* Interaction states
     ----------------------------------*/
     .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-        border: 1px solid #cf3a72;
-        background: #cf3a72 url(/images/ui-bg_flat_100_cf3a72_40x100.png) 50% 50% repeat-x;
+        border: 1px solid #4196ee;
+        background: #4196ee url(/images/ui-bg_flat_100_4196ee_40x100.png) 50% 50% repeat-x;
         font-weight: normal;
         color: #ffffff;
     }
@@ -163,8 +163,8 @@
     }
 
     .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-        border: 1px solid #421325;
-        background: #421325 url(/images/ui-bg_flat_100_421325_40x100.png) 50% 50% repeat-x;
+        border: 1px solid #80bdfb;
+        background: #80bdfb url(/images/ui-bg_flat_100_80bdfb_40x100.png) 50% 50% repeat-x;
         font-weight: normal;
         color: #fff;
     }
@@ -1881,7 +1881,7 @@
     }
 
     #right .ui-datepicker-header {
-        background: #421325;
+        background: #80bdfb;
         border: none;
     }
 
@@ -1894,7 +1894,7 @@
 
     #right thead {
         background: none;
-        color: #421325;
+        color: #80bdfb;
         border: none;
     }
 

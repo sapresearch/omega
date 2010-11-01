@@ -1,23 +1,56 @@
+<% require_javascript 'thirdParty/jquery.dataTables.min.js' %>
+<% require_javascript 'omega_volunteering_records' %>
+
 <% require_stylesheet 'omega_volunteering' %>
-<% require_javascript 'omega_volunteering' %>
+<% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
+
 <h1 class="page-content corners-top">
   Application Overview
 </h1>
 <div class="page-content corners-bottom">
-  <ul id="records-list" class="item-list">
-  <% if @records.empty? %>
-    <h2> No Applications to Show!</h2>
-<%end%>
-    <% @records.each do |a| %>
-        <%= render 'record_row', :record => a %>
-    <% end %>
-  </ul>
+  <table class="width-100 clear" id="records-table">
+    <thead>
+    <tr>
 
-    <%= will_paginate @records %>
+      <th>Position</th>
+      <th>
+         From
+      </th>
+      <th>
+           Date
+
+      </th>
+      <th>
+            Action
+
+      </th>
+      <th>
+            Status
+        </th>
+      <th>
+        Active
+        </th>
+      <th>
+           Missing
+       </th>
+    </tr>
+    </thead>
+    <% if @records.empty? %>
+        <h2> No Applications to Show!</h2>
+    <% end %>
+    <% @records.each do |a| %>
+
+        <%= render 'record_row', :record => a %>
+
+    <% end %>
+
+
+  </table>
+
+
+
+  <%= will_paginate @records %>
 
   <div class="clear"></div>
 
 </div>
-<% content_for :sidebar do %>
-    <%= render "sidebar_records" %>
-<% end %>
