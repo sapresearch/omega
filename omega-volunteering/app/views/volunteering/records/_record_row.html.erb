@@ -26,18 +26,28 @@
   </td>
   <td><%= om_button(:plain => true, :icon => 'mail-sent') do %>
         <span>  <%= record.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
-    <% end %></td>
+    <% end %>
+  </td>
   <td><%= om_button(:plain => true, :icon => 'folder-open') do %>
-       <%= link_to record.action, administer_volunteering_record_url(record), :remote => 'true' %>
-    <% end %></td>
+        <%= link_to record.action , administer_volunteering_record_url(record), :remote => 'true' %>
+    <% end %>
+  </td>
   <td> <%= om_button(:plain => true, :icon => 'folder-open') do %>
         <%= record.status %>
-    <% end %></td>
+    <% end %>
+  </td>
   <td> <%= om_button(:plain => true, :icon => 'counter') do %>
         <span class="green">   <%= record.position.active_volunteers.count %></span>
-    <% end %></td>
+    <% end %>
+  </td>
   <td><%= om_button(:plain => true, :icon => 'counter') do %>
         <span class="red">   <%= record.position.missing_volunteers %></span>
-    <% end %></td>
+    <% end %>
+  </td>
+  <td>
+    <%= om_button(:plain => true, :icon => 'next') do %>
+        <%= link_to 'Application History', history_volunteering_record_path(record) %>
+    <% end %>
+  </td>
 
 </tr>

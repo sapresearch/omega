@@ -1,6 +1,6 @@
 class Volunteering::Record < Omega::Model
 
-  MAX_RECORDS_PER_PAGE = 5
+  MAX_RECORDS_PER_PAGE = 100
 
   belongs_to  :position
   belongs_to  :contact, :validate => false

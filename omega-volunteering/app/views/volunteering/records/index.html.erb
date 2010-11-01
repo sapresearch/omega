@@ -18,11 +18,9 @@
       </th>
       <th>
            Date
-
       </th>
       <th>
             Action
-
       </th>
       <th>
             Status
@@ -33,23 +31,23 @@
       <th>
            Missing
        </th>
+      <th>
+        History
+      </th>
     </tr>
     </thead>
     <% if @records.empty? %>
         <h2> No Applications to Show!</h2>
     <% end %>
     <% @records.each do |a| %>
-
         <%= render 'record_row', :record => a %>
-
     <% end %>
+
+
 
 
   </table>
 
-
-
-  <%= will_paginate @records %>
 
   <div class="clear"></div>
 

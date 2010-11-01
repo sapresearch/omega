@@ -19,6 +19,7 @@ module Omega
 
     initializer :'omega.add_mime_types' do
       Mime::Type.register_alias('text/plain', :psv)
+      Mime::Type.register_alias('application/json', :dt)
     end
 
     initializer :'omega.set_field_error_proc' do
