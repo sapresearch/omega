@@ -57,6 +57,7 @@ $(function() {
      */
     $('#contact-assignment').dialog({ autoOpen: false,
         title: 'Assign Contacts',
+        modal: true,
         height:400,
         width:600
     });
