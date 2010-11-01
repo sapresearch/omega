@@ -54,7 +54,9 @@ class UploadsController < Omega::Controller
       params[:upload][:upload] = file
     end
 
-    @upload = Upload.create(params[:upload])
+    @upload = Upload.create(params[:upload]) do |upload|
+      upload.uploader = current_user
+    end
 
     respond_with(@upload)
   end
