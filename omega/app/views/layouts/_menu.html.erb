@@ -5,7 +5,7 @@
       <%= link_to "Volunteering", volunteering_positions_url %>
       <div>
         <%= link_to "All Volunteering Positions", volunteering_positions_url %>
-        <% if current_user.has_permission?("users_staff_member") %>
+        <%= with_permission(Volunteering::PERM_ADMIN) do %>
             <%= link_to "Create a position", new_volunteering_position_path %>
         <% end %>
 

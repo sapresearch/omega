@@ -1,32 +1,42 @@
 <%= require_stylesheet 'omega_users' %>
 <h1 class="page-content corners-top">
-User List
+  User List
 </h1>
 <div class="page-content corners-bottom">
-  
-  <ul id="users-list">
-    <% @users.each do |user| %>
-        <li class="list-item relative">
-          <div class="item-list-actions-wrapper corners">
-            <div class="item-list-actions">
-              <%= om_button(:plain => true, :icon=>'edit') do %>
-                 sdsds
-              <% end %>
-            </div>
-          </div>
-          <div>
-            <%= om_button(:plain => true, :icon => 'user') do %>
-                <%= link_to "#{user.username} - #{user.first_name} #{user.last_name}", edit_user_path(user), :class => 'blue' %>
+  <div class="right">
+  <%= om_button(:icon=>'sort-az') do %>
+      <%= link_to 'sort Z-A', url_for(params.merge(:username => 'asc')) %>
+  <% end %>
+  <%= om_button(:icon=>'sort-za') do %>
+      <%= link_to 'sort Z-A', url_for(params.merge(:username => 'desc')) %>
+  <% end %>
+</div>
+
+
+<div class="clear"></div>
+<ul id="users-list">
+  <% @users.each do |user| %>
+      <li class="list-item relative">
+        <div class="item-list-actions-wrapper corners">
+          <div class="item-list-actions">
+            <%= om_button(:plain => true, :icon=>'edit') do %>
+                sdsds
             <% end %>
-
           </div>
+        </div>
+        <div>
+          <%= om_button(:plain => true, :icon => 'user') do %>
+              <%= link_to "#{user.username} - #{user.first_name} #{user.last_name}", edit_user_path(user), :class => 'blue' %>
+          <% end %>
 
-        </li>
-    <% end %>
-  </ul>
-    <%= will_paginate @users %>
+        </div>
 
-  <div class="clear"></div>
+      </li>
+  <% end %>
+</ul>
+<%= will_paginate @users %>
+
+<div class="clear"></div>
 </div>
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_users" %>

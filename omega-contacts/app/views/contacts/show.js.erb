@@ -1,6 +1,7 @@
 $('#contacts_contact_pane').empty().append('<%= escape_javascript(render(:partial => 'contacts/shared/contact_details')) %>');
         $("#contact_accordion").accordion();
         $('#contact-assignment').dialog({ autoOpen: false,
+            modal: true,
             title: 'Assign Contacts',
             height:400,
             width:600

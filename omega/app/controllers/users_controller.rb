@@ -4,6 +4,7 @@ class UsersController < Omega::Controller
   require_permission User::PERM_VIEW, :except => [:register, :create, :lost_username, :lost_password]
   require_permission User::PERM_ADMIN, :only  => [:new, :edit, :create, :update, :destroy]
   breadcrumb 'Users' => :users
+  before_filter :sort, :only => [:index]
 
   def index
     @users = @users.paginate(:page => params[:page], :per_page => User::MAX_USERS_PER_PAGE)
@@ -55,15 +56,15 @@ class UsersController < Omega::Controller
 
   def letter
     @letter = params[:letter]
-    @users = User.where('username like ?', "#{@letter}%").order('username')
-    @users = @users.paginate(:page => params[:page], :per_page => User::MAX_USERS_PER_PAGE)
+    @users  = User.where('username like ?', "#{@letter}%").order('username')
+    @users  = @users.paginate(:page => params[:page], :per_page => User::MAX_USERS_PER_PAGE)
     respond_with(@users) do |format|
       format.any(:html, :js) { render 'index' }
     end
   end
 
   def autocomplete
-    @q = params[:term]
+    @q     = params[:term]
     @users = User.named(@q)
     @users.limit(params[:limit]) if params[:limit]
 
@@ -78,14 +79,25 @@ class UsersController < Omega::Controller
     @users = User.where('email = ?', params[:email])
 
     if @users.any?
-      
+
     end
 
     respond_with(@users)
   end
 
   def lost_password
-    
+
+  end
+
+  SORT_KEYS = ['username']
+  SORT_DIRECTIONS = ['asc', 'desc']
+  def sort
+    @users = User.scoped
+
+    params.each do |attr, direction|
+      next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
+      @users = @users.order("#{attr} #{direction}")
+    end
   end
 
 end

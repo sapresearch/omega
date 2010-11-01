@@ -2,7 +2,7 @@
     <%= errors_for_model f.object %>
 
        <p>
-				<%= f.label t(:title) %>
+				<%= f.label :title %>
 				<%= f.select :title, options_for_select(Contact::TITLES) %>
        </p>
 

@@ -15,19 +15,18 @@ table, tbody, tfoot, thead, tr, th, td {
 }
 
 body {
-    background: #f2f2f2;
-        background-image: url("/images/om_sprite.png");
-    background-position: 48px 0;
-    background-repeat: repeat-x;
+
+background: url("/images/om_sprite.png") repeat-x #f2f2f2; 
 }
 
 html, body, #wrapper {
+
     height: 100%;
     color: #4096ee;
 }
 
 body > #wrapper {
-    /*background: url("/images/abstract.png") top  no-repeat;*/
+
 
     height: auto;
     min-height: 100%;
@@ -965,6 +964,9 @@ span.om-icon-back {
 }
 .om-icon-document-share {
     background-position: 0 -960px;
+}
+.om-icon-megaphone {
+    background-position: 0 -976px;
 }
 /*END BUTTONS*/
 
