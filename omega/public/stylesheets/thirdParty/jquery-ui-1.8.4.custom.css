@@ -127,7 +127,7 @@
 
     .ui-widget-header {
         border: 1px solid #4196ee;
-        background: #cf3a72 url(/images/ui-bg_flat_100_4196ee_40x100.png) 50% 50% repeat-x;
+        background: url("/images/bg_dark.png") repeat-x scroll center bottom #80BDFB;
         color: #ffffff;
         font-weight: bold;
     }
@@ -1904,3 +1904,6 @@
         border: none;
         font-size: 1em;
     }
+.ui-toolbar select {
+    padding:0
+}

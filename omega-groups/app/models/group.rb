@@ -19,4 +19,9 @@ class Group < Omega::Model
 
   has_many :threads
   has_many :posts, :through => :threads
+
+  has_many :group_uploads, :class_name => '::GroupUpload'
+#  has_many :uploads, :through => :group_uploads, :source => :upload
+
+  accepts_nested_attributes_for :group_uploads
 end

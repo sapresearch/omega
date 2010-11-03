@@ -8,7 +8,6 @@ class GroupsController < Omega::Controller
   def index
     @groups = @groups.paginate(:page => params[:page], :per_page => Group::MAX_GROUPS_PER_PAGE)
     respond_with(@groups)
-
   end
 
   def new
@@ -79,5 +78,9 @@ class GroupsController < Omega::Controller
     respond_with(@groups) do |format|
       format.any(:html, :js) { render 'index' }
     end
+  end
+
+  def share
+    
   end
 end

@@ -1,0 +1,11 @@
+<%= side_bar_box(:Files) do %>
+
+    <ul>
+      <li>
+         <%= om_button(:icon=>'document') do %>
+      <%= link_to 'Upload File', new_group_upload_path(@group) ,:remote=> true %>
+  <% end %>
+      </li>
+
+    </ul>
+<% end %>

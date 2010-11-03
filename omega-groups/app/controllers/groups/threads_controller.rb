@@ -1,4 +1,4 @@
-class Group::ThreadsController < Omega::Controller
+class Groups::ThreadsController < Omega::Controller
   respond_to :html, :xml, :json
 
   before_filter :get_threads, :only => [:index]

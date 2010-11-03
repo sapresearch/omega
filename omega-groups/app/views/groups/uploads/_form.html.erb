@@ -1,0 +1,27 @@
+<% require_stylesheet 'uploadify/uploadify' %>
+<% require_javascript 'uploadify/swfobject', 'uploadify/jquery.uploadify.v2.1.0' %>
+
+<%= form_for @upload, :remote => true, :html => {:multipart => true} do |f| %>
+    <%= errors_for_form @upload %>
+    <ul id="upload-file-list">
+
+    </ul>
+
+    <%= f.fields_for :uploads do |u| %>
+
+        <p>
+          <%= u.label :upload %>
+          <%= u.file_field :upload %>
+        </p>
+        <p>
+          <%= om_button(:icon=>'save') do %>
+              <%= u.submit 'Save' %>
+          <% end %>
+        </p>
+
+
+
+    <% end %>
+
+<% end %>
+

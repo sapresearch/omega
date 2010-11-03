@@ -1,13 +1,9 @@
 Omega::Groups::Module.routes.draw do
   resources :groups do
-    resources :threads, :module => 'group' do
-      resources :posts
-    end
     
     member do
 
       get :assign
-
       put :assign_user_to, :path => 'assign/:user_id'
       put :remove_user_from, :path => 'remove/:user_id'
     end
@@ -17,5 +13,12 @@ Omega::Groups::Module.routes.draw do
       match ':letter' => 'groups#letter', :constraints => {:letter => /[a-z]/i}
     end
 
+    scope :module => 'groups' do
+      resources :threads do
+        resources :posts
+      end
+
+      resources :uploads
+    end
   end
 end

@@ -1,4 +1,4 @@
-class Group::PostsController < Omega::Controller
+class Groups::PostsController < Omega::Controller
   respond_to :html, :xml, :json
 
   before_filter :get_posts, :only => [:index]

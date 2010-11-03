@@ -8,8 +8,8 @@ jQuery.fn.jfilter = function(o) {
             var filter = $(this).val();
             if (this.value.length < 1) {
                 $(this).next('.filter-ctrl').find('.clear-filter').hide();
-            }else{
-                $(this).next('.filter-ctrl').find('.clear-filter').show().click(function(){
+            } else {
+                $(this).next('.filter-ctrl').find('.clear-filter').show().click(function() {
                     $(this).hide();
                     $(o.list).find('li').show();
 
@@ -65,4 +65,7 @@ $(function() {
                                            }).mouseleave(function() {
         $(this).find('div.item-list-actions-wrapper').fadeOut('fast')
     });
+
+
+
 });

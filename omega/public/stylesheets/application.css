@@ -969,6 +969,24 @@ span.om-icon-back {
 .om-icon-megaphone {
     background-position: 0 -976px;
 }
+.om-icon-doc-image {
+    background-position: 0 -992px;
+}
+.om-icon-doc-pdf {
+    background-position: 0 -1008px;
+}
+.om-icon-doc-excel {
+    background-position: 0 -1024px;
+}
+.om-icon-doc-blue {
+    background-position: 0 -1040px;
+}
+.om-icon-doc-word {
+    background-position: 0 -1056px;
+}
+.om-icon-doc-powerpoint {
+    background-position: 0 -1072px;
+}
 /*END BUTTONS*/
 
 /*Pagination */

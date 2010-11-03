@@ -5,7 +5,7 @@ module Omega
     class << self
       private
         def has_upload(association_id, options = {})
-          has_one("#{association_id}_upload", options.merge(:class_name => '::Upload', :as => :binding))
+#          has_one("#{association_id}_upload", options.merge(:class_name => '::Upload', :as => :binding))
 
           class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
             def #{association_id}

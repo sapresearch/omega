@@ -1,0 +1,36 @@
+<% @uploads.each do |file| %>
+    <%
+
+       icon = case file.upload.upload_content_type
+                  when /^image/ then
+                      'image'
+                  when /spread/ then
+                      'excel'
+                  when /word/ then
+                       'word'
+                  when /pdf/ then
+                       'pdf'
+                  when /presentation/ then
+                       'pdf'
+                  else
+                      'blue'
+
+
+              end
+    %>
+
+
+    <tr>
+      <td>
+
+        <%= om_button(:plain => true, :icon => "doc-#{icon}") do %>
+            <span><%= file.upload.upload_file_name %></span>
+        <% end %>
+
+
+      </td>
+      <td><%= file.upload.uploader.username %></td>
+      <td><%= file.upload.upload_updated_at %></td>
+    </tr>
+
+<% end %>
