@@ -51,3 +51,14 @@ THE SOFTWARE.
 	width: 1px;
 	height: 3px;
 }
+
+
+
+/*OMEGA SPECIFIC*/
+
+#upload-wrapper {
+    height:200px;
+}
+#upload-file-list{
+    height:200px;
+}

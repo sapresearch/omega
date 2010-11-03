@@ -1,5 +1,5 @@
-<% require_javascript 'thirdParty/jquery.dataTables.min.js', 'uploadify/swfobject', 'uploadify/jquery.uploadify.v2.1.0', 'omega_groups_uploads' %>
-<% require_stylesheet 'thirdParty/jquery.dataTables.jui.css', 'uploadify/uploadify' %>
+<% require_javascript 'thirdParty/jquery.dataTables.min.js', 'uploadify/swfobject', 'uploadify/swfobject', 'uploadify/jquery.uploadify.v2.1.0', 'omega_groups_uploads' %>
+<% require_stylesheet 'thirdParty/jquery.dataTables.jui.css', 'uploadify/omega_uploads' %>
 
 <h1 class="page-content corners-top">
   Shared Documents
@@ -9,16 +9,17 @@
 
 
   <table id="shared-documents" class="width-100">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>From</th>
-      <th>Date</th>
-    </tr>
-    </thead>
+
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>From</th>
+    <th>Date</th>
+  </tr>
+  </thead>
     <%= render :partial => "upload_records" %>
-   
   </table>
+
 </div>
 
 
