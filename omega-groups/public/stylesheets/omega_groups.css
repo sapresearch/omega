@@ -41,14 +41,16 @@
     height: 20px;
 }
 
-#user-list,#member-list {
-    margin:10px;
+#user-list, #member-list {
+    margin: 10px;
     height: 400px;
 
 }
-#sidebar-member-list{
+
+#sidebar-member-list {
     height: 200px;
 }
+
 .filter-wrapper {
     background: url("/images/filterBg.png") repeat scroll 0 0 transparent;
     float: left;
@@ -56,20 +58,22 @@
     width: 148px;
 }
 
-.filter-wrapper input{
-background:none repeat scroll 0 0 transparent;
-border:0 none;
-float:left;
-left:4px;
-padding:0;
-position:relative;
-top:4px;
-width:90px;
+.filter-wrapper input {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    float: left;
+    left: 4px;
+    padding: 0;
+    position: relative;
+    top: 4px;
+    width: 90px;
 }
-.filter-ctrl{
-    float:right;
-position:relative;
-right:4px;
-top:4px;
-width:40px;
+
+.filter-ctrl {
+    float: right;
+    position: relative;
+    right: 4px;
+    top: 4px;
+    width: 40px;
 }
+

@@ -515,6 +515,7 @@ li.list-item {
 #topnav li div {
 
     padding: 0 0 10px;
+    margin: 0 0 0 15px; 
     position: absolute;
     top: 38px;
     display: none;
@@ -726,7 +727,7 @@ span.om-icon-button {
 }
 
 span.om-plain-button, span.om-plain-icon-button {
-    cursor:pointer;
+    cursor: auto;
     position: relative;
     display: inline-block;
     height: 16px;
@@ -963,7 +964,7 @@ span.om-icon-back {
 .om-icon-ui-selectbox {
     background-position: 0 -944px;
 }
-.om-icon-document-share {
+.om-icon-doc-share {
     background-position: 0 -960px;
 }
 .om-icon-megaphone {
@@ -987,6 +988,10 @@ span.om-icon-back {
 .om-icon-doc-powerpoint {
     background-position: 0 -1072px;
 }
+.om-icon-doc-add {
+    background-position: 0 -1088px;
+}
+
 /*END BUTTONS*/
 
 /*Pagination */
