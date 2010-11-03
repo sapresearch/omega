@@ -1,4 +1,13 @@
 class Contact < Omega::Model
+  require_dependency 'contact/address'
+  require_dependency 'contact/group'
+  require_dependency 'contact/group_position'
+  require_dependency 'contact/import'
+  require_dependency 'contact/interest'
+  require_dependency 'contact/phone_number'
+  require_dependency 'contact/skill'
+  require_dependency 'contact/user_observer'
+
   PERM_ADMIN     = 'users_admin'
   PERM_EDIT_SELF = 'contacts_edit_self'
   PERM_VIEW      = 'users_view'
