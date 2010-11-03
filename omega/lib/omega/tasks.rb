@@ -3,7 +3,9 @@ module Omega
     class << self
       def define
         namespace :omega do
-          yield
+          namespace :all do
+            yield
+          end
         end
       end
 
