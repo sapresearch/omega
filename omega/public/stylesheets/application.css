@@ -16,7 +16,7 @@ table, tbody, tfoot, thead, tr, th, td {
 
 body {
 
-background: url("/images/om_sprite.png") repeat-x #f2f2f2; 
+    background: url("/images/om_sprite.png") repeat-x #f2f2f2;
 }
 
 html, body, #wrapper {
@@ -26,7 +26,6 @@ html, body, #wrapper {
 }
 
 body > #wrapper {
-
 
     height: auto;
     min-height: 100%;
@@ -92,10 +91,11 @@ h3 a {
     font-size: 1.2em;
     color: #4096ee;
 }
-h4{
-    padding:2px;
+
+h4 {
+    padding: 2px;
     border: 1px dotted #0063dc;
-    color:#0063dc;
+    color: #0063dc;
 }
 
 p {
@@ -111,9 +111,10 @@ a {
     list-style-type: none;
 }
 
-a:hover{
-    color: #0063dc ;
+a:hover {
+    color: #0063dc;
 }
+
 a.blue {
     color: #0063dc !important;
 }
@@ -170,7 +171,7 @@ form label {
     font-weight: bold;
     min-width: 120px;
     text-align: right;
-    margin:0 10px;
+    margin: 0 10px;
     text-transform: capitalize;
 
 }
@@ -179,7 +180,7 @@ fieldset {
     margin: 1.3em;
     padding: 1.3em;
     background: #F2F2F2;
-    border: 4px solid #E2E2E2;
+    border: 1px solid #80BDFB;
 
 }
 
@@ -189,12 +190,12 @@ legend {
     color: #333;
     padding: 0 0.5em;
 
-
 }
 
 * html .clearfix {
     height: 1%;
 }
+
 td h4 {
 
     border-bottom: 4px solid #09F3E4;
@@ -204,15 +205,15 @@ td h4 {
     margin: 0.5em 0;
     text-transform: capitalize;
 }
-th{
-    text-align:left;
-    color:#448be2;
-    font-size:1.2em;
-    border-bottom:1px dotted #448be2;
+
+th {
+    text-align: left;
+    color: #448be2;
+    font-size: 1.2em;
+    border-bottom: 1px dotted #448be2;
 }
+
 /* End Element stylerules */
-
-
 
 table.om-table {
     margin: 1em 0;
@@ -220,9 +221,11 @@ table.om-table {
     font-size: 1em;
     border-collapse: collapse;
 }
+
 table.om-table th {
-    color:#fff;
+    color: #fff;
 }
+
 .om-table tr {
     height: 20px;
 }
@@ -230,14 +233,14 @@ table.om-table th {
 tr.even {
     background: #f2f2f2;
 }
+
 tr.even a, tr.odd a {
-    color:#333 !important;
+    color: #333 !important;
 }
+
 tr.odd {
     background: #e3e3e3;
 }
-
-
 
 #notification-flash-wrapper {
     opacity: 0.90;
@@ -262,10 +265,11 @@ tr.odd {
     height: 28px;
 
 }
-#user_custom_bar{
-    float:left;
-    position:relative;
-    top:8px;
+
+#user_custom_bar {
+    float: left;
+    position: relative;
+    top: 8px;
 }
 
 #user_custom_bar {
@@ -290,6 +294,7 @@ tr.odd {
     text-align: left;
     margin: 0 auto 50px;
 }
+
 #loginWrapper {
     display: none;
 }
@@ -301,14 +306,16 @@ tr.odd {
 }
 
 #ctlrBar {
-    font-weight: bold;
-    text-transform: capitalize;
-    color: #cf3a72;
-    margin-left: 1em;
-    height: 28px;
-    line-height: 28px;
+    background: #333;
+    color: #FFF;
     float: right;
-    vertical-align: bottom
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 1em;
+    padding: 0 10px;
+    text-transform: capitalize;
+    vertical-align: bottom;
 }
 
 #breadcrumb {
@@ -351,11 +358,11 @@ tr.odd {
 }
 
 div.page-content {
-    background:#fff;
+    background: #fff;
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
-    
+
     padding: 15px;
 }
 
@@ -395,36 +402,37 @@ div.sidebar-menu-content li {
 }
 
 li.menu-li-last-divider {
-    border-bottom-width:0 !important;
+    border-bottom-width: 0 !important;
 }
 
-ul.item-list{
-    
+ul.item-list {
+
 }
 
 li.list-item {
-   padding:10px 0;
+    padding: 10px 0;
     border-bottom: 1px dashed #ddd;
 }
 
 .item-list-actions-wrapper {
     position: absolute;
-    background:#191919;
+    background: #191919;
     opacity: 0.8;
-    right:0;
-    display:none;
+    right: 0;
+    display: none;
 
 }
-.item-list-actions{
-    margin:5px;
-    height:100%;
-    
+
+.item-list-actions {
+    margin: 5px;
+    height: 100%;
+
 }
 
-.first-l{
-    color:#4096ee;
-    font-size:1.7em;
-    font-weight:bold
+.first-l {
+    color: #4096ee;
+    font-size: 1.7em;
+    font-weight: bold
 }
 
 .corners-bottom {
@@ -444,12 +452,14 @@ li.list-item {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
+
 .corners {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
 
 }
+
 #time_picker {
 
     display: none;
@@ -472,6 +482,7 @@ li.list-item {
     padding: 0.1em 0.2em;
     cursor: pointer;
 }
+
 /* top  menu */
 #navigation {
     position: relative;
@@ -484,9 +495,9 @@ li.list-item {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    -moz-box-shadow:0 0 10px #333;
-    -webkit-box-shadow:0 0 10px #666;
-    box-shadow:0 0 10px #666;
+    -moz-box-shadow: 0 0 10px #333;
+    -webkit-box-shadow: 0 0 10px #666;
+    box-shadow: 0 0 10px #666;
     margin: 0;
     padding: 0;
     float: left;
@@ -515,7 +526,7 @@ li.list-item {
 #topnav li div {
 
     padding: 0 0 10px;
-    margin: 0 0 0 15px; 
+    margin: 0 0 0 15px;
     position: absolute;
     top: 38px;
     display: none;
@@ -566,9 +577,11 @@ li.list-item {
 span.error, .red {
     color: #ed513b;
 }
+
 .green {
-    color:#61bd68;
+    color: #61bd68;
 }
+
 #errorExplanation h2 {
 
     padding: 0.5em;
@@ -602,9 +615,11 @@ span.error, .red {
     border: 1px solid #61bd68;
 
 }
+
 .fieldset_active {
-    border: 4px solid #285370;
+    border: 1px solid #448be2;
 }
+
 .om-table td {
     border: 1px solid #DFE5E7;
     color: #191919;
@@ -612,6 +627,7 @@ span.error, .red {
     height: 28px;
     vertical-align: middle;
 }
+
 .om-table thead {
 
     color: #FFF;
@@ -627,6 +643,7 @@ span.error, .red {
 .om-table tbody {
     margin-top: 10px;
 }
+
 .om-table tr {
     height: 20px;
 }
@@ -655,25 +672,24 @@ span.error, .red {
     float: right;
 }
 
-
-
 .inputActive {
+    
     border: 1px solid #999;
-    background: #fff5ca;
+
 
 }
 
-.box-shadow{
+.box-shadow {
     -moz-box-shadow: 0 0 10px #ddd;
     -webkit-box-shadow: 0 0 10px #ddd;
     box-shadow: 0 0 10px #ddd;
 }
-.box-shadow-dark{
+
+.box-shadow-dark {
     -moz-box-shadow: 0 0 10px #333;
     -webkit-box-shadow: 0 0 10px #333;
     box-shadow: 0 0 10px #333;
 }
-
 
 /* Buttons */
 .om-button a, .om-button input, .om-button button, .om-icon-button a, .om-icon-button input, .om-icon-button button {
@@ -928,68 +944,92 @@ span.om-icon-back {
 .om-icon-calendar-prev {
     background-position: 0 -752px;
 }
+
 .om-icon-next {
     background-position: 0 -768px;
 }
+
 .om-icon-folder-stamped {
     background-position: 0 -784px;
 }
+
 .om-icon-folder-stack {
     background-position: 0 -800px;
 }
+
 .om-icon-folder-open {
     background-position: 0 -816px;
 }
+
 .om-icon-folder-edit {
     background-position: 0 -832px;
 }
+
 .om-icon-counter {
     background-position: 0 -848px;
 }
+
 .om-icon-tick-small {
     background-position: 0 -864px;
 }
+
 .om-icon-clipboard-list {
     background-position: 0 -880px;
 }
+
 .om-icon-ui-textfield {
     background-position: 0 -896px;
 }
+
 .om-icon-ui-textarea {
     background-position: 0 -912px;
 }
+
 .om-icon-ui-label {
     background-position: 0 -928px;
 }
+
 .om-icon-ui-selectbox {
     background-position: 0 -944px;
 }
+
 .om-icon-doc-share {
     background-position: 0 -960px;
 }
+
 .om-icon-megaphone {
     background-position: 0 -976px;
 }
+
 .om-icon-doc-image {
     background-position: 0 -992px;
 }
+
 .om-icon-doc-pdf {
     background-position: 0 -1008px;
 }
+
 .om-icon-doc-excel {
     background-position: 0 -1024px;
 }
+
 .om-icon-doc-blue {
     background-position: 0 -1040px;
 }
+
 .om-icon-doc-word {
     background-position: 0 -1056px;
 }
+
 .om-icon-doc-powerpoint {
     background-position: 0 -1072px;
 }
+
 .om-icon-doc-add {
     background-position: 0 -1088px;
+}
+.om-icon-login {
+    background-position: 0 -1104px;
 }
 
 /*END BUTTONS*/
@@ -1046,7 +1086,6 @@ div.pagination span.disabled {
 }
 
 /*End Pagination */
-
 
 form span.error {
 
@@ -1128,8 +1167,6 @@ form span.error {
 
 /* End hide from IE-mac */
 
-
-
 #ctlrBar a {
     color: #FFF;
     cursor: pointer;
@@ -1171,8 +1208,6 @@ form span.error {
 .content {
     color: #0E5A9D;
 }
-
-
 
 /** dropdown **/
 dl.drop_down {
@@ -1254,7 +1289,6 @@ dl.drop_down {
     background-color: #ddd;
 }
 
-
 .li-over {
     background: #1484E6;
     color: #FFF;
@@ -1264,7 +1298,6 @@ dl.drop_down {
     background: #1484E6;
     color: #FFF !important;
 }
-
 
 /* search box */
 .search_wrapper_l {
@@ -1290,7 +1323,6 @@ dl.drop_down {
     border: none;
 
 }
-
 
 /************ calendar list ********************/
 .pos-date {
@@ -1456,15 +1488,19 @@ dl.drop_down {
 .italic {
     font-style: italic;
 }
-.bold{
-    font-weight:bold;
+
+.bold {
+    font-weight: bold;
 }
+
 .text-right {
     text-align: right;
 }
+
 .text-left {
     text-align: left;
 }
+
 .right {
     float: right;
 
@@ -1482,132 +1518,120 @@ dl.drop_down {
     position: relative;
 
 }
-.width-50{
-    width:50%;
+
+.width-50 {
+    width: 50%;
 }
-.width-100{
-    width:100%;
+
+.width-100 {
+    width: 100%;
 }
+
 /*
- * CSS Styles that are needed by jScrollPane for it to operate correctly.
- *
- * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
- * may not operate correctly without them.
- */
+* CSS Styles that are needed by jScrollPane for it to operate correctly.
+*
+* Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+* may not operate correctly without them.
+*/
 
-.jspContainer
-{
-	overflow: hidden;
-	position: relative;
+.jspContainer {
+    overflow: hidden;
+    position: relative;
 }
 
-.jspPane
-{
-	position: absolute;
+.jspPane {
+    position: absolute;
 }
 
-.jspVerticalBar
-{
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 16px;
-	height: 100%;
-	background: transparent;
+.jspVerticalBar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 100%;
+    background: transparent;
 }
 
-.jspHorizontalBar
-{
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 16px;
-	background: transparent;
+.jspHorizontalBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 16px;
+    background: transparent;
 }
 
 .jspVerticalBar *,
-.jspHorizontalBar *
-{
-	margin: 0;
-	padding: 0;
+.jspHorizontalBar * {
+    margin: 0;
+    padding: 0;
 }
 
-.jspCap
-{
-	display: none;
+.jspCap {
+    display: none;
 }
 
-.jspHorizontalBar .jspCap
-{
-	float: left;
+.jspHorizontalBar .jspCap {
+    float: left;
 }
 
-.jspTrack
-{
-	background: #FFF;
-	position: relative;
+.jspTrack {
+    background: #FFF;
+    position: relative;
 }
 
-.jspDrag
-{
-    border:1px solid #448be2;
-	background: #fff;
-	position: relative;
-	top: 0;
-	left: 0;
-	cursor: pointer;
+.jspDrag {
+    border: 1px solid #448be2;
+    background: #fff;
+    position: relative;
+    top: 0;
+    left: 0;
+    cursor: pointer;
 }
 
 .jspHorizontalBar .jspTrack,
-.jspHorizontalBar .jspDrag
-{
-	float: left;
-	height: 100%;
+.jspHorizontalBar .jspDrag {
+    float: left;
+    height: 100%;
 }
 
-.jspArrow
-{
-	background: url("/images/ui-icons_448be2_256x240.png") no-repeat scroll 0 0 #fff;
-	text-indent: -20000px;
-	display: block;
-	cursor: pointer;
+.jspArrow {
+    background: url("/images/ui-icons_448be2_256x240.png") no-repeat scroll 0 0 #fff;
+    text-indent: -20000px;
+    display: block;
+    cursor: pointer;
 }
+
 .jspArrowDown {
-background-position:-64px 0 !important;
-}
-.jspArrow.jspDisabled
-{
-	cursor: default;
-	background: transparent;
+    background-position: -64px 0 !important;
 }
 
-.jspVerticalBar .jspArrow
-{
-	height: 16px;
+.jspArrow.jspDisabled {
+    cursor: default;
+    background: transparent;
 }
 
-.jspHorizontalBar .jspArrow
-{
-	width: 16px;
-	float: left;
-	height: 100%;
+.jspVerticalBar .jspArrow {
+    height: 16px;
 }
 
-.jspVerticalBar .jspArrow:focus
-{
-	outline: none;
+.jspHorizontalBar .jspArrow {
+    width: 16px;
+    float: left;
+    height: 100%;
 }
 
-.jspCorner
-{
-	background: #eeeef4;
-	float: left;
-	height: 100%;
+.jspVerticalBar .jspArrow:focus {
+    outline: none;
+}
+
+.jspCorner {
+    background: #eeeef4;
+    float: left;
+    height: 100%;
 }
 
 /* Yuk! CSS Hack for IE6 3 pixel bug :( */
-* html .jspCorner
-{
-	margin: 0 -3px 0 0;
+* html .jspCorner {
+    margin: 0 -3px 0 0;
 }

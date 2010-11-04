@@ -76,9 +76,16 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def create
-    @record = Volunteering::Record.create(params[:volunteering_record]) do |p|
-      p.action = 'To Be Taken'
-    end
+    record = params[:volunteering_record]
+
+    @record = Volunteering::Record.new
+    @record.contact_id = record['contact_attributes']['id'] if record['contact_attributes']
+    @record.action = 'To Be Taken'
+    @record.update_attributes(record)
+
+#    @record = Volunteering::Record.create(params[:volunteering_record]) do |p|
+#      p.action = 'To Be Taken'
+#    end
     respond_with(@record)
   end
 

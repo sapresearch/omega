@@ -26,6 +26,11 @@ class GroupsController < Omega::Controller
     respond_with(@group)
   end
 
+  def destroy
+    @group.destroy
+    respond_with(@group)
+  end
+
   def assign
     @group = Group.find(params[:id])
     @assigned_users = @group.users

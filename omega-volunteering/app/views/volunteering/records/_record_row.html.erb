@@ -36,13 +36,13 @@
         <%= record.status %>
     <% end %>
   </td>
-  <td> <%= om_button(:plain => true, :icon => 'counter') do %>
+  <td>
         <span class="green">   <%= record.position.active_volunteers.count %></span>
-    <% end %>
+
   </td>
-  <td><%= om_button(:plain => true, :icon => 'counter') do %>
+  <td>
         <span class="red">   <%= record.position.missing_volunteers %></span>
-    <% end %>
+   
   </td>
   <td>
     <%= om_button(:plain => true, :icon => 'next') do %>

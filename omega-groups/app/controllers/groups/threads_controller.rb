@@ -1,6 +1,7 @@
 class Groups::ThreadsController < Omega::Controller
   respond_to :html, :xml, :json
 
+  before_filter :get_group
   before_filter :get_threads, :only => [:index]
   before_filter :get_thread,  :only => [:show, :edit, :update, :destroy]
 
@@ -23,7 +24,7 @@ class Groups::ThreadsController < Omega::Controller
 
   def create
     @thread = Group::Thread.create(params[:thread]) do |thread|
-      thread.group = Group.find(params[:group_id])
+      thread.group = @group
     end
     respond_with(@thread)
   end
@@ -39,11 +40,15 @@ class Groups::ThreadsController < Omega::Controller
   end
 
   private
+    def get_group
+      @group = Group.find(params[:group_id])
+    end
+
     def get_threads
-      @threads = Group.find(params[:group_id]).threads
+      @threads = @group.threads
     end
 
     def get_thread
-      @thread = Group.find(params[:group_id]).threads.find(params[:id])
+      @thread = @group.threads.find(params[:id])
     end
 end

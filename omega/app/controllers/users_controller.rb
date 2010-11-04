@@ -1,7 +1,7 @@
 class UsersController < Omega::Controller
   respond_to :html, :xml, :js, :json
   crud_helper User
-  require_permission User::PERM_VIEW, :except => [:register, :create, :lost_username, :lost_password]
+  require_permission User::PERM_VIEW, :except => [:register, :join,   :create, :lost_username, :lost_password]
   require_permission User::PERM_ADMIN, :only  => [:new, :edit, :create, :update, :destroy]
   breadcrumb 'Users' => :users
   before_filter :sort, :only => [:index]
@@ -21,13 +21,14 @@ class UsersController < Omega::Controller
   end
 
   def register
-    if request.post?
-      @user = User.register(params[:user])
-    else
-      @user = User.new
-    end
-
+    @user = User.new
     respond_with(@user)
+  end
+
+  def join
+    @user = User.register(params[:user])
+
+    respond_with(@user, :location => root_url)
   end
 
   def edit

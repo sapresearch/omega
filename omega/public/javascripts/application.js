@@ -322,6 +322,7 @@ jQuery(function($) {
                         var result = $.parseJSON(response);
                         var upload = result.upload;
 
+                        input.after(newInput).after(displayInput);
                         newInput.val(upload.id);
                         displayInput.val(upload.upload_file_name);
                         displayInput.show();
@@ -330,8 +331,6 @@ jQuery(function($) {
                         alert("onError");
                     }
                 });
-
-                input.after(newInput).after(displayInput);
             });
         }
     });

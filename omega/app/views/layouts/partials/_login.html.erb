@@ -1,22 +1,24 @@
-
 <div id="loginFailed">
 </div>
 <%= form_for Session.new, :remote => true, :'data-type' => 'json' do |f| %>
+    <p>
+      <%= f.label :user %>
+      <%= f.text_field :username, :class => 'inputMid', :tabindex=>1 %>
+
+    </p>
+    <p>
+      <%= f.label :password %>
+      <%= f.password_field :password, :class => 'inputMid', :tabindex=>1 %>
+
+    </p>
+
+     <%= om_button(:icon => 'login') do %>
+        <%= f.submit %>
+    <% end %>
 <p>
-    <%= f.label :user %>
-    <%= f.text_field :username, :class => 'inputMid' %>
-    <%= link_to 'Lost your username?', lost_username_path %>
-</p>
-<p>
-    <%= f.label :password %>
-    <%= f.password_field :password, :class => 'inputMid' %>
-    <%= link_to 'Lost your password?', lost_password_path %>
+  <%= link_to 'Lost your username?', lost_username_path %> <br>
+  <%= link_to 'Lost your password?', lost_password_path %>
 </p>
 
-    <span class="om-button">
-      <%= f.submit %>
-    </span>
-
-    
 
 <% end %>
