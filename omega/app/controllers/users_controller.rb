@@ -12,7 +12,7 @@ class UsersController < Omega::Controller
   end
 
   def show
-
+    
     respond_with(@user)
   end
 

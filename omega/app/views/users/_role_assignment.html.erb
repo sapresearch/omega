@@ -1,4 +1,5 @@
 <% role = role_assignment %>
+<%= label_tag "role_#{role.id}", role_assignment.name %>
 <%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role) || role.default_role?,
                   :id => "role_#{role.id}" %>
-<%= label_tag     "role_#{role.id}", role_assignment.name %>
+

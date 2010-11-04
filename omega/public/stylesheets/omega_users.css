@@ -18,3 +18,11 @@
 #letter-list  a {
     color:#002A5C;
 }
+#vcard dt {
+    color:#162D3D;
+    float:left;
+    width:150px;
+}
+#vcard dl {
+    line-height:1.4em;
+}

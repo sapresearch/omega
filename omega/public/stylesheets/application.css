@@ -126,7 +126,7 @@ input {
 
 }
 
-form input, textarea, select {
+form input[type=text] ,form input[type=password], textarea, select {
 
     padding: 8px;
     border: 1px solid #dedede;
@@ -169,7 +169,7 @@ form label {
     *display: inline;
 
     font-weight: bold;
-    min-width: 120px;
+    min-width: 140px;
     text-align: right;
     margin: 0 10px;
     text-transform: capitalize;
@@ -751,7 +751,7 @@ span.om-plain-button, span.om-plain-icon-button {
 }
 
 span.om-plain-button a, span.om-plain-icon-button a {
-    color: #fff;
+    color: #4096EE;
 }
 
 span.om-button span.om-icon,
