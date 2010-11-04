@@ -260,9 +260,10 @@ jQuery(function($) {
 
 
     loginWrapper.dialog({
-        modal : true,
+        modal   : true,
         autoOpen: false,
-        title: 'Login'
+        title   : 'Login',
+        width   : 400
     });
     trigger.click(function() {
         loginWrapper.dialog('open');

@@ -8,11 +8,11 @@
 
 $(function() {
 
-	$('#records-table').dataTable({
+    $('#records-table').dataTable({
         "bJQueryUI": true
-        
-    } );
 
+
+    });
 
 
 });

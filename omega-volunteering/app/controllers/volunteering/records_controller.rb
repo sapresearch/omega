@@ -5,8 +5,9 @@ class Volunteering::RecordsController < Omega::Controller
 
 
   def index
-    @records = Volunteering::Record.all()
-    @records =    @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
+    @records = Volunteering::Record.scoped.includes(:contact, :position)
+    @records = @records
+    @records = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
     respond_with(@records)
   end
 
