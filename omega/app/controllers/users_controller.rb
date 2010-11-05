@@ -2,7 +2,7 @@ class UsersController < Omega::Controller
   respond_to :html, :xml, :js, :json
   crud_helper User
   require_permission User::PERM_VIEW, :except => [:register, :join,   :create, :lost_username, :lost_password]
-  require_permission User::PERM_ADMIN, :only  => [:new, :edit, :create, :update, :destroy]
+  require_permission User::PERM_ADMIN, :only  => [:new, :create, :update, :destroy]
   breadcrumb 'Users' => :users
   before_filter :sort, :only => [:index]
 
