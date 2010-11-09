@@ -32,6 +32,7 @@ class Contact < Omega::Model
   has_many :phone_numbers, :as => :contact, :dependent => :destroy
 
   has_upload :photo
+  has_upload :resume
 
   accepts_flattened_values_for :interests, :skills, :value => :name
 

@@ -151,6 +151,7 @@ function update_contacts(contacts, group_id, group_name) {
     $contacts.find('a.remove-contact').bind("ajax:success", function() {
         $(this).closest('tr').remove();
     });
+
 }
 
 

@@ -8,8 +8,10 @@
 
 <h2 class="absolute">
   <%= @contact.first_name %>  <%= @contact.last_name %>
+
 </h2>
 <div class="user_image">
+
   <%= image_tag("profile.jpg", :width =>  '130') %>
 </div>
 <div class="clear"></div>
@@ -17,6 +19,24 @@
 Email: <%= @contact.email %><br>
 
 <div id="contact_accordion">
+
+
+      <h3><a href="#">References</a></h3>
+
+      <div>
+        <table class="width-100">
+          <thead>
+          <tr>
+            <th>Filename</th>
+            <th>Type</th>
+
+
+          </tr>
+          </thead>
+
+        </table>
+
+      </div>
 
   <% if @contact.groups.any? %>
       <h3><a href="#">Group Assignments</a></h3>
@@ -37,7 +57,7 @@ Email: <%= @contact.email %><br>
 
       <div>
         <%= render :partial => 'contacts/partials/skills_and_interests' %>
-        
+
       </div>
   <% end %>
   <% if @contact.addresses.any? %>
@@ -72,7 +92,7 @@ Email: <%= @contact.email %><br>
             <br>
 
         <% end %>
-        </div>
+      </div>
   <% end %>
 </div>
 <div>

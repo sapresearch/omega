@@ -1,7 +1,7 @@
 class ContactsController < Omega::Controller
   respond_to :html, :xml, :js, :json
   sub_layout :determine_sub_layout
-  crud_helper Contact, :all => [:all]
+  crud_helper Contact, :all => [:all, :list]
 
   contact_is_self = lambda { @contact.user == current_user }
 #  require_permission Contact::PERM_VIEW, :except => [:show, :edit]
@@ -15,7 +15,6 @@ class ContactsController < Omega::Controller
 
   def index
     @contact_groups = Contact::Group.all.group_by(&:group_type)
-
     respond_with(@contacts) do |format|
       format.any(:html, :js) { render 'all' }
     end
@@ -25,7 +24,12 @@ class ContactsController < Omega::Controller
     respond_with(@contacts)
   end
 
+  def list
+    respond_with(@contacts)
+  end
+
   def show
+    @records        = Volunteering::Record.where('contact_id = ?', params[:id]).order('created_at desc').limit(5)
     @contact_groups = Contact::Group.all.group_by(&:group_type)
     respond_with(@contact)
   end
@@ -37,6 +41,17 @@ class ContactsController < Omega::Controller
   end
 
   def edit
+    @records      = Volunteering::Record.where('contact_id = ?', params[:id]).order('created_at desc').limit(5)
+    respond_with(@contact)
+  end
+
+  def add_file
+    @contact = Contact.find(params[:id])
+    respond_with(@contact)
+  end
+
+  def upload
+    @contact = Contact.find(params[:id])
     respond_with(@contact)
   end
 
@@ -45,7 +60,7 @@ class ContactsController < Omega::Controller
   end
 
   def autocomplete
-    @q = params[:term]
+    @q        = params[:term]
     @contacts = Contact.named(@q)
     @contacts.limit(params[:limit]) if params[:limit]
 
@@ -62,7 +77,7 @@ class ContactsController < Omega::Controller
   end
 
   def search
-    @q = params[:q]
+    @q        = params[:q]
     @contacts = Contact.named(@q)
 
     respond_with(@contacts) do |format|
@@ -71,7 +86,7 @@ class ContactsController < Omega::Controller
   end
 
   def letter
-    @letter = params[:letter]
+    @letter   = params[:letter]
     @contacts = Contact.where('last_name like ?', "#{@letter}%").order('last_name')
 
     respond_with(@contacts) do |format|
