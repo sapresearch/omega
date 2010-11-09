@@ -84,17 +84,39 @@
       <fieldset>
         <legend>Contact for this position</legend>
         <% [['none', 'no contact'], ['existing', 'existing contact'], ['new', 'new contact']].each do |value, text| %>
-            <%= radio_button_tag 'contact_assignment', value, value == params[:contact_assignment] %><%= text %>
+            <%= radio_button_tag 'contact_assignment', value, value == @contact_assignment %><%= text %>
         <% end %>
       </fieldset>
       <fieldset id="position_exisiting_contact" class="hide">
         <legend>Assign an existing contact</legend>
-        <%= f.label "contact_name(s)" %>
-        <%= text_field_tag 'ac-contacts', nil %>
-        <%= f.hidden_field :contact_ids %>
-        <ul id="assigned_contacts" class="right">
+        <table>
+          <tr>
+            <td><%= f.label "contact_name(s)" %></td>
+            <td>
+              
+                  <span id="add-contacts">
+               <span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add contact"></span>
+                Add an exisitng contact
+                  </span>
 
-        </ul>
+              <ul id="assigned_contacts">
+
+                <% @position.contacts.each do |c| %>
+                    <li ui-data="<%= c.id %>">
+                      <span class="om-icon-only om-blue-icon ui-icon-minus" data-tooltip="Remove this contact"></span>
+                      <%= c.first_name %><%= c.last_name %>
+                    </li>
+                <% end unless @position.contacts.empty? %>
+              </ul>
+            </td>
+          </tr>
+        </table>
+
+        <%#= text_field_tag 'ac-contacts', nil %>
+
+        <%= f.hidden_field :contact_ids %>
+
+
       </fieldset>
 
 
@@ -118,7 +140,7 @@
         <%= f.text_field :interests_values %>
       </p>
     </fieldset>
-    <p >
+    <p>
       <%= om_button(:icon=>'save') do %>
           <%= f.submit %>
       <% end %>

@@ -11,7 +11,7 @@ table, tbody, tfoot, thead, tr, th, td {
     outline: 0;
     vertical-align: baseline;
     background: transparent;
-    font: 12px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 12px/1.5em helvetica, arial, freesans, clean, sans-serif;
 }
 
 body {
@@ -66,11 +66,11 @@ h1.page-content {
 
 h2 a {
     font-size: 1.3em;
-    color: #00469C;
+    color: #cf3a72;
 }
 
 h2 a:hover {
-    color: #0069E9;
+    color: #A32D5A;
 }
 
 h2 {
@@ -93,9 +93,10 @@ h3 a {
 }
 
 h4 {
+    border-bottom: 1px dotted #0063DC;
+    color: #0063DC;
+    margin: 10px 0;
     padding: 2px;
-    border: 1px dotted #0063dc;
-    color: #0063dc;
 }
 
 p {
@@ -126,7 +127,7 @@ input {
 
 }
 
-form input[type=text] ,form input[type=password], textarea, select {
+form input[type=text], form input[type=email], form input[type=password], textarea, select {
 
     padding: 8px;
     border: 1px solid #dedede;
@@ -145,7 +146,7 @@ input[type="button"]::-moz-focus-inner {
 
 form table input {
     height: 22px;
-    padding: 0;
+    padding: 0 !important;
     background: #F2F2F2;
     border: 1px solid #A2A6A7;
 }
@@ -266,24 +267,6 @@ tr.odd {
 
 }
 
-#user_custom_bar {
-    float: left;
-    position: relative;
-    top: 8px;
-}
-
-#user_custom_bar {
-    float: left;
-    position: relative;
-    top: 8px;
-
-}
-
-#user_custom_bar a {
-    color: #FFF;
-
-}
-
 #wrapper {
     min-height: 400px;
 }
@@ -305,17 +288,19 @@ tr.odd {
     position: relative;
 }
 
-#ctlrBar {
+#ctlrBar, #user_custom_bar {
     background: #333;
     color: #FFF;
-    float: right;
     font-weight: bold;
     height: 20px;
     line-height: 20px;
-    margin-left: 1em;
     padding: 0 10px;
     text-transform: capitalize;
-    vertical-align: bottom;
+}
+
+#ctlrBar a, #user_custom_bar a {
+    color: #FFF;
+
 }
 
 #breadcrumb {
@@ -426,7 +411,6 @@ li.list-item {
 .item-list-actions {
     margin: 5px;
     height: 100%;
-
 }
 
 .first-l {
@@ -496,8 +480,8 @@ li.list-item {
     -webkit-border-radius: 4px;
     border-radius: 4px;
     -moz-box-shadow: 0 0 10px #333;
-    -webkit-box-shadow: 0 0 10px #666;
-    box-shadow: 0 0 10px #666;
+    -webkit-box-shadow: 0 0 10px #333;
+    box-shadow: 0 0 10px #333;
     margin: 0;
     padding: 0;
     float: left;
@@ -673,9 +657,8 @@ span.error, .red {
 }
 
 .inputActive {
-    
-    border: 1px solid #999;
 
+    border: 1px solid #999;
 
 }
 
@@ -697,7 +680,10 @@ span.error, .red {
     text-transform: capitalize;
     line-height: 18px;
     height: 18px;
-    color: #002A5C;
+       color: #333333;
+    font-weight: bold;
+
+    text-shadow: 1px 1px 1px #FFFFFF;
     background: none;
     display: inline-block;
     white-space: nowrap;
@@ -715,7 +701,12 @@ span.error, .red {
 }
 
 .om-icon-button a {
+    color: #333333;
+    font-weight: bold;
+
+    text-shadow: 1px 1px 1px #FFFFFF;
     padding: 1px 8px;
+
 }
 
 .om-button button {
@@ -747,7 +738,7 @@ span.om-plain-button, span.om-plain-icon-button {
     position: relative;
     display: inline-block;
     height: 16px;
-    margin: 0 0 0 30px;
+    margin: 0 0 0 22px;
 }
 
 span.om-plain-button a, span.om-plain-icon-button a {
@@ -808,9 +799,13 @@ span.om-plain-icon-button span.om-icon {
     position: absolute;
     top: 2px;
     margin: 0 0 0 -20px;
-    display: inline-block;
+    display: block;
     width: 16px;
     height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    *display: inline;
+    *zoom: 1;
 
 }
 
@@ -1028,8 +1023,13 @@ span.om-icon-back {
 .om-icon-doc-add {
     background-position: 0 -1088px;
 }
+
 .om-icon-login {
     background-position: 0 -1104px;
+}
+
+.om-icon-clipboard-plus {
+    background-position: 0 -1120px;
 }
 
 /*END BUTTONS*/
@@ -1166,12 +1166,6 @@ form span.error {
 }
 
 /* End hide from IE-mac */
-
-#ctlrBar a {
-    color: #FFF;
-    cursor: pointer;
-
-}
 
 #events {
     height: 175px;
@@ -1382,18 +1376,18 @@ dl.drop_down {
     font-size: 12px;
     position: absolute;
     z-index: 100000;
+
 }
 
 .tipsy-inner {
     padding: 5px 8px 4px 8px;
     background-color: #191919;
-    color: #FFF;
-    border: 1px solid #191919;
+    color: #FFF;;
     max-width: 200px;
     text-align: center;
-}
-
-.tipsy-inner {
+    -moz-box-shadow: 0 0 6px #333;
+    -webkit-box-shadow: 0 0 6px #333;
+    box-shadow: 0 0 6px #333;
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;

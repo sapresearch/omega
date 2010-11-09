@@ -5,7 +5,7 @@ module Omega
     class << self
       private
         def has_upload(association_id, options = {})
-#          has_one("#{association_id}_upload", options.merge(:class_name => '::Upload', :as => :binding))
+          has_one("#{association_id}_upload", options.merge(:class_name => '::Upload', :as => :binding))
 
           class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
             def #{association_id}
@@ -24,6 +24,28 @@ module Omega
             end
           RUBY_EVAL
         end
+
+#        def has_uploads(association_id, options = {})
+#          association = "#{association_id.singularize}_uploads"
+#          has_many(association, options.merge(:class_name => '::Upload', :as => :binding))
+#
+#          class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
+#            def #{association_id}
+#              #{association}
+#            end
+#
+##            def #{association_id}=(value)
+##              case value
+##                when File
+##                  send(:'#{association_id}_upload=', Upload.create!(:upload => value))
+##                when String, Integer
+##                  send(:'#{association_id}_upload=', Upload.find(value.to_i))
+##                else
+##                  send(:'#{association_id}_upload=', value)
+##              end
+##            end
+#          RUBY_EVAL
+#        end
     end
 
 

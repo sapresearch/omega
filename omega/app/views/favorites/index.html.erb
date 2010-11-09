@@ -12,8 +12,10 @@
     <% end %>
   </div>
   <div class="clear"></div>
+  <% if @favorites.any? %>
   <ul id="favorites-list">
-    <% @favorites.each do |favorite| %>
+
+    <%  @favorites.each do |favorite| %>
         <li class="list-item relative">
           <div class="item-list-actions-wrapper corners">
             <div class="item-list-actions">
@@ -27,8 +29,9 @@
           </div>
           <%= truncate(favorite.item.to_s, :length=> 160) %>
         </li>
-    <% end %>
+    <% end  %>
   </ul>
+        <% end  %>
 </div>
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_favorites_menu" %>

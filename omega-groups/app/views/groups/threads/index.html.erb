@@ -3,8 +3,9 @@
 </h1>
 
 <div class="page-content corners-bottom">
-
-
+<% @threads.each do |t| %>
+  <%= t.title %>
+<% end %>
 </div>
 
 <% content_for :sidebar do %>

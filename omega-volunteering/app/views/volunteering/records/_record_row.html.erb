@@ -1,53 +1,31 @@
-<tr class="list-item relative" id="record-<%= record.id %>">
-  <div class="item-list-actions-wrapper corners">
-    <div class="item-list-actions">
-      <%= om_button(:plain => true, :icon => 'folder-edit') do %>
-          <%= link_to "Process", administer_volunteering_record_url(record), :remote => 'true' %>
-      <% end %>
-      <br>
-      <%= om_button(:plain => true, :icon => 'next') do %>
-          <%= link_to 'Application Details', volunteering_record_url(record) %>
-      <% end %>
-      <br>
-      <%= om_button(:plain => true, :icon => 'next') do %>
-          <%= link_to 'Application History', history_volunteering_record_path(record) %>
-      <% end %>
-      <br>
-    </div>
-  </div>
-  <td>
 
-    <%= truncate(record.position.name, :length => 20) %>
-  </td>
-  <td>
-    <%= om_button(:plain => true, :icon => 'user') do %>
-        <%= link_to "#{record.contact.first_name} #{record.contact.last_name}", contact_path(record.contact), :class => 'blue' %>
-    <% end %>
-  </td>
-  <td><%= om_button(:plain => true, :icon => 'mail-sent') do %>
-        <span>  <%= record.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
-    <% end %>
-  </td>
-  <td><%= om_button(:plain => true, :icon => 'folder-open') do %>
-        <%= link_to record.action , administer_volunteering_record_url(record), :remote => 'true' %>
-    <% end %>
-  </td>
-  <td> <%= om_button(:plain => true, :icon => 'folder-open') do %>
-        <%= record.status %>
-    <% end %>
-  </td>
-  <td>
-        <span class="green">   <%= record.position.active_volunteers.count %></span>
+        <tr  id="record-<%= record.id %>">
 
-  </td>
-  <td>
-        <span class="red">   <%= record.position.missing_volunteers %></span>
+          <td>
 
-  </td>
-  <td>
-    <%= om_button(:plain => true, :icon => 'next') do %>
-        <%= link_to 'History', history_volunteering_record_path(record) %>
-    <% end %>
-  </td>
+             <%= om_button(:plain => true, :icon => 'next') do %>
+                <%= link_to 'See Application', volunteering_record_path(record) %>
+            <% end %>
+          </td>
+          <td>
+            <%= om_button(:plain => true, :icon => 'user') do %>
+                <%= link_to "#{record.contact.first_name} #{record.contact.last_name}", contact_path(record.contact), :class => 'blue' %>
+            <% end %>
+          </td>
+          <td><%= om_button(:plain => true, :icon => 'mail-sent') do %>
+                <span>  <%= record.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
+            <% end %>
+          </td>
+          <td>
+            <%= om_button(:plain => true, :icon => 'folder-open') do %>
+                <%= link_to record.action , administer_volunteering_record_url(record), :remote => 'true' %>
+            <% end %>
+          </td>
+          <td> <%= om_button(:plain => true, :icon => 'folder-open') do %>
+                <%= record.status %>
+            <% end %>
+          </td>
 
-</tr>
+
+
+        </tr>

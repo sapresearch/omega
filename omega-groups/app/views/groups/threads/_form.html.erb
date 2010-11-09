@@ -1,0 +1,14 @@
+<%= form_for @thread, :remote => true do |f| %>
+   
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <%= f.label :caption %>
+    <%= f.text_field :caption %>
+    <p>
+      <%= om_button(:icon=>'save') do %>
+          <%= f.submit 'Save' %>
+      <% end %>
+    </p>
+
+
+<% end %>

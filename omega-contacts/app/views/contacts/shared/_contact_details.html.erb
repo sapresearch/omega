@@ -19,7 +19,40 @@
 Email: <%= @contact.email %><br>
 
 <div id="contact_accordion">
+  <% if @records.any? %>
+      <h3><a href="#">Volunteering history</a></h3>
 
+      <div>
+        <table class="width-100">
+          <thead>
+          <tr>
+            <th>Position</th>
+            <th>Date</th>
+            <th>Status</th>
+
+          </tr>
+          </thead>
+
+          <% @records.each do |record| %>
+              <tr class="<%= cycle('odd', 'even') %>">
+                <td>
+
+                  <%= truncate(record.position.name, :length => 20) %>
+                </td>
+                <td><%= om_button(:plain => true, :icon => 'mail-sent') do %>
+                      <span>  <%= record.created_at.strftime("%m/%d/%Y") %></span>
+                  <% end %>
+                </td>
+                <td><%= om_button(:plain => true, :icon => 'folder-open') do %>
+                      <%= record.status %>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+        </table>
+<%= link_to 'See entire history', nil %>
+      </div>
+  <% end %>
 
       <h3><a href="#">References</a></h3>
 

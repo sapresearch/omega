@@ -1,1 +1,24 @@
-<%= render('form') %>
+<h1 class="page-content corners-top">
+  New Message
+</h1>
+<div class="page-content corners-bottom">
+  <%= form_for @message do |f| %>
+      <p>
+        <%= f.label :to %>  <%= @message.to.username %>
+        <%= f.hidden_field :to_id %>
+      </p>
+
+      <p>
+        <%= f.label :subject %> <%= f.text_field :subject %>
+      </p>
+
+      <p>
+        <%= f.label :body %> <%= f.text_area :body %>
+      </p>
+      <%= om_button(:icon => 'mail') do %>
+          <%= f.submit :value => 'Send Message' %>
+      <% end %>
+
+
+  <% end %>
+</div>

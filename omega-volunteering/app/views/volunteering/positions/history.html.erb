@@ -2,15 +2,27 @@
 <% require_javascript 'omega_volunteering_records' %>
 <% require_stylesheet 'omega_volunteering' %>
 <% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
-
 <h1 class="page-content corners-top">
-  Application Overview
+  Appliaction history for <%= @position.name %>
 </h1>
 <div class="page-content corners-bottom">
+  <%= om_button(:plain => true, :icon => 'counter') do %>
+      Active Volunteers <span class="green">   <%= @position.active_volunteers.count %></span>
+  <% end %>
+<br>
+    <%= om_button(:plain => true, :icon => 'counter') do %>
+      Missing Volunteers <span class="red">   <%= @position.missing_volunteers %></span>
+  <% end %>
+<br>
+<br>
+
+
+
   <table class="width-100 clear" id="records-table">
     <thead>
     <tr>
-      <th>Position</th>
+
+      <th>Application</th>
       <th>
         From
       </th>
@@ -23,27 +35,21 @@
       <th>
         Status
       </th>
-      <th>
-        Active
-      </th>
-      <th>
-        Missing
-      </th>
-      <th>
-        History
-      </th>
+
     </tr>
     </thead>
     <% if @records.empty? %>
         <h2> No Applications to Show!</h2>
     <% end %>
-    <%= render :partial => 'record_row', :collection => @records, :as => :record %>
+    <%= render :partial => 'volunteering/records/record_row', :collection => @records, :as => :record %>
     <%# @records.each do |a| %>
-
-        <%#= render 'record_row', :record_row => a %>
+    <%#= render 'record_row', :record => a %>
     <%# end %>
+
+
   </table>
-    <%= will_paginate @positions %>
+
+  <%#= will_paginate @positions %>
   <div class="clear"></div>
 
 </div>

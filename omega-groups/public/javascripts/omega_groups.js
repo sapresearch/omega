@@ -36,14 +36,10 @@ $(function() {
     });
 
     $('#user-filter').jfilter({
-        list: '#user-list',
-        speed: 100,
-        highlight: 'highlight' // Class name with no "."
+        list: '#user-list'
     });
     $('#member-filter').jfilter({
-        list: '#member-list',
-        speed: 100,
-        highlight: 'highlight' // Class name with no "."
+        list: '#member-list'
     });
 
 

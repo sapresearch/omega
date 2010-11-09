@@ -32,6 +32,8 @@ class Groups::UploadsController < Omega::Controller
         end
       end
 
+      logger.debug "\n\n@uploads = #{@uploads}"
+
       respond_with(@uploads)
     else
       @upload = GroupUpload.create(params[:upload]) do |upload|

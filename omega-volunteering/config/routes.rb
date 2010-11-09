@@ -14,6 +14,9 @@ Omega::Volunteering::Module.routes.draw do
 
       end
 
+      member do
+        get :history
+      end
     end
 
     resources :schedules
@@ -26,19 +29,17 @@ Omega::Volunteering::Module.routes.draw do
         get :newest
         get :completed
         get :admin_page
-
+        get :user_history, :path => 'user_history/:contact_id'
       end
+
       member do
         get :administer
-      end
-      member do
         get :withdraw
       end
-      member do
-        get :history
-      end
     end
+
     resources :time_entries
+
 
 
     root :to => 'volunteering#index', :as => ''

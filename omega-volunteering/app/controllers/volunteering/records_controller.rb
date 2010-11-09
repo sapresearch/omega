@@ -60,6 +60,15 @@ class Volunteering::RecordsController < Omega::Controller
   def history
     record    = Volunteering::Record.find(params[:id])
     @records  = Volunteering::Record.where('position_id = ?', record.position_id).order('created_at desc')
+    @records =  @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
+    respond_with(@records)
+  end
+
+  def user_history
+    contact_id    = Volunteering::Record.find(params[:contact_id])
+    @contact      = Contact.find(contact_id)
+    @records      = Volunteering::Record.where('contact_id = ?', contact_id).order('created_at desc')
+    breadcrumb 'Applications from user' => 'Applications from user'
     respond_with(@records)
   end
 
@@ -77,9 +86,9 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def create
-    record = params[:volunteering_record]
+    record         = params[:volunteering_record]
 
-    @record = Volunteering::Record.new
+    @record        = Volunteering::Record.new
     @record.contact_id = record['contact_attributes']['id'] if record['contact_attributes']
     @record.action = 'To Be Taken'
     @record.update_attributes(record)

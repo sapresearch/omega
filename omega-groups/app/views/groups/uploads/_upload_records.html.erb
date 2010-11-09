@@ -26,7 +26,7 @@
           <% end %>
         </td>
         <td><%= file.upload.uploader.username %></td>
-        <td><%= file.upload.upload_updated_at %></td>
+        <td><%= file.upload.upload_updated_at.strftime("%m/%d/%Y at %I:%M%p")  %></td>
       </tr>
 
   <% end %>

@@ -3,7 +3,7 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
 <h1 class="page-content corners-top">
-  Appliaction history
+  Appliaction history of <%= "#{@contact.first_name} #{@contact.last_name}" %>
 </h1>
 <div class="page-content corners-bottom">
 
@@ -49,7 +49,7 @@
 
   </table>
 
-  <%= will_paginate @positions %>
+  <%#= will_paginate @positions %>
   <div class="clear"></div>
 
 </div>

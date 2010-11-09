@@ -1,21 +1,22 @@
-<% require_javascript 'omega_messages.js',%>
+<% require_javascript 'omega_messages.js', %>
 <div class="page-content corners-bottom">
   <%= form_for @message do |f| %>
       <p>
-        <%= f.label :to %>: <%= text_field_tag :'ac-users' %>
+        <%= f.label :to %> <%= text_field_tag :'ac-users' %>
         <%= f.hidden_field :to_id %>
       </p>
 
       <p>
-        <%= f.label :subject %>: <%= f.text_field :subject %>
+        <%= f.label :subject %> <%= f.text_field :subject %>
       </p>
 
       <p>
-        <%= f.label :body %>: <%= f.text_area :body %>
+        <%= f.label :body %> <%= f.text_area :body %>
       </p>
 
-      <%= om_button do %>
+      <%= om_button(:icon => 'mail') do %>
           <%= f.submit :value => 'Send Message' %>
       <% end %>
-      </div>
+
   <% end %>
+</div>
