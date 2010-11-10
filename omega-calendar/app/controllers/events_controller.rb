@@ -2,6 +2,8 @@ class EventsController < Omega::Controller
 
   respond_to :html, :xml, :js, :json
 
+  before_filter :get_calendar
+
 
  def index
     @events = Event.all
@@ -28,7 +30,6 @@ class EventsController < Omega::Controller
   end
 
   def edit
-    @calendar = Calendar.find(params[:calendar_id])
     @event = Event.find(params[:id])
     respond_with(@event)
   end
@@ -45,4 +46,8 @@ class EventsController < Omega::Controller
     respond_with(@event)
   end
 
+  private
+    def get_calendar
+      @calendar = Calendar.find(params[:calendar_id])
+    end
 end

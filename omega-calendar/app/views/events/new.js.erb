@@ -1,2 +1,20 @@
+$('body').append('<%= escape_javascript(render 'form', :event => @event, :calendar => @calendar) %>');
 
-$('#add-event-form').html('<%= escape_javascript(render "/events/form", :event => @event) %>');
+
+        $('.new_event').dialog({
+            autoOpen    : true,
+            width       : 600,
+            title       : 'Create a new event'
+        });
+        if ($('#event_allday').is(':checked')) {
+            $('.tpickr').hide();
+        } else {
+            $('.tpickr').show();
+        }
+        $('#event_allday').change(function() {
+            if ($(this).is(':checked')) {
+                $('.tpickr').hide()
+            } else {
+                $('.tpickr').show();
+            }
+        });

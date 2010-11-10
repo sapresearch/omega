@@ -28,11 +28,16 @@ $(document).ready(function() {
             right: 'month,agendaWeek,agendaDay'
         },
         editable: true,
-        events: '/calendars/' + this.calendar_id + '/events.json',
+        events: '/calendars/1/events.json',
         dayClick: function(date, allDay, jsEvent, view) {
-            $('#cal').hide();
-            $create_event.show();
+            var that = $('#cal').data('fullCalendar');
+            $.ajax({
+                url: '/calendars/' + that.options.calendar_id + '/events/new',
+                dataType: 'script'
+
+            });
             $('#event_start, #event_end').val($.fullCalendar.formatDate(date, 'yyyy-MM-dd'));
+
 
         },
         eventClick: function(event, jsEvent, view) {
@@ -72,7 +77,6 @@ $(document).ready(function() {
                     }
                 }
             });
-            $('#sidebox_events').hide('slide', {direction : 'down'}, 500).empty().append(ed).show('slide', { direction : 'up' }, 500)
 
 
         },
@@ -116,34 +120,8 @@ $(document).ready(function() {
             });
             //$('#edit_event_time').attr('action', '/events/' + event.id).trigger('submit');
 
-        },
-
-        loading: function(isloading) {
-            // TODO show loading animation
         }
     });
-
-
-//    $('#btn_edit_event').live('click', function() {
-//
-//        var f = '<form method="post" id="edit_event" data-remote="true" action="">';
-//        f += '<input type="hidden" value="put" name="_method">';
-//        f += '<input type="hidden" value="' + csrf_token + '" name="' + csrf_token + '">';
-//        f += '<p><label for="event_title">Title</label><input type="text" value="date" size="30" name="event[title]" id="event_title"></p>';
-//        f += '<p><label for="event_start">Start</label><input type="text" value="' + $.fullCalendar.formatDate(curent_event.start, 'yyyy-MM-dd HH:mm') + '" size="30" name="event[start]" id="event_start">YYYY-MM-DD</p>';
-//        f += '<p><label for="event_end">End</label><input type="text" value="' + $.fullCalendar.formatDate(curent_event.end, 'yyyy-MM-dd HH:mm') + '" size="30" name="event[end]" id="event_end">YYYY-MM-DD</p>';
-//        f += '<p><label for="event_event_description">Event description</label><textarea rows="5" name="event[event_description]" id="event_event_description" cols="40">' + curent_event.event_description + '</textarea></p>';
-//        f += '<input type="hidden" value="1" name="event[calendar_id]" id="event_calendar_id">';
-//        f += '<p><input type="submit" value="Update Event" name="commit" id="event_submit"><span id="cancel">cancel</span></p>';
-//        f += '</form>';
-//
-//
-//        $('#cal').hide();
-//        $(f).insertAfter($('#cal'));
-//        $('#edit_event').attr('action', '/events/' + curent_event.id);
-//
-//
-//    });
 
 
     $('#btn_edit_event').live('click', function() {
@@ -184,36 +162,20 @@ $(document).ready(function() {
     }
 
 
-    $('#new_event').bind('ajax:success', function() {
-        //todo : notification
-        $('#cal').fullCalendar('refetchEvents');
-        $create_event.hide();
-        $('#cal').show();
 
 
-        reset_form($(this))
 
 
+    $('input.datepickr').live('click', function() {
+        $(this).datepicker({
+            showOn:'focus',
+            dateFormat: 'yy-mm-dd',
+            showButtonPanel: true,
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '2010:2020'}).focus();
     });
-    if ($('#event_allday').is(':checked')) {
-        $('.tpickr').hide();
-    } else {
-        $('.tpickr').show();
-    }
-    $('#event_allday').change(function() {
-        if ($(this).is(':checked')) {
-            $('.tpickr').hide()
-        } else {
-            $('.tpickr').show();
-        }
-    });
-    $('.datepickr').datepicker({
-        dateFormat: 'yy-mm-dd',
-        showButtonPanel: true,
-        changeMonth: true,
-        changeYear: true,
-        yearRange: '2010:2020'
-    });
+
 
 
 });
