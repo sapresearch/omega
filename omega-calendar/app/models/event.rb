@@ -16,6 +16,8 @@ class Event < Omega::Model
   validates_presence_of :title
   validates :start_date, :presence => true#, :date_must_be_before => { :before => :end_date }
   validates :end_date, :presence => true
+  
+  has_one :event_source
 
   validate do
     if allday

@@ -1,4 +1,6 @@
 class Calendar < Omega::Model
+  require_dependency 'calendar/model_observer'
+
   PERM_ADMIN     = 'calendars_admin'
   PERM_ADMIN_OWN = 'calendars_admin_own'
   PERM_VIEW      = 'calendars_view'
