@@ -29,8 +29,8 @@ Omega::Contacts::Module.routes.draw do
     end
 
     member do
-      get  :add_file
-      post :upload
+      get  :upload
+      post :do_upload
     end
 
     scope :as => 'contact', :module => 'contacts' do

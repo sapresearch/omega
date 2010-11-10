@@ -57,6 +57,7 @@ Email: <%= @contact.email %><br>
       <h3><a href="#">References</a></h3>
 
       <div>
+        <%= link_to "Upload", upload_contact_path(@contact), :remote => false %>
         <table class="width-100">
           <thead>
           <tr>

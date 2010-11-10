@@ -32,7 +32,9 @@ class Contact < Omega::Model
   has_many :phone_numbers, :as => :contact, :dependent => :destroy
 
   has_upload :photo
-  has_upload :resume
+
+  has_many :uploads, :as => 'binding'
+  accepts_nested_attributes_for :uploads
 
   accepts_flattened_values_for :interests, :skills, :value => :name
 

@@ -45,13 +45,14 @@ class ContactsController < Omega::Controller
     respond_with(@contact)
   end
 
-  def add_file
+  def upload
     @contact = Contact.find(params[:id])
     respond_with(@contact)
   end
 
-  def upload
+  def do_upload
     @contact = Contact.find(params[:id])
+    @cotnact.update_attributes(params[:contact])
     respond_with(@contact)
   end
 
