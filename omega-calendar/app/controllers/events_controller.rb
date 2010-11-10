@@ -16,7 +16,9 @@ class EventsController < Omega::Controller
   end
 
   def new
-    @event = Event.new
+    @event = Event.new do |e|
+      e.calendar = @calendar
+    end
     respond_with(@event)
   end
 

@@ -20,6 +20,7 @@ $(document).ready(function() {
 
 
     $('#cal').fullCalendar({
+        more:3,
         calendar_id :1,
         height: 550,
         header: {
@@ -30,6 +31,9 @@ $(document).ready(function() {
         editable: true,
         events: '/calendars/1/events.json',
         dayClick: function(date, allDay, jsEvent, view) {
+
+            
+
             var that = $('#cal').data('fullCalendar');
             $.ajax({
                 url: '/calendars/' + that.options.calendar_id + '/events/new',

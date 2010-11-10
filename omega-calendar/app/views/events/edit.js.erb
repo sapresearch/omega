@@ -4,3 +4,15 @@ $('body').append('<%= escape_javascript(render 'form.html', :event => @event, :c
             width       : 600,
             title       : '<%= @event.title %>'
         });
+                if ($('#event_allday').is(':checked')) {
+            $('.tpickr').hide();
+        } else {
+            $('.tpickr').show();
+        }
+        $('#event_allday').change(function() {
+            if ($(this).is(':checked')) {
+                $('.tpickr').hide()
+            } else {
+                $('.tpickr').show();
+            }
+        });
