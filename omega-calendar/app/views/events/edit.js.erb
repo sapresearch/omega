@@ -1,1 +1,6 @@
-$('#display-event-form').html('<%= escape_javascript(render "/events/form", :event => @event) %>');
+$('body').append('<%= escape_javascript(render 'form.html', :event => @event, :calendar => @calendar) %>');
+        $('form.edit_event').dialog({
+            autoOpen    : true,
+            width       : 600,
+            title       : '<%= @event.title %>'
+        });

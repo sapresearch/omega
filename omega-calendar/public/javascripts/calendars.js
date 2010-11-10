@@ -7,313 +7,213 @@
  */
 
 $(document).ready(function() {
-    var clickDate = "";
-    $('form').find('.tpickr').timepicker();
-    // jquery selector caching
-    $addeventform = $('#add-event-form');
-    $dateSelect = $('#dateSelect');
-    $displayeventform = $('#display-event-form');
+
+    // store the current event object
+    var curent_event;
+
+    // cache the content
+    var $left = $('#left');
+    var $create_event = $('#create_event');
+    var left_pos = $left.position();
+    var csrf_token = $('meta[name=csrf-token]').attr('content')
+    //$create_event.css({ 'left': left_pos.left, 'top': left_pos.top, 'width' : $left.width() });
 
 
-    /**
-     * Initialize with current year and date. Returns reference to plugin object.
-     */
-    var jfcalplugin = $("#cal").jFrontierCal({
-        date: new Date(),
-        dayClickCallback: myDayClickHandler,
-        agendaClickCallback: myAgendaClickHandler,
-        agendaDropCallback: myAgendaDropHandler,
-        dragAndDropEnabled: true
-    }).data("plugin");
+    $('#cal').fullCalendar({
+        calendar_id :1,
+        height: 550,
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        editable: true,
+        events: '/calendars/' + this.calendar_id + '/events.json',
+        dayClick: function(date, allDay, jsEvent, view) {
+            $('#cal').hide();
+            $create_event.show();
+            $('#event_start, #event_end').val($.fullCalendar.formatDate(date, 'yyyy-MM-dd'));
 
-    var startDate = jfcalplugin.getStartDate('#cal');
-    var endDate = jfcalplugin.getEndDate('#cal');
+        },
+        eventClick: function(event, jsEvent, view) {
 
+            curent_event = event;
+            event_id = event.id;
+            var ed = '<div id="event-details">';
+            ed += 'Start: ';
+            ed += $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd HH:mm');
+            ed += '<br>';
+            ed += 'End: ';
+            ed += $.fullCalendar.formatDate(event.end, 'yyyy-MM-dd HH:mm');
+            ed += '<br>';
+            ed += event.event_description;
+            ed += '<br>';
+            ed += '<a><span id="btn_edit_event">edit</span></a>';
+            ed += '<br></div>';
+            $('body').append(ed);
+            $("#event-details").dialog({
+                autoOpen:true,
+                title: event.title,
+                close : function(e, ui) {
+                    $(ui).remove();
+                },
+                buttons: {
+                    "Ok": function() {
+                        $(this).dialog("destroy");
+                    },
+                    "Edit" : function() {
+                        var that = $('#cal').data('fullCalendar');
+                        $.ajax({
+                            url: '/calendars/' + that.options.calendar_id + '/events/' + event_id + '/edit',
+                            dataType: 'script'
 
-    /**
-     * Get the date (Date object) of the day that was clicked from the event object
-     */
-    function myDayClickHandler(eventObj) {
-
-        // Get the Date of the day that was clicked from the event object
-        var date = eventObj.data.calDayDate;
-        // store date in our global js variable for access later
-        clickDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-        // open our add event dialog
-        $addeventform.dialog('open');
-    }
-
-
-    /**
-     * Called when user clicks and agenda item
-     * use reference to plugin object to edit agenda item
-     */
-    function myAgendaClickHandler(eventObj) {
-        // Get ID of the agenda item from the event object
-        var agendaId = eventObj.data.agendaId;
-        // pull agenda item from calendar
-        var agendaItem = jfcalplugin.getAgendaItemById("#cal", agendaId);
-        clickAgendaItem = agendaItem;
-
-        $displayeventform.dialog('open');
-    }
-
-    ;
-    /**
-     * get the agenda item that was dropped. It's start and end dates will be updated.
-     */
-    function myAgendaDropHandler(eventObj) {
-        var agendaId = eventObj.data.agendaId;
-        var date = eventObj.data.calDayDate;
-        var agendaItem = jfcalplugin.getAgendaItemById("#cal", agendaId);
-        alert("You dropped agenda item " + agendaItem.title +
-                " onto " + date.toString() + ". Here is where you can make an AJAX call to update your database.");
-    }
-
-
-    /**
-     * Initialize previous month button
-     */
-
-    $("#BtnPreviousMonth").click(function() {
-        jfcalplugin.showPreviousMonth("#cal");
-        // update the jqeury datepicker value
-        var calDate = jfcalplugin.getCurrentDate("#cal"); // returns Date object
-        var cyear = calDate.getFullYear();
-        // Date month 0-based (0=January)
-        var cmonth = calDate.getMonth();
-        var cday = calDate.getDate();
-        // jquery datepicker month starts at 1 (1=January) so we add 1
-        $dateSelect.datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
-
-        var startDate = jfcalplugin.getStartDate('#cal');
-        var endDate = jfcalplugin.getEndDate('#cal');
-        jfcalplugin.deleteAllAgendaItems('#cal')
-        retrieveData(startDate, endDate);
-
-        return false;
-    });
-    /**
-     * Initialize next month button
-     */
-
-    $("#BtnNextMonth").click(function() {
-        jfcalplugin.showNextMonth("#cal");
-        // update the jqeury datepicker value
-        var calDate = jfcalplugin.getCurrentDate("#cal"); // returns Date object
-        var cyear = calDate.getFullYear();
-        // Date month 0-based (0=January)
-        var cmonth = calDate.getMonth();
-        var cday = calDate.getDate();
-        // jquery datepicker month starts at 1 (1=January) so we add 1
-        $dateSelect.datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
-        var startDate = jfcalplugin.getStartDate('#cal');
-        var endDate = jfcalplugin.getEndDate('#cal');
-        jfcalplugin.deleteAllAgendaItems('#cal');
-        retrieveData(startDate, endDate);
-        return false;
-    });
-
-
-
-    /**
-     * Initialize jquery ui datepicker. set date format to yyyy-mm-dd for easy parsing
-     */
-    $dateSelect.datepicker({
-        showOtherMonths: true,
-        selectOtherMonths: true,
-        changeMonth: true,
-        changeYear: true,
-        showButtonPanel: true,
-        dateFormat: 'yy-mm-dd'
-    });
-    /**
-     * Set datepicker to current date
-     */
-    $dateSelect.datepicker('setDate', new Date());
-
-
-    /**
-     * Use reference to plugin object to a specific year/month
-     */
-    $dateSelect.bind('change', function() {
-        var selectedDate = $dateSelect.val();
-        var dtArray = selectedDate.split("-");
-        var year = dtArray[0];
-        // jquery datepicker months start at 1 (1=January)
-        var month = dtArray[1];
-        // strip any preceeding 0's
-        month = month.replace(/^[0]+/g, "")
-        var day = dtArray[2];
-        // plugin uses 0-based months so we subtrac 1
-        jfcalplugin.showMonth("#cal", year, parseInt(month - 1).toString());
-        var startDate = jfcalplugin.getStartDate('#cal');
-        var endDate = jfcalplugin.getEndDate('#cal');
-
-        retrieveData(startDate, endDate);
-    });
-    /**
-     * Initialize add event modal form
-     */
-    $addeventform.dialog({
-        autoOpen: false,
-        height: 400,
-        width: 500,
-        modal: false,
-        open: function(event, ui) {
-
-            // initialize start date picker
-            $("#event_start_date").datepicker({
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'yy-mm-dd'
-            }).val(clickDate);
-            // initialize end date picker
-            $("#event_end_date").datepicker({
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'yy-mm-dd'
-            }).val(clickDate);
-            // initialize with the date that was clicked
+                        });
+                        $(this).dialog("destroy");
+                    }
+                }
+            });
+            $('#sidebox_events').hide('slide', {direction : 'down'}, 500).empty().append(ed).show('slide', { direction : 'up' }, 500)
 
 
         },
-        close: function() {
+        eventResize: function(event) {
 
-            $.ajax({
-                url : '/calendars/1/events/new' ,
-                global: false,
-                dataType : 'script'
+
+            var f = '<form method="post" id="edit_event_time" data-remote="true" action="">';
+            f += '<input type="hidden" value="put" name="_method">';
+            f += '<input type="hidden" value="' + csrf_token + '" name="' + csrf_token + '">';
+            f += '<p><input type="hidden" value="" name="event[end]" id="edit_event_end"></p>';
+            f += '</form>';
+
+            $('body').append(f);
+
+
+            $('#edit_event_end').attr('value', $.fullCalendar.formatDate(event.end, 'yyyy-MM-dd HH:mm'));
+            $('#edit_event_time').bind("ajax:success", function() {
+                $(this).remove();
+            });
+            $('#edit_event_time').attr('action', '/events/' + event.id).trigger('submit');
+
+        },
+        eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
+
+            var f = '<form method="post" id="edit_event_time" data-remote="true" action="">';
+            f += '<input type="hidden" value="put" name="_method">';
+            f += '<input type="hidden" value="' + csrf_token + '" name="' + csrf_token + '">';
+            f += '<input type="hidden" value="" name="event[end]" id="edit_event_end">';
+            f += '<input type="hidden" value="" name="event[start]" id="edit_event_start">';
+            f += '<input type="hidden" value="' + event.id + '" name="event[id]" id="edit_event_id">';
+            f += '</form>';
+
+            $('body').append(f);
+
+
+            $('#edit_event_end').attr('value', $.fullCalendar.formatDate(event.end, 'yyyy-MM-dd HH:mm'));
+            $('#edit_event_start').attr('value', $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd HH:mm'));
+            $('#edit_event_time').bind("ajax:success", function() {
+                $(this).remove();
 
             });
+            //$('#edit_event_time').attr('action', '/events/' + event.id).trigger('submit');
 
-            $('#new_event')[0].reset();
+        },
 
+        loading: function(isloading) {
+            // TODO show loading animation
         }
     });
+
+
+//    $('#btn_edit_event').live('click', function() {
+//
+//        var f = '<form method="post" id="edit_event" data-remote="true" action="">';
+//        f += '<input type="hidden" value="put" name="_method">';
+//        f += '<input type="hidden" value="' + csrf_token + '" name="' + csrf_token + '">';
+//        f += '<p><label for="event_title">Title</label><input type="text" value="date" size="30" name="event[title]" id="event_title"></p>';
+//        f += '<p><label for="event_start">Start</label><input type="text" value="' + $.fullCalendar.formatDate(curent_event.start, 'yyyy-MM-dd HH:mm') + '" size="30" name="event[start]" id="event_start">YYYY-MM-DD</p>';
+//        f += '<p><label for="event_end">End</label><input type="text" value="' + $.fullCalendar.formatDate(curent_event.end, 'yyyy-MM-dd HH:mm') + '" size="30" name="event[end]" id="event_end">YYYY-MM-DD</p>';
+//        f += '<p><label for="event_event_description">Event description</label><textarea rows="5" name="event[event_description]" id="event_event_description" cols="40">' + curent_event.event_description + '</textarea></p>';
+//        f += '<input type="hidden" value="1" name="event[calendar_id]" id="event_calendar_id">';
+//        f += '<p><input type="submit" value="Update Event" name="commit" id="event_submit"><span id="cancel">cancel</span></p>';
+//        f += '</form>';
+//
+//
+//        $('#cal').hide();
+//        $(f).insertAfter($('#cal'));
+//        $('#edit_event').attr('action', '/events/' + curent_event.id);
+//
+//
+//    });
+
+
+    $('#btn_edit_event').live('click', function() {
+        $.ajax({
+            url : '/calendars/1/events/12/edit'
+        })
+    });
+
+
+    $('#cancel').live('click', function() {
+        $('#cal').show();
+        $create_event.hide();
+        $('#edit_event').hide();
+        reset_form($('#new_event'))
+    });
+    $("#calendar").datepicker({
+        show: '',
+        onSelect: function(dateText) {
+            var d = new Date(dateText);
+            $('#cal').fullCalendar('changeView', 'agendaDay');
+            $('#cal').fullCalendar('gotoDate', d);
+        }
+
+    });
+
+    $('#edit_event').live("ajax:success", function() {
+
+        $('#cal').fullCalendar('refetchEvents')
+
+    });
+
+
+    function reset_form(em) {
+        em.find('input[type="text"]').attr('value', '');
+        em.find('input[type="checkbox"]').attr('checked', true);
+        em.find('.tpickr').hide();
+        $('time_picker').remove();
+    }
 
 
     $('#new_event').bind('ajax:success', function() {
-        $addeventform.dialog('close');
+        //todo : notification
+        $('#cal').fullCalendar('refetchEvents');
+        $create_event.hide();
+        $('#cal').show();
+
+
+        reset_form($(this))
+
+
     });
-    $('#event_allday').live('change', function() {
-        if (!$(this).is(':checked')) {
-
-            $('#new_event').find('.tpickr').removeClass('hide')
-        } else {
-            $('#new_event').find('.tpickr').addClass('hide')
-        }
-    });
-
-    /**
-     * Initialize display event form.
-     */
-    $displayeventform.dialog({
-
-        autoOpen: false,
-        height: 500,
-        width: 500,
-        modal: true,
-        buttons: {
-            Cancel: function() {
-                $(this).dialog('close');
-
-            },
-            'Edit': function() {
-                var self = $(this);
-                $.ajax({
-                    global : false,
-                    url : '/calendars/1/events/' + clickAgendaItem.data.id + '/edit',
-                    type : 'GET',
-                    dataType : 'script',
-                    success: function() {
-
-                    }
-                })
-            },
-            'Delete': function() {
-                var self = $(this);
-                $.ajax({
-                    global : false,
-                    url : '/events/' + clickAgendaItem.data.id ,
-                    type : 'DELETE',
-                    dataType : 'json',
-                    success: function() {
-                        var agendaId = clickAgendaItem.agendaId;
-                        jfcalplugin.deleteAgendaItemById("#cal", agendaId);
-                        self.dialog('close');
-                    }
-                })
-
-            }
-        },
-        open: function(event, ui) {
-            if (clickAgendaItem != null) {
-                var data = clickAgendaItem.data;
-                var title = clickAgendaItem.title;
-                var startDate = clickAgendaItem.startDate;
-                var endDate = clickAgendaItem.endDate;
-                var allDay = clickAgendaItem.allDay;
-
-                // in our example add agenda modal form we put some fake data in the agenda data. we can retrieve it here.
-                var append = '';
-
-                append += "<h2>" + title + "</h2>";
-
-                if (allDay) {
-
-                    append += "(All day event)<br><br>"
-                } else {
-                    append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Starts:' + startDate + "<br>"
-                    append += '<span class="om-plain-icon-button"><span class="om-icon om-icon-calendar"></span></span>Ends:' + endDate + "<br>"
-                }
-                append += '<p>' + data.description + '</p>';
-                $displayeventform.append(append);
-            }
-        },
-        close: function() {
-            // clear agenda data
-
-            $displayeventform.html("");
-        }
-    });
-
-
-    var addAgendaItems = function(jso) {
-        var l = jso.length, i = 0,jsi;
-        for (i; i < l; i++) {
-            jsi = jso[i];
-            var desc = (typeof jsi.event_description != 'undefined') ? jsi.event_description : ''
-            var alld = jsi.allDay || false;
-            jfcalplugin.addAgendaItem(
-                    "#cal",
-                    jsi.title,
-                    new Date(jsi.start),
-                    new Date(jsi.end),
-                    alld,
-            {
-                id: jsi.id,
-                description:  desc
-            });
-
-
-        }
-    };
-
-    function retrieveData(startDate, endDate) {
-        $.ajax({
-            url: "calendars/1/events.json?startDate=" + startDate + '&endDate=' + endDate,
-            success: addAgendaItems
-        });
+    if ($('#event_allday').is(':checked')) {
+        $('.tpickr').hide();
+    } else {
+        $('.tpickr').show();
     }
-
-    retrieveData(startDate, endDate);
+    $('#event_allday').change(function() {
+        if ($(this).is(':checked')) {
+            $('.tpickr').hide()
+        } else {
+            $('.tpickr').show();
+        }
+    });
+    $('.datepickr').datepicker({
+        dateFormat: 'yy-mm-dd',
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2010:2020'
+    });
 
 
 });

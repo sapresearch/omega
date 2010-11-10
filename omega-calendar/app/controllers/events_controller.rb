@@ -1,8 +1,7 @@
 class EventsController < Omega::Controller
 
   respond_to :html, :xml, :js, :json
-  respond_to :ics, :only => [:index]
-  
+
 
  def index
     @events = Event.all
@@ -15,7 +14,7 @@ class EventsController < Omega::Controller
   end
 
   def new
-    @event = Event.new(:calendar_id => 1)
+    @event = Event.new
     respond_with(@event)
   end
 

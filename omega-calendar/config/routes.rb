@@ -8,6 +8,6 @@ Omega::Calendar::Module.routes.draw do
   end
 
 
-  resources :events
-
+#  resources :events
+  resources :form_builders
 end
