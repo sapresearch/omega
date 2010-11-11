@@ -48,10 +48,15 @@ module Omega
 #        end
     end
 
+    has_many :favorites, :as => :item, :dependent => :destroy
+
+    def favorite_text
+      "#{self}"
+    end
 
     private
       # Override how ActiveRecord handles errors on associations to remove each attribute from the parent and only
-      # show "#{relfieciton.name} is invalid"
+      # show "#{reflection.name} is invalid"
       def association_valid?(reflection, association)
         return true if association.destroyed? || association.marked_for_destruction?
 
