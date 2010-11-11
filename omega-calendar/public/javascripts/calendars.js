@@ -8,15 +8,12 @@
 
 $(document).ready(function() {
 
-    // store the current event object
-    var curent_event;
 
-    // cache the content
-    var $left = $('#left');
-    var $create_event = $('#create_event');
-    var left_pos = $left.position();
+    function formatDateForId(d) {
+        return '' + d.getFullYear() + '-' + ((d.getMonth() < 10) ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1)) + '-' + ((d.getDate() < 10) ? ('0' + d.getDate()) : d.getDate());
+    }
+
     var csrf_token = $('meta[name=csrf-token]').attr('content')
-    //$create_event.css({ 'left': left_pos.left, 'top': left_pos.top, 'width' : $left.width() });
 
 
     $('#cal').fullCalendar({
@@ -32,55 +29,67 @@ $(document).ready(function() {
         events: '/calendars/1/events.json',
         dayClick: function(date, allDay, jsEvent, view) {
 
-            
+            calDate = $('#cal').fullCalendar('getDate');
 
-            var that = $('#cal').data('fullCalendar');
-            $.ajax({
-                url: '/calendars/' + that.options.calendar_id + '/events/new',
-                dataType: 'script'
+            var id = $('#uibox_content_' + formatDateForId(calDate));
 
-            });
-            $('#event_start, #event_end').val($.fullCalendar.formatDate(date, 'yyyy-MM-dd'));
+            if (!id.is(':visible')) {
+
+                $.ajax({
+                    url     : '/calendars/' + 1 + '/events/new',
+                    dataType: 'script',
+                    complete : function(){
+                        $('#event_start_date').val($.fullCalendar.formatDate(date, 'yyyy-MM-dd'));
+                    }
+
+                });
+
+            }
 
 
         },
         eventClick: function(event, jsEvent, view) {
 
-            curent_event = event;
-            event_id = event.id;
-            var ed = '<div id="event-details">';
-            ed += 'Start: ';
-            ed += $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd HH:mm');
-            ed += '<br>';
-            ed += 'End: ';
-            ed += $.fullCalendar.formatDate(event.end, 'yyyy-MM-dd HH:mm');
-            ed += '<br>';
-            ed += event.event_description;
-            ed += '<br>';
-            ed += '<a><span id="btn_edit_event">edit</span></a>';
-            ed += '<br></div>';
-            $('body').append(ed);
-            $("#event-details").dialog({
-                autoOpen:true,
-                title: event.title,
-                close : function(e, ui) {
-                    $(ui).remove();
-                },
-                buttons: {
-                    "Ok": function() {
-                        $(this).dialog("destroy");
-                    },
-                    "Edit" : function() {
-                        var that = $('#cal').data('fullCalendar');
-                        $.ajax({
-                            url: '/calendars/' + that.options.calendar_id + '/events/' + event_id + '/edit',
-                            dataType: 'script'
 
-                        });
+            if (! $(this).andSelf("td").hasClass('more')) {
+                var ed = '<div id="event-details">';
+                ed += 'Start: ';
+                ed += $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd HH:mm');
+                ed += '<br>';
+                ed += 'End: ';
+                ed += $.fullCalendar.formatDate(event.end, 'yyyy-MM-dd HH:mm');
+                ed += '<br>';
+                ed += event.event_description;
+                ed += '<br>';
+                ed += '<a><span id="btn_edit_event">edit</span></a>';
+                ed += '<br></div>';
+                $('body').append(ed);
+                $("#event-details").dialog({
+                    autoOpen:true,
+                    title: event.title,
+                    close : function(e, ui) {
+                        $("#event-details").remove();
                         $(this).dialog("destroy");
+
+                    },
+                    buttons: {
+                        "Ok": function() {
+                            $("#event-details").remove();
+                            $(this).dialog("destroy");
+
+                        },
+                        "Edit" : function() {
+                            var that = $('#cal').data('fullCalendar');
+                            $.ajax({
+                                url: '/calendars/' + 1+ '/events/' + event.id + '/edit',
+                                dataType: 'script'
+
+                            });
+                            $(this).dialog("destroy");
+                        }
                     }
-                }
-            });
+                });
+            }
 
 
         },
@@ -165,20 +174,6 @@ $(document).ready(function() {
         $('time_picker').remove();
     }
 
-
-
-
-
-
-    $('input.datepickr').live('click', function() {
-        $(this).datepicker({
-            showOn:'focus',
-            dateFormat: 'yy-mm-dd',
-            showButtonPanel: true,
-            changeMonth: true,
-            changeYear: true,
-            yearRange: '2010:2020'}).focus();
-    });
 
 
 

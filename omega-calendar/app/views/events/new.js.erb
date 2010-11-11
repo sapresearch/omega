@@ -1,5 +1,16 @@
 $('body').append('<%= escape_javascript(render 'form', :event => @event, :calendar => @calendar) %>');
 
+if($('#event_allday').is(':checked')){
+   $('.tpickr').hide();
+}
+        $('#event_allday').change(function(){
+            if($(this).is(':checked')){
+                $('.tpickr').hide().val('');
+            }else{
+                $('.tpickr').show();
+            }
+});
+
 
         $('.new_event').dialog({
             autoOpen    : true,
@@ -10,3 +21,13 @@ $('body').append('<%= escape_javascript(render 'form', :event => @event, :calend
                 $('#new_event').remove();
             }
         });
+
+    $('input.datepickr').datepicker({
+            showOn:'focus',
+            dateFormat: 'yy-mm-dd',
+            showButtonPanel: true,
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '2010:2020'
+    });
+           $('.tpickr').timepicker();
