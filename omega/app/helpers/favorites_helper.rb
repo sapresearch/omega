@@ -1,11 +1,6 @@
 module FavoritesHelper
   def link_to_favorite(favorite)
-    item = favorite.item
-
-    item_path_helper = Omega::FavoritePaths[item]
-    raise("#{item.class} is not registered in #{Omega::FavoritePaths}") unless item_path_helper
-
-    link_to(item, send(item_path_helper, item))
+    link_to(favorite.item_text, polymorphic_path(favorite.item))
   end
 
   def toggle_favorite(model)
