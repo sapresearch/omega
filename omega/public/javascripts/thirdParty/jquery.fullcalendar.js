@@ -27,7 +27,6 @@ var views = fc.views = {};
 -----------------------------------------------------------------------------*/
 
 var defaults = {
-
 	// display
 	defaultView: 'month',
 	aspectRatio: 1.35,

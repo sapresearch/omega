@@ -14,32 +14,34 @@ $(document).ready(function() {
     }
 
     var csrf_token = $('meta[name=csrf-token]').attr('content')
-
-
-    $('#cal').fullCalendar({
-        more:3,
-        calendar_id :1,
-        height: 550,
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
+    var cal = $('#cal');
+    cal.data('calendar_id', 1);
+    cal.fullCalendar({
+        disableDragging  : true,
+        more            :3,
+        calendar_id     :1,
+        height          : 550,
+        header          : {
+            left        : 'prev,next today',
+            center      : 'title',
+            right       : 'month,agendaWeek,agendaDay'
         },
-        editable: true,
-        events: '/calendars/1/events.json',
-        dayClick: function(date, allDay, jsEvent, view) {
+        editable        : true,
+        events          : '/calendars/' + cal.data('calendar_id') + '/events.json',
+        dayClick        : function(date, allDay, jsEvent, view) {
 
-            calDate = $('#cal').fullCalendar('getDate');
 
-            var id = $('#uibox_content_' + formatDateForId(calDate));
+            var id = $('#uibox_' + formatDateForId(date));
 
             if (!id.is(':visible')) {
 
                 $.ajax({
-                    url     : '/calendars/' + 1 + '/events/new',
+                    url     : '/calendars/' + cal.data('calendar_id') + '/events/new',
                     dataType: 'script',
-                    complete : function(){
+                    complete: function() {
+
                         $('#event_start_date').val($.fullCalendar.formatDate(date, 'yyyy-MM-dd'));
+                        $('#event_end_date').val($.fullCalendar.formatDate(date, 'yyyy-MM-dd'));
                     }
 
                 });
@@ -48,9 +50,7 @@ $(document).ready(function() {
 
 
         },
-        eventClick: function(event, jsEvent, view) {
-
-
+        eventClick: function(event) {
             if (! $(this).andSelf("td").hasClass('more')) {
                 var ed = '<div id="event-details">';
                 ed += 'Start: ';
@@ -68,8 +68,8 @@ $(document).ready(function() {
                     autoOpen:true,
                     title: event.title,
                     close : function(e, ui) {
-                        $("#event-details").remove();
-                        $(this).dialog("destroy");
+
+                        $(this).dialog("destroy").remove();
 
                     },
                     buttons: {
@@ -81,100 +81,51 @@ $(document).ready(function() {
                         "Edit" : function() {
                             var that = $('#cal').data('fullCalendar');
                             $.ajax({
-                                url: '/calendars/' + 1+ '/events/' + event.id + '/edit',
+                                url: '/calendars/' + cal.data('calendar_id') + '/events/' + event.id + '/edit',
                                 dataType: 'script'
 
                             });
-                            $(this).dialog("destroy");
+                            var id = '#edit_event_' + event.id;
+
+                            $("#event-details").dialog("destroy").remove();
+
+                        },
+                        "Delete": function() {
+                            $.ajax({
+                                url     : '/calendars/' + cal.data('calendar_id') + '/events/' + event.id ,
+                                dataType: 'script',
+                                type    : "delete",
+                                success : function() {
+                                    cal = $('#cal').data('fullCalendar');
+                                    cal.removeEvents(event.id)
+                                }
+
+                            });
+
                         }
                     }
                 });
             }
-
-
-        },
-        eventResize: function(event) {
-
-
-            var f = '<form method="post" id="edit_event_time" data-remote="true" action="">';
-            f += '<input type="hidden" value="put" name="_method">';
-            f += '<input type="hidden" value="' + csrf_token + '" name="' + csrf_token + '">';
-            f += '<p><input type="hidden" value="" name="event[end]" id="edit_event_end"></p>';
-            f += '</form>';
-
-            $('body').append(f);
-
-
-            $('#edit_event_end').attr('value', $.fullCalendar.formatDate(event.end, 'yyyy-MM-dd HH:mm'));
-            $('#edit_event_time').bind("ajax:success", function() {
-                $(this).remove();
-            });
-            $('#edit_event_time').attr('action', '/events/' + event.id).trigger('submit');
-
-        },
-        eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
-
-            var f = '<form method="post" id="edit_event_time" data-remote="true" action="">';
-            f += '<input type="hidden" value="put" name="_method">';
-            f += '<input type="hidden" value="' + csrf_token + '" name="' + csrf_token + '">';
-            f += '<input type="hidden" value="" name="event[end]" id="edit_event_end">';
-            f += '<input type="hidden" value="" name="event[start]" id="edit_event_start">';
-            f += '<input type="hidden" value="' + event.id + '" name="event[id]" id="edit_event_id">';
-            f += '</form>';
-
-            $('body').append(f);
-
-
-            $('#edit_event_end').attr('value', $.fullCalendar.formatDate(event.end, 'yyyy-MM-dd HH:mm'));
-            $('#edit_event_start').attr('value', $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd HH:mm'));
-            $('#edit_event_time').bind("ajax:success", function() {
-                $(this).remove();
-
-            });
-            //$('#edit_event_time').attr('action', '/events/' + event.id).trigger('submit');
-
         }
     });
 
 
-    $('#btn_edit_event').live('click', function() {
-        $.ajax({
-            url : '/calendars/1/events/12/edit'
-        })
-    });
-
-
-    $('#cancel').live('click', function() {
-        $('#cal').show();
-        $create_event.hide();
-        $('#edit_event').hide();
-        reset_form($('#new_event'))
-    });
     $("#calendar").datepicker({
         show: '',
         onSelect: function(dateText) {
             var d = new Date(dateText);
-            $('#cal').fullCalendar('changeView', 'agendaDay');
-            $('#cal').fullCalendar('gotoDate', d);
+            cal.fullCalendar('changeView', 'agendaDay');
+            cal.fullCalendar('gotoDate', d);
         }
 
     });
 
-    $('#edit_event').live("ajax:success", function() {
+$('#_calendars').change(function(){
 
-        $('#cal').fullCalendar('refetchEvents')
-
-    });
-
-
-    function reset_form(em) {
-        em.find('input[type="text"]').attr('value', '');
-        em.find('input[type="checkbox"]').attr('checked', true);
-        em.find('.tpickr').hide();
-        $('time_picker').remove();
-    }
-
-
-
+    cal.data('calendar_id', $(this).val());
+    var fullCalendar = cal.data('fullCalendar');
+    fullCalendar.removeEvents();
+    fullCalendar.addEventSource('/calendars/' + cal.data('calendar_id') + '/events.json')
+})
 
 });

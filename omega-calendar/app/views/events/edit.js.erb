@@ -2,9 +2,15 @@ $('body').append('<%= escape_javascript(render 'form.html', :event => @event, :c
         $('form.edit_event').dialog({
             autoOpen    : true,
             width       : 600,
-            title       : '<%= @event.title %>'
+            title       : '<%= @event.title %>',
+            close : function(e, ui) {
+
+                $(this).dialog("destroy").remove();
+
+            }
+
         });
-                if ($('#event_allday').is(':checked')) {
+        if ($('#event_allday').is(':checked')) {
             $('.tpickr').hide();
         } else {
             $('.tpickr').show();
@@ -16,3 +22,4 @@ $('body').append('<%= escape_javascript(render 'form.html', :event => @event, :c
                 $('.tpickr').show();
             }
         });
+        $('.tpickr').timepicker();

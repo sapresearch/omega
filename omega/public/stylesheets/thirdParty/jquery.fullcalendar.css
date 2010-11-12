@@ -228,7 +228,7 @@ h2.fc-header-title{
 	}
 	
 .fc-content .fc-not-today {
-	background: none;
+	background: #fff;;
 	}
 	
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */

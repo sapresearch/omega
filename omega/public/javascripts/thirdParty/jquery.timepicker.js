@@ -38,7 +38,7 @@
             var tp = new Timepicker();
 
             tp.init();
-            jQuery.fn.timepicker.defaults.initialized = true;
+            Timepicker.initializedd = true;
         }
         //cache ref
         var $timepicker = jQuery('#time_picker');
@@ -111,10 +111,4 @@
         scrolled: false
     }
 })
-        (jQuery);/**
- * Created by IntelliJ IDEA.
- * User: I823626
- * Date: Sep 14, 2010
- * Time: 10:29:42 AM
- * To change this template use File | Settings | File Templates.
- */
+        (jQuery);

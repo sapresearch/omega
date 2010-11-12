@@ -5,14 +5,14 @@ if($('#event_allday').is(':checked')){
 }
         $('#event_allday').change(function(){
             if($(this).is(':checked')){
-                $('.tpickr').hide().val('');
+                $('.tpickr').hide();
             }else{
                 $('.tpickr').show();
             }
 });
 
 
-        $('.new_event').dialog({
+        $('#new_event').dialog({
             autoOpen    : true,
             width       : 600,
             title       : 'Create a new event',
