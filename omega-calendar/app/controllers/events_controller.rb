@@ -9,7 +9,7 @@ class EventsController < Omega::Controller
     @events = Event.all
     respond_with(@events)
   end
-
+# Testing 123
   def show
     @event = Event.find(params[:id])
     respond_with(@event)
