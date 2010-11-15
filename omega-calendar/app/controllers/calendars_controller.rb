@@ -6,8 +6,12 @@ class CalendarsController < Omega::Controller
 
   
   def index
-    @calendars = Calendar.all
+
     respond_with(@calendar)
+  end
+
+  def administer
+    @calendars = Calendar.all
   end
 
   def show

@@ -13,7 +13,7 @@ $(document).ready(function() {
         return '' + d.getFullYear() + '-' + ((d.getMonth() < 10) ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1)) + '-' + ((d.getDate() < 10) ? ('0' + d.getDate()) : d.getDate());
     }
 
-    var csrf_token = $('meta[name=csrf-token]').attr('content')
+    var csrf_token = $('meta[name=csrf-token]').attr('content');
     var cal = $('#cal');
     cal.data('calendar_id', 1);
     cal.fullCalendar({
