@@ -26,7 +26,8 @@ class Services::RegistrationsController < Omega::Controller
      @registration_fields = Service::Field.find_all_by_field_category("Registration Details")
      @registration = Service::Registration.new
      @registration.fieldvalues.build
-     @registration.build_contact unless @registration.contact = Contact.for(current_user)
+     @contact = Contact.for(current_user)
+     logger.debug("Contact: #{@contact}")
      respond_with(@registration)
   end
 
