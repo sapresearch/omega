@@ -58,7 +58,11 @@ var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta
             });
         }
     });
-$(function() {
+
+
+    Queue.add(function(){
+
+
 		/*
 	 * Set default setting for validator plugin
 	 */
@@ -103,5 +107,14 @@ $(function() {
 		}
 
 	})
-     $('input[type=file]').liveUpload();
-});
+
+
+    $('input[type=file]').liveUpload({
+         wmode       : 'transparent',
+         buttonImg   : '/images/browse.png',
+         hideButton  : true
+
+     });
+
+});        
+
