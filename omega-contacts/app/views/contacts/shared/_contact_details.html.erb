@@ -11,15 +11,8 @@
 
 </h2>
 <div class="user_image">
-  <% if @contact.photo %>
-      <% photo = @contact.photo.upload
-         size  = Paperclip::Geometry.from_file(photo.to_file(:original)) %>
-      <%= image_tag(photo.url, (size.width > size.height ? :width : :height) => '130') %>
-  <% else %>
-      <%= image_tag("profile.jpg", :width =>  '130') %>
-  <% end %>
 
-  <%#= image_tag( @contact.photo.upload.url  , :width =>  '130', :height => '130') %>
+  <%= image_tag("profile.jpg", :width =>  '130') %>
 </div>
 <div class="clear"></div>
 
@@ -57,26 +50,27 @@ Email: <%= @contact.email %><br>
               </tr>
           <% end %>
         </table>
-        <%= link_to 'See entire history', nil %>
+<%= link_to 'See entire history', nil %>
       </div>
   <% end %>
 
-  <h3><a href="#">References</a></h3>
+      <h3><a href="#">References</a></h3>
 
-  <div>
-    <span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Assign this contact"></span> 
-    <%= link_to "Upload", upload_contact_path(@contact), :remote => true %>
-    <table class="width-100">
-      <thead>
-      <tr>
-        <th>Filename</th>
-        <th>Type</th>
-      </tr>
-      </thead>
+      <div>
+        <%= link_to "Upload", upload_contact_path(@contact), :remote => false %>
+        <table class="width-100">
+          <thead>
+          <tr>
+            <th>Filename</th>
+            <th>Type</th>
 
-    </table>
 
-  </div>
+          </tr>
+          </thead>
+
+        </table>
+
+      </div>
 
   <% if @contact.groups.any? %>
       <h3><a href="#">Group Assignments</a></h3>

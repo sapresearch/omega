@@ -63,7 +63,12 @@ $('#new_group_upload').remove();
 
 
 
-$('input[type=file]').multiUpload();
+$('input[type=file]').multiUpload({
+            wmode       : 'transparent',
+            buttonImg   : '/images/browse.png',
+            hideButton  : true,
+
+        });
 
 $('#upload-file-list').delegate('li','click',function(){
    $(this).remove();
