@@ -2,15 +2,13 @@
 
 
 .user_image{
-	background:url("/images/contact_image_bg.png");
-	width:150px;
-    height:155px;
     position:relative;
     top:0;
 	float:right;
+    border: 1px solid #ddd;
 }
 .user_image img{
-	padding: 10px;
+	padding: 4px;
 }
 
 #contact_filter_wrapper{
