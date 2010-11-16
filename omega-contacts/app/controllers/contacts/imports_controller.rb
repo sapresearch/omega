@@ -1,6 +1,6 @@
 require 'csv'
 
-class Contacts::ImportsController < ApplicationController
+class Contacts::ImportsController < Omega::Controller
 
   respond_to :html, :js, :json, :xml
   
