@@ -42,7 +42,9 @@ jQuery(function($) {
 
     /* jrails adapter for jquery ajax support in rails */
 
-    var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta[name=csrf-param]').attr('content');
+    var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta[name=csrf-param]').attr('content'),
+            flash_session_key = $('meta[name=flash-session-key]').attr('content'),
+            flash_session_cookie = $('meta[name=flash-session-cookie]').attr('content');
 
     $.fn.extend({
         /**
@@ -255,19 +257,18 @@ jQuery(function($) {
     /* jquery selector caching */
     var trigger = $('#trigger');
     var loginWrapper = $('#loginWrapper');
-    
+
 
     loginWrapper.dialog({
-        modal : true,
+        modal   : true,
         autoOpen: false,
-        title: 'Login'
+        title   : 'Login',
+        width   : 400
     });
     trigger.click(function() {
         loginWrapper.dialog('open');
         $('#session_username').focus();
     });
-
-
 
 
     $(document).bind('click', function(e) {
@@ -276,46 +277,10 @@ jQuery(function($) {
             $(".drop_down dd ul").hide();
     });
 
-/*	var uploadifyScriptData = {};
-	uploadifyScriptData['uploadify'] = true;
-	uploadifyScriptData[csrf_param]  = csrf_token;
+    $('#right').find('div.sidebar-menu-content li:last-child').addClass('menu-li-last-divider');
 
-	$('input[type=file]').each(function() {
-		var input = $(this);
 
-		var id   = input.attr('id'),
-			name = input.attr('name');
 
-		input.attr('name', null);
-
-		var newInput = $(document.createElement('input'))
-		                  .attr('id', id + '_upload')
-		                  .attr('name', name)
-		                  .attr('disabled', 'true')
-		                  .css('display', 'none');
-
-		input.uploadify({
-			auto: true,
-			uploader: '/uploadify/uploadify.swf',
-			script: '/uploads.json',
-			cancelImg: '/uploadify/cancel.png',
-			buttonText: 'Upload',
-			scriptData: uploadifyScriptData,
-			onComplete: function(event, queue, file, response, data) {
-				var result = $.parseJSON(response);
-				var upload = result.upload;
-				newInput.val(upload.id + ' - ' + upload.filename);
-				newInput.show();
-			},
-			onError: function(event, queue, file, error) {
-				alert("onError");
-			}
-		});
-
-		input.after(newInput);
-	});*/
-
-   $('#right').find('div.sidebar-menu-content li:last-child').addClass('menu-li-last-divider')
+   
 });
-
 

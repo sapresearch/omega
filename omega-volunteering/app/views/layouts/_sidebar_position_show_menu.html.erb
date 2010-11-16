@@ -1,12 +1,14 @@
 <h1 class="side-bar corners-top">Menu</h1>
 <div class="corners-bottom sidebar-menu-content">
   <ul>
-    <% if !current_user.is_anonymous? %>
+    <%= with_permission(Volunteering::PERM_ADMIN) do %>
         <li>
           <%= om_button(:icon=>'edit') do %>
               <%= link_to 'Edit', edit_volunteering_position_path(@position) %>
           <% end %>
         </li>
+    <% end %>
+    <%= with_permission(Volunteering::PERM_APPLY) do %>
         <li>
           <% if already_favorite?(@position) %>
               <%= om_button(:icon => 'favorite-remove') do %>
@@ -32,5 +34,12 @@
           <% end %>
         </li>
     <% end %>
+    <li>
+      <%= with_permission(Volunteering::PERM_APPLY) do %>
+          <%= om_button(:icon => 'apply') do %>
+              <%= link_to 'Apply', new_volunteering_record_url(:id=>@position) %>
+          <% end %>
+      <% end %>
+    </li>
   </ul>
 </div>

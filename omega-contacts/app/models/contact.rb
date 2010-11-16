@@ -1,4 +1,13 @@
-class Contact < ActiveRecord::Base
+class Contact < Omega::Model
+  require_dependency 'contact/address'
+  require_dependency 'contact/group'
+  require_dependency 'contact/group_position'
+  require_dependency 'contact/import'
+  require_dependency 'contact/interest'
+  require_dependency 'contact/phone_number'
+  require_dependency 'contact/skill'
+  require_dependency 'contact/user_observer'
+
   PERM_ADMIN     = 'users_admin'
   PERM_EDIT_SELF = 'contacts_edit_self'
   PERM_VIEW      = 'users_view'
@@ -21,6 +30,11 @@ class Contact < ActiveRecord::Base
 
   has_many :addresses,     :as => :contact, :dependent => :destroy
   has_many :phone_numbers, :as => :contact, :dependent => :destroy
+
+  has_upload :photo
+
+  has_many :uploads, :as => 'binding'
+  accepts_nested_attributes_for :uploads
 
   accepts_flattened_values_for :interests, :skills, :value => :name
 

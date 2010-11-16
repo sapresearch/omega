@@ -12,5 +12,6 @@ class CreateServiceDetails < ActiveRecord::Migration
   end
 
   def self.down
+    drop_table :service_details
   end
 end

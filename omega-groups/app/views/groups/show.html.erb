@@ -1,0 +1,18 @@
+<%= require_javascript 'omega_groups' %>
+<%= require_stylesheet 'omega_groups' %>
+<h1 class="page-content corners-top">
+  <%= @group.name %>
+</h1>
+
+<div class="page-content corners-bottom">
+  <h2>Description</h2>
+<p>
+<%= @group.description %>
+  </p>
+
+
+</div>
+<% content_for :sidebar do %>
+    <%= render :partial => "partials/sidebar_group" %>
+    <%= render :partial => "partials/sidebar_group_members" %>
+<% end %>

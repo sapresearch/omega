@@ -74,6 +74,7 @@ $(function() {
     if ($('#contact_assignment_existing').is(':checked')) {
 
         $('#position_exisiting_contact').show();
+       // update_cid_values();
 
     } else if ($('#contact_assignment_new').is(':checked')) {
 
@@ -96,60 +97,73 @@ $(function() {
     var $vp_contact_id = $('#volunteering_position_contact_ids');
 
     /* jqueryui autocomplete for contacts */
-    $('#ac-contacts').autocomplete({
-        source : '/contacts/autocomplete',
-        minLength: 2,
-
-        select: function(event, ui) {
-
-            $(this).val('');
-            $('<li />').append(ui.item.label + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', ui.item.id);
-            update_cid_values();
-            return false;
-        }
-
-    });
+//    $('#ac-contacts').autocomplete({
+//        source : '/contacts/autocomplete',
+//        minLength: 2,
+//
+//        select: function(event, ui) {
+//
+//            $(this).val('');
+//            $('<li />').append(ui.item.label + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', ui.item.id);
+//            update_cid_values();
+//            return false;
+//        }
+//
+//    });
 
     /**
      * when the form gets displayed again because  of errors we have to make sure that we restore the state as it was before
      */
-    var contact_val = $('#volunteering_position_contact_ids').val();
-    if (contact_val != "[]" && typeof contact_val != 'undefined' ) {
+//    var contact_val = $('#volunteering_position_contact_ids').val();
+//    if (contact_val != "[]" && typeof contact_val != 'undefined' ) {
+//
+//        var contacts = $('#volunteering_position_contact_ids').val().replace(/[\[\]']+/g, '').split(',');
+//        $.each(contacts, function(k, v) {
+//            $.ajax({
+//                global: false,
+//                url : '/contacts/' + v ,
+//                dataType : 'json',
+//                success: function(data) {
+//                    $('<li />').append(data.first_name + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', data.id);
+//                    return false;
+//                }
+//
+//            });
+//        })
+//    }
 
-        var contacts = $('#volunteering_position_contact_ids').val().replace(/[\[\]']+/g, '').split(',');
-        $.each(contacts, function(k, v) {
-            $.ajax({
-                global: false,
-                url : '/contacts/' + v ,
-                dataType : 'json',
-                success: function(data) {
-                    $('<li />').append(data.first_name + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', data.id);
-                    return false;
-                }
-
-            });
-        })
-    }
-
-
-$assigned_contacts.find('.delete-user').live('click', function(e) {
-    $(this).parent('li').remove();
-    update_cid_values();
-
+$('#add-contacts').click(function(){
+    $.ajax({
+        url     : '/contacts/list',
+        dataType: 'script',
+        success : function(data){
+     
+        }
+    })
 });
-/**
- * update #assigned_contacts hidden field with the values from the assigned contact list
- * the corresponding contact id is stored in the dom with the $.data method
- * on update action (add or remove) we iterate over the list items and build a string which cointains all the cids from li elements
- */
-function update_cid_values() {
-    var serialized_cids = '', separator = '';
-    $assigned_contacts.find('li').each(function() {
-        serialized_cids += separator + $(this).data('cid');
-        separator = ',';
-    });
-    $vp_contact_id.val(serialized_cids);
-}
+
+$('#assigned_contacts').delegate('li','click',function(){
+   $(this).remove();
+    $('div.tipsy').remove();
+    update_cid_values();
+});
+
 })
 ;
 
+    /**
+     * update #assigned_contacts hidden field with the values from the assigned contact list
+     * the corresponding contact id is stored in the dom with the ui-data attribute
+     * on update action (add or remove) we iterate over the list items and build a string which cointains all the cids from li elements
+     */
+        function update_cid_values() {
+
+            var serialized_cids = '[', separator = '';
+            $('#assigned_contacts').find('li').each(function() {
+                serialized_cids += separator + $(this).attr('ui-data');
+                separator = ',';
+            });
+            serialized_cids += ']';
+
+            $('#volunteering_position_contact_ids').val(serialized_cids);
+        }

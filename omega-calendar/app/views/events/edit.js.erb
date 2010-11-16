@@ -1,1 +1,25 @@
-$('#display-event-form').html('<%= escape_javascript(render "/events/form", :event => @event) %>');
+$('body').append('<%= escape_javascript(render 'form.html', :event => @event, :calendar => @calendar) %>');
+        $('form.edit_event').dialog({
+            autoOpen    : true,
+            width       : 600,
+            title       : '<%= @event.title %>',
+            close : function(e, ui) {
+
+                $(this).dialog("destroy").remove();
+
+            }
+
+        });
+        if ($('#event_allday').is(':checked')) {
+            $('.tpickr').hide();
+        } else {
+            $('.tpickr').show();
+        }
+        $('#event_allday').change(function() {
+            if ($(this).is(':checked')) {
+                $('.tpickr').hide()
+            } else {
+                $('.tpickr').show();
+            }
+        });
+        $('.tpickr').timepicker();

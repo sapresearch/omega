@@ -7,21 +7,21 @@
           <%= link_to 'Edit', edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>
       <% end %>
       <%= om_button(:plain => true, :icon=>'clipboard-list ') do %>
-          <%= link_to 'Applications', history_volunteering_record_path(position), :'data-tooltip' => 'See all the applications for this position' %>
+          <%= link_to 'Applications', history_volunteering_position_path(position), :'data-tooltip' => 'See all the applications for this position' %>
       <% end %>
   <% end %>
-  <% if !current_user.is_anonymous? %>
-      <% if position.status_of(Contact.for(current_user)) == :valid %>
+
+       <%= with_permission(Volunteering::PERM_RECORD_HOURS) do %>
           <%= om_button(:plain => true, :icon => 'clock') do %>
               <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user)), :'data-tooltip' => 'Log hours for this position') %>
           <% end %>
       <% end %>
-      <% if position.status_of(Contact.for(current_user)) != :valid %>
+       <%= with_permission(Volunteering::PERM_APPLY) do %>
           <%= om_button(:plain => true, :icon => 'apply') do %>
               <%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
           <% end %>
       <% end %>
-  <% end %>
+
   <% unless current_user.is_anonymous? %>
       <% if already_favorite?(position) %>
           <%= om_button(:plain => true, :icon => 'favorite-remove') do %>

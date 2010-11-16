@@ -39,7 +39,6 @@ class Volunteering::PositionsController < Omega::Controller
   end
 
   def new
-    params[:contact_assignment] = 'new'
     @position = Volunteering::Position.new
     fix_model_to_view
     respond_with(@position)
@@ -90,6 +89,13 @@ class Volunteering::PositionsController < Omega::Controller
     @records.each do |r|
       @timesheets << Volunteering::TimeEntry.find_all_by_record_id(r.id)
     end
+  end
+
+  def history
+    @position = Volunteering::Position.find(params[:id])
+    @records = @position.records
+    @records = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
+    respond_with(@records)
   end
 
 
@@ -170,7 +176,7 @@ class Volunteering::PositionsController < Omega::Controller
     end
 
     if contact_ids = params[:volunteering_position][:contact_ids]
-      params[:volunteering_position][:contact_ids] = contact_ids.split(',')
+      params[:volunteering_position][:contact_ids] = JSON.parse(contact_ids)
     end
 
     if schedule = params[:volunteering_position].delete(:schedule_attributes)
@@ -186,8 +192,8 @@ class Volunteering::PositionsController < Omega::Controller
         when 'weekly'
           params[:volunteering_position][:schedule_attributes] = schedule[:weekly]
           params[:volunteering_position][:schedule_attributes][:schedule_type] = 'weekly'
-          params[:volunteering_position][:schedule_attributes][:start_time] = "00:00"
-          params[:volunteering_position][:schedule_attributes][:end_time] = "00:00"
+          params[:volunteering_position][:schedule_attributes][:start_time] = '00:00'
+          params[:volunteering_position][:schedule_attributes][:end_time] = '00:00'
       end
     end
   end
@@ -202,5 +208,13 @@ class Volunteering::PositionsController < Omega::Controller
     ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day|
       @position.schedule.days.build(:day => day) unless @position.schedule.days.any? { |d| d.day == day }
     end
+
+    if @position.new_record?
+      @contact_assignment = 'new'
+    elsif @position.contacts.any?
+      @contact_assignment = 'existing'
+    else
+      @contact_assignment = 'none'
+     end
   end
 end

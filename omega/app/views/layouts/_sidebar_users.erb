@@ -1,0 +1,14 @@
+<%= side_bar_box(:filter) do %>
+<h2>Filter by letter</h2>
+    <ul id="letter-list">
+      <% ('A'..'Z').each do |l| %>
+          <li>
+            <span><%= link_to l, "/users/#{l}" %></span>
+          </li>
+      <% end %>
+    </ul>
+
+    <div class="clear"></div>
+    <h2>Search by name</h2>
+    <input/>
+<% end %>

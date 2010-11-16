@@ -5,10 +5,9 @@ class Volunteering::RecordsController < Omega::Controller
 
 
   def index
-    @records = Volunteering::Record.all()
- @records =    @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
-
-
+    @records = Volunteering::Record.scoped.includes(:contact, :position)
+    @records = @records
+    @records = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
     respond_with(@records)
   end
 
@@ -19,7 +18,7 @@ class Volunteering::RecordsController < Omega::Controller
 
   def newest
     @records = Volunteering::Record.find(:all, :conditions => ['status = ?', "Applied"])
-   @records =  @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
+    @records =  @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
     breadcrumb 'Newest Applications' => :newest_volunteering_records
     respond_with(@records)
 
@@ -48,7 +47,7 @@ class Volunteering::RecordsController < Omega::Controller
 
   def administer
     @record = Volunteering::Record.find(params[:id])
-    
+
     respond_with(@record)
   end
 
@@ -61,11 +60,20 @@ class Volunteering::RecordsController < Omega::Controller
   def history
     record    = Volunteering::Record.find(params[:id])
     @records  = Volunteering::Record.where('position_id = ?', record.position_id).order('created_at desc')
+    @records =  @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
+    respond_with(@records)
+  end
+
+  def user_history
+    contact_id    = Volunteering::Record.find(params[:contact_id])
+    @contact      = Contact.find(contact_id)
+    @records      = Volunteering::Record.where('contact_id = ?', contact_id).order('created_at desc')
+    breadcrumb 'Applications from user' => 'Applications from user'
     respond_with(@records)
   end
 
   def new
-    @record = Volunteering::Record.new
+    @record          = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
     @record.build_contact unless @record.contact = Contact.for(current_user)
     respond_with(@record)
@@ -78,36 +86,45 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def create
-    @record = Volunteering::Record.create(params[:volunteering_record])
+    record         = params[:volunteering_record]
+
+    @record        = Volunteering::Record.new
+    @record.contact_id = record['contact_attributes']['id'] if record['contact_attributes']
+    @record.action = 'To Be Taken'
+    @record.update_attributes(record)
+
+#    @record = Volunteering::Record.create(params[:volunteering_record]) do |p|
+#      p.action = 'To Be Taken'
+#    end
     respond_with(@record)
   end
 
   def update
-    @record = Volunteering::Record.find(params[:id])
+    @record          = Volunteering::Record.find(params[:id])
 
     case params[:volunteering_record][:action]
       when 'More Information'
         params[:volunteering_record][:status] = 'Pending'
-        status = 'Further information for your application is required'
-        msg = 'a'
+        status                                = 'Further information for your application is required'
+        msg                                   = 'a'
       when 'Reject'
         params[:volunteering_record][:status] = 'Complete'
-        status = 'Your applicaton got rejected'
-        msg = 'a'
+        status                                = 'Your applicaton got rejected'
+        msg                                   = 'a'
       when 'Accept'
         params[:volunteering_record][:status] = 'Complete'
-        status = 'Your applicaton got accepted'
-        msg = 'a'
+        status                                = 'Your applicaton got accepted'
+        msg                                   = 'a'
     end
     if params[:volunteering_record][:more_information]
       msg = params[:volunteering_record][:more_information]
     end
 
-    @message = Message.new()
+    @message         = Message.new()
     @message.subject = status
-    @message.body = msg
-    @message.to = @record.contact.user
-    @message.from = current_user
+    @message.body    = msg
+    @message.to      = @record.contact.user
+    @message.from    = current_user
     @message.save
 
 
@@ -118,7 +135,7 @@ class Volunteering::RecordsController < Omega::Controller
   def withdraw
     @record = Volunteering::Record.find(params[:id])
     @record.update_attributes(:status => 'withdrawn')
-    
+
     redirect_to my_applications_volunteering_records_url
   end
 
@@ -126,8 +143,6 @@ class Volunteering::RecordsController < Omega::Controller
     @record = Volunteering::Record.find(params[:id])
     @record.destroy
   end
-
-
 
 
 end

@@ -22,9 +22,15 @@ Omega::Contacts::Module.routes.draw do
     collection do
       get :all
       get :search
+      get :list
 
       get :autocomplete
       match ':letter' => 'contacts#letter', :constraints => { :letter => /[a-z]/i}
+    end
+
+    member do
+      get  :upload
+      post :do_upload
     end
 
     scope :as => 'contact', :module => 'contacts' do

@@ -7,4 +7,8 @@ class Favorite < ActiveRecord::Base
   scope :for, lambda { |model| where('item_id = ?', model).klassed(model.class) }
 
   validates :item_id, :uniqueness => { :scope => [:user_id, :item_id, :item_type] }
+
+  def item_text
+    item.respond_to?(:favorite_text) ? item.favorite_text : item.to_s
+  end
 end

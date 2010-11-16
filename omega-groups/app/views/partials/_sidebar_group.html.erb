@@ -1,0 +1,26 @@
+<%= side_bar_box(:Menu) do %>
+
+    <ul>
+      <li>
+        <%= om_button(:icon=>'group') do %>
+            <%= link_to 'Members', assign_group_url(@group) %>
+        <% end %>
+      </li>
+      <li>
+         <%= om_button(:icon=>'doc-share') do %>
+            <%= link_to 'Shared Documents', group_uploads_url(@group) %>
+        <% end %>
+      </li>
+      <li>
+        <%= om_button(:icon=>'megaphone') do %>
+            <%= link_to 'Bulletin Board', group_threads_url(@group) %>
+        <% end %>
+      </li>
+      <li>
+        <%= om_button(:icon=>'delete') do %>
+          <%= link_to 'Delete this group', group_path(@group), :method=> :delete%>
+        <% end %>
+      </li>
+
+    </ul>
+<% end %>

@@ -3,4 +3,11 @@ en:
   
   helpers:
     submit:
-         create: "Create"  
+         create: "Create"
+
+en:
+  user_mailer:
+    lost_username:
+      subject: Omega - Your usernames
+    lost_password:
+      subject: Omega - Reset your lost password

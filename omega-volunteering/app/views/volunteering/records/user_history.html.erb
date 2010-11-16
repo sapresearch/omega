@@ -1,0 +1,55 @@
+<% require_javascript 'thirdParty/jquery.dataTables.min.js' %>
+<% require_javascript 'omega_volunteering_records' %>
+<% require_stylesheet 'omega_volunteering' %>
+<% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
+<h1 class="page-content corners-top">
+  Appliaction history of <%= "#{@contact.first_name} #{@contact.last_name}" %>
+</h1>
+<div class="page-content corners-bottom">
+
+
+
+    <table class="width-100 clear" id="records-table">
+    <thead>
+    <tr>
+
+      <th>Position</th>
+      <th>
+         From
+      </th>
+      <th>
+           Date
+      </th>
+      <th>
+            Action
+      </th>
+      <th>
+            Status
+        </th>
+      <th>
+        Active
+        </th>
+      <th>
+           Missing
+       </th>
+      <th>
+        History
+      </th>
+    </tr>
+    </thead>
+    <% if @records.empty? %>
+        <h2> No Applications to Show!</h2>
+    <% end %>
+    <% @records.each do |a| %>
+        <%= render 'record_row', :record => a %>
+    <% end %>
+
+
+
+
+  </table>
+
+  <%#= will_paginate @positions %>
+  <div class="clear"></div>
+
+</div>

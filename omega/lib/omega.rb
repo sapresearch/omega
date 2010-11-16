@@ -21,6 +21,10 @@ module Omega
     autoload :RouteSetProxy
     autoload :Routes
   end
+
+  autoload_under 'middleware' do
+    autoload :FlashUploads
+  end
 end
 
 require 'patches/fix_5243'

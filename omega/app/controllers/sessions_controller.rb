@@ -21,12 +21,14 @@ class SessionsController < Omega::Controller
 
   def create
     @session = Session.new(params[:session])
+    @session.requested_page = session[:requested_page] || root_url
+
     if @session.authenticate
       flash['Logged in']
       set_current_user(@session.user)
     end
     
-    respond_with(@session, :location => session[:requested_page] || root_url)
+    respond_with(@session)
   end
 
   def update

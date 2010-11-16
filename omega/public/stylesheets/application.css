@@ -1,6 +1,6 @@
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, code, em, font, img, kbd, q, tt, var,
+a, code, em, font, img,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
@@ -11,23 +11,21 @@ table, tbody, tfoot, thead, tr, th, td {
     outline: 0;
     vertical-align: baseline;
     background: transparent;
-    font: 12px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 12px/1.5em helvetica, arial, freesans, clean, sans-serif;
 }
 
 body {
-    background: #f2f2f2;
-        background-image: url("/images/om_sprite.png");
-    background-position: 48px 0;
-    background-repeat: repeat-x;
+
+    background: url("/images/om_sprite.png") repeat-x #f2f2f2;
 }
 
 html, body, #wrapper {
+
     height: 100%;
     color: #4096ee;
 }
 
 body > #wrapper {
-    /*background: url("/images/abstract.png") top  no-repeat;*/
 
     height: auto;
     min-height: 100%;
@@ -51,11 +49,11 @@ h1, h2, h3, h4 {
 
 }
 
-h1 {
+h1, .h1 {
     padding: 6px 10px;
     color: #333333;
     font-weight: normal;
-    font-size: 1.5em;
+    font-size: 18px;
 }
 
 h1.page-content {
@@ -68,11 +66,11 @@ h1.page-content {
 
 h2 a {
     font-size: 1.3em;
-    color: #00469C;
+    color: #cf3a72;
 }
 
 h2 a:hover {
-    color: #0069E9;
+    color: #A32D5A;
 }
 
 h2 {
@@ -93,10 +91,12 @@ h3 a {
     font-size: 1.2em;
     color: #4096ee;
 }
-h4{
-    padding:2px;
-    border: 1px dotted #0063dc;
-    color:#0063dc;
+
+h4 {
+    border-bottom: 1px dotted #0063DC;
+    color: #0063DC;
+    margin: 10px 0;
+    padding: 2px;
 }
 
 p {
@@ -112,9 +112,10 @@ a {
     list-style-type: none;
 }
 
-a:hover{
-    color: #0063dc ;
+a:hover {
+    color: #0063dc;
 }
+
 a.blue {
     color: #0063dc !important;
 }
@@ -126,7 +127,7 @@ input {
 
 }
 
-form input, textarea, select {
+form input[type=text], form input[type=email], form input[type=password], textarea, select {
 
     padding: 8px;
     border: 1px solid #dedede;
@@ -145,7 +146,7 @@ input[type="button"]::-moz-focus-inner {
 
 form table input {
     height: 22px;
-    padding: 0;
+    padding: 0 !important;
     background: #F2F2F2;
     border: 1px solid #A2A6A7;
 }
@@ -169,9 +170,9 @@ form label {
     *display: inline;
 
     font-weight: bold;
-    min-width: 120px;
+    min-width: 140px;
     text-align: right;
-    margin:0 10px;
+    margin: 0 10px;
     text-transform: capitalize;
 
 }
@@ -180,7 +181,7 @@ fieldset {
     margin: 1.3em;
     padding: 1.3em;
     background: #F2F2F2;
-    border: 4px solid #E2E2E2;
+    border: 1px solid #80BDFB;
 
 }
 
@@ -190,12 +191,12 @@ legend {
     color: #333;
     padding: 0 0.5em;
 
-
 }
 
 * html .clearfix {
     height: 1%;
 }
+
 td h4 {
 
     border-bottom: 4px solid #09F3E4;
@@ -205,14 +206,15 @@ td h4 {
     margin: 0.5em 0;
     text-transform: capitalize;
 }
-th{
-    color:#448be2;
-    font-size:1.2em;
-    border-bottom:1px dotted #448be2;
+
+th {
+    text-align: left;
+    color: #448be2;
+    font-size: 1.2em;
+    border-bottom: 1px dotted #448be2;
 }
+
 /* End Element stylerules */
-
-
 
 table.om-table {
     margin: 1em 0;
@@ -220,24 +222,26 @@ table.om-table {
     font-size: 1em;
     border-collapse: collapse;
 }
+
 table.om-table th {
-    color:#fff;
+    color: #fff;
 }
+
 .om-table tr {
     height: 20px;
 }
 
 tr.even {
     background: #f2f2f2;
+}
 
+tr.even a, tr.odd a {
+    color: #333 !important;
 }
 
 tr.odd {
     background: #e3e3e3;
-
 }
-
-
 
 #notification-flash-wrapper {
     opacity: 0.90;
@@ -262,23 +266,6 @@ tr.odd {
     height: 28px;
 
 }
-#user_custom_bar{
-    float:left;
-    position:relative;
-    top:8px;
-}
-
-#user_custom_bar {
-    float: left;
-    position: relative;
-    top: 8px;
-
-}
-
-#user_custom_bar a {
-    color: #FFF;
-
-}
 
 #wrapper {
     min-height: 400px;
@@ -290,6 +277,7 @@ tr.odd {
     text-align: left;
     margin: 0 auto 50px;
 }
+
 #loginWrapper {
     display: none;
 }
@@ -300,15 +288,19 @@ tr.odd {
     position: relative;
 }
 
-#ctlrBar {
+#ctlrBar, #user_custom_bar {
+    background: #333;
+    color: #FFF;
     font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
     text-transform: capitalize;
-    color: #cf3a72;
-    margin-left: 1em;
-    height: 28px;
-    line-height: 28px;
-    float: right;
-    vertical-align: bottom
+}
+
+#ctlrBar a, #user_custom_bar a {
+    color: #FFF;
+
 }
 
 #breadcrumb {
@@ -351,11 +343,11 @@ tr.odd {
 }
 
 div.page-content {
-    background:#fff;
+    background: #fff;
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
-    
+
     padding: 15px;
 }
 
@@ -395,36 +387,36 @@ div.sidebar-menu-content li {
 }
 
 li.menu-li-last-divider {
-    border-bottom-width:0 !important;
+    border-bottom-width: 0 !important;
 }
 
-ul.item-list{
-    
+ul.item-list {
+
 }
 
 li.list-item {
-   padding:10px 0;
+    padding: 10px 0;
     border-bottom: 1px dashed #ddd;
 }
 
 .item-list-actions-wrapper {
     position: absolute;
-    background:#191919;
+    background: #191919;
     opacity: 0.8;
-    right:0;
-    display:none;
+    right: 0;
+    display: none;
 
 }
-.item-list-actions{
-    margin:5px;
-    height:100%;
-    
+
+.item-list-actions {
+    margin: 5px;
+    height: 100%;
 }
 
-.first-l{
-    color:#4096ee;
-    font-size:1.7em;
-    font-weight:bold
+.first-l {
+    color: #4096ee;
+    font-size: 1.7em;
+    font-weight: bold
 }
 
 .corners-bottom {
@@ -444,12 +436,14 @@ li.list-item {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
+
 .corners {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
 
 }
+
 #time_picker {
 
     display: none;
@@ -472,6 +466,7 @@ li.list-item {
     padding: 0.1em 0.2em;
     cursor: pointer;
 }
+
 /* top  menu */
 #navigation {
     position: relative;
@@ -484,9 +479,9 @@ li.list-item {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    -moz-box-shadow:0 0 10px #333;
-    -webkit-box-shadow:0 0 10px #666;
-    box-shadow:0 0 10px #666;
+    -moz-box-shadow: 0 0 10px #333;
+    -webkit-box-shadow: 0 0 10px #333;
+    box-shadow: 0 0 10px #333;
     margin: 0;
     padding: 0;
     float: left;
@@ -515,6 +510,7 @@ li.list-item {
 #topnav li div {
 
     padding: 0 0 10px;
+    margin: 0 0 0 15px;
     position: absolute;
     top: 38px;
     display: none;
@@ -565,9 +561,11 @@ li.list-item {
 span.error, .red {
     color: #ed513b;
 }
+
 .green {
-    color:#61bd68;
+    color: #61bd68;
 }
+
 #errorExplanation h2 {
 
     padding: 0.5em;
@@ -601,9 +599,11 @@ span.error, .red {
     border: 1px solid #61bd68;
 
 }
+
 .fieldset_active {
-    border: 4px solid #285370;
+    border: 1px solid #448be2;
 }
+
 .om-table td {
     border: 1px solid #DFE5E7;
     color: #191919;
@@ -611,6 +611,7 @@ span.error, .red {
     height: 28px;
     vertical-align: middle;
 }
+
 .om-table thead {
 
     color: #FFF;
@@ -626,6 +627,7 @@ span.error, .red {
 .om-table tbody {
     margin-top: 10px;
 }
+
 .om-table tr {
     height: 20px;
 }
@@ -654,25 +656,23 @@ span.error, .red {
     float: right;
 }
 
-
-
 .inputActive {
+
     border: 1px solid #999;
-    background: #fff5ca;
 
 }
 
-.box-shadow{
+.box-shadow {
     -moz-box-shadow: 0 0 10px #ddd;
     -webkit-box-shadow: 0 0 10px #ddd;
     box-shadow: 0 0 10px #ddd;
 }
-.box-shadow-dark{
+
+.box-shadow-dark {
     -moz-box-shadow: 0 0 10px #333;
     -webkit-box-shadow: 0 0 10px #333;
     box-shadow: 0 0 10px #333;
 }
-
 
 /* Buttons */
 .om-button a, .om-button input, .om-button button, .om-icon-button a, .om-icon-button input, .om-icon-button button {
@@ -680,7 +680,10 @@ span.error, .red {
     text-transform: capitalize;
     line-height: 18px;
     height: 18px;
-    color: #002A5C;
+       color: #333333;
+    font-weight: bold;
+
+    text-shadow: 1px 1px 1px #FFFFFF;
     background: none;
     display: inline-block;
     white-space: nowrap;
@@ -698,7 +701,12 @@ span.error, .red {
 }
 
 .om-icon-button a {
+    color: #333333;
+    font-weight: bold;
+
+    text-shadow: 1px 1px 1px #FFFFFF;
     padding: 1px 8px;
+
 }
 
 .om-button button {
@@ -722,19 +730,20 @@ span.om-icon-button {
 }
 
 span.om-icon-button {
+    vertical-align:bottom;
     padding: 0 0 0 20px;
 }
 
 span.om-plain-button, span.om-plain-icon-button {
-    cursor:pointer;
+    cursor: auto;
     position: relative;
     display: inline-block;
     height: 16px;
-    margin: 0 0 0 30px;
+    margin: 0 0 0 22px;
 }
 
 span.om-plain-button a, span.om-plain-icon-button a {
-    color: #fff;
+    color: #4096EE;
 }
 
 span.om-button span.om-icon,
@@ -791,9 +800,13 @@ span.om-plain-icon-button span.om-icon {
     position: absolute;
     top: 2px;
     margin: 0 0 0 -20px;
-    display: inline-block;
+    display: block;
     width: 16px;
     height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    *display: inline;
+    *zoom: 1;
 
 }
 
@@ -927,42 +940,99 @@ span.om-icon-back {
 .om-icon-calendar-prev {
     background-position: 0 -752px;
 }
+
 .om-icon-next {
     background-position: 0 -768px;
 }
+
 .om-icon-folder-stamped {
     background-position: 0 -784px;
 }
+
 .om-icon-folder-stack {
     background-position: 0 -800px;
 }
+
 .om-icon-folder-open {
     background-position: 0 -816px;
 }
+
 .om-icon-folder-edit {
     background-position: 0 -832px;
 }
+
 .om-icon-counter {
     background-position: 0 -848px;
 }
+
 .om-icon-tick-small {
     background-position: 0 -864px;
 }
+
 .om-icon-clipboard-list {
     background-position: 0 -880px;
 }
+
 .om-icon-ui-textfield {
     background-position: 0 -896px;
 }
+
 .om-icon-ui-textarea {
     background-position: 0 -912px;
 }
+
 .om-icon-ui-label {
     background-position: 0 -928px;
 }
+
 .om-icon-ui-selectbox {
     background-position: 0 -944px;
 }
+
+.om-icon-doc-share {
+    background-position: 0 -960px;
+}
+
+.om-icon-megaphone {
+    background-position: 0 -976px;
+}
+
+.om-icon-doc-image {
+    background-position: 0 -992px;
+}
+
+.om-icon-doc-pdf {
+    background-position: 0 -1008px;
+}
+
+.om-icon-doc-excel {
+    background-position: 0 -1024px;
+}
+
+.om-icon-doc-blue {
+    background-position: 0 -1040px;
+}
+
+.om-icon-doc-word {
+    background-position: 0 -1056px;
+}
+
+.om-icon-doc-powerpoint {
+    background-position: 0 -1072px;
+}
+
+.om-icon-doc-add {
+    background-position: 0 -1088px;
+}
+
+.om-icon-login {
+    background-position: 0 -1104px;
+}
+
+.om-icon-clipboard-plus {
+    background-position: 0 -1120px;
+}
+
 /*END BUTTONS*/
 
 /*Pagination */
@@ -1018,7 +1088,6 @@ div.pagination span.disabled {
 
 /*End Pagination */
 
-
 form span.error {
 
     padding: 0 0 0 4px;
@@ -1047,7 +1116,7 @@ form span.error {
 #footer {
     width: 950px;
     margin: 0 auto;
-    background: #191919;
+    background: #333;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
 
@@ -1099,14 +1168,6 @@ form span.error {
 
 /* End hide from IE-mac */
 
-
-
-#ctlrBar a {
-    color: #FFF;
-    cursor: pointer;
-
-}
-
 #events {
     height: 175px;
     overflow: hidden;
@@ -1142,8 +1203,6 @@ form span.error {
 .content {
     color: #0E5A9D;
 }
-
-
 
 /** dropdown **/
 dl.drop_down {
@@ -1225,7 +1284,6 @@ dl.drop_down {
     background-color: #ddd;
 }
 
-
 .li-over {
     background: #1484E6;
     color: #FFF;
@@ -1235,7 +1293,6 @@ dl.drop_down {
     background: #1484E6;
     color: #FFF !important;
 }
-
 
 /* search box */
 .search_wrapper_l {
@@ -1261,7 +1318,6 @@ dl.drop_down {
     border: none;
 
 }
-
 
 /************ calendar list ********************/
 .pos-date {
@@ -1321,18 +1377,18 @@ dl.drop_down {
     font-size: 12px;
     position: absolute;
     z-index: 100000;
+
 }
 
 .tipsy-inner {
     padding: 5px 8px 4px 8px;
     background-color: #191919;
-    color: #FFF;
-    border: 1px solid #191919;
+    color: #FFF;;
     max-width: 200px;
     text-align: center;
-}
-
-.tipsy-inner {
+    -moz-box-shadow: 0 0 6px #333;
+    -webkit-box-shadow: 0 0 6px #333;
+    box-shadow: 0 0 6px #333;
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -1427,15 +1483,19 @@ dl.drop_down {
 .italic {
     font-style: italic;
 }
-.bold{
-    font-weight:bold;
+
+.bold {
+    font-weight: bold;
 }
+
 .text-right {
     text-align: right;
 }
+
 .text-left {
     text-align: left;
 }
+
 .right {
     float: right;
 
@@ -1453,9 +1513,120 @@ dl.drop_down {
     position: relative;
 
 }
-.width-50{
-    width:50%;
+
+.width-50 {
+    width: 50%;
 }
-.width-100{
-    width:100%;
+
+.width-100 {
+    width: 100%;
+}
+
+/*
+* CSS Styles that are needed by jScrollPane for it to operate correctly.
+*
+* Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+* may not operate correctly without them.
+*/
+
+.jspContainer {
+    overflow: hidden;
+    position: relative;
+}
+
+.jspPane {
+    position: absolute;
+}
+
+.jspVerticalBar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 100%;
+    background: transparent;
+}
+
+.jspHorizontalBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 16px;
+    background: transparent;
+}
+
+.jspVerticalBar *,
+.jspHorizontalBar * {
+    margin: 0;
+    padding: 0;
+}
+
+.jspCap {
+    display: none;
+}
+
+.jspHorizontalBar .jspCap {
+    float: left;
+}
+
+.jspTrack {
+    background: #FFF;
+    position: relative;
+}
+
+.jspDrag {
+    border: 1px solid #448be2;
+    background: #fff;
+    position: relative;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag {
+    float: left;
+    height: 100%;
+}
+
+.jspArrow {
+    background: url("/images/ui-icons_448be2_256x240.png") no-repeat scroll 0 0 #fff;
+    text-indent: -20000px;
+    display: block;
+    cursor: pointer;
+}
+
+.jspArrowDown {
+    background-position: -64px 0 !important;
+}
+
+.jspArrow.jspDisabled {
+    cursor: default;
+    background: transparent;
+}
+
+.jspVerticalBar .jspArrow {
+    height: 16px;
+}
+
+.jspHorizontalBar .jspArrow {
+    width: 16px;
+    float: left;
+    height: 100%;
+}
+
+.jspVerticalBar .jspArrow:focus {
+    outline: none;
+}
+
+.jspCorner {
+    background: #eeeef4;
+    float: left;
+    height: 100%;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner {
+    margin: 0 -3px 0 0;
 }

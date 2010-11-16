@@ -1,4 +1,6 @@
 require 'accepts_flattened_values'
+require 'paperclip'
+require 'mime/types'
 require 'will_paginate'
 
 require 'omega'
@@ -17,6 +19,7 @@ module Omega
 
     initializer :'omega.add_mime_types' do
       Mime::Type.register_alias('text/plain', :psv)
+      Mime::Type.register_alias('application/json', :dt)
     end
 
     initializer :'omega.set_field_error_proc' do
@@ -24,6 +27,10 @@ module Omega
         # Override the default error message layout
         ActionView::Base.field_error_proc = Proc.new { |html_tag, instance| %Q{<span class="fieldWithErrors">#{html_tag}</span>}.html_safe }
       end
+    end
+
+    initializer :'omega.middleware' do |app|
+      app.config.middleware.insert(0, Omega::FlashUploads, Rails.application.config.session_options[:key])
     end
 
     config.omega.assets = ActiveSupport::OrderedOptions.new

@@ -1,2 +1,5 @@
+$('#edit_event_<%= @event.id %>').parents('.ui-dialog').andSelf().remove();
 
-$('#display-event-form').html('<%= escape_javascript(render 'events/show', :event => @event) %>');
+        var cal = $('#cal').data('fullCalendar')
+        cal.removeEvents(<%= @event.id %>)
+cal.renderEvent(<%= @event.to_json.html_safe %>,true)

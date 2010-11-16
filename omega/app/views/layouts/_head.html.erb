@@ -1,30 +1,36 @@
-
-    <div id="top-pane">
-      <div class="center-content">
-      <div id="user_custom_bar">
-		<%= render('layouts/partials/messages') %>
-		<%= render('layouts/partials/favorites') %>
-      </div>
-      <div id="ctlrBar">
-        <% if current_user.is_anonymous? -%>
-            <span id="trigger"><a class="btnLoginCtrl" rel="test" href="#"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
-            | <%= link_to content_tag(:span, t(:sign_up)), register_users_url %>
-        <% else -%>
-            <%= link_to content_tag(:span, "logout"), sessions_url, :method => :delete, :confirm => 'Are you sure?' %>
-             <%= current_user.username %>
-        <% end -%>
-      </div>
-      <div id="search_wrapper">
-        <input id="search_input">
-      </div>
-      <div id="loginWrapper">
-          <%= render :partial => "layouts/partials/login" %>
-      </div>
-        </div>
+<div id="top-pane">
+  <div class="center-content">
+<%= with_permission(User::PERM_VIEW) do %>
+       <div id="user_custom_bar" class="corners-bottom left" >
+      <%= render('layouts/partials/messages') %>
+      <%= render('layouts/partials/favorites') %>
     </div>
-  <div id="head">
-    <%= render :partial => "layouts/menu" %>
-        <div id="breadcrumb">
-      <%= breadcrumbs %>
+      <% end %>
+
+    
+    <div id="ctlrBar" class="corners-bottom right">
+      <% if current_user.is_anonymous? -%>
+          <span id="trigger"><a class="btnLoginCtrl" rel="test" href="#"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
+          | <%= link_to content_tag(:span, t(:sign_up)), register_users_url %>
+      <% else -%>
+          <span class="om-icon-only om-white-icon ui-icon-power"></span>
+          <%= link_to content_tag(:span, "logout"), sessions_url, :method => :delete, :confirm => 'Are you sure?' %>
+           |
+          <span class="om-icon-only om-white-icon ui-icon-person"></span>
+           <%= link_to 'My Profile', edit_user_url(current_user) %>
+      <% end -%>
+    </div>
+    <!--<div id="search_wrapper">-->
+      <!--<input id="search_input">-->
+    <!--</div>-->
+    <div id="loginWrapper">
+      <%= render :partial => "layouts/partials/login" %>
     </div>
   </div>
+</div>
+<div id="head">
+  <%= render :partial => "layouts/menu" %>
+  <div id="breadcrumb">
+    <%= breadcrumbs %>
+  </div>
+</div>

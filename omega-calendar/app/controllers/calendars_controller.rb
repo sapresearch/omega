@@ -1,14 +1,17 @@
 class CalendarsController < Omega::Controller
 
   respond_to :html, :xml, :js, :json
-  breadcrumb 'Calendar' => :calendars
 
   
 
   
   def index
-    @calendars = Calendar.all
+
     respond_with(@calendar)
+  end
+
+  def administer
+    @calendars = Calendar.all
   end
 
   def show

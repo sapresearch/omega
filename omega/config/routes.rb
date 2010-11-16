@@ -22,10 +22,16 @@ Omega::Module.routes.draw do
 
   resources :users do
     collection do
-      match :register
+      get :register
+      post :join, :path => 'register'
       get :autocomplete
+
+      match ':letter' => 'users#letter', :constraints => { :letter => /[a-z]/i}
     end
   end
+
+  match 'lost_username' => 'users#lost_username'
+  match 'lost_password' => 'users#lost_password'
 
   resources :roles
   resources :permissions, :only => [:index, :show]

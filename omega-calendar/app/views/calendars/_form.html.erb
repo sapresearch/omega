@@ -1,6 +1,5 @@
-<h1>Create a new calendar</h1>
-<%= form_for @calendar do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@calendar,:remote => true) do |f| %>
+
   <p>
     <%= f.label :calendar_name %>
     <%= f.text_field :calendar_name %>
@@ -8,5 +7,7 @@
 
 
 
-  <p><%= f.submit %></p>
+ <%= om_button(:icon => 'save') do %>
+                      <%= f.submit %>
+                  <% end %>
 <% end %>

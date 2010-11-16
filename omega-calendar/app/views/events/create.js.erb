@@ -1,22 +1,9 @@
-<% if @event.valid? %>
 
 
-        $('#cal').data('plugin').addAgendaItem(
-                "#cal",
-                '<%= @event.title %>',
-                new Date('<%= @event.start_date %>'),
-                new Date('<%= @event.end_date %>'),
-                false,
-        {
-            fname: "Santa",
-            lname: "Claus",
-            leadReindeer: "Rudolph",
-            myExampleDate: new Date()
-        }
-                );
+$('#new_event').parents('.ui-dialog').andSelf().remove();
+  var cal = $('#cal').data('fullCalendar')
+cal.renderEvent(<%= @event.to_json.html_safe %>,true)
 
 
-        $('#add-event-form').dialog('close');
-        <% else %>
-        $('#add-event-form').html('<%= escape_javascript(render "/events/form", :event => @event) %>');
-        <% end %>
+
+

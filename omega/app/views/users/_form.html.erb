@@ -39,12 +39,14 @@
       </p>
 
     </fieldset>
+     <%= with_permission(User::PERM_ADMIN) do %>
+
 
     <fieldset>
       <legend>Roles and Permissions</legend>
       <%= render 'role_assignments', :form => f %>
     </fieldset>
-
+ <% end %>
 
 
 

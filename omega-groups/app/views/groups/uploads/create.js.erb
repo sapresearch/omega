@@ -1,0 +1,36 @@
+var table = $('#shared-documents').dataTable();
+
+
+
+
+
+        <% @uploads.each do |file| %>
+
+
+        <%
+           icon = case file.upload.upload_content_type
+                      when /^image/ then
+                          'image'
+                      when /spread/ then
+                          'excel'
+                      when /word/ then
+                          'word'
+                      when /pdf/ then
+                          'pdf'
+                      when /presentation/ then
+                          'pdf'
+                      else
+                          'blue'
+                  end
+        %>
+
+
+                        table.fnAddData([
+                            '<%= escape_javascript( file.upload.upload_file_name  ) %>',
+                            '<%= escape_javascript(file.upload.uploader.username) %>',
+                            '<%= escape_javascript(file.upload.upload_updated_at.strftime("%m/%d/%Y at %I:%M%p") ) %>'
+                        ]);
+        <% end %>
+        var oSettings = table.fnSettings();
+
+        $('#new_group_upload').parents('div.ui-dialog').remove();
