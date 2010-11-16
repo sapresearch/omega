@@ -11,6 +11,8 @@ class ContactsController < Omega::Controller
 #  require_permission Contact::PERM_ADMIN, :only => [:edit, :update], :unless => contact_is_self
 #  require_permission Contact::PERM_EDIT_SELF, :only => [:edit, :update], :if     => contact_is_self
 
+  before_filter :get_contact_volunteering_records, :only => [:show, :edit, :update]
+
   breadcrumb 'Contacts' => :contacts
 
   def index
@@ -29,7 +31,6 @@ class ContactsController < Omega::Controller
   end
 
   def show
-    @records        = Volunteering::Record.where('contact_id = ?', params[:id]).order('created_at desc').limit(5)
     @contact_groups = Contact::Group.all.group_by(&:group_type)
     respond_with(@contact)
   end
@@ -41,7 +42,6 @@ class ContactsController < Omega::Controller
   end
 
   def edit
-    @records      = Volunteering::Record.where('contact_id = ?', params[:id]).order('created_at desc').limit(5)
     respond_with(@contact)
   end
 
@@ -107,12 +107,16 @@ class ContactsController < Omega::Controller
 
 
   private
-  def determine_sub_layout
-    case params[:action]
-      when 'index'
-        'contacts/with_groups'
-      else
-        nil
+    def get_contact_volunteering_records
+      @records = Volunteering::Record.where('contact_id = ?', params[:id]).order('created_at desc').limit(5)
     end
-  end
+
+    def determine_sub_layout
+      case params[:action]
+        when 'index'
+          'contacts/with_groups'
+        else
+          nil
+      end
+    end
 end
