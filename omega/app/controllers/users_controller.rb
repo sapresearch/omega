@@ -1,10 +1,9 @@
 class UsersController < Omega::Controller
   respond_to :html, :xml, :js, :json
   crud_helper User
-  require_permission User::PERM_VIEW, :except => [:register, :join,   :create, :lost_username, :lost_password]
-  require_permission User::PERM_ADMIN, :only  => [:new, :create, :update, :destroy]
+  require_permission User::PERM_VIEW, :except => [:register, :create]
+  require_permission User::PERM_ADMIN, :only  => [:new, :edit, :create, :update, :destroy]
   breadcrumb 'Users' => :users
-  before_filter :sort, :only => [:index]
 
   def index
     @users = @users.paginate(:page => params[:page], :per_page => User::MAX_USERS_PER_PAGE)
@@ -12,7 +11,7 @@ class UsersController < Omega::Controller
   end
 
   def show
-    
+
     respond_with(@user)
   end
 
@@ -21,21 +20,16 @@ class UsersController < Omega::Controller
   end
 
   def register
-    @user = User.new
+    if request.post?
+      @user = User.register(params[:user])
+    else
+      @user = User.new
+    end
+
     respond_with(@user)
   end
 
-  def join
-    @user = User.register(params[:user])
-
-    respond_with(@user, :location => root_url)
-  end
-
   def edit
-    unless @user == current_user
-      require_permission User::PERM_ADMIN
-    end
-
     respond_with(@user)
   end
 
@@ -57,15 +51,15 @@ class UsersController < Omega::Controller
 
   def letter
     @letter = params[:letter]
-    @users  = User.where('username like ?', "#{@letter}%").order('username')
-    @users  = @users.paginate(:page => params[:page], :per_page => User::MAX_USERS_PER_PAGE)
+    @users = User.where('username like ?', "#{@letter}%").order('username')
+    @users = @users.paginate(:page => params[:page], :per_page => User::MAX_USERS_PER_PAGE)
     respond_with(@users) do |format|
       format.any(:html, :js) { render 'index' }
     end
   end
 
   def autocomplete
-    @q     = params[:term]
+    @q = params[:term]
     @users = User.named(@q)
     @users.limit(params[:limit]) if params[:limit]
 
@@ -73,31 +67,6 @@ class UsersController < Omega::Controller
       format.json do
         render :json  =>   @users.map { |c| {:id => c.id, :label => "#{c.last_name}  #{c.first_name}", :value => c.id} }
       end
-    end
-  end
-
-  def lost_username
-    @users = User.where('email = ?', params[:email])
-
-    if @users.any?
-
-    end
-
-    respond_with(@users)
-  end
-
-  def lost_password
-
-  end
-
-  SORT_KEYS = ['username']
-  SORT_DIRECTIONS = ['asc', 'desc']
-  def sort
-    @users = User.scoped
-
-    params.each do |attr, direction|
-      next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
-      @users = @users.order("#{attr} #{direction}")
     end
   end
 
