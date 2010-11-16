@@ -1,4 +1,4 @@
-class ServicesController < Omega::Controller
+class ServicesController < ApplicationController
 
   respond_to :html, :xml, :js, :json
 
@@ -80,8 +80,6 @@ class ServicesController < Omega::Controller
     case params[:step]
 
       when 'introduction'
-         @services = Service.all
-    
 
         render "services/wizard_introduction"
 
@@ -168,7 +166,6 @@ class ServicesController < Omega::Controller
     @current_step = session[:current_step]
 
     if params[:save] # Update the object in the wizard and remain on the current step
-
       @service.save
 
       redirect_to service_wizard_services_url(:step => 2)
@@ -243,6 +240,7 @@ class ServicesController < Omega::Controller
     @field = Service::Field.new
     @field.build_detail
     
+
 
   end
 

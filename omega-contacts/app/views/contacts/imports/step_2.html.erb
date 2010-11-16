@@ -1,127 +1,29 @@
-<% require_stylesheet 'csv_import' %>
-<% require_javascript 'csv_import' %>
-
 
 <h1 class="page-content corners-top">
-
-  STEP 2: Field Mapping
-
-</h1>
-
+STEP 2 - Upload File</h1>
 <div class="page-content corners-bottom">
 
-  <div class="csv-container">
 
-    <div class="content">
+<h2><strong>Upload a CSV</strong></h2>
 
-      <%= form_for @import do |f| %>
-          
-      <table>
-        <tr>
-          <td>
+<%= form_for @import, :html => { :multipart => true } do |f| %>
+  <p>
+    <strong> File: <%= f.file_field :csv %> <br/>
+    Data Type: </strong><%= f.select :datatype, %w{contacts}%> <br/>
 
-            <table class="csv-table">
+  </p>
 
-               <th class="csv-table">CSV Field</th> <th class="csv-table">Discard</th> <th class="omega-table">Omega Field</th>
+  <p>
+    <br/>
+    <%= f.submit "Upload", :name => "upload" %>
 
-                  <%$rows[0].each do |c|%>
+    <%= link_to "Back", csv_import_wizard_contact_imports_url(:step => 1) %>
 
-                    <% unless c.nil? %>
+  </p>
+<% end %>
 
-                      <tr class="csv-table">
-
-                         <td class="csv-table">
-                            <%=c%>
-                         </td>
-
-                         <td class="csv-table">
-
-                           <% @flag = true %>
-
-                           <% @mapping.each do |k,v| %>
-
-                               <% if v.include?(c) %>
-
-                                   <% @flag = false %>
-
-                               <%end%>
-
-                            <%end%>
-
-
-                           <%= check_box 'discard', c, {:checked => @flag} %>
-
-
-                         </td>
-
-                         <td class="csv-table">
-
-                            <% @mapping.each do |k,v| %>
-
-                               <% if v.include?(c) %>
-
-                                   <% @val = k %>
-
-                               <%end%>
-
-                            <%end%>
-
-                            <%= select 'csv_field',c, options_from_collection_for_select(@contact_fields,"name","name",@val) %>
-
-                          </td>
-                      </tr>
-                    <%end%>
-
-                  <%end%>
-
-            </table>
-          </td>
-
-          <td>
-
-            <table class="csv-table">
-
-                  <th class="csv-table">Imported Data Preview</th>
-
-                      <% $rows[1].each do |d| %>
-
-                          <% unless d.nil?%>
-                                 <tr class="csv-table">
-
-                                     <td class="csv-table">
-                                         <%=d%>
-                                     </td>
-                                 </tr>
-                          <%end%>
-
-
-                      <%end%>
-            </table>
-
-          </td>
-        </tr>
-        
-      </table>
-
-      <%=f.submit "Update"%>
-
-      <%=f.submit "Finalize"%>
-
-
-      <%end%>
-    </div>
-
-  </div>
 
 </div>
-
-
-
-
-
-
-
-
 
 
 

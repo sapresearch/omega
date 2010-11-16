@@ -1,0 +1,122 @@
+<% require_stylesheet 'csv_import' %>
+<% require_javascript 'csv_import' %>
+
+
+<h1 class="page-content corners-top">
+
+  STEP 4: Import Data
+
+</h1>
+
+<div class="page-content corners-bottom">
+
+  <div class="csv-container">
+
+    <div class="content">
+
+      <%= form_tag '/contacts/imports/update_csv' do %>
+
+      <table>
+        <tr>
+          <td>
+
+            <table class="csv-table">
+
+               <th class="csv-table">CSV Field</th>
+
+                  <% $rows_old.each do |c|%>
+
+
+                      <tr class="csv-table">
+
+                         <td class="csv-table">
+                            <%=c%>
+                         </td>
+
+                      </tr>
+
+                  <%end%>
+
+            </table>
+
+
+          </td>
+
+          <td>
+
+              <table class="csv-table">
+
+               <th class="csv-table">Mapped Omega Field</th>
+
+                  <% @rows[0].each do |c|%>
+
+
+                      <tr class="csv-table">
+
+                         <td class="csv-table">
+                            <%=c%>
+                         </td>
+
+                      </tr>
+                    <%end%>
+
+
+            </table>
+
+          </td>
+
+          <td>
+
+            <table class="csv-table">
+
+                  <th class="csv-table">Imported Data Preview</th>
+
+                      <% @rows[1].each do |d| %>
+
+                      <% unless d.nil? %>
+                                 <tr class="csv-table">
+
+                                     <td class="csv-table">
+                                         <%=d%>
+                                     </td>
+                                   
+                                 </tr>
+
+                      <%end%>
+                      <%end%>
+            </table>
+
+          </td>
+        </tr>
+        
+      </table>
+
+
+      <%=submit_tag "Import", :name => "import"%>
+
+
+      <%end%>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
