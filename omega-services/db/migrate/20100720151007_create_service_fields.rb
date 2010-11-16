@@ -3,7 +3,6 @@ class CreateServiceFields < ActiveRecord::Migration
     create_table :service_fields do |t|
       t.string :field_name, :null =>false
       t.string :field_type, :null=>false
-      t.boolean :is_required
       t.string :field_type_class
 
       t.string :field_category, :null=>false

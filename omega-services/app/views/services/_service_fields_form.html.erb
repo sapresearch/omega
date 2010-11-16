@@ -14,7 +14,7 @@
 
                      <%=f.fields_for :detail do |d| %>
 
-                           <%#= d.hidden_field :service_id, :value => service.id %>
+                           <%= d.hidden_field :service_id, :value => service.id %>
 
                                  <strong> <%= d.label :field_value%></strong>
                                           <%= d.text_field :field_value%>
