@@ -3,7 +3,10 @@ $('#new_group_upload').remove();
         $('form.edit_contact').dialog({autoOpen:true,
             width:500,
             height:500,
-            title:'Please choose files that you would like to upload'
+            title:'Please choose files that you would like to upload',
+            close: function(){
+                $('form.edit_contact').parents('.ui-dialog').andSelf().remove();
+            }
         });
 
         $.fn.extend({
