@@ -4,7 +4,7 @@
 
 <h1 class="page-content corners-top">
 
-  STEP 2: Field Mapping
+  STEP 3: Field Mapping
 
 </h1>
 
@@ -14,7 +14,7 @@
 
     <div class="content">
 
-      <%= form_for @import do |f| %>
+      <%= form_tag '/contacts/imports/update_csv' do %>
           
       <table>
         <tr>
@@ -22,9 +22,10 @@
 
             <table class="csv-table">
 
-               <th class="csv-table">Final Fields</th>
+               <th class="csv-table">CSV Field</th> <th class="csv-table">Discard</th> <th class="omega-table">Omega Field</th>
 
-                  <%$rows[0].each do |c|%>
+              
+                  <% @rows[0].each do |c|%>
 
                     <% unless c.nil? %>
 
@@ -34,8 +35,50 @@
                             <%=c%>
                          </td>
 
+                         <td class="csv-table">
+
+                           <% @flag = true %>
+
+                            <% @mapping.each do |k,v| %>
+
+                               <% if v.include?(c) || k == c %>
+
+                                   <% @flag = false %>
 
 
+
+                               <%end%>
+
+                            <%end%>
+
+
+                           <%= check_box 'mapping[][discard]', c, {:checked => @flag} %>
+
+                           <%= hidden_field 'mapping[][column]', c, :value => @rows[0].index(c)%>
+
+
+                         </td>
+
+                         <td class="csv-table">
+
+                            <% @val = c %>
+
+                            <% @mapping.each do |k,v| %>
+
+                               <% if v.include?(c) %>
+
+                                   <% @val = k %>
+
+                               
+
+                               <%end%>
+
+                            <%end%>
+
+                            <%= select 'csv_field',c, options_from_collection_for_select(@contact_fields,"name","name",@val) %>
+                            <%= hidden_field 'column', @val, :value => @rows[0].index(c)%>
+
+                          </td>
                       </tr>
                     <%end%>
 
@@ -50,18 +93,18 @@
 
                   <th class="csv-table">Imported Data Preview</th>
 
-                      <% $rows[1].each do |d| %>
+                      <% @rows[1].each do |d| %>
 
-                          <% unless d.nil?%>
+                      <% unless d.nil? %>
                                  <tr class="csv-table">
 
                                      <td class="csv-table">
                                          <%=d%>
                                      </td>
+                                   
                                  </tr>
-                          <%end%>
 
-
+                      <%end%>
                       <%end%>
             </table>
 
@@ -70,9 +113,10 @@
         
       </table>
 
-      <%=f.submit "Update"%>
+          
+      <%= submit_tag "Discard", :name => "update"%>
 
-      <%=f.submit "Import"%>
+      <%= submit_tag "Next", :name => "next"%>
 
 
       <%end%>

@@ -64,14 +64,17 @@ Email: <%= @contact.email %><br>
   <h3><a href="#">References</a></h3>
 
   <div>
-    <span data-tooltip="Upload your document">
-      <span class="om-icon-only om-blue-icon ui-icon-document"></span>
+    <span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Assign this contact"></span> 
+    <%= link_to "Upload", upload_contact_path(@contact), :remote => true %>
+    <table class="width-100">
+      <thead>
+      <tr>
+        <th>Filename</th>
+        <th>Type</th>
+      </tr>
+      </thead>
 
-      <%= link_to "Upload", upload_contact_path(@contact), :remote => true %>
-</span>
-
-    <%= render :partial => "/contacts/uploads/upload_records" %>
-
+    </table>
 
   </div>
 
@@ -83,10 +86,8 @@ Email: <%= @contact.email %><br>
           <%= render :partial => 'contacts/partials/assigned_groups' %>
         </ul>
         <a href="#" id="assign-trigger">
-          <span data-tooltip="Assign this contact">
-          <span class="om-icon-only om-blue-icon ui-icon-plus" ></span>
-          <%= @contact.first_name %> <%= @contact.last_name %>Assign to desired groups
-              </span>
+          <span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Assign this contact"></span>Assign
+          <%= @contact.first_name %> <%= @contact.last_name %> to desired groups
         </a>
 
       </div>
@@ -154,12 +155,7 @@ Email: <%= @contact.email %><br>
 
 
           <% Contact::Group.without_contact(@contact).each do |g| %>
-              <li>
-                <span data-tooltip="Add  <%= "#{@contact.first_name} #{@contact.last_name} to: #{g.name}".html_safe  %>">
-                <%= link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus" }.html_safe, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %><%= g.name %>
-              </span>
-              </li>
-
+              <li> <%= link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add  #{@contact.first_name} #{@contact.last_name} to: #{g.name} "></span>}.html_safe, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %><%= g.name %></li>
           <% end %>
 
         </ul>
