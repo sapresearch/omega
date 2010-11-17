@@ -2,6 +2,16 @@
      * insert edit contact view
      * empty the pane, append contact form
      */
-            $('#contacts_contact_pane').empty().append('<%= escape_javascript(render('form.html')) %>');
+            Queue.add(function() {
+
+                $('#contacts_contact_pane').empty().append('<%= escape_javascript(render('form.html')) %>');
+                $('input[type=file]').liveUpload({
+                    wmode       : 'transparent',
+                    buttonImg   : '/images/browse.png',
+                    hideButton  : true
+
+                });
+            });
+
 
  

@@ -8,15 +8,24 @@ Queue = function() {
     return {
         count : 0,
         add : function(f) {
-            function_stack.push(f);
-
+            if (this.count == 0)
+            {
+                f();
+            }
+            else
+            {
+                function_stack.push(f);
+            }
         },
         invoke : function() {
-console.log('invoke')
-            while (function_stack.length > 0) {
-                // invoke and pop
-                (function_stack.shift())();
-            }
+
+                while (function_stack.length > 0) {
+
+                    // invoke and pop
+                    (function_stack.shift())();
+                }
+
+
         }
     }
 }();
@@ -43,7 +52,7 @@ function _already_required_javascript(source) {
     return _already_required(source, 'script', 'src', 'text/javascript');
 }
 
-function require_stylesheet(source, options) {
+function require_stylesheet(source) {
     if (_already_required_stylesheet(source)) return;
 
     var link = document.createElement('link');
@@ -55,7 +64,7 @@ function require_stylesheet(source, options) {
     document.getElementsByTagName('head')[0].appendChild(link);
 }
 
-function require_javascript(source, options) {
+function require_javascript(source) {
     if (_already_required_javascript(source)) return;
 
     Queue.count++;

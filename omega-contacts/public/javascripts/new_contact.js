@@ -60,8 +60,6 @@ var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta
     });
 
 
-    Queue.add(function(){
-
 
 		/*
 	 * Set default setting for validator plugin
@@ -109,12 +107,7 @@ var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta
 	})
 
 
-    $('input[type=file]').liveUpload({
-         wmode       : 'transparent',
-         buttonImg   : '/images/browse.png',
-         hideButton  : true
 
-     });
 
-});        
+
 

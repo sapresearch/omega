@@ -33,4 +33,4 @@ var table = $('#shared-documents').dataTable();
         <% end %>
         var oSettings = table.fnSettings();
 
-        $('#new_group_upload').parents('div.ui-dialog').remove();
+        $('#new_group_upload').parents('div.ui-dialog').andSelf().remove();

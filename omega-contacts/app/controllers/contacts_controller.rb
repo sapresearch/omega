@@ -52,7 +52,7 @@ class ContactsController < Omega::Controller
 
   def do_upload
     @contact = Contact.find(params[:id])
-    @cotnact.update_attributes(params[:contact])
+    @contact.update_attributes(params[:contact])
     respond_with(@contact)
   end
 
@@ -96,6 +96,10 @@ class ContactsController < Omega::Controller
   end
 
   def update
+    if uploads = params[:uploads]
+      uploads.each { |upload| @contact.uploads << Upload.find(upload) }
+    end
+
     @contact.update_attributes(params[:contact])
     respond_with(@contact)
   end

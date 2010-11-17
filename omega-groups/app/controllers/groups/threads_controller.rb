@@ -15,6 +15,7 @@ class Groups::ThreadsController < Omega::Controller
 
   def new
     @thread = Group::Thread.new
+    @thread.posts.build
     respond_with(@thread)
   end
 

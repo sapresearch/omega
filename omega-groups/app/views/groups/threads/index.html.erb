@@ -1,11 +1,30 @@
+<% require_javascript 'omega_threads' %>
+<% require_stylesheet 'omega_threads' %>
 <h1 class="page-content corners-top">
   Threads
 </h1>
 
 <div class="page-content corners-bottom">
-<% @threads.each do |t| %>
-  <%= t.title %>
-<% end %>
+    <ul id="threads-list">
+    <% @threads.each do |t| %>
+        <li id="thread-<%= t.id %>" class="list-item relative">
+
+          <h3>
+           <%= link_to t.title, group_thread_posts_path(@group,t) %>
+           
+            <span class="om-icon-only om-blue-icon ui-icon-search relative"></span>
+            <div class="thred-preview">
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+          </div>
+          </h3>
+
+
+        </li>
+    <% end %>
+  </ul>
+
+
 </div>
 
 <% content_for :sidebar do %>

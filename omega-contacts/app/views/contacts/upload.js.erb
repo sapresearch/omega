@@ -42,13 +42,12 @@ $('#new_group_upload').remove();
                             $('#upload-file-list').append(
                                     '<li>'
                                             + result.upload.upload_file_name
-                                            + '<input type="hidden" name="group_uploads['
-                                            + id
-                                            + '][upload_id]" value="'
+                                            + '<input type="hidden" name="uploads[]" value="'
                                             + id
                                             + '">'
                                             + '</li>')
-
+                            
+console.log('dgf')
 
                         },
                         onError: function(event, queue, file, error) {
@@ -73,6 +72,7 @@ $('#new_group_upload').remove();
 
 
         Queue.add(function() {
+
             $('input[type=file]').multiUpload();
         }
                 );
