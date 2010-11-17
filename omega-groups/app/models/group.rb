@@ -1,5 +1,4 @@
 class Group < Omega::Model
-  require_dependency 'group/post'
   require_dependency 'group/thread'
 
   PERM_ADMIN = 'groups_admin'

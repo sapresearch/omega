@@ -1,6 +1,8 @@
 class Groups::PostsController < Omega::Controller
-  respond_to :html, :xml, :json
+  respond_to :html, :xml, :json, :js
 
+  before_filter :get_group
+  before_filter :get_thread
   before_filter :get_posts, :only => [:index]
   before_filter :get_post,  :only => [:show, :edit, :update, :destroy]
 
@@ -24,6 +26,7 @@ class Groups::PostsController < Omega::Controller
 
   def create
     @post = Group::Post.create(params[:post]) do |post|
+      post.author = current_user
       post.thread = Group.find(params[:group_id]).threads.find(params[:thread_id])
     end
     respond_with(@post)
@@ -40,11 +43,19 @@ class Groups::PostsController < Omega::Controller
   end
 
   private
+    def get_group
+      @group = Group.find(params[:group_id])
+    end
+
+    def get_thread
+      @thread = @group.threads.find(params[:thread_id])
+    end
+
     def get_posts
-      @posts = Group.find(params[:group_id]).threads.find(params[:thread_id]).posts
+      @posts = @thread.posts
     end
 
     def get_post
-      @thread = Group.find(params[:group_id]).threads.find(params[:thread_id]).posts.find(params[:id])
+      @thread = @thread.posts.find(params[:id])
     end
 end

@@ -1,0 +1,17 @@
+<%= form_for @post, :url => group_thread_posts_path(@group, @thread), :remote => true do |f| %>
+    <p>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :text %>
+      <%= f.text_area :body %>
+    </p>
+    <p>
+      <%= om_button(:icon=>'save') do %>
+          <%= f.submit 'Save' %>
+      <% end %>
+    </p>
+
+
+<% end %>
