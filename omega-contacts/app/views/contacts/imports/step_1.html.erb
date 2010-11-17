@@ -1,33 +1,13 @@
 
 <h1 class="page-content corners-top">
-STEP 1</h1>
+Step 1 - Introduction </h1>
 <div class="page-content corners-bottom">
 
 
-<h2><strong>Import Data from a CSV</strong></h2>
-
-<%= form_for @import, :html => { :multipart => true } do |f| %>
-  <p>
-    <strong> File: <%= f.file_field :csv %> <br/>
-    Data Type: </strong><%= f.select :datatype, %w{contacts}%> <br/>
-
-  </p>
-
-  <p>
-    <br/>
-    <%= f.submit "Upload" %>
-  </p>
-<% end %>
+<%= link_to 'Next', csv_import_wizard_contact_imports_url(:step => '2')%>
 
 
 </div>
-
-
-
-
-
-
-
 
 
 
