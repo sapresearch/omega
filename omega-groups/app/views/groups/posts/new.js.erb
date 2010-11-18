@@ -1,0 +1,10 @@
+$('body').append('<%= escape_javascript(render(:partial => 'form.html')) %>');
+        $('#new_post').dialog({
+            autoOpen: true,
+            width   : 600,
+            title   : 'Create new thread',
+            close   : function(){
+                $(this).dialog('destroy').andSelf().remove();
+            }
+        }
+                );

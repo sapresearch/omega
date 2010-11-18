@@ -717,9 +717,9 @@ span.error, .red {
 span.om-button,
 span.om-icon-button {
     position: relative;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
     display: inline-block;
     height: 20px;
     background: url("/images/om_button_bg.png") repeat-x bottom transparent;

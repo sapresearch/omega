@@ -1,1 +1,37 @@
-as
+<% require_javascript 'omega_threads' %>
+<% require_stylesheet 'omega_threads' %>
+<h1 class="page-content corners-top">
+  Threads
+</h1>
+
+<div class="page-content corners-bottom">
+    <ul id="threads-list">
+    <% @posts.each do |p| %>
+        <li id="post-<%= p.id %>" class="list-item relative">
+
+          <h2>
+           <%=  p.title%>
+
+          </h2>
+          <div class="post-details">
+             <%= p.author.username %> replied at : <%= p.created_at.strftime("%b %d %Y, %H:%M") %>
+          </div>
+<div>
+  <%= p.body %>
+</div>
+
+        </li>
+    <% end %>
+  </ul>
+<p>
+<%= om_button(:icon=>'mail') do %>
+          <%= link_to 'Reply', new_group_thread_post_path(@group), :remote => true%>
+        <% end %>
+  </p>
+</div>
+
+
+<% content_for :sidebar do %>
+    <%= render :partial => "groups/sidebar_group" %>
+    <%#= render :partial => "sidebar_groups_threads" %>
+<% end %>
