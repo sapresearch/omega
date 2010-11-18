@@ -77,7 +77,6 @@ class Contacts::ImportsController < Omega::Controller
               params[:discard_column].each do |k1,v1|
                 if k1.eql?(k)
                   row.delete_at(v1.to_i)
-
                 end
               end
             end
