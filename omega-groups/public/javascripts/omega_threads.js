@@ -5,9 +5,6 @@ $(function(){
                                                          },
                                                          function(){
                                                              $(this).siblings('div.thred-preview').hide();
-                                                         $(this).next('.thred-preview').show();
-                                                         },
-                                                         function(){
-                                                             $(this).next('.thred-preview').hide();
+
                                                          })
 });
