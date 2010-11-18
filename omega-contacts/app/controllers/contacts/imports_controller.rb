@@ -21,7 +21,7 @@ class Contacts::ImportsController < Omega::Controller
         render "contacts/imports/step_1"
         session[:current_page] = nil
         session[:rows] = nil
-        session[:old_rows] = nil
+        session[:rows_old] = nil
       when '2'
         render "contacts/imports/step_2"
         session[:current_page] = "upload"
@@ -66,29 +66,17 @@ class Contacts::ImportsController < Omega::Controller
 
     if params[:update]
 
-      logger.debug("Mapping: #{params[:mapping]}")
+          params[:mapping].each do |k,v|
 
-      @rows.each do |row|
-
-        params[:mapping].each do |k,v|
-
-            if v.eql?("1")
-
-              params[:discard_column].each do |k1,v1|
-                if k1.eql?(k)
-                  row.delete_at(v1.to_i)
-
-                end
-              end
-            end
-
-        end
-      end
+               if v["discard"] == "1"
+                 @rows.each do |row|
+                   row.delete_at(v["column"].to_i)
+                 end
+               end
+           end
 
       session[:column] = params[:column]
       session[:rows] = @rows
-
-      $rows_old = @rows[0]
 
       redirect_to csv_import_wizard_contact_imports_url(:step => 3)
 
@@ -96,6 +84,8 @@ class Contacts::ImportsController < Omega::Controller
     end
 
     if params[:next]
+
+      session[:rows_old] = @rows[0]
 
       @rows[0].each do |column|
 
@@ -137,8 +127,8 @@ class Contacts::ImportsController < Omega::Controller
       @rows.each do |row|
 
         @contact = Contact.new
-        @contact.addresses.build
         @contact.phone_numbers.build
+        @contact.addresses.build
 
         session[:column].each do |k,v|
 

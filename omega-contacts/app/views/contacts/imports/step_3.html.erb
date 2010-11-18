@@ -45,16 +45,14 @@
 
                                    <% @flag = false %>
 
-
-
                                <%end%>
 
                             <%end%>
 
 
-                           <%= check_box 'mapping[][discard]', c, {:checked => @flag} %>
+                           <%= check_box "mapping[#{c}]", 'discard', {:checked => @flag} %>
 
-                           <%= hidden_field 'mapping[][column]', c, :value => @rows[0].index(c)%>
+                           <%= hidden_field_tag "mapping[#{c}][column]", @rows[0].index(c)%>
 
 
                          </td>
