@@ -1,11 +1,12 @@
 <%= form_for @thread, :remote => true do |f| %>
+ <%= errors_for_form @thread %>
    <p>
     <%= f.label :title %>
     <%= f.text_field :title %>
 </p>
     <%= f.fields_for :posts do |p| %>
         <p>
-    <%= p.label :content %>
+    <%= p.label :body %>
     <%= p.text_area :body %>
         </p>
 

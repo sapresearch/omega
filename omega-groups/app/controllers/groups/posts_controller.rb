@@ -1,10 +1,14 @@
 class Groups::PostsController < Omega::Controller
   respond_to :html, :xml, :json, :js
 
+  breadcrumb 'Groups' => :groups
+
   before_filter :get_group
   before_filter :get_thread
   before_filter :get_posts, :only => [:index]
   before_filter :get_post,  :only => [:show, :edit, :update, :destroy]
+
+
 
   def index
     @posts = Group::Post.scoped
@@ -45,10 +49,13 @@ class Groups::PostsController < Omega::Controller
   private
     def get_group
       @group = Group.find(params[:group_id])
+      breadcrumb @group.name => group_path(@group)
+      breadcrumb 'Threads' => group_threads_path(@group)
     end
 
     def get_thread
       @thread = @group.threads.find(params[:thread_id])
+      breadcrumb @thread.title => group_thread_posts_path(@group, @thread).truncate(50)
     end
 
     def get_posts
