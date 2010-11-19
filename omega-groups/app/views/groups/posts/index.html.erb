@@ -14,7 +14,7 @@
 
           </h2>
           <div class="post-details">
-             <%= p.author.username %> replied at : <%= p.created_at.strftime("%b %d %Y, %H:%M") %>
+           <span class="cf3a72">  <%= p.author.username %> </span>  <%= p.created_at.strftime("%b %d %Y, %H:%M") %>
           </div>
 <div>
   <%= p.body %>
@@ -32,6 +32,6 @@
 
 
 <% content_for :sidebar do %>
-    <%= render :partial => "groups/sidebar_group" %>
+    <%#= render :partial => "groups/sidebar_group" %>
     <%#= render :partial => "sidebar_groups_threads" %>
 <% end %>

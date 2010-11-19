@@ -52,7 +52,7 @@ class Groups::PostsController < Omega::Controller
 
     def get_thread
       @thread = @group.threads.find(params[:thread_id])
-      breadcrumb @thread.title => group_thread_posts_path(@group, @thread).truncate(50)
+      breadcrumb @thread.title.truncate(40)  => group_thread_posts_path(@group, @thread).truncate(50)
     end
 
     def get_posts

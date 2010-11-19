@@ -1,5 +1,7 @@
 class Groups::UploadsController < Omega::Controller
   respond_to :html, :xml, :json, :js
+  
+  breadcrumb 'Groups' => :groups
 
   before_filter :get_group
   before_filter :get_uploads, :only => [:index]
@@ -32,8 +34,6 @@ class Groups::UploadsController < Omega::Controller
         end
       end
 
-      logger.debug "\n\n@uploads = #{@uploads}"
-
       respond_with(@uploads)
     else
       @upload = GroupUpload.create(params[:upload]) do |upload|
@@ -56,7 +56,10 @@ class Groups::UploadsController < Omega::Controller
 
   private
     def get_group
+
       @group = Group.find(params[:group_id])
+      breadcrumb @group.name => group_path(@group)
+       breadcrumb 'Uploads' => group_uploads_path(@group)
     end
 
     def get_uploads
