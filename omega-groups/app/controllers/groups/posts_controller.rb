@@ -8,10 +8,7 @@ class Groups::PostsController < Omega::Controller
   before_filter :get_posts, :only => [:index]
   before_filter :get_post,  :only => [:show, :edit, :update, :destroy]
 
-
-
   def index
-    @posts = Group::Post.scoped
     respond_with(@posts)
   end
 
@@ -31,7 +28,7 @@ class Groups::PostsController < Omega::Controller
   def create
     @post = Group::Post.create(params[:post]) do |post|
       post.author = current_user
-      post.thread = Group.find(params[:group_id]).threads.find(params[:thread_id])
+      post.thread = @thread
     end
     respond_with(@post)
   end
