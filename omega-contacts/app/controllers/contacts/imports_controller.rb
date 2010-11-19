@@ -13,15 +13,17 @@ class Contacts::ImportsController < Omega::Controller
      @contact_fields = get_omega_contact_fields
      @mapping = get_mapping_hash
 
-     @rows = session[:rows]
+     unless session[:rows_id].nil?
+       @rows = Contact::DataImport.find(session[:rows_id]).rows
+
+     end
 
      case params[:step]
 
       when '1'
         render "contacts/imports/step_1"
         session[:current_page] = nil
-        session[:rows] = nil
-        session[:old_rows] = nil
+        session[:rows_id] = nil
       when '2'
         render "contacts/imports/step_2"
         session[:current_page] = "upload"
@@ -29,8 +31,13 @@ class Contacts::ImportsController < Omega::Controller
         render "contacts/imports/step_3"
         session[:current_page] = "mapping"
       when '4'
-        render "contacts/imports/step_4"
         session[:current_page] = "import"
+
+        @old_rows = Contact::DataImport.find(session[:rows_id]).rows
+        @rows = Contact::DataImport.find(session[:rows_id]).new_rows
+
+        render "contacts/imports/step_4"
+         
      end
 
 
@@ -62,32 +69,24 @@ class Contacts::ImportsController < Omega::Controller
 
   def update_csv
 
-    @rows = session[:rows]
+    @rows = Contact::DataImport.find(session[:rows_id]).rows
 
     if params[:update]
 
-      logger.debug("Mapping: #{params[:mapping]}")
+          params[:mapping].each do |k,v|
 
-      @rows.each do |row|
-
-        params[:mapping].each do |k,v|
-
-            if v.eql?("1")
-
-              params[:discard_column].each do |k1,v1|
-                if k1.eql?(k)
-                  row.delete_at(v1.to_i)
-                end
-              end
-            end
-
-        end
-      end
+               if v["discard"] == "1"
+                 @rows.each do |row|
+                   row.delete_at(v["column"].to_i)
+                 end
+               end
+           end
 
       session[:column] = params[:column]
-      session[:rows] = @rows
 
-      $rows_old = @rows[0]
+      @csv_rows = Contact::DataImport.find(session[:rows_id])
+      @csv_rows.update_attributes(:rows => @rows)
+
 
       redirect_to csv_import_wizard_contact_imports_url(:step => 3)
 
@@ -95,6 +94,8 @@ class Contacts::ImportsController < Omega::Controller
     end
 
     if params[:next]
+
+      @rows = Contact::DataImport.find(session[:rows_id]).rows
 
       @rows[0].each do |column|
 
@@ -111,7 +112,8 @@ class Contacts::ImportsController < Omega::Controller
       end
       end
 
-      session[:rows] = @rows
+      @csv_rows = Contact::DataImport.find(session[:rows_id])
+      @csv_rows.update_attributes(:new_rows => @rows)
 
       case session[:current_page]
 
@@ -128,7 +130,11 @@ class Contacts::ImportsController < Omega::Controller
 
     if params[:import]
 
+
+      @rows = Contact::DataImport.find(session[:rows_id]).new_rows
+
       logger.debug("Rows: #{@rows}")
+      
       @rows.shift
 
       @rows.compact!
@@ -136,8 +142,8 @@ class Contacts::ImportsController < Omega::Controller
       @rows.each do |row|
 
         @contact = Contact.new
-        @contact.addresses.build
         @contact.phone_numbers.build
+        @contact.addresses.build
 
         session[:column].each do |k,v|
 
@@ -181,14 +187,18 @@ class Contacts::ImportsController < Omega::Controller
 
       if rows.size > 0
         import.update_attributes(:processed => rows.size)
-        @rows = []
+        @csv_rows = []
 
         rows.each do |r|
-          @rows << r
+          @csv_rows << r
         end
       end
 
-    session[:rows] = @rows
+      @rows = Contact::DataImport.create(:rows => @csv_rows)
+
+      session[:rows_id] = @rows.id
+
+      logger.debug("Rows:#{@rows.rows}")
   end
 
   def parse_csv(csv)
