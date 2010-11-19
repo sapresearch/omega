@@ -5,6 +5,8 @@
 </h1>
 
 <div class="page-content corners-bottom">
+
+  
   <table id="threads-list" class="width-100">
     <thead>
     
@@ -36,7 +38,8 @@
             </td>
             <td>
 
-             by <%= t.author.username %><br>
+            <span class="cf3a72"> <%= t.author.username %></span>
+              <br>
               <span class="date">
               <%= t.created_at.strftime("%b %d %Y, %H:%M") %>
 </span>
@@ -47,7 +50,8 @@
 
             </td>
           <td>
-             by <%= last_thread(t).author.username %><br>
+             <span class="cf3a72"> <%= last_thread(t).author.username %></span>
+               <br>
               <span class="date">
               <%= last_thread(t).created_at.strftime("%b %d %Y, %H:%M") %>
                   </span>
@@ -57,7 +61,9 @@
         </tr>
     <% end %>
   </table>
-
+   <%= om_button(:icon=>'clipboard-plus') do %>
+            <%= link_to 'Post a new topic', new_group_thread_path(@thread) , :remote=> true%>
+        <% end %>
   <%= will_paginate @threads %>
 </div>
 
