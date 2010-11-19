@@ -2,4 +2,49 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  calendar:
+    recurrence:
+      daily: Daily
+      weekly: Weekly
+      monthly: Monthly
+      yearly: Yearly
+
+      day: Day
+      ordinal: Ordinal
+
+      ordinals:
+        first: First
+        second: Second
+        third: Third
+        fourth: Fourth
+        last: Last
+
+      days_of_the_week: &days_of_the_week
+        sunday: Sunday
+        monday: Monday
+        tuesday: Tuesday
+        wednesday: Wednesday
+        thursday: Thursday
+        friday: Friday
+        saturday: Saturday
+
+      days:
+        day: Day
+        weekday: Weekday
+        weekend_day: Weekend day
+        <<: *days_of_the_week
+
+      months:
+        january: January
+        february: February
+        march: March
+        april: April
+        may: May
+        june: June
+        july: July
+        august: August
+        september: September
+        october: October
+        november: November
+        december: December
+      

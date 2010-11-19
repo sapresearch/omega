@@ -199,6 +199,8 @@ class Volunteering::PositionsController < Omega::Controller
   end
 
   def fix_model_to_view
+    @position.build_event_source unless @position.event_source
+
     @position.contacts.build do |c|
       c.phone_numbers.build
     end if @position.contacts.empty?

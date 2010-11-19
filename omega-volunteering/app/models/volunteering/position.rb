@@ -8,6 +8,9 @@ class Volunteering::Position < Omega::Model
 #  belongs_to :contact
   has_many :records, :dependent => :destroy, :inverse_of => :position
   has_one :schedule
+
+  has_one :event_source, :as => :source
+  accepts_nested_attributes_for :event_source
   
   has_and_belongs_to_many :skills,    :class_name => '::Contact::Skill',
                                       :join_table => 'contact_skills_volunteering_positions'

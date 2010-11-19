@@ -16,18 +16,14 @@ class EventsController < Omega::Controller
   end
 
   def new
-    @event = Event.new do |e|
+    @event = Calendar::Event.new do |e|
       e.calendar = @calendar
     end
     respond_with(@event)
   end
 
   def create
-    event = params[:event]
-    event[:start] = "#{event.delete(:start_date)} #{event.delete(:start_time)}"
-    event[:end]   = "#{event.delete(:end_date)} #{event.delete(:end_time)}"
-
-    @event = Event.create(event)
+    @event = Calendar::Event.create(params[:calendar_event])
     respond_with(@event)
   end
 
@@ -38,7 +34,7 @@ class EventsController < Omega::Controller
 
   def update
     @event = @calendar.events.find(params[:id])
-    @event.update_attributes(params[:event])
+    @event.update_attributes(params[:calendar_event])
     respond_with(@event)
   end
 

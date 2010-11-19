@@ -1,4 +1,4 @@
-$('#edit_event_<%= @event.id %>').parents('.ui-dialog').andSelf().remove();
+$('#edit_calendar_event_<%= @event.id %>').parents('.ui-dialog').andSelf().remove();
 
         var cal = $('#cal').data('fullCalendar')
         cal.removeEvents(<%= @event.id %>)

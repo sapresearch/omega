@@ -1,8 +1,8 @@
 $('body').append('<%= escape_javascript(render 'form.html', :event => @event, :calendar => @calendar) %>');
-        $('form.edit_event').dialog({
+        $('form.edit_calendar_event').dialog({
             autoOpen    : true,
             width       : 600,
-            title       : '<%= @event.title %>',
+            title       : '<%= @event.name %>',
             close : function(e, ui) {
 
                 $(this).dialog("destroy").remove();
@@ -10,12 +10,12 @@ $('body').append('<%= escape_javascript(render 'form.html', :event => @event, :c
             }
 
         });
-        if ($('#event_allday').is(':checked')) {
+        if ($('#event_all_day').is(':checked')) {
             $('.tpickr').hide();
         } else {
             $('.tpickr').show();
         }
-        $('#event_allday').change(function() {
+        $('#event_all_day').change(function() {
             if ($(this).is(':checked')) {
                 $('.tpickr').hide()
             } else {
