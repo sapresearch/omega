@@ -1,17 +1,24 @@
+<div id="post-form">
 <%= form_for @post, :url => group_thread_posts_path(@group, @thread), :remote => true do |f| %>
     <p>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
+      <%= f.label :title,  %>
+      <%= f.text_field :title, :class => 'broad-text' %>
     </p>
     <p>
       <%= f.label :text %>
-      <%= f.text_area :body %>
+      <%= f.text_area :body, :class => 'broad-text' %>
     </p>
     <p>
       <%= om_button(:icon=>'save') do %>
           <%= f.submit 'Save' %>
       <% end %>
+
+       <%= om_button(:icon=>'delete') do %>
+          <%= link_to 'Cancel' , 'javascript:void(0)', :id => 'cancel-post'%>
+      <% end %>
+
     </p>
 
 
 <% end %>
+</div>

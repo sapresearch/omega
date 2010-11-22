@@ -5,7 +5,7 @@ class Calendar
     def after_save(model)
       case model
         when Volunteering::Position
-          after_save_volunteering_position(model)
+#          after_save_volunteering_position(model)
       end
     end
     

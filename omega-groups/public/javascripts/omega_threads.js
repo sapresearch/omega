@@ -1,12 +1,10 @@
 $(function(){
 
-    $('#threads-list').dataTable({ "bJQueryUI": true}).find('span.ui-icon-search ').hover(
+    $('#posts-list').dataTable({ "bJQueryUI": true}).find('span.ui-icon-search ').hover(
                                                          function(){
-
-                                                         $(this).siblings('div.thred-preview').show();
+                                                         $(this).siblings('div.post-preview').show();
                                                          },
                                                          function(){
-                                                             $(this).siblings('div.thred-preview').hide();
-
+                                                             $(this).siblings('div.post-preview').hide();
                                                          })
 });

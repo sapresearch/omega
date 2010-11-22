@@ -9,6 +9,7 @@ class Groups::PostsController < Omega::Controller
   before_filter :get_post,  :only => [:show, :edit, :update, :destroy]
 
   def index
+    @posts = @posts.paginate(:page => params[:page], :per_page => Post::MAX_POSTS_PER_PAGE)
     respond_with(@posts)
   end
 

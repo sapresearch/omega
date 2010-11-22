@@ -68,6 +68,7 @@ class Volunteering::PositionsController < Omega::Controller
 
   def skills
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
+      breadcrumb 'Skills' => 'skills'
     render :index
   end
 
@@ -199,8 +200,6 @@ class Volunteering::PositionsController < Omega::Controller
   end
 
   def fix_model_to_view
-    @position.build_event_source unless @position.event_source
-
     @position.contacts.build do |c|
       c.phone_numbers.build
     end if @position.contacts.empty?

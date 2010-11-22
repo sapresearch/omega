@@ -139,38 +139,6 @@
         <%= f.text_field :interests_values %>
       </p>
     </fieldset>
-
-    <%= f.fields_for :event_source do |e| %>
-    <fieldset>
-      <legend>Calendar</legend>
-      <%= e.hidden_field :id %>
-      <p>
-        <%= e.label :synchronize %>
-        <%= e.check_box :synchronize %>
-      </p>
-      <p>
-        <%= e.label :calendar %>
-        <%= e.text_field :calendar_id %>
-      </p>
-      <p>
-        <%= e.label :event %>
-        <%= e.text_field :event_id %>
-      </p>
-      <%= e.fields_for :mapping do |m| %>
-          <p>
-            <%= m.label :mapping %>
-          </p>
-      <% mapping = @position.event_source.mapping %>
-      <% sources = @position.attributes.map { |name, _| [name.humanize, name] } %>
-        <% (Event.columns.map(&:name) & ['title', 'start', 'end', 'allday', 'url', 'event_description']).each do |attribute| %>
-          <p>
-            <%= m.label attribute %>
-            <%= m.select attribute, options_for_select(sources), :include_blank => true %>
-          </p>
-        <% end %>
-      <% end %>
-    </fieldset>
-    <% end %>
     <p>
       <%= om_button(:icon=>'save') do %>
           <%= f.submit %>

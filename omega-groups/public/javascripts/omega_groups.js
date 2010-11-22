@@ -61,6 +61,13 @@ $(function() {
                                            }).mouseleave(function() {
         $(this).find('div.item-list-actions-wrapper').fadeOut('fast')
     });
+        $('#posts-list').find('span.ui-icon-search ').hover(
+                                                         function(){
+                                                         $(this).siblings('div.post-preview').show();
+                                                         },
+                                                         function(){
+                                                             $(this).siblings('div.post-preview').hide();
+                                                         })
 
 
 
