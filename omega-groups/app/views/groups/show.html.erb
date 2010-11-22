@@ -3,13 +3,16 @@
 <h1 class="page-content corners-top">
   <%= @group.name %>
 </h1>
-
 <div class="page-content corners-bottom">
   <h2>Description</h2>
-
   <p>
     <%= @group.description %>
   </p>
+</div>
+<h1 class="page-content corners-top">
+  Latest posts
+</h1>
+<div class="page-content corners-bottom">
   <table id="posts-list" class="width-100">
     <thead>
     <tr>
@@ -17,41 +20,44 @@
         Latest Post
       </th>
       <th>Author</th>
-
-
     </tr>
     </thead>
     <% @posts.each do |t| %>
-        <tr id="thread-<%= t.id %>" class="list-item relative clear <%= cycle('even', 'odd') %>">
-
+        <tr id="thread-<%= t.id %>" class="list-item relative clear <%= cycle('odd', 'even') %>">
           <td>
             <%= link_to t.title, group_thread_posts_path(@group, t) %>
-
             <span class="om-icon-only om-blue-icon ui-icon-search relative right"></span>
-
-
             <div class="post-preview">
-
               <%= t.body %>
             </div>
-
-
           </td>
           <td width="100">
-
             <span class="cf3a72"> <%= t.author.username %></span>
             <br>
-              <span class="date">
-              <%= t.created_at.strftime("%b %d %Y, %H:%M") %>
-</span>
-
+              <span class="date"><%= t.created_at.strftime("%b %d %Y, %H:%M") %></span>
           </td>
 
 
         </tr>
     <% end %>
   </table>
+</div>
+<h1 class="page-content corners-top">
+  Most recent uploads
+</h1>
+<div class="page-content corners-bottom">
+  <table id="uploads-list" class="width-100">
+    <thead>
+    <tr>
+    <th>FileName</th>
+    <th>From</th>
+    <th>Date</th>
+    </tr>
+    </thead>
+<%= render :partial => "groups/uploads/upload_records" %>
 
+
+  </table>
 </div>
 <% content_for :sidebar do %>
     <%= render :partial => "groups/sidebar_group" %>

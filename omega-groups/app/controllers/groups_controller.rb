@@ -23,6 +23,7 @@ class GroupsController < Omega::Controller
 
     @group = Group.find(params[:id])
     @posts = @group.posts.limit(5)
+    @uploads = @group.group_uploads
     @users = @group.users
     breadcrumb @group.name => group_path(@group)
     respond_with(@group)

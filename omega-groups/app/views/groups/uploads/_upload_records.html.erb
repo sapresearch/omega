@@ -19,14 +19,17 @@
                 end
       %>
 
-      <tr>
+      <tr class="<%= cycle('odd', 'even') %>">
         <td>
           <%= om_button(:plain => true, :icon => "doc-#{icon}") do %>
               <span><%= file.upload.upload_file_name %></span>
           <% end %>
         </td>
         <td><%= file.upload.uploader.username %></td>
-        <td><%= file.upload.upload_updated_at.strftime("%m/%d/%Y at %I:%M%p")  %></td>
+        <td><span class="date">
+          <%= file.upload.upload_updated_at.strftime("%m/%d/%Y at %I:%M%p")  %></td>          
+        </span>
+
       </tr>
 
   <% end %>

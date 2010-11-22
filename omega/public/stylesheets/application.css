@@ -236,7 +236,7 @@ table.om-table th {
 }
 
 tr.even {
-    background: #EAEBFF;
+    background: #EAEBFF !important;;
 }
 
 tr.even a, tr.odd a {
@@ -244,7 +244,7 @@ tr.even a, tr.odd a {
 }
 
 tr.odd {
-    background: #D3D6FF;
+    background: #D3D6FF !important;;
 }
 
 #notification-flash-wrapper {
@@ -351,7 +351,6 @@ div.page-content {
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
-
     padding: 15px;
 }
 
@@ -1153,25 +1152,9 @@ form span.error {
     color: #C7CCCD;
 }
 
-/* CLEAR FIX*/
-.clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
 
-/* Hides from IE-mac \*/
-* html .clearfix {
-    height: 1%;
-}
 
-.clearfix {
-    display: block;
-}
 
-/* End hide from IE-mac */
 
 #events {
     height: 175px;
@@ -1555,4 +1538,10 @@ form span.error {
 /* Yuk! CSS Hack for IE6 3 pixel bug :( */
 * html .jspCorner {
     margin: 0 -3px 0 0;
+}
+
+
+.date {
+    font-size: 11px;
+    color: #333;
 }
