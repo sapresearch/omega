@@ -1,5 +1,5 @@
 class Group::Thread < Omega::Model
-  MAX_THREADS_PER_PAGE = 20
+  MAX_THREADS_PER_PAGE = 10
   belongs_to :group
   belongs_to :author, :class_name => '::User'
 

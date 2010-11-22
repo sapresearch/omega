@@ -144,6 +144,10 @@ input[type="button"]::-moz-focus-inner {
     padding: 0;
 }
 
+.broad-text{
+    width:500px;
+}
+
 form table input {
     height: 22px;
     padding: 0 !important;
@@ -232,7 +236,7 @@ table.om-table th {
 }
 
 tr.even {
-    background: #f2f2f2;
+    background: #EAEBFF;
 }
 
 tr.even a, tr.odd a {
@@ -240,7 +244,7 @@ tr.even a, tr.odd a {
 }
 
 tr.odd {
-    background: #e3e3e3;
+    background: #D3D6FF;
 }
 
 #notification-flash-wrapper {
@@ -1037,9 +1041,10 @@ span.om-icon-back {
 
 /*Pagination */
 div.pagination {
+    margin: 20px 0 0; 
     color: #000000;
     display: block;
-    float: left;
+    border-top: 1px solid #ddd;
     font-size: 12px;
     line-height: 18px;
     padding: 30px;
