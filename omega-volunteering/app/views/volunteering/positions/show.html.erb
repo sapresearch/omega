@@ -51,18 +51,18 @@
 
 
     <% end %>
-    <div class="position-tags">
-      <% @position.skills.each do |skill| %>
-          <span class="skill-tag"><a href=""><%= skill.name %></a> </span>
-      <% end %>
-    </div>
+
 
     <% if @position.contacts.any? %>
         <p>
           <span class="fieldDescribtion"> Contact:</span>
+          <ul>
+
+
           <% @position.contacts.each do |contact| %>
-              <%= contact.first_name %>
+            <li>  <%= contact.first_name %> <%= contact.last_name %></li>
           <% end %>
+               </ul>
         </p>
     <% end %>
 
@@ -73,4 +73,5 @@
 
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_position_show_menu" %>
+    <%= render :partial => "layouts/sidebar_position_show_skills" %>
 <% end %>

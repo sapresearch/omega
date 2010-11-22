@@ -19,10 +19,10 @@
 
   <div class="clear"></div>
 
-  <% if @skills_tags %>
+  <% if tags = @skills_tags or tags = @interests_tags %>
       <p>
-        <% @skills_tags.each do |skill| %>
-            <span class="skill_tag skill_tag_active"><a href=""><%= skill %></a> </span>
+        <% tags.each do |tag| %>
+             <span class="skill-tag-active"> <%= tag %> </span>
         <% end %>
       </p>
   <% end %>

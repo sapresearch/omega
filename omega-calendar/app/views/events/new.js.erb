@@ -12,13 +12,13 @@ if($('#event_allday').is(':checked')){
 });
 
 
-        $('#new_event').dialog({
+        $('#new_calendar_event').dialog({
             autoOpen    : true,
             width       : 600,
             title       : 'Create a new event',
             close       :function(e,ui){
                 $(this).dialog('destroy');
-                $('#new_event').remove();
+                $('#new_calendar_event').remove();
             }
         });
 

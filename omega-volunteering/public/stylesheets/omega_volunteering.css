@@ -100,9 +100,16 @@ span.skill-tag {
     background: url("/images/om_button_bg.png") repeat-x bottom;
 }
 
-span.skill-tag_active {
-    background-color: #A82F5D;
-    border: none;
+span.skill-tag-active {
+        color:#fff;
+    margin: 2px 4px;
+    padding: 2px 8px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    display: inline-block;
+    background-color: #CF3A72;
+
+    border: 1px solid #A82F5D;
 }
 
 .skill_tag-active a {
