@@ -15,12 +15,9 @@ class Contacts::ImportsController < Omega::Controller
 
      unless session[:rows_id].nil?
        @rows = Contact::DataImport.find(session[:rows_id]).rows
-
-       logger.debug("Rows:#{@rows[0]}")
      end
 
      case params[:step]
-
 
        when '1'
 
@@ -79,11 +76,6 @@ class Contacts::ImportsController < Omega::Controller
     @discard_columns = Array.new
 
         params[:mapping].each do |k,v|
-
-            logger.debug("Mapping Key: #{k} ")
-            logger.debug("Mapping Value: #{v} ")
-            logger.debug("Mapping Discard: #{v["discard"]} ")
-            logger.debug("Mapping Column: #{v["column"]} ")
 
             if v["discard"] == "1"
                @discard_columns << v["column"].to_i
