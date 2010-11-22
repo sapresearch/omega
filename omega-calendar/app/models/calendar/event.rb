@@ -218,8 +218,7 @@ class Calendar
               yield friday    if recurrence_days[Recurrence::FRIDAY] == '1'    && friday    >= recurrence_start
               yield saturday  if recurrence_days[Recurrence::SATURDAY] == '1'  && saturday  >= recurrence_start
 
-              recurrence_weeks.times { date = week.next_week }
-              puts ""
+              recurrence_weeks.times { date = date.next_week }
             when Recurrence::MONTHLY
             when Recurrence::YEARLY
   
