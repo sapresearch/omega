@@ -24,7 +24,6 @@
 
                <th class="csv-table">CSV Field</th> <th class="csv-table">Discard</th> <th class="omega-table">Omega Field</th>
 
-              
                   <% @rows[0].each do |c|%>
 
                     <% unless c.nil? %>
@@ -92,7 +91,6 @@
 
                       <% @rows[1].each do |d| %>
 
-                      <% unless d.nil? %>
                                  <tr class="csv-table">
 
                                      <td class="csv-table">
@@ -101,7 +99,6 @@
                                    
                                  </tr>
 
-                      <%end%>
                       <%end%>
             </table>
 

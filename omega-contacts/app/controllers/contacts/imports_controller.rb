@@ -16,21 +16,30 @@ class Contacts::ImportsController < Omega::Controller
      unless session[:rows_id].nil?
        @rows = Contact::DataImport.find(session[:rows_id]).rows
 
+       logger.debug("Rows:#{@rows[0]}")
      end
 
      case params[:step]
 
-      when '1'
+
+       when '1'
+
         render "contacts/imports/step_1"
         session[:current_page] = nil
         session[:rows_id] = nil
-      when '2'
+
+       when '2'
+
         render "contacts/imports/step_2"
         session[:current_page] = "upload"
-      when '3'
+        session[:rows_id] = nil
+         
+       when '3'
         render "contacts/imports/step_3"
         session[:current_page] = "mapping"
-      when '4'
+
+       when '4'
+
         session[:current_page] = "import"
 
         @old_rows = Contact::DataImport.find(session[:rows_id]).rows
@@ -39,12 +48,9 @@ class Contacts::ImportsController < Omega::Controller
         render "contacts/imports/step_4"
          
      end
-
-
   end
 
   def show
-
   end
 
   def new
@@ -133,8 +139,6 @@ class Contacts::ImportsController < Omega::Controller
 
       @rows = Contact::DataImport.find(session[:rows_id]).new_rows
 
-      logger.debug("Rows: #{@rows}")
-      
       @rows.shift
 
       @rows.compact!
