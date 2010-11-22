@@ -72,9 +72,9 @@
     <%= with_permission(User::PERM_VIEW) do %>
         <li> <%= link_to "Users", users_url %></li>
     <% end %>
-    <%#= with_permission(Group::PERM_VIEW) do %>
-        <li> <%#= link_to "Groups", groups_url %></li>
-    <%# end %>
+    <%= with_permission(Group::PERM_VIEW) do %>
+        <li> <%= link_to "Groups", groups_url %></li>
+    <% end %>
   </ul>
 
   <div class="clear"></div>

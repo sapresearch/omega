@@ -1,11 +1,12 @@
-<%= form_for([calendar, event], :remote => true) do |f| %>
+<%= form_for(event, :remote => true) do |f| %>
+    <%= f.hidden_field(:calendar_id) %>
     <p>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
     </p>
     <p>
-      <%= f.label :allday %>
-      <%= f.check_box :allday, :checked => true %>
+      <%= f.label :all_day %>
+      <%= f.check_box :all_day, :checked => true %>
     </p>
 
 
@@ -25,10 +26,11 @@
 
 
     <p>
-      <%= f.label :event_description %>
-      <%= f.text_area :event_description %>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
     </p>
-    <%= f.hidden_field(:calendar_id) %>
+
+    <%= recurrence(f) %>
 
 
     <%= om_button(:icon => 'Update') do %>

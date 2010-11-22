@@ -1,5 +1,5 @@
 class Calendar
-  class ModelObserver < ActiveRecord::Observer#Omega::Observer
+  class ModelObserver < ActiveRecord::Observer
     observe Omega::Model
     
     def after_save(model)
@@ -11,17 +11,19 @@ class Calendar
     
     private
       def after_save_volunteering_position(position)
-puts "after_save_volunteering_position(#{position})"
-        event_source = EventSource.for(position) || EventSource.create!(:source => position)
-        event = event_source.event || Event.new(:event_source => event_source)
-        
-        event.calendar_id       = 1
-        event.title             = position.name
-        event.event_description = position.description
-        event.start             = position.start
-        event.end               = position.end
-        
-        event.save!
+        if event_source = EventSource.for(position) and event_source.synchronize?
+          event = event_source.event || Event.new(:event_source => event_source)
+
+          event.calendar_id = event_source.calendar_id
+
+          event_source.mapping.each do |attribute, source|
+            next unless source.present?
+
+            event[attribute] = position[source]
+          end
+
+          event.save!
+        end
       end
   end
 end

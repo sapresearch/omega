@@ -1,36 +1,69 @@
-<% require_javascript 'omega_threads' %>
-<% require_stylesheet 'omega_threads' %>
+<% require_javascript 'thirdParty/jquery.dataTables.min.js', 'omega_threads' %>
+<% require_stylesheet 'omega_threads', 'thirdParty/jquery.dataTables.jui.css' %>
 <h1 class="page-content corners-top">
   Threads
 </h1>
 
 <div class="page-content corners-bottom">
-    <ul id="threads-list">
-    <% @threads.each do |t| %>
-        <li id="thread-<%= t.id %>" class="list-item relative">
 
-          <h3>
-           <%= link_to t.title, group_thread_posts_path(@group,t) %>
-           
-            <span class="om-icon-only om-blue-icon ui-icon-search relative"></span>
-            <div class="post-details">
-              <%= t.created_at.strftime("%b %d %Y, %H:%M") %>
-            </div>
+  
+  <table id="threads-list" class="width-100">
+    <thead>
+    
+    
+    <tr>
+      <th>
+        Topic
+      </th>
+      <th>Author</th>
+      <th>Replies</th>
+      <th>Last Post</th>
+      </tr>
+    </thead>
+    <% @threads.each do |t| %>
+        <tr id="thread-<%= t.id %>" class="list-item relative clear">
+
+<td width="540">
+              <%= link_to t.title, group_thread_posts_path(@group, t) %>
+
+              <span class="om-icon-only om-blue-icon ui-icon-search relative right"></span>
+
+
             <div class="thred-preview">
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-          </div>
-          </h3>
+              <%= t.caption %>
+            </div>
 
 
-        </li>
+            </td>
+            <td>
+
+            <span class="cf3a72"> <%= t.author.username %></span>
+              <br>
+              <span class="date">
+              <%= t.created_at.strftime("%b %d %Y, %H:%M") %>
+</span>
+
+            </td>
+            <td width="70">
+              <%= get_replies(t) %>
+
+            </td>
+          <td>
+             <span class="cf3a72"> <%= last_thread(t).author.username %></span>
+               <br>
+              <span class="date">
+              <%= last_thread(t).created_at.strftime("%b %d %Y, %H:%M") %>
+                  </span>
+          </td>
+          
+
+        </tr>
     <% end %>
-  </ul>
-
-
+  </table>
+   <%= om_button(:icon=>'clipboard-plus') do %>
+            <%= link_to 'Post a new topic', new_group_thread_path(@thread) , :remote=> true%>
+        <% end %>
+  <%= will_paginate @threads %>
 </div>
 
-<% content_for :sidebar do %>
-    <%= render :partial => "groups/sidebar_group" %>
-    <%= render :partial => "sidebar_groups_threads" %>
-<% end %>

@@ -1,10 +1,17 @@
-class EventSource < Omega::Model
+class Calendar::EventSource < Omega::Model
   class << self
     def for(source)
       EventSource.where(:source_id => source).where(:source_type => source.class).first
     end
   end
 
+  belongs_to :calendar
   belongs_to :event
   belongs_to :source, :polymorphic => true
+
+  serialize :mapping, Hash
+
+  def mapping
+    super || Hash.new
+  end
 end

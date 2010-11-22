@@ -15,7 +15,7 @@ class CalendarsController < Omega::Controller
   end
 
   def show
-    @events = Event.all
+    @events = Calendar::Event.all
     @calendar = Calendar.find(params[:id])
     respond_with(@calendars)
   end

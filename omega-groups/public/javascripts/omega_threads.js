@@ -1,6 +1,8 @@
 $(function(){
-    $('#threads-list').find('span.ui-icon-search ').hover(
+
+    $('#threads-list').dataTable({ "bJQueryUI": true}).find('span.ui-icon-search ').hover(
                                                          function(){
+
                                                          $(this).siblings('div.thred-preview').show();
                                                          },
                                                          function(){

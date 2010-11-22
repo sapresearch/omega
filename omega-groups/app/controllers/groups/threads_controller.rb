@@ -1,11 +1,18 @@
 class Groups::ThreadsController < Omega::Controller
   respond_to :html, :xml, :json, :js
 
+  breadcrumb 'Groups' => :groups
+
   before_filter :get_group
   before_filter :get_threads, :only => [:index]
   before_filter :get_thread, :only => [:show, :edit, :update, :destroy]
 
+  
+
+
   def index
+    @threads = @threads.paginate(:page => params[:page], :per_page => Group::Thread::MAX_THREADS_PER_PAGE)
+
     respond_with(@threads)
   end
 
@@ -25,8 +32,12 @@ class Groups::ThreadsController < Omega::Controller
 
   def create
     @thread = Group::Thread.create(params[:group_thread]) do |thread|
-      thread.group     = @group
-      thread.author_id = current_user.id
+      thread.group  = @group
+      thread.author = current_user
+
+      post = thread.posts.first
+      post.author = current_user
+      thread.caption = post.body.truncate(100)
     end
 
     respond_with(@thread)
@@ -42,9 +53,13 @@ class Groups::ThreadsController < Omega::Controller
     respond_with(@thread)
   end
 
+
+
   private
   def get_group
     @group = Group.find(params[:group_id])
+    breadcrumb @group.name => group_path(@group)
+    breadcrumb 'Threads' => group_threads_path(@group)
   end
 
   def get_threads
@@ -53,5 +68,8 @@ class Groups::ThreadsController < Omega::Controller
 
   def get_thread
     @thread = @group.threads.find(params[:id])
+    breadcrumb @thread.title.truncate(40) => group_thread_path(@group, @thread)
   end
+
+
 end
