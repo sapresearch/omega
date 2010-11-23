@@ -1,15 +1,5 @@
-//$('body').append('<%= escape_javascript(render(:partial => 'form.html')) %>');
-//        $('#new_post').dialog({
-//            autoOpen: true,
-//            width   : 600,
-//            title   : 'Create new thread',
-//            close   : function(){
-//                $(this).dialog('destroy').andSelf().remove();
-//            }
-//        }
-//                );
         if( !$('#post-form').length > 0){
-             $('#threads-list').after().append('<%= escape_javascript(render(:partial => 'form.html')) %>');
+             $('#posts-list').after().append('<%= escape_javascript(render(:partial => 'form.html')) %>');
         }
 
 

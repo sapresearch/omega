@@ -22,7 +22,7 @@ class GroupsController < Omega::Controller
   def show
 
     @group = Group.find(params[:id])
-    @posts = @group.posts.limit(5)
+    @posts = @group.posts.limit(5).order('created_at desc')
     @uploads = @group.group_uploads
     @users = @group.users
     breadcrumb @group.name => group_path(@group)

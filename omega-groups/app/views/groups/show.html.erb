@@ -4,7 +4,7 @@
   <%= @group.name %>
 </h1>
 <div class="page-content corners-bottom">
-  <h2>Description</h2>
+
   <p>
     <%= @group.description %>
   </p>
@@ -22,19 +22,20 @@
       <th>Author</th>
     </tr>
     </thead>
-    <% @posts.each do |t| %>
+    <% @posts.each do |p| %>
+        <% t = p.thread %>
         <tr id="thread-<%= t.id %>" class="list-item relative clear <%= cycle('odd', 'even') %>">
           <td>
             <%= link_to t.title, group_thread_posts_path(@group, t) %>
             <span class="om-icon-only om-blue-icon ui-icon-search relative right"></span>
             <div class="post-preview">
-              <%= t.body %>
+              <%= p.body %>
             </div>
           </td>
           <td width="100">
-            <span class="cf3a72"> <%= t.author.username %></span>
+            <span class="cf3a72"> <%= p.author.username %></span>
             <br>
-              <span class="date"><%= t.created_at.strftime("%b %d %Y, %H:%M") %></span>
+              <span class="date"><%= p.created_at.strftime("%b %d %Y, %H:%M") %></span>
           </td>
 
 
