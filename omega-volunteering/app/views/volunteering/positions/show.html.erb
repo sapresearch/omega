@@ -1,7 +1,7 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% if notice != nil %><p class="notice"><%= notice %></p>
 <% end %>
-
+<%= context_box do %>
 <h1 class="page-content corners-top">
   <%= @position.name %>
 </h1>
@@ -70,7 +70,7 @@
   </div>
 </div>
 
-
+<% end %>
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_position_show_menu" %>
     <%= render :partial => "layouts/sidebar_position_show_skills" %>

@@ -1,5 +1,7 @@
 <% require_javascript 'thirdParty/jquery.dataTables.min.js', 'omega_threads' %>
 <% require_stylesheet 'omega_threads', 'thirdParty/jquery.dataTables.jui.css' %>
+<%= context_box do %>
+
 <h1 class="page-content corners-top">
   Threads
 </h1>
@@ -67,3 +69,4 @@
   <%= will_paginate @threads %>
 </div>
 
+<% end %>

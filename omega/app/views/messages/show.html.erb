@@ -1,3 +1,4 @@
+<%= context_box do %>
 <h1 class="page-content corners-top">
   <%= @message.subject %>
 </h1>
@@ -14,7 +15,7 @@
   </p>
 
 </div>
-
+<% end %>
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_messages_menu" %>
 <% end %>

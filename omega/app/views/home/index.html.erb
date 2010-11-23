@@ -1,6 +1,6 @@
 <% require_stylesheet 'omega_home' %>
 <% require_javascript 'omega_home/omega_home' %>
-
+<%= context_box do %>
 <h1 class="page-content corners-top">
   Omega
 </h1>
@@ -44,6 +44,7 @@
 
 
 </div>
+    <% end %>
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_wheretofind" %>
 <% end %>

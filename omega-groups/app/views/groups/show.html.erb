@@ -1,5 +1,7 @@
 <%= require_javascript 'thirdParty/jquery.dataTables.min.js', 'omega_groups' %>
 <%= require_stylesheet 'thirdParty/jquery.dataTables.jui.css', 'omega_groups', 'omega_threads' %>
+<%= context_box do %>
+
 <h1 class="page-content corners-top">
   <%= @group.name %>
 </h1>
@@ -9,6 +11,9 @@
     <%= @group.description %>
   </p>
 </div>
+      <% end %>
+<%= context_box do %>
+
 <h1 class="page-content corners-top">
   Latest posts
 </h1>
@@ -43,6 +48,9 @@
     <% end %>
   </table>
 </div>
+     <% end %>
+<%= context_box do %>
+
 <h1 class="page-content corners-top">
   Most recent uploads
 </h1>
@@ -60,6 +68,8 @@
 
   </table>
 </div>
+  <% end %>
+
 <% content_for :sidebar do %>
     <%= render :partial => "groups/sidebar_group" %>
     <%= render :partial => "groups/sidebar_group_members" %>

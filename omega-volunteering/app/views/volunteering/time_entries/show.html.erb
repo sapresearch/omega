@@ -1,3 +1,4 @@
+<%= context_box do %>
 <h1 class="page-content corners-top">
   <%= Volunteering::Position.find_by_id(Volunteering::Record.find_by_id(@entry.record.id).position_id).name %>
   Position Time Sheet
@@ -53,3 +54,4 @@
   </p>
 
 </div>
+<% end %>

@@ -1,6 +1,8 @@
 <%= require_javascript 'omega_groups' %>
 <%= require_stylesheet 'omega_groups' %>
 
+
+<%= context_box do %>
 <h1 class="page-content corners-top">
   <%= @group.name %>
 </h1>
@@ -64,6 +66,7 @@
 
 
 </div>
+    <% end %>
 <% content_for :sidebar do %>
     <%= render :partial => "groups/sidebar_group" %>
 <% end %>
