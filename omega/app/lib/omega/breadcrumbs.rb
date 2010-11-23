@@ -8,10 +8,13 @@ module Omega
 
     module ClassMethods
       def breadcrumbs(*crumbs)
+Rails.logger.warn("#{self}.breadcrumbs(#{crumbs})")
         options = crumbs.extract_options!
         crumbs << options.slice!(:only, :except, :if, :unless)
+a = crumbs.dup
         class_eval do
           before_filter options do
+Rails.logger.warn("#{self} before_filter crumbs = #{a}")
             breadcrumbs(*crumbs)
           end
         end
@@ -20,8 +23,9 @@ module Omega
     end
 
     def breadcrumbs(*crumbs)
-      options = crumbs.extract_options!
-      crumbs << options.slice!(:no_options_yet)
+Rails.logger.warn("#{self}.breadcrumbs(#{crumbs})")
+#      options = crumbs.extract_options!
+#      crumbs << options.slice!(:no_options_yet)
 
       @breadcrumbs ||= []
 
