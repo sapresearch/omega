@@ -90,8 +90,6 @@ class Contacts::ImportsController < Omega::Controller
         end
     end
 
-    session[:column] = params[:column]
-
     @csv_rows = Contact::DataImport.find(session[:rows_id])
     @csv_rows.update_attributes(:rows => @rows)
 
@@ -131,6 +129,9 @@ class Contacts::ImportsController < Omega::Controller
         redirect_to csv_import_wizard_contact_imports_url(:step => 4)
 
       end
+
+      session[:column] = params[:column]
+
     end
 
     if params[:import]
@@ -138,8 +139,6 @@ class Contacts::ImportsController < Omega::Controller
       @rows = Contact::DataImport.find(session[:rows_id]).new_rows
 
       @rows.shift
-
-      @rows.compact!
 
       @rows.each do |row|
 
