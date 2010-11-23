@@ -1,45 +1,30 @@
 <%= require_javascript 'omega_groups' %>
 <%= require_stylesheet 'omega_groups' %>
 <%= context_box do %>
-<h1 class="page-content corners-top">
-  Group Overview
-</h1>
-
-<div class="page-content corners-bottom">
-
-
-  <ul id="groups-list">
-    <% @groups.each do |group| %>
-        <li id="group-<%= group.id %>" class="list-item relative">
-          <div class="item-list-actions-wrapper corners">
-            <div class="item-list-actions">
-              <%= om_button(:plain=> true, :icon=>'delete') do %>
-                  <%= link_to 'Delete', group_path(group), :method=> :delete, :remote=> true %>
-              <% end %>
-
-            </div>
-          </div>
-          <h3>
-
-
-          </h3>
-
-          <div>
-            <%= link_to group.name, group_path(group) %>
-          </div>
-
-        </li>
-    <% end %>
-  </ul>
-  <%= will_paginate @groups %>
-
-  <div class="clear"></div>
-</div>
-
-
-
-
- <% end %>
+    <h1 class="page-content corners-top">
+      Group Overview
+    </h1>
+    <div class="page-content corners-bottom">
+      <ul id="groups-list">
+        <% @groups.each do |group| %>
+            <li id="group-<%= group.id %>" class="list-item relative">
+              <div class="item-list-actions-wrapper corners">
+                <div class="item-list-actions">
+                  <%= om_button(:plain=> true, :icon=>'delete') do %>
+                      <%= link_to 'Delete', group_path(group), :method=> :delete, :remote=> true %>
+                  <% end %>
+                </div>
+              </div>
+              <div>
+                <%= link_to group.name, group_path(group) %>
+              </div>
+            </li>
+        <% end %>
+      </ul>
+      <%= will_paginate @groups %>
+      <div class="clear"></div>
+    </div>
+<% end %>
 <% content_for :sidebar do %>
     <%= render :partial => "partials/sidebar_search" %>
     <%= render :partial => "partials/sidebar_groups" %>

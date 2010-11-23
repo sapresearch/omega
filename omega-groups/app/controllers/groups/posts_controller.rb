@@ -61,6 +61,6 @@ class Groups::PostsController < Omega::Controller
     end
 
     def get_post
-      @thread = @thread.posts.find(params[:id])
+      @post = @thread.posts.find(params[:id])
     end
 end

@@ -2,75 +2,81 @@
 <%= require_stylesheet 'thirdParty/jquery.dataTables.jui.css', 'omega_groups', 'omega_threads' %>
 <%= context_box do %>
 
-<h1 class="page-content corners-top">
-  <%= @group.name %>
-</h1>
-<div class="page-content corners-bottom">
+    <h1 class="page-content corners-top">
+      <%= @group.name %>
+    </h1>
+    <div class="page-content corners-bottom">
 
-  <p>
-    <%= @group.description %>
-  </p>
-</div>
-      <% end %>
-<%= context_box do %>
+      <p>
+        <%= @group.description %>
+      </p>
+    </div>
+<% end %>
+<% if @posts.any? %>
+    <%= context_box do %>
+        <h1 class="page-content corners-top">
+          Latest posts
+        </h1>
+        <div class="page-content corners-bottom">
+          <table id="posts-list" class="width-100">
+            <thead>
+            <tr>
+              <th>
+                Latest Post
+              </th>
+              <th>Author</th>
+            </tr>
+            </thead>
+            <% @posts.each do |p| %>
+                <% t = p.thread %>
+                <tr id="thread-<%= t.id %>" class="list-item relative clear <%= cycle('odd', 'even') %>">
+                  <td>
+                    <%= link_to t.title, group_thread_posts_path(@group, t) %>
+                    <span class="om-icon-only om-blue-icon ui-icon-search relative right"></span>
 
-<h1 class="page-content corners-top">
-  Latest posts
-</h1>
-<div class="page-content corners-bottom">
-  <table id="posts-list" class="width-100">
-    <thead>
-    <tr>
-      <th>
-        Latest Post
-      </th>
-      <th>Author</th>
-    </tr>
-    </thead>
-    <% @posts.each do |p| %>
-        <% t = p.thread %>
-        <tr id="thread-<%= t.id %>" class="list-item relative clear <%= cycle('odd', 'even') %>">
-          <td>
-            <%= link_to t.title, group_thread_posts_path(@group, t) %>
-            <span class="om-icon-only om-blue-icon ui-icon-search relative right"></span>
-            <div class="post-preview">
-              <%= p.body %>
-            </div>
-          </td>
-          <td width="100">
-            <span class="cf3a72"> <%= p.author.username %></span>
-            <br>
-              <span class="date"><%= p.created_at.strftime("%b %d %Y, %H:%M") %></span>
-          </td>
+                    <div class="post-preview">
+                      <%= p.body %>
+                    </div>
+                  </td>
+                  <td width="100">
+                    <span class="cf3a72"> <%= p.author.username %></span>
+                    <br>
+                    <span class="date"><%= p.created_at.strftime("%b %d %Y, %H:%M") %></span>
+                  </td>
 
 
-        </tr>
+                </tr>
+            <% end %>
+          </table>
+        </div>
     <% end %>
-  </table>
-</div>
-     <% end %>
+<% end %>
+<% if @uploads.any? %>
 <%= context_box do %>
 
-<h1 class="page-content corners-top">
-  Most recent uploads
-</h1>
-<div class="page-content corners-bottom">
-  <table id="uploads-list" class="width-100">
-    <thead>
-    <tr>
-    <th>FileName</th>
-    <th>From</th>
-    <th>Date</th>
-    </tr>
-    </thead>
-<%= render :partial => "groups/uploads/upload_records" %>
+    <h1 class="page-content corners-top">
+      Most recent uploads
+    </h1>
+    <div class="page-content corners-bottom">
+      <table id="uploads-list" class="width-100">
+        <thead>
+        <tr>
+          <th>FileName</th>
+          <th>From</th>
+          <th>Date</th>
+        </tr>
+        </thead>
+        <%= render :partial => "groups/uploads/upload_records" %>
 
 
-  </table>
-</div>
-  <% end %>
+      </table>
+    </div>
+<% end %>
+<% end %>
 
 <% content_for :sidebar do %>
     <%= render :partial => "groups/sidebar_group" %>
+    <% if @users.any? %>
     <%= render :partial => "groups/sidebar_group_members" %>
+        <% end %>
 <% end %>

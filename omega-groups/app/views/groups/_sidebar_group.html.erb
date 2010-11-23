@@ -2,12 +2,12 @@
 
     <ul>
       <li>
-        <%= om_button(:icon=>'group') do %>
-            <%= link_to 'Members', assign_group_url(@group) %>
+        <%= om_button(:icon=>'home') do %>
+            <%= link_to 'Group Home', group_path(@group) %>
         <% end %>
       </li>
       <li>
-         <%= om_button(:icon=>'doc-share') do %>
+        <%= om_button(:icon=>'doc-share') do %>
             <%= link_to 'Shared Documents', group_uploads_url(@group) %>
         <% end %>
       </li>
@@ -16,9 +16,20 @@
             <%= link_to 'Bulletin Board', group_threads_url(@group) %>
         <% end %>
       </li>
+
+      <li>
+        <%= om_button(:icon=>'group') do %>
+            <%= link_to 'Manage Members', assign_group_url(@group) %>
+        <% end %>
+      </li>
+      <li>
+        <%= om_button(:icon=>'edit') do %>
+            <%= link_to 'Edit Group', edit_group_path(@group) %>
+        <% end %>
+      </li>
       <li>
         <%= om_button(:icon=>'delete') do %>
-          <%= link_to 'Delete this group', group_path(@group), :method=> :delete%>
+            <%= link_to 'Delete this group', group_path(@group), :method=> :delete %>
         <% end %>
       </li>
 

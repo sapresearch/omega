@@ -22,7 +22,7 @@ body {
 html, body, #wrapper {
 
     height: 100%;
-    color: #4096ee;
+    color: #191919;
 }
 
 body > #wrapper {
@@ -494,7 +494,7 @@ li.list-item {
     list-style: none;
     position: relative;
     font-size: 1em;
-    background: url("/images/bg_menu.png") repeat-x #0058C2;
+    background: url("/images/bg_menu .png") repeat-x ;
 }
 
 #topnav li {
@@ -504,6 +504,7 @@ li.list-item {
 }
 
 #topnav li a {
+    font-weight:bold;
     text-transform: capitalize;
     padding: 10px 15px;
     display: block;
@@ -537,7 +538,7 @@ li.list-item {
 
 /*--Since we declared a link style on the parent list link, we will correct it back to its original state--*/
 #topnav li div a:hover {
-    background: url(/images/bg_menu.png) repeat-x;
+    background: url("/images/bg_menu .png") repeat-x ;
     text-decoration: none;
 }
 
@@ -1036,6 +1037,9 @@ span.om-icon-back {
 
 .om-icon-clipboard-plus {
     background-position: 0 -1120px;
+}
+.om-icon-home {
+    background-position: 0 -1136px;
 }
 
 /*END BUTTONS*/

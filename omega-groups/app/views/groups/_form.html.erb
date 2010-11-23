@@ -1,10 +1,10 @@
-<%= form_for :group, @group, :url => {:action => "create"} do |f| %>
+<%= form_for  @group do |f| %>
     <p>
     <%= f.label :name %>
     <%= f.text_field :name %>
       </p>
     <p>
-    <%= f.label :description %>  
+    <%= f.label :description %>
     <%= f.text_area :description %>
       </p>
     <%= om_button(:icon=>'save') do %>
@@ -14,5 +14,4 @@
      <%= om_button(:icon=>'delete') do %>
         <%= link_to 'Cancel', groups_url  %>
     <% end %>
-
 <% end %>

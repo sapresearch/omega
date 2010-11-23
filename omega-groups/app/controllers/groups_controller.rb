@@ -21,11 +21,21 @@ class GroupsController < Omega::Controller
 
   def show
 
-    @group = Group.find(params[:id])
-    @posts = @group.posts.limit(5).order('created_at desc')
+    @group   = Group.find(params[:id])
+    @posts   = @group.posts.limit(5).order('created_at desc')
     @uploads = @group.group_uploads
-    @users = @group.users
+    @users   = @group.users
     breadcrumb @group.name => group_path(@group)
+    respond_with(@group)
+  end
+
+  def edit
+    @users   = @group.users
+    respond_with(@group)
+  end
+
+  def update
+    @group.update_attributes(params[:group])
     respond_with(@group)
   end
 
@@ -35,35 +45,34 @@ class GroupsController < Omega::Controller
   end
 
   def assign
-    @group = Group.find(params[:id])
+    @group          = Group.find(params[:id])
     @assigned_users = @group.users
-    @users = User.all
-     breadcrumb @group.name => group_path(@group)
+    @users          = User.all
+    breadcrumb @group.name => group_path(@group)
     respond_with(@group)
   end
 
   def assign_user_to
     @group = Group.find(params[:id])
-    @user = User.find(params[:user_id])
+    @user  = User.find(params[:user_id])
 
     @group.users << @user
     @group.save
 
     respond_with(@group)
   end
-  
+
   def remove_user_from
-    @group = Group.find(params[:id])
-    @user = User.find(params[:user_id])
+    @group             = Group.find(params[:id])
+    @user              = User.find(params[:user_id])
 
     @group_memberships = GroupMembership.where('group_id = ?', @group).where('user_id = ?', @user).destroy_all
     respond_with(@group)
   end
 
 
-
   def autocomplete
-    @q = params[:term]
+    @q      = params[:term]
     @groups = Group.named(@q)
     @groups.limit(params[:limit]) if params[:limit]
 
@@ -89,6 +98,6 @@ class GroupsController < Omega::Controller
   end
 
   def share
-    
+
   end
 end
