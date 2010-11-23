@@ -158,6 +158,7 @@ class Contacts::ImportsController < Omega::Controller
             if c.include?(k)
               @contact.phone_numbers[0][k] = row[v.to_i]
             end
+
           end
 
           @cols = Contact::Address.columns.collect { |c| [c.name] }
@@ -168,10 +169,10 @@ class Contacts::ImportsController < Omega::Controller
               @contact.addresses[0][k] = row[v.to_i]
             end
           end
+
         end
 
-        @contact.save!
-
+        @contact.save(:validate => false)
 
       end
 
