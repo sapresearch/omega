@@ -1,5 +1,5 @@
 <% require_javascript 'omega_messages' %>
-
+<%= context_box do %>
 <h1 class="page-content corners-top">
   Messages
 </h1>
@@ -54,6 +54,7 @@
 
   <div class="clear"></div>
 </div>
+    <% end %>
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_messages_menu" %>
 <% end %>

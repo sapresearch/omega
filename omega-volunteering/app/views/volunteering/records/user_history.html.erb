@@ -2,6 +2,7 @@
 <% require_javascript 'omega_volunteering_records' %>
 <% require_stylesheet 'omega_volunteering' %>
 <% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
+<%= context_box do %>
 <h1 class="page-content corners-top">
   Appliaction history of <%= "#{@contact.first_name} #{@contact.last_name}" %>
 </h1>
@@ -53,3 +54,4 @@
   <div class="clear"></div>
 
 </div>
+    <% end %>

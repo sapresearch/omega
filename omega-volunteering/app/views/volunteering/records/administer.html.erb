@@ -1,3 +1,4 @@
+<%= context_box do %>
 <h1 class="page-content corners-top">
   Administer Application of <%= @record.contact.first_name %>  <%= @record.contact.last_name %>
   for <%= @record.position.name %>
@@ -6,3 +7,4 @@
 
 <%= render 'administer' %>
 </div>
+<% end %>

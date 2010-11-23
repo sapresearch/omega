@@ -1,4 +1,4 @@
-
+<%= context_box do %>
 
 <h1 class="page-content corners-top">
   Edit <%= @position.name %>
@@ -10,6 +10,7 @@
   <%= render 'form' %>
 
 </div>
+    <% end %>
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_position_show_menu" %>
 <% end %>

@@ -1,9 +1,11 @@
+<%= context_box do %>
 <h1 class="page-content corners-top">
   New Message
 </h1>
 
 <%= render('form') %>
 
+    <% end %>
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_messages_menu" %>
 <% end %>
