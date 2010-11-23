@@ -1,7 +1,7 @@
 <%= context_box do %>
 <%= require_stylesheet 'omega_users' %>
 <h1 class="page-content corners-top">
- Hello  <%= current_user.username %>
+ Hello  <%= @user.username %>
 </h1>
 <div class="page-content corners-bottom">
   <div id="vcard">
@@ -10,7 +10,7 @@
         Name
       </dt>
       <dd>
-        <%= current_user.first_name %> <%= current_user.last_name %>
+        <%= @user.first_name %> <%= @user.last_name %>
       </dd>
     </dl>
     <dl>
@@ -18,7 +18,7 @@
         Member since
       </dt>
       <dd>
-        <%= current_user.created_at.strftime("%m-%d-%Y")  %>
+        <%= @user.created_at.strftime("%m-%d-%Y")  %>
       </dd>
     </dl>
     <dl>
@@ -26,7 +26,7 @@
        Email
       </dt>
       <dd>
-        <%= current_user.email  %>
+        <%= @user.email  %>
       </dd>
     </dl>
   </div>

@@ -99,17 +99,18 @@ function require_javascript(source) {
     };
     // safari doesn't support either onload or readystate, create a timer
     // only way to do this in safari
-    if (/Safari/i.test(navigator.userAgent)) { //Test for Safari
-        var _timer = setInterval(function() {
-            if (/loaded|complete/.test(document.readyState)) {
-                clearInterval(_timer)
-                Queue.count--;
-                if (Queue.count == 0) {
-                    Queue.invoke()
-                }
-            }
-        }, 10)
-    }
+//    if (/Safari/i.test(navigator.userAgent)) { //Test for Safari
+//console.log(navigator.userAgent)
+//        var _timer = setInterval(function() {
+//            if (/loaded|complete/.test(document.readyState)) {
+//                clearInterval(_timer)
+//                Queue.count--;
+//                if (Queue.count == 0) {
+//                    Queue.invoke()
+//                }
+//            }
+//        }, 10)
+//    }
 
 }
 

@@ -1,6 +1,7 @@
 var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta[name=csrf-param]').attr('content'),
             flash_session_key = $('meta[name=flash-session-key]').attr('content'),
             flash_session_cookie = $('meta[name=flash-session-cookie]').attr('content');
+console.log('new start')
     $.fn.extend({
         liveUpload: function() {
             var uploadifyScriptData = {};
@@ -109,5 +110,5 @@ var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta
 
 
 
-
+console.log('new end')
 
