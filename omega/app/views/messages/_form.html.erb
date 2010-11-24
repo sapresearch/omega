@@ -7,16 +7,22 @@
       </p>
 
       <p>
-        <%= f.label :subject %> <%= f.text_field :subject %>
+        <%= f.label :subject %>
+        <%= f.text_field :subject,:class => 'broad-text' %>
       </p>
 
       <p>
-        <%= f.label :body %> <%= f.text_area :body %>
+        <%= f.label :body %>
+        <%= f.text_area :body, :class => 'broad-text' %>
       </p>
 
       <%= om_button(:icon => 'mail') do %>
           <%= f.submit :value => 'Send Message' %>
       <% end %>
 
+
+      <%= om_button(:icon => 'Cancel') do %>
+          <%= link_to 'Cancel', messages_path %>
+      <% end %>
   <% end %>
 </div>

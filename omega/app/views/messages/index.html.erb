@@ -40,7 +40,7 @@
 
           <div>
             <%= om_button(:plain => true, :icon => 'user') do %>
-                From:  <%= link_to "#{message.from.first_name} #{message.from.last_name}", contact_path(message.from), :class => 'blue' %>
+                From:  <%= link_to "#{message.from.first_name} #{message.from.last_name}", user_path(message.from), :class => 'blue' %>
             <% end %>
             <%= message.created_at.strftime("%a %m/%d/%Y at %I:%M %p") %>
             <br>

@@ -7,17 +7,20 @@
     <fieldset>
       <p>
         <%= f.label :name %>
-        <%= f.text_field :name, :'data-tooltip '=> 'descriptive name for position' %>
+        <%= f.text_field :name, :'data-tooltip '=> 'descriptive name for position', :class => 'broad-text' %>
       </p>
 
       <p>
         <%= f.label :description %>
-        <%= f.text_area :description, :rows => 6, :'data-tooltip '=> 'describe what work the volunteer will be doing in this position' %>
+        <%= f.text_area :description, :rows => 6, :'data-tooltip '=> 'describe what work the volunteer will be doing in this position', :class => 'broad-text' %>
       </p>
 
       <p>
         <%= f.label :hours %>
-        <%= f.text_field :hours, :class => "inputSmall", :'data-tooltip '=> 'approximate number of hours per week needed' %>
+
+        <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+        <%= f.text_field :hours, :value=> 1, :class => "inputSmall", :'data-tooltip '=> 'approximate number of hours per week needed' %>
+        <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
       </p>
 
       <p>
@@ -64,7 +67,9 @@
 
       <p>
         <%= f.label :Num_Volunteers %>
-        <%= f.text_field :volunteers_required, :size=>10 %>
+        <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+        <%= f.text_field :volunteers_required,:value => 1,:class => "inputSmall" %>
+        <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
       </p>
     </fieldset>
 
@@ -134,6 +139,7 @@
         <%= f.label :skills %>
         <%= f.text_field :skills_values %>
       </p>
+
       <p>
         <%= f.label :interests %>
         <%= f.text_field :interests_values %>
