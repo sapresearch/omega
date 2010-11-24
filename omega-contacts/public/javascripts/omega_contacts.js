@@ -61,10 +61,12 @@ $(function() {
         height:400,
         width:600
     });
+
+
     $('#assign-trigger').click(function() {
         $('#contact-assignment').dialog('open');
     });
-    $('#contact-assignment').dialog('close');
+     $("#contact_accordion").accordion();
 
     /**
      * contact group assignment by draging and dropping

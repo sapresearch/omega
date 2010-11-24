@@ -1,3 +1,4 @@
+$('#contact-assignment').dialog('destroy').andSelf().remove();
 $('#contacts_contact_pane').empty().append('<%= escape_javascript(render(:partial => 'contacts/shared/contact_details')) %>');
         $("#contact_accordion").accordion();
         $('#contact-assignment').dialog({ autoOpen: false,
@@ -7,9 +8,10 @@ $('#contacts_contact_pane').empty().append('<%= escape_javascript(render(:partia
             width:600
         });
         $('#assign-trigger').click(function() {
+            
             $('#contact-assignment').dialog('open');
         });
-        $('#contact-assignment').dialog('destroy').andSelf().remove();
+
         <% if request.post? %>
         $('#contacts ul').append('<%= escape_javascript(render('contact_row', :contact_row => @contact)) %>');
         <% elsif request.put? %>

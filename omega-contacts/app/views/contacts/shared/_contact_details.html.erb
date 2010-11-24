@@ -75,7 +75,7 @@ Email: <%= @contact.email %><br>
 
   </div>
 
-  <% if @contact.groups.any? %>
+
       <h3><a href="#">Group Assignments</a></h3>
 
       <div>
@@ -83,14 +83,14 @@ Email: <%= @contact.email %><br>
           <%= render :partial => 'contacts/partials/assigned_groups' %>
         </ul>
         <a href="#" id="assign-trigger">
-          <span data-tooltip="Assign this contact">
+          <span data-tooltip="Assign this contact to groups">
           <span class="om-icon-only om-blue-icon ui-icon-plus" ></span>
-          <%= @contact.first_name %> <%= @contact.last_name %>Assign to desired groups
+          Assign to desired groups
               </span>
         </a>
 
       </div>
-  <% end %>
+
   <% if @contact.skills.any? or @contact.interests.any? %>
       <h3><a href="#">Skills and Interests </a></h3>
 
@@ -151,17 +151,13 @@ Email: <%= @contact.email %><br>
     <tr>
       <td>
         <ul class="group-list">
-
-
           <% Contact::Group.without_contact(@contact).each do |g| %>
               <li>
-                <span data-tooltip="Add  <%= "#{@contact.first_name} #{@contact.last_name} to: #{g.name}".html_safe  %>">
-                <%= link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus" }.html_safe, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %><%= g.name %>
+                <span data-tooltip="Add  <%= "#{@contact.first_name} #{@contact.last_name} to: #{g.name} by clicking. The assignment gets applied right away".html_safe  %>">
+                <%= link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus"></span> #{g.name.truncate(40)} }.html_safe, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
               </span>
               </li>
-
           <% end %>
-
         </ul>
       </td>
       <td>
@@ -172,7 +168,3 @@ Email: <%= @contact.email %><br>
     </tr>
   </table>
 </div>
-
-<%= javascript_tag do %>
-    $("#contact_accordion").accordion();
-<% end %>

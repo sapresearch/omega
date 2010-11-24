@@ -163,8 +163,8 @@ form input.inputMid {
     width: 8em;
 }
 
-form input.datepicker {
-    width: 8em;
+form input.datepickr,form input.tpickr {
+    width: 100px;
 }
 
 form label {
