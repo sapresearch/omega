@@ -4,62 +4,160 @@
    days             = t(:'calendar.recurrence.days').map { |k, v| [v, k] }
    months           = t(:'calendar.recurrence.months').map { |k, v| [v, k] }
 %>
-    <%= builder.fields_for(:recurrence) do |r| %>
-    <fieldset>
+<div id="scheduler">
+  <%= builder.fields_for(:recurrence) do |r| %>
+
+      <fieldset>
         <legend>Time</legend>
-        Start: <%= r.text_field :start_time %><br />
-        End: <%= r.text_field :end_time %><br />
-    </fieldset>
+        <%= r.label :Start_time %><%= r.text_field :start_time, :class => 'tpickr' %>
+        <%= r.label :End_time %> <%= r.text_field :end_time, :class => 'tpickr' %>
 
-    <fieldset>
+      </fieldset>
+
+      <fieldset>
         <legend>Recurrence pattern</legend>
-        <%= r.radio_button :pattern, Calendar::Recurrence::DAILY %><%= t(:'calendar.recurrence.daily') %><br />
-        <%= r.fields_for(:daily) do |d| %>
-            <%= d.radio_button :every, Calendar::Recurrence::DAY %>Every <%= d.text_field :days %> day(s)<br />
-            <%= d.radio_button :every, Calendar::Recurrence::WEEKDAY %>Every weekday<br />
-        <% end %>
+        <div id="scheduler-pattern" class="left">
+          <%= r.label t(:'calendar.recurrence.daily') %> <%= r.radio_button :pattern, Calendar::Recurrence::DAILY %>
+          <br/>
+          <%= r.label t(:'calendar.recurrence.weekly') %> <%= r.radio_button :pattern, Calendar::Recurrence::WEEKLY %>
+          <br/>
+          <%= r.label t(:'calendar.recurrence.monthly') %><%= r.radio_button :pattern, Calendar::Recurrence::MONTHLY %>
+          <br/>
+          <%= r.label t(:'calendar.recurrence.yearly') %><%= r.radio_button :pattern, Calendar::Recurrence::YEARLY %>
 
-        <%= r.radio_button :pattern, Calendar::Recurrence::WEEKLY %><%= t(:'calendar.recurrence.weekly') %><br />
-        <%= r.fields_for(:weekly) do |w| %>
-            Every <%= w.text_field :weeks %> week(s)<br />
-            <%= w.fields_for :days do |wd| %>
-                <% days_of_the_week.each do |day, human_day| %>
-                    <%= wd.check_box day, :checked => (w.object.days[day] == '1' ? 'checked' : '') %> <%= human_day %>
-                <% end %>
-            <% end %><br />
-        <% end %>
+        </div>
+        <div id="schedule" class="left">
+          <div id="schedule-daily" class="schedules">
+            <%= r.fields_for(:daily) do |d| %>
+                <%= d.radio_button :every, Calendar::Recurrence::DAY %>Every
+                <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+                <%= d.text_field :days, :class => 'inputSmall' %>
+                <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
+                day(s)<p>
+            <%= d.radio_button :every, Calendar::Recurrence::WEEKDAY %>Every weekday
+          </p>
+            <% end %>
 
-        <%= r.radio_button :pattern, Calendar::Recurrence::MONTHLY %><%= t(:'calendar.recurrence.monthly') %><br />
-        <%= r.fields_for(:monthly) do |m| %>
-            <%= m.radio_button :every, Calendar::Recurrence::DAY %>Day
-            <%= m.fields_for(:day) do |md| %>
-                <%= md.text_field :days %> of <%= md.text_field :months %> month(s)<br />
-            <% end %>
-            <%= m.radio_button :every, Calendar::Recurrence::ORDINAL %>The
-            <%= m.fields_for(:ordinal) do |mo| %>
-                <%= mo.select :ordinal, ordinals %><%= mo.select :days, days %> of every <%= mo.text_field :months %> month(s)<br />
-            <% end %>
-        <% end %>
 
-        <%= r.radio_button :pattern, Calendar::Recurrence::YEARLY %><%= t(:'calendar.recurrence.yearly') %><br />
-        <%= r.fields_for(:yearly) do |y| %>
-            Every <%= y.text_field :years %> year(s)<br />
-            <%= y.radio_button :every, Calendar::Recurrence::DAY %>On
-            <%= y.fields_for(:day) do |yd| %>
-                <%= yd.text_field :months %><%= yd.text_field :days %><br />
-            <% end %>
-            <%= y.radio_button :every, Calendar::Recurrence::ORDINAL %>On the
-            <%= y.fields_for(:ordinal) do |yo| %>
-                <%= yo.select :ordinal, ordinals %><%= yo.select :days, days %> of <%= yo.select :months, months %><br />
-            <% end %>
-        <% end %>
-    </fieldset>
+          </div>
+          <div id="schedule-weekly" class="schedules">
 
-    <fieldset>
+            <%= r.fields_for(:weekly) do |w| %>
+                <p>
+
+                  Every
+                  <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+                  <%= w.text_field :weeks, :class => 'inputSmall' %>
+                  <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
+
+                  week(s)
+                </p>
+
+                <p>
+                  <%= w.fields_for :days do |wd| %>
+                      <% days_of_the_week.each do |day, human_day| %>
+                          <%= wd.check_box day, :checked => (w.object.days[day] == '1' ? 'checked' : '') %><%= human_day %> </br>
+                      <% end %>
+                  <% end %>
+                </p>
+            <% end %>
+
+
+          </div>
+
+          <div id="schedule-monthly" class="schedules">
+            <%= r.fields_for(:monthly) do |m| %>
+                <p>
+                  <%= m.radio_button :every, Calendar::Recurrence::DAY %>Day
+                  <%= m.fields_for(:day) do |md| %>
+                      <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+                      <%= md.text_field :days, :class => 'inputSmall' %>
+                      <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
+                      of
+                      <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+                      <%= md.text_field :months, :class => 'inputSmall' %>
+                      <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
+                      month(s)
+
+                  <% end %>
+                </p>
+
+                <p>
+                  <%= m.radio_button :every, Calendar::Recurrence::ORDINAL %>The
+                  <%= m.fields_for(:ordinal) do |mo| %>
+                      <%= mo.select :ordinal, ordinals %><%= mo.select :days, days %> of
+                      every
+                      <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+                      <%= mo.text_field :months, :class => 'inputSmall' %>
+                      <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
+                      month(s)
+                  <% end %>
+                </p>
+            <% end %>
+          </div>
+
+          <div id="schedule-yearly" class="schedules">
+            <%= r.fields_for(:yearly) do |y| %>
+                <p>
+                  Every <%= y.text_field :years, :class => 'inputSmall' %> year(s)
+                </p>
+
+                <p>
+                  <%= y.radio_button :every, Calendar::Recurrence::DAY %>On
+
+                  <%= y.fields_for(:day) do |yd| %>
+                      <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+                      <%= yd.text_field :months, :class => 'inputSmall' %>
+                      <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
+                      <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+                      <%= yd.text_field :days, :class => 'inputSmall' %>
+                      <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
+                      <br/>
+                  <% end %>
+                </p>
+
+                <p>
+
+                  <%= y.radio_button :every, Calendar::Recurrence::ORDINAL %>On the
+                  <%= y.fields_for(:ordinal) do |yo| %>
+                      <%= yo.select :ordinal, ordinals %><%= yo.select :days, days %>
+                      of <%= yo.select :months, months %>
+
+                  <% end %>
+                </p>
+            <% end %>
+          </div>
+
+
+        </div>
+
+
+      </fieldset>
+
+      <fieldset>
         <legend>Recurrence range</legend>
-        Start: <%= r.text_field :start %><br />
-        <%= r.radio_button :end_on, Calendar::Recurrence::END_ON_NEVER %>No end date<br />
-        <%= r.radio_button :end_on, Calendar::Recurrence::END_ON_NUMBER %>End after: <%= r.text_field :end_after %> ocurrences<br />
-        <%= r.radio_button :end_on, Calendar::Recurrence::END_ON_DATE %>End by: <%= r.text_field :end_at %><br />
-    </fieldset>
-    <% end %>
+        <p>
+          <%= r.label :Start %>
+          <%= r.text_field :start, :class=> 'datepickr' %>
+        </p>
+
+        <p>
+          <%= r.radio_button :end_on, Calendar::Recurrence::END_ON_NEVER %>No end date
+        </p>
+
+        <p>
+
+          <%= r.radio_button :end_on, Calendar::Recurrence::END_ON_NUMBER %>End after:
+          <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+          <%= r.text_field :end_after, :class => 'inputSmall' %>
+          <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
+          ocurrences
+        </p>
+
+        <p>
+          <%= r.radio_button :end_on, Calendar::Recurrence::END_ON_DATE %>End
+          by: <%= r.text_field :end_at, :class => 'datepickr' %>
+        </p>
+      </fieldset>
+  <% end %>
+</div>

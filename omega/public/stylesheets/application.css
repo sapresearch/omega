@@ -100,8 +100,6 @@ h4 {
 }
 
 p {
-
-    font-size: 1.2em;
     letter-spacing: 1px;
     margin: 5px 0;
 }
@@ -127,13 +125,16 @@ input {
 
 }
 
+
 form input[type=text], form input[type=email], form input[type=password], textarea, select {
 
-    padding: 8px;
+    padding: 4px;
     border: 1px solid #dedede;
     color: #191919;
 }
-
+select{
+    margin: 2px 8px;
+}
 input[type="submit"]::-moz-focus-inner, button::-moz-focus-inner {
     border: 0;
     padding: 0;
@@ -293,7 +294,7 @@ tr.odd {
 }
 
 #ctlrBar, #user_custom_bar {
-    background: #333;
+    background: #666;
     color: #FFF;
     font-weight: bold;
     height: 20px;
@@ -1550,4 +1551,8 @@ form span.error {
 .date {
     font-size: 11px;
     color: #333;
+}
+/* icons for increasing or decreasing input values*/
+.increase,.decrease{
+    margin: 0 5px;
 }
