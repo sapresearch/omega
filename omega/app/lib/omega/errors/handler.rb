@@ -60,7 +60,7 @@ module Omega
           ActiveSupport::Deprecation.silence do
             message = "\n#{exception.class} (#{exception.message}):\n"
             message << exception.annoted_source_code.to_s if exception.respond_to?(:annoted_source_code)
-            message << "  " << application_trace(exception).join("\n  ")
+            message << "  " << application_trace(exception).join("\n  ") if exception.backtrace
             logger.fatal("#{message}\n\n")
           end
         end
