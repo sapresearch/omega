@@ -5,8 +5,6 @@ class Calendar
 
       def initialize(attributes = {})
         attributes.each { |attribute, value| send(:"#{attribute}=", value) }
-        self.every = attributes['every']
-        self.days  = attributes['days']
       end
 
       def persisted?

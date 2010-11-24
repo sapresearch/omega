@@ -56,13 +56,11 @@
                 <p>
                   <%= w.fields_for :days do |wd| %>
                       <% days_of_the_week.each do |day, human_day| %>
-                          <%= wd.check_box day, :checked => (w.object.days[day] == '1' ? 'checked' : '') %><%= human_day %> </br>
+                          <%= wd.check_box day, :checked => (w.object.days[day.to_s] == '1' ? 'checked' : '') %><%= human_day %> <br />
                       <% end %>
                   <% end %>
                 </p>
             <% end %>
-
-
           </div>
 
           <div id="schedule-monthly" class="schedules">
@@ -107,7 +105,7 @@
 
                   <%= y.fields_for(:day) do |yd| %>
                       <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
-                      <%= yd.text_field :months, :class => 'inputSmall' %>
+                      <%= yd.select :months, months %>
                       <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
                       <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
                       <%= yd.text_field :days, :class => 'inputSmall' %>

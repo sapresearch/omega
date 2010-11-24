@@ -14,34 +14,35 @@ class Calendar
     DAY         = 'day'
     WEEKDAY     = 'weekday'
     WEEKEND_DAY = 'weekend day'
-    SUNDAY      = 'sunday'
-    MONDAY      = 'monday'
-    TUESDAY     = 'tuesday'
-    WEDNESDAY   = 'wednesday'
-    THURSDAY    = 'thursday'
-    FRIDAY      = 'friday'
-    SATURDAY    = 'saturday'
-    JANUARY     = 'january'
-    FEBRUARY    = 'february'
-    MARCH       = 'march'
-    APRIL       = 'april'
-    MAY         = 'may'
-    JUNE        = 'june'
-    JULY        = 'july'
-    AUGUST      = 'august'
-    SEPTEMBER   = 'september'
-    OCTOBER     = 'october'
-    NOVEMBER    = 'november'
-    DECEMBER    = 'december'
+    SUNDAY      = '7' #'sunday'
+    MONDAY      = '1' #'monday'
+    TUESDAY     = '2' #'tuesday'
+    WEDNESDAY   = '3' #'wednesday'
+    THURSDAY    = '4' #'thursday'
+    FRIDAY      = '5' #'friday'
+    SATURDAY    = '6' #'saturday'
+    JANUARY     = 1#'january'
+    FEBRUARY    = 2#'february'
+    MARCH       = 3#'march'
+    APRIL       = 4#'april'
+    MAY         = 5#'may'
+    JUNE        = 6#'june'
+    JULY        = 7#'july'
+    AUGUST      = 8#'august'
+    SEPTEMBER   = 9#'september'
+    OCTOBER     = 10#'october'
+    NOVEMBER    = 11#'november'
+    DECEMBER    = 12#'december'
 
     END_ON_NEVER  = 'never'
     END_ON_NUMBER = 'number'
     END_ON_DATE   = 'date'
 
-    PATTERNS = [DAILY, WEEKLY, MONTHLY, YEARLY]
-    ORDINALS = [FIRST, SECOND, THIRD, FOURTH, LAST]
-    DAYS     = [DAY, WEEKDAY, WEEKEND_DAY, SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY]
-    MONTHS   = [JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER]
+    PATTERNS         = [DAILY, WEEKLY, MONTHLY, YEARLY].freeze
+    ORDINALS         = [FIRST, SECOND, THIRD, FOURTH, LAST].freeze
+    DAYS_OF_THE_WEEK = [SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY].freeze
+    DAYS             = [DAY, WEEKDAY, WEEKEND_DAY].concat(DAYS_OF_THE_WEEK).freeze
+    MONTHS           = [JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER].freeze
     
     require_dependency 'calendar/recurrence/daily_pattern'
     require_dependency 'calendar/recurrence/weekly_pattern'
@@ -89,6 +90,10 @@ class Calendar
       self.yearly = YearlyPattern.new(attributes)
     end
 
+    def start
+      @start || Date.today
+    end
+
     def end_on
       @end_on || END_ON_NEVER
     end
@@ -98,7 +103,7 @@ class Calendar
     end
 
     def end_at
-      @end_at || Time.now.next_year
+      @end_at || Date.today.next_year
     end
 
     def persisted?
