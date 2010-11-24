@@ -23,25 +23,12 @@
       <th>
         Status
       </th>
-      <th>
-        Active
-      </th>
-      <th>
-        Missing
-      </th>
-      <th>
-        History
-      </th>
     </tr>
     </thead>
     <% if @records.empty? %>
         <h2> No Applications to Show!</h2>
     <% end %>
     <%= render :partial => 'record_row', :collection => @records, :as => :record %>
-    <%# @records.each do |a| %>
-
-        <%#= render 'record_row', :record_row => a %>
-    <%# end %>
   </table>
     <%= will_paginate @positions %>
   <div class="clear"></div>
