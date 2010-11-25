@@ -2,7 +2,6 @@
     <h1 class="page-content corners-top">
       My time sheets
     </h1>
-
     <div class="page-content corners-bottom">
       <div class="right">
         <%= om_button(:icon=>'sort-az') do %>
@@ -12,22 +11,16 @@
             <a href="">Implement sort</a>
         <% end %>
       </div>
-
       <div class="clear"></div>
-
       <% if @timesheets.empty? %>
           <strong>You Don't Have Any Time Sheets Yet!</strong><br/><br/>
-
       <% else %>
-
           <% @timesheets.each do |timesheet| %>
-
                 <% timesheet.each do |t| %>
                     <h2><%= Volunteering::Position.find_by_id(Volunteering::Record.find_by_id(t.record_id).position_id).name %></h2>
                    <span class="cf3a72">From: </span> <span class="date"> <%= start = t.week.strftime('%Y-%m-%d') %> </span>
                    <span class="cf3a72">To: </span>   <span class="date">  <%= Date.parse(start).advance(:days => 6).to_time.strftime('%Y-%m-%d') %></span>
                     <% unless t.nil? %>
-
                         <table class="width-100">
                           <thead>
                           <th class="ui-state-default"></th>
@@ -41,36 +34,19 @@
                           </thead>
                           <tr class="odd">
                             <td>Hours</td>
-
                             <% @entry_days.each do |ed| %>
-
                                 <% if t.id == ed.time_entry_id %>
-
                                     <td><%= ed.hours %></td>
-
                                 <% end %>
-
                             <% end %>
                           </tr>
-
                         </table>
-                        <br/>
-
-
                     <% end %>
-
                 <% end %>
-
-        
-
-
-           
           <% end %>
-
           <%= om_button(:icon => 'clock') do %>
           <%= link_to 'Record Hours Now!', mine_volunteering_positions_path %>
       <% end %>
-
       <% end %>
 </div>
 <% end %>

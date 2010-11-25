@@ -1,5 +1,5 @@
-<%= require_stylesheet 'omega_calendars' %>
-<%= require_javascript 'thirdParty/jquery.timepicker', 'new_event' %>
+
+<%= require_javascript 'thirdParty/jquery.timepicker' %>
 
 <%= form_for(event, :remote => true) do |f| %>
     <%= f.hidden_field(:calendar_id) %>
