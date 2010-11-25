@@ -1,6 +1,6 @@
 module Omega
   class Controller < ActionController::Base
-#    include Omega::Errors::Handler
+    include Omega::Errors::Handler
 
     include Omega::Assets::Dependencies
 

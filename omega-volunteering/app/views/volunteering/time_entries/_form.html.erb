@@ -10,14 +10,14 @@
 
     <p>
 
-      Pick the start date of a Week from the calendar on the right: <%= text_field_tag 'cw' %>
+      Pick the start date of a Week by cliking the input field aside <%= f.text_field :week, :class => 'datepickr' %>
 
-      <%= f.hidden_field :week, :size => 10 %>
+     
     </p>
-    <table width="50%" class="om-table">
+    <table  class="width-100">
       <thead>
-      <th>Day</th>
-      <th>Hours</th>
+      <th class="ui-state-default">Day</th>
+      <th class="ui-state-default">Hours</th>
       </thead>
       <% @entry.days.each_with_index do |ed| %>
           <%= f.fields_for "days", ed do |d| %>
@@ -28,7 +28,13 @@
 
                 <td>   <%= d.hidden_field :day %>         <%= ed.day %>
                 </td>
-                <td><%= d.text_field :hours, :size => 5 %><%= hours_errors.size unless day.errors.empty? %></td>
+                <td>
+                  <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+                  <%= d.text_field :hours, :class => 'inputSmall'%>
+                <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>  
+                  <%= hours_errors.size unless day.errors.empty? %>
+
+                </td>
               </tr>
           <% end %>
       <% end %>
@@ -45,13 +51,7 @@
         <%= f.submit "Save" %>
     <% end %>
 
-
-
     </p>
 
-
-    <% content_for :sidebar do %>
-        <%= render :partial => "layouts/sidebar_time_entries" %>
-    <% end %>
 
 <% end %>

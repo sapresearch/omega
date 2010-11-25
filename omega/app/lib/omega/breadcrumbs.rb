@@ -20,8 +20,8 @@ module Omega
     end
 
     def breadcrumbs(*crumbs)
-      options = crumbs.extract_options!
-      crumbs << options.slice!(:no_options_yet)
+#      options = crumbs.extract_options!
+#      crumbs << options.slice!(:no_options_yet)
 
       @breadcrumbs ||= []
 

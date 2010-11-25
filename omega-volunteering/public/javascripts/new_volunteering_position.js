@@ -74,7 +74,7 @@ $(function() {
     if ($('#contact_assignment_existing').is(':checked')) {
 
         $('#position_exisiting_contact').show();
-       // update_cid_values();
+        // update_cid_values();
 
     } else if ($('#contact_assignment_new').is(':checked')) {
 
@@ -96,74 +96,50 @@ $(function() {
     var $assigned_contacts = $('#assigned_contacts');
     var $vp_contact_id = $('#volunteering_position_contact_ids');
 
-    /* jqueryui autocomplete for contacts */
-//    $('#ac-contacts').autocomplete({
-//        source : '/contacts/autocomplete',
-//        minLength: 2,
-//
-//        select: function(event, ui) {
-//
-//            $(this).val('');
-//            $('<li />').append(ui.item.label + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', ui.item.id);
-//            update_cid_values();
-//            return false;
-//        }
-//
-//    });
 
-    /**
-     * when the form gets displayed again because  of errors we have to make sure that we restore the state as it was before
-     */
-//    var contact_val = $('#volunteering_position_contact_ids').val();
-//    if (contact_val != "[]" && typeof contact_val != 'undefined' ) {
-//
-//        var contacts = $('#volunteering_position_contact_ids').val().replace(/[\[\]']+/g, '').split(',');
-//        $.each(contacts, function(k, v) {
-//            $.ajax({
-//                global: false,
-//                url : '/contacts/' + v ,
-//                dataType : 'json',
-//                success: function(data) {
-//                    $('<li />').append(data.first_name + '<a href="javascript:void(0)" class="delete-user"> X</a>').appendTo($assigned_contacts).data('cid', data.id);
-//                    return false;
-//                }
-//
-//            });
-//        })
-//    }
+    $('#add-contacts').click(function() {
+        $.ajax({
+            url     : '/contacts/list',
+            dataType: 'script',
+            success : function(data) {
 
-$('#add-contacts').click(function(){
-    $.ajax({
-        url     : '/contacts/list',
-        dataType: 'script',
-        success : function(data){
-     
-        }
-    })
+            }
+        })
+    });
+
+    $('#assigned_contacts').delegate('li', 'click', function() {
+        $(this).remove();
+        $('div.tipsy').remove();
+        update_cid_values();
+    });
+
+
+   $('#volunteer_position_form').find('span.increase').click(function() {
+        var ipt = $(this).next('input');
+        var curval = parseFloat(ipt.val());
+        ipt.val(curval +1)
+    });
+       $('#volunteer_position_form').find('span.decrease').click(function() {
+        var ipt = $(this).prev('input');
+        var curval = parseFloat(ipt.val());
+           if(curval>1) ipt.val(curval -1);
+    });
+
 });
 
-$('#assigned_contacts').delegate('li','click',function(){
-   $(this).remove();
-    $('div.tipsy').remove();
-    update_cid_values();
-});
+/**
+ * update #assigned_contacts hidden field with the values from the assigned contact list
+ * the corresponding contact id is stored in the dom with the ui-data attribute
+ * on update action (add or remove) we iterate over the list items and build a string which cointains all the cids from li elements
+ */
+function update_cid_values() {
 
-})
-;
+    var serialized_cids = '[', separator = '';
+    $('#assigned_contacts').find('li').each(function() {
+        serialized_cids += separator + $(this).attr('ui-data');
+        separator = ',';
+    });
+    serialized_cids += ']';
 
-    /**
-     * update #assigned_contacts hidden field with the values from the assigned contact list
-     * the corresponding contact id is stored in the dom with the ui-data attribute
-     * on update action (add or remove) we iterate over the list items and build a string which cointains all the cids from li elements
-     */
-        function update_cid_values() {
-
-            var serialized_cids = '[', separator = '';
-            $('#assigned_contacts').find('li').each(function() {
-                serialized_cids += separator + $(this).attr('ui-data');
-                separator = ',';
-            });
-            serialized_cids += ']';
-
-            $('#volunteering_position_contact_ids').val(serialized_cids);
-        }
+    $('#volunteering_position_contact_ids').val(serialized_cids);
+}

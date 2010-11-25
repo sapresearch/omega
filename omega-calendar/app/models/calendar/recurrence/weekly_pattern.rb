@@ -8,11 +8,11 @@ class Calendar
       end
 
       def days
-        {}
+        @days || {}
       end
 
       def weeks
-        1
+        @weeks || 1
       end
 
       def persisted?

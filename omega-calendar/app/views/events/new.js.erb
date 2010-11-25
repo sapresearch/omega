@@ -14,7 +14,7 @@ if($('#event_allday').is(':checked')){
 
         $('#new_calendar_event').dialog({
             autoOpen    : true,
-            width       : 600,
+            width       : 800,
             title       : 'Create a new event',
             close       :function(e,ui){
                 $(this).dialog('destroy');
@@ -22,12 +22,3 @@ if($('#event_allday').is(':checked')){
             }
         });
 
-    $('input.datepickr').datepicker({
-            showOn:'focus',
-            dateFormat: 'yy-mm-dd',
-            showButtonPanel: true,
-            changeMonth: true,
-            changeYear: true,
-            yearRange: '2010:2020'
-    });
-           $('.tpickr').timepicker();

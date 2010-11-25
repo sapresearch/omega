@@ -1,0 +1,15 @@
+<%= context_box do %>
+<h1 class="page-content corners-top">
+  Edit <%= @group.name %>
+</h1>
+<div class="page-content corners-bottom">
+<%= render 'form' %>
+
+</div>
+
+
+<% end %>
+<% content_for :sidebar do %>
+    <%= render :partial => "groups/sidebar_group" %>
+    <%= render :partial => "groups/sidebar_group_members" %>
+<% end %>

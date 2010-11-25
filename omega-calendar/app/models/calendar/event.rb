@@ -52,6 +52,8 @@ class Calendar
   
     belongs_to :recurrence_series, :class_name => '::Calendar::Event'
     has_many   :recurrence_events, :class_name => '::Calendar::Event', :foreign_key => :recurrence_series_id
+
+    before_save :calculate_recurrence
   
     serialize :recurrence_days
   
@@ -79,14 +81,14 @@ class Calendar
 
           attributes[:monthly_attributes] = p
         when Recurrence::YEARLY
-          p = { :every => self.recurrence_every }
+          p = { :every => self.recurrence_every, :years => self.recurrence_years }
 
           case self.recurrence_every
             when Recurrence::DAY
               p[:day_attributes] = { :days => self.recurrence_days, :months => self.recurrence_months }
             when Recurrence::ORDINAL
-              p[:ordinal_attributes] = { :ordinal => self.recurrence_ordinal, :days  => self.recurrence_days,
-                                         :months  => self.recurrence_months,  :years => self.recurrence_years }
+              p[:ordinal_attributes] = { :ordinal => self.recurrence_ordinal, :days => self.recurrence_days,
+                                         :months  => self.recurrence_months }
           end
 
           attributes[:yearly_attributes] = p
@@ -127,7 +129,7 @@ class Calendar
           end
         when Recurrence::MONTHLY
           if (monthly = attributes['monthly_attributes']) &&
-             (row     = (monthly['every'] == Recurrence::DAY) ? monthly['day_attributes'] : monthly['ordinal_attributes'])
+             (row     = monthly['every'] == Recurrence::DAY ? monthly['day_attributes'] : monthly['ordinal_attributes'])
             self.recurrence_every   = monthly['every']
             self.recurrence_ordinal = row['ordinal']
             self.recurrence_days    = row['days']
@@ -137,7 +139,7 @@ class Calendar
           end
         when Recurrence::YEARLY
           if (yearly = attributes['yearly_attributes']) &&
-             (row    = (yearly['every'] == Recurrence::DAY) ? yearly['day_attributes'] : yearly['ordinal_attributes'])
+             (row    = yearly['every'] == Recurrence::DAY ? yearly['day_attributes'] : yearly['ordinal_attributes'])
             self.recurrence_every   = yearly['every']
             self.recurrence_ordinal = row['ordinal']
             self.recurrence_days    = row['days']
@@ -145,8 +147,6 @@ class Calendar
             self.recurrence_months  = row['months']
             self.recurrence_years   = yearly['years']
           end
-#        else
-#          raise(ArgumentError, 'pattern is missing')
       end
 
       self.recurrence_start = attributes['start']
@@ -171,59 +171,142 @@ class Calendar
   
         series = recurrence_events
         series.destroy_all # TODO: reuse old events for recurrence
+
+        self.start   = nil
+        self.end     = nil
+        self.all_day = nil
   
         recurrences do |date|
-  
+          Event.new do |e|
+            e.calendar_id = calendar_id
+            e.name        = name
+            e.url         = url
+            e.description = description
+            e.start       = recurrence_start_time.change(:year => date.year, :month => date.month, :day => date.day)
+            e.end         = recurrence_end_time.change(:year => date.year, :month => date.month, :day => date.day)
+            e.all_day     = false
+
+            e.recurrence_series = self
+          end.save(:validate => false)
         end
       end
   
       def recurrences
-        date = recurrence_start
+        date, count = recurrence_start, 1
   
         loop do
-#          break if (stop = recurrence_end_at) && date >= stop
-          
           case recurrence_pattern
             when Recurrence::DAILY
+              return if done?(date, count)
+
               yield date
+              count += 1
 
               case recurrence_every
                 when Recurrence::DAY
-                  step = recurrence_days.to_i
-                  date = date.next_day(step)
+                  date = date.next_day(recurrence_days.to_i)
                 when Recurrence::WEEKDAY
-                  if date.friday?
-                    date = date.next_week
-                  else
-                    date = date.next_day
-                  end
+                  date = date.friday? ? date.next_week : date.next_day
               end
             when Recurrence::WEEKLY
-              week = date.beginning_of_week
+              day = date.beginning_of_week - 1.day
 
-              sunday    = week      - 1.day
-              monday    = sunday    + 1.day
-              tuesday   = monday    + 1.day
-              wednesday = tuesday   + 1.day
-              thursday  = wednesday + 1.day
-              friday    = thursday  + 1.day
-              saturday  = friday    + 1.day
+              Recurrence::DAYS_OF_THE_WEEK.each do |weekday|
+                return if done?(day, count)
+                if recurrence_days[weekday] == '1' && recurrence_start <= day
+                  yield day
+                  count += 1
+                end
 
-
-              yield sunday    if recurrence_days[Recurrence::SUNDAY] == '1'    && sunday    >= recurrence_start
-              yield monday    if recurrence_days[Recurrence::MONDAY] == '1'    && monday    >= recurrence_start
-              yield tuesday   if recurrence_days[Recurrence::TUESDAY] == '1'   && tuesday   >= recurrence_start
-              yield wednesday if recurrence_days[Recurrence::WEDNESDAY] == '1' && wednesday >= recurrence_start
-              yield thursday  if recurrence_days[Recurrence::THURSDAY] == '1'  && thursday  >= recurrence_start
-              yield friday    if recurrence_days[Recurrence::FRIDAY] == '1'    && friday    >= recurrence_start
-              yield saturday  if recurrence_days[Recurrence::SATURDAY] == '1'  && saturday  >= recurrence_start
+                day = day.tomorrow
+              end
 
               recurrence_weeks.times { date = date.next_week }
             when Recurrence::MONTHLY
+              month = date.beginning_of_month
+
+              case recurrence_every
+                when Recurrence::DAY
+                  day = month.change(:day => recurrence_days.to_i)
+                when Recurrence::ORDINAL
+                  day = ordinal_change(month, recurrence_ordinal, recurrence_days)
+              end
+
+              return if done?(day, count)
+              if recurrence_start <= day
+                yield day
+                count += 1
+              end
+
+              date = month.next_month(recurrence_months)
             when Recurrence::YEARLY
-  
+              year = date.beginning_of_year
+
+              case recurrence_every
+                when Recurrence::DAY
+                  day = year.change(:month => recurrence_months, :day => recurrence_days.to_i)
+                when Recurrence::ORDINAL
+                  month = year.change(:month => recurrence_months)
+                  day = ordinal_change(month, recurrence_ordinal, recurrence_days)
+              end
+
+              return if done?(day, count)
+              if recurrence_start <= day
+                yield day
+                count += 1
+              end
+
+              date = year.next_year(recurrence_years)
           end
         end
+      end
+
+      def ordinal_change(month, ordinal, day)
+        case ordinal
+          when Recurrence::FIRST
+            week = month
+          when Recurrence::SECOND
+            week = month.advance(:weeks => 1)
+          when Recurrence::THIRD
+            week = month.advance(:weeks => 2)
+          when Recurrence::FOURTH
+            week = month.advance(:weeks => 3)
+          when Recurrence::LAST
+            week = month.next_month.advance(:weeks => -1)
+          else
+            return
+        end
+
+        case day
+          when Recurrence::DAY
+            return week
+          when Recurrence::WEEKDAY
+            return week.next_week
+          when Recurrence::WEEKEND_DAY
+            return week.sunday? ? week : next_day_of_the_week(week, Recurrence::SATURDAY)
+          when *Recurrence::DAYS_OF_THE_WEEK
+            return next_day_of_the_week(date, recurrence_days.to_i)
+        end
+      end
+
+      def next_day_of_the_week(date, day_of_the_week)
+        current_day_of_the_week = date.cwday
+
+        if day_of_the_week >= current_day_of_the_week
+          offset = day_of_the_week - current_day_of_the_week
+        else
+          offset = 7 - (current_day_of_the_week - day_of_the_week)
+        end
+
+        date.advance(:days => offset)
+      end
+
+      def done?(date, count)
+        (date.nil?) ||
+        (recurrence_end_on == Recurrence::END_ON_DATE   && date >= recurrence_end_at) ||
+        (recurrence_end_on == Recurrence::END_ON_NUMBER && count > recurrence_end_after) ||
+        (recurrence_end_on == Recurrence::END_ON_NEVER  && count > 100) ||
+        (count > 600) #just in case
       end
   end
 end

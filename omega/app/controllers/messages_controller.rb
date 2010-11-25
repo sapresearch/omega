@@ -75,7 +75,7 @@ class MessagesController < Omega::Controller
     respond_with(@message)
   end
 
-  SORT_KEYS = ['created_at']
+  SORT_KEYS       = ['created_at']
   SORT_DIRECTIONS = ['asc', 'desc']
 
   def sort
@@ -94,7 +94,7 @@ class MessagesController < Omega::Controller
 
   def _get_sent_messages
     @messages = current_user.sent_messages
-    
+
     breadcrumb "Sent" => sent_messages_path
   end
 
