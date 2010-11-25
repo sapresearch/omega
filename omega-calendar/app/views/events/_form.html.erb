@@ -2,7 +2,7 @@
 
 <%= form_for(event, :remote => true) do |f| %>
     <%= f.hidden_field(:calendar_id) %>
-    <%= f.hidden_field :recurrence, :value => 0 %>
+    <%= f.hidden_field :recurrence %>
     <p>
       <%= f.label :name %>
       <%= f.text_field :name, :class => 'broad-text' %>

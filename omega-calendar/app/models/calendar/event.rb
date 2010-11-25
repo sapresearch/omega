@@ -1,10 +1,11 @@
-require 'ostruct'
-
 class Calendar
   class Event < Omega::Model
     belongs_to :calendar
   
     has_one :event_source
+
+
+    after_save :calculate_recurrence, :if => :recurrence?
   
     def as_json(options = {})
       {
@@ -175,6 +176,7 @@ class Calendar
         self.start   = nil
         self.end     = nil
         self.all_day = nil
+        save(:validate => false)
   
         recurrences do |date|
           Event.new do |e|
