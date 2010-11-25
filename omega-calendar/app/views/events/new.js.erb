@@ -14,6 +14,7 @@ if($('#calendar_event_all_day').is(':checked')){
         $('#new_calendar_event').dialog({
             autoOpen    : true,
             width       : 800,
+            height      : 700,
             title       : 'Create a new event',
             close       :function(){
                 $(this).dialog('destroy');
@@ -52,6 +53,7 @@ $('#scheduler-pattern').find('input').change(function() {
 });
 
 $('#scheduler-trigger').click(function() {
+    $(this).find('span.scheduler-text').toggle();
     $('#scheduler,#non-recurrent').toggle();
     var rec = $('#calendar_event_recurrence');
     (rec.val() == 1 ) ? rec.val(0) : rec.val(1);
