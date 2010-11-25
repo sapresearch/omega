@@ -6,11 +6,17 @@ class Contacts::ImportsController < Omega::Controller
   
   def csv_import_wizard
 
+
+     if params[:step] == '1'
+       session[:rows_id] = nil
+     end
+
      if params[:step] == '2'
        @import = Contact::Import.new
      end
      
      @contact_fields = get_omega_contact_fields
+     @contact_fields.compact!
      @mapping = get_mapping_hash
 
      unless session[:rows_id].nil?
@@ -21,20 +27,19 @@ class Contacts::ImportsController < Omega::Controller
 
        when '1'
 
+        session[:current_page] = "intro"
         render "contacts/imports/step_1"
-        session[:current_page] = nil
-        session[:rows_id] = nil
 
        when '2'
 
-        render "contacts/imports/step_2"
         session[:current_page] = "upload"
-        session[:rows_id] = nil
+        render "contacts/imports/step_2"
+
          
        when '3'
 
-        render "contacts/imports/step_3"
         session[:current_page] = "mapping"
+        render "contacts/imports/step_3"
 
        when '4'
 
@@ -71,8 +76,8 @@ class Contacts::ImportsController < Omega::Controller
 
     @rows = Contact::DataImport.find(session[:rows_id]).rows
 
-    if params[:update]
-
+    if params[:discard]
+    
     @discard_columns = Array.new
 
         params[:mapping].each do |k,v|
@@ -101,19 +106,20 @@ class Contacts::ImportsController < Omega::Controller
 
       @rows = Contact::DataImport.find(session[:rows_id]).rows
 
-      @rows[0].each do |column|
-
-      unless column.nil?
-
       params[:csv_field].each do |k,v|
 
-       if k.eql?(column)
-          index = @rows[0].index(k)
-          @rows[0][index] = v
-       end
+        @rows[0].each do |column|
 
-      end
-      end
+        unless column.nil?
+
+          if k == column
+            index = @rows[0].index(k)
+            @rows[0][index] = v
+          end
+        end
+        end
+
+
       end
 
       @csv_rows = Contact::DataImport.find(session[:rows_id])
@@ -216,9 +222,16 @@ class Contacts::ImportsController < Omega::Controller
 
   def get_omega_contact_fields
 
-    @contacts = Contact.columns()
-    @phones = Contact::PhoneNumber.columns()
-    @address = Contact::Address.columns()
+    @contacts = Array.new
+    @contacts << "Do Not Import"
+
+    Contact.columns.collect { |c| [c.name] unless c.name == "id"  || c.name == "created_at" || c.name == "updated_at" || c.name == "status"  }.each do |c|
+      @contacts << c
+    end
+
+    @phones = Contact::PhoneNumber.columns.collect { |c| [c.name] unless c.name == "id" || c.name == "contact_id" || c.name == "created_at" || c.name == "updated_at" }
+    @address = Contact::Address.columns.collect { |c| [c.name] unless c.name == "id" || c.name == "created_at" || c.name == "updated_at"}
+
 
     @contacts | @phones | @address
 
@@ -226,19 +239,34 @@ class Contacts::ImportsController < Omega::Controller
 
   def get_mapping_hash
     
-    @mapping = {     "title" => ['Individual Prefix', 'Prefix', 'Salutation', 'salutation' 'Title', 'prefix', 'individual prefix'],
-                     "first_name" => ['First Name', 'First name', 'First_name', 'first_Name', 'first name', 'firstname', 'Firstname'],
-                     "last_name" => ['Last Name', 'Last name', 'Last_name', 'last_Name', 'last name', 'lastname', 'Lastname', 'last_name'],
-                     "number_type" => ['phone type', 'phone_type', 'Phone_Type', 'Phone Type', 'Number Type'],
-                     "address_type" => ['address type', 'address_type', 'Address_Type', 'Address Type', 'Address type'],
-                     "number" => ['phone', 'Phone', 'Phone Number', 'Number', "Phone number"],
+    @mapping = {     "title" => ['Individual Prefix', 'Prefix', 'Salutation', 'salutation' 'Title', 'prefix', 'individual prefix', 'title'],
+                     "first_name" => ['First Name', 'First name', 'First_name', 'first_Name', 'first name', 'firstname', 'Firstname', 'first_name'],
+                     "last_name" => ['Last Name', 'Last name', 'Last_name', 'last_Name', 'last name', 'lastname', 'Lastname', 'last_name', 'last_name'],
+                     "number_type" => ['phone type', 'phone_type', 'Phone_Type', 'Phone Type', 'Number Type', 'number_type'],
+                     "address_type" => ['address type', 'address_type', 'Address_Type', 'Address Type', 'Address type', 'address_type'],
+                     "number" => ['phone', 'Phone', 'Phone Number', 'Number', 'Phone number', 'number', 'telephone', 'Telephone'],
                      "contact_type" => ['contact type', 'Contact Type', 'Contact_type', 'contact_Type'],
-                     "city" => ['City'],
-                     "zip_code" => ['Postal Code', 'Postal code', 'postal_code', 'Postal_code', 'Zip code', 'Zip', 'zip'],
-                     "state" => [ 'State', 'Province', 'province'],
-                     "street" => [ 'Street', 'street'],
-                     "country" => ['Country'],
-                     "email" => ['Email', 'e-mail', 'E-mail', 'email']
+                     "city" => ['City', 'city'],
+                     "zip_code" => ['Postal Code', 'Postal code', 'postal_code', 'Postal_code', 'Zip code', 'Zip', 'zip', 'zip_code'],
+                     "state" => [ 'State', 'Province', 'province', 'state'],
+                     "street" => [ 'Street', 'street', 'street name', 'Street Name'],
+                     "country" => ['Country', 'country'],
+                     "email" => ['Email', 'e-mail', 'E-mail', 'email'],
+                     "do_not_email" => ['Do Not Email'],
+                     "do_not_phone" => ['Do Not Phone'],
+                     "do_not_mail" => ['Do Not Mail'],
+                     "do_not_sms" => ['Do Not Sms'],
+                     "no_bulk_emails" => ['No Bulk Emails'],
+                     "nick_name" => ['Nick Name', 'nickname'],
+                     "legal_name" => ['Legal Name'],
+                     "middle_name" => ['Middle Name'],
+                     "preferred_communication_method" => ['Preferred Communication Method'],
+                     "preferred_language" => ['Preferred Language'],
+                     "date_of_birth" => ['Birth Date'],
+                     "deceased_date" => ['Deceased Date'],
+                     "gender" => ['Gender'],
+                     "individual_suffix" => ['Individual Suffix']
+
     }
   end
 end

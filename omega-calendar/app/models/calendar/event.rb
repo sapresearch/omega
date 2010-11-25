@@ -53,7 +53,7 @@ class Calendar
     belongs_to :recurrence_series, :class_name => '::Calendar::Event'
     has_many   :recurrence_events, :class_name => '::Calendar::Event', :foreign_key => :recurrence_series_id
 
-    before_save :calculate_recurrence
+    after_save :calculate_recurrence
   
     serialize :recurrence_days
   
