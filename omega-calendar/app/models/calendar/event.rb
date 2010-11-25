@@ -257,6 +257,8 @@ class Calendar
               end
 
               date = year.next_year(recurrence_years)
+            else
+              return
           end
         end
       end
