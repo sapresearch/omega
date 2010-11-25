@@ -2,8 +2,8 @@ class CreateContactDataImport < ActiveRecord::Migration
   def self.up
     create_table :contact_data_imports do |t|
 
-      t.longtext :rows
-      t.longtext :new_rows
+      t.text :rows, :limit => "4294967295"
+      t.text :new_rows, :limit => "4294967295"
 
       t.timestamps
     end
@@ -11,5 +11,6 @@ class CreateContactDataImport < ActiveRecord::Migration
   end
 
   def self.down
+    drop_table :contact_data_imports
   end
 end
