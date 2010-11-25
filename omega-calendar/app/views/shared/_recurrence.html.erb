@@ -5,7 +5,9 @@
    months           = t(:'calendar.recurrence.months').map { |k, v| [v, k] }
 %>
 <div id="scheduler">
+  
   <%= builder.fields_for(:recurrence) do |r| %>
+
 
       <fieldset>
         <legend>Time</legend>

@@ -1220,10 +1220,6 @@ form span.error {
     font: 12px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.ui-widget-content a {
-    color: #162D3D;
-}
-
 .ui-icon {
     display: inline-block !important;
 }

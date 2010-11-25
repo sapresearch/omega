@@ -5,7 +5,7 @@ class EventsController < Omega::Controller
   before_filter :get_calendar
 
 
- def index
+  def index
     @events = @calendar.events
     respond_with(@events)
   end
