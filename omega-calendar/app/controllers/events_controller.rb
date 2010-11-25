@@ -4,8 +4,6 @@ class EventsController < Omega::Controller
 
   before_filter :get_calendar
 
-  before_filter :remove_recurrence, :only => [:create, :update]
-
 
   def index
     @events = @calendar.events
@@ -49,11 +47,5 @@ class EventsController < Omega::Controller
   private
     def get_calendar
       @calendar = Calendar.find(params[:calendar_id])
-    end
-
-    def remove_recurrence
-      if event = params[:calendar_event]
-        event.delete(:recurrence_attributes) unless event.delete(:recurrence) == '1'
-      end
     end
 end
