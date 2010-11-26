@@ -1,8 +1,7 @@
 <%= require_javascript 'thirdParty/jquery.timepicker' %>
 
-<%= form_for(event, :remote => true) do |f| %>
-    <%= f.hidden_field(:calendar_id) %>
-    <%= f.hidden_field :recurrence %>
+<%= form_for(@event, :url => @event.persisted? ? calendar_event_path(@calendar, @event) : calendar_events_path(@calendar), :remote => true) do |f| %>
+    <%= f.hidden_field :recurrent %>
     <p>
       <%= f.label :name %>
       <%= f.text_field :name, :class => 'broad-text' %>
@@ -32,6 +31,8 @@
       <%= f.label :description %>
       <%= f.text_area :description, :class => 'broad-text' %>
     </p>
+   
+    <% if params[:action] == 'new' %>
     <p>
       <a href="javascript:void(0)" id="scheduler-trigger">
         <span class="om-icon-only om-blue-icon ui-icon-refresh"></span>
@@ -44,7 +45,7 @@
 
       </a>
     </p>
-
+<% end  %>
     <%= recurrence(f) %>
 
 

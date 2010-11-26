@@ -5,7 +5,7 @@ class Calendar
     has_one :event_source
 
 
-    after_save :calculate_recurrence, :if => :recurrence?
+    before_save :calculate_recurrence, :if => :recurrent?
   
     def as_json(options = {})
       {
@@ -15,7 +15,9 @@ class Calendar
         :end => self.end,
         :allDay => all_day,
         :url => url,
-        :event_description => description
+        :event_description => description,
+        :recurrent => recurrent,
+        :recurrence_series_id => recurrence_series_id
       }
     end
   
@@ -53,8 +55,6 @@ class Calendar
   
     belongs_to :recurrence_series, :class_name => '::Calendar::Event'
     has_many   :recurrence_events, :class_name => '::Calendar::Event', :foreign_key => :recurrence_series_id
-
-    after_save :calculate_recurrence
   
     serialize :recurrence_days
   
@@ -176,10 +176,9 @@ class Calendar
         self.start   = nil
         self.end     = nil
         self.all_day = nil
-        save(:validate => false)
   
         recurrences do |date|
-          Event.new do |e|
+          recurrence_events << Event.new do |e|
             e.calendar_id = calendar_id
             e.name        = name
             e.url         = url
@@ -187,9 +186,7 @@ class Calendar
             e.start       = recurrence_start_time.change(:year => date.year, :month => date.month, :day => date.day)
             e.end         = recurrence_end_time.change(:year => date.year, :month => date.month, :day => date.day)
             e.all_day     = false
-
-            e.recurrence_series = self
-          end.save(:validate => false)
+          end
         end
       end
   

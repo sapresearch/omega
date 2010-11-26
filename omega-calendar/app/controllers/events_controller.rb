@@ -16,14 +16,12 @@ class EventsController < Omega::Controller
   end
 
   def new
-    @event = Calendar::Event.new do |e|
-      e.calendar = @calendar
-    end
+    @event = @calendar.events.build
     respond_with(@event)
   end
 
   def create
-    @event = Calendar::Event.create(params[:calendar_event])
+    @event = @calendar.events.create(params[:calendar_event])
     respond_with(@event)
   end
 
