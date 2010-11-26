@@ -1,5 +1,5 @@
 class Calendar
-  class Recurrence
+  module Recurrence
     class WeeklyPattern
       attr_accessor :days, :weeks
 

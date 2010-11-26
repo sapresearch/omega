@@ -1,13 +1,17 @@
 $('body').append('<%= escape_javascript(render 'form', :event => @event, :calendar => @calendar) %>');
 
+        $('#calendar_event_start_date').val($('#cal').data('day_data'));
+        $('#calendar_event_end_date').val($('#cal').data('day_data'));
+
 if($('#calendar_event_all_day').is(':checked')){
-   $('.tpickr').hide();
+     $('#non-recurrent').find('.tpickr').hide();
 }
         $('#calendar_event_all_day').change(function(){
             if($(this).is(':checked')){
-                $('.tpickr').hide();
+
+                $('#non-recurrent').find('.tpickr').hide();
             }else{
-                $('.tpickr').show();
+               $('#non-recurrent').find('.tpickr').show();
             }
 });
 
@@ -55,6 +59,6 @@ $('#scheduler-pattern').find('input').change(function() {
 $('#scheduler-trigger').click(function() {
     $(this).find('span.scheduler-text').toggle();
     $('#scheduler,#non-recurrent').toggle();
-    var rec = $('#calendar_event_recurrence');
+    var rec = $('#calendar_event_recurrent');
     (rec.val() == 1 ) ? rec.val(0) : rec.val(1);
 });

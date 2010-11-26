@@ -33,6 +33,7 @@
 	}
 	
 .fc td, .fc th {
+text-shadow:1px 1px 1px #ddd;
 	padding: 0;
 	vertical-align: top;
 	}
@@ -380,6 +381,7 @@ h2.fc-header-title{
 	}
 	
 .fc .fc-grid th {
+    background: url("/images/bg_light.png") repeat-x scroll top;
 	border-width: 0 0 0 1px;
 	text-align: center;
 	}

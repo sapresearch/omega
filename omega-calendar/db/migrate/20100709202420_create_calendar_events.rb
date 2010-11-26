@@ -10,7 +10,7 @@ class CreateCalendarEvents < ActiveRecord::Migration
       t.boolean    :all_day
       t.timestamps
 
-      t.boolean    :recurrence
+      t.boolean    :recurrent
       t.belongs_to :recurrence_series
 
       t.time       :recurrence_start_time

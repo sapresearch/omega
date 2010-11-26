@@ -1,5 +1,5 @@
 class Calendar
-  class Recurrence
+  module Recurrence
     class MonthlyPattern
       attr_accessor :every, :day, :ordinal
 

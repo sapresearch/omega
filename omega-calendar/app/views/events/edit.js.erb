@@ -1,25 +1,64 @@
 $('body').append('<%= escape_javascript(render 'form.html', :event => @event, :calendar => @calendar) %>');
-        $('form.edit_calendar_event').dialog({
-            autoOpen    : true,
-            width       : 600,
-            title       : '<%= @event.name %>',
-            close : function(e, ui) {
-
-                $(this).dialog("destroy").remove();
-
-            }
-
-        });
-        if ($('#event_all_day').is(':checked')) {
-            $('.tpickr').hide();
-        } else {
-            $('.tpickr').show();
+         $('#edit_calendar_event_<%=@event.id%>').find('.tpickr').timepicker();
+        if($('#calendar_event_all_day').is(':checked')){
+             $('#non-recurrent').find('.tpickr').hide();
+            
         }
-        $('#event_all_day').change(function() {
-            if ($(this).is(':checked')) {
-                $('.tpickr').hide()
+                $('#calendar_event_all_day').change(function(){
+                    if($(this).is(':checked')){
+
+                        $('#non-recurrent').find('.tpickr').hide();
+                    }else{
+                       $('#non-recurrent').find('.tpickr').show();
+                    }
+        });
+
+                $('#edit_calendar_event_<%=@event.id%>').dialog({
+                    autoOpen    : true,
+                    width       : 800,
+                    height      : 700,
+                    title       : 'Create a new event',
+                    close       :function(){
+                         $(this).dialog("destroy").andSelf().remove();
+                    }
+                });
+        $('#edit_calendar_event_<%=@event.id%>').find('.datepickr').datepicker({
+            dateFormat: 'yy-mm-dd',
+            showButtonPanel: true,
+            changeMonth: true,
+            changeYear: true
+        });
+
+
+
+        $('#edit_calendar_event_<%=@event.id%>').find('span.increase').click(function() {
+            var ipt = $(this).next('input');
+            if (ipt.val() == '') {
+
+                ipt.val(1)
             } else {
-                $('.tpickr').show();
+                var curval = parseFloat(ipt.val());
+                ipt.val(curval + 1)
             }
         });
-        $('.tpickr').timepicker();
+        $('#edit_calendar_event_<%=@event.id%>').find('span.decrease').click(function() {
+            var ipt = $(this).prev('input');
+            var curval = parseFloat(ipt.val());
+            if (curval > 1) ipt.val(curval - 1);
+        });
+        <% if @event.recurrent? %>
+            $('#scheduler,#non-recurrent').toggle();
+        <% end %>
+
+        $('#scheduler-pattern').find('input').change(function() {
+            var pattern = '#schedule-' + $(this).val();
+            $('#schedule').find('div.schedules:visible').hide();
+            $(pattern).show();
+        });
+
+        $('#scheduler-trigger').click(function() {
+            $(this).find('span.scheduler-text').toggle();
+            $('#scheduler,#non-recurrent').toggle();
+            var rec = $('#calendar_event_recurrent');
+            (rec.val() == 1 ) ? rec.val(0) : rec.val(1);
+        });
