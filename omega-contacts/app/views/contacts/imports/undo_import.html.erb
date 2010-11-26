@@ -1,7 +1,33 @@
-<h2>Undo Import</h2>
+<% require_javascript 'import' %>
+<% require_stylesheet 'csv_import' %>
 
 
-Import Date:
-<%= select 'date','import', @imports %>
+<h1 class="page-content corners-top">
+  Undo Import
+</h1>
+<div class="page-content corners-bottom">
+
+  <span class="style2"> </span> <br/>
+
+  <br/>
+
+  Import Date and Time:
+  <%= select 'import','date', @imports %>
+
+  <br/>
+
+  <%["By Mapping", "By Data"].each do |f|%>
+      <%= radio_button_tag 'import_filter', f %> <%=f%>
+  <%end%>
+
+  <div id="import_contacts">
+
+  </div>
+
+  <div id="import_mapping">
+
+  </div>
 
 
+
+</div>

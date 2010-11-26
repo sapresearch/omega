@@ -15,6 +15,8 @@ Omega::Contacts::Module.routes.draw do
         match :csv_import_wizard, :to => 'imports#csv_import_wizard', :path => 'wizard/step/:step'
         post :update_csv
         get :undo_import
+        get :get_import_data
+        get :get_import_mapping
       end
     end
 
