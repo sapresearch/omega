@@ -1,5 +1,5 @@
 class Calendar
-  class Recurrence
+  module Recurrence
     class OrdinalRow
       attr_accessor :ordinal, :days, :months
 

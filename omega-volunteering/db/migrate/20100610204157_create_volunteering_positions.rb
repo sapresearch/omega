@@ -8,6 +8,23 @@ class CreateVolunteeringPositions < ActiveRecord::Migration
       t.references :contact
 
       t.timestamps
+
+      t.boolean    :recurrent
+      t.belongs_to :recurrence_series
+
+      t.time       :recurrence_start_time
+      t.time       :recurrence_end_time
+      t.string     :recurrence_pattern
+      t.string     :recurrence_every
+      t.string     :recurrence_ordinal
+      t.string     :recurrence_days
+      t.integer    :recurrence_weeks
+      t.integer    :recurrence_months
+      t.integer    :recurrence_years
+      t.date       :recurrence_start
+      t.string     :recurrence_end_on
+      t.date       :recurrence_end_at
+      t.integer    :recurrence_end_after
     end
   end
 

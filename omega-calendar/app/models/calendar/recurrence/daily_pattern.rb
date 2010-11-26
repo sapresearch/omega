@@ -1,5 +1,5 @@
 class Calendar
-  class Recurrence
+  module Recurrence
     class DailyPattern
       attr_accessor :every, :days
 

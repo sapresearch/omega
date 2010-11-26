@@ -1,5 +1,5 @@
 class Calendar
-  class Recurrence
+  module Recurrence
     class DayRow
       attr_accessor :days, :months
 

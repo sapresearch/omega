@@ -6,7 +6,7 @@ class EventsController < Omega::Controller
 
 
   def index
-    @events = @calendar.events
+    @events = @calendar.events.non_recurrent
     respond_with(@events)
   end
 

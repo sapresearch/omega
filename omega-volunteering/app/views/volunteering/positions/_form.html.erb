@@ -50,20 +50,7 @@
         </p>
       </div>
 
-      <div id="scheduler">
-        <label for="volunteering_position[schedule_type]">Pattern</label>
-
-        <%= f.fields_for :schedule do |ff| %>
-            <%= errors_for_model f.object %>
-            <% ['daily', 'weekly', 'monthly', 'yearly'].each do |d| %>
-                <%= ff.radio_button :schedule_type, d %> <%= d %>
-            <% end %>
-        <% end %>
-
-
-        <%= render('form_schedule_weekly', :f => f) %>
-        <%= render('form_schedule_daily', :f => f) %>
-      </div>
+      <%= recurrence(f) %>
 
       <p>
         <%= f.label :Num_Volunteers %>
@@ -131,6 +118,11 @@
             <%= render 'contact_form', :f => ff %>
         <% end %>
       </fieldset>
+
+      <%= f.fields_for :event_source do |es| %>
+      Synchronize? <%= es.check_box :synchronize %>
+          Calendar? <%= es.select :calendar_id, options_from_collection_for_select(Calendar.scoped, :id, :calendar_name, es.object.calendar_id) %>
+      <% end %>
 
     </div>
     <fieldset>
