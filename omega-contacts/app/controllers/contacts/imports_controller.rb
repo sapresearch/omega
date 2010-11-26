@@ -1,4 +1,5 @@
 require 'csv'
+require 'iconv'
 
 class Contacts::ImportsController < Omega::Controller
 
@@ -8,6 +9,7 @@ class Contacts::ImportsController < Omega::Controller
 
      if params[:step] == '1'
        session[:rows_id] = nil
+       session[:errors] = nil
      end
 
      if params[:step] == '2'
@@ -60,13 +62,15 @@ class Contacts::ImportsController < Omega::Controller
 
   def create
 
-    @import = Contact::Import.create(params[:contact_import])
+      @import = Contact::Import.create(params[:contact_import])
 
-    process_csv(@import)
-
-    if params[:upload]
-       redirect_to csv_import_wizard_contact_imports_url(:step => 3)
-    end
+      if @import.valid?
+        process_csv(@import)
+        redirect_to csv_import_wizard_contact_imports_url(:step => 3)
+      else
+        session[:errors] = @import.errors.full_messages
+        redirect_to csv_import_wizard_contact_imports_url(:step => 2)
+      end
 
   end
 
@@ -174,7 +178,6 @@ class Contacts::ImportsController < Omega::Controller
         end
 
         @contact.save(:validate => false)
-
         @contacts << @contact.id
         
       end
@@ -202,8 +205,25 @@ class Contacts::ImportsController < Omega::Controller
   def undo_import
 
   @imports = Contact::DataImport.all.collect{ |c| [c.created_at] unless c.status == 'draft'}
+    
+  end
+
+  def get_import_data
+
+  @contacts = Contact::DataImport.find_by_created_at(params[:created_at]).contact_ids
+
+  render :partial => "get_import_data"
 
   end
+
+  def get_import_mapping
+
+  @contacts = Contact::DataImport.find_by_created_at(params[:created_at]).contact_ids
+
+  render :partial => "get_import_mapping"
+
+  end
+  
   private #---------------------------------------------------------------------------------------------------
 
   def process_csv(import)
@@ -218,6 +238,7 @@ class Contacts::ImportsController < Omega::Controller
         rows.each do |r|
           @csv_rows << r
         end
+        
       end
 
       @rows = Contact::DataImport.create(:csv_rows => @csv_rows, :status => 'draft')
@@ -228,12 +249,23 @@ class Contacts::ImportsController < Omega::Controller
 
     rows = []
 
-    CSV.foreach(csv) do |r|
-      rows << r
+    CSV.foreach(csv) do |row|
+
+      row = row.to_s
+
+      row = Iconv.new('UTF-8//IGNORE', 'UTF-8').iconv(row + ' ')[0..-2]
+
+      row = row.gsub!(/[\[\]]/,'').split(",")
+
+      row.each do |r|
+        r.gsub!(/\A "|"\Z|"/,"")
+      end
+
+      rows << row
+
     end
     
     rows
-    
   end
 
   def get_omega_contact_fields
@@ -254,7 +286,7 @@ class Contacts::ImportsController < Omega::Controller
 
   def get_mapping_hash
     
-    @mapping = {     "title" => ['Individual Prefix', 'Prefix', 'Salutation', 'salutation' 'Title', 'prefix', 'individual prefix', 'title'],
+    @mapping = {     "title" => ['Individual Prefix', 'Prefix', 'Salutation', 'salutation', 'Title', 'prefix', 'individual prefix', 'title'],
                      "first_name" => ['First Name', 'First name', 'First_name', 'first_Name', 'first name', 'firstname', 'Firstname', 'first_name'],
                      "last_name" => ['Last Name', 'Last name', 'Last_name', 'last_Name', 'last name', 'lastname', 'Lastname', 'last_name', 'last_name'],
                      "number_type" => ['phone type', 'phone_type', 'Phone_Type', 'Phone Type', 'Number Type', 'number_type'],
@@ -264,9 +296,9 @@ class Contacts::ImportsController < Omega::Controller
                      "city" => ['City', 'city'],
                      "zip_code" => ['Postal Code', 'Postal code', 'postal_code', 'Postal_code', 'Zip code', 'Zip', 'zip', 'zip_code'],
                      "state" => [ 'State', 'Province', 'province', 'state'],
-                     "street" => [ 'Street', 'street', 'street name', 'Street Name'],
+                     "street" => [ 'Street', 'street', 'street name', 'Street Name', 'Street Address'],
                      "country" => ['Country', 'country'],
-                     "email" => ['Email', 'e-mail', 'E-mail', 'email'],
+                     "email" => ['Email', 'e-mail', 'E-mail', 'email', 'E-mail Address', 'e-mail address'],
                      "do_not_email" => ['Do Not Email'],
                      "do_not_phone" => ['Do Not Phone'],
                      "do_not_mail" => ['Do Not Mail'],
@@ -276,11 +308,11 @@ class Contacts::ImportsController < Omega::Controller
                      "legal_name" => ['Legal Name'],
                      "middle_name" => ['Middle Name'],
                      "preferred_communication_method" => ['Preferred Communication Method'],
-                     "preferred_language" => ['Preferred Language'],
-                     "date_of_birth" => ['Birth Date'],
+                     "preferred_language" => ['Preferred Language', 'Language', 'language'],
+                     "date_of_birth" => ['Birth Date', 'Birthday', 'birthday', 'DOB', 'dob', 'Date of Birth','date of birth'],
                      "deceased_date" => ['Deceased Date'],
-                     "gender" => ['Gender'],
-                     "individual_suffix" => ['Individual Suffix']
+                     "gender" => ['Gender', 'gender'],
+                     "individual_suffix" => ['Individual Suffix', 'Suffix', 'suffix']
 
     }
   end

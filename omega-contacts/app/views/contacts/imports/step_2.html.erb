@@ -7,6 +7,11 @@ STEP 2</h1>
 <h2><strong>Import Data from a CSV</strong></h2>
 
 <%= form_for @import, :html => { :multipart => true } do |f| %>
+      <% unless session[:errors].nil?  %>
+          <%= session[:errors].each do |e| %>
+              <%= e %>
+          <%end%>
+      <%end%>
   <p>
     <strong> File: <%= f.file_field :csv %> <br/>
     Data Type: </strong><%= f.select :datatype, %w{contacts}%> <br/>
@@ -15,7 +20,10 @@ STEP 2</h1>
 
   <p>
     <br/>
+
     <%= f.submit "Upload", :name => "upload" %>
+    <%= f.submit "Next", :name => "next" %>
+
   </p>
 <% end %>
 
