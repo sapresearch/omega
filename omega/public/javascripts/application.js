@@ -224,10 +224,12 @@ jQuery(function($) {
 
     /* menu */
 
-    $("ul#topnav li").hover(function() { //Hover over event on list item
+    $("ul#topnav li a").mouseover(function(){ //Hover over event on list item
 
-        $(this).find("div").slideDown('fast'); //Show the subnav
-    }, function() { //on hover out...
+        $(this).parent().find("div").delay(200).slideDown('fast'); //Show the subnav
+    });
+
+     $("ul#topnav li").mouseleave(function(){
 
         $(this).find("div").slideUp('fast'); //Hide the subnav
     });

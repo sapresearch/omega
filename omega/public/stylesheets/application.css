@@ -16,7 +16,7 @@ table, tbody, tfoot, thead, tr, th, td {
 
 body {
 
-    background: url("/images/om_sprite.png") repeat-x #f2f2f2;
+    background: url("/images/om_sprite.png") repeat-x #f7f7f7;
 }
 
 html, body, #wrapper {
@@ -485,13 +485,13 @@ li.list-item {
 #topnav li {
     float: left;
     margin: 0;
-    padding: 0; /*border-right: 1px solid #d1d1d1; *//*--Divider for each parent level links--*/
+    padding: 10px; /*border-right: 1px solid #d1d1d1; *//*--Divider for each parent level links--*/
 }
 
 #topnav li a {
     font-weight:bold;
     text-transform: capitalize;
-    padding: 10px 15px;
+    
     display: block;
     COLOR: #fff;
     text-decoration: none;
@@ -501,7 +501,7 @@ li.list-item {
 #topnav li div {
 
     padding: 0 0 10px;
-    margin: 0 0 0 15px;
+    margin: 0 ;
     position: absolute;
     top: 38px;
     display: none;
@@ -1218,6 +1218,7 @@ form span.error {
 /******************************** overwrite jquery ui **************/
 .ui-widget {
     font: 12px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border: 1px solid #ddd;
 }
 
 .ui-icon {

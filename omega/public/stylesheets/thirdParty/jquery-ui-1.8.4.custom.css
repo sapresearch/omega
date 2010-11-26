@@ -108,6 +108,7 @@
 
     .ui-widget .ui-widget {
         font-size: 1em;
+        
     }
 
     .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
@@ -116,8 +117,8 @@
     }
 
     .ui-widget-content {
-        border: none;
-        background: #ffffff url(/images/ui-bg_flat_1000_ffffff_40x100.png) 50% 50% repeat-x;
+        
+        background: #f7f7f7 url(/images/bg_clouds.png) center repeat;
         color: #2d302d;
     }
 
@@ -1421,6 +1422,7 @@
     .ui-dialog .ui-dialog-title {
         float: left;
         margin: .1em 16px .2em 0;
+        font-size:20px;
     }
 
     .ui-dialog .ui-dialog-titlebar-close {
@@ -1446,7 +1448,7 @@
         position: relative;
         border: 0;
         padding: .5em 1em;
-        background: none;
+        
         overflow: auto;
         zoom: 1;
     }

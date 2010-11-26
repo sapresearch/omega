@@ -15,7 +15,7 @@
             <%= link_to "My Time Sheets", my_time_sheets_volunteering_positions_path %>
 
 
-             <%= with_permission(Volunteering::PERM_ADMIN) do %>
+            <%= with_permission(Volunteering::PERM_ADMIN) do %>
                 <%= link_to "Applications", volunteering_records_path %>
             <% end %>
             <%= link_to "My Applications", my_applications_volunteering_records_path %>
@@ -55,12 +55,10 @@
           </div>
         </li>
     <% end %>
-    <li>
 
-    </li>
     <%= with_permission(Contact::PERM_VIEW) do %>
         <li> <%= link_to "Contacts", contacts_url %>
-        <div>
+          <div>
             <%= link_to 'import contacts', csv_import_wizard_contact_imports_url(:step=> '1') %>
 
           </div>
