@@ -1,4 +1,5 @@
 class Volunteering::Position < Omega::Model
+  include Calendar::Recurrence
 
   MAX_POSITIONS_PER_PAGE = 5
 
@@ -9,8 +10,8 @@ class Volunteering::Position < Omega::Model
   has_many :records, :dependent => :destroy, :inverse_of => :position
   has_one :schedule
 
-#  has_one :event_source, :as => :source
-#  accepts_nested_attributes_for :event_source
+  has_one :event_source, :as => :source, :class_name => '::Calendar::EventSource'
+  accepts_nested_attributes_for :event_source
   
   has_and_belongs_to_many :skills,    :class_name => '::Contact::Skill',
                                       :join_table => 'contact_skills_volunteering_positions'
