@@ -211,7 +211,7 @@ class Contacts::ImportsController < Omega::Controller
 
   def undo_import
 
-  @imports = Contact::DataImport.all.collect{ |c| [c.created_at.strftime('%Y-%m-%d %H:%M:%S')] unless c.status == 'draft' || c.status == 'deleted'}
+  @imports = Contact::DataImport.all.collect{ |c| [c.created_at.utc] unless c.status == 'draft' || c.status == 'deleted'}
     
   end
 
