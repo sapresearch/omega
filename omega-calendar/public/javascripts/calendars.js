@@ -1,12 +1,4 @@
-/**
- * Created by IntelliJ IDEA.
- * User: I823626
- * Date: Jun 22, 2010
- * Time: 10:36:04 AM
- * To change this template use File | Settings | File Templates.
- */
-
-$(document).ready(function() {
+$(function() {
 
 
     function formatDateForId(d) {
@@ -17,7 +9,7 @@ $(document).ready(function() {
     var cal = $('#cal');
     cal.data('calendar_id', 1);
     cal.fullCalendar({
-        disableDragging  : true,
+
         more            :3,
         calendar_id     :1,
         height          : 550,
@@ -29,8 +21,8 @@ $(document).ready(function() {
         editable        : true,
         events          : '/calendars/' + cal.data('calendar_id') + '/events.json',
         dayClick        : function(date, allDay, jsEvent, view) {
-            
-            cal.data('day_data',$.fullCalendar.formatDate(date, 'yyyy-MM-dd'));
+
+            cal.data('day_data', $.fullCalendar.formatDate(date, 'yyyy-MM-dd'));
             var id = $('#uibox_' + formatDateForId(date));
 
             if (!id.is(':visible')) {
@@ -45,7 +37,43 @@ $(document).ready(function() {
 
 
         },
-        eventClick: function(event) {
+        eventResize: function(event, dayDelta, minuteDelta, revertFunc) {
+
+
+            $.ajax({
+                type:   'POST',
+
+                url     : '/calendars/1/events/' + event.id,
+                data    :   {
+                    _method:'PUT',
+                    'calendar_event[start_time]' : $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd HH:mm'),
+                    'calendar_event[end_time]'      : $.fullCalendar.formatDate(event.end, 'yyyy-MM-dd HH:mm')
+                },
+                dataType: 'json'
+
+            })
+
+
+        },
+
+        eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
+            $.ajax({
+                type:   'POST',
+
+                url     : '/calendars/1/events/' + event.id,
+                data    :   {
+                    _method:'PUT',
+                    'calendar_event[start]' : $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd HH:mm'),
+                    'calendar_event[end]'      : $.fullCalendar.formatDate(event.end, 'yyyy-MM-dd HH:mm')
+                },
+                dataType: 'json'
+
+            })
+
+
+        },
+
+        eventClick : function(event) {
             if (! $(this).andSelf("td").hasClass('more')) {
                 var ed = '<div id="event-details">';
                 ed += 'Start: ';
@@ -67,7 +95,7 @@ $(document).ready(function() {
                     }
 
                 });
-                x = event
+
                 if (event.recurrence_series_id != null) {
 
                     $("#event-details").dialog("option", "buttons", {
@@ -111,8 +139,8 @@ $(document).ready(function() {
 
 
                     });
-                }else{
-                     $("#event-details").dialog("option", "buttons", {
+                } else {
+                    $("#event-details").dialog("option", "buttons", {
 
 
                         "Edit this occurence" : function() {
@@ -168,4 +196,5 @@ $(document).ready(function() {
         fullCalendar.addEventSource('/calendars/' + cal.data('calendar_id') + '/events.json')
     })
 
-});
+})
+        ;
