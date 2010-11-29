@@ -28,3 +28,7 @@
           </td>
         </tr>
  </table>
+
+<%= om_button(:icon=>'cancel') do %>
+ <%= link_to 'Undo', undo_import_finalize_contact_imports_url(:id => @import) %>
+<%end%>

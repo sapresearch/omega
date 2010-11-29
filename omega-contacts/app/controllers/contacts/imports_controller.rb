@@ -53,7 +53,14 @@ class Contacts::ImportsController < Omega::Controller
      end
   end
 
+  def index
+
+    @imports = Contact::DataImport.all
+
+  end
+
   def show
+    
   end
 
   def new
@@ -197,14 +204,14 @@ class Contacts::ImportsController < Omega::Controller
       @imported_rows = Contact::DataImport.find(session[:rows_id])
       @imported_rows.update_attributes(:status => 'complete', :imported_rows => @rows, :contact_ids => @contacts)
 
-      redirect_to contact_imports_url()
+      redirect_to contact_imports_url(@imported_rows)
 
     end
   end
 
   def undo_import
 
-  @imports = Contact::DataImport.all.collect{ |c| [c.created_at] unless c.status == 'draft'}
+  @imports = Contact::DataImport.all.collect{ |c| [c.created_at] unless c.status == 'draft' || c.status == 'deleted'}
     
   end
 
@@ -226,6 +233,20 @@ class Contacts::ImportsController < Omega::Controller
 
   end
 
+  def undo_import_finalize
+
+  @import = Contact::DataImport.find(params[:id])
+
+  @import.update_attributes(:status => 'deleted')
+
+  @import.contact_ids.each do |c|
+    contact = Contact.find_by_id(c)
+    contact.status = 'deleted'
+    contact.save(:validate => false)
+  end
+
+  redirect_to contact_imports_url()
+  end
   
   
   private #---------------------------------------------------------------------------------------------------

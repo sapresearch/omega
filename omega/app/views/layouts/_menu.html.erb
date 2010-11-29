@@ -60,7 +60,8 @@
         <li> <%= link_to "Contacts", contacts_url %>
           <div>
             <%= link_to 'import contacts', csv_import_wizard_contact_imports_url(:step=> '1') %>
-            <%= link_to 'undo import', undo_import_contact_imports_url() %>
+            <%= link_to 'list of imports', contact_imports_url() %>
+            <%= link_to 'undo an import', undo_import_contact_imports_url() %>
 
           </div>
         </li>
@@ -71,9 +72,9 @@
     <%= with_permission(User::PERM_VIEW) do %>
         <li> <%= link_to "Users", users_url %></li>
     <% end %>
-    <%#= with_permission(Group::PERM_VIEW) do %>
-        <li> <%#= link_to "Groups", groups_url %></li>
-    <%# end %>
+    <%= with_permission(Group::PERM_VIEW) do %>
+        <li> <%= link_to "Groups", groups_url %></li>
+    <% end %>
   </ul>
 
   <div class="clear"></div>

@@ -1,4 +1,35 @@
-<h2>Contacts Imported & Created Successfully</h2>
+<h1 class="page-content corners-top">
+  List of Imports
+</h1>
 
-<%= link_to 'View Now>> ', contacts_url%>
-<%= link_to 'Undo Import', undo_import_contact_imports_url() %>
+<div class="page-content corners-bottom">
+
+  <table>
+
+    <th> Created At </th>   <th> &nbsp;&nbsp;Status </th>
+
+    <% @imports.each do |i| %>
+
+    <tr>
+
+      <td>
+        <strong>
+        <%= i.created_at%> <br/>
+        </strong>
+      </td>
+
+
+       <td>
+        &nbsp;&nbsp;
+         <strong>
+         <%= i.status%>
+         </strong> <br/>
+      </td>
+
+    </tr>
+    <%end%>
+  </table>
+
+
+
+</div>
