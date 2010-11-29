@@ -4,22 +4,36 @@
 
             <table class="csv-table">
 
-               <th class="csv-table">First Name</th> <th class="csv-table">Last Name</th>
+               <th class="csv-table">CSV Fields</th>
 
-                <% @contacts.each do |c| %>
-
-                    <% contact = Contact.find(c) %>
+                <% @import.csv_rows[0].each do |r| %>
 
                     <tr class="csv-table">
 
                       <td class="csv-table">
-                        <%= contact.last_name %>
-                      </td>
-
-                      <td class="csv-table">
-                        <%= contact.first_name %>
+                        <%= r %>
                       </td>
                       
+                    </tr>
+                <%end%>
+
+
+            </table>
+          </td>
+
+          <td>
+             <table class="csv-table">
+
+               <th class="csv-table">Mapped Omega Fields</th>
+
+                <% @import.mapped_rows[0].each do |r| %>
+
+                    <tr class="csv-table">
+
+                      <td class="csv-table">
+                        <%= r %>
+                      </td>
+
                     </tr>
                 <%end%>
 

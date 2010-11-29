@@ -60,6 +60,8 @@
         <li> <%= link_to "Contacts", contacts_url %>
           <div>
             <%= link_to 'import contacts', csv_import_wizard_contact_imports_url(:step=> '1') %>
+            <%= link_to 'list of imports', contact_imports_url() %>
+            <%= link_to 'undo an import', undo_import_contact_imports_url() %>
 
           </div>
         </li>

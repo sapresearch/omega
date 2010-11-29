@@ -53,7 +53,14 @@ class Contacts::ImportsController < Omega::Controller
      end
   end
 
+  def index
+
+    @imports = Contact::DataImport.all
+
+  end
+
   def show
+    
   end
 
   def new
@@ -197,32 +204,50 @@ class Contacts::ImportsController < Omega::Controller
       @imported_rows = Contact::DataImport.find(session[:rows_id])
       @imported_rows.update_attributes(:status => 'complete', :imported_rows => @rows, :contact_ids => @contacts)
 
-      redirect_to contact_imports_url()
+      redirect_to contact_imports_url(@imported_rows)
 
     end
   end
 
   def undo_import
 
-  @imports = Contact::DataImport.all.collect{ |c| [c.created_at] unless c.status == 'draft'}
+  @imports = Contact::DataImport.all.collect{ |c| [c.created_at.utc] unless c.status == 'draft' || c.status == 'deleted'}
     
   end
 
   def get_import_data
 
-  @contacts = Contact::DataImport.find_by_created_at(params[:created_at]).contact_ids
+  @import = Contact::DataImport.find_by_created_at(params[:created_at])
 
-  render :partial => "get_import_data"
+  if params[:filter] == 'import_filter_By_Mapping'
+
+    render :partial => "get_import_mapping"
+
+  else if params[:filter] == 'import_filter_By_Data'
+
+    @contacts = @import.contact_ids
+    render :partial => "get_import_data"
+
+    end
+  end
 
   end
 
-  def get_import_mapping
+  def undo_import_finalize
 
-  @contacts = Contact::DataImport.find_by_created_at(params[:created_at]).contact_ids
+  @import = Contact::DataImport.find(params[:id])
 
-  render :partial => "get_import_mapping"
+  @import.update_attributes(:status => 'deleted')
 
+  @import.contact_ids.each do |c|
+    contact = Contact.find_by_id(c)
+    contact.status = 'deleted'
+    contact.save(:validate => false)
   end
+
+  redirect_to contact_imports_url()
+  end
+  
   
   private #---------------------------------------------------------------------------------------------------
 
@@ -252,7 +277,6 @@ class Contacts::ImportsController < Omega::Controller
     CSV.foreach(csv) do |row|
 
       row = row.to_s
-
       row = Iconv.new('UTF-8//IGNORE', 'UTF-8').iconv(row + ' ')[0..-2]
 
       row = row.gsub!(/[\[\]]/,'').split(",")
@@ -266,6 +290,7 @@ class Contacts::ImportsController < Omega::Controller
     end
     
     rows
+    
   end
 
   def get_omega_contact_fields

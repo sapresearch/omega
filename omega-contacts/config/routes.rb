@@ -17,6 +17,7 @@ Omega::Contacts::Module.routes.draw do
         get :undo_import
         get :get_import_data
         get :get_import_mapping
+        get :undo_import_finalize
       end
     end
 
