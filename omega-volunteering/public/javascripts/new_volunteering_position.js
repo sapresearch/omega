@@ -18,13 +18,13 @@ $(function() {
 
 
     // selector caching
-    var $recurrent = $('input[name=volunteering_position[recurrence]]');
+    var $recurrent = $('input[name=volunteering_position[recurrent]]');
     var $scheduler = $('#scheduler');
     var $vp_contact = $('#vp_contact');
 
     $recurrent.change(function() {
         if ($(this).val() == 'true') {
-            $('#non_recurrent').hide()
+            $('#non_recurrent').hide();
             $scheduler.slideDown('fast');
 
         } else {
@@ -45,13 +45,26 @@ $(function() {
 
     });
 
-    // restore the dom state on page refresh
+    // restore the dom state on page refresh or edit
     if ($recurrent.is(':checked')) {
+        var pattern = '#schedule-' + $scheduler.find('input:checked').val();
+        $(pattern).show();
         $('#scheduler').show();
-        $('#non_recurrent').hide();
 
+        $('#non_recurrent').hide();
     }
     var v = $scheduler.find('input:radio:checked').val();
+
+    if ($('#contact_assignment_existing').is(':checked')) {
+        $('#position_exisiting_contact').show();
+
+
+    } else if ($('#contact_assignment_new').is(':checked')) {
+
+        $('#position_new_contact').show();
+    }
+
+
     $scheduler.find('#' + v + '_schedule').show();
 
     $scheduler.find('input[name="volunteering_position[schedule_attributes][schedule_type]"]').change(function() {
@@ -71,26 +84,8 @@ $(function() {
         }
 
     });
-    if ($('#contact_assignment_existing').is(':checked')) {
-
-        $('#position_exisiting_contact').show();
-        // update_cid_values();
-
-    } else if ($('#contact_assignment_new').is(':checked')) {
-
-        $('#position_new_contact').show();
-    }
 
 
-    $('#wst').find('input[type="checkbox"]').change(function() {
-        if ($(this).is(':checked')) {
-
-            $(this).parent().siblings('td').find('input').attr('disabled', '')
-        } else {
-            $(this).parent().siblings('td').find('input').attr('disabled', 'disabled').val('')
-        }
-
-    });
 
     // selector caching
     var $assigned_contacts = $('#assigned_contacts');
@@ -112,18 +107,35 @@ $(function() {
         $('div.tipsy').remove();
         update_cid_values();
     });
+    $('#scheduler').find('input[type="text"]').focusin(function(){
+
+      $(this).prevAll('input[type="radio"]').attr('checked',true)
+    }).end().find('select').change(function(){
+      $(this).prevAll('input[type="radio"]').attr('checked',true)  
+    });
 
 
    $('#volunteer_position_form').find('span.increase').click(function() {
         var ipt = $(this).next('input');
+            if (ipt.val() == '') {  
+
+        ipt.val(1)
+    } else {
         var curval = parseFloat(ipt.val());
-        ipt.val(curval +1)
+        ipt.val(curval + 1)
+    }
     });
        $('#volunteer_position_form').find('span.decrease').click(function() {
         var ipt = $(this).prev('input');
         var curval = parseFloat(ipt.val());
            if(curval>1) ipt.val(curval -1);
     });
+
+    $('#scheduler-pattern').find('input').change(function() {
+    var pattern = '#schedule-' + $(this).val();
+    $('#schedule').find('div.schedules:visible').hide();
+    $(pattern).show();
+});
 
 });
 

@@ -52,6 +52,8 @@ $('#new_calendar_event').find('span.decrease').click(function() {
     if (curval > 1) ipt.val(curval - 1);
 });
 
+        
+
 $('#scheduler-pattern').find('input').change(function() {
     var pattern = '#schedule-' + $(this).val();
     $('#schedule').find('div.schedules:visible').hide();
@@ -64,3 +66,9 @@ $('#scheduler-trigger').click(function() {
     var rec = $('#calendar_event_recurrent');
     (rec.val() == 1 ) ? rec.val(0) : rec.val(1);
 });
+        $('#scheduler').find('input[type="text"]').focusin(function(){
+
+          $(this).prevAll('input[type="radio"]').attr('checked',true)
+        }).end().find('select').change(function(){
+          $(this).prevAll('input[type="radio"]').attr('checked',true)
+        });

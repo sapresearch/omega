@@ -106,9 +106,9 @@
                   <%= y.radio_button :every, Calendar::Recurrence::DAY %>On
 
                   <%= y.fields_for(:day) do |yd| %>
-                      <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+                      
                       <%= yd.select :months, months %>
-                      <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
+
                       <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
                       <%= yd.text_field :days, :class => 'inputSmall' %>
                       <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
