@@ -210,19 +210,23 @@ class Contacts::ImportsController < Omega::Controller
 
   def get_import_data
 
-  @contacts = Contact::DataImport.find_by_created_at(params[:created_at]).contact_ids
+  @import = Contact::DataImport.find_by_created_at(params[:created_at])
 
-  render :partial => "get_import_data"
+  if params[:filter] == 'import_filter_By_Mapping'
+
+    render :partial => "get_import_mapping"
+
+  else if params[:filter] == 'import_filter_By_Data'
+
+    @contacts = @import.contact_ids
+    render :partial => "get_import_data"
+
+    end
+  end
 
   end
 
-  def get_import_mapping
-
-  @contacts = Contact::DataImport.find_by_created_at(params[:created_at]).contact_ids
-
-  render :partial => "get_import_mapping"
-
-  end
+  
   
   private #---------------------------------------------------------------------------------------------------
 
@@ -252,7 +256,6 @@ class Contacts::ImportsController < Omega::Controller
     CSV.foreach(csv) do |row|
 
       row = row.to_s
-
       row = Iconv.new('UTF-8//IGNORE', 'UTF-8').iconv(row + ' ')[0..-2]
 
       row = row.gsub!(/[\[\]]/,'').split(",")
@@ -266,6 +269,7 @@ class Contacts::ImportsController < Omega::Controller
     end
     
     rows
+    
   end
 
   def get_omega_contact_fields
