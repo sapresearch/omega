@@ -29,7 +29,7 @@ Omega::Contacts::Module.routes.draw do
       get :list
 
       get :autocomplete
-      match ':letter' => 'contacts#letter', :constraints => { :letter => /[a-z]/i}
+      match :letter, :constraints => { :letter => /[a-z]/i}
     end
 
     member do
