@@ -1,4 +1,15 @@
 $('body').append('<%= escape_javascript(render 'form', :event => @event, :calendar => @calendar) %>');
+  $('#new_calendar_event').dialog({
+            autoOpen    : true,
+            width       : 800,
+            height      : 700,
+            title       : 'Create a new event',
+            close       :function(){
+                $(this).dialog('destroy');
+                $('#new_calendar_event').remove();
+            }
+        });
+
 
         $('#calendar_event_start_date').val($('#cal').data('day_data'));
         $('#calendar_event_end_date').val($('#cal').data('day_data'));
@@ -15,16 +26,7 @@ if($('#calendar_event_all_day').is(':checked')){
             }
 });
 
-        $('#new_calendar_event').dialog({
-            autoOpen    : true,
-            width       : 800,
-            height      : 700,
-            title       : 'Create a new event',
-            close       :function(){
-                $(this).dialog('destroy');
-                $('#new_calendar_event').remove();
-            }
-        });
+
 $('#new_calendar_event').find('.datepickr').datepicker({
     dateFormat: 'yy-mm-dd',
     showButtonPanel: true,

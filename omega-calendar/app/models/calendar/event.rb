@@ -11,6 +11,8 @@ class Calendar
 
 
     before_save :calculate_recurrence, :if => :recurrent?
+
+    validates_presence_of :title
   
     def as_json(options = {})
       {
