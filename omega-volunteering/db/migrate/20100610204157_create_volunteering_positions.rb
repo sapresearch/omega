@@ -7,6 +7,9 @@ class CreateVolunteeringPositions < ActiveRecord::Migration
       t.integer    :volunteers_required, :null => false
       t.references :contact
 
+      t.datetime   :start
+      t.datetime   :end
+
       t.timestamps
 
       t.boolean    :recurrent
