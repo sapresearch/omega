@@ -11,8 +11,8 @@
 
       <fieldset>
         <legend>Time</legend>
-        <%= r.label :Start_time %><%= r.text_field :start_time, :class => 'tpickr' %>
-        <%= r.label :End_time %> <%= r.text_field :end_time, :class => 'tpickr' %>
+        <%= r.label :Start_time %><%= r.text_field :start_time, :class => 'tpickr', :value => r.object.start_time.try(:to_s, :time) %>
+        <%= r.label :End_time %> <%= r.text_field :end_time, :class => 'tpickr', :value => r.object.end_time.try(:to_s, :time) %>
 
       </fieldset>
 
