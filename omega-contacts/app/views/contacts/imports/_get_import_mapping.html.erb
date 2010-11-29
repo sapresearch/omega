@@ -1,0 +1,30 @@
+ <table>
+        <tr>
+          <td>
+
+            <table class="csv-table">
+
+               <th class="csv-table">First Name</th> <th class="csv-table">Last Name</th>
+
+                <% @contacts.each do |c| %>
+
+                    <% contact = Contact.find(c) %>
+
+                    <tr class="csv-table">
+
+                      <td class="csv-table">
+                        <%= contact.last_name %>
+                      </td>
+
+                      <td class="csv-table">
+                        <%= contact.first_name %>
+                      </td>
+                      
+                    </tr>
+                <%end%>
+
+
+            </table>
+          </td>
+        </tr>
+ </table>
