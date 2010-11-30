@@ -18,11 +18,16 @@ class Calendar
           event.calendar_id = event_source.calendar_id
           event.name        = position.name
           event.description = position.description
-          
-          [:recurrent, :recurrence_start_time, :recurrence_end_time,
-           :recurrence_pattern, :recurrence_every, :recurrence_ordinal, :recurrence_days, :recurrence_weeks, :recurrence_months, :recurrence_years,
-           :recurrence_start, :recurrence_end_on, :recurrence_end_at, :recurrence_end_after].each do |attribute|
-            event[attribute] = position[attribute]
+
+          if position.recurrent?
+            [:recurrent, :recurrence_start_time, :recurrence_end_time,
+             :recurrence_pattern, :recurrence_every, :recurrence_ordinal, :recurrence_days, :recurrence_weeks, :recurrence_months, :recurrence_years,
+             :recurrence_start, :recurrence_end_on, :recurrence_end_at, :recurrence_end_after].each do |attribute|
+              event[attribute] = position[attribute]
+            end
+          else
+            event.start = position.start
+            event.end   = position.end
           end
 
           event.save!

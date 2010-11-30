@@ -25,9 +25,9 @@
 
       <p>
         <%= f.label :reoccurs %>
-        <%= f.radio_button :recurrence, true %>
+        <%= f.radio_button :recurrent, true %>
         <%= f.label :one_time_only %>
-        <%= f.radio_button :recurrence, false %>
+        <%= f.radio_button :recurrent, false %>
 
       </p>
 
@@ -52,25 +52,26 @@
 
       <%= recurrence(f) %>
 
-      <p>
+
+
+    <p>
         <%= f.label :Num_Volunteers %>
         <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
         <%= f.text_field :volunteers_required,:value => 1,:class => "inputSmall" %>
         <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
       </p>
     </fieldset>
+<fieldset>
+  <legend>Synchronization</legend>
+    <div class="explanation">
+      By checking the selectbox below and choosing a calendar you can make this volunteering position to appear in the selected calendar
+    </div>
 
-    <%#= f.label :skills_values %>
-
-    <%#= f.text_field :skills_values %>
-
-
-    <%#= f.label :interests_values %>
-
-    <%#= f.text_field :interests_values %>
-
-
-
+      <%= f.fields_for :event_source do |es| %>
+      <%= es.label :'synchronize?' %> <%= es.check_box :synchronize %><br>
+          <%= es.label :'Calendar' %> <%= es.select :calendar_id, options_from_collection_for_select(Calendar.scoped, :id, :calendar_name, es.object.calendar_id) %>
+      <% end %>
+  </fieldset>
 
     <div id="vp_contact">
       <fieldset>
@@ -119,10 +120,6 @@
         <% end %>
       </fieldset>
 
-      <%= f.fields_for :event_source do |es| %>
-      Synchronize? <%= es.check_box :synchronize %>
-          Calendar? <%= es.select :calendar_id, options_from_collection_for_select(Calendar.scoped, :id, :calendar_name, es.object.calendar_id) %>
-      <% end %>
 
     </div>
     <fieldset>

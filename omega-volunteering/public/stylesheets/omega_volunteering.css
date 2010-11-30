@@ -147,9 +147,7 @@ span.skill-tag-active {
     padding: 1em;
 }
 
-.contacts-hover {
 
-}
 
 .sidebar-menu-content > div.help-explanation{
     font-style:italic;
@@ -162,4 +160,24 @@ span.skill-tag-active {
 #contact-assignment-list{
     height:400px;
     overflow-y:scroll;
+}
+#scheduler-pattern{
+    border-right:1px solid #ddd;
+    margin:10px;
+    padding:10px;
+    width:200px;
+}
+.schedules{
+    display:none;
+}
+#scheduler{
+    display:none;
+}
+
+.explanation{
+background:none repeat scroll 0 0 #FFFFFF;
+border:1px solid #FFC22C;
+color:#333333;
+margin:10px 0;
+padding:10px;
 }

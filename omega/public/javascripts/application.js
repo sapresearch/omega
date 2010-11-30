@@ -236,20 +236,7 @@ jQuery(function($) {
 
     /* jquerui datepicker defaults */
     $.datepicker.setDefaults({showAnim: '' });
-    /* visual highlight methods */
-    $('input[type=text],fieldset input[type=password],textarea').live('focus',
-                                                                     function() {
-                                                                         $(this).addClass('inputActive');
-                                                                     }).live('blur', function() {
-        $(this).removeClass('inputActive');
-    });
 
-    $('fieldset input,fieldset select').live('focus',
-                                            function() {
-                                                $(this).closest('fieldset').addClass('fieldset_active')
-                                            }).live('blur', function() {
-        $(this).closest('fieldset').removeClass('fieldset_active');
-    });
 
 
     $('[data-link-to]').click(function() {

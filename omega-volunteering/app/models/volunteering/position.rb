@@ -30,7 +30,7 @@ class Volunteering::Position < Omega::Model
   validates :name, :description, :hours, :volunteers_required, :presence => true
 
   validates :start, :end, :presence => true,
-                          :unless   => :recurrence?
+                          :unless   => :recurrent?
 
   def active_volunteers
     records.includes(:contact).where('action = ?', 'Accept').collect(&:contact)
