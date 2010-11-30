@@ -8,7 +8,7 @@ class Calendar
       end
 
       def day
-        @day || DayRow.new
+        @day ||= DayRow.new
       end
 
       def day_attributes=(attributes)
@@ -16,7 +16,7 @@ class Calendar
       end
 
       def ordinal
-        @ordinal || OrdinalRow.new
+        @ordinal ||= OrdinalRow.new
       end
 
       def ordinal_attributes=(attributes)
