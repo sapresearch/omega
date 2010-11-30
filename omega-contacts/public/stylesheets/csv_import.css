@@ -17,18 +17,19 @@ div.content{
 }
 
 .csv-table tr {
-    height: 50px;
-}
-
-.csv-table thead {
-    color: #FFF;
-    border: 1px solid #00469C;
+    height: 35px;
 }
 
 .csv-table th {
-    background: #00469C;
-    font-size: 1.2em;
-    color: #FFFFFF;
+    background: #777777;
+    border-color: #DDDDDD #DDDDDD #C3C3C3;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
     padding: 0.5em;
 }
 

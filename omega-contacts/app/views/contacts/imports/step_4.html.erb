@@ -4,7 +4,7 @@
 
 <h1 class="page-content corners-top">
 
-  STEP 4: Import Data
+  Import Preview - Step (4/4)
 
 </h1>
 
@@ -89,9 +89,13 @@
 
       </table>
 
+      <%= om_button(:icon=>'cancel') do %>
+        <%=submit_tag "Import Contacts", :name => "import"%>
+      <%end%>
 
-      <%=submit_tag "Import", :name => "import"%>
-
+      <%= om_button(:icon=>'back') do %>
+              <%= link_to 'Back', csv_import_wizard_contact_imports_url(:step => '3')%>
+      <%end%>
 
       <%end%>
     </div>

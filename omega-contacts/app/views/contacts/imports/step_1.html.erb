@@ -1,10 +1,25 @@
 
 <h1 class="page-content corners-top">
-Step 1 - Introduction </h1>
+Import Wizard Introduction - Step (1/4)  </h1>
 <div class="page-content corners-bottom">
 
+  <p>
+    This wizard allows you to easily import contact records from other applications into Omega. <br/> For example,
+    if your organization has contacts in MS Access or Excel, you can 'import' <br/> those contacts for use in omega
+    with the help of this wizard.
+  </p>
 
-<%= link_to 'Next', csv_import_wizard_contact_imports_url(:step => '2')%>
+  <br/>
+  <br/>
+
+  
+<%= om_button(:icon=>'next') do %>
+    <%= link_to 'Continue', csv_import_wizard_contact_imports_url(:step => '2')%>
+<%end%>
+
+<%= om_button(:icon=>'cancel') do %>
+    <%= link_to 'Cancel', contacts_url()%>
+<%end%>
 
 
 </div>
