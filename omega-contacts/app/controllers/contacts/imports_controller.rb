@@ -298,14 +298,14 @@ class Contacts::ImportsController < Omega::Controller
 
     CSV.foreach(csv) do |row|
 
-      row = row.to_s
-      row = Iconv.new('UTF-8//IGNORE', 'UTF-8').iconv(row + ' ')[0..-2]
+      #row = row.to_s
+      #row = Iconv.new('UTF-8//IGNORE', 'UTF-8').iconv(row + ' ')[0..-2]
 
-      row = row.gsub!(/[\[\]]/,'').split(",")
+      #row = row.gsub!(/[\[\]]/,'').split(",")
 
-      row.each do |r|
-        r.gsub!(/\A "|"\Z|"/,"")
-      end
+      #row.each do |r|
+       # r.gsub!(/\A "|"\Z|"/,"")
+      #end
 
       rows << row
 
