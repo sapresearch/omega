@@ -14,7 +14,7 @@
 
       <td>
         <strong>
-        <%= i.created_at%> <br/>
+        <%= i.created_at.utc.strftime('%Y-%m%d %H:%M:%S')%> <br/>
         </strong>
       </td>
 
