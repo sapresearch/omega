@@ -3,7 +3,11 @@
 </h1>
 
 <div class="page-content corners-bottom">
+<%if @imports.nil? %>
 
+  <h2> No Files Imported Yet</h2>
+      
+<%else%>
   <table>
 
     <th> Created At </th>   <th> &nbsp;&nbsp;Status </th>
@@ -31,5 +35,6 @@
   </table>
 
 
+<%end%>
 
 </div>
