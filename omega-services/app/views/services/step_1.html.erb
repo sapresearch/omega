@@ -1,7 +1,6 @@
 <%= content_for :explanation do %>
     <%= render :partial => 'services/partials/steps' %>
 <% end %>
-
 <%= render :layout => 'layouts/services_wizard' do %>
     <%= form_tag :action=> 'create' do %>
         <ul id="service_types">
@@ -17,13 +16,11 @@
               <%= link_to 'Back', service_wizard_services_url(:step => 'introduction') %>
           <% end %>
           <%= om_button(:icon=>'next') do %>
-              
               <%= submit_tag 'Next' %>
           <% end %>
           <%= om_button(:icon=>'cancel') do %>
               <%= link_to 'Cancel', @service, :confirm => 'Are You Sure?', :method => :delete %>
           <% end %>
-
         </div>
     <% end %>
 <% end %>
