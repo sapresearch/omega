@@ -269,7 +269,5 @@ jQuery(function($) {
     $('#right').find('div.sidebar-menu-content li:last-child').addClass('menu-li-last-divider');
 
 
-
-   
 });
 
