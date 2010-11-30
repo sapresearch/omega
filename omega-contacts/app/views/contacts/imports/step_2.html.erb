@@ -1,28 +1,58 @@
+<% require_stylesheet 'csv_import' %>
 
 <h1 class="page-content corners-top">
-STEP 2</h1>
+Choose/Upload CSV File for Import - Step (2/4)</h1>
 <div class="page-content corners-bottom">
 
+  <div class="helptext">
 
-<h2><strong>Import Data from a CSV</strong></h2>
+    This step is where the actual import process starts. First choose a file you wish to import your contacts from. <br/>
+    The supported format for the import data is CSV 'comma separated values' once you choose the file, click 'continue' <br/>
+    to upload the file and proceed to the next step. If the upload is unsuccessful, you would be redirected to step 2.
+
+  </div>
 
 <%= form_for @import, :html => { :multipart => true } do |f| %>
-      <% unless session[:errors].nil?  %>
-          <%= session[:errors].each do |e| %>
-              <%= e %>
-          <%end%>
-      <%end%>
+
   <p>
-    <strong> File: <%= f.file_field :csv %> <br/>
-    Data Type: </strong><%= f.select :datatype, %w{contacts}%> <br/>
+    <br/>
+    <strong> Browse Data File <br/>
+    <%= f.file_field :csv %> <br/>
+    <br/>
+    Choose Data Type </strong> <br/>
+    <%= f.select :datatype, %w{contacts}%> <br/>
 
   </p>
+
+  <div class="error_messages">
+    <br/>
+    <br/>
+    <% unless session[:errors].nil?  %>
+      <h2> Oops! Following errors prohibited you from proceeding to the next step:</h2>
+      <p>
+        <% session[:errors].each do |e| %>
+         &nbsp;<%= e %><br/>
+      <%end%>
+      </p>
+
+  <%end%>
+
+  </div>
 
   <p>
     <br/>
 
-    <%= f.submit "Upload", :name => "upload" %>
-    <%= f.submit "Next", :name => "next" %>
+    <%= om_button(:icon=>'cancel') do %>
+       <%= f.submit "Upload", :name => "upload" %>
+    <%end%>
+
+    <%= om_button(:icon=>'next') do %>
+        <%= f.submit "Continue", :name => "next" %>
+    <%end%>
+
+    <%= om_button(:icon=>'back') do %>
+        <%= link_to 'Back', csv_import_wizard_contact_imports_url(:step => '1')%>
+    <%end%>
 
   </p>
 <% end %>

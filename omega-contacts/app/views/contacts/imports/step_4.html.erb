@@ -4,11 +4,19 @@
 
 <h1 class="page-content corners-top">
 
-  STEP 4: Import Data
+  Import Preview - Step (4/4)
 
 </h1>
 
 <div class="page-content corners-bottom">
+
+   <div class="helptext">
+
+    This step gives you a preview of the mapping done in the previous step. Click 'back' to make changes to the<br/>
+    mapping or to discard fields you don't wish to import. Once you finish, click 'import' to import the contacts  <br/>
+    into omega.
+
+   </div>
 
   <div class="csv-container">
 
@@ -89,9 +97,13 @@
 
       </table>
 
+      <%= om_button(:icon=>'cancel') do %>
+        <%=submit_tag "Import Contacts", :name => "import"%>
+      <%end%>
 
-      <%=submit_tag "Import", :name => "import"%>
-
+      <%= om_button(:icon=>'back') do %>
+              <%= link_to 'Back', csv_import_wizard_contact_imports_url(:step => '3')%>
+      <%end%>
 
       <%end%>
     </div>

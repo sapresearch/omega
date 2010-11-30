@@ -69,7 +69,9 @@ class Contacts::ImportsController < Omega::Controller
 
   def create
 
-      @import = Contact::Import.create(params[:contact_import])
+    @import = Contact::Import.create(params[:contact_import])
+
+    if params[:upload]
 
       if @import.valid?
         process_csv(@import)
@@ -78,6 +80,17 @@ class Contacts::ImportsController < Omega::Controller
         session[:errors] = @import.errors.full_messages
         redirect_to csv_import_wizard_contact_imports_url(:step => 2)
       end
+
+      else if params[:next]
+
+        if session[:rows_id].nil?
+          redirect_to csv_import_wizard_contact_imports_url(:step => 2)
+        else
+          redirect_to csv_import_wizard_contact_imports_url(:step => 3)
+        end
+
+      end
+    end
 
   end
 
@@ -211,25 +224,34 @@ class Contacts::ImportsController < Omega::Controller
 
   def undo_import
 
-  @imports = Contact::DataImport.all.collect{ |c| [c.created_at.utc] unless c.status == 'draft' || c.status == 'deleted'}
+  @imports = Contact::DataImport.all.collect{ |c| [c.created_at.utc.strftime('%Y-%m-%d %H:%M:%S')] unless c.status == 'draft' || c.status == 'deleted'}
+  @imports.compact!
     
   end
 
   def get_import_data
 
-  @import = Contact::DataImport.find_by_created_at(params[:created_at])
+    if params[:created_at] == ''
 
-  if params[:filter] == 'import_filter_By_Mapping'
+      render :partial => "error_page"
 
-    render :partial => "get_import_mapping"
+    else
 
-  else if params[:filter] == 'import_filter_By_Data'
+      @import = Contact::DataImport.find_by_created_at(params[:created_at])
 
-    @contacts = @import.contact_ids
-    render :partial => "get_import_data"
+      if params[:filter] == 'import_filter_By_Mapping'
+
+        render :partial => "get_import_mapping"
+
+        else if params[:filter] == 'import_filter_By_Data'
+
+          @contacts = @import.contact_ids
+          render :partial => "get_import_data"
+
+        end
+      end
 
     end
-  end
 
   end
 

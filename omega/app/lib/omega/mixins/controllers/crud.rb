@@ -14,7 +14,7 @@ module Omega::Mixins::Controllers
 
         class_eval do
           before_filter :only => all do
-            instance_variable_set("@#{variable_name.pluralize}", model.all)
+            instance_variable_set("@#{variable_name.pluralize}", model.scoped)
           end
 
           before_filter :only => new do

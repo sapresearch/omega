@@ -1,10 +1,29 @@
+<% require_stylesheet 'csv_import' %>
 
 <h1 class="page-content corners-top">
-Step 1 - Introduction </h1>
+Import Wizard Introduction - Step (1/4)  </h1>
 <div class="page-content corners-bottom">
 
+  <div class="helptext">
 
-<%= link_to 'Next', csv_import_wizard_contact_imports_url(:step => '2')%>
+    This wizard allows easy import of contact records from other applications into Omega. <br/> For example,
+    if your organization has contacts exported from a data-source in csv format, you can 'import' <br/> these contacts for use in omega
+    with the help of this wizard.
+
+  </div>
+
+
+  <br/>
+  <br/>
+
+  
+<%= om_button(:icon=>'next') do %>
+    <%= link_to 'Continue', csv_import_wizard_contact_imports_url(:step => '2')%>
+<%end%>
+
+<%= om_button(:icon=>'cancel') do %>
+    <%= link_to 'Cancel', contacts_url()%>
+<%end%>
 
 
 </div>

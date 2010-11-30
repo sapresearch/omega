@@ -23,6 +23,7 @@ class ContactsController < Omega::Controller
   end
 
   def all
+    @contacts = Contact.status
     respond_with(@contacts)
   end
 
