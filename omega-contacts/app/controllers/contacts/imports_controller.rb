@@ -275,7 +275,9 @@ class Contacts::ImportsController < Omega::Controller
 
   def process_csv(import)
 
-      rows = parse_csv(import.csv.path)
+      csv_data = Iconv.iconv('UTF-8//IGNORE','UTF-8', import.csv.path)
+
+      rows = parse_csv(csv_data.join(","))
 
       if rows.size > 0
 
@@ -297,15 +299,6 @@ class Contacts::ImportsController < Omega::Controller
     rows = []
 
     CSV.foreach(csv) do |row|
-
-      #row = row.to_s
-      #row = Iconv.new('UTF-8//IGNORE', 'UTF-8').iconv(row + ' ')[0..-2]
-
-      #row = row.gsub!(/[\[\]]/,'').split(",")
-
-      #row.each do |r|
-       # r.gsub!(/\A "|"\Z|"/,"")
-      #end
 
       rows << row
 
