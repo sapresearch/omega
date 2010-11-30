@@ -1,19 +1,25 @@
+<% require_stylesheet 'csv_import' %>
 
 <h1 class="page-content corners-top">
 Choose/Upload CSV File for Import - Step (2/4)</h1>
 <div class="page-content corners-bottom">
 
+  <div class="helptext">
 
-<h2><strong>Import Data from a CSV</strong></h2>
+    This step is where the actual import process starts. First choose a file you wish to import your contacts from. <br/>
+    The supported format for the import data is CSV 'comma separated values' once you choose the file, click 'continue' <br/>
+    to upload the file and proceed to the next step. If the upload is unsuccessful, you would be redirected to step 2.
+
+  </div>
 
 <%= form_for @import, :html => { :multipart => true } do |f| %>
 
   <p>
     <br/>
-    <strong> CSV Data File <br/>
+    <strong> Browse Data File <br/>
     <%= f.file_field :csv %> <br/>
     <br/>
-    Data Type </strong> <br/>
+    Choose Data Type </strong> <br/>
     <%= f.select :datatype, %w{contacts}%> <br/>
 
   </p>
