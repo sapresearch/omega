@@ -5,6 +5,19 @@ class Contact::Import < Omega::Model
                     :path => ":rails_root/public/csvs/contacts/:id/:basename.:extension"
 
   validates_attachment_presence :csv
+  validates_attachment_content_type :csv, :content_type =>
+                                                  ['text/csv',
+                                                   'text/comma-separated-values',
+                                                   'text/csv',
+                                                   'applications/csv',
+                                                   'applications/excel',
+                                                   'applications/vnd.ms-excel',
+                                                   'applications/vnd.msexcel',
+                                                   'applications/google',
+                                                   'applications/outlook',                                                
+                                                   'text/anytext',
+                                                   'text/plain'
+                                                  ]
 
 
 end
