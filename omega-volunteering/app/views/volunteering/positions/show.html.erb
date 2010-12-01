@@ -5,10 +5,7 @@
     <h1 class="page-content corners-top">
       <%= @position.name %>
     </h1>
-
     <div class="page-content corners-bottom">
-
-
       <p>
         <%= @position.description %>
       </p>
@@ -26,9 +23,7 @@
               <%= @position.end.to_formatted_s(:long) %>
             </p>
         <% end %>
-
         <!-- hours-->
-
         <% if @position.recurrence.pattern %>
             <% recurrence = @position.recurrence %>
             <p class="explanation">
@@ -59,7 +54,6 @@
                                           t(:"calendar.recurrence.days.#{recurrence.monthly.ordinal.days}") +
                                           ' of every ' + recurrence.monthly.ordinal.months.to_s + ' month'
                           end
-
 
                       when Calendar::Recurrence::YEARLY
                           case recurrence.yearly.every

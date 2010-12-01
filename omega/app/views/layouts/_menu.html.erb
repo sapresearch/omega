@@ -34,6 +34,7 @@
         <%= with_permission(Service::PERM_ADMIN) do %>
             <%= link_to "My Draft Services", show_drafts_services_url %>
             <%= link_to "Create a Service ", service_wizard_services_url(:step => 'introduction') %>
+            <%= link_to "Create a Service Typ ", new_service_type_url %>
         <% end %>
         <%= with_permission(Service::PERM_APPLY) do %>
             <%= link_to "My Service Registrations", my_registrations_service_registrations_url %>

@@ -641,7 +641,7 @@ span.error, .red {
     box-shadow: 0 0 10px #333;
 }
 
-/* Buttons */
+/* OM-COLORED-ICON-BUTTONS */
 .om-button a, .om-button input, .om-button button, .om-icon-button a, .om-icon-button input, .om-icon-button button {
     position: relative;
     text-transform: capitalize;
@@ -803,7 +803,7 @@ span.om-icon-button span.om-icon {
 
 }
 
-.om-icon-delete-small {
+.om-icon-delete-small,.om-icon-cancel {
     background-position: 0 -80px;
 
 }
@@ -1004,7 +1004,7 @@ span.om-icon-back {
     background-position: 0 -1136px;
 }
 
-/*END BUTTONS*/
+/* END OM-COLORED-ICON BUTTONS */
 
 /*Pagination */
 div.pagination {
