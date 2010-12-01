@@ -34,11 +34,13 @@ class Contacts::ImportsController < Omega::Controller
 
        when '2'
 
+          session[:last_page] = "intro"
+
         session[:current_page] = "upload"
         render "contacts/imports/step_2"
 
        when '3'
-
+                  
         session[:current_page] = "mapping"
         render "contacts/imports/step_3"
 

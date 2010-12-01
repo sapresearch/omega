@@ -104,16 +104,14 @@
         
       </table>
 
-      <%= om_button(:icon=>'cancel') do %>
-        <%= submit_tag "Discard", :name => "discard"%>
-      <%end%>
-
       <%= om_button(:icon=>'next') do %>
         <%= submit_tag "Continue", :name => "next"%>
       <%end%>
 
       <%= om_button(:icon=>'back') do %>
         <%= link_to 'Back', csv_import_wizard_contact_imports_url(:step => '2')%>
+              <% session[:last_page] = "mapping"%>
+
       <%end%>
 
       <%end%>
