@@ -28,7 +28,7 @@
 
                <th class="csv-table">CSV Field</th>
 
-                  <% @old_rows[0].each do |c|%>
+                  <% @csv_rows[0].each do |c|%>
 
                       <tr class="csv-table">
 
@@ -57,7 +57,7 @@
                       <tr class="csv-table">
 
                          <td class="csv-table">
-                            <%=c%>
+                            <%=c.humanize%>
                          </td>
 
                       </tr>

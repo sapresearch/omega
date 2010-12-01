@@ -6,10 +6,11 @@ class Contacts::ImportsController < Omega::Controller
   respond_to :html, :js, :json, :xml
   
   def csv_import_wizard
-
+   
      if params[:step] == '1'
        session[:rows_id] = nil
        session[:errors] = nil
+       session[:last_page] = nil
      end
 
      if params[:step] == '2'
@@ -18,16 +19,17 @@ class Contacts::ImportsController < Omega::Controller
      
      @contact_fields = get_omega_contact_fields
      @contact_fields.compact!
+
      @mapping = get_mapping_hash
 
      unless session[:rows_id].nil?
-       @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
+       @csv_rows = Contact::DataImport.find(session[:rows_id]).csv_rows
      end
 
      case params[:step]
 
        when '1'
-
+         
         session[:current_page] = "intro"
         render "contacts/imports/step_1"
 
@@ -37,15 +39,21 @@ class Contacts::ImportsController < Omega::Controller
         render "contacts/imports/step_2"
 
        when '3'
-
+                  
         session[:current_page] = "mapping"
+
+        if session[:last_page] == "preview" || session[:last_page] == "mapping"
+          @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
+        else
+          @rows = Contact::DataImport.find(session[:rows_id]).csv_rows          
+        end
         render "contacts/imports/step_3"
 
        when '4'
 
         session[:current_page] = "import"
 
-        @old_rows = Contact::DataImport.find(session[:rows_id]).csv_rows
+        @csv_rows = Contact::DataImport.find(session[:rows_id]).csv_rows
         @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
 
         render "contacts/imports/step_4"
@@ -97,34 +105,10 @@ class Contacts::ImportsController < Omega::Controller
   def update_csv
 
     @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
-
-    if params[:discard]
     
-    @discard_columns = Array.new
-
-        params[:mapping].each do |k,v|
-
-            if v["discard"] == "1"
-               @discard_columns << v["column"].to_i
-            end
-        end
-
-    @discard_columns = @discard_columns.sort {|x,y| y <=> x }
-
-    @discard_columns.each do |c|
-        @rows.each do |row|
-           row.delete_at(c)
-        end
-    end
-
-    @csv_rows = Contact::DataImport.find(session[:rows_id])
-    @csv_rows.update_attributes(:csv_rows => @rows)
-
-    redirect_to csv_import_wizard_contact_imports_url(:step => 3)
-
-    end
-
     if params[:next]
+
+      session[:last_page] = "preview"
 
       @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
 
@@ -311,18 +295,19 @@ class Contacts::ImportsController < Omega::Controller
   def get_omega_contact_fields
 
     @contacts = Array.new
-    @contacts << "Do Not Import"
+    @contacts << ["Do Not Import" , "Do Not Import"]
 
-    Contact.columns.collect { |c| [c.name] unless c.name == "id"  || c.name == "created_at" || c.name == "updated_at" || c.name == "status"  }.each do |c|
+    Contact.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id"  || c.name == "created_at" || c.name == "updated_at" || c.name == "status"  }.each do |c|
       @contacts << c
     end
 
-    @phones = Contact::PhoneNumber.columns.collect { |c| [c.name] unless c.name == "id" || c.name == "contact_id" || c.name == "created_at" || c.name == "updated_at" }
-    @address = Contact::Address.columns.collect { |c| [c.name] unless c.name == "id" || c.name == "created_at" || c.name == "updated_at"}
+    @phones = Contact::PhoneNumber.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "contact_id" || c.name == "created_at" || c.name == "updated_at" }
+    @address = Contact::Address.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "created_at" || c.name == "updated_at"}
 
     @contacts | @phones | @address
 
   end
+
 
   def get_mapping_hash
     

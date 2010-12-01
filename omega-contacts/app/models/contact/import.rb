@@ -13,6 +13,8 @@ class Contact::Import < Omega::Model
                                                    'applications/excel',
                                                    'applications/vnd.ms-excel',
                                                    'applications/vnd.msexcel',
+                                                   'applications/google',
+                                                   'applications/outlook',                                                
                                                    'text/anytext',
                                                    'text/plain'
                                                   ]
