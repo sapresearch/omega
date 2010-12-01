@@ -46,7 +46,7 @@ Choose/Upload CSV File for Import - Step (2/4)</h1>
        <%= f.submit "Upload", :name => "upload" %>
     <%end%>
 
-    <% if session[:last_page] == 'mapping' %>
+    <% if session[:last_page] == 'mapping'  %>
     <%= om_button(:icon=>'next') do %>
         <%= f.submit "Continue", :name => "next" %>
     <%end%>

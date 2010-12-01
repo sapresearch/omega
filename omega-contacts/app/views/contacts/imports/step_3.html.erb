@@ -31,7 +31,7 @@
 
                <th class="csv-table">CSV Field</th>
 
-                  <% @rows[0].each do |c|%>
+                  <% @csv_rows[0].each do |c|%>
 
                     <% unless c.nil? %>
 
@@ -110,8 +110,7 @@
 
       <%= om_button(:icon=>'back') do %>
         <%= link_to 'Back', csv_import_wizard_contact_imports_url(:step => '2')%>
-
-      <% session[:last_page] = "mapping"%>
+        <% session[:last_page] = "mapping"%>
 
       <%end%>
 

@@ -23,7 +23,7 @@ class Contacts::ImportsController < Omega::Controller
      @mapping = get_mapping_hash
 
      unless session[:rows_id].nil?
-       @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
+       @csv_rows = Contact::DataImport.find(session[:rows_id]).csv_rows
      end
 
      case params[:step]
@@ -41,13 +41,19 @@ class Contacts::ImportsController < Omega::Controller
        when '3'
                   
         session[:current_page] = "mapping"
+
+        if session[:last_page] == "preview" || session[:last_page] == "mapping"
+          @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
+        else
+          @rows = Contact::DataImport.find(session[:rows_id]).csv_rows          
+        end
         render "contacts/imports/step_3"
 
        when '4'
 
         session[:current_page] = "import"
 
-        @old_rows = Contact::DataImport.find(session[:rows_id]).csv_rows
+        @csv_rows = Contact::DataImport.find(session[:rows_id]).csv_rows
         @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
 
         render "contacts/imports/step_4"
@@ -99,34 +105,10 @@ class Contacts::ImportsController < Omega::Controller
   def update_csv
 
     @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
-
-    if params[:discard]
     
-    @discard_columns = Array.new
-
-        params[:mapping].each do |k,v|
-
-            if v["discard"] == "1"
-               @discard_columns << v["column"].to_i
-            end
-        end
-
-    @discard_columns = @discard_columns.sort {|x,y| y <=> x }
-
-    @discard_columns.each do |c|
-        @rows.each do |row|
-           row.delete_at(c)
-        end
-    end
-
-    @csv_rows = Contact::DataImport.find(session[:rows_id])
-    @csv_rows.update_attributes(:csv_rows => @rows)
-
-    redirect_to csv_import_wizard_contact_imports_url(:step => 3)
-
-    end
-
     if params[:next]
+
+      session[:last_page] = "preview"
 
       @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
 
