@@ -10,7 +10,7 @@ class FormBuilderController < Omega::Controller
     type_class = ''
 
 
-    @rand = rand(1000)
+    
     case params[:element]
       when 'input'
         type = 'text'

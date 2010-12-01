@@ -9,12 +9,10 @@
         <%= f.label :name %>
         <%= f.text_field :name, :'data-tooltip '=> 'descriptive name for position', :class => 'broad-text' %>
       </p>
-
       <p>
         <%= f.label :description %>
         <%= f.text_area :description, :rows => 6, :'data-tooltip '=> 'describe what work the volunteer will be doing in this position', :class => 'broad-text' %>
       </p>
-
       <p>
         <%= f.label :hours %>
 
@@ -22,15 +20,12 @@
         <%= f.text_field :hours, :value=> 1, :class => "inputSmall", :'data-tooltip '=> 'approximate number of hours per week needed' %>
         <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
       </p>
-
       <p>
         <%= f.label :reoccurs %>
         <%= f.radio_button :recurrent, true %>
         <%= f.label :one_time_only %>
         <%= f.radio_button :recurrent, false %>
-
       </p>
-
 
       <div id="non_recurrent">
 
@@ -40,7 +35,6 @@
           <%= f.label :end_date %>
           <%= f.text_field :end_date, :class=>'datepickr', :autocomplete => 'off' %>
         </p>
-
         <p>
 
           <%= f.label :start_time %>

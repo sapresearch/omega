@@ -28,9 +28,18 @@
 
 
       <p>
-        <%= f.submit "Create" %>
+
+        <%= om_button(:icon => 'apply') do %>
+              <%= f.submit "Create" %>
+          <% end %>
+
+        <%= om_button(:icon => 'cancel') do %>
+          <%= link_to 'Cancel', services_path %>
+      <% end %>
+
 
       </p>
+      <div class="clear"></div>
 
     </div>
 <% end %>
