@@ -8,9 +8,9 @@ $(function() {
         import_data(this.id)
     });
 
-    $('#wizard-intro li').hover(function(){
+    $('#wizard-intro li').find('.read-more').hover(function(){
       
-        $(this).find('.wizard-explanation').show().animate({
+        $(this).next('.wizard-explanation').show().animate({
                              marginTop: '-110px', /* The next 4 lines will vertically align this image */
                              marginLeft: '-110px',
                              top: '50%',
@@ -20,7 +20,7 @@ $(function() {
                              padding: '10px'
                          }, 200).addClass('box-shadow-dark');
     },function(){
-        $(this).find('.wizard-explanation').animate({
+        $(this).next('.wizard-explanation').animate({
                              marginTop: '0', /* Set alignment back to default */
                              marginLeft: '0',
                              top: '0',
