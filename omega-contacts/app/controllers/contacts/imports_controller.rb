@@ -18,6 +18,7 @@ class Contacts::ImportsController < Omega::Controller
      
      @contact_fields = get_omega_contact_fields
      @contact_fields.compact!
+
      @mapping = get_mapping_hash
 
      unless session[:rows_id].nil?
@@ -311,18 +312,19 @@ class Contacts::ImportsController < Omega::Controller
   def get_omega_contact_fields
 
     @contacts = Array.new
-    @contacts << "Do Not Import"
+    @contacts << ["Do Not Import" , "Do Not Import"]
 
-    Contact.columns.collect { |c| [c.name] unless c.name == "id"  || c.name == "created_at" || c.name == "updated_at" || c.name == "status"  }.each do |c|
+    Contact.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id"  || c.name == "created_at" || c.name == "updated_at" || c.name == "status"  }.each do |c|
       @contacts << c
     end
 
-    @phones = Contact::PhoneNumber.columns.collect { |c| [c.name] unless c.name == "id" || c.name == "contact_id" || c.name == "created_at" || c.name == "updated_at" }
-    @address = Contact::Address.columns.collect { |c| [c.name] unless c.name == "id" || c.name == "created_at" || c.name == "updated_at"}
+    @phones = Contact::PhoneNumber.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "contact_id" || c.name == "created_at" || c.name == "updated_at" }
+    @address = Contact::Address.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "created_at" || c.name == "updated_at"}
 
     @contacts | @phones | @address
 
   end
+
 
   def get_mapping_hash
     

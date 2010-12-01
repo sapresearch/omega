@@ -29,7 +29,7 @@
 
             <table class="csv-table">
 
-               <th class="csv-table">CSV Field</th> <th class="csv-table">Discard</th>
+               <th class="csv-table">CSV Field</th>
 
                   <% @rows[0].each do |c|%>
 
@@ -40,27 +40,7 @@
                          <td class="csv-table">
                             <%=c.humanize%>
                          </td>
-
-                         <td class="csv-table">
-
-                           <% @flag = true %>
-
-                            <% @mapping.each do |k,v| %>
-
-                               <% if v.include?(c) || k == c %>
-
-                                   <% @flag = false %>
-
-                               <%end%>
-
-                            <%end%>
-
-                           <%= check_box "mapping[#{c}]", 'discard', {:checked => @flag} %>
-
-                           <%= hidden_field_tag "mapping[#{c}][column]", @rows[0].index(c)%>
-
-
-                         </tr>
+                      </tr>
                     <%end%>
 
                   <%end%>
@@ -98,7 +78,7 @@
                     </tr>
                  <%end%>
           </table>
-
+            
           </td>
 
           <td>
@@ -111,7 +91,6 @@
                                  <tr class="csv-table">
 
                                      <td class="csv-table">
-
                                          <%=d%>
                                      </td>
                                    
