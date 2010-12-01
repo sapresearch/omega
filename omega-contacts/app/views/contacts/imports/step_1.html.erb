@@ -1,4 +1,9 @@
 <% require_stylesheet 'csv_import' %>
+<% require_javascript 'import' %>
+<%= content_for :explanation do %>
+    <%= render :partial => 'contacts/partials/steps' %>
+<% end %>
+
 
 <h1 class="page-content corners-top">
 Import Wizard Introduction - Step (1/4)  </h1>

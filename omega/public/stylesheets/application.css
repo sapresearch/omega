@@ -702,7 +702,7 @@ span.om-icon-button {
 }
 
 span.om-plain-button, span.om-plain-icon-button {
-    cursor: auto;
+    cursor: pointer;
     position: relative;
     display: inline-block;
     height: 16px;

@@ -4,7 +4,7 @@ $(function() {
 
         $(this).css({'z-index' : '10'});
         /*Add a higher z-index value so this image stays on top*/
-        $(this).find('img').stop()/* Add class of "hover", then stop animation queue buildup*/
+        $(this).find('img')
                 .animate({
                              marginTop: '-110px', /* The next 4 lines will vertically align this image */
                              marginLeft: '-110px',
@@ -19,7 +19,7 @@ $(function() {
     }, function() {
         $(this).css({'z-index' : '0'});
         /* Set z-index back to 0 */
-        $(this).find('img').stop()/* Remove the "hover" class , then stop animation queue buildup*/
+        $(this).find('img')
                 .animate({
                              marginTop: '0', /* Set alignment back to default */
                              marginLeft: '0',

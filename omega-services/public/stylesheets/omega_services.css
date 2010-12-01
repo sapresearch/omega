@@ -65,7 +65,7 @@ div.position_slider {
     position: absolute;
     top: 22px;
     background: url("../images/details_bg.png") repeat-x bottom;
-    color: #fff;
+    color: #fff !important;
     display: none;
 
 }
@@ -171,8 +171,8 @@ span.skill_tag_active {
     color: #333;
 }
 
-
-#services-intro li{
+/* Wizard steps */
+#wizard-intro li{
     
     float:left;
     width:240px;
@@ -180,7 +180,7 @@ span.skill_tag_active {
 
 }
 
-#services-intro li {
+#wizard-intro li {
     color: #333;
     border: 1px solid #4096ee;
     height: 90px;
@@ -189,13 +189,13 @@ span.skill_tag_active {
     background: url("/images/omega_services.png") top left no-repeat #fff;
 }
 
-#services-intro li.active {
+#wizard-intro li.active {
     font-weight:bold;
     color: #cf3a72;
     border: 1px solid #cf3a72;
     background-position: 0 -110px
 }
-#services-intro li.active h3{
+#wizard-intro li.active h3{
     color:#421325;
 }
 div.step-nail {
@@ -244,10 +244,15 @@ div.step-4 {
 div.step-5 {
     background-position: 0 -424px
 }
+
+
 #form-builder{
     width:900px;
     height:100px;
     display:block;
     position:static;
     bottom:0
+}
+.position_actions span.om-plain-icon-button a {
+    color: #FFFFFF;
 }

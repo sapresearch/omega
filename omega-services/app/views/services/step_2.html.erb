@@ -95,12 +95,10 @@
           <%= om_button(:icon=>'back') do %>
               <%= link_to 'Back', service_wizard_services_url(:step => 1) %>
           <% end %>
-          <%= om_button(:icon=>'save') do %>
-              <%= f.submit "Save", :name => "save" %>
-          <% end %>
           <%= om_button(:icon=>'next') do %>
-              <%= f.submit "Next", :name => "next" %>
+              <%= f.submit "Next", :name => "save" %>
           <% end %>
+  
           <%#= om_button(:icon=>'cancel') do %>
           <%#= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
           <%# end %>

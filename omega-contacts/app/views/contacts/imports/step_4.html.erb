@@ -1,5 +1,5 @@
 <% require_stylesheet 'csv_import' %>
-<% require_javascript 'csv_import' %>
+<% require_javascript 'import' %>
 
 
 <h1 class="page-content corners-top">
@@ -9,14 +9,10 @@
 </h1>
 
 <div class="page-content corners-bottom">
+<%= content_for :explanation do %>
+    <%= render :partial => 'contacts/partials/steps' %>
+<% end %>
 
-   <div class="helptext">
-
-    This step gives you a preview of the mapping done in the previous step. Click 'back' to make changes to the<br/>
-    mapping or to discard fields you don't wish to import. Once you finish, click 'import' to import the contacts  <br/>
-    into omega.
-
-   </div>
 
   <div class="csv-container">
 
