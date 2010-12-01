@@ -1,0 +1,36 @@
+<%= form_for @service_type do |f| %>
+
+    <%= errors_for_form @service_type %>
+
+    <div>
+
+      <p>
+
+        <%= f.label :service_category %>
+        <%= f.select :service_category, %w{enrollable requestable}%>
+
+      </p>
+
+      <p>
+
+        <%= f.label :type_name %>
+        <%= f.text_field :service_type %>
+
+      </p>
+
+
+      <p>
+
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+
+      </p>
+
+
+      <p>
+        <%= f.submit "Create" %>
+
+      </p>
+
+    </div>
+<% end %>
