@@ -6,10 +6,11 @@ class Contacts::ImportsController < Omega::Controller
   respond_to :html, :js, :json, :xml
   
   def csv_import_wizard
-
+   
      if params[:step] == '1'
        session[:rows_id] = nil
        session[:errors] = nil
+       session[:last_page] = nil
      end
 
      if params[:step] == '2'
@@ -28,13 +29,11 @@ class Contacts::ImportsController < Omega::Controller
      case params[:step]
 
        when '1'
-
+         
         session[:current_page] = "intro"
         render "contacts/imports/step_1"
 
        when '2'
-
-          session[:last_page] = "intro"
 
         session[:current_page] = "upload"
         render "contacts/imports/step_2"

@@ -54,6 +54,7 @@ Choose/Upload CSV File for Import - Step (2/4)</h1>
 
     <%= om_button(:icon=>'back') do %>
         <%= link_to 'Back', csv_import_wizard_contact_imports_url(:step => '1')%>
+        <% session[:errors] = nil %>
     <%end%>
 
   </p>
