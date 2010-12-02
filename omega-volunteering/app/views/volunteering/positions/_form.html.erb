@@ -1,5 +1,5 @@
 <% require_stylesheet 'omega_volunteering' %>
-<% require_javascript 'thirdParty/jquery.timepicker', 'new_volunteering_position' %>
+<% require_javascript 'thirdParty/jquery.timepicker', 'new_volunteering_position', 'jquery.tokeninput' %>
 
 
 <%= form_for(@position, :html => {:id => 'volunteer_position_form'}) do |f| %>
@@ -120,13 +120,14 @@
       <legend>Skills and Interests</legend>
       <p>
         <%= f.label :skills %>
-        <%= f.text_field :skills_values %>
+        <%= f.text_field :skills_values, :'data-tokeninput' => volunteering_skills_path(:json),
+                         :'data-tokeninput-prepopulate' => @position.skills.map { |s| { :id => s.name, :name => s.name } }.to_json %>
       </p>
 
       <p>
         <%= f.label :interests %>
-        <%= f.text_field :interests_values %>
-      </p>
+        <%= f.text_field :interests_values, :'data-tokeninput' => volunteering_interests_path(:json),
+                         :'data-tokeninput-prepopulate' => @position.interests.map { |s| { :id => s.name, :name => s.name } }.to_json %>
     </fieldset>
     <p>
       <%= om_button(:icon=>'save') do %>

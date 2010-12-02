@@ -50,13 +50,13 @@
 
              <th class="csv-table">Omega Field</th>
 
-                 <% @rows[0].each do |c| %>
+                 <% @together.each do |csv,map| %>
 
-                    <% @val = c %>
+                    <% @val = map %>
 
                     <% @mapping.each do |k,v| %>
 
-                        <% if v.include?(c) %>
+                        <% if v.include?(csv) %>
 
                             <% @val = k %>
 
@@ -67,8 +67,8 @@
                     <tr class="csv-table">
 
                         <td class="csv-table">
-                             <%= select 'csv_field',c, @contact_fields, :selected => @val%>
-                             <%= hidden_field 'column', @val, :value => @rows[0].index(c)%>
+                             <%= select 'csv_field',csv, @contact_fields, :selected => @val%>
+                             <%= hidden_field 'column', map, :value => @csv_rows[0].index(csv)%>
                         </td>
 
                     </tr>
@@ -83,7 +83,7 @@
 
                   <th class="csv-table">Imported Data Preview</th>
 
-                      <% @rows[2].each do |d| %>
+                      <% @csv_rows[2].each do |d| %>
                                  <tr class="csv-table">
 
                                      <td class="csv-table">
