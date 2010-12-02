@@ -26,7 +26,7 @@ Omega::Module.routes.draw do
       post :join, :path => 'register'
       get :autocomplete
 
-      match :letter, :constraints => { :letter => /[a-z]/i}
+      match :letter, :path => ':letter', :constraints => { :letter => /[a-z]/i }
     end
   end
 
