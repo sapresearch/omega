@@ -4,9 +4,9 @@ require 'iconv'
 class Contacts::ImportsController < Omega::Controller
 
   respond_to :html, :js, :json, :xml
-  
+
   def csv_import_wizard
-   
+
      if params[:step] == '1'
        session[:rows_id] = nil
        session[:errors] = nil
@@ -16,7 +16,7 @@ class Contacts::ImportsController < Omega::Controller
      if params[:step] == '2'
        @import = Contact::Import.new
      end
-     
+
      @contact_fields = get_omega_contact_fields
      @contact_fields.compact!
 
@@ -29,7 +29,7 @@ class Contacts::ImportsController < Omega::Controller
      case params[:step]
 
        when '1'
-         
+
         session[:current_page] = "intro"
         render "contacts/imports/step_1"
 
@@ -39,7 +39,7 @@ class Contacts::ImportsController < Omega::Controller
         render "contacts/imports/step_2"
 
        when '3'
-                  
+
         session[:current_page] = "mapping"
 
         @csv_rows = Contact::DataImport.find(session[:rows_id]).csv_rows
@@ -63,7 +63,7 @@ class Contacts::ImportsController < Omega::Controller
         @mapped_rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
 
         render "contacts/imports/step_4"
-         
+
      end
   end
 
@@ -74,7 +74,7 @@ class Contacts::ImportsController < Omega::Controller
   end
 
   def show
-    
+
   end
 
   def new
@@ -114,7 +114,7 @@ class Contacts::ImportsController < Omega::Controller
 
       session[:last_page] = "preview"
       @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
-      
+
       params[:csv_field].each do |k,v|
 
         @rows[0].each do |column|
@@ -150,7 +150,7 @@ class Contacts::ImportsController < Omega::Controller
     if params[:import]
 
       @contacts = Array.new
-      
+
       @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
       @rows.shift
 
@@ -186,7 +186,7 @@ class Contacts::ImportsController < Omega::Controller
 
         @contact.save(:validate => false)
         @contacts << @contact.id
-        
+
       end
 
       @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
@@ -213,7 +213,7 @@ class Contacts::ImportsController < Omega::Controller
 
   @imports = Contact::DataImport.all.collect{ |c| [c.created_at.utc.strftime('%Y-%m-%d %H:%M:%S')] unless c.status == 'draft' || c.status == 'deleted'}
   @imports.compact!
-    
+
   end
 
   def get_import_data
@@ -256,8 +256,8 @@ class Contacts::ImportsController < Omega::Controller
 
   redirect_to contact_imports_url()
   end
-  
-  
+
+
   private #---------------------------------------------------------------------------------------------------
 
   def process_csv(import)
@@ -274,7 +274,7 @@ class Contacts::ImportsController < Omega::Controller
         rows.each do |r|
           @csv_rows << r
         end
-        
+
       end
 
       @rows = Contact::DataImport.create(:csv_rows => @csv_rows, :status => 'draft')
@@ -290,9 +290,9 @@ class Contacts::ImportsController < Omega::Controller
       rows << row
 
     end
-    
+
     rows
-    
+
   end
 
   def get_omega_contact_fields
@@ -313,7 +313,7 @@ class Contacts::ImportsController < Omega::Controller
 
 
   def get_mapping_hash
-    
+
     @mapping = {     "title" => ['Individual Prefix', 'Prefix', 'Salutation', 'salutation', 'Title', 'prefix', 'individual prefix', 'title'],
                      "first_name" => ['First Name', 'First name', 'First_name', 'first_Name', 'first name', 'firstname', 'Firstname', 'first_name'],
                      "last_name" => ['Last Name', 'Last name', 'Last_name', 'last_Name', 'last name', 'lastname', 'Lastname', 'last_name', 'last_name'],
