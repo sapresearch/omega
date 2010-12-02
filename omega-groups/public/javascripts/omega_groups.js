@@ -1,3 +1,8 @@
+/**
+ * Filter plugin for live filtering on the client side
+ * @param o options
+ */
+
 jQuery.fn.jfilter = function(o) {
 
     return this.each(function() {
@@ -34,10 +39,11 @@ $(function() {
     $('#user-filter, #member-filter').focusout(function() {
         $(this).val('');
     });
-
+    //user filter for the group member assign view
     $('#user-filter').jfilter({
         list: '#user-list'
     });
+    //user filter for the group member assign view
     $('#member-filter').jfilter({
         list: '#member-list'
     });
@@ -46,29 +52,31 @@ $(function() {
     /* jqueryui autocomplete for groups */
     $('#sidebar-search-input').autocomplete({
         source : '/groups/autocomplete',
-        minLength: 3,
+        minLength: 2,
         select: function(event, ui) {
 
+            window.location = '/groups/'+ ui.item.id;
             return false;
         }
     }).focus(function() {
         $(this).val('')
     });
-
+// show the available actions at the group overview
     $('#groups-list').find('li').mouseenter(
                                            function() {
                                                $(this).find('div.item-list-actions-wrapper').fadeIn('fast')
                                            }).mouseleave(function() {
         $(this).find('div.item-list-actions-wrapper').fadeOut('fast')
     });
-        $('#posts-list').find('span.ui-icon-search ').hover(
-                                                         function(){
-                                                         $(this).siblings('div.post-preview').show();
-                                                         },
-                                                         function(){
-                                                             $(this).siblings('div.post-preview').hide();
-                                                         })
 
+    // show the post preview at the bulletion board 
+    $('#posts-list').find('span.ui-icon-search ').hover(
+                                                       function() {
+                                                           $(this).siblings('div.post-preview').show();
+                                                       },
+                                                       function() {
+                                                           $(this).siblings('div.post-preview').hide();
+                                                       })
 
 
 });

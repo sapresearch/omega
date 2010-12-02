@@ -7,6 +7,8 @@
  */
 
 $(function() {
+
+    // datepicker to select only a week not an actual day as weeks get recorded
     $('.datepickr').datepicker({
         firstDay:1,
         beforeShowDay: function(date) {
@@ -17,16 +19,16 @@ $(function() {
             return a;
         }, dateFormat: 'yy-mm-dd',
         onSelect: function(dateText) {
-        $(this).val(dateText);
+            $(this).val(dateText);
         },
-         weekHeader: 'W' ,
-        showWeek: true 
+        weekHeader: 'W' ,
+        showWeek: true
 
     });
-
-        $('#new_volunteering_time_entry').find('span.increase').click(function() {
+//increase the input value by clicking on the plus icon
+    $('#new_volunteering_time_entry').find('span.increase').click(function() {
         var ipt = $(this).next('input');
-        if (ipt.val() =='') {
+        if (ipt.val() == '') {
 
             ipt.val(1)
         } else {
@@ -36,6 +38,8 @@ $(function() {
 
 
     });
+
+    //decrease the input value by clicking on the plus icon
     $('#new_volunteering_time_entry').find('span.decrease').click(function() {
         var ipt = $(this).prev('input');
         var curval = parseFloat(ipt.val());

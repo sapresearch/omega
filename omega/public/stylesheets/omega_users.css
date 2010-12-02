@@ -26,3 +26,17 @@
 #vcard dl {
     line-height:1.4em;
 }
+#sidebar-search {
+    background: url("/images/search_blue.png");
+    display: block;
+    width: 218px;
+    height: 45px;
+    margin: 0 0 20px;
+}
+
+#sidebar-search input {
+    color: #4196ee;
+    margin: 12px 0 0 25px;
+    border: none;
+    height: 20px;
+}

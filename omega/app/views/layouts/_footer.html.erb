@@ -43,11 +43,12 @@
           </div>
 
           <div class="footer-content">
+
             <ul>
-              <li><span class="date">08.04.2010</span> Omega gets new flex layout</li>
-              <li><span class="date">08.05.2010</span> Omega get 1 billion makeover</li>
-              <li><span class="date">08.06.2010</span> Omega has rails under the hood</li>
-              <li><span class="date">08.07.2010</span> Omega is looking for beta testers</li>
+              <% Calendar::Event.non_recurrent.last(5).each do |event| %>
+              <li><span class="date"><%= event.start.strftime("%m/%d/%Y") if event.start %> </span> <%= event.name %> </li>
+                  <% end %>
+
             </ul>
           </div>
 

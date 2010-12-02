@@ -4,6 +4,10 @@ require 'iconv'
 class Contacts::ImportsController < Omega::Controller
 
   respond_to :html, :js, :json, :xml
+
+  breadcrumb 'Contacts' => :contacts
+  breadcrumb 'Import' => :csv_import_wizard_contact_imports
+
   
   def csv_import_wizard
    
@@ -31,11 +35,14 @@ class Contacts::ImportsController < Omega::Controller
        when '1'
          
         session[:current_page] = "intro"
+        breadcrumb 'Intro' => "Intro"
+
         render "contacts/imports/step_1"
 
        when '2'
 
         session[:current_page] = "upload"
+        breadcrumb 'Upload' => "Upload"
         render "contacts/imports/step_2"
 
        when '3'
@@ -47,6 +54,7 @@ class Contacts::ImportsController < Omega::Controller
         else
           @rows = Contact::DataImport.find(session[:rows_id]).csv_rows          
         end
+        breadcrumb 'Mapping' => "Mapping"
         render "contacts/imports/step_3"
 
        when '4'
@@ -55,9 +63,10 @@ class Contacts::ImportsController < Omega::Controller
 
         @csv_rows = Contact::DataImport.find(session[:rows_id]).csv_rows
         @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
+        breadcrumb 'Import' => "Import"
 
         render "contacts/imports/step_4"
-         
+
      end
   end
 
