@@ -66,16 +66,16 @@ h1.page-content {
 
 h2 a {
     font-size: 1.3em;
-    color: #cf3a72;
+    color: #00459a;
 }
 
 h2 a:hover {
-    color: #A32D5A;
+    color: #4196ee;
 }
 
 h2 {
 
-    color: #0063DC;
+    color: #00459a;
     font-size: 1.3em;
     font-weight: normal;
     letter-spacing: 0;
@@ -1200,7 +1200,14 @@ form span.error {
     padding: 5px 0 0 0;
     float: left;
     width: 45px;
-    height: 40px;
+    height: 60px;
+}
+.pos-recurrent {
+margin: 0 10px 0 0;
+    background: url("/images/recurrent_bg.png") no-repeat;
+    float: left;
+    width: 45px;
+    height: 60px;
 }
 
 .pos-cal-month {

@@ -104,7 +104,7 @@ class Volunteering::PositionsController < Omega::Controller
 
   private
   def get_positions
-    @positions = Volunteering::Position.includes(:skills, :records)
+    @positions = Volunteering::Position.includes(:skills, :records).order
 
     if skills = params[:skills].try(:split, '+')
       @positions = @positions.select('`volunteering_positions`.*, count(`contact_skills`.`id`) as s_count').

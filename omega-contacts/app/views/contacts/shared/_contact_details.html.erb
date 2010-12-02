@@ -13,10 +13,10 @@
 <div class="user_image">
   <% if @contact.photo %>
       <% photo = @contact.photo.upload
-         size  = Paperclip::Geometry.from_file(photo.to_file(:original)) %>
+         size = Paperclip::Geometry.from_file(photo.to_file(:original)) %>
       <%= image_tag(photo.url, (size.width > size.height ? :width : :height) => '130') %>
   <% else %>
-      <%= image_tag("profile.jpg", :width =>  '130') %>
+      <%= image_tag("profile.jpg", :width => '130') %>
   <% end %>
 
   <%#= image_tag( @contact.photo.upload.url  , :width =>  '130', :height => '130') %>
@@ -76,20 +76,20 @@ Email: <%= @contact.email %><br>
   </div>
 
 
-      <h3><a href="#">Group Assignments</a></h3>
+  <h3><a href="#">Group Assignments</a></h3>
 
-      <div>
-        <ul class="assigned-groups">
-          <%= render :partial => 'contacts/partials/assigned_groups' %>
-        </ul>
-        <a href="#" id="assign-trigger">
+  <div>
+    <ul class="assigned-groups">
+      <%= render :partial => 'contacts/partials/assigned_groups' %>
+    </ul>
+    <a href="#" id="assign-trigger">
           <span data-tooltip="Assign this contact to groups">
-          <span class="om-icon-only om-blue-icon ui-icon-plus" ></span>
+          <span class="om-icon-only om-blue-icon ui-icon-plus"></span>
           Assign to desired groups
               </span>
-        </a>
+    </a>
 
-      </div>
+  </div>
 
   <% if @contact.skills.any? or @contact.interests.any? %>
       <h3><a href="#">Skills and Interests </a></h3>
@@ -104,18 +104,22 @@ Email: <%= @contact.email %><br>
 
       <div>
         <% @contact.addresses.each do |address| %>
-
-            City:
-            <%= address.city.capitalize %>
-            <br>
-            Street:
-            <%= address.street %>
-            <br>
-            Postal Code:
-            <%= address.zip_code %>
-            <br>
-            <br>
-
+            <% if address.city %>
+                City:
+                <%= address.city.capitalize %>
+                <br>
+            <% end %>
+            <% if address.street? %>
+                Street:
+                <%= address.street %>
+                <br>
+            <% end %>
+            <% if address.zip_code? %>
+                Postal Code:
+                <%= address.zip_code %>
+                <br>
+                <br>
+            <% end %>
         <% end %>
       </div>
   <% end %>
@@ -153,7 +157,7 @@ Email: <%= @contact.email %><br>
         <ul class="group-list">
           <% Contact::Group.without_contact(@contact).each do |g| %>
               <li>
-                <span data-tooltip="Add  <%= "#{@contact.first_name} #{@contact.last_name} to: #{g.name} by clicking. The assignment gets applied right away".html_safe  %>">
+                <span data-tooltip="Add  <%= "#{@contact.first_name} #{@contact.last_name} to: #{g.name} by clicking. The assignment gets applied right away".html_safe %>">
                 <%= link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus"></span> #{g.name.truncate(40)} }.html_safe, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
               </span>
               </li>
