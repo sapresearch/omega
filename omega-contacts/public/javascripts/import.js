@@ -26,7 +26,7 @@ $(function() {
                              top: '0',
                              left: '0',
                              width: '200px', /* Set width back to default */
-                             height: '0px' /* Set height back to default */
+                             height: '200px' /* Set height back to default */
                              
                          }, 400,function(){
           $(this).hide().removeClass('box-shadow-dark');  
