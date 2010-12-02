@@ -42,11 +42,17 @@ class Contacts::ImportsController < Omega::Controller
                   
         session[:current_page] = "mapping"
 
-        if session[:last_page] == "preview" || session[:last_page] == "mapping"
-          @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
+        @csv_rows = Contact::DataImport.find(session[:rows_id]).csv_rows
+        @mapped_rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
+
+        if @mapped_rows.nil?
+          @together = Hash[*@csv_rows[0].zip(@csv_rows[0]).flatten]
+
         else
-          @rows = Contact::DataImport.find(session[:rows_id]).csv_rows          
+          @together = Hash[*@csv_rows[0].zip(@mapped_rows[0]).flatten]
+
         end
+
         render "contacts/imports/step_3"
 
        when '4'
@@ -54,7 +60,7 @@ class Contacts::ImportsController < Omega::Controller
         session[:current_page] = "import"
 
         @csv_rows = Contact::DataImport.find(session[:rows_id]).csv_rows
-        @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
+        @mapped_rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
 
         render "contacts/imports/step_4"
          
@@ -104,14 +110,11 @@ class Contacts::ImportsController < Omega::Controller
 
   def update_csv
 
-    @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
-    
     if params[:next]
 
       session[:last_page] = "preview"
-
       @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
-
+      
       params[:csv_field].each do |k,v|
 
         @rows[0].each do |column|
@@ -201,7 +204,7 @@ class Contacts::ImportsController < Omega::Controller
       @imported_rows = Contact::DataImport.find(session[:rows_id])
       @imported_rows.update_attributes(:status => 'complete', :imported_rows => @rows, :contact_ids => @contacts)
 
-      redirect_to contact_imports_url(@imported_rows)
+      redirect_to contact_imports_url()
 
     end
   end
