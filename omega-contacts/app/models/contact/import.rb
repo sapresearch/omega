@@ -6,7 +6,7 @@ class Contact::Import < Omega::Model
 
   validates_attachment_presence :csv
 
-  validates_attachment_content_type :csv, :content_type => ['text/plain', 'text/csv', 'applications/csv', 'applications/vnd.ms-excel' ]
+  validates_attachment_content_type :csv, :content_type => ['text/plain', 'application/vnd.ms-excel' ]
 
 
 end
