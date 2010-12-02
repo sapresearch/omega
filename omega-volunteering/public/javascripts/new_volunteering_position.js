@@ -8,13 +8,7 @@ $(function() {
     $('.tpickr').timepicker();
 
     /* jqueryui datepicker defaults */
-    $('#volunteer_position_form').find(".datepickr").datepicker({
-        dateFormat: 'yy-mm-dd',
-        showButtonPanel: true,
-        changeMonth: true,
-        changeYear: true,
-        yearRange: '2010:2020'
-    });
+    $('#volunteer_position_form').find(".datepickr").datepicker();
 
 
     // selector caching

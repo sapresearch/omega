@@ -1,3 +1,4 @@
+/* Overlay layer for notifications and ajax request notifications*/
 jQuery.showFlash = function(msg, n) {
     var msg_div = $('#notification-flash-wrapper');
     msg_div.find('div').html(msg);
@@ -15,7 +16,7 @@ jQuery.showFlash = function(msg, n) {
     });
 };
 
-/* jquery plugin - default settings */
+/* jquery plugin for tooltips - default settings */
 $.fn.tipsy.defaults = {
     delayIn: 0,      // delay before showing tooltip (ms)
     delayOut: 0,     // delay before hiding tooltip (ms)
@@ -36,6 +37,7 @@ $.fn.tipsy.defaults = {
 /* dom ready! here we go */
 
 jQuery(function($) {
+    /* Bug fix  for empty ajax response */
     jQuery.ajaxSetup({ dataFilter: function(data, type) {
         return (!data || jQuery.trim(data) == '') ? '{}' : data;
     } });
@@ -224,19 +226,23 @@ jQuery(function($) {
 
     /* menu */
 
-    $("ul#topnav li a").mouseover(function(){ //Hover over event on list item
+    $("ul#topnav li a").mouseover(function() { //Hover over event on list item
 
         $(this).parent().find("div").delay(200).slideDown('fast'); //Show the subnav
     });
 
-     $("ul#topnav li").mouseleave(function(){
+    $("ul#topnav li").mouseleave(function() {
 
         $(this).find("div").slideUp('fast'); //Hide the subnav
     });
 
     /* jquerui datepicker defaults */
-    $.datepicker.setDefaults({showAnim: '' });
-
+    $.datepicker.setDefaults({showAnim: '',
+        dateFormat: 'yy-mm-dd',
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2010:2020'});
 
 
     $('[data-link-to]').click(function() {
@@ -259,12 +265,6 @@ jQuery(function($) {
         $('#session_username').focus();
     });
 
-
-    $(document).bind('click', function(e) {
-        var $clicked = $(e.target);
-        if (! $clicked.parents().hasClass("drop_down"))
-            $(".drop_down dd ul").hide();
-    });
 
     $('#right').find('div.sidebar-menu-content li:last-child').addClass('menu-li-last-divider');
 
