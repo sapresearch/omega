@@ -11,7 +11,7 @@ Omega::Groups::Module.routes.draw do
     collection do
       get :autocomplete
 
-      match :letter, :constraints => {:letter => /[a-z]/i}
+      match :letter, :path => ':letter', :constraints => { :letter => /[a-z]/i }
     end
 
     scope :module => 'groups' do

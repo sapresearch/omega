@@ -102,30 +102,32 @@ class Volunteering::RecordsController < Omega::Controller
   def update
     @record          = Volunteering::Record.find(params[:id])
 
-    case params[:volunteering_record][:action]
-      when 'More Information'
-        params[:volunteering_record][:status] = 'Pending'
-        status                                = 'Further information for your application is required'
-        msg                                   = 'a'
-      when 'Reject'
-        params[:volunteering_record][:status] = 'Complete'
-        status                                = 'Your applicaton got rejected'
-        msg                                   = 'a'
-      when 'Accept'
-        params[:volunteering_record][:status] = 'Complete'
-        status                                = 'Your applicaton got accepted'
-        msg                                   = 'a'
-    end
-    if params[:volunteering_record][:more_information]
-      msg = params[:volunteering_record][:more_information]
-    end
+    if @record.contact.user
+      case params[:volunteering_record][:action]
+        when 'More Information'
+          params[:volunteering_record][:status] = 'Pending'
+          status                                = 'Further information for your application is required'
+          msg                                   = 'a'
+        when 'Reject'
+          params[:volunteering_record][:status] = 'Complete'
+          status                                = 'Your applicaton got rejected'
+          msg                                   = 'a'
+        when 'Accept'
+          params[:volunteering_record][:status] = 'Complete'
+          status                                = 'Your applicaton got accepted'
+          msg                                   = 'a'
+      end
+      if params[:volunteering_record][:more_information]
+        msg = params[:volunteering_record][:more_information]
+      end
 
-    @message         = Message.new()
-    @message.subject = status
-    @message.body    = msg
-    @message.to      = @record.contact.user
-    @message.from    = current_user
-    @message.save
+      @message         = Message.new()
+      @message.subject = status
+      @message.body    = msg
+      @message.to      = @record.contact.user
+      @message.from    = current_user
+      @message.save
+    end
 
 
     @record.update_attributes(params[:volunteering_record])
