@@ -97,7 +97,7 @@
 
 <% end %>
 <% content_for :sidebar do %>
-<%= with_permission(Volunteering::PERM_ADMIN) do %>
+
     <%= render :partial => "layouts/sidebar_position_show_menu" %>
         <% end %>
     <% if @position.skills.any? %>
@@ -107,4 +107,3 @@
     <% if @position.interests.any? %>
     <   %= render :partial => "layouts/sidebar_position_show_interests" %>
     <% end %>
-<% end %>

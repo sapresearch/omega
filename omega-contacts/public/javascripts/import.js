@@ -42,9 +42,7 @@ marginTop: '-110px', /* The next 4 lines will vertically align this image */
 });
 
 function import_data(selection){
-
     var import_date = document.getElementById('import_date').value;
-
     $.ajax({
 
                 type: "GET",
