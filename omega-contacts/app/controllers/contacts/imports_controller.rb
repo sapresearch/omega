@@ -46,10 +46,10 @@ class Contacts::ImportsController < Omega::Controller
         @mapped_rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
 
         if @mapped_rows.nil?
-          @together = Hash[*@csv_rows[0].zip(@csv_rows[0]).flatten]
+          @csv_mapping = Hash[*@csv_rows[0].zip(@csv_rows[0]).flatten]
 
         else
-          @together = Hash[*@csv_rows[0].zip(@mapped_rows[0]).flatten]
+          @csv_mapping = Hash[*@csv_rows[0].zip(@mapped_rows[0]).flatten]
 
         end
 
@@ -117,20 +117,14 @@ class Contacts::ImportsController < Omega::Controller
 
       params[:csv_field].each do |k,v|
 
-        @rows[0].each do |column|
-
-        unless column.nil?
-
-          if k == column
             index = @rows[0].index(k)
             @rows[0][index] = v
-          end
-        end
-        end
+
       end
 
+
       @csv_rows = Contact::DataImport.find(session[:rows_id])
-      @csv_rows.update_attributes(:mapped_rows => @rows)
+      @csv_rows.update_attributes(:mapped_rows => @rows, :mapping => params[:csv_field])
 
       case session[:current_page]
 
@@ -143,8 +137,6 @@ class Contacts::ImportsController < Omega::Controller
 
       end
 
-      session[:column] = params[:column]
-
     end
 
     if params[:import]
@@ -152,6 +144,19 @@ class Contacts::ImportsController < Omega::Controller
       @contacts = Array.new
 
       @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
+
+      @mapping = Contact::DataImport.find(session[:rows_id]).mapping
+
+      fields_index = Hash.new
+
+       @mapping.each do |k,v|
+
+          index = @rows[0].index(v)
+
+          fields_index[v] = index
+
+        end
+
       @rows.shift
 
       @rows.each do |row|
@@ -160,7 +165,7 @@ class Contacts::ImportsController < Omega::Controller
         @contact.phone_numbers.build
         @contact.addresses.build
 
-        session[:column].each do |k,v|
+        fields_index.each do |k,v|
 
           @contact[k] = row[v.to_i]
 

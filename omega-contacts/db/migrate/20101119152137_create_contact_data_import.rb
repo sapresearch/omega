@@ -3,6 +3,7 @@ class CreateContactDataImport < ActiveRecord::Migration
     create_table :contact_data_imports do |t|
 
       t.text :csv_rows, :limit => "4294967295"
+      t.text :mapping, :limit => "4294967295"
       t.text :mapped_rows, :limit => "4294967295"
       t.text :imported_rows, :limit => "4294967295"
       t.string :status

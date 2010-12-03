@@ -4,6 +4,6 @@ class Contact::DataImport < Omega::Model
   serialize :mapped_rows
   serialize :imported_rows
   serialize :contact_ids
-  serialize :mapping_rows
+  serialize :mapping
   
 end
