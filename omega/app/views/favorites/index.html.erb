@@ -30,8 +30,14 @@
           </div>
           <%= truncate(favorite.item_text, :length=> 160) %>
         </li>
+
+
     <% end  %>
   </ul>
+      <% else %>
+<div class="explanation">
+  Currently, you don't have any favorites
+</div>
         <% end  %>
 </div>
     <% end %>

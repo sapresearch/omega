@@ -21,7 +21,9 @@ ul.thumb li img {
 	position: absolute;
 	left: 0; top: 0;
 }
-/*ul.thumb li img.hover {*/
-	/*background:url(/images/thumb_bg.png) no-repeat center center;  *//* Image used as background on hover effect*/
-	/*border: none; *//* Get rid of border on hover */
+/* class for first lette highliting*/
+.first-l {
+    color: #4096ee;
+    font-size: 1.7em;
+    font-weight: bold
 }
