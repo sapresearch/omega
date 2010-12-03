@@ -11,6 +11,7 @@
       </p>
 
       <div>
+        <% unless @position.recurrent? %>
         <% if @position.start %>
             <p>
               <span class="om-icon-only ui-icon-date"></span> <span> Start date:</span>
@@ -24,7 +25,7 @@
             </p>
         <% end %>
         <!-- hours-->
-        <% if @position.recurrence.pattern %>
+        <% else %>
             <% recurrence = @position.recurrence %>
             <p class="explanation">
 
