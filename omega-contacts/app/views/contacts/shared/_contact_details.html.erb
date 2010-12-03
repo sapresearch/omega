@@ -19,16 +19,13 @@
       <%= image_tag("profile.jpg", :width => '130') %>
   <% end %>
 
-  <%#= image_tag( @contact.photo.upload.url  , :width =>  '130', :height => '130') %>
 </div>
 <div class="clear"></div>
 
 Email: <%= @contact.email %><br>
-
 <div id="contact_accordion">
   <% if @records.any? %>
       <h3><a href="#">Volunteering history</a></h3>
-
       <div>
         <table class="width-100">
           <thead>
@@ -36,14 +33,11 @@ Email: <%= @contact.email %><br>
             <th>Position</th>
             <th>Date</th>
             <th>Status</th>
-
           </tr>
           </thead>
-
           <% @records.each do |record| %>
               <tr class="<%= cycle('odd', 'even') %>">
                 <td>
-
                   <%= truncate(record.position.name, :length => 20) %>
                 </td>
                 <td><%= om_button(:plain => true, :icon => 'mail-sent') do %>

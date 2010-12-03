@@ -54,9 +54,11 @@
                 <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
               </h2>
               <p>
-                <%= truncate(position.description, :length=> 140) %> <%= link_to '( read more ... )', volunteering_position_path(position) %>
+                <%= truncate(position.description, :length=> 140) %>
               </p>
-
+              <p>
+                 <%= link_to '( read more ... )', volunteering_position_path(position) %>
+              </p>
               <span>
                 <% position.skills.each do |skill| %>
                     <span class="skill-tag">
@@ -71,20 +73,13 @@
             </div>
           </div>
           <div class="clear"></div>
-
         </li>
-
     <% end %>
   </ul>
-
   <%= will_paginate @positions %>
-
   <div class="clear"></div>
-
 </div>
-
     <% end %>
-
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_positions_skills" %>
     <%= render :partial => "layouts/sidebar_positions_interests" %>

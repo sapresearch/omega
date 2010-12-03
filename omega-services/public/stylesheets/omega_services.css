@@ -256,3 +256,33 @@ div.step-5 {
 .position_actions span.om-plain-icon-button a {
     color: #FFFFFF;
 }
+/************ calendar list ********************/
+.pos-date {
+    margin: 20px 10px 0 0;
+    background: url("/images/cal_bg.png") no-repeat;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 5px 0 0 0;
+    float: left;
+    width: 45px;
+    height: 60px;
+}
+
+.pos-recurrent {
+    margin: 20px 10px 0 0;
+    background: url("/images/recurrent_bg.png") no-repeat;
+    float: left;
+    width: 45px;
+    height: 60px;
+}
+
+.pos-cal-month {
+    color: #FFF;
+}
+
+.pos-cal-day {
+
+    padding-top: 4px;
+    font-size: 0.8em;
+    color: #fff;
+}
