@@ -86,7 +86,8 @@
                                  <tr class="csv-table">
 
                                      <td class="csv-table">
-                                         <%=d%>
+                                       <%d = Iconv.iconv('UTF-8','UTF-8', d)%>
+                                       <%=d.to_s.gsub!(/"|\[|\A|\]|"/,"")%>
                                      </td>
                                    
                                  </tr>
