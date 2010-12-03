@@ -116,15 +116,14 @@ class Contacts::ImportsController < Omega::Controller
       @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
 
       params[:csv_field].each do |k,v|
-
             index = @rows[0].index(k)
             @rows[0][index] = v
-
       end
-
 
       @csv_rows = Contact::DataImport.find(session[:rows_id])
       @csv_rows.update_attributes(:mapped_rows => @rows, :mapping => params[:csv_field])
+
+     # @csv_rows.update_attributes(:mapped_rows => @rows, :mapping => params[:csv_field])
 
       case session[:current_page]
 
@@ -267,9 +266,10 @@ class Contacts::ImportsController < Omega::Controller
 
   def process_csv(import)
 
-      csv_data = Iconv.iconv('UTF-8//IGNORE','UTF-8', import.csv.path)
+     csv_data = Iconv.iconv('UTF-8','UTF-8', import.csv.path)
 
-      rows = parse_csv(csv_data.join(","))
+        rows = parse_csv(csv_data.join(","))
+      
 
       if rows.size > 0
 
