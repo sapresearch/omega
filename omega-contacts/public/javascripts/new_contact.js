@@ -59,28 +59,3 @@ var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta
             });
         }
     });
-
-
-
-		/*
-	 * Set default setting for validator plugin
-	 */
-	jQuery.validator.setDefaults({
-		errorElement: "span",
-		highlight: function(element, errorClass) {
-			$(element).addClass('inputInvalid')
-		},
-		unhighlight: function(element, errorClass) {
-			$(element).removeClass('inputInvalid').addClass('inputValid');
-
-		}
-	});
-
-	 //prevent the template for additional address fields from getting validated
-	 $.validator.addClassRules({
-				 validate_presence: {
-						required: function(element) { return !(/_ID_/.test(element.id)); }
-				 }
-			});
-
-

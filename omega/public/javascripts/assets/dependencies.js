@@ -99,8 +99,8 @@ function require_javascript(source) {
     };
     // safari doesn't support either onload or readystate, create a timer
     // only way to do this in safari
+    // that approach is not wroking anylonger since tha pattern below is also matching google's chrome
 //    if (/Safari/i.test(navigator.userAgent)) { //Test for Safari
-//console.log(navigator.userAgent)
 //        var _timer = setInterval(function() {
 //            if (/loaded|complete/.test(document.readyState)) {
 //                clearInterval(_timer)

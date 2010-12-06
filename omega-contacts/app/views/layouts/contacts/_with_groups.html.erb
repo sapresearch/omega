@@ -4,22 +4,16 @@
 <h1 class="page-content corners-top">
   Contacts
 </h1>
-
 <div id="cm" class="page-content corners-bottom">
-
   <div class="head_bg">
     <div id="contact_filter_wrapper">
-
       <%= text_field_tag 'ac-contacts', nil %>
-
       <div id="filter_ctrl">
-
         <div class="right om-icon-only om-icon-magnifier-m relative"></div>
         <div id="clear-filter" class="right om-icon-only om-icon-delete-small "></div>
       </div>
     </div>
     <div id="contact-actions" class="right">
-
       <%= om_button(:icon=>'user-add') do %>
           <%= link_to 'New Contact', new_contact_path, :remote => true %>
       <% end %>
@@ -29,11 +23,8 @@
       <%= om_button(:icon=>'organization-add') do %>
           <%= link_to 'New organization', new_contact_organization_path, :remote => true %>
       <% end %>
-
     </div>
-
   </div>
-
   <div id="contacts_alphabet" class="left">
     <ul>
       <% ('A'..'Z').each do |l| %>
@@ -42,53 +33,9 @@
       <% end %>
     </ul>
   </div>
-
-  <div id="contacts_groups" class="left">
-    <div id="accordion">
-      <h3>
-        <a>
-          All Contacts
-        </a>
-
-      </h3>
-
-      <div>
-        <ul>
-          <li>
-            <%= link_to 'Show All', "/contacts/", :remote => true %>
-          </li>
-        </ul>
-
-      </div>
-
-      <% @contact_groups.keys.each do |group_type| %>
-          <h3>
-            <a>
-              <%= group_type.try(:pluralize) %>
-            </a>
-
-          </h3>
-
-          <div>
-            <table class="width-100">
-              <% @contact_groups[group_type].each do |group| %>
-                  <tr data-id=<%= group.id %>>
-                    <td> <%= link_to truncate(group.name, :length => 30), group, :remote=> true %></td>
-                  </tr>
-              <% end %>
-            </table>
-          </div>
-
-
-      <% end %>
-
-    </div>
-  </div>
-
-
+   <div id="contacts_groups" class="left">
+ <%= render 'contacts/shared/groups' %>
+     </div>
   <%= yield %>
-
-
 </div>
-
   <% end %>

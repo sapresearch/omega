@@ -1,6 +1,8 @@
 $('#contacts_contact_pane').empty().append('<%= escape_javascript(render('show')) %>');
+        // jquery ui dialog
 $('#contact-assignment').dialog('close');
+        // jquery ui accordion
         $("#contact_accordion").accordion();
 var contacts = <%= @contact_group.contacts.to_json.html_safe %>;
-
+//update contacts, method available in omega_contacts.js
 update_contacts(contacts, <%= @contact_group.id %>, "<%= @contact_group.name %>");

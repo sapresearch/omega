@@ -67,13 +67,13 @@ $(function() {
      */
     $('#accordion').find('tr').droppable({
         drop: function(event, ui) {
-alert('drop')
+
             $(this).effect('pulsate');
             var group_id = this.getAttribute('data-id');
             var contact_id = ui.draggable.attr('data-id');
             var from_group_id = ui.draggable.attr('data-group-id');
             if (from_group_id == undefined) {
-                alert('df')
+                
                 $.ajax({
                     url :  '/contacts/' + contact_id + '/groups/' + group_id + '/assign/',
                     type: 'PUT',

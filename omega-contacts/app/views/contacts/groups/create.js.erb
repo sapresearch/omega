@@ -1,5 +1,10 @@
 $('#contacts_contact_pane').empty().append('<%= escape_javascript(render('show')) %>');
-
+        // empty the contact gorup pance with its accordion and insert the groups view with the new created group
+$('#contacts_groups').empty().append('<%= escape_javascript(render('contacts/shared/groups')) %>');
+        // jquery ui accordion effect
+ $("#accordion").accordion({
+        fillSpace: true
+    });
 var contacts = <%= @contact_group.contacts.to_json.html_safe %>;
-
+// update the contact list. method available inside omega_contacts.js 
 update_contacts(contacts);
