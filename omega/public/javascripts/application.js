@@ -213,16 +213,16 @@ jQuery(function($) {
         trigger : 'focus'
     });
     /* bind default beahvior for ajax calls */
-    $('#notification-flash-wrapper').bind("ajaxSend",
-                                         function() {
-                                             $.showFlash('Loading', 'ajax')
-                                         }).bind("ajaxComplete",
-                                                function() {
-                                                    $(this).fadeOut();
-                                                }).bind("ajaxError", function(e, xhr, settings, exception) {
-        $.showFlash('Error :' + xhr.responseText)
-
-    });
+//    $('#notification-flash-wrapper').bind("ajaxSend",
+//                                         function() {
+//                                             $.showFlash('Loading', 'ajax')
+//                                         }).bind("ajaxComplete",
+//                                                function() {
+//                                                    $(this).fadeOut();
+//                                                }).bind("ajaxError", function(e, xhr, settings, exception) {
+//        $.showFlash('Error :' + xhr.responseText)
+//
+//    });
 
     /* menu */
 

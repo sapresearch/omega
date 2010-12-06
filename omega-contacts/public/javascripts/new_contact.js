@@ -1,7 +1,7 @@
 var csrf_token = $('meta[name=csrf-token]').attr('content'),csrf_param = $('meta[name=csrf-param]').attr('content'),
             flash_session_key = $('meta[name=flash-session-key]').attr('content'),
             flash_session_cookie = $('meta[name=flash-session-cookie]').attr('content');
-console.log('new start')
+
     $.fn.extend({
         liveUpload: function() {
             var uploadifyScriptData = {};
@@ -82,33 +82,5 @@ console.log('new start')
 						required: function(element) { return !(/_ID_/.test(element.id)); }
 				 }
 			});
-	// validate the new contact form
-	$('.new_contact').validate(
-	{
-		ignore: ':hidden',
-		rules: {
-			"contact[first_name]": {
-				required: true,
-				minlength: 2
-			},
-			"contact[last_name]":  {
-				required: true,
-				minlength: 2
-			},
-			"contact[email]":
-			{
-				email : true,
-				required: true,
-				minlength: 6
-			}
 
-
-		}
-
-	})
-
-
-
-
-console.log('new end')
 

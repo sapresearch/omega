@@ -70,7 +70,7 @@
           </h3>
 
           <div>
-            <table>
+            <table class="width-100">
               <% @contact_groups[group_type].each do |group| %>
                   <tr data-id=<%= group.id %>>
                     <td> <%= link_to truncate(group.name, :length => 30), group, :remote=> true %></td>

@@ -1,10 +1,3 @@
-/**
- * Created by IntelliJ IDEA.
- * User: I823626
- * Date: Jun 29, 2010
- * Time: 9:56:02 AM
- * To change this template use File | Settings | File Templates.
- */
 $(function() {
 
     /**
@@ -74,11 +67,13 @@ $(function() {
      */
     $('#accordion').find('tr').droppable({
         drop: function(event, ui) {
+alert('drop')
             $(this).effect('pulsate');
             var group_id = this.getAttribute('data-id');
             var contact_id = ui.draggable.attr('data-id');
             var from_group_id = ui.draggable.attr('data-group-id');
             if (from_group_id == undefined) {
+                alert('df')
                 $.ajax({
                     url :  '/contacts/' + contact_id + '/groups/' + group_id + '/assign/',
                     type: 'PUT',
@@ -140,20 +135,16 @@ function update_contacts(contacts, group_id, group_name) {
     }
     list += '</table>';
     $contacts.append(list);
-    $contacts.find('table').delegate("tr", 'hover', function() {
-
-        $(this).draggable({
+    $contacts.find('tr').draggable({
             helper: 'clone',
             start: function(event, ui) {
                 // remove tipsy tooltip otherwise it wont get removed anymore
                 $("div.tipsy").remove();
             }
         }).find('.mgm-contact').toggleClass('hide');
-    });
+   
     $contacts.find('a.remove-contact').bind("ajax:success", function() {
         $(this).closest('tr').remove();
     });
 
 }
-
-
