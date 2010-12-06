@@ -1,41 +1,43 @@
 <% require_javascript 'omega_contacts.js' %>
 <% require_stylesheet 'omega_contacts.css', 'thirdParty/jquery.autocomplete.css' %>
 <%= context_box do %>
-<h1 class="page-content corners-top">
-  Contacts
-</h1>
-<div id="cm" class="page-content corners-bottom">
-  <div class="head_bg">
-    <div id="contact_filter_wrapper">
-      <%= text_field_tag 'ac-contacts', nil %>
-      <div id="filter_ctrl">
-        <div class="right om-icon-only om-icon-magnifier-m relative"></div>
-        <div id="clear-filter" class="right om-icon-only om-icon-delete-small "></div>
+    <h1 class="page-content corners-top">
+      Contacts
+    </h1>
+    <div id="cm" class="page-content corners-bottom">
+      <div class="head_bg">
+        <div id="contact_filter_wrapper">
+          <%= text_field_tag 'ac-contacts', nil %>
+          <div id="filter_ctrl">
+            <div class="right om-icon-only om-icon-magnifier-m relative"></div>
+            <div id="clear-filter" class="right om-icon-only om-icon-delete-small "></div>
+          </div>
+        </div>
+        <div id="contact-actions" class="right">
+          <%= with_permission(Contact::PERM_ADMIN) do %>
+              <%= om_button(:icon=>'user-add') do %>
+                  <%= link_to 'New Contact', new_contact_path, :remote => true %>
+              <% end %>
+              <%= om_button(:icon=>'household-add') do %>
+                  <%= link_to 'New Household', new_contact_household_path, :remote => true %>
+              <% end %>
+              <%= om_button(:icon=>'organization-add') do %>
+                  <%= link_to 'New organization', new_contact_organization_path, :remote => true %>
+              <% end %>
+          <% end %>
+        </div>
       </div>
+      <div id="contacts_alphabet" class="left">
+        <ul>
+          <% ('A'..'Z').each do |l| %>
+              <li>
+                <span><%= link_to l, "/contacts/#{l}", :remote => true %></span></li>
+          <% end %>
+        </ul>
+      </div>
+      <div id="contacts_groups" class="left">
+        <%= render 'contacts/shared/groups' %>
+      </div>
+      <%= yield %>
     </div>
-    <div id="contact-actions" class="right">
-      <%= om_button(:icon=>'user-add') do %>
-          <%= link_to 'New Contact', new_contact_path, :remote => true %>
-      <% end %>
-      <%= om_button(:icon=>'household-add') do %>
-          <%= link_to 'New Household', new_contact_household_path, :remote => true %>
-      <% end %>
-      <%= om_button(:icon=>'organization-add') do %>
-          <%= link_to 'New organization', new_contact_organization_path, :remote => true %>
-      <% end %>
-    </div>
-  </div>
-  <div id="contacts_alphabet" class="left">
-    <ul>
-      <% ('A'..'Z').each do |l| %>
-          <li>
-            <span><%= link_to l, "/contacts/#{l}", :remote => true %></span></li>
-      <% end %>
-    </ul>
-  </div>
-   <div id="contacts_groups" class="left">
- <%= render 'contacts/shared/groups' %>
-     </div>
-  <%= yield %>
-</div>
-  <% end %>
+<% end %>
