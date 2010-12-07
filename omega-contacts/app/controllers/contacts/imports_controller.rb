@@ -173,9 +173,13 @@ class Contacts::ImportsController < Omega::Controller
 
         fields_index.each do |k,v|
 
-          @contact[k] = row[v.to_i]
+          @contact[k] = row[v.to_i]                
           @group[k] = row[v.to_i]
 
+          if k == 'group_name'
+            @group['group_type'] = 'Household'
+          end
+          
           @cols = Contact::PhoneNumber.columns.collect { |c| [c.name] }
 
           @cols.each do |c|
@@ -366,7 +370,7 @@ class Contacts::ImportsController < Omega::Controller
                      "deceased_date" => ['Deceased Date'],
                      "gender" => ['Gender', 'gender'],
                      "individual_suffix" => ['Individual Suffix', 'Suffix', 'suffix'],
-                     "group_type" => ['household', 'Household', 'Household Name', 'household name', 'household_name', 'Household_name']
+                     "group_name" => ['household', 'Household', 'Household Name', 'household name', 'household_name', 'Household_name']
 
     }
   end

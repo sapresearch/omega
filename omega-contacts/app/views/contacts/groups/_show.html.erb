@@ -1,5 +1,5 @@
 <h2>
-  <%= @contact_group.name %>
+  <%= @contact_group.group_name %>
 </h2>
 <div class="group-members">
   <table>
@@ -10,7 +10,7 @@
           </td>
           <td >
             <a data-method="put" data-remote="true"  class="remove-contact" href="<%= %Q{/contacts/#{c.id}/groups/#{@contact_group.id}/remove} %>">
-              <span data-tooltip="remove <%= "#{c.first_name} #{c.last_name}" %>  from: <%= @contact_group.name %>" class="om-icon-only om-blue-icon ui-icon-minus"></span>
+              <span data-tooltip="remove <%= "#{c.first_name} #{c.last_name}" %>  from: <%= @contact_group.group_name %>" class="om-icon-only om-blue-icon ui-icon-minus"></span>
             </a>
             <a data-method="delete" data-remote="true" class="remove-contact" href="<%= %Q{/contacts/#{c.id}} %>">
               <span data-tooltip="Delete <%= "#{c.first_name} #{c.last_name}" %> from database" class="om-icon-only om-blue-icon ui-icon-trash">
@@ -22,6 +22,7 @@
   </table>
 </div>
 <div id="contact_accordion">
+
   <% @contact_group.addresses.each do |address| %>
       <h3><a href="#"> <%= address.city.capitalize %></a></h3>
 
@@ -36,6 +37,8 @@
         <%= address.zip_code %>
       </div>
   <% end %>
+
+
   <% @contact_group.phone_numbers.each do |phone| %>
       <h3><a href="#">Phone Number </a></h3>
 
