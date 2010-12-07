@@ -1,11 +1,28 @@
 $('#new_calendar_event').parents('.ui-dialog').andSelf().remove();
-var cal = $('#cal').data('fullCalendar')
-<% if @event.recurrent? %>
-<% @event.recurrence_events.each do |event| %>
-cal.renderEvent(<%= event.to_json.html_safe %>, true)
-<% end %>
+        var cal = $('#cal').data('fullCalendar');
+        <% if @event.valid? %>
+        <% if @event.recurrent? %>
+        <% @event.recurrence_events.each do |event| %>
+        cal.renderEvent(<%= @event.to_json.html_safe %>, true);
+        <% end %>
 
-<% else %>
-cal.renderEvent(<%= @event.to_json.html_safe %>, true)
+        <% else %>
+        cal.renderEvent(<%= @event.to_json.html_safe %>, true);
 
-<% end %>
+        <% end %>
+
+        <% else %>
+        $('body').append('<%= escape_javascript(render 'form', :event => @event, :calendar => @calendar) %>');
+          $('#new_calendar_event').dialog({
+                    autoOpen    : true,
+                    width       : 800,
+                    height      : 700,
+                    title       : 'Create a new event',
+                    close       :function(){
+                        $(this).dialog('destroy');
+                        $('#new_calendar_event').remove();
+                    }
+                });
+        
+
+        <% end %>

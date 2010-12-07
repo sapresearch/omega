@@ -4,14 +4,7 @@
   Favorites
 </h1>
 <div class="page-content corners-bottom">
-  <div class="right">
-    <%= om_button(:icon=>'sort-az') do %>
-        <%= link_to 'sort A-Z', messages_path(:subject => 'asc') %>
-    <% end %>
-    <%= om_button(:icon=>'sort-za') do %>
-        <%= link_to 'sort Z-A', messages_path(:subject => 'desc') %>
-    <% end %>
-  </div>
+
   <div class="clear"></div>
   <% if @favorites.any? %>
   <ul id="favorites-list">

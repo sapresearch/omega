@@ -1,4 +1,7 @@
-<% if @contact.errors.any? %>
-alert('errors!');
-<% end %>
+// empty contact the pane and insert the form create/update form
 $('#contacts_contact_pane').empty().append('<%= escape_javascript(render('form.html')) %>');
+// function queueing to make sure that the dependencies are loaded.
+Queue.add(function() {
+//liveupload for image uploading
+$('#contact_photo').liveUpload();
+});

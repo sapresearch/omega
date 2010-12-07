@@ -11,12 +11,12 @@ class ContactsController < Omega::Controller
 #  require_permission Contact::PERM_ADMIN, :only => [:edit, :update], :unless => contact_is_self
 #  require_permission Contact::PERM_EDIT_SELF, :only => [:edit, :update], :if     => contact_is_self
 
-  before_filter :get_contact_volunteering_records, :only => [:show, :edit, :update]
+  before_filter :get_contact_volunteering_records, :only => [:show, :edit, :create, :update]
 
   breadcrumb 'Contacts' => :contacts
 
   def index
-    @contact_groups = Contact::Group.all.group_by(&:group_type)
+    @contact_groups = Contact::Group.scoped
     respond_with(@contacts) do |format|
       format.any(:html, :js) { render 'all' }
     end
@@ -32,7 +32,7 @@ class ContactsController < Omega::Controller
   end
 
   def show
-    @contact_groups = Contact::Group.all.group_by(&:group_type)
+    @contact_groups = Contact::Group.scoped
     respond_with(@contact)
   end
 

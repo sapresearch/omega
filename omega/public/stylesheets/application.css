@@ -183,7 +183,7 @@ form label {
 }
 
 fieldset {
-    margin: 1.3em;
+    margin: 1.3em 0;
     padding: 1.3em;
     background: #f7f7f7;
     border-color: #ddd;

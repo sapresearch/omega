@@ -1,6 +1,8 @@
 class FavoritesController < Omega::Controller
   respond_to :html, :js, :xml, :json
 
+  breadcrumb 'Favorites' => :favorites
+
   def index
     @favorites = Favorite.of(current_user)
     respond_with(@favorites)

@@ -1,5 +1,8 @@
 $('#contacts_contact_pane').empty().append('<%= escape_javascript(render('show')) %>');
-
+$('#contacts_groups').empty().append('<%= escape_javascript(render('contacts/shared/groups')) %>');
+ $("#accordion").accordion({
+        fillSpace: true
+    });
 var contacts = <%= @contact_group.contacts.to_json.html_safe %>;
-
+// update the contact list. method available inside omega_contacts.js
 update_contacts(contacts);

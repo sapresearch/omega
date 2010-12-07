@@ -1,6 +1,6 @@
 <% require_stylesheet 'uploadify/uploadify' %>
 <% require_javascript 'uploadify/swfobject', 'uploadify/jquery.uploadify.v2.1.0' %>
-<% require_javascript 'thirdParty/jquery.validate.js', 'new_contact.js' %>
+<% require_javascript 'new_contact.js' %>
 <%= form_for @contact, :remote => true, :html => { :multipart => true } do |f| %>
     <%= errors_for_form @contact %>
     <fieldset>
@@ -16,17 +16,14 @@
       <%= f.label :first_name %>
       <%= f.text_field :first_name %>
     </p>
-
     <p>
       <%= f.label :last_name %>
       <%= f.text_field :last_name %>
     </p>
-
     <p>
       <%= f.label :email %>
       <%= f.email_field :email %>
     </p>
-
     <p>
       <%= f.label :skills %>
       <%= f.text_field :skills_values %>
@@ -44,7 +41,6 @@
             <%= render 'address_form', :f => a %>
         <% end %>
       </p>
-
       <p>
         <% new_text = lambda do %>
         <span data-tooltip="By clicking on this icon you will be able to add another address. Feel free to add as many addresses as you want">Add another address
@@ -64,7 +60,6 @@
             <%= render 'phone_number_form', :f => pn %>
         <% end %>
       </p>
-
       <p>
         <% new_text = lambda do %>
         <span data-tooltip="By clicking on this icon you will be able to add another phone number. Feel free to add as many phone numbers as you want">Add another phone number
@@ -78,8 +73,6 @@
     </div>
       </fieldset>
     <p>
-
-
       <%= om_button(:icon=>'save') do %>
           <%= f.submit %>
       <% end %>
@@ -89,10 +82,6 @@
       <% end %>
       <% end %>
     </p>
-
-
     <div class="clear"></div>
-
-
 <% end %>
 

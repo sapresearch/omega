@@ -141,7 +141,7 @@ div.step-5 {
     background-position: 0 -424px
 }
 .wizard-explanation{
-    
+     padding: 10px;
     display:none;
     height:0;
 

@@ -1,6 +1,9 @@
 class Contacts::GroupsController < Omega::Controller
   respond_to :html, :xml, :js, :json
   sub_layout :determine_sub_layout
+
+  before_filter :get_all_contact_groups, :except => [:index]
+
   crud_helper Contact::Group, :find => [:assign, :remove]
 #  require_permission Contact::PERM_VIEW
 #  require_permission Contact::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
@@ -16,8 +19,6 @@ class Contacts::GroupsController < Omega::Controller
   end
 
   def show
-    @contact_groups = Contact::Group.all.group_by(&:group_type)
-
     respond_with(@contact_group)
   end
 
@@ -79,5 +80,9 @@ class Contacts::GroupsController < Omega::Controller
         else
           nil
       end
+    end
+
+    def get_all_contact_groups
+      @contact_groups = Contact::Group.scoped
     end
 end

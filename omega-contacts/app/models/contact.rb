@@ -8,9 +8,9 @@ class Contact < Omega::Model
   require_dependency 'contact/skill'
   require_dependency 'contact/user_observer'
 
-  PERM_ADMIN     = 'users_admin'
+  PERM_ADMIN     = 'contacts_admin'
   PERM_EDIT_SELF = 'contacts_edit_self'
-  PERM_VIEW      = 'users_view'
+  PERM_VIEW      = 'contacts_view'
   PERM_VIEW_SELF = 'contacts_view_self'
 
   TITLES = %w{ mr. dr. ms. mrs.}

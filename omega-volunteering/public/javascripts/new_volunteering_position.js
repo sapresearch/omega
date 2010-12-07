@@ -46,6 +46,10 @@ $(function() {
         $('#scheduler').show();
 
         $('#non_recurrent').hide();
+    }else{
+         $('#scheduler').hide();
+        $('#non_recurrent').show();
+
     }
     var v = $scheduler.find('input:radio:checked').val();
 
