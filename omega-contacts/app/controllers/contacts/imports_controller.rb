@@ -115,12 +115,14 @@ class Contacts::ImportsController < Omega::Controller
       session[:last_page] = "preview"
       @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
 
+
       params[:csv_field].each do |k,v|
             index = @rows[0].index(k)
             @rows[0][index] = v
       end
 
       @csv_rows = Contact::DataImport.find(session[:rows_id])
+
       @csv_rows.update_attributes(:mapped_rows => @rows, :mapping => params[:csv_field])
 
      # @csv_rows.update_attributes(:mapped_rows => @rows, :mapping => params[:csv_field])
@@ -266,10 +268,7 @@ class Contacts::ImportsController < Omega::Controller
 
   def process_csv(import)
 
-     csv_data = Iconv.iconv('UTF-8','UTF-8', import.csv.path)
-
-        rows = parse_csv(csv_data.join(","))
-      
+     rows = parse_csv(import.csv.path)
 
       if rows.size > 0
 
@@ -277,12 +276,18 @@ class Contacts::ImportsController < Omega::Controller
         @csv_rows = []
 
         rows.each do |r|
+
           @csv_rows << r
         end
 
       end
 
+
       @rows = Contact::DataImport.create(:csv_rows => @csv_rows, :status => 'draft')
+
+
+
+                   
       session[:rows_id] = @rows.id
   end
 
@@ -296,7 +301,27 @@ class Contacts::ImportsController < Omega::Controller
 
     end
 
-    rows
+   encoded_rows = []
+
+    rows.each do |r|
+
+      row = []
+
+      logger.debug("row before: #{r}")
+
+      r.each do |c|
+
+        logger.debug("value of c: #{c}")
+
+        row << Iconv.new('UTF-8//IGNORE', 'UTF-8').iconv(c.to_s + ' ')[0..-2]
+
+      end
+
+      encoded_rows << row
+
+    end
+
+    encoded_rows
 
   end
 
