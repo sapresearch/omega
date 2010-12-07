@@ -6,8 +6,6 @@
 
     <%# if @record.contact.new_record? %>
     <%= f.fields_for :contact do |c| %>
-
-        <%= c.hidden_field :id %>
         <p>
           <%= c.label :title %>
           <%= c.select :title, options_for_select(Contact::TITLES) %>
