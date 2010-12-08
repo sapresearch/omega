@@ -2,7 +2,7 @@ class CreateContactGroups < ActiveRecord::Migration
   def self.up
     create_table :contact_groups do |t|
       t.string     :group_type
-      t.string     :name
+      t.string     :group_name
       t.text       :description
       t.timestamps
     end

@@ -163,13 +163,23 @@ class Contacts::ImportsController < Omega::Controller
       @rows.each do |row|
 
         @contact = Contact.new
+        @group = Contact::Group.new
+
         @contact.phone_numbers.build
         @contact.addresses.build
 
+        @group.phone_numbers.build
+        @group.addresses.build
+
         fields_index.each do |k,v|
 
-          @contact[k] = row[v.to_i]
+          @contact[k] = row[v.to_i]                
+          @group[k] = row[v.to_i]
 
+          if k == 'group_name'
+            @group['group_type'] = 'Household'
+          end
+          
           @cols = Contact::PhoneNumber.columns.collect { |c| [c.name] }
 
           @cols.each do |c|
@@ -191,8 +201,11 @@ class Contacts::ImportsController < Omega::Controller
         end
 
         @contact.save(:validate => false)
-        @contacts << @contact.id
+        @group.save(:validate => false)
 
+        @contact_group = Contact::GroupPosition.create(:contact_id => @contact.id, :group_id => @group.id)
+
+        @contacts << @contact.id
       end
 
       @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
@@ -276,18 +289,12 @@ class Contacts::ImportsController < Omega::Controller
         @csv_rows = []
 
         rows.each do |r|
-
           @csv_rows << r
         end
 
       end
 
-
       @rows = Contact::DataImport.create(:csv_rows => @csv_rows, :status => 'draft')
-
-
-
-                   
       session[:rows_id] = @rows.id
   end
 
@@ -296,29 +303,19 @@ class Contacts::ImportsController < Omega::Controller
     rows = []
 
     CSV.foreach(csv) do |row|
-
       rows << row
-
     end
 
-   encoded_rows = []
+    encoded_rows = []
 
     rows.each do |r|
-
       row = []
 
-      logger.debug("row before: #{r}")
-
       r.each do |c|
-
-        logger.debug("value of c: #{c}")
-
         row << Iconv.new('UTF-8//IGNORE', 'UTF-8').iconv(c.to_s + ' ')[0..-2]
-
       end
 
       encoded_rows << row
-
     end
 
     encoded_rows
@@ -336,8 +333,10 @@ class Contacts::ImportsController < Omega::Controller
 
     @phones = Contact::PhoneNumber.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "contact_id" || c.name == "created_at" || c.name == "updated_at" }
     @address = Contact::Address.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "created_at" || c.name == "updated_at"}
+    @group = Contact::Group.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "created_at" || c.name == "updated_at"}
 
-    @contacts | @phones | @address
+
+    @contacts | @phones | @address | @group
 
   end
 
@@ -370,7 +369,8 @@ class Contacts::ImportsController < Omega::Controller
                      "date_of_birth" => ['Birth Date', 'Birthday', 'birthday', 'DOB', 'dob', 'Date of Birth','date of birth'],
                      "deceased_date" => ['Deceased Date'],
                      "gender" => ['Gender', 'gender'],
-                     "individual_suffix" => ['Individual Suffix', 'Suffix', 'suffix']
+                     "individual_suffix" => ['Individual Suffix', 'Suffix', 'suffix'],
+                     "group_name" => ['household', 'Household', 'Household Name', 'household name', 'household_name', 'Household_name']
 
     }
   end
