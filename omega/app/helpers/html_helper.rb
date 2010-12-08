@@ -70,7 +70,7 @@ module HtmlHelper
       icon = content_tag(:span, '', :class => "om-icon om-icon-#{options[:icon]}")
     else
       icon_class = nil
-      icon = ''
+      icon = ''.html_safe
     end
 
     klass = ['om', plain, icon_class, 'button'].compact.join('-')
