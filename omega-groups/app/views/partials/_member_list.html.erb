@@ -2,6 +2,6 @@
     <li>
       <%= link_to remove_user_from_group_path(@group, :user_id => user), :method => :put, :remote => true do %>
       <span class="om-icon-only om-blue-icon ui-icon-minus" data-tooltip="remove <%= "#{user.username}"  %>  from: <%= @group.name %>"></span>
-      <% end %><%= user.username %>
+      <% end %><%= "#{user.first_name} #{user.last_name}" %>
     </li>
 <% end %>

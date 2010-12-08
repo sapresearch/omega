@@ -89,30 +89,61 @@ div.position-wrapper {
 
 }
 
-span.skill-tag {
-    border: 1px solid #CCCCCC;
-    margin: 2px 4px;
-    padding: 2px 8px;
-    -moz-border-radius: 12px;
-    -webkit-border-radius: 12px;
-    display: inline-block;
-    background: url("/images/om_button_bg.png") repeat-x bottom;
+a.skill-tag {
+margin:4px;
+    background: url("/images/tag_r.png") no-repeat scroll right top transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 11px;
+    height: 19px;
+    padding: 0 2px 0 0;
+    text-decoration: none;
+    vertical-align: middle;
+}
+a.skill-tag:hover{
+    background-position: right bottom;
+    color:#FFF;
+}
+a.skill-tag span {
+    background: url("/images/tag.png") no-repeat scroll left top transparent;
+    display: block;
+    float: left;
+    height: 15px;
+    line-height: 15px;
+    padding: 1px 7px 3px 19px;
+    vertical-align: top;
+    white-space: nowrap;
+
+}
+a.skill-tag span:hover {
+background: url("/images/tag.png") no-repeat scroll left bottom transparent;
 }
 
 span.skill-tag-active {
-        color:#fff;
-    margin: 2px 4px;
-    padding: 2px 8px;
-    -moz-border-radius: 12px;
-    -webkit-border-radius: 12px;
-    display: inline-block;
-    background-color: #CF3A72;
-
-    border: 1px solid #A82F5D;
+margin:4px;
+    background: url("/images/tag_r.png") no-repeat scroll right bottom transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 11px;
+    height: 19px;
+    padding: 0 2px 0 0;
+    text-decoration: none;
+    vertical-align: middle;
 }
 
-.skill_tag-active a {
-    color: #FFF !important;
+a.skill_tag-active span {
+    background: url("/images/tag.png") no-repeat scroll left bottom transparent;
+    display: block;
+    float: left;
+    height: 15px;
+    line-height: 15px;
+    padding: 1px 7px 3px 19px;
+    vertical-align: top;
+    white-space: nowrap;
 }
 
 .skill-tag a {

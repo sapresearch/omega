@@ -17,7 +17,7 @@ $('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "f
 
         $('.datepicker').datepicker({
             onSelect: function(dateText, inst) {
-            field_value_preview.find('input:disabled').val(dateText);
+            field_value_preview.empty().append(dateText);
             field_value_submit.val(dateText);
             }
 

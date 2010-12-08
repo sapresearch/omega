@@ -167,15 +167,10 @@ class ServicesController < Omega::Controller
 
     @current_step = session[:current_step]
 
-    if params[:save] # Update the object in the wizard and remain on the current step
-
-      @service.save
-
-      redirect_to service_wizard_services_url(:step => 2)
-
-    end
+ 
 
     if params[:next] # Proceed to next step in the wizard
+       @service.save
       redirect_to service_wizard_services_url(:step => 3)
 
     end
