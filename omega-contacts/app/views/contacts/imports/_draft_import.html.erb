@@ -13,7 +13,7 @@
     <%end%>
 
     <%= om_button(:icon=>'cancel') do %>
-        <%= link_to 'Delete', delete_contact_imports_url(:id => @import.id), 'data-tooltip' => 'Delete this Import', :confirm => 'Are You Sure?' %>
+        <%= link_to 'Delete', delete_forever_contact_imports_url(:id => @import.id), 'data-tooltip' => 'Delete this Import', :confirm => 'Are You Sure?' %>
     <%end%>
 
   </tr>

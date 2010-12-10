@@ -21,7 +21,6 @@ Omega::Contacts::Module.routes.draw do
         get :redo_mapping
         get :delete_forever
         get :draft_import
-        get :delete
         get :redo_import
         get :redo_import_finalize
       end
