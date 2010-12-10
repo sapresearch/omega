@@ -88,7 +88,16 @@ class UsersController < Omega::Controller
   end
 
   def lost_password
+    if params[:username]
+      @username = params[:username]
+      @user = User.find_by_username(@username)
 
+      @user_token = UserToken.create(:token_type => 'login', :user => @user)
+
+      UserMailer.lost_password(@username, @user, @user_token, token_sessions_url(:token => @user_token.token)).deliver
+    end
+
+    respond_with(:ok)
   end
 
   SORT_KEYS = ['username']

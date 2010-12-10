@@ -1,26 +1,15 @@
 class UserMailer < ActionMailer::Base
   default :from => "from@example.com"
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.user_mailer.lost_username.subject
-  #
   def lost_username(email, users)
-    @email = email
-    @users = users
+    @email, @users = email, users
 
     mail :to => @email
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.user_mailer.lost_password.subject
-  #
-  def lost_password
-    @greeting = "Hi"
+  def lost_password(username, user, user_token, session_url)
+    @username, @user, @user_token, @session_url = username, user, user_token, session_url
 
-    mail :to => "to@example.org"
+    mail :to => user.email
   end
 end

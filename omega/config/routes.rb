@@ -18,6 +18,10 @@ Omega::Module.routes.draw do
     collection do
       delete :destroy
     end
+
+    collection do
+      get :token, :path => 'new/:token'
+    end
   end
 
   resources :users do
