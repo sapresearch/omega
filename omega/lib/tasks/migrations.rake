@@ -10,7 +10,7 @@ Omega::Tasks.define do
   end
 end
 
-Omega::Tasks.each_module do |mod, name|
+Omega::Tasks.each_module do |mod, name, ns|
   if Omega::Migrations.can_migrate?(mod)
     desc "Pushes the schema to the next version for the #{name} module. " +
          'Specify the number of steps with STEP=n'
@@ -30,13 +30,13 @@ Omega::Tasks.each_module do |mod, name|
       desc "Rollbacks the database one migration and re migrate up for the #{name} module. " +
            'If you want to rollback more than one step, define STEP=x. Target specific version with VERSION=x.'
       task :redo => :environment do
-#        if ENV["VERSION"]
-#          Rake::Task["#{@namespace}:migrate:down"].invoke
-#          Rake::Task["#{@namespace}:migrate:up"].invoke
-#        else
-#          Rake::Task["#{@namespace}:rollback"].invoke
-#          Rake::Task["#{@namespace}:migrate"].invoke
-#        end
+        if ENV["VERSION"]
+          Rake::Task["#{ns}:migrate:down"].invoke
+          Rake::Task["#{ns}:migrate:up"].invoke
+        else
+          Rake::Task["#{ns}:rollback"].invoke
+          Rake::Task["#{ns}:migrate"].invoke
+        end
       end
 
       desc %Q{Runs the "up" for the #{name} module for a given migration VERSION.}

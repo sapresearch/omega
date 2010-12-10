@@ -12,9 +12,10 @@ module Omega
       def each_module
         Omega::Module::Base.subclasses.each do |mod|
           name = mod.undecorated_name.gsub(/::/, ' ').titleize
+          ns   = mod.undecorated_name.gsub(/::/, ':').underscore
 
-          namespace mod.undecorated_name.gsub(/::/, ':').underscore do
-            yield(mod, name)
+          namespace(ns) do
+            yield(mod, name, ns)
           end
         end
       end
