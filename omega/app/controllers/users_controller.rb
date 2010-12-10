@@ -77,13 +77,14 @@ class UsersController < Omega::Controller
   end
 
   def lost_username
-    @users = User.where('email = ?', params[:email])
+    if params[:email]
+      @email = params[:email]
+      @users = User.where('email = ?', @email)
 
-    if @users.any?
-
+      UserMailer.lost_username(@email, @users).deliver
     end
 
-    respond_with(@users)
+    respond_with(:ok)
   end
 
   def lost_password

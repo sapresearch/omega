@@ -8,6 +8,6 @@ en:
 en:
   user_mailer:
     lost_username:
-      subject: Omega - Your usernames
+      subject: Omega - Your username
     lost_password:
       subject: Omega - Reset your lost password

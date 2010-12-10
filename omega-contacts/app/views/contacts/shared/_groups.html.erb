@@ -23,7 +23,7 @@
         <table class="width-100">
           <% groups.each do |group| %>
               <tr data-id=<%= group.id %>>
-                <td> <%= link_to truncate(group.group_name, :length => 30), group, :remote=> true %></td>
+                <td> <%= link_to truncate(group.name, :length => 30), group, :remote=> true %></td>
               </tr>
           <% end %>
         </table>
