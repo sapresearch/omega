@@ -18,6 +18,12 @@ Omega::Contacts::Module.routes.draw do
         get :get_import_data
         get :get_import_mapping
         get :undo_import_finalize
+        get :redo_mapping
+        get :delete_forever
+        get :draft_import
+        get :delete
+        get :redo_import
+        get :redo_import_finalize
       end
     end
 

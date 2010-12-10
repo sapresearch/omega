@@ -1,33 +1,83 @@
-<h1 class="page-content corners-top">
+<% require_stylesheet 'omega_contacts.css', 'thirdParty/jquery.autocomplete.css', 'csv_import.css' %>
+<% require_javascript 'import' %>
+
+
+
+  <h1 class="page-content corners-top">
   List of Imports
 </h1>
 
-<div class="page-content corners-bottom">
+<div id="cm" class="page-content corners-bottom">
+
+
+<div id="import_list" >
 <% if @imports.empty? %>
 
   <h2> No Files Imported Yet</h2>
-      
-<%else%>
-  <table>
 
-    <th> Created At </th>   <th> &nbsp;&nbsp;Status </th>
+<%else%>
+
+  <table class="imports" >
 
     <% @imports.each do |i| %>
 
-    <tr>
+    <tr class="imports">
 
-      <td>
-        <strong>
-        <%= i.created_at.utc.strftime('%Y-%m-%d %H:%M:%S')%> <br/>
-        </strong>
-      </td>
+      <td class="imports">
+        
+        <span id= "import_date" class="list-item"><%=i.created_at.utc.strftime('%Y-%m-%d %H:%M:%S')%></span>
+
+        <br/>
+
+        <% if i.status == 'complete' %>
+        <span class="om-icon-only om-blue-icon ui-icon-flag"
+              data-tooltip="This Import Completed Successfully">
+        </span>
+
+        <span class="om-icon-only om-blue-icon ui-icon-person"
+              data-tooltip="Preview By Imported Contacts"
+              onClick= 'import_data("import_filter_By_Data","<%=i.created_at.utc.strftime('%Y-%m-%d %H:%M:%S')%>")'>
+        </span>
+
+        <span data-tooltip="Preview By Mapped Fields"
+              class="om-icon-only om-blue-icon ui-icon-transferthick-e-w"
+              onClick= 'import_data("import_filter_By_Mapping","<%=i.created_at.utc.strftime('%Y-%m-%d %H:%M:%S')%>")'>
+
+        </span>
 
 
-       <td>
-        &nbsp;&nbsp;
-         <strong>
-         <%= i.status%>
-         </strong> <br/>
+
+        <%else if i.status == 'deleted'%>
+
+        <span class="om-icon-only om-blue-icon ui-icon-flag"
+         data-tooltip="This is an Undone Import">
+
+        </span>
+
+        <span class="om-icon-only om-blue-icon ui-icon-arrowrefresh-1-w"
+              data-tooltip="Redo this Import"
+              onClick= 'redo_import("<%=i.created_at.utc.strftime('%Y-%m-%d %H:%M:%S')%>")'>
+        </span>
+
+
+
+        <%else%>
+
+          <span class="om-icon-only om-blue-icon ui-icon-flag"
+         data-tooltip="This is a Draft Import">
+
+        </span>
+
+        <span class="om-icon-only om-blue-icon ui-icon-folder-open"
+              data-tooltip="Resume Working on this Import"
+              onClick= 'draft_import("<%=i.created_at.utc.strftime('%Y-%m-%d %H:%M:%S')%>")'>
+        </span>
+
+
+        <%end%>
+
+        <%end%>
+
       </td>
 
     </tr>
@@ -38,3 +88,15 @@
 <%end%>
 
 </div>
+
+<div id="import_preview">
+
+    <div id="import_contacts">
+    </div>
+
+
+</div>
+</div>
+
+  
+

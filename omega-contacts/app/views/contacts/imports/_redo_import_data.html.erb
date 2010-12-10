@@ -1,6 +1,6 @@
 <br/>
 
-<span class="list-item-detail"> Preview Imported Contacts</span>
+<span class="list-item-detail">Preview Imported Data</span>
 
 <br/>
 
@@ -12,11 +12,12 @@
 
                <th class="imports-detail">First Name</th> <th class="csv-table">Last Name</th>
 
-                <% @contacts.each do |c| %>
+                <% @import.contact_ids.each do |c| %>
 
                     <% contact = Contact.find(c) %>
 
                     <% unless contact.nil? %>
+
                     <tr class="imports-detail">
 
                       <td class="imports-detail">
@@ -28,7 +29,7 @@
                       </td>
                       
                     </tr>
-                     <%end%>
+                      <%end%>
                 <%end%>
 
             </table>
@@ -37,7 +38,7 @@
 
   <tr>
     <%= om_button(:icon=>'cancel') do %>
-    <%= link_to 'Undo Import', undo_import_finalize_contact_imports_url(:id => @import) %>
+    <%= link_to 'Redo Import', redo_import_finalize_contact_imports_url(:id => @import) %>
     <%end%>
 
     <%= om_button(:icon=>'cancel') do %>

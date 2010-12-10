@@ -1,14 +1,5 @@
 $(function() {
 
-    $('#import_filter_By_Mapping').click(function() {
-        import_data(this.id)
-    });
-
-    $('#import_filter_By_Data').click(function() {
-        import_data(this.id)
-    });
-    
-
     $('#wizard-intro li').hover(function(){
       
         $(this).find('.wizard-explanation').show().animate({
@@ -41,8 +32,7 @@ marginTop: '-110px', /* The next 4 lines will vertically align this image */
 
 });
 
-function import_data(selection){
-    var import_date = document.getElementById('import_date').value;
+function import_data(selection, import_date){
     $.ajax({
 
                 type: "GET",
@@ -54,3 +44,34 @@ function import_data(selection){
                 }
     });
 }
+
+
+function draft_import(date){
+
+    $.ajax({
+
+                type: "GET",
+                url: "/contacts/imports/draft_import",
+                data: { "created_at": date },
+                success: function(html){
+                    $('#import_contacts').html(html);
+
+                }
+    });
+}
+
+function redo_import(date){
+
+    $.ajax({
+
+                type: "GET",
+                url: "/contacts/imports/redo_import",
+                data: { "created_at": date },
+                success: function(html){
+                    $('#import_contacts').html(html);
+
+                }
+    });
+}
+
+

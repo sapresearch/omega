@@ -26,6 +26,8 @@ div.helptext{
 
 
 }
+
+
 .csv-table tr {
     height: 35px;
 }
@@ -62,6 +64,69 @@ table.csv-table {
     border-collapse: collapse;
 }
 
+.imports tr {
+    height: 2px;
+    
+}
+
+.imports th {
+    font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    padding: 0.5em;
+}
+
+.imports tbody {
+}
+
+.imports td {
+    border-bottom: 1px solid #DFE5E7;
+    color: #191919;
+    text-align: center;
+}
+
+table.imports {
+    margin:1em;
+    width: 93%;
+    font-size: 1em;
+}
+
+
+
+.imports-detail tr {
+    height: 2px;
+    
+}
+
+.imports-detail th {
+    background: url("/images/bg-imports-table-th.png") repeat-x scroll center bottom transparent;
+    font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+    font-size: 1.0em;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    height: 10px;
+
+}
+
+.imports-detail tbody {
+}
+
+.imports-detail td {
+    border: 1px solid #DFE5E7;
+    color: #191919;
+    text-align: center;
+    border-collapse: collapse;
+    
+}
+
+table.imports-detail {
+    margin:1em 0;
+    width: 250px;
+    font-size: 1em;
+}
 
 /* Wizard steps */
 #wizard-intro li{
@@ -141,13 +206,65 @@ div.step-5 {
     background-position: 0 -424px
 }
 .wizard-explanation{
-     padding: 10px;
+    padding: 10px;
     display:none;
-    height:0;
+    height:50px;
+    width: 2000px;
 
 }
 span.read-more{
     cursor: pointer;
     font-weight:bold;
-color:#666;
+    color:#666;
+}
+
+
+#import_list{
+    float:left;
+	width:220px;
+    height: 500px;
+	top:4px;
+	left:4px;
+	padding: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: url("/images/bg_import_list.png") repeat-x scroll center bottom transparent;
+}
+
+#import_preview{
+	width:698px;
+    float: right;
+    height: 500px;
+	top:4px;
+    overflow-y:scroll;
+    overflow-x: hidden;
+    background: url("/images/bg_import_list_2.png") repeat-x scroll center bottom transparent;
+    
+}
+
+span.list-item{
+    padding: 10px;
+    font-weight:bold;
+    color: #4096ee;
+}
+
+span.list-item:hover {
+    cursor: pointer;
+    color:#055F67;
+}
+
+span.list-item-detail{
+    font-size: 1.4em;
+    padding: 20px;
+    font-weight:bold;
+    color: #666;
+}
+
+table td {
+}
+
+table {
+    margin: 1em 1em;
+    width: auto;
+    text-align: left;
 }

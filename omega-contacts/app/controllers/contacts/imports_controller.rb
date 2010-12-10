@@ -125,8 +125,6 @@ class Contacts::ImportsController < Omega::Controller
 
       @csv_rows.update_attributes(:mapped_rows => @rows, :mapping => params[:csv_field])
 
-     # @csv_rows.update_attributes(:mapped_rows => @rows, :mapping => params[:csv_field])
-
       case session[:current_page]
 
       when 'mapping'
@@ -141,6 +139,17 @@ class Contacts::ImportsController < Omega::Controller
     end
 
     if params[:import]
+
+      @previous_import = Contact::DataImport.find(session[:rows_id])
+
+      if @previous_import.status == 'redo mapping'
+        @previous_import.contact_ids.each do |c|
+          unless c.nil?
+            contact = Contact.find(c)
+            contact.destroy
+          end
+        end
+      end
 
       @contacts = Array.new
 
@@ -204,8 +213,8 @@ class Contacts::ImportsController < Omega::Controller
         @group.save(:validate => false)
 
         @contact_group = Contact::GroupPosition.create(:contact_id => @contact.id, :group_id => @group.id)
-
         @contacts << @contact.id
+
       end
 
       @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
@@ -222,10 +231,16 @@ class Contacts::ImportsController < Omega::Controller
 
       @imported_rows = Contact::DataImport.find(session[:rows_id])
       @imported_rows.update_attributes(:status => 'complete', :imported_rows => @rows, :contact_ids => @contacts)
-
       redirect_to contact_imports_url()
 
     end
+  end
+
+  def draft_import
+    
+    @import = Contact::DataImport.find_by_created_at(params[:created_at])
+    render :partial => "draft_import"
+
   end
 
   def undo_import
@@ -235,13 +250,29 @@ class Contacts::ImportsController < Omega::Controller
 
   end
 
+  def redo_import
+    @import = Contact::DataImport.find_by_created_at(params[:created_at])
+    render :partial => 'redo_import_data'
+    
+  end
+
+  def redo_import_finalize
+
+    @import = Contact::DataImport.find(params[:id])
+    @import.update_attributes(:status => 'complete')
+
+    @import.contact_ids.each do |c|
+      contact = Contact.find(c)
+      contact.status = nil
+      contact.save(:validate => false)
+
+    end
+
+    redirect_to contact_imports_url()
+
+  end
+
   def get_import_data
-
-    if params[:created_at] == ''
-
-      render :partial => "error_page"
-
-    else
 
       @import = Contact::DataImport.find_by_created_at(params[:created_at])
 
@@ -256,8 +287,6 @@ class Contacts::ImportsController < Omega::Controller
 
         end
       end
-
-    end
 
   end
 
@@ -274,6 +303,40 @@ class Contacts::ImportsController < Omega::Controller
   end
 
   redirect_to contact_imports_url()
+  end
+
+  def redo_mapping
+
+    @import = Contact::DataImport.find(params[:id])
+
+    @import.update_attributes(:status => 'redo mapping')
+
+    session[:rows_id] = @import.id
+
+    redirect_to csv_import_wizard_contact_imports_url(:step => 3)
+
+  end
+
+  def delete_forever
+
+    @import = Contact::DataImport.find(params[:id])
+
+    @import.contact_ids.each do |c|
+    contact = Contact.find_by_id(c)
+    contact.status = 'deleted'
+    contact.save(:validate => false)
+    end
+
+
+  end
+
+  def delete
+
+    @import = Contact::DataImport.find(params[:id])
+    @import.destroy
+
+    redirect_to contact_imports_url()
+
   end
 
 
@@ -370,7 +433,9 @@ class Contacts::ImportsController < Omega::Controller
                      "deceased_date" => ['Deceased Date'],
                      "gender" => ['Gender', 'gender'],
                      "individual_suffix" => ['Individual Suffix', 'Suffix', 'suffix'],
-                     "group_name" => ['household', 'Household', 'Household Name', 'household name', 'household_name', 'Household_name']
+                     "group_name" => ['household', 'Household', 'Household Name', 'household name', 'household_name', 'Household_name',
+                                      'organization', 'Organization', 'Organization Name', 'organization name', 'organization_name', 'Organization_name',
+                                      'group', 'Group', 'Group Name', 'group name', 'group_name', 'Group_name']
 
     }
   end

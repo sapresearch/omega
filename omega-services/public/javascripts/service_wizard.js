@@ -43,10 +43,8 @@ $(function() {
                                    url:'/form_builder/dispatch_ui_element/' + ui_em ,
                                    success:function(data) {
                                        append = data;
-
                                    }
                                })
-
                            }
                        });
 
@@ -61,7 +59,6 @@ $(function() {
                                         url:'/form_builder/dispatch_element_properties/' + ui_em + '?em_id=' + em_id + '&field_category=' + category,
                                         dataType: 'script'
                                     })
-
 
                                 }).droppable({
                                                  drop: function() {
@@ -80,12 +77,11 @@ $(function() {
                                                      }
                                                  }
                                              }).delegate('span.delete-ui-em', 'click', function() {
-          $(this).parents('li').hide();
+        $(this).parents('li').hide();
         var em_id =  $(this).parents('li').find('.ui-em-preview').attr('id').replace(/ui-em-/,'');
 
         $('#fields_' + em_id +'__destroy').val('true');
     });
-
 });
 
 function create_editor(em) {
@@ -99,3 +95,11 @@ function create_editor(em) {
         submit_val.val(v)
     })
 }
+
+
+
+
+
+
+
+
