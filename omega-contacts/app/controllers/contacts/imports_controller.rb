@@ -143,12 +143,16 @@ class Contacts::ImportsController < Omega::Controller
       @previous_import = Contact::DataImport.find(session[:rows_id])
 
       if @previous_import.status == 'redo mapping'
-        @previous_import.contact_ids.each do |c|
+
+        unless @previous_import.contact_ids.nil?
+          @previous_import.contact_ids.each do |c|
           unless c.nil?
             contact = Contact.find(c)
             contact.destroy
           end
         end
+        end
+
       end
 
       @contacts = Array.new
