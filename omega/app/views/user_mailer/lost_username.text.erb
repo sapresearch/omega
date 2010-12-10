@@ -1,0 +1,13 @@
+Hey, we heard you lost your username.
+
+<% if @users.any? %>
+After searching long and hard we were able to find the following usernames for your email:
+<% @users.each do |user| %>
+ - <%= user.username %>
+<% end %>
+<% else %>
+Unfortunately we were unable to find any usernames associated with your email address <%= @email %>.
+<% end %>
+
+Thanks,
+The Omega Team

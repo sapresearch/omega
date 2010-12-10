@@ -1,0 +1,16 @@
+<% unless request.post? %>
+<%= form_tag do %>
+  <fieldset>
+    <legend>Lost Username</legend>
+      <p>
+        <%= label_tag :email %>
+        <%= text_field_tag :email %>
+      </p>
+  </fieldset>
+  <%= om_button do %>
+      <%= submit_tag 'Submit' %>
+  <% end %>
+<% end %>
+<% else %>
+<p>An email has been sent to <%= @email %> containing all usernames associated with that address.</p>
+<% end %>

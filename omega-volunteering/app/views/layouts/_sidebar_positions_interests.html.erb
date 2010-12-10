@@ -1,11 +1,14 @@
 <% if @interests %>
     <%= side_bar_box(:interests) do %>
         <% @interests.each do |interest| %>
-            <span class="skill-tag">
-          <%= link_to interests_volunteering_positions_path(:interests => [params[:interests], interest.name].compact.join('+')) do %>
-                <%= interest.name %> x <%= interest.count %>
+
+
+          <%= link_to volunteering_interests_path(:interests => [params[:interests], interest.name].compact.join('+')), :class => 'skill-tag' do %>
+               <span>   <%= interest.name %> x <%= interest.count %>  </span>
             <% end %>
-        </span>
+
+
         <% end %>
+        <div class="clear"></div>
     <% end %>
 <% end %>

@@ -8,3 +8,14 @@ $('#contacts_contact_pane').empty().append('<%= escape_javascript(render(:partia
             //append the new created contact at the end of list
             // TODO: insert the contact at the right alphabetical position
 $('#contacts ul').append('<%= escape_javascript(render('contact_row', :contact_row => @contact)) %>');
+               $("#contact_accordion").accordion();
+        $('#contact-assignment').dialog({ autoOpen: false,
+            modal: true,
+            title: 'Assign Contacts',
+            height:400,
+            width:600
+        });
+        $('#assign-trigger').click(function() {
+
+            $('#contact-assignment').dialog('open');
+        });
