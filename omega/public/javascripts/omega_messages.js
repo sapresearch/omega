@@ -24,8 +24,8 @@ $(function() {
     
     $('#messages-list').find('li').mouseenter(
                              function() {
-                                 $(this).find('div.item-list-actions-wrapper').fadeIn()
+                                 $(this).find('div.item-list-actions-wrapper').show()
                              }).mouseleave(function() {
-        $(this).find('div.item-list-actions-wrapper').fadeOut()
+        $(this).find('div.item-list-actions-wrapper').hide()
     });
 });

@@ -15,7 +15,7 @@ class Contact < Omega::Model
 
   TITLES = %w{ mr. dr. ms. mrs.}
 
-  scope :status, where('statis IS NULL')
+  scope :status, where('status IS NULL')
 
   class << self
     def for(user) where('user_id = ?', user).first end

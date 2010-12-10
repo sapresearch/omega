@@ -398,8 +398,7 @@ li.list-item {
 /* hidden div which will be shown as soon as the users over the list item */
 .item-list-actions-wrapper {
     position: absolute;
-    background: #191919;
-    opacity: 0.8;
+
     right: 0;
     display: none;
 
