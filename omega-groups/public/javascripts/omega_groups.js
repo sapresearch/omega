@@ -64,9 +64,9 @@ $(function() {
 // show the available actions at the group overview
     $('#groups-list').find('li').mouseenter(
                                            function() {
-                                               $(this).find('div.item-list-actions-wrapper').fadeIn('fast')
+                                               $(this).find('div.item-list-actions-wrapper').show()
                                            }).mouseleave(function() {
-        $(this).find('div.item-list-actions-wrapper').fadeOut('fast')
+        $(this).find('div.item-list-actions-wrapper').hide();
     });
 
     // show the post preview at the bulletion board 

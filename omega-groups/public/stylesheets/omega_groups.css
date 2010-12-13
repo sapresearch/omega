@@ -34,10 +34,10 @@
 }
 
 #sidebar-search input {
-    color: #4196ee;
-    margin: 12px 0 0 25px;
-    border: none;
-    height: 20px;
+    border: medium none;
+    color: #4196EE;
+    height: 13px;
+    margin: 17px 0 0 25px;
 }
 
 #user-list, #member-list {
