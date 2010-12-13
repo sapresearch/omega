@@ -240,6 +240,21 @@ class Contacts::ImportsController < Omega::Controller
     end
   end
 
+   def get_import_data
+
+      @import = Contact::DataImport.find_by_created_at(params[:created_at])
+
+      if params[:filter] == 'import_filter_By_Mapping'
+        render :partial => "get_import_mapping"
+
+        else if params[:filter] == 'import_filter_By_Data'
+          @contacts = @import.contact_ids
+          render :partial => "get_import_data"
+        end
+      end
+
+   end
+
   def draft_import
     
     @import = Contact::DataImport.find_by_created_at(params[:created_at])
@@ -254,10 +269,35 @@ class Contacts::ImportsController < Omega::Controller
 
   end
 
+  def undo_import_finalize
+
+  @import = Contact::DataImport.find(params[:id])
+  @import.update_attributes(:status => 'deleted')
+
+  @import.contact_ids.each do |c|
+    contact = Contact.find_by_id(c)
+    contact.status = 'deleted'
+    contact.save(:validate => false)
+  end
+
+  redirect_to contact_imports_url()
+    
+  end
+
+  def redo_mapping
+
+    @import = Contact::DataImport.find(params[:id])
+    @import.update_attributes(:status => 'redo mapping')
+
+    session[:rows_id] = @import.id
+    redirect_to csv_import_wizard_contact_imports_url(:step => 3)
+
+  end
+
   def redo_import
     @import = Contact::DataImport.find_by_created_at(params[:created_at])
     render :partial => 'redo_import_data'
-    
+
   end
 
   def redo_import_finalize
@@ -269,55 +309,9 @@ class Contacts::ImportsController < Omega::Controller
       contact = Contact.find(c)
       contact.status = nil
       contact.save(:validate => false)
-
     end
 
     redirect_to contact_imports_url()
-
-  end
-
-  def get_import_data
-
-      @import = Contact::DataImport.find_by_created_at(params[:created_at])
-
-      if params[:filter] == 'import_filter_By_Mapping'
-
-        render :partial => "get_import_mapping"
-
-        else if params[:filter] == 'import_filter_By_Data'
-
-          @contacts = @import.contact_ids
-          render :partial => "get_import_data"
-
-        end
-      end
-
-  end
-
-  def undo_import_finalize
-
-  @import = Contact::DataImport.find(params[:id])
-
-  @import.update_attributes(:status => 'deleted')
-
-  @import.contact_ids.each do |c|
-    contact = Contact.find_by_id(c)
-    contact.status = 'deleted'
-    contact.save(:validate => false)
-  end
-
-  redirect_to contact_imports_url()
-  end
-
-  def redo_mapping
-
-    @import = Contact::DataImport.find(params[:id])
-
-    @import.update_attributes(:status => 'redo mapping')
-
-    session[:rows_id] = @import.id
-
-    redirect_to csv_import_wizard_contact_imports_url(:step => 3)
 
   end
 
@@ -325,24 +319,19 @@ class Contacts::ImportsController < Omega::Controller
 
     @import = Contact::DataImport.find(params[:id])
 
-    @import.contact_ids.each do |c|
-    contact = Contact.find_by_id(c)
-    contact.status = 'deleted'
-    contact.save(:validate => false)
+    unless @import.contact_ids.nil?
+      @import.contact_ids.each do |c|
+        contact = Contact.find_by_id(c)
+        contact.status = 'deleted'
+        contact.save(:validate => false)
+      end
     end
 
-
-  end
-
-  def delete
-
-    @import = Contact::DataImport.find(params[:id])
     @import.destroy
 
     redirect_to contact_imports_url()
 
   end
-
 
   private #---------------------------------------------------------------------------------------------------
 
