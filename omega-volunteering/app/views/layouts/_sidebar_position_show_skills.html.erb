@@ -2,12 +2,12 @@
     <%= side_bar_box(:skills) do %>
         <% @position.skills.each do |skill| %>
 
-            <%= link_to volunteering_skills_path(:skills => [params[:skills], skill.name].compact.join('+')) do %>
+            <%= link_to volunteering_skills_path(:skills => [params[:skills], skill.name].compact.join('+')), :class => 'skill-tag' do %>
                 <span class="skill-tag">
                 <%= skill.name %>
                 </span>
             <% end %>
-
+ <div class="clear"></div>
         <% end %>
     <% end %>
 

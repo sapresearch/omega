@@ -12,24 +12,24 @@
 
       <div>
         <% unless @position.recurrent? %>
-        <% if @position.start %>
-            <p>
-              <span class="om-icon-only ui-icon-date"></span> <span> Start date:</span>
-              <%= @position.start.to_formatted_s(:long) %>
-            </p>
-        <% end %>
-        <% if @position.end %>
-            <p>
-              <span class="om-icon-only ui-icon-date"></span> <span>End date:</span>
-              <%= @position.end.to_formatted_s(:long) %>
-            </p>
-        <% end %>
-        <!-- hours-->
+            <% if @position.start %>
+                <p>
+                  <span class="om-icon-only ui-icon-date"></span> <span> Start date:</span>
+                  <%= @position.start.to_formatted_s(:long) %>
+                </p>
+            <% end %>
+            <% if @position.end %>
+                <p>
+                  <span class="om-icon-only ui-icon-date"></span> <span>End date:</span>
+                  <%= @position.end.to_formatted_s(:long) %>
+                </p>
+            <% end %>
+            <!-- hours-->
         <% else %>
             <% recurrence = @position.recurrence %>
             <p class="explanation">
 
-             <span class="om-icon-only ui-icon-date"></span> 
+              <span class="om-icon-only ui-icon-date"></span>
 
               This Position reoccurs
               <%= case recurrence.pattern
@@ -61,7 +61,7 @@
 
                               when Calendar::Recurrence::DAY
                                   'every ' + recurrence.yearly.day.days.to_s + ' ' + t(:"calendar.recurrence.months.#{recurrence.yearly.day.months}")
-                                when Calendar::Recurrence::ORDINAL
+                              when Calendar::Recurrence::ORDINAL
                                   'the ' + t(:"calendar.recurrence.ordinals.#{recurrence.yearly.ordinal.ordinal}") + ' ' +
                                           t(:"calendar.recurrence.days.#{recurrence.yearly.ordinal.days}") +
                                           ' of every ' + recurrence.yearly.ordinal.months.to_s + ' month'
@@ -99,11 +99,15 @@
 <% content_for :sidebar do %>
 
     <%= render :partial => "layouts/sidebar_position_show_menu" %>
-        <% end %>
-    <% if @position.skills.any? %>
-        <%= render :partial => "layouts/sidebar_position_show_skills" %>
-    <% end %>
 
-    <% if @position.interests.any? %>
+
+<% if @position.skills.any? %>
+    <%= render :partial => "layouts/sidebar_position_show_skills" %>
+<% end %>
+
+<% if @position.interests.any? %>
     <%= render :partial => "layouts/sidebar_position_show_interests" %>
-    <% end %>
+<% end %>
+
+<% end %>
+
