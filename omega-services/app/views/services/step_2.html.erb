@@ -14,43 +14,32 @@
         <%= f.hidden_field :icon %>
         <%= f.hidden_field :published %>
         <fieldset>
-          <legend><%= @service.service_type %></legend>
+          <legend>Service Details</legend>
+
+          <p>
+            <%= f.label :service_type %>
+            <%= @service.service_type %>
+          </p>
+
           <p>
             <%= f.label :category %>
             <%= @service.service_category %>
           </p>
-          <ul id="service-details" class="elements-list">
-            <li class="list-item relative">
-              <div class="item-list-actions-wrapper corners">
-                <div class="item-list-actions">
-                    <span class="om-plain-icon-button"><span class="om-icon om-icon-edit"></span>
-                    <span class="edit-ui-em">Edit this Field</span> </span>
-                </div>
-              </div>
-              <div id="<%= "ui-em-#{rand(1000)}" %>" class="ui-em-preview" ui-data="textfield">
-                <%= f.label :name_for_service, :id =>'service-name' %>
-                <span class="field-value-preview">
-            <%= @service.service_name %>
-            </span>
-                <%= f.hidden_field :service_name, :class=>'field-value' %>
-              </div>
-            </li>
-            <li class="list-item relative">
-              <div class="item-list-actions-wrapper corners">
-                <div class="item-list-actions">
-                    <span class="om-plain-icon-button"><span class="om-icon om-icon-edit"></span>
-                    <span class="edit-ui-em">Edit this Field</span> </span>
-                </div>
-              </div>
-              <div id="<%= "ui-em-#{rand(1000)}" %>" class="ui-em-preview" ui-data="textfield">
-                <%= f.label :description, :id => "service-description" %>
-                <span class="field-value-preview">
-            <%= @service.description %>
-            </span>
 
-                <%= f.hidden_field :description, :class=>'field-value' %>
-              </div>
-            </li>
+          <p>
+             <%= f.label :name_for_service, :id =>'service-name' %>
+             <%= f.text_field :service_name, :class=>'field-value'%>
+          </p>
+
+          <p>
+             <%= f.label :description, :id => "service-description" %>
+             <%= f.text_area :description, :class=>'field-value' %>
+          </p>
+
+
+          <ul id="service-details" class="elements-list">
+
+
             <% unless @details.empty? %>
                 <% @details.each_with_index do |detail, index| %>
                     <% @field =  Service::Field.find_by_id_and_field_category(detail.field_id, "Service Details") %>
@@ -62,22 +51,28 @@
         <fieldset>
           <legend>Registration Details</legend>
           <ul id="registration-details" class="elements-list">
-            <% if @service.service_category.eql?("Enrollable") %>
+            <% if @service.service_category== "enrollable" %>
                 <li class="list-item">
                   <label>First Name</label><input type="text" disabled="disabled">
                 </li>
                 <li class="list-item"><label>Last Name</label><input type="text" disabled="disabled"></li>
                 <li class="list-item"><label>Email</label><input type="text" disabled="disabled"></li>
-                <li class="list-item"><label>Phone</label><input type="text" disabled="disabled"></li>
+                <li class="list-item"><label>Phone Number</label><input type="text" disabled="disabled"></li>
                 <li class="list-item">
-                  <label>Notest</label><textarea disabled="disabled"></textarea></li>
+                  <label>Notes</label><textarea disabled="disabled"></textarea>
+                </li>
+                <li class="list-item">
+                  <label>Questions</label><textarea disabled="disabled"></textarea>
+                </li>
             <% else %>
-                <strong>
-                  Email <br/>
-                  Phone Numbers <br/>
-                  Notes <br/>
-                  Questions <br/>
-                </strong>
+                <li class="list-item"><label>Email</label><input type="text" disabled="disabled"></li>
+                <li class="list-item"><label>Phone Number</label><input type="text" disabled="disabled"></li>
+                <li class="list-item">
+                  <label>Notes</label><textarea disabled="disabled"></textarea>
+                </li>
+                <li class="list-item">
+                  <label>Questions</label><textarea disabled="disabled"></textarea>
+                </li>
             <% end %>
           </ul>
           <% unless @registration_fields.empty? %>

@@ -78,7 +78,9 @@ class Contacts::ImportsController < Omega::Controller
   end
 
   def new
-      @import = Contact::Import.new
+
+    @import = Contact::Import.new
+
   end
 
   def create
@@ -114,7 +116,6 @@ class Contacts::ImportsController < Omega::Controller
 
       session[:last_page] = "preview"
       @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
-
 
       params[:csv_field].each do |k,v|
             index = @rows[0].index(k)
@@ -158,17 +159,13 @@ class Contacts::ImportsController < Omega::Controller
       @contacts = Array.new
 
       @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
-
       @mapping = Contact::DataImport.find(session[:rows_id]).mapping
 
       fields_index = Hash.new
 
        @mapping.each do |k,v|
-
           index = @rows[0].index(v)
-
           fields_index[v] = index
-
         end
 
       @rows.shift
@@ -196,21 +193,19 @@ class Contacts::ImportsController < Omega::Controller
           @cols = Contact::PhoneNumber.columns.collect { |c| [c.name] }
 
           @cols.each do |c|
-
             if c.include?(k)
               @contact.phone_numbers[0][k] = row[v.to_i]
             end
-
           end
 
           @cols = Contact::Address.columns.collect { |c| [c.name] }
 
           @cols.each do |c|
-
             if c.include?(k)
               @contact.addresses[0][k] = row[v.to_i]
             end
           end
+
         end
 
         @contact.save(:validate => false)
@@ -264,23 +259,23 @@ class Contacts::ImportsController < Omega::Controller
 
   def undo_import
 
-  @imports = Contact::DataImport.all.collect{ |c| [c.created_at.utc.strftime('%Y-%m-%d %H:%M:%S')] unless c.status == 'draft' || c.status == 'deleted'}
-  @imports.compact!
+    @imports = Contact::DataImport.all.collect{ |c| [c.created_at.utc.strftime('%Y-%m-%d %H:%M:%S')] unless c.status == 'draft' || c.status == 'deleted'}
+    @imports.compact!
 
   end
-
+  
   def undo_import_finalize
 
-  @import = Contact::DataImport.find(params[:id])
-  @import.update_attributes(:status => 'deleted')
+    @import = Contact::DataImport.find(params[:id])
+    @import.update_attributes(:status => 'deleted')
 
-  @import.contact_ids.each do |c|
-    contact = Contact.find_by_id(c)
-    contact.status = 'deleted'
-    contact.save(:validate => false)
-  end
+    @import.contact_ids.each do |c|
+      contact = Contact.find_by_id(c)
+      contact.status = 'deleted'
+      contact.save(:validate => false)
+    end
 
-  redirect_to contact_imports_url()
+    redirect_to contact_imports_url()
     
   end
 
@@ -295,6 +290,7 @@ class Contacts::ImportsController < Omega::Controller
   end
 
   def redo_import
+
     @import = Contact::DataImport.find_by_created_at(params[:created_at])
     render :partial => 'redo_import_data'
 
@@ -352,6 +348,7 @@ class Contacts::ImportsController < Omega::Controller
 
       @rows = Contact::DataImport.create(:csv_rows => @csv_rows, :status => 'draft')
       session[:rows_id] = @rows.id
+
   end
 
   def parse_csv(csv)

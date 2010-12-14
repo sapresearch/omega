@@ -5,38 +5,28 @@
     <div>
 
       <p>
-
         <%= f.label :service_category %>
-        <%= f.select :service_category, %w{enrollable requestable}%>
-
+        <%= f.select :service_category, %w{Enrollable Requestable}%>
       </p>
 
       <p>
-
         <%= f.label :type_name %>
         <%= f.text_field :service_type %>
-
       </p>
 
-
       <p>
-
         <%= f.label :description %>
         <%= f.text_area :description %>
-
       </p>
 
-
       <p>
-
         <%= om_button(:icon => 'apply') do %>
               <%= f.submit "Create" %>
-          <% end %>
+        <% end %>
 
         <%= om_button(:icon => 'cancel') do %>
           <%= link_to 'Cancel', services_path %>
-      <% end %>
-
+        <% end %>
 
       </p>
       <div class="clear"></div>

@@ -18,9 +18,9 @@ class FormBuilderController < Omega::Controller
       when 'text'
         type = 'text'
         type_class = 'text'
-      when 'labelfield'
+      when 'textarea'
         type = 'text'
-        type_class = 'labelfield'
+        type_class = 'textarea'
       when 'selectbox'
         type = 'text'
         type_class = 'selectbox'
@@ -29,8 +29,8 @@ class FormBuilderController < Omega::Controller
         type_class = 'date'
     end
 
-    @field.field_name = 'Label'
-    @field.detail.field_value = 'Text'
+    @field.field_name = 'Field Label'
+    @field.detail.field_value = 'Value for this field'
     @field.field_type = type
     @field.field_type_class = type_class
 
@@ -45,8 +45,8 @@ class FormBuilderController < Omega::Controller
         render :partial => 'form_builder/partials/properties_input'
       when 'text'
         render :partial => 'form_builder/partials/properties_text'
-      when 'labelfield'
-        render :partial => 'form_builder/partials/properties_labelfield'
+      when 'textarea'
+        render :partial => 'form_builder/partials/properties_textarea'
       when 'selectbox'
         render :partial => 'form_builder/partials/properties_selectbox'
       when 'date'

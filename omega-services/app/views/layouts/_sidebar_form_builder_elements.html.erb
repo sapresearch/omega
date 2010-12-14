@@ -1,43 +1,38 @@
-<%= side_bar_box('Ui Elements') do %>
+<%= side_bar_box('Form Fields') do %>
 
     <ul id="ui-elements">
-      <li>
-        just click on one of the elements below to add it to the form
-      </li>
-      <li>
-        <input type="radio" value="service" name="part" checked="true">Add Custom fields<br>
-        <input type="radio" value="registration" name="part">Add Custom fields
-      </li>
-      <li class="ui-em">
-        <%= om_button(:plain => true, :icon => 'ui-label') do %>
-            <span class="blue add-ui-em" ui-data="labelfield">
-            Field with label aside 
-            </span>
 
+      <li>
+        <strong>Add a New Field To </strong><br/>
+        <input type="radio" value="service" name="part" checked="true">Service Details<br>
+        <input type="radio" value="registration" name="part">Registration Details
+      </li>
+
+      <strong>Choose the Field Type </strong> <br/>
+
+      <li class="ui-em">
+        <%= om_button(:plain => true, :icon => 'ui-textarea') do %>
+            <span class="blue add-ui-em" ui-data="textarea">
+            Text Area
+            </span>
         <% end %>
       </li>
-    <li class="ui-em">
-        <%= om_button(:plain => true, :icon => 'ui-textarea') do %>
-            <span class="blue add-ui-em" ui-data="text">
-            Text
-            </span>
-        <%end %>
-      </li>
-    <li class="ui-em">
+
+      <li class="ui-em">
         <%= om_button(:plain => true, :icon => 'ui-textfield') do %>
             <span class="blue add-ui-em" ui-data="input">
-            Input
+            Text Field
             </span>
         <% end %>
       </li>
       <li class="ui-em">
         <%= om_button(:plain => true, :icon => 'ui-selectbox') do %>
             <span class="blue add-ui-em" ui-data="selectbox">
-            Selectbox
+            Select List
             </span>
         <% end %>
       </li>
-     <li class="ui-em">
+      <li class="ui-em">
         <%= om_button(:plain => true, :icon => 'calendar') do %>
             <span class="blue add-ui-em" ui-data="date">
             Date
