@@ -118,8 +118,14 @@ class Contacts::ImportsController < Omega::Controller
       @rows = Contact::DataImport.find(session[:rows_id]).csv_rows
 
       params[:csv_field].each do |k,v|
+            
             index = @rows[0].index(k)
-            @rows[0][index] = v
+                     
+            unless index.nil? 
+
+              @rows[0][index]= v
+
+            end            
       end
 
       @csv_rows = Contact::DataImport.find(session[:rows_id])
