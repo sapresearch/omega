@@ -8,33 +8,43 @@ class FormBuilderController < Omega::Controller
 
     type = ''
     type_class = ''
-
-
-    
+    field = ''
+    default = ''
+   
     case params[:element]
       when 'input'
         type = 'text'
         type_class = 'input'
-      when 'text'
-        type = 'text'
-        type_class = 'text'
+        field = "Input Field"
+        default = "Enter Text/Number/Email"
+
       when 'textarea'
         type = 'text'
         type_class = 'textarea'
+        field = "Text Field"
+        default = "Enter Text"
+
       when 'selectbox'
         type = 'text'
         type_class = 'selectbox'
+        field = "Select List"
+        default = "Option1;Option2"
+
       when 'date'
         type = 'text'
         type_class = 'date'
+        field = "Date"
+        default = Date.today
+
     end
 
-    @field.field_name = 'Field Label'
-    @field.detail.field_value = 'Value for this field'
+    @field.field_name = field
+    @field.detail.field_value = default
     @field.field_type = type
     @field.field_type_class = type_class
 
-     render :partial => "form_builder/partials/#{type_class}", :locals => { :index => Time.now.to_i }
+    render :partial => "form_builder/partials/#{type_class}", :locals => { :index => Time.now.to_i }
+
   end
 
   def dispatch_element_properties

@@ -2,7 +2,7 @@
 
 
 <h1 class="page-content corners-top">
-  <%= @service.service_name %> Service
+  <%= @service.service_name %> Service 
 </h1>
 <div class="page-content corners-bottom">
 
@@ -47,6 +47,7 @@
 
         <%= s.field_name %>:
         <%= Service::Detail.find_by_field_id(s.id).field_value %>
+		
       </p>
   <% end %>
 
@@ -61,7 +62,6 @@
               Notes <br/>
               </strong>
 
-
               <%else%>
 
               <strong>
@@ -69,7 +69,6 @@
               Phone Numbers <br/>
               Notes <br/>
               Questions <br/>
-
 
               </strong>
 

@@ -12,7 +12,7 @@
     <%= label_tag @field.field_name, nil, :id=>"fields_#{index}_field_name_preview", :class =>'label-preview' %>
 
     <span id="<%= "value-preview-#{index}"%>">
-           <%= @field.field_type %>
+           <%= @field.value.field_value %>
 
      </span>
   </div>

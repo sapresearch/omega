@@ -39,6 +39,46 @@
     padding: 0;
 }
 
+h3.services {
+    color: #215487;
+    font-size: 1.2em;
+	text-align:center;
+}
+
+ul.service_types 
+{
+	list-style-image:none;
+}
+
+li.service_type
+{
+	clear: left; 
+    list-style-type: none; 
+    padding: 0.3em 0 0.3em 0; 
+    border-bottom: dotted 1px #EAEAEA;
+
+}
+
+li.mouse_enter
+{
+	  /*  background: #F8F8EF;*/
+	background:url('/images/wizard/arrow_list_services_preview.png') right center no-repeat;
+
+}
+
+span.service_type  {
+	background:url('/images/wizard/bullet_blue.png') left top no-repeat;
+	padding: 4px 15px;	
+	font: 1.2em helvetica, arial, freesans, clean, sans-serif;
+	color: #307AC5;
+	font-weight: bold;
+}
+
+span:hover.service_type {
+	background:url('/images/wizard/bullet_pink.png') left top no-repeat;
+	padding: 4px 15px;	
+}
+
 .sel_wday {
     width: 100px;
     padding: 0.5em;
@@ -59,7 +99,6 @@ div.position_slider {
     border: none;
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
-
     height: 22px;
     width: 100%;
     position: absolute;
@@ -108,6 +147,22 @@ div.position-wrapper {
     padding: 5px;
 
 }
+
+h2.main_heading {
+	font: 1.25em tahoma, arial, freesans, clean, sans-serif;
+	color: #411224;
+	font-weight: bold;
+	padding:2em 0 0 1.2em;
+}
+
+span.step {
+	font: 1.6em georgia;
+	color: #411224;
+	font-weight: bold;
+	padding-right: 0.2em;
+	
+}
+
 
 span.skill_tag {
     border: 1px solid #CCCCCC;
@@ -173,51 +228,141 @@ span.skill_tag_active {
 
 /* Wizard steps */
 #wizard-intro li{
-    
     float:left;
-    width:240px;
+    width:250px;
     margin:10px !important;
-
 }
 
 #wizard-intro li {
     color: #333;
-    border: 1px solid #4096ee;
-    height: 90px;
-    margin: 20px 4px;
-    padding: 10px 10px 10px 30px;
-    background: url("/images/omega_services.png") top left no-repeat #fff;
+   /* border-top: 1px solid #4096ee;*/
+    height: auto;
+    padding: 5px 21px 0px 11px;
+    /*background: url("/images/omega_services.png") top left no-repeat #fff;*/
 }
 
 #wizard-intro li.active {
     font-weight:bold;
     color: #cf3a72;
-    border: 1px solid #cf3a72;
-    background-position: 0 -110px
+    /*border-top: 1px solid #cf3a72;*/
+   /* background-position: 0 -110px*/
 }
 #wizard-intro li.active h3{
     color:#421325;
 }
+
+.hidden { 
+	display: none;
+ }
+ 
+ .unhidden {
+ 	display: block;
+ }
+ 
+div #type_templates {
+	min-height: 400px;
+	width: 200px;
+	padding: 20px;
+	overflow: auto;
+}
+
+div #buttons_wizard {
+	padding: 20px;
+	overflow: auto;
+	background: #F9F9F9;
+	border-color: #ddd ;
+    border-style: solid;
+    border-top-width: 1px;
+	height: 25px;
+}
+
+div #service_preview {
+	background: #F9F9F3;
+/*	background: url("/images/wizard/preview_bg.png") repeat-y;*/
+	border: 1px solid #A8929B;
+	height: 375px;
+	width: 670px;
+	position: absolute;
+	top: 160px;
+	left: 245px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-left: -1.2em;
+	padding: 0 1.5em 0 1.5em;
+}
+
+div.intro_image {
+	width:380px;
+	height: 190px;
+	background: url("/images/wizard/wizard_intro_help_image_.png") no-repeat;
+    z-index: 1;
+	margin: -365px 200px 100px 40px;
+    	
+}
+div #heading {
+    background-image: url("/images/wizard/horizontal_partition.png");
+    background-repeat: no-repeat;
+	min-height: 800px;
+	width: 250px;
+}
+
 div.step-nail {
     background-image: url("/images/omega_services.png");
     background-repeat: no-repeat;
-    width: 22px;
+    width: 302px;
     height: 22px;
-    position: absolute;
-    top: -15px;
-    left: -15px;
+}
+
+div.arrow {
+	position: absolute;
+	left: 238px;
+    z-index: 1;
+	top: 185px;
+    margin-left: -1.1em;
+	background-image: url("/images/wizard/arrow_preview_service.png");
+    background-repeat: no-repeat;
+    width: 7px;
+    height: 31px;
+}
+
+div.arrow-1 {
+    top: 168px;
+}
+
+div.arrow-2 {
+    top: 194px;
+}
+
+div.arrow-3 {
+	top: 220px;
+}
+
+div.arrow-4 {
+	top: 246px;
+}
+
+div.arrow-5 {
+	top: 272px;
+}
+
+div.arrow-6 {
+	top: 298px
+}
+
+div.arrow-7 {
+	top: 324px;
 }
 
 div.step-1-active {
-    background-position: 0 -224px
+    background-position: 0 -444px
 }
 
 div.step-2-active {
-    background-position: 0 -246px
+    background-position: 0 -466px
 }
 
 div.step-3-active {
-    background-position: 0 -268px
+    background-position: 0 -488px
 }
 div.step-4-active {
     background-position: 0 -290px
@@ -226,7 +371,12 @@ div.step-4-active {
 div.step-5-active {
     background-position: 0 -312px
 }
+
 div.step-1{
+    background-position: 0 -224px
+}
+
+div.step-1-intro{
     background-position: 0 -334px
 }
 
@@ -234,6 +384,10 @@ div.step-2 {
     background-position: 0 -356px
 }
 
+div.step-2-stepped {
+	background-position: 0 -246px
+
+}
 div.step-3{
     background-position: 0 -378px
 }
@@ -244,6 +398,8 @@ div.step-4 {
 div.step-5 {
     background-position: 0 -424px
 }
+
+
 
 
 #form-builder{

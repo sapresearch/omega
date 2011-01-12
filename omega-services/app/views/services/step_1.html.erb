@@ -3,7 +3,7 @@
 <% end %>
 <%= render :layout => 'layouts/services_wizard' do %>
     <%= form_tag :action=> 'create' do %>
-        <ul id="service_types">
+        <ul id="service_types"> 
           <% @service_types.each do |s| %>
               <li>
                 <%= radio_button 'service_library', 'service_type', s.service_type %>

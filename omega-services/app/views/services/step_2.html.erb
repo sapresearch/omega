@@ -32,13 +32,13 @@
           </p>
 
           <p>
+
              <%= f.label :description, :id => "service-description" %>
              <%= f.text_area :description, :class=>'field-value' %>
           </p>
 
 
           <ul id="service-details" class="elements-list">
-
 
             <% unless @details.empty? %>
                 <% @details.each_with_index do |detail, index| %>
@@ -51,13 +51,13 @@
         <fieldset>
           <legend>Registration Details</legend>
           <ul id="registration-details" class="elements-list">
-            <% if @service.service_category== "enrollable" %>
+            <% if @service.service_category== "Enrollable" %>
                 <li class="list-item">
-                  <label>First Name</label><input type="text" disabled="disabled">
+                  <label>First Name</label><input class= "service" type="text" disabled="disabled">
                 </li>
-                <li class="list-item"><label>Last Name</label><input type="text" disabled="disabled"></li>
-                <li class="list-item"><label>Email</label><input type="text" disabled="disabled"></li>
-                <li class="list-item"><label>Phone Number</label><input type="text" disabled="disabled"></li>
+                <li class="list-item"><label>Last Name</label><input class= "service" type="text" disabled="disabled"></li>
+                <li class="list-item"><label>Email</label><input class= "service" type="text" disabled="disabled"></li>
+                <li class="list-item"><label>Phone Number</label><input class= "service" type="text" disabled="disabled"></li>
                 <li class="list-item">
                   <label>Notes</label><textarea disabled="disabled"></textarea>
                 </li>
@@ -65,8 +65,8 @@
                   <label>Questions</label><textarea disabled="disabled"></textarea>
                 </li>
             <% else %>
-                <li class="list-item"><label>Email</label><input type="text" disabled="disabled"></li>
-                <li class="list-item"><label>Phone Number</label><input type="text" disabled="disabled"></li>
+                <li class="list-item"><label>Email</label><input class= "service" type="text" disabled="disabled"></li>
+                <li class="list-item"><label>Phone Number</label><input class= "service" type="text" disabled="disabled"></li>
                 <li class="list-item">
                   <label>Notes</label><textarea disabled="disabled"></textarea>
                 </li>

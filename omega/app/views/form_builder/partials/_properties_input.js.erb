@@ -1,22 +1,22 @@
 $('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "form_builder/partials/properties_input.html") %>').effect('highlight');
 
-        $('#edit-field-value').change(function() {
+        $('#edit-field-value').keyup(function() {
             var v = $(this).val();
-            field_value_preview.find('input:disabled').val(v);
-            field_value_submit.val(v);
+            $("#<%="value-preview-#{@em_id}"%>").empty().append(v);
+            $('#fields_<%="#{@em_id}"%>_detail_attributes_field_value').val(v)
 
         });
         $('#edit-label-value').keyup(function() {
 
             var v = $(this).val();
             $('#fields_<%="#{@em_id}"%>_field_name_preview').empty().append(v);
-            $('#fields_<%="#{@em_id}"%>_field_type').val(v)
+            $('#fields_<%="#{@em_id}"%>_field_name').val(v)
 
         });
-$('#edit-db-value').keyup(function() {
+
+        $('#edit-field-type').live(function() {
 
             var v = $(this).val();
-
-            $('#db-value-preview-<%="#{@em_id}"%>').val(v);
+            $('#fields_<%="#{@em_id}"%>_field_type').val(v)
 
         });

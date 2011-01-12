@@ -1,18 +1,16 @@
-    <ul id="wizard-intro">
+
+	<ul id="wizard-intro">
       <li class="relative<%= ' active' if params[:step] == '1' %>">
-        <div class="step-nail step-1<%= '-active' if params[:step] == '1' %>"></div>
-       <h3>Choose your type of service</h3>
-       Choose one service out of the available service types
+        <div class="step-nail step-1<%= '-active' if params[:step] == '1' %><%= '-intro' if params[:step] == 'introduction' %>"></div>
+       <h3 class="services">Choose a Type Template</h3>
       </li>
        <li class="relative<%= ' active' if params[:step] == '2' %>">
-        <div class="step-nail step-2<%= '-active' if params[:step] == '2' %>"></div>
-        <h3>Customize the chosen service</h3>
-       Add and remove informations that you want to provide
+        <div class="step-nail step-2<%= '-active' if params[:step] == '2' %><%= '-stepped' if params[:step] == '3' %>"></div>
+        <h3 class="services">Customize the Type</h3>
       </li>
       <li class="relative<%= ' active' if params[:step] == '3' %>">
-        <div class="step-nail step-3<%= '-active' if params[:step] == '3' %>"></div>
-        <h3>Finalize</h3>
-       Review your service and publish it
+        <div class="step-nail step-3<%= '-active' if params[:step] == '3' %>"> </div>
+        <h3 class="services">Finalize the Created Type</h3>
       </li>
 </ul>
-  <div class="clear"></div>
+

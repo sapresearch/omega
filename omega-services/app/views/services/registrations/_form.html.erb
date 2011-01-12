@@ -2,10 +2,9 @@
 
 <%= form_for @registration do |f| %>
 
-    <%= errors_for_form(@registration, 'registration') %>
+ <%= errors_for_form(@registration, 'registration') %>
 
     <%= f.hidden_field :service_id, :value => params[:service_id] %>
-<<<<<<< HEAD
     <%= f.hidden_field :contact_id, :value => @contact.id %>
 
     <p>
@@ -28,42 +27,48 @@
 
     <% unless @registration_fields.nil? %>
 
-=======
-    <%= f.fields_for :contact do |c| %>
-        <%= c.hidden_field :id %>
-        <%= c.hidden_field :title %>
-        <% if @service.service_category.eql?("Enrollable") %>
-            <%= contact.first_name %>
-            <p>
-              <%= c.label :first_name %>
-              <%= c.text_field :first_name  %>
-            <p>
-              <%= c.label :last_name %>
-              <%= c.text_field :last_name %>
-            <p>
-              <%= c.label :emai; %>
-              <%= c.text_field :email %>
-
-        <% else %>
+		<%= f.fields_for :contact do |c| %>
+		
+			<%= c.hidden_field :id %>
+        	<%= c.hidden_field :title %>
+			
+        	<% if @service.service_category.eql?("Enrollable") %>
+            	<p>
+              	<%= c.label :first_name %>
+              	<%= c.text_field :first_name  %>
+            	</p>
+                          	
+				<p>
+			  	<%= c.label :last_name %>
+              	<%= c.text_field :last_name %>
+				</p>
+				
+           	 	<p>          	 		
+              	<%= c.label :email %>
+              	<%= c.text_field :email %>
+				</p>
+			<% else %>
+			
             <%= c.hidden_field :first_name %>
             <%= c.hidden_field :last_name %>
-        <% end %>
-        
-    <% end %>
->>>>>>> b60d67c37ec1c022ff11e5fa2637525a0daab9d1
-    <% @registration_fields.each do |field| %>
+			
+			<%end%>
+		
+		<%end%>
+	<%end%>
+	
+	<% @registration_fields.each do |field| %>
         <%= f.fields_for :fieldvalues do |ff| %>
             <%= render 'registration_form', :f => ff, :field => field %>
         <% end %>
     <% end %>
-    <div class="bottom-buttons">
+	
+	<div class="bottom-buttons">
       <%= om_button(:icon=>'apply') do %>
           <%= button_to 'Register!', url_for(params.merge(:name => 'desc')) %>
       <% end %>
     </div>
+	
     <div class="clear"></div>
-<% end %>
 
-
-
-
+<%end%>

@@ -15,7 +15,7 @@
 
     <span id="<%= "value-preview-#{index}" %>">
            <select>
-             <% options = @field.detail.field_value.split(';') %>
+             <% options = @field.value.field_value.split(';') %>
              <% options.each do |option| %>
              <option><%= option %></option>
                  <% end %>

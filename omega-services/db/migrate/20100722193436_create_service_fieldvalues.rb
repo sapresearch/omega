@@ -3,7 +3,7 @@ class CreateServiceFieldvalues < ActiveRecord::Migration
     create_table :service_fieldvalues do |t|
 
       t.integer :registration_id, :null => false
-      t.integer :field_id, :null => false
+      t.references :field, :null => false
       t.text :field_value, :null => false
 
       t.timestamps

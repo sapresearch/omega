@@ -3,11 +3,11 @@
 
     <ul>
 
-      <% @services.each do |s| %>
+      <% @service_types.each do |s| %>
 
             <% if (s.published !=true) and !current_user.is_anonymous? %>
               <li>
-                <h3>  <%= s.service_name %> - <%= s.service_type %> Service </h3>
+                <h3>  <%= s.service_type %> - <%= s.service_type %> Service </h3>
 
 
                 <%= om_button(:icon=>'sort-za') do %>

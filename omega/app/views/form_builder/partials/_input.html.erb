@@ -12,12 +12,12 @@
     <%= label_tag @field.field_name, nil, :id=>"fields_#{index}_field_name_preview", :class =>'label-preview' %>
 
     <span id="<%= "value-preview-#{index}" %>">
-           <input disabled="disabled" type="text" value="<%= @field.field_type %>"/>
+           <input class="service" disabled="disabled" type="text" value="<%= @type_field.value.field_value %>"/>
 
 
      </span>
   </div>
-<input type="hidden" id="<%= "db-value-preview-#{index}" %>">
+<input type="hidden" id="<%= "value-preview-#{index}" %>">
   <%= render :partial => 'form_builder/partials/hidden_fields', :locals => { :index => index }%>
 
 </li>

@@ -1,11 +1,18 @@
 <% require_javascript 'service_wizard.js' %>
 <% require_stylesheet 'omega_services.css' %>
 
-<h1 class="page-content corners-top">
-  Create a Service Wizard - Step <%= params[:step] || '1' %>
-</h1>
-<div class="page-content corners-bottom">
-  
-  <%= yield %>
+<div class="wizard-header-services corners-top">
+			
+    <h1 class="service_wizard " >
+		CREATE NEW SERVICE TYPE 
+	</h1>
+	
 </div>
 
+
+<div class="page-content-services">
+ 
+  <%= yield %>  
+  
+
+</div>

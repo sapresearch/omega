@@ -7,7 +7,7 @@ class CreateServiceFields < ActiveRecord::Migration
 
       t.string :field_category, :null=>false
 
-      t.integer :service_id, :null=>false
+      t.references :service, :null => false
 
       t.timestamps
       end
