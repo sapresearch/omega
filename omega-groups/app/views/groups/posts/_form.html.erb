@@ -1,7 +1,7 @@
 <div id="post-form">
 <%= form_for @post, :url => group_thread_posts_path(@group, @thread), :remote => true do |f| %>
     <p>
-      <%= f.label :title,  %>
+      <%= f.label :title  %>
       <%= f.text_field :title, :class => 'broad-text' %>
     </p>
     <p>

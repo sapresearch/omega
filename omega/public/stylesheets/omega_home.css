@@ -21,9 +21,15 @@ ul.thumb li img {
 	position: absolute;
 	left: 0; top: 0;
 }
-/* class for first lette highliting*/
+/* class for first lette highliting
 .first-l {
     color: #4096ee;
     font-size: 1.7em;
+    font-weight: bold
+}
+*/
+.first-1-evergreen {
+	color: #342B21;
+	font-size: 1.7em;
     font-weight: bold
 }

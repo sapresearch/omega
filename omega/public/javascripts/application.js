@@ -2,7 +2,7 @@
 jQuery.showFlash = function(msg, n) {
     var msg_div = $('#notification-flash-wrapper');
     msg_div.find('div').html(msg);
-    msg_div.css('top', ($(window).height() / 2) + 'px');
+    msg_div.css('top', ($(window).height() / 4) + 'px');
     if (n === 'ajax') {
 
         msg_div.fadeIn('fast');
@@ -12,7 +12,7 @@ jQuery.showFlash = function(msg, n) {
     }
 
     $(window).resize(function() {
-        msg_div.css('top', ($(window).height() / 2) - (msg_div.height() / 2) + 'px');
+        msg_div.css('top', ($(window).height() / 4) - (msg_div.height() / 4) + 'px');
     });
 };
 

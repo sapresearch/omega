@@ -1,10 +1,10 @@
 <%= require_javascript 'thirdParty/jquery.jscrollpane.min.js', 'omega_groups' %>
 <%= require_stylesheet 'omega_groups' %>
 <%= context_box do %>
-    <h1 class="page-content corners-top">
+    <h1 class="page-content-evergreen corners-top">
       Group Overview
     </h1>
-    <div class="page-content corners-bottom">
+    <div class="page-content-evergreen corners-bottom">
       <ul id="groups-list">
         <% @groups.each do |group| %>
             <li id="group-<%= group.id %>" class="list-item relative">

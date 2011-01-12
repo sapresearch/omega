@@ -1,10 +1,10 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_javascript 'omega_volunteering' %>
 <%= context_box do %>
-    <h1 class="page-content corners-top">
+    <h1 class="page-content-evergreen corners-top">
       Volunteering Positions
     </h1>
-    <div class="page-content corners-bottom">
+    <div class="page-content-evergreen corners-bottom">
       <div class="right">
         <%= om_button(:icon=>'sort-az') do %>
             <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
