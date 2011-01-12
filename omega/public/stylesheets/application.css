@@ -22,7 +22,7 @@ body {
 }
 
 body.evergreen {
-	background: url("/images/om_sprite_evergreen.png") repeat-x #F1F0ED;
+	background: url("/images/om_sprite_evergreen_1.png") repeat-x #F1F0ED;
 
 }
 html, body, #wrapper {
@@ -87,7 +87,7 @@ h1.page-content {
 }
 
 h1.page-content-evergreen {
-    background: url("/images/h1_page_content_bg_evergreen.png") repeat-x bottom #D6D7C6;
+    background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #D6D7C6;
     text-shadow: #E3E3D7 1px 1px 1px;
 	font-weight: bold;
 	color: #313021;
@@ -343,7 +343,7 @@ tr.odd {
 	margin-left: -160px;
 	height: 100px;
 	width: 90px;
-	background: url("/images/evergreen_logo_2.png") no-repeat;
+	background: url("/images/evergreen_logo_1.png") no-repeat;
 
 }
 
