@@ -1,23 +1,23 @@
 
 ul.thumb {
-	float: left;
+	float: right;
 	list-style: none;
 	margin: 0; padding: 10px;
-	width: 360px;
+	width: 200px;
 }
 ul.thumb li {
 	margin: 0; padding: 5px;
-	float: left;
+	float: right;
 	position: relative;  /* Set the absolute positioning base coordinate */
-	width: 110px;
-	height: 110px;
+	width: 200px;
+	height: 148px;
 }
 ul.thumb li img {
-	width: 100px; height: 100px; /* Set the small thumbnail size */
+	width: 200px; height: 148px; /* Set the small thumbnail size */
 	-ms-interpolation-mode: bicubic; /* IE Fix for Bicubic Scaling */
-	border: 1px solid #ddd;
-	padding: 5px;
-	background: #f0f0f0;
+	/*border: 1px solid #ddd;*/
+	/*padding: 5px;*/
+	/*background: #f0f0f0;*/
 	position: absolute;
 	left: 0; top: 0;
 }

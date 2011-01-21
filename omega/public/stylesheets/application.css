@@ -15,24 +15,26 @@ table, tbody, tfoot, thead, tr, th, td {
 }
 
 body {
-
     /*background: url("/images/om_sprite.png") repeat-x #f7f7f7;*/
 	background: url("/images/om_sprite.png") repeat-x #fff;
-
 }
 
 body.evergreen {
-	background: url("/images/om_sprite_evergreen_1.png") repeat-x #F1F0ED;
-
+	background: url("/images/om_sprite_evergreen_1.png") repeat-x #DED8C0;
 }
-html, body, #wrapper {
 
+body.evergreen > #wrapper {
+	width: 950px;
+	margin: 0 auto;
+    min-height: 100%;
+}
+
+html, body, #wrapper {
     height: 100%;
     color: #191919;
 }
 
 body > #wrapper {
-
     height: auto;
     min-height: 100%;
 }
@@ -62,10 +64,8 @@ ol, ul {
 }
 
 h1, h2, h3, h4 {
-
     text-transform: capitalize;
     font: bold "Century Schoolbook", Georgia, Times, serif;
-
 }
 
 h1, .h1 {
@@ -333,18 +333,16 @@ tr.odd {
 #head {
     width: 950px;
     text-align: left;
-    margin: 0 auto 50px;
+    margin: 0 auto 2px;
 }
 
 #logo {
 	position: relative;
 	z-index: 1;
-	margin-top: -100px;
-	margin-left: -160px;
-	height: 100px;
-	width: 90px;
-	background: url("/images/evergreen_logo_1.png") no-repeat;
-
+    margin: -169px 0 0 -320px;
+	height: 180px;
+	width: 1600px;        
+	background: url("/images/banner-top-main.png") no-repeat;
 }
 
 #loginWrapper {
@@ -377,7 +375,7 @@ tr.odd {
     height: 20px;
     line-height: 20px;
     padding: 0 10px;
-    text-transform: capitalize;
+    text-transform:capitalize;
 }
 
 #ctlrBar-evergreen a, #user_custom_bar-evergreen a {
@@ -393,9 +391,9 @@ tr.odd {
 
 #content.evergreen {
     text-align: left;
-    margin: 0 auto 4em 24em;
-    width: 75%;
-    padding-bottom: 16em;
+    margin: 0 auto 4em ;
+    width: 950px;
+	padding-bottom: 16em;
 }
 
 #left {
@@ -415,18 +413,18 @@ tr.odd {
 #left.evergreen {
     text-align: left;
     float: left;
-    width: 80%;
+    width: 690px
     margin: 0;
 }
 
 #right.evergreen {
     text-align: left !important;
-    width: 18%;
+    width: 230px;
     margin: 0;
     float: right;
 }
 .content-box {
-    margin: 0 0 20px;
+    margin: 0 0 0;
 }
 
 .center-content {
@@ -436,7 +434,7 @@ tr.odd {
 }
 
 .center-content-evergreen {
-	width: 70%;
+	width: 950px;
     margin: 0 auto;
 }
 
@@ -457,6 +455,35 @@ div.page-content-evergreen {
 	height: auto;
 	min-height: 300px;
 }
+
+div.main-page-content-evergreen {
+    background: #fff;
+    border-bottom: 1px solid #99976A;
+    border-left: 1px solid #99976A;
+    border-right: 1px solid #99976A;
+	padding: 65px 0 0 25px;
+	height: auto;
+	width: 923px;
+	min-height: 650px;
+	margin: 0 auto 0 auto;
+	text-align: justify;
+}
+
+div.main-content-left {
+	float: left;
+	width: 600px;
+	height: auto;
+	padding: 60px 0 0 0;
+	
+}
+
+div.main-content-right {
+	float: right;
+	width: 300px;
+	height: auto;
+    padding: 45px 0 0 20px;
+}
+
 
 div.page-content-services{
 	position: relative;
@@ -658,7 +685,7 @@ li.list-item {
 /**************************** Menu *****************************/
 #navigation {
     position: relative;
-    margin: 40px auto 0;
+    margin: 100px auto 0;
     width: 950px;
     z-index: 1000;
 }
@@ -670,7 +697,7 @@ li.list-item {
     -moz-box-shadow: 0 0 10px #333;
     -webkit-box-shadow: 0 0 10px #333;
     box-shadow: 0 0 10px #333;
-    margin: 0;
+    margin: 0 ;
     padding: 0;
     float: left;
     width: 950px;
@@ -679,7 +706,7 @@ li.list-item {
     font-size: 1em;
     /*background: url("/images/bg_menu .png") repeat-x;*/
     background: url("/images/bg_menu_evergreen.png") repeat-x;  /* Evergreen */
-
+   
 }
 
 
@@ -696,7 +723,7 @@ li.list-item {
     text-transform: capitalize;
     display: block;
     /*color: #fff;  */
- 	color: #312F20; /*Evergreen*/
+ 	color: #111; /*Evergreen*/
     text-decoration: none;
 }
 
@@ -709,7 +736,7 @@ li.list-item {
     display: none;
     width: 200px;
    /* background: #a32d5a;  */
-	background: #6D6A49;      /*Evergreen*/
+	background: #796F3E;      /*Evergreen*/
     color: #fff;
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 4px 4px;
@@ -721,16 +748,17 @@ li.list-item {
    /* border-bottom: 1px dotted #cf3a72;*/
 	border-bottom: 1px dotted #312F20;    /*Evergreen*/
   /*  background: #A32D5A;  */
- 	background: #9CA618;      /*Evergreen*/
+ 	background:#796F3E;      /*Evergreen*/
     padding: 3px 15px;
     display: block;
-	color: #312F20;  /*Evergreen*/
+	color:#C5C891;  /*Evergreen*/
 }
 
 /*--Since we declared a link style on the parent list link, we will correct it back to its original state--*/
 #topnav li div a:hover {
     /*background: url("/images/bg_menu .png") repeat-x;*/
 	background: url("/images/bg_menu_evergreen.png") repeat-x;  /* Evergreen */
+	color: #222;
     text-decoration: none;
 }
 
@@ -930,6 +958,14 @@ span.om-plain-icon-button span.om-icon,
 
 .om-footer-rss {
     background-position: 0 -512px;
+}
+
+.om-footer-facebook {
+    background-position: 0 -1153px;
+}
+
+.om-footer-evergreen {
+    background-position: 0 -1214px;
 }
 
 .om-footer-calendar {
@@ -1267,16 +1303,16 @@ div.pagination span.disabled {
 /* must be same height as the footer */
 
 #footer_wrapper {
+	width:950px;
     position: relative;
-    margin: -16em 0; /* negative value of footer height */
-    height: 16em;
-    clear: both;
-
+    margin: -20em auto 0 auto; /* negative value of footer height */
+	height:auto;
+  
 }
 
 #footer {
     width: 950px;
-    margin: 0 auto;
+    margin: 0 auto ;
     background: #333;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -1311,27 +1347,26 @@ div.pagination span.disabled {
 
 
 #footer-evergreen {
-    width:60%;
-    margin: 0 39em 0 auto;
-    background: #313021;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
+    width:950px;
+	height: 100px;
+    margin: 0 auto 0 auto;
 
 }
 
 #footer-evergreen table {
     width: 100%;
-
     text-align: center;
+	background: url("/images/footer_bg.png") repeat-x #fff;
+
 }
 
 #footer-evergreen h1 {
-    color: #D6D3BD;
+    color: #C5C891;
 }
 
 #footer-evergreen table td {
     vertical-align: top;
-    color: #D6D3BD;
+    color: #333;
 }
 
 #footer-evergreen div.footer-content {
