@@ -1,8 +1,8 @@
 class UsersController < Omega::Controller
   respond_to :html, :xml, :js, :json
   crud_helper User
-  require_permission User::PERM_VIEW, :except => [:register, :join,   :create, :lost_username, :lost_password]
-  require_permission User::PERM_ADMIN, :only  => [:new, :create, :update, :destroy]
+  #require_permission User::PERM_VIEW, :except => [:register, :join,   :create, :lost_username, :lost_password]
+  #require_permission User::PERM_ADMIN, :only  => [:new, :create, :update, :destroy]
   breadcrumb 'Users' => :users
   before_filter :sort, :only => [:index]
 
@@ -22,12 +22,12 @@ class UsersController < Omega::Controller
 
   def register
     @user = User.new
+    @user.build_contact
     respond_with(@user)
   end
 
   def join
     @user = User.register(params[:user])
-
     respond_with(@user, :location => root_url)
   end
 
@@ -41,7 +41,6 @@ class UsersController < Omega::Controller
 
   def create
     @user = User.create(params[:user])
-
     respond_with(@user)
   end
 

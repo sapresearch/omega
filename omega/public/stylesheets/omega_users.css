@@ -40,3 +40,30 @@
     border: none;
     height: 20px;
 }
+
+h2.summary {
+	font-family: "Arial Rounded MT Bold";
+	font-size: 35px;
+	color: #666;
+	margin-top: -20px;
+	margin-left: -10px;
+	margin-bottom: -10px;
+}
+
+p.summary {
+	
+	margin-left: -4px;
+}
+
+span.text-style1 {
+	font-family: "Trebuchet MS";
+	font-size: 14px;
+	
+}
+
+span.text-style-large {
+	font-family: "Trebuchet MS";
+	font-size: 18px;
+	color: #444;
+	
+}

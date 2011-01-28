@@ -1,8 +1,12 @@
+<div class="signup-box bgcolor">	
+
 <div id="loginFailed">
 </div>
-<%= form_for Session.new, :remote => true, :'data-type' => 'json' do |f| %>
+
+<div class="login-box">
+	<%= form_for Session.new, :remote => true, :'data-type' => 'json' do |f| %>
     <p>
-      <%= f.label :user %>
+      <%= f.label :username %>
       <%= f.text_field :username, :class => 'inputMid', :tabindex=>1 %>
 
     </p>
@@ -15,10 +19,14 @@
      <%= om_button(:icon => 'login') do %>
         <%= f.submit %>
     <% end %>
-<p>
+<p class="left-margin">
   <%= link_to 'Lost your username?', lost_username_path %> <br>
   <%= link_to 'Lost your password?', lost_password_path %>
 </p>
 
 
 <% end %>
+	
+</div>
+
+</div>

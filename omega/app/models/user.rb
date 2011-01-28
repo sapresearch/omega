@@ -10,7 +10,8 @@ class User < Omega::Model
   
   # These are the fields that are allowed when a user is registering (which is different from creating a user which
   # only an admin should be able to do.)
-  REGISTRATION_FIELDS = [:username, :password, :password_confirmation, :email, :first_name, :last_name, :time_zone]
+  #REGISTRATION_FIELDS = [:username, :password, :password_confirmation, :email, :first_name, :last_name, :time_zone]
+  REGISTRATION_FIELDS = [:username, :password, :password_confirmation, :time_zone]
 
   scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
 
@@ -29,17 +30,19 @@ class User < Omega::Model
     end
 
     def register(attributes = nil, &block)
-      if attributes
-        not_allowed = attributes.keys.reject { |key| REGISTRATION_FIELDS.include?(key.to_sym) }
-        unless not_allowed.empty?
-          raise ArgumentError, "attribute(s) #{not_allowed.inspect} not allowed for registering"
-        end
-      end
+    #  if attributes
+       # not_allowed = attributes.keys.reject { |key| REGISTRATION_FIELDS.include?(key.to_sym) }
+        #unless not_allowed.empty?
+         # raise ArgumentError, "attribute(s) #{not_allowed.inspect} not allowed for registering"
+        #end
+      #end
       create(attributes, &block)
     end
   end
 
   has_and_belongs_to_many :roles
+  
+  has_one :contact
 
   has_many :messages,      :foreign_key => :to_id,   :class_name => '::Message', :inverse_of => :to,
                            :conditions => ['deleted_by_to_at IS NULL']
@@ -48,6 +51,8 @@ class User < Omega::Model
 
   has_many :favorites
   has_many :favorite_items, :through => :favorites, :source => :item
+  
+  accepts_nested_attributes_for :contact
 
   attr_accessor :password, :password_confirmation
 
@@ -58,12 +63,12 @@ class User < Omega::Model
                          :confirmation => true,
                          :length => 5..40,
                          :if => :save_password?
-  validates :email,      :presence => true,
-                         :length => 6..80,
-                         :email => true
-  validates :first_name, :length => 0..80
-  validates :last_name,  :presence => true,
-                         :length => 1..80
+  #validates :email,      :presence => true,
+   #                      :length => 6..80,
+    #                     :email => true
+  #validates :first_name, :length => 0..80
+  #validates :last_name,  :presence => true,
+   #                      :length => 1..80
 
   before_create :create_salt, :save_password
   before_update :save_password

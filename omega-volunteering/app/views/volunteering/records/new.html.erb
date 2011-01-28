@@ -1,11 +1,21 @@
 <%= context_box do %>
-<h1 class="page-content corners-top">
-  Apply for <%= @record.position.name %>
-</h1>
 
-
-<div class="page-content corners-bottom">
-
-<%= render 'form' %>
-</div>
+<div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+  					Volunteer Application
+		    	</h1>
+			</div>
+	
+		</div>
+		
+		
+		
+ 		<div class="signup-box">	
+		Apply for <%= @record.position.name %>
+			<%= render 'form' %>
+		</div>
 <% end %>

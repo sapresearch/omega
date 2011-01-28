@@ -58,12 +58,16 @@ module HtmlHelper
   def cust_button(text)
     content_tag(:span, text, :class => 'formBtn')
   end
+  
+  
 
+ 
   # om_button(:plain => true, :icon => 'some-icon') do
   #   link_to ...
   # end
   def om_button(options = {}, &block)
     plain = options[:plain] ? 'plain' : nil
+    small = options[:small] ? 'small' : nil
 
     if options[:icon]
       icon_class = 'icon'
@@ -73,7 +77,7 @@ module HtmlHelper
       icon = ''.html_safe
     end
 
-    klass = ['om', plain, icon_class, 'button'].compact.join('-')
+    klass = ['om', plain, small, icon_class, 'button'].compact.join('-')
 
     content_tag(:span, :class => klass) do
       icon + capture(&block)
@@ -92,7 +96,10 @@ module HtmlHelper
   end
 
   def context_box(&block)
-    %Q{<div class="box-shadow content-box">#{capture(&block)}</div>}.html_safe
+    #%Q{<div class="box-shadow content-box">#{capture(&block)}</div>}.html_safe
+    
+    %Q{<div class=" content-box">#{capture(&block)}</div>}.html_safe
+
   end
 
 

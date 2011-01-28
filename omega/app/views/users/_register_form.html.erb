@@ -1,30 +1,35 @@
+
 <%= form_for @user, :url => register_users_path do |f| %>
     <%= errors_for_form @user %>
 	
-    <p>
-      <%= f.label :user %>
-      <%= f.text_field(:username, :'data-tooltip' => 'Plese provide username with at least 2 characters') %>
-    </p>
+	<%= f.fields_for :contact do |c|%>
+	
+		<p>	
+      		<%= c.label :first_name %>
+      		<%= c.text_field(:first_name, :'data-tooltip' => 'Your first name')%> 
+   		</p>
+	
+    	<p>
+      		<%= c.label :last_name %>
+      		<%= c.text_field(:last_name, :'data-tooltip' => 'Your last name')%>
+    	</p>
 
-    <p>
-      <%= f.label :first_name %>
-      <%= f.text_field(:first_name, :'data-tooltip' => 'Plese provide lastname') %>
-    </p>
+    	<p>
+      		<%= c.label :email %>
+      		<%= c.text_field(:email, :'data-tooltip' => 'Email where you could be contacted') %>
+    	</p>
 
-    <p>
-      <%= f.label :last_name %>
-      <%= f.text_field(:last_name, :'data-tooltip' => 'Plese provide lastname') %>
-    </p>
+	<%end%>
 
+    
     <p>
-      <%= f.label :email %>
-      <%= f.text_field(:email, :'data-tooltip' => 'Plese provide email') %>
+      <%= f.label :username %>
+      <%= f.text_field(:username, :'data-tooltip' => 'Username should include atleast 2 characters')%>
     </p>
-
 
     <p>
       <%= f.label :password %>
-      <%= f.password_field :password %>
+      <%= f.password_field(:password, :'data-tooltip' => 'The password should have atleast 8 characters') %>
     </p>
 
     <p>
@@ -37,10 +42,11 @@
 	  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
 	</p>
 
-    <%= om_button(:icon => 'save') do %>
-        <%= f.submit %>
+    <p>
+    <%= om_button do %>
+        <%= f.submit "REGISTER" %>
     <% end %>
-
+    </p>
 
 <% end %>
 

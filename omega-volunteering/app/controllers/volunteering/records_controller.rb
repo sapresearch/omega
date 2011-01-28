@@ -68,14 +68,21 @@ class Volunteering::RecordsController < Omega::Controller
     contact_id    = Volunteering::Record.find(params[:contact_id])
     @contact      = Contact.find(contact_id)
     @records      = Volunteering::Record.where('contact_id = ?', contact_id).order('created_at desc')
+  
     breadcrumb 'Applications from user' => 'Applications from user'
     respond_with(@records)
   end
 
   def new
-    @record          = Volunteering::Record.new
+    @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
-    @record.build_contact unless @record.contact = Contact.for(current_user)
+    @record.build_contact do |c|
+      c.addresses.build
+      c.phone_numbers.build
+    end unless @record.contact = Contact.for(current_user)
+    
+    @record.contact.addresses.build
+    @record.contact.phone_numbers.build
     respond_with(@record)
 
   end

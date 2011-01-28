@@ -1,11 +1,29 @@
 <%= context_box do %>
 
-<h1 class="page-content corners-top">
-  Register a new User
-</h1>
-<div class="page-content corners-bottom">
 
-<%= render :partial => 'register_form' %>
+<div class="page-content circle-corners-top circle-corners-bottom">
 
+<div class="heading-main">
+	
+	<div class="left-heading">
+		<h1 class="page-content">
+			Volunteer Sign Up
+		</h1>
+	</div>
+	
+	<div class="right-heading">
+		<p class="info-text">
+			<span class="info-text"> Already a member? <strong>Sign In!</strong> </span>
+		</p>
+	</div>
+	    
+</div>
+
+
+<div class="signup-box">	
+	<div class="form-signup">
+		<%= render :partial => 'register_form' %>
+	</div>
+</div>
 </div>
 <% end %>

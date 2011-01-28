@@ -2,10 +2,21 @@
 <% if notice != nil %><p class="notice"><%= notice %></p>
 <% end %>
 <%= context_box do %>
-    <h1 class="page-content corners-top">
-      <%= @position.name %>
-    </h1>
-    <div class="page-content corners-bottom">
+
+    <div class="page-content circle-corners-bottom corners-top">
+    	
+		<div class="heading-main">
+	
+		<div class="left-heading">
+		<h1 class="page-content">
+			 <%= @position.name %>
+		</h1>
+		</div>
+	   
+        </div>
+		
+	  <div class="signup-box">	
+	
       <p>
         <%= @position.description %>
       </p>
@@ -93,21 +104,22 @@
 
 
       </div>
+	  </div>
     </div>
 
 <% end %>
-<% content_for :sidebar do %>
+<%# content_for :sidebar do %>
 
-    <%= render :partial => "layouts/sidebar_position_show_menu" %>
+    <%#= render :partial => "layouts/sidebar_position_show_menu" %>
 
 
-<% if @position.skills.any? %>
-    <%= render :partial => "layouts/sidebar_position_show_skills" %>
-<% end %>
+<% #if @position.skills.any? %>
+    <%#= render :partial => "layouts/sidebar_position_show_skills" %>
+<%# end %>
 
-<% if @position.interests.any? %>
-    <%= render :partial => "layouts/sidebar_position_show_interests" %>
-<% end %>
+<% #if @position.interests.any? %>
+    <%#= render :partial => "layouts/sidebar_position_show_interests" %>
+<%# end %>
 
-<% end %>
+<%# end %>
 

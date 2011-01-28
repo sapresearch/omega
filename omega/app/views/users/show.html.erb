@@ -1,39 +1,39 @@
 <%= context_box do %>
-<%= require_stylesheet 'omega_users' %>
-<h1 class="page-content corners-top">
- Hello  <%= @user.username %>
-</h1>
-<div class="page-content corners-bottom">
-  <div id="vcard">
-    <dl>
-      <dt>
-        Name
-      </dt>
-      <dd>
-        <%= @user.first_name %> <%= @user.last_name %>
-      </dd>
-    </dl>
-    <dl>
-      <dt>
-        Member since
-      </dt>
-      <dd>
-        <%= @user.created_at.strftime("%m-%d-%Y")  %>
-      </dd>
-    </dl>
-    <dl>
-      <dt>
-       Email
-      </dt>
-      <dd>
-        <%= @user.email  %>
-      </dd>
-    </dl>
-  </div>
+<%= require_stylesheet 'omega_users'%>
+
+<div class="page-content circle-corners-bottom  corners-top">
+	
+	
+
+	
+	
+<div class="signup-box">	
+<h2 class="summary">
+		Hello <%= @user.username %>!
+	</h2>
+	
+		<p class="summary"> <span class="text-style1"> Your registration was successful!
+		<br/>
+		 A confirmation email has been sent to <%= @user.email %>
+		 </span></p>
+
+<p class="summary">
+	
+	<br/>
+	<br/>
+	<span class="text-style-large"> Sign In and Start Volunteering Now!</span> <br/>
+	
+	
+
+</p>
 </div>
 
+<div class="login_box">
+	    <%= render :partial => "layouts/partials/login" %>
 
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_user" %>
-<% end %>
+</div>
+	  
+<%# content_for :sidebar do %>
+    <%#= render :partial => "layouts/sidebar_user" %>
+<%# end %>
 <% end %>

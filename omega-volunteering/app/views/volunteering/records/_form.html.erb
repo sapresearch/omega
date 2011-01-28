@@ -1,3 +1,4 @@
+
 <%= form_for(@record) do |f| %>
 
     <%= errors_for_form @record %>
@@ -6,6 +7,8 @@
 
     <%# if @record.contact.new_record? %>
     <%= f.fields_for :contact do |c| %>
+	
+	    PERSONAL INFORMATION
         <p>
           <%= c.label :title %>
           <%= c.select :title, options_for_select(Contact::TITLES) %>
@@ -20,47 +23,223 @@
           <%= c.label :last_name %>
           <%= c.text_field :last_name , :'data-tooltip' => 'Plese type in your last name' %>
         </p>
+		
+	    <p>
+          <%= c.label :middle_name %>
+          <%= c.text_field :middle_name , :'data-tooltip' => 'Plese type in your last name' %>
+        </p>
+		
         <p>
-          <%= c.label :email %>
-          <%= c.text_field :email , :'data-tooltip' => 'Plese type in your email'%>
+          <%= c.label :primary_email %>
+          <%= c.text_field :email , :'data-tooltip' => 'Plese type in your primary email'%>
         </p>
 
         <p>
-          <%= c.label :skills %>
+          <%= c.label :secondary_email %>
+          <%= c.text_field :email2 , :'data-tooltip' => 'Plese type in your secondary email'%>
+        </p>
+		
+		ADDRESSES
+		
+        <p>
+          <%= c.fields_for :addresses do |a| %>
+          	<%= render 'address_form', :f => a %>
+          <% end %>
+        </p>
+        
+		<p>
+        	<% new_text = lambda do %>
+        		<span data-tooltip="By clicking on this icon you will be able to add another address. Feel free to add as many addresses as you want">Add another address
+            	<span class="om-icon-only om-blue-icon ui-icon-home"></span>
+        		</span>
+        	<% end %>
+        
+			<%= link_to_new_nested c, :addresses, :text => new_text do |a| %>
+            	<%= render 'address_form', :f => a %>
+        	<% end %>
+      	</p>
+
+        PHONE NUMBERS
+      	<p>
+        	<%= c.fields_for :phone_numbers do |pn| %>
+            	<%= render 'phone_number_form', :f => pn %>
+        	<% end %>
+      	</p>
+      	<p>
+        	<% new_text = lambda do %>
+        		<span data-tooltip="By clicking on this icon you will be able to add another phone number. Feel free to add as many phone numbers as you want">Add another phone number
+            	<span class="om-icon-only om-blue-icon ui-icon-contact"></span>
+        		</span>
+        	<% end %>
+        
+			<%= link_to_new_nested c, :phone_numbers, :text =>  new_text do |pn| %>
+            	<%= render 'phone_number_form', :f => pn %>
+        	<% end %>
+      	</p>
+
+		EMERGENCY CONTACT INFO
+		<p>
+			
+        <%= c.label :emergency_contact_name%>
+		<%= c.text_field :emergency_contact_name%>
+
+		</p>
+		
+		<p>
+			
+        <%= c.label :emergency_contact_number%>
+		<%= c.text_field :emergency_contact_number%>
+
+		</p>
+		
+		VOLUNTEER HISTORY
+		
+		<p>
+	      <%= c.label :have_you_volunteered_with_us_before %>
+          <%= c.check_box :volunteered_before, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+		</p>
+		
+		<p>
+	      <%= c.label :if_yes_when_and_where %>
+          <%= c.text_area :volunteerd_when_where, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+		</p>
+		
+		<%end%>
+		
+	    WHAT I BRING
+
+
+		<p>
+	      <%= f.label :volunteering_reason %>
+          <%= f.text_area :volunteering_reason, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+		</p>
+		
+				
+		<p>
+	      <%= f.label :my_idea %>
+          <%= f.text_area :my_idea, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+		</p>
+		
+		<%= f.fields_for :contact do |c| %>
+		
+		<p>
+          <%= c.label :skills_or_qualifications %>
           <%= c.text_field :skills_values , :'data-tooltip' => 'Plese type in your skills, seperated by comma: e.g. thougtful, helpful' %>
         </p>
 
         <p>
-          <%= c.label :interests %>
+          <%= c.label :interests_or_hobbies %>
           <%= c.text_field :interests_values, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>
         </p>
+		
+	    <p>
+          <%= c.label :languages %>
+          <%= c.text_field :languages_values , :'data-tooltip' => 'Plese type in your skills, seperated by comma: e.g. thougtful, helpful' %>
+        </p>
 
-        <%= c.fields_for :phone_numbers do |p| %>
+		
+		
+		
+		
+		
+		
+		PARENTAL APPROVAL
+		
+		Youth aged 18 and under require parental consent to volunteer with Evergreen. Youth aged 14 and under must be accompanied by a parent or guardian. I am the parent and/or legal guardian of who is under 19 years of age. I hereby verify that I give consent for my child to volunteer with Evergreen.
+		
+		<p>
+		  <%= c.label :parents_name %>
+          <%= c.text_field :parent_name, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+	
+	 	</p>
+		
+		<p>
+		  <%= c.label :parent_email_address %>
+          <%= c.text_field :parent_email, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+	
+	 	</p>
+		
+		
+		
+    	<% end %>
+		
+		AVAILABILITY
+		
+		<p>
+	      <%= f.label :can_commit_to %>
+		 <% ['Event Only', 'Casual', 'Up to 3 months', 'More than 3 months','# of hours per week' ].each do |o|%>
+          <%= f.radio_button :availability, o %> <%=o%>	
+		  <%end%>
+		</p>
+		
+			
+		<p>
+		  <%= f.label :Number_of_hours_per_week %> 
+          <%= f.text_field :hours_per_week, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
 
-            <%= p.hidden_field :id %>
+	 	</p>
+				
+		<p>
+	      <%= f.label :time_of_the_day %>
+          Day <%= f.check_box :day_time%> <%= f.select :day_preference, %w{Weekday Weekend} %>	
+		  Evening <%= f.check_box :evening_time%> <%= f.select :evening_preference, %w{Weekday Weekend} %>
+		</p>
+		
+		
+		
+		<p>
+		  <%= f.label :can_start_on %> 
+          <%= f.text_field :start_date, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+	      <%= f.text_field :start_time, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
 
-            <%= p.hidden_field :number_type %>
+	 	</p>
+		
+		<p>
+		  <%= f.label :until %>
+          <%= f.text_field :end_date, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+	      <%= f.text_field :end_time, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
 
+	 	</p>
+		
+		<p>
+		  <%= f.label :volunteering_to_meet_requirements%>
+          <%= f.check_box :volunteering_to_meet_requirements, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+			
+		</p>
+		
+		<p>
+		  <%= f.label :if_yes_how_many_hours%>
+          <%= f.text_field :hours_required, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+	
+		</p>
+		
+		
+		By submitting this application, I understand that:
 
-            <p>
-              <%= p.label :phone_number %>
-              <%= p.text_field :number %>
-            </p>
-
-        <% end %>
-
-    <% end %>
-    <%# else %>
+		Volunteer placement is made on the basis of the program requirements, the skills and experience of the applicant and, when appropriate, successful reference checks. Evergreen may need to collect personal information appropriate to the position(s) applied for concerning my academic background and employment/volunteering history, and to conduct reference checks.
+		Evergreen adheres to the Freedom of Information and Protection of Privacy Act. Evergreen respects your privacy and will not trade or sell your personal information to other organizations. I agree to respect the confidentiality of all information I may have access to at Evergreen.
+		If I require volunteer hours to qualify for community service, I will have my hours validated when I volunteer and/or sign in at the event.
+		By selecting the “I agree” box below, you acknowledge that the information provided is true and accurate and that you have read understand the points above.
+		
+	
+			
+		<%= f.check_box :agreement%> I agree
+		
+		<%= f.fields_for :contact do |c|%>
+		
+		
+		<%= c.check_box :no_bulk_emails%>  Evergreen respects your privacy. Contact information is collected to send you information about Evergreen programs, events, and special appeals. This includes the regular volunteer newsletter. Please tick this box if you DO NOT wish to receive these benefits.
+		
+		
+		<%end%>
+		
+		
         <%= f.hidden_field :contact_id %>
-    <%# end %>
-    <p>
-      <%= f.label :notes %>
-      <%= f.text_area :notes %>
-    </p>
+    
 
      <%= om_button(:icon => 'apply') do %>
               <%= f.submit 'Apply' %>
-          <% end %>
+     <% end %>
 
 
 <% end %>
