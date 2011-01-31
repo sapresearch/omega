@@ -16,9 +16,16 @@
               <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user)), :'data-tooltip' => 'Log hours for this position') %>
           <% end %>
       <% end %>
+	  
        <%= with_permission(Volunteering::PERM_APPLY) do %>
           <%= om_button(:plain => true, :icon => 'apply') do %>
-              <%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
+              <%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Enrool A Volunteer' %>
+          <% end %>
+      <% end %>
+	  
+	   <%= with_permission(Volunteering::PERM_ADMIN) do %>
+          <%= om_button(:plain => true, :icon => 'apply') do %>
+              <%= link_to 'Enroll a Volunteer', new_volunteer_volunteering_records_path(:id=>position), :'data-tooltip' => 'Apply for this position' %>
           <% end %>
       <% end %>
 

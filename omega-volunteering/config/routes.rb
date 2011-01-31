@@ -30,6 +30,7 @@ Omega::Volunteering::Module.routes.draw do
         get :newest
         get :completed
         get :admin_page
+        get :new_volunteer
         get :user_history, :path => 'user_history/:contact_id'
       end
 

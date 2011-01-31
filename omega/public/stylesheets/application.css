@@ -80,10 +80,9 @@ h1, .h1 {
 h1.page-content {
    /* background: url("/images/bg_light.png") repeat-x bottom #F7F3F7;*/
    /* background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #F3F1E9;*/
-    text-shadow: #999 1px 1px 1px;
 	font-family:"Trebuchet MS", Arial Black ,Geneva, Arial, Helvetica, sans-serif;
 	font-weight: bold;
-	color:#444;
+	color: #806F39;
 	font-size: 28px;
 	height: 35px;
 	padding: 30px 0 20px 30px;
@@ -137,6 +136,22 @@ h2 {
     padding: 0.2em;
 }
 
+h2.application-form {
+	font-family:"Arial Rounded MT Bold";
+	font-size: 25px;
+	color: #768B2E;
+	
+}
+
+h2.application-form-content-heading {
+	margin-top: 50px;
+	margin-left: 20px;
+	font-family:"Arial Rounded MT Bold";
+	font-size: 18px;
+	color: #768B2E;
+	
+}
+
 h3 {
     color: #4096ee;
     font-size: 1.2em;
@@ -147,11 +162,56 @@ h3 a {
     color: #4096ee;
 }
 
+h3.application-form {
+	background: #B8CE6C;
+	text-shadow: 1px 1px 1px #666;
+	color: #fff;
+	font-family:"Trebuchet MS";
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 20px;
+	height:25px;
+	width: 800px;
+	padding: 5px 0 0 20px;
+	margin: 45px 0 25px 0;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-top-radius: 8px;
+	
+}
+
 h4 {
     border-bottom: 1px dotted #0063DC;
     color: #0063DC;
     margin: 10px 0;
     padding: 2px;
+}
+
+h2.summary {
+	font-family: "Arial Rounded MT Bold";
+	font-size: 35px;
+	color: #666;
+	margin-top: -20px;
+	margin-left: -10px;
+	margin-bottom: -10px;
+}
+
+p.summary {
+	
+	margin-left: -4px;
+}
+
+span.text-style1 {
+	font-family: "Trebuchet MS";
+	font-size: 14px;
+	
+}
+
+span.text-style-large {
+	font-family: "Trebuchet MS";
+	font-size: 18px;
+	color: #444;
+	
 }
 
 p {
@@ -177,6 +237,101 @@ span.info-text {
 
 }
 
+span.margin-left-phone{
+	margin-left: 280px;
+	color: #4B591E;
+
+}
+
+span.margin-left-2-phone{
+	color: #4B591E;
+	border-top :1px solid #9AB63D;
+	margin-left: 240px;
+	padding-top: 8px;
+	padding-left: 5px;
+}
+
+span.margin-left-address{
+	margin-left: 280px;
+	color: #4B591E;
+
+}
+
+span.margin-left-2-address{
+	color: #4B591E;
+	border-top :1px solid #9AB63D;
+	margin-left: 250px;
+	padding-top: 8px;
+	padding-left: 5px;
+}
+
+span.form-text {
+	border: 1px solid #8DA637;
+	color: #637526;
+	display: block;
+	width: 750px;
+	height: 60px;
+	padding: 20px 20px 20px 20px;
+	margin-left: 0;
+	margin-bottom: 40px;
+	text-align: justify;
+	-moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-top-radius: 8px;
+}
+
+span.form-agreement {
+	border: 1px solid #8DA637;
+	color: #637526;
+	display: block;
+	line-height: 16px;
+	width: 750px;
+	height: 80px;
+	padding: 20px 20px 20px 20px;
+	margin-left: 0;
+	margin-bottom: 40px;
+	text-align: justify;
+	-moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-top-radius: 8px;
+	overflow-x: auto;
+}
+
+span.form-text-plain {
+	color: #45521B;
+	display: block;
+	line-height: 16px;
+	width: 750px;
+	padding: 20px 20px 20px 20px;
+	margin-left: 0;
+	margin-bottom: 40px;
+	text-align: justify;
+}
+
+span.form-text-plain-2 {
+	color: #45521B;
+	display: block;
+	line-height: 16px;
+	width: 750px;
+	margin-left: -10px;
+	margin-top: -10px;
+	margin-bottom: 30px;
+	text-align: justify;
+}
+
+
+span.radio-button-set {
+	display:inline-block;
+	width: 300px;
+	margin-bottom: 2px;
+}
+
+span.check-box-set {
+	display:inline-block;
+	width: 300px;
+	margin-bottom: 10px;
+	margin-top:-10px;
+}
 
 a {
     color: #162D3D;
@@ -222,6 +377,10 @@ form input[type=text], form input[type=email], form input[type=password], textar
     border-top-right-radius: 4px;
 }
 
+form input[type=checkbox] {
+    margin-top:15px;
+}
+
 select {
     width:200px;
     margin: 0;
@@ -237,6 +396,7 @@ input[type="button"]::-moz-focus-inner {
     border: 0;
     padding: 0;
 }
+
 
 input.service {
     width:200px;
@@ -272,13 +432,14 @@ form label {
     font-family: "Arial";
 	font-weight: bold;
 	font-size: 14px;
-    width: 110px;
-    text-align: left;
+    width: 180px;
+    text-align: right;
     margin-right: 22px;
 	margin-top: 5px;
     text-transform: capitalize;
 
 }
+
 
 fieldset {
     margin: 1.3em 0;
@@ -557,7 +718,7 @@ div.main-content-left {
 div.heading-main {
 	width: 948px;
 	height: 80px;
-	background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #F3F1E9;
+	background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #E1DFCB;
 
 
 }
@@ -584,7 +745,7 @@ div.signup-box {
 }
 
 div.login-box {
-	background: url("/images/h1_page_content_bg_evergreen_1.png") repeat;
+	background: url("/images/login_box_bg_evergreen_1.png") repeat;
 	width: 500px;
 	height:250px;
 	padding: 20px 20px 20px 20px;

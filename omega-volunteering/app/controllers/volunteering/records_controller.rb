@@ -87,6 +87,19 @@ class Volunteering::RecordsController < Omega::Controller
 
   end
 
+  def new_volunteer
+    @record = Volunteering::Record.new
+    @record.position = Volunteering::Position.find(params[:id])
+    @record.build_contact do |c|
+      c.addresses.build
+      c.phone_numbers.build
+    end 
+    
+    @record.contact.addresses.build
+    @record.contact.phone_numbers.build
+    respond_with(@record)
+  end
+
   def edit
     @record = Volunteering::Record.find(params[:id])
     respond_with(@record)

@@ -28,7 +28,7 @@ class UsersController < Omega::Controller
 
   def join
     @user = User.register(params[:user])
-    respond_with(@user, :location => root_url)
+    respond_with(@user)
   end
 
   def edit

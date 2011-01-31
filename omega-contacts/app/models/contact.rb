@@ -51,8 +51,8 @@ class Contact < Omega::Model
 
   scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
 
-  validates :title,      :presence  => true,
-                         :inclusion => { :in => TITLES }
+  #validates :title,      :presence  => true,
+                        # :inclusion => { :in => TITLES }
   validates :email,      :presence  => true,
                          :length    => 6..80,
                          :email     => true,

@@ -42,6 +42,20 @@
 	  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
 	</p>
 
+		
+		<%= f.fields_for :contact do |c|%>
+						<p>
+
+		   <label>No bulk emails!</label> <%= c.check_box :no_bulk_emails%> 
+				
+		</p>
+		<p>
+      		<%= c.label :where_did_you_hear_about_us? %>
+      		<%= c.text_field(:about_us, :'data-tooltip' => '')%>
+        </p>
+	    </span>
+			<%end%>	
+
     <p>
     <%= om_button do %>
         <%= f.submit "REGISTER" %>

@@ -15,7 +15,13 @@
 		
 		
  		<div class="signup-box">	
-		Apply for <%= @record.position.name %>
+			<h2 class="application-form"> Apply for <%= @record.position.name %> </h2>
+			<p>
+				<span class="form-text-plain-2">
+				Please fill-out the form below in order to apply for this position. Fields marked * are mandatory.</span>
+			</span>
+			</p>
+			
 			<%= render 'form' %>
 		</div>
 <% end %>

@@ -71,6 +71,31 @@ div.position {
 
 }
 
+div #search {
+	background: #666;
+	color: #fff;
+	height: 17px;
+	width: 70px;
+	position: relative;
+	top: 10px;
+	left: 250px;
+	cursor: pointer;
+	-moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+	padding: 7px 5px 5px 20px;
+	font-family: "Arial Rounded MT Bold";
+}
+
+div #search_volunteer {
+	border: 1px solid #8DA637;
+    width: 600px;
+	height: 150px;
+	margin: 50px 0 0 50px;
+	padding: 20px 0 20px 0;
+	 -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+	
+}
 div.position-wrapper {
     margin: 2px 2px 2px 2px;
     padding: 0.5em;
