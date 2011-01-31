@@ -1,0 +1,87 @@
+<% require_javascript 'service.js' %>
+<% require_stylesheet 'omega_services.css' %>
+
+
+<%= render :layout => 'layouts/services_wizard' do %>
+
+<%= form_tag :action => 'create' do %>
+
+		<div class="steps">
+			
+		   <%= render :partial => 'services/partials/steps' %>
+
+		</div>
+		
+ 
+		<h2 class="main_heading"> <span class="step">1.</span>Choose a Template and Click Next  </h2>
+				 	
+		<div id="type_templates">
+			
+		  <ul id="services" class="service_types">
+		    <br/>
+          <% @service_types.each do |s| %>
+              
+			  <li class= "service_type", id= <%=s.id%> >			     
+  					<span class="service_type"> <%=s.type_name%> </span> 		 
+              </li>
+			  
+          <%end %>
+        </ul>
+		
+
+		<%= hidden_field_tag('templates[service_type]')  %>
+		
+
+		</div>
+
+        <div id="arrow1" class="arrow arrow-1">
+        </div>
+		
+		<div id="arrow2" class="arrow arrow-2">
+        </div>
+		
+		<div id="arrow3" class="arrow arrow-3">
+        </div>
+		
+		<div id="arrow4" class="arrow arrow-4">
+        </div>
+		
+		<div id="arrow5" class="arrow arrow-5">
+        </div>
+		
+		<div id="arrow6" class="arrow arrow-6">
+        </div>
+		
+		<div id="arrow7" class="arrow arrow-7">
+        </div>
+		
+		
+		<div id="service_preview"> 
+        
+			
+		
+		</div>
+		
+		
+		
+	<div id="buttons_wizard">
+
+          <%= om_button(:icon=>'back') do %>
+              <%= link_to 'Back', service_wizard_service_types_url(:step => 'introduction') %>
+          <% end %>
+		  
+          <%= om_button(:icon=>'next') do %>
+              <%= submit_tag "Next", :name => "next" %>
+          <% end %>
+  
+          <%= om_button(:icon=>'cancel') do %>
+          <%= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
+          <% end %>
+		  
+	</div>
+
+<%end%>	
+		
+<% end %>
+
+

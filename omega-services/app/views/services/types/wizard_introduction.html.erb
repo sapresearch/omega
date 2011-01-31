@@ -1,0 +1,66 @@
+<% require_javascript 'service_wizard.js' %>
+<% require_stylesheet 'omega_services.css' %>
+
+
+<div class="wizard-header-services corners-top">
+			
+    <h1 class="service_wizard " >
+		CREATE NEW SERVICE TYPE - Introduction
+    <!-- Step <%= params[:step] || '1' %> -->
+	</h1>
+	
+</div>
+
+
+
+<div class="page-content-services">
+ 
+<div class="steps">
+			
+   <%= render :partial => 'services/partials/steps' %>
+
+</div>
+
+
+
+<div class="wizard_intro">
+	
+	<p>
+    <span class="first-l">T</span>he Service Type Creation Wizard allows you to add a service type from a list
+    of sample types in the library. This page introduces you to the steps involved in this process.
+  </p>
+
+  <p>
+    <strong><span class="first-l">W</span>hat do I do next?</strong>
+    When you are ready to continue, press the Next button to continue on to
+    the template selection page. If you would like to exit the Wizard without
+    creating a new Service Type, press the Cancel button.
+  </p>
+
+  <p>
+    <strong><span class="first-l">H</span>ow did I get here?</strong>
+    The Create a Service Type Wizard: Introduction Page appears when you select
+    to create a new service type. 
+  </p>
+
+	
+</div>
+  
+  <div class="intro_image">
+	</div>
+
+ <div id="buttons_wizard">
+         
+		  
+          <%= om_button(:icon=>'next') do %>
+              <%= link_to 'Next', service_wizard_service_types_url(:step => '1') %>
+          <% end %>
+  
+          <%= om_button(:icon=>'cancel') do %>
+          <%= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
+          <% end %>
+		  
+	</div>
+
+</div>
+

@@ -1,0 +1,3 @@
+$( "#service_details_fields" ).append( "<%= escape_javascript( render( :partial => "service_fields_form",
+         :locals => { :field => @field, :service => @service, :index => params[:index].to_i + 1} ) ) %>" );
+

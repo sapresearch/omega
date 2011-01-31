@@ -1,0 +1,31 @@
+<div id="service_fields_<%= index %>">
+
+<%=fields_for "fields[#{index}]", field do |f| %>
+<br/>
+
+            <strong> <%= f.label :field_name %> </strong>
+                     <%= f.text_field :field_name %> <br/>
+            <strong> <%= f.label :field_type %> </strong>
+                     <%= f.select :field_type,
+                                 options_for_select(%w{ Text String Number Date Time })%> <br/>
+
+                     <%= f.hidden_field :field_type_class, :value => "default"%>
+                     <%= f.hidden_field :field_category, :value => "Service Details" %> <br/>
+
+                     <%=f.fields_for :detail do |d| %>
+
+                           <%= d.hidden_field :service_id, :value => service.id %>
+
+                                 <strong> <%= d.label :field_value%></strong>
+                                          <%= d.text_field :field_value%>
+                           <%end%>
+                     <%end%>
+
+
+<br/>
+
+  <%= link_to 'Cancel', remove_field_services_url(:index => index), :remote => true%>
+<br/>
+
+</div>
+

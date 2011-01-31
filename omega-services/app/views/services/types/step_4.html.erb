@@ -1,0 +1,102 @@
+<% require_stylesheet 'services.css'%>
+
+<h1 class="page-content corners-top">
+  Create a Service Wizard - Step 4 
+</h1>
+
+
+<div class="page-content corners-bottom">
+
+
+
+<br/>
+<div class="content-services">
+
+  <p class="left-align">
+
+  <span class="style1">Finalize Service Creation - Summary </span><br/>
+  <br/>
+    <br/>
+  <strong>Service Name :</strong> <%=@service.service_name%><br/>
+  <strong>Service Type : </strong><%=@service.service_type%><br/>
+  <strong>Icon:</strong>
+    <% if @service.icon_file_name != 'missing.png'%>
+
+             <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
+
+          <%else%>
+             <%= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
+
+    <%end%>
+  <br/>
+  <span class="style2">Service Details</span><br/><br/>
+
+    <%Service::Field.find_all_by_field_category_and_service_id("Service Details", @service.id).each do |s|%>
+
+
+     <strong><%=s.field_name%></strong>:
+        <%=Service::Detail.find_by_field_id_and_service_id(s.id,@service.id).field_value%>
+
+     <br/>
+
+  <%end%>
+
+    <br/>
+  <span class="style2">Registration Form Fields</span><br/>
+
+    <br/>
+    <% if @service.service_category.eql?("Enrollable") %>
+
+              <strong> First Name <br/>
+              Last Name <br/>
+              Email <br/>
+              Phone Numbers <br/>
+              Notes <br/>
+              </strong>
+
+
+              <%else%>
+
+              <strong>
+              Email <br/>
+              Phone Numbers <br/>
+              Notes <br/>
+              Questions <br/>
+
+
+              </strong>
+
+     <%end%>
+    
+     <%Service::Field.find_all_by_field_category_and_service_id("Registration Details",@service.id).each do |s|%>
+
+     <strong><%=s.field_name%></strong>
+
+     <br/>
+
+     <%end%>
+  </p>
+
+<br/>
+
+</div>
+<div class="bottom-buttons">
+
+  <%= om_button(:icon=>'next-step') do %>
+    <%=button_to "Publish", finalize_services_url(:id => @service)%>
+
+  <%end%>
+
+  <%= om_button(:icon=>'cancel') do %>
+    <%= button_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete%>
+  <%end%>
+
+  <%= om_button(:icon=>'prev-step') do %>
+    <%= button_to 'Back', service_wizard_services_url(:step => 3)%>
+  <%end%>
+</div>
+</div>
+
+
+
+
