@@ -1,0 +1,63 @@
+<% require_javascript 'enroll_volunteer' %>
+<% require_stylesheet 'omega_volunteering' %>
+
+
+<%= context_box do %>
+
+<div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+  					Enroll A Volunteer
+		    	</h1>
+			</div>
+	
+		</div>
+		
+		
+		
+ 		<div class="signup-box">	
+			<h2 class="application-form"> Application for <%= @record.position.name %> </h2>
+			<h3 class="application-form"> Volunteer Information </h3>
+			<p>
+
+        <%= form_tag do %>
+			
+			   <% ['search the database','enter volunteer information'].each do |c|%>
+			   	<span class="text-style1" ><%= radio_button_tag 'enroll_volunteer', c %> <%= c.humanize %> <br/>
+			    </span>
+			   <%end%>
+			</p>
+			
+			
+			<div id="search_volunteer">
+				<p>
+					
+				<label > Email </label>
+				 <%= text_field :email, :value => '' %>
+				</p>
+				
+				<p>
+				
+				<div id="search">
+					SEARCH
+				</div>
+				</p>
+				
+			</div>
+			
+			<div id="create_volunteer">
+				
+				<%= render :partial => 'enroll_volunteer_form' %>
+				
+			</div>
+			
+<%end%>			
+			<div id="volunteering_application">
+				
+			</div>
+			
+		</div>
+<% end %>
