@@ -23,6 +23,7 @@ class CreateContacts < ActiveRecord::Migration
 
 
       t.string :gender
+      t.string :about_us
 
       t.string :status
       

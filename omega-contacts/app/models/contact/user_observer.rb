@@ -20,7 +20,7 @@ class Contact
 
       def sync_user_with_contact(user)
         contact = Contact.for(user)
-        contact.sync_from_user unless contact.synced?
+        contact.sync_to_user unless contact.synced?
       end
   end
 end
