@@ -3,26 +3,32 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
 <%= context_box do %>
-<h1 class="page-content-evergreen corners-top">
-  Application Overview
-</h1>
+
+<div class="page-content circle-corners-bottom corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+  					Volunteer Applications
+		    	</h1>
+			</div>
+	
+        </div>
+		
+	
+
+
+
 <div class="page-content-evergreen corners-bottom">
   <table class="width-100 clear" id="records-table">
     <thead>
     <tr>
       <th>Position</th>
-      <th>
-        From
-      </th>
-      <th>
-        Date
-      </th>
-      <th>
-        Action
-      </th>
-      <th>
-        Status
-      </th>
+      <th>From</th>
+      <th>Date</th>
+      <th>Action</th>
+      <th>Status</th>
     </tr>
     </thead>
     <% if @records.empty? %>
@@ -33,5 +39,6 @@
     <%= will_paginate @positions %>
   <div class="clear"></div>
 
+</div>
 </div>
 <% end %>

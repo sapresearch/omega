@@ -82,7 +82,7 @@ h1.page-content {
    /* background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #F3F1E9;*/
 	font-family:"Trebuchet MS", Arial Black ,Geneva, Arial, Helvetica, sans-serif;
 	font-weight: bold;
-	color: #806F39;
+	color: #4D5C27;
 	font-size: 28px;
 	height: 35px;
 	padding: 30px 0 20px 30px;
@@ -123,8 +123,19 @@ h2 a {
     color: #00459a;
 }
 
+
+
 h2 a:hover {
     color: #4196ee;
+}
+
+h2 a.position-name {
+    font-size: 1.3em;
+    color: #687B28;
+}
+
+h2 a.position-name:hover {
+    color: #6B540C;
 }
 
 h2 {
@@ -511,7 +522,7 @@ tr.even a, tr.odd a {
 }
 
 tr.odd {
-    background: #D3D6FF !important;;
+    background: #EEF3DA !important;;
 }
 
 /* style rule for the ajax loading animation and flash notice*/
@@ -1237,7 +1248,8 @@ span.om-plain-button, span.om-plain-icon-button {
 }
 
 span.om-plain-button a, span.om-plain-icon-button a {
-    color: #4096EE;
+    color: #333;
+	font-weight: bold;	
 }
 
 span.om-plain-button span.om-icon,
@@ -1251,7 +1263,6 @@ span.om-plain-icon-button span.om-icon,
 
 span.om-plain-button span.om-icon,
 span.om-plain-icon-button span.om-icon {
-
     position: absolute;
     top: 2px;
     margin: 0 0 0 -20px;
@@ -1276,14 +1287,15 @@ span.om-small-button, span.om-small-icon-button {
     background: url("/images/om_button_bg.png") repeat-x bottom transparent;
     border-width: 1px;
     border-style: solid;
-    border-color:  #5498CF #5498CF #2F72A9;
+    border-color: #B3BF82 #B3BF82 #7E9403;
 	width: 100px;
-    height: 30px;
+    height: 25px;
     margin: 0 0 0 20px;
 }
 
 span.om-small-button a, span.om-small-icon-button a {
-    color: #fff;
+    color: #000;
+	font-weight: bold;
 	margin-left: 35px;
 	padding-top: 15px;
 	line-height: 25px;

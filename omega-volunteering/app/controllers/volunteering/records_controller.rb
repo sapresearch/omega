@@ -83,7 +83,7 @@ class Volunteering::RecordsController < Omega::Controller
     
     @record.contact.addresses.build
     @record.contact.phone_numbers.build
-    respond_with(@record)
+    respond_with(@record, :location => summary_volunteering_records_path)
 
   end
 
@@ -106,9 +106,9 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def create
-    record         = params[:volunteering_record]
+    record = params[:volunteering_record]
 
-    @record        = Volunteering::Record.new
+    @record = Volunteering::Record.new
 #    @record.contact_id = record['contact_attributes']['id'] if record['contact_attributes']
     @record.action = 'To Be Taken'
     @record.update_attributes(record)

@@ -47,7 +47,7 @@ div.position-slider {
     top: 42px;
 	left:20px;
     background: url("/images/bg_dark.png") repeat-x bottom;
-    color: #fff;
+    color: #000;
     display: none;
 
 }
@@ -101,12 +101,15 @@ div.position-wrapper {
     padding: 0.5em;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    border: 1px solid #e3e3e3;
-    background: url("/images/position_bg.png") repeat-x bottom #F2F1E1;
+    /*border: 1px solid #e3e3e3;*/
+	border: 1px solid #A7C249;
+	background: #fff;
+    /*background: url("/images/position_bg.png") repeat-x bottom #F2F1E1;*/
 }
 
 .position-hover {
-    background: #4196ee !important; /*background:#c9c9c9 !important;*/
+    /*background: #4196ee !important; /*background:#c9c9c9 !important;*/
+    background: #BFD37A !important; /*background:#c9c9c9 !important;*/
 
 }
 
@@ -234,13 +237,14 @@ a.skill_tag-active span {
 /************ calendar list ********************/
 .pos-date {
     margin: 20px 10px 0 0;
-    background: url("/images/cal_bg.png") no-repeat;
+    background: url("/images/cal_bg_evergreen.png") no-repeat;
     text-align: center;
     font-size: 1.3em;
     padding: 5px 0 0 0;
     float: left;
     width: 45px;
     height: 60px;
+	
 }
 
 .pos-recurrent {
@@ -252,12 +256,12 @@ a.skill_tag-active span {
 }
 
 .pos-cal-month {
-    color: #FFF;
+    color: #4D5C27;
 }
 
 .pos-cal-day {
 
-    padding-top: 4px;
+    padding-top: 2px;
     font-size: 0.8em;
     color: #fff;
 }

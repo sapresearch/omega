@@ -5,13 +5,42 @@
 	
 <div class="signup-box">	
 	<h2 class="summary">
-		Application Sent! 
+		<%= @record.position.name %>
 	</h2>
 	
-		<p class="summary"> <span class="text-style1"> Your registration for '<%= @record.position.name %>' was successful!
-		<br/>
-		An email would be sent to your primary email address when an action is taken on your application.</span>
+		<p class="summary"> 
+		
+			<h3 class="application-form">Applicant Information</h3>
+			 <strong> Full Name:  </strong>
+			 <span class="application-detail"> <%= @record.contact.title %> <%= @record.contact.first_name %> <%= @record.contact.last_name %></span><br/>
 
+			 <strong>Address:</strong>
+			 <span class="application-detail"> <%= @record.contact.addresses.first.street %>, <%= @record.contact.addresses.first.city %> <%= @record.contact.addresses.first.zip_code %></span>
+			 
+
+			<h3 class="application-form">Volunteering History</h3>
+			 <strong> Position and Start Date: </strong>
+
+			<% Volunteering::Record.where('contact_id = ?',@record.contact_id).each do |r|%>
+			  <%= r.position.name %> - <%= r.start_date %>  <br/>
+			 
+			
+            <%end%>
+			
+			 <h3 class="application-form">Application Approval</h3>
+			 <strong>Action:</strong>
+			<span class="application-detail"> <%= @record.action %>  </span> <br/><br/><br/><br/>
+		
+		<%= om_button(:plain => true, :icon => 'folder-open') do %>
+                <%= link_to "Take Action Now!" , administer_volunteering_record_url(@record), :remote => 'true' %>
+            <% end %>	
+			
+			
+			| <%= om_button(:plain => true, :icon => 'folder-open') do %>
+                <%= link_to "Edit Applicant" , edit_volunteering_record_url(@record), :remote => 'true' %>
+            <% end %>	
+			
+			
 		</p>
 
 
@@ -20,7 +49,7 @@
 		
 </div>
 		
-		
+	
 
   <%#= om_button(:icon => 'next') do %>
             <%#= link_to "Go To Volunteering Positions", volunteering_positions_url %>
