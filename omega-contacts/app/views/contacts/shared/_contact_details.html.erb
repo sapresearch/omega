@@ -1,10 +1,4 @@
-<div> <%= om_button(:icon=>'user-remove') do %>
-      <%= link_to 'delete', @contact, :method=> :delete, :remote => true %>
-  <% end %>
-  <%= om_button(:icon=>'user-edit') do %>
-      <%= link_to 'edit', edit_contact_path(@contact), :remote => true %>
-  <% end %>
-</div>
+
 
 <h2 class="absolute">
   <%= @contact.first_name %>  <%= @contact.last_name %>
