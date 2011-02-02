@@ -30,7 +30,7 @@
 
 
 #positions-list li {
-    height: 140px;
+    height: 180px;
     position: relative;
 }
 
@@ -117,7 +117,9 @@ div.position-wrapper {
 
     background: none !important;
     padding: 5px;
-	margin-bottom: 20px;
+	margin: 30px;
+		height: 150px;
+
 
 }
 
