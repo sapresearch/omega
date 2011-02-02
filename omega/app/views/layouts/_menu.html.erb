@@ -4,19 +4,19 @@
     <li>
       <%= link_to "Volunteering", volunteering_positions_url %>
       <div>
-        <%= link_to "All Volunteering Positions", volunteering_positions_url %>
+        <%= link_to "All Volunteering Assignments", volunteering_positions_url %>
         <%= with_permission(Volunteering::PERM_ADMIN) do %>
-            <%= link_to "Create a position", new_volunteering_position_path %>
+            <%= link_to "Create an Assignment", new_volunteering_position_path %>
         <% end %>
 
         <% if (!current_user.is_anonymous?) %>
 
-            <%= link_to "My Positions", mine_volunteering_positions_path %>
+            <%= link_to "My Assignments", mine_volunteering_positions_path %>
             <%= link_to "Time Sheets", my_time_sheets_volunteering_positions_path %>
 
 
             <%= with_permission(Volunteering::PERM_ADMIN) do %>
-                <%= link_to "Applications", volunteering_records_path %>
+                <%= link_to "Manage Applications", volunteering_records_path %>
             <%end%>
 			            
 			<%= with_permission(Volunteering::PERM_APPLY) do %>

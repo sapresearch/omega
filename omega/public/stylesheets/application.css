@@ -755,6 +755,14 @@ div.signup-box {
 	
 }
 
+div.main-box {
+	width:880px;
+	height:auto;
+    margin: 50px 10px 70px 40px;   
+
+	
+}
+
 div.login-box {
 	background: url("/images/login_box_bg_evergreen_1.png") repeat;
 	width: 500px;
@@ -1180,7 +1188,7 @@ form span.error {
 }
 /**************************** ICONS *****************************/
 /* OM-COLORED-ICON-BUTTONS */
-.om-button a, .om-button input, .om-button button, .om-icon-button a, .om-icon-button input, .om-icon-button button {
+.om-button a, .om-button input, .om-button button, .om-icon-button input, .om-icon-button button {
     position: relative;
     text-transform: capitalize;
     line-height: 12px;
@@ -1207,10 +1215,10 @@ form span.error {
 }
 
 .om-icon-button a {
-    color: #2E71A8;
+    color: #fff;
     font-weight: bold;
     text-shadow: 1px 1px 1px #666;
-    padding: 1px 8px 1px 2px;
+    padding-left: 35px;
 
 }
 
@@ -1230,7 +1238,7 @@ span.om-icon-button {
     background: url("/images/om_button_bg.png") repeat-x bottom transparent;
     border-width: 1px;
     border-style: solid;
-    border-color:  #5498CF #5498CF #2F72A9;
+    border-color:  #B3BF82 #B3BF82 #7E9403;
     margin-left: 135px;
 	margin-top: 40px;
 	margin-bottom: 5px;
@@ -1275,6 +1283,45 @@ span.om-plain-icon-button span.om-icon {
     *zoom: 1;
 
 }
+
+
+span.om-contact-button, span.om-contact-icon-button {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    height: 16px;
+	margin-left: 30px;
+}
+
+span.om-contact-button a, span.om-contact-icon-button a {
+    color: #333;
+	font-weight: bold;	
+}
+
+span.om-contact-button span.om-icon,
+span.om-contact-icon-button span.om-icon,
+.om-icon-only, .om-footer-symbol {
+    background-image: url(../images/icons/iconSprite.png);
+    background-repeat: no-repeat;
+}
+
+
+
+span.om-contact-button span.om-icon,
+span.om-contact-icon-button span.om-icon {
+    position: absolute;
+    top: 2px;
+    margin: 0 0 0 -20px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    *display: inline;
+    *zoom: 1;
+
+}
+
 
 span.om-small-button, span.om-small-icon-button {
     
@@ -1772,7 +1819,7 @@ div.pagination span.disabled {
 }
 
 .head_bg {
-    height: 24px;
+    height: 54px;
     font-weight: bold;
     padding: 2px;
     color: #0E5A9D;

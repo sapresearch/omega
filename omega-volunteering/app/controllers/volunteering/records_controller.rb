@@ -47,7 +47,6 @@ class Volunteering::RecordsController < Omega::Controller
 
   def administer
     @record = Volunteering::Record.find(params[:id])
-
     respond_with(@record)
   end
 

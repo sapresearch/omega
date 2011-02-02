@@ -3,16 +3,29 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
 <%= context_box do %>
-<h1 class="page-content-evergreen corners-top">
-  Appliaction history for <%= @position.name %>
-</h1>
-<div class="page-content-evergreen corners-bottom">
-  <%= om_button(:plain => true, :icon => 'counter') do %>
-      Active Volunteers <span class="green">   <%= @position.active_volunteers.count %></span>
-  <% end %>
-<br>
-    <%= om_button(:plain => true, :icon => 'counter') do %>
-      Missing Volunteers <span class="red">   <%= @position.missing_volunteers %></span>
+
+ <div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+                Volunteer Assignment History
+		    	</h1>
+			</div>
+	
+		</div>
+
+
+
+  <%#= om_button(:plain => true, :icon => 'counter') do %>
+   <!--   Active Volunteers <span class="green">   <%#= @position.active_volunteers.count %></span>
+  <%# end %> 
+<br>-->
+<div class="main-box">
+	
+	    <%= om_button(:plain => true, :icon => 'counter') do %>
+      Active Volunteers <span class="red">   <%= @position.missing_volunteers %></span>
   <% end %>
 <br>
 <br>
@@ -52,6 +65,8 @@
 
   <%#= will_paginate @positions %>
   <div class="clear"></div>
+
+</div>
 
 </div>
  <% end %>

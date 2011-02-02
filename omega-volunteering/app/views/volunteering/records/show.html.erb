@@ -19,9 +19,9 @@
 			 
 
 			<h3 class="application-form">Volunteering History</h3>
-			 <strong> Position and Start Date: </strong>
 
 			<% Volunteering::Record.where('contact_id = ?',@record.contact_id).each do |r|%>
+			  	<strong> Position and Start Date: </strong>
 			  <%= r.position.name %> - <%= r.start_date %>  <br/>
 			 
 			

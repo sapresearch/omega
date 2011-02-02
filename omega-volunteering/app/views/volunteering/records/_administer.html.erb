@@ -3,13 +3,12 @@
     <%= f.hidden_field :id %>
     <%= errors_for_form @record %>
     <%= f.label :action %>
-    <% ["Accept", "Reject", "More Information"].each do |v| %>
+    <% ["Accepted", "Rejected", "Further Information Required"].each do |v| %>
         <%= f.radio_button :action, v, {:checked => "checked"} %> <%= v %>
     <% end %>
 
     <p>
       <%= f.label :Note %>
-
       <%= f.text_area :more_information, :rows => 2 %>
     </p>
 

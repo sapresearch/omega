@@ -1,10 +1,28 @@
 <%= context_box do %>
 <h1 class="page-content corners-top">
-  Administer Application of <%= @record.contact.first_name %>  <%= @record.contact.last_name %>
-  for <%= @record.position.name %>
+  
 </h1>
-<div class="page-content corners-bottom">
 
-<%= render 'administer' %>
+
+<div class="page-content circle-corners-bottom corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+					Administer Application   	
+				</h1>
+			</div>
+	
+		</div>
+	
+		
+ 		<div class="signup-box">	
+			<h2 class="application-form"> Applicant: <%= @record.contact.first_name %>  <%= @record.contact.last_name %> </h2>
+			<h3 class="application-form"> Volunteer Assignment: <%= @record.position.name %> </h3>
+							
+
+         <%= render 'administer' %>
+		</div>
 </div>
 <% end %>

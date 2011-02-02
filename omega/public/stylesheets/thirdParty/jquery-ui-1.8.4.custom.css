@@ -172,9 +172,12 @@
     }
 
     .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-        border: 1px solid #80bdfb;
-        background: #80bdfb url(/images/ui-bg_flat_100_80bdfb_40x100.png) 50% 50% repeat-x;
-        font-weight: normal;
+       /* border: 1px solid #80bdfb;
+      /*  background: #80bdfb url(/images/ui-bg_flat_100_80bdfb_40x100.png) 50% 50% repeat-x;
+      */
+	    border: 1px solid #BCD175;
+	    background: #BCD175;
+	    font-weight: normal;
         color: #fff;
     }
 

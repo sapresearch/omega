@@ -12,7 +12,8 @@
 }
 
 #contact_filter_wrapper{
-	float:left;
+	margin-left: 10px;
+	margin-top: 10px;
 	background:url("/images/filterBg.png");
 	width:148px;
 	height:24px;

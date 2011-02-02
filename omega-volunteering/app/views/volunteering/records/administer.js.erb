@@ -2,7 +2,7 @@ $('body').append('<%= escape_javascript(render('administer')) %>')
         $("#edit_volunteering_record_<%= @record.id %>").dialog({
             autoOpen: true ,
             width:600,
-            title: 'Administer',
+            title: 'Administer Application',
             close: function(e,ui){
                 $(this).remove()
             }
