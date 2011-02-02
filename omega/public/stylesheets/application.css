@@ -82,7 +82,7 @@ h1.page-content {
    /* background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #F3F1E9;*/
 	font-family:"Trebuchet MS", Arial Black ,Geneva, Arial, Helvetica, sans-serif;
 	font-weight: bold;
-	color: #4D5C27;
+	color: #36361B;
 	font-size: 28px;
 	height: 35px;
 	padding: 30px 0 20px 30px;
@@ -97,7 +97,7 @@ h1.page-content-evergreen {
     text-shadow: #ddd 0.02em 0.02em 0.02em;
 	font-family: Arial Black, Helvetica, sans-serif;
 	font-weight: bold;
-	color:#2D3934;
+	color:#36361B;
 	font-size: 24px;
     padding-left: 0.6em;
 	height: 25px;
@@ -1209,16 +1209,17 @@ form span.error {
 
 }
 
-
 .om-button input, .om-icon-button input {
-
+	margin-left: 35px;
 }
 
 .om-icon-button a {
     color: #fff;
     font-weight: bold;
-    text-shadow: 1px 1px 1px #666;
     padding-left: 35px;
+	font-size: 14px;
+
+	
 
 }
 

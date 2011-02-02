@@ -1,21 +1,30 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_javascript 'omega_volunteering' %>
 <%= context_box do %>
-<h1 class="page-content-evergreen corners-top">
-  Volunteering Positions
-</h1>
+ <div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+      				My Volunteering Assignments
+		    	</h1>
+			</div>
+	
+		</div>
 
 
-<div class="page-content-evergreen corners-bottom">
+
   <div class="right">
-    <%= om_button(:icon=>'sort-az') do %>
-        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'asc')) %>
-    <% end %>
-    <%= om_button(:icon=>'sort-za') do %>
-        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
-    <% end %>
+      	<br/>
+        <%= om_button(:icon=>'sort-az', :small => true) do %>
+            <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
+        <% end %>
+        <%= om_button(:icon=>'sort-za', :small => true) do %>
+            <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+        <% end %>
 
-  </div>
+      </div>
 
   <div class="clear"></div>
 
@@ -77,7 +86,7 @@
     <% end %>
   </ul>
 
-  <%= will_paginate @positions %>
+  <%#= will_paginate @positions %>
 
   <div class="clear"></div>
 
@@ -85,8 +94,8 @@
 
 
 <% end %>
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_positions_skills" %>
-    <%= render :partial => "layouts/sidebar_positions_interests" %>
-<% end %>
+<%# content_for :sidebar do %>
+    <%#= render :partial => "layouts/sidebar_positions_skills" %>
+    <%#= render :partial => "layouts/sidebar_positions_interests" %>
+<%# end %>
 

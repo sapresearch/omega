@@ -1,17 +1,30 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_javascript 'omega_volunteering' %>
 <%= context_box do %>
-<h1 class="page-content-evergreen corners-top">
-  Application Overview
-</h1>
-<div class="page-content-evergreen corners-bottom">
+
+
+    <div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+      				My Applications
+		    	</h1>
+			</div>
+	
+		</div>
+		
+
+ <div class="main-box">
   <ul id="records-list" class="item-list">
     <% if @records.empty? %>
         <h2> No Applications to Show!</h2>
     <% end %>
     <% @records.each do |a| %>
-        <%= render 'user_record_row', :record => a %>
+        <%= render 'user_applications', :record => a %>
     <% end %>
   </ul>
+  </div>
 </div>
 <% end %>

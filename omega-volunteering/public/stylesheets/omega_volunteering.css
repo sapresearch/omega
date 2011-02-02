@@ -123,8 +123,8 @@ div.position-wrapper {
 
 a.skill-tag {
 margin:4px;
-    background: url("/images/tag_r.png") no-repeat scroll right top transparent;
-    color: #FFFFFF;
+    background: url("/images/tag_r_evergreen.png") no-repeat scroll right top transparent;
+    color: #222;
     cursor: pointer;
     display: block;
     float: left;
@@ -136,7 +136,7 @@ margin:4px;
 }
 a.skill-tag:hover{
     background-position: right bottom;
-    color:#FFF;
+    color:#666;
 }
 a.skill-tag span {
     background: url("/images/tag_evergreen.png") no-repeat scroll left top transparent;
@@ -155,7 +155,7 @@ background: url("/images/tag_evergreen.png") no-repeat scroll left bottom transp
 
 span.skill-tag-active {
 margin:4px;
-    background: url("/images/tag_r.png") no-repeat scroll right bottom transparent;
+    background: url("/images/tag_r_evergreen.png") no-repeat scroll right bottom transparent;
     color: #FFFFFF;
     cursor: pointer;
     display: block;
