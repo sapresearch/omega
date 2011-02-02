@@ -150,7 +150,7 @@ a.skill-tag span {
 
 }
 a.skill-tag span:hover {
-background: url("/images/tag.png") no-repeat scroll left bottom transparent;
+background: url("/images/tag_evergreen.png") no-repeat scroll left bottom transparent;
 }
 
 span.skill-tag-active {
