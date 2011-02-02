@@ -1,17 +1,23 @@
 <% require_javascript 'omega_messages' %>
 <%= context_box do %>
-<h1 class="page-content corners-top">
-  Messages
-</h1>
-<div class="page-content corners-bottom">
-  <div class="right">
-    <%= om_button(:icon=>'sort-az') do %>
-        <%= link_to 'sort Asc', messages_path(:created_at => 'asc') %>
-    <% end %>
-    <%= om_button(:icon=>'sort-za') do %>
-        <%= link_to 'sort Desc', messages_path(:created_at => 'desc') %>
-    <% end %>
-  </div>
+<div class="page-content circle-corners-top circle-corners-bottom">
+
+<div class="heading-main">
+	
+	<div class="left-heading">
+		<h1 class="page-content">
+			My Messages
+		</h1>
+	</div>
+	
+	
+	    
+</div>
+
+
+<div class="main-box">
+	
+  
   <div class="clear"></div>
   <ul id="messages-list">
     <% @messages.each do |message| %>
@@ -51,10 +57,8 @@
     <% end %>
   </ul>
   <%= will_paginate @messages %>
-
+  </div>
   <div class="clear"></div>
 </div>
-    <% end %>
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_messages_menu" %>
-<% end %>
+ <% end %>
+

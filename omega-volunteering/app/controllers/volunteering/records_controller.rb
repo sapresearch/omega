@@ -82,7 +82,7 @@ class Volunteering::RecordsController < Omega::Controller
     
     @record.contact.addresses.build
     @record.contact.phone_numbers.build
-    respond_with(@record, :location => summary_volunteering_records_path)
+    
 
   end
 
@@ -118,6 +118,7 @@ class Volunteering::RecordsController < Omega::Controller
     respond_with(@record)
   end
 
+  
   def update
     @record          = Volunteering::Record.find(params[:id])
 

@@ -10,7 +10,7 @@
 	
 		<p class="summary"> 
 		
-			<h3 class="application-form">Applicant Information</h3>
+		 <h3 class="application-form">Applicant Information</h3>
 			 <strong> Full Name:  </strong>
 			 <span class="application-detail"> <%= @record.contact.title %> <%= @record.contact.first_name %> <%= @record.contact.last_name %></span><br/>
 
@@ -26,6 +26,10 @@
 			 
 			
             <%end%>
+		
+		 <%= with_permission(Volunteering::PERM_ADMIN) do %>
+         
+		
 			
 			 <h3 class="application-form">Application Approval</h3>
 			 <strong>Action:</strong>
@@ -39,6 +43,12 @@
 			| <%= om_button(:plain => true, :icon => 'folder-open') do %>
                 <%= link_to "Edit Applicant" , edit_volunteering_record_url(@record), :remote => 'true' %>
             <% end %>	
+		 
+         <% end %>
+		 
+
+		 
+	     
 			
 			
 		</p>

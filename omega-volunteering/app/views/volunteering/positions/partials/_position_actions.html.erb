@@ -18,12 +18,12 @@
       <% end %>
 	  
        <%= with_permission(Volunteering::PERM_APPLY) do %>
-	   <% if Volunteering::Record.where('contact_id=? and position_id = ?', Contact.for(current_user),position.id).nil?%>
+	   <% @application = Volunteering::Record.find_by_position_id_and_contact_id(position.id,Contact.for(current_user))%>
+		  <% if @application.nil?%>
 		  <%= om_button(:contact => true, :icon => 'apply') do %>
               <%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
-          <% end %>
-	   <%end%>
-          
+		  <%end%>
+          <%end%>
       <% end %>
 	  
 	   <%= with_permission(Volunteering::PERM_ADMIN) do %>

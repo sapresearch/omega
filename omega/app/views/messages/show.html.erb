@@ -1,8 +1,24 @@
 <%= context_box do %>
-<h1 class="page-content corners-top">
-  <%= @message.subject %>
-</h1>
-<div class="page-content corners-bottom">
+
+
+<div class="page-content circle-corners-top circle-corners-bottom">
+
+<div class="heading-main">
+	
+	<div class="left-heading">
+		<h1 class="page-content">
+  			<%= @message.subject %>
+		</h1>
+	</div>
+	
+	
+	    
+</div>
+
+
+<div class="main-box">
+	
+
   <p>
     From: <%= @message.from.first_name %> <%= @message.from.last_name %>
   </p>
@@ -15,7 +31,4 @@
   </p>
 
 </div>
-<% end %>
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_messages_menu" %>
 <% end %>
