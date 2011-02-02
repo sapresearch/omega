@@ -139,7 +139,7 @@ a.skill-tag:hover{
     color:#FFF;
 }
 a.skill-tag span {
-    background: url("/images/tag.png") no-repeat scroll left top transparent;
+    background: url("/images/tag_evergreen.png") no-repeat scroll left top transparent;
     display: block;
     float: left;
     height: 15px;
