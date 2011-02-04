@@ -1,60 +1,97 @@
-<%= form_for @user do |f| %>
+
+<%= form_for @user, :url => register_users_path do |f| %>
     <%= errors_for_form @user %>
-    <fieldset>
-      <legend>User Details</legend>
-      <p>
-        <%= f.label :user %>
-        <%= f.text_field(:username, :'data-tooltip' => 'Plese provide username with at least 2 characters') %>
-      </p>
+	
+	<%= f.fields_for :contact do |c|%>
+	
+	 <h3 class="application-form">PERSONAL INFORMATION </h3> 
+		<p>	
+      		<%= c.label :first_name %>
+      		<%= c.text_field(:first_name, :'data-tooltip' => 'Your first name')%> 
+   		</p>
+	
+    	<p>
+      		<%= c.label :last_name %>
+      		<%= c.text_field(:last_name, :'data-tooltip' => 'Your last name')%>
+    	</p>
 
-      <p>
-        <%= f.label :first_name %>
-        <%= f.text_field(:first_name, :'data-tooltip' => 'Plese provide lastname') %>
-      </p>
+    
+		<%=  c.fields_for :addresses do |a|%>
 
-      <p>
-        <%= f.label :last_name %>
-        <%= f.text_field(:last_name, :'data-tooltip' => 'Plese provide lastname') %>
-      </p>
+        <p>
+        	<%= a.label :city %>
+			<%= a.text_field(:city, :'data-tooltip' => 'Email where you could be contacted') %>
 
-      <p>
-        <%= f.label :email %>
-        <%= f.text_field(:email, :'data-tooltip' => 'Plese provide email') %>
-      </p>
+	    </p>
+		
+		<%end%>
+		
+		<%= c.fields_for :phone_numbers do |p|%>
+		<p>
+			<%= p.label :phone %>
+			<%= p.text_field :number%>
+	    </p>
+		
+		<%end%>
+	<%end%>
+              
+    <h3 class="application-form">LOG IN INFORMATION </h3> 
 
+   <%= f.fields_for :contact do |c|%>
+   
+   <p>
+      <%= c.label :email %>
+      <%= c.text_field(:email, :'data-tooltip' => 'Email where you could be contacted') %>
+    </p>
+	
+	
+	  
+	<p>
+		<%= c.label :confirm_email %>
+      <%= c.text_field(:email_confirmation, :'data-tooltip' => 'Email where you could be contacted') %>
 
-      <p>
-        <%= f.label :password %>
-        <%= f.password_field :password %>
-      </p>
+	</p>
+   <%end%>
+   
+    <p>
+      <%= f.label :username %>
+      <%= f.text_field(:username, :'data-tooltip' => 'Username should include atleast 2 characters')%>
+    </p>
 
-      <p>
-        <%= f.label :confirmation %>
-        <%= f.password_field :password_confirmation %>
-      </p>
+    <p>
+      <%= f.label :password %>
+      <%= f.password_field(:password, :'data-tooltip' => 'The password should have atleast 8 characters') %>
+    </p>
 
-      <p>
-        <%= f.label :time_zone %>
-        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
-      </p>
+    <p>
+      <%= f.label :confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </p>
 
-    </fieldset>
-     <%= with_permission(User::PERM_ADMIN) do %>
+	  <%= f.label :time_zone %>
+	  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
+		
+		 <h3 class="application-form">NEWS LETTERS </h3> 
 
+		<%= f.fields_for :contact do |c|%>
+		<p>
 
-    <fieldset>
-      <legend>Roles and Permissions</legend>
-      <%= render 'role_assignments', :form => f %>
-    </fieldset>
- <% end %>
+		   <label>No bulk emails!</label> <%= c.check_box :no_bulk_emails%> 
+				
+		</p>
+		<p>
+      		<%= c.label :where_did_you_hear_about_us? %>
+      		<%= c.text_field(:about_us, :'data-tooltip' => '')%>
+        </p>
+	    </span>
+			
+	    <%end%>	
 
-
-
-
-    <%= om_button(:icon => 'save') do %>
-        <%= f.submit %>
+    <p>
+    <%= om_button do %>
+        <%= f.submit "REGISTER" %>
     <% end %>
-
+    </p>
 
 <% end %>
 

@@ -551,30 +551,54 @@ tr.odd {
 
 #wrapper {
     min-height: 400px;
+
 }
 
 #head {
     width: 950px;
     text-align: left;
     margin: 0 auto 2px;
+
 }
 
-#logo_wrapper {
+#banner_wrapper {
 	/*position: relative;
 	z-index: 1;
     margin: -171px 0 0 -132px;*/
 	position: absolute;
 	top: 29px;
 	left: 0;
-	min-width: 1200px;
+	min-width: 100%;
 	width: 100%;
 	height: auto;
+	
+	
 }
 
 #logo {
-	background: url("/images/banner-top-main.png") no-repeat center;
+
+	position: relative;
+	top: -170px;
+	left: 50px;
+    background: url("/images/logo-evergreen.png") no-repeat center;
+    width: 230px;
+	height: 100px;
+	z-index: 1;
+
+}
+#banner-left {
+	float: left;
 	height: 180px;
 }
+
+#banner-right {
+	float: right;
+	background: url("/images/top-banner-right.png") no-repeat center;
+	width: 976px;
+	height: 180px;
+}
+
+
 #loginWrapper {
     display: none;
 }

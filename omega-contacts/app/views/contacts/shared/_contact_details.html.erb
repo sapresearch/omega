@@ -74,7 +74,7 @@ Email: <%= @contact.email %><br>
           <span data-tooltip="Assign this contact to groups">
           <span class="om-icon-only om-blue-icon ui-icon-plus"></span>
           Assign to desired groups
-              </span>
+          </span>
     </a>
 
   </div>
@@ -111,6 +111,8 @@ Email: <%= @contact.email %><br>
         <% end %>
       </div>
   <% end %>
+  
+  
   <% if @contact.phone_numbers.any? %>
       <h3><a href="#">Phone Numbers</a></h3>
 
@@ -131,7 +133,7 @@ Email: <%= @contact.email %><br>
 
 </div>
 <div id="contact-assignment">
-  <table class="width-100">
+  <table class="width-100" >
     <tr>
       <th class="text-left width-50">
         Available Groups
@@ -158,5 +160,6 @@ Email: <%= @contact.email %><br>
         </ul>
       </td>
     </tr>
-  </table>
+  </table> 
+ 
 </div>

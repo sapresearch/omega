@@ -6,6 +6,7 @@ Omega::Groups::Module.routes.draw do
       get :assign
       put :assign_user_to, :path => 'assign/:user_id'
       put :remove_user_from, :path => 'remove/:user_id'
+
     end
 
     collection do

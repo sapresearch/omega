@@ -4,6 +4,7 @@
 	
 	<%= f.fields_for :contact do |c|%>
 	
+	 <h3 class="application-form">PERSONAL INFORMATION </h3> 
 		<p>	
       		<%= c.label :first_name %>
       		<%= c.text_field(:first_name, :'data-tooltip' => 'Your first name')%> 
@@ -14,14 +15,44 @@
       		<%= c.text_field(:last_name, :'data-tooltip' => 'Your last name')%>
     	</p>
 
-    	<p>
-      		<%= c.label :email %>
-      		<%= c.text_field(:email, :'data-tooltip' => 'Email where you could be contacted') %>
-    	</p>
-
-	<%end%>
-
     
+		<%=  c.fields_for :addresses do |a|%>
+
+        <p>
+        	<%= a.label :city %>
+			<%= a.text_field(:city, :'data-tooltip' => 'Email where you could be contacted') %>
+
+	    </p>
+		
+		<%end%>
+		
+		<%= c.fields_for :phone_numbers do |p|%>
+		<p>
+			<%= p.label :phone %>
+			<%= p.text_field :number%>
+	    </p>
+		
+		<%end%>
+	<%end%>
+              
+    <h3 class="application-form">LOG IN INFORMATION </h3> 
+
+   <%= f.fields_for :contact do |c|%>
+   
+   <p>
+      <%= c.label :email %>
+      <%= c.text_field(:email, :'data-tooltip' => 'Email where you could be contacted') %>
+    </p>
+	
+	
+	  
+	<p>
+		<%= c.label :confirm_email %>
+      <%= c.text_field(:email_confirmation, :'data-tooltip' => 'Email where you could be contacted') %>
+
+	</p>
+   <%end%>
+   
     <p>
       <%= f.label :username %>
       <%= f.text_field(:username, :'data-tooltip' => 'Username should include atleast 2 characters')%>
@@ -37,14 +68,13 @@
       <%= f.password_field :password_confirmation %>
     </p>
 
-	<p>
 	  <%= f.label :time_zone %>
 	  <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
-	</p>
-
 		
+		 <h3 class="application-form">NEWS LETTERS </h3> 
+
 		<%= f.fields_for :contact do |c|%>
-						<p>
+		<p>
 
 		   <label>No bulk emails!</label> <%= c.check_box :no_bulk_emails%> 
 				
@@ -54,7 +84,8 @@
       		<%= c.text_field(:about_us, :'data-tooltip' => '')%>
         </p>
 	    </span>
-			<%end%>	
+			
+	    <%end%>	
 
     <p>
     <%= om_button do %>

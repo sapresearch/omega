@@ -50,21 +50,22 @@ class Contact < Omega::Model
   scope :ordered, order('last_name, first_name')
 
   scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
+  
+  attr_accessor :email_confirmation
 
   #validates :title,      :presence  => true,
                         # :inclusion => { :in => TITLES }
-  validates :email,      :presence  => true,
-                         :length    => 6..80,
-                         :email     => true,
-                         :unless    => :has_user?
+  #validates :email,      :presence  => true,
+   #                      :length    => 6..80,
+    #                     :email     => true
+                         
+ # validates :first_name, :length    => 0..80,
+  #                       :unless    => :has_user?
+  #validates :last_name,  :presence  => true,
+   #                      :length    => 1..80,
+    #                     :unless    => :has_user?
 
-  validates :first_name, :length    => 0..80,
-                         :unless    => :has_user?
-  validates :last_name,  :presence  => true,
-                         :length    => 1..80
-#                         :unless    => :has_user?
-
- # after_save :sync_to_user, :unless => :synced?
+  after_save :sync_to_user, :unless => :synced?
 
   SYNC_FIELDS = %w(email first_name last_name)
 

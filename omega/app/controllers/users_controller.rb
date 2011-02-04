@@ -22,7 +22,12 @@ class UsersController < Omega::Controller
 
   def register
     @user = User.new
-    @user.build_contact
+    
+    contact = @user.build_contact
+    
+    #contact.addresses.build
+    #contact.phone_numbers.build
+
     respond_with(@user)
   end
 
@@ -41,6 +46,8 @@ class UsersController < Omega::Controller
 
   def create
     @user = User.create(params[:user])
+        UserMailer.registration_confirmation(@user).deliver
+
     respond_with(@user)
   end
 

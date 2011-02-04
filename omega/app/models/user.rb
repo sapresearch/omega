@@ -11,7 +11,7 @@ class User < Omega::Model
   # These are the fields that are allowed when a user is registering (which is different from creating a user which
   # only an admin should be able to do.)
   #REGISTRATION_FIELDS = [:username, :password, :password_confirmation, :email, :first_name, :last_name, :time_zone]
-  REGISTRATION_FIELDS = [:username, :password, :password_confirmation, :time_zone]
+  REGISTRATION_FIELDS = [:username, :password, :password_confirmation]
 
   scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
 
@@ -63,12 +63,8 @@ class User < Omega::Model
                          :confirmation => true,
                          :length => 5..40,
                          :if => :save_password?
-  #validates :email,      :presence => true,
-   #                      :length => 6..80,
-    #                     :email => true
-  #validates :first_name, :length => 0..80
-  #validates :last_name,  :presence => true,
-   #                      :length => 1..80
+
+ 
 
   before_create :create_salt, :save_password
   before_update :save_password
