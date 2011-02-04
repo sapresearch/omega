@@ -586,16 +586,21 @@ tr.odd {
 	z-index: 1;
 
 }
+
 #banner-left {
 	float: left;
+	width: 30%;
 	height: 180px;
 }
 
 #banner-right {
+	position:relative;
 	float: right;
 	background: url("/images/top-banner-right.png") no-repeat center;
-	width: 976px;
+	width: 70%;
 	height: 180px;
+	top: 0;
+	right: 0;
 }
 
 
