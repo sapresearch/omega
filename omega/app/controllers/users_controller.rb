@@ -45,13 +45,8 @@ class UsersController < Omega::Controller
   end
 
   def create
-    @user = User.create(params[:user])
-        
-      UserMailer.lost_username(@user.email).deliver
-    
+    @user = User.new(params[:user])
     respond_with(@user)
-        
-
   end
 
   def update

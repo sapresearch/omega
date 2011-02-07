@@ -13,8 +13,9 @@ class UserMailer < ActionMailer::Base
     mail :to => user.email
   end
   
-  def registration_confirmation(email)
-    mail :to => email 
+  def registration_confirmation(user)
+    
+    mail :to => user.email 
     
   end
 end

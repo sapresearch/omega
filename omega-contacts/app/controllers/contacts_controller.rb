@@ -59,6 +59,8 @@ class ContactsController < Omega::Controller
 
   def create
     respond_with(@contact = Contact.create(params[:contact]))
+         
+
   end
 
   def autocomplete
