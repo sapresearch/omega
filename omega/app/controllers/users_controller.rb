@@ -47,11 +47,10 @@ class UsersController < Omega::Controller
   def create
     @user = User.create(params[:user])
         
-
+    UserMailer.registration_confirmation(@user.email).deliver
+    
     respond_with(@user)
-        logger.debug("#{UserMailer.registration_confirmation(params[:user][:contact_attributes][:email]).deliver}")
         
-        UserMailer.registration_confirmation(@user).deliver
 
   end
 
