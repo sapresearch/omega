@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "from@example.com"
+  default :from => "admin@evergreen.ca"
 
   def lost_username(email, users)
     @email, @users = email, users
@@ -18,4 +18,12 @@ class UserMailer < ActionMailer::Base
     mail :to => user.email 
     
   end
+  
+  def parental_approval(user)
+    @user = user
+    
+    mail :to => @user.email
+    
+  end
+  
 end

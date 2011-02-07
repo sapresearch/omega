@@ -4,6 +4,7 @@ class CreateContactAddresses < ActiveRecord::Migration
       t.references :contact, :null => false, :polymorphic => true
       t.string     :address_type
       t.string     :street
+      t.integer    :unit_apt_number
       t.string     :city
       t.string     :state
       t.string     :zip_code

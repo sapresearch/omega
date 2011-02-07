@@ -76,7 +76,7 @@
 	  <%#= f.label :time_zone %>
 	  <%#= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
 		
-		 <h3 class="application-form">NEWS LETTERS </h3> 
+		 		<h2 class="application-form-content-heading">Newsletters</h2>
 
 		<%= f.fields_for :contact do |c|%>
 		<p>
@@ -170,8 +170,8 @@
 				
 		</p>
 		<p>
-      		<%= c.label :where_did_you_hear_about_us? %>
-      		<%= c.text_field(:about_us, :'data-tooltip' => '')%>
+      		<%= c.label :where_did_you_hear_about_evergreen? %>
+      		<%= c.select :about_us, %w{Attended an Event Web Search}%>
         </p>
 	    </span>
 			

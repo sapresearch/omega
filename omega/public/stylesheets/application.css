@@ -218,6 +218,20 @@ span.text-style1 {
 	
 }
 
+span.checkbox-block {
+	display:inline-block;
+	margin-left: 210px;
+	margin-top: -20px;
+	
+}
+span.application-form-content {
+
+	font-family:"Arial Rounded MT Bold";
+	font-size: 18px;
+	color: #768B2E;
+	
+}
+
 span.text-style-large {
 	font-family: "Trebuchet MS";
 	font-size: 18px;
@@ -295,7 +309,8 @@ span.form-agreement {
 	border: 1px solid #8DA637;
 	color: #637526;
 	display: block;
-	line-height: 16px;
+	line-height: 18px;
+	font-size: 14px;
 	width: 750px;
 	height: 80px;
 	padding: 20px 20px 20px 20px;
@@ -692,6 +707,16 @@ div.arrow {
     background-repeat: no-repeat;
     width: 60px;
     height: 30px;
+}
+
+div.mandatory-field {
+	position: relative;
+    z-index: 1;
+	left: 195px;
+	background-image: url("/images/mandatory-field.png");
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 10px;
 }
 
 .content-box {

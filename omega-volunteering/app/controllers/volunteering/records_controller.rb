@@ -115,6 +115,13 @@ class Volunteering::RecordsController < Omega::Controller
 #    @record = Volunteering::Record.create(params[:volunteering_record]) do |p|
 #      p.action = 'To Be Taken'
 #    end
+    
+    @user = Contact.where('id = ?', @record.contact_id)
+    
+    @user = @user.first 
+    
+    UserMailer.parental_approval(@user).deliver
+    
     respond_with(@record)
   end
 

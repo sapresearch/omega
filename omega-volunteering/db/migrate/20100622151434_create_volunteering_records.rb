@@ -29,7 +29,8 @@ class CreateVolunteeringRecords < ActiveRecord::Migration
       t.boolean    :volunteering_to_meet_requirements
       t.integer    :hours_required
       
-      t.integer    :agreement
+      t.boolean    :parental_consent
+      t.integer    :agreement, :default => true
       
       t.timestamps
     end

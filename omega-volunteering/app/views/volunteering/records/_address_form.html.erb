@@ -2,15 +2,21 @@
 
     <%= errors_for_model f.object %>
     <p>
-      <%= f.label :address_type %>
+      <%= f.label :address_type %> <div class="mandatory-field"></div>
       <%= f.select :address_type, options_for_select(Contact::Address::ADDRESS_TYPES) %>
     </p>
     <p>
       <%= f.label :street %>
       <%= f.text_field :street, :class => 'validate_presence' %>
     </p>
+	
+	<p>
+      <%= f.label 'Apt/Unit No.' %>
+      <%= f.text_field :unit_apt_number, :class => 'validate_presence' %>
+    </p>
+	
     <p>
-      <%= f.label :city %>
+      <%= f.label :city %><div class="mandatory-field"></div>
       <%= f.text_field :city, :class => 'validate_presence' %>
     </p>
     <p>
@@ -18,7 +24,7 @@
       <%= f.text_field :state, :class => 'validate_presence' %>
     </p>
     <p>
-      <%= f.label :zip_code %>
+      <%= f.label :postal_code %><div class="mandatory-field"></div>
       <%= f.text_field :zip_code, :class => 'validate_presence' %>
     </p>
     <p>
