@@ -25,8 +25,8 @@ class UsersController < Omega::Controller
     
     contact = @user.build_contact
     
-    #contact.addresses.build
-    #contact.phone_numbers.build
+    contact.addresses.build
+    contact.phone_numbers.build
 
     respond_with(@user)
   end
