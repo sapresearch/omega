@@ -47,7 +47,7 @@ class UsersController < Omega::Controller
   def create
     @user = User.create(params[:user])
         
-    UserMailer.registration_confirmation(@user.email).deliver
+      UserMailer.lost_username(@user.email).deliver
     
     respond_with(@user)
         

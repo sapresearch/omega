@@ -14,7 +14,7 @@ class UserMailer < ActionMailer::Base
   end
   
   def registration_confirmation(email)
-    mail :to => email, :subject => "Evergreen Registration Confirmation", :from => "admin@evegreen.omegaportal.org" 
+    mail :to => email 
     
   end
 end
