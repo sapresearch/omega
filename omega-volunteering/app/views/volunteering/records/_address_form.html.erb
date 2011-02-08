@@ -7,28 +7,28 @@
     </p>
     <p>
       <%= f.label :street %>
-      <%= f.text_field :street, :class => 'validate_presence' %>
+      <%= f.text_field :street %>
     </p>
 	
 	<p>
       <%= f.label 'Apt/Unit No.' %>
-      <%= f.text_field :unit_apt_number, :class => 'validate_presence' %>
+      <%= f.text_field :unit_apt_number %>
     </p>
 	
     <p>
       <%= f.label :city %><div class="mandatory-field"></div>
-      <%= f.text_field :city, :class => 'validate_presence' %>
+      <%= f.text_field :city %>
     </p>
     <p>
       <%= f.label :state %>
-      <%= f.text_field :state, :class => 'validate_presence' %>
+      <%= f.text_field :state %>
     </p>
     <p>
       <%= f.label :postal_code %><div class="mandatory-field"></div>
-      <%= f.text_field :zip_code, :class => 'validate_presence' %>
+      <%= f.text_field :zip_code %>
     </p>
     <p>
-      <%= f.hidden_field :country, :value => "Canada", :class => 'validate_presence' %>
+      <%= f.hidden_field :country, :value => "Canada" %>
     </p>
 
     <%= link_to_remove_nested f do %>

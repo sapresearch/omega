@@ -127,7 +127,7 @@ class Volunteering::RecordsController < Omega::Controller
 
   
   def update
-    @record          = Volunteering::Record.find(params[:id])
+    @record = Volunteering::Record.find(params[:id])
 
     if @record.contact.user
       case params[:volunteering_record][:action]
