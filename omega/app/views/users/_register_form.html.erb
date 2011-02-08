@@ -72,107 +72,76 @@
       <%= f.label :confirmation %>
       <%= f.password_field :password_confirmation %>
     </p>
+	
+	
 
 	  <%#= f.label :time_zone %>
 	  <%#= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
 		
-		 		<h2 class="application-form-content-heading">Newsletters</h2>
 
 		<%= f.fields_for :contact do |c|%>
+		
+		<p>
+      		<%= c.label :where_did_you_hear_about_evergreen? %>
+      		<%= c.select :about_us, %w{Attended an Event Web Search}%>
+        </p>
+		
+				<h2 class="application-form-content-heading">Newsletters</h2>
+
 		<p>
 			
-		<span class="check-box-set"> 
+		    <span class="checkbox-newsletter"> 
 
 			<%= c.check_box :evergreen_news%>
-	    	 Evergreen News
+	    	 Evergreen News <br/>
 			
-		</span>
-		</p>
  
- 		<p>
-			
-		<span class="check-box-set"> 
+ 	
 		
 			<%= c.check_box :evergreen_bw_news%>
-			Evergreen Brick Works News
+			Evergreen Brick Works News<br/>
 
-		</span>
-		</p>
 		
-		<p>
+		
+	
 			
-		<span class="check-box-set"> 
+		
 			<%= c.check_box :gta_volunteer_news%> 
-			Dig In! GTA (Volunteer News and Opportunities
+			Dig In! GTA (Volunteer News and Opportunities<br/>
 
-		</span>
-		</p>
 		
-		<p>
-			
-		<span class="check-box-set"> 
+		
  			<%= c.check_box :vancouver_volunteer_news%>
-			Dig In! Vancouver (Volunteer News and Opportunities			
+			Dig In! Vancouver (Volunteer News and Opportunities	<br/>		
  
-			
-		</span>
-		</p>
-		
-		<p>
-			
-		<span class="check-box-set"> 		
+				
  			<%= c.check_box :outdoor_classroom%> 
-		    The Outdoor Classroom (School Ground Greening Newsletter		
+		    The Outdoor Classroom (School Ground Greening Newsletter	<br/>	
 
 			
-		</span>
-		</p>
-		
-		<p>
-			
-		<span class="check-box-set"> 	
  			<%= c.check_box :la_classe_en_plein_air%>
-			La classe en plein air (French edition of The Outdoor Classroom)		
+			La classe en plein air (French edition of The Outdoor Classroom)	<br/>	
  
-		</span>
-		</p>
 		
-		<p>
-			
-		<span class="check-box-set"> 	
 			<%= c.check_box :evergreen_funding_opp%> 
-		    Evergreen Funding Opportunities			
+		    Evergreen Funding Opportunities			<br/>
 
-		</span>
-		</p>	
 		
-		
-		<p>
-			
-		<span class="check-box-set"> 
  			<%= c.check_box :evergreen_bw_school_program%> 
-			Evergreen Brick Works School Program	
+			Evergreen Brick Works School Program	<br/>
 
  			
-		</span>
-		</p>
-			
-		<p>
-			
-		<span class="check-box-set"> 
+		
 			<%= c.check_box :evergreen_bw_family_program%>
-			Evergreen Brick Works Family Programming	
+			Evergreen Brick Works Family Programming	<br/>
  
 			
 		</span>
 		</p>
 
 				
-		</p>
-		<p>
-      		<%= c.label :where_did_you_hear_about_evergreen? %>
-      		<%= c.select :about_us, %w{Attended an Event Web Search}%>
-        </p>
+		
+		
 	    </span>
 			
 	    <%end%>	
