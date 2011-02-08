@@ -1,28 +1,47 @@
 <% require_javascript 'thirdParty/jquery.timepicker.js', 'thirdParty/jquery.fullcalendar.js', 'calendars.js' %>
 <% require_stylesheet 'thirdParty/jquery.fullcalendar.css', 'omega_calendars.css' %>
 <%= context_box do %>
-<h1 class="page-content-evergreen corners-top" >
-  <div class="left h1">
-  Calendar  
-  </div>
+<div class="page-content circle-corners-bottom corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+  					Manage Applications
+		    	</h1>
+			</div>
+			
+				
+        </div>
+		
+	
 
-  <div class="right" style="display:inline;">
-    <%= om_button(:icon => 'calendar') do %>
-        <%= link_to 'Create Calendar', new_calendar_url, :remote  => true %>
-    <% end %>
+<div class="main-box">
+<p>
+	 <span class="calendar-top-right">
 
-  <%= select( nil, "calendars", Calendar.all.collect {|p| [ p.calendar_name, p.id ] })  %>
-  </div>
-  <div class="clear"></div>
-</h1>
+	
+	  				<%= select( nil, "calendars", Calendar.all.collect {|p| [ p.calendar_name, p.id ] })  %>
+</span>
 
-<div class="page-content-evergreen corners-bottom">
+<span class="calendar-top-left">
+	<%= om_button(:icon => 'calendar') do %>
+        				<%= link_to 'Create Calendar', new_calendar_url, :remote  => true %>
+    				<% end %> <br/>
+</span>
+	
+	
+</p>	
+   
+	
+
+
   <div id="cal">
   </div>
 
 
 </div>
-
+</div>
 
 <% end %>
 

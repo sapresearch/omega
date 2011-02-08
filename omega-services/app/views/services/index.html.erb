@@ -1,19 +1,31 @@
 <% require_stylesheet 'omega_services' %>
 <% require_javascript 'omega_services' %>
 
-<h1 class="page-content-evergreen corners-top">
-  Services Offered
-</h1>
-<div class="page-content-evergreen corners-bottom">
-  <div class="right">
-    <%= om_button(:icon=>'sort-az') do %>
-        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'asc')) %>
-    <% end %>
-    <%= om_button(:icon=>'sort-za') do %>
-        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
-    <% end %>
-  </div>
-  <div class="clear"></div>
+   <div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+      				Services Offered
+		    	</h1>
+			</div>
+	
+		</div>
+
+
+      <div class="right">
+      	<br/>
+        <%= om_button(:icon=>'sort-az', :small => true) do %>
+            <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
+        <% end %>
+        <%= om_button(:icon=>'sort-za', :small => true) do %>
+            <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+        <% end %>
+
+      </div>
+
+      <div class="clear"></div>
 
   <ul id="positions_list">
     <% @services.each do |s| %>
@@ -75,6 +87,6 @@
   <div class="clear"></div>
 
 </div>
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/services_menu" %>
-<% end %>
+<% #content_for :sidebar do %>
+    <%#= render :partial => "layouts/services_menu" %>
+<% #end %>

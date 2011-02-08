@@ -1,22 +1,34 @@
 <%= require_stylesheet 'omega_users' %>
 <%= require_javascript 'omega_users' %>
 <%= context_box do %>
-<h1 class="page-content corners-top">
-  User List
-</h1>
-<div class="page-content corners-bottom">
-  <div class="right">
-  <%= om_button(:icon=>'sort-az') do %>
-      <%= link_to 'sort Z-A', url_for(params.merge(:username => 'asc')) %>
-  <% end %>
-  <%= om_button(:icon=>'sort-za') do %>
-      <%= link_to 'sort Z-A', url_for(params.merge(:username => 'desc')) %>
-  <% end %>
-</div>
+ <div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+      				Users
+		    	</h1>
+			</div>
+	
+		</div>
 
 
-<div class="clear"></div>
-<ul id="users-list">
+      <div class="right">
+      	<br/>
+        <%= om_button(:icon=>'sort-az', :small => true) do %>
+            <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
+        <% end %>
+        <%= om_button(:icon=>'sort-za', :small => true) do %>
+            <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+        <% end %>
+
+      </div>
+
+      <div class="clear"></div>
+	  
+	  <div class="main-box">
+	  	<ul id="users-list">
   <% @users.each do |user| %>
       <li class="list-item relative">
         <div class="item-list-actions-wrapper corners">
@@ -40,9 +52,11 @@
 
 <div class="clear"></div>
 </div>
-<% content_for :sidebar do %>
-        <%= render :partial => "partials/sidebar_search" %>
-        <%= render :partial => "layouts/sidebar_users" %>
+	  </div>
 
-<% end %>
+<%# content_for :sidebar do %>
+        <%#= render :partial => "partials/sidebar_search" %>
+        <%#= render :partial => "layouts/sidebar_users" %>
+
+<%# end %>
 <% end %>

@@ -1,11 +1,21 @@
 <% require_javascript 'omega_favorites' %>
 <%= context_box do %>
-<h1 class="page-content corners-top">
-  Favorites
-</h1>
-<div class="page-content corners-bottom">
+<div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+      				Current Volunteering Opportunities
+		    	</h1>
+			</div>
+	
+		</div>
 
-  <div class="clear"></div>
+
+     
+
+     <div class="clear"></div>
   <% if @favorites.any? %>
   <ul id="favorites-list">
 
@@ -34,6 +44,6 @@
         <% end  %>
 </div>
     <% end %>
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_favorites_menu" %>
-<% end %>
+<%# content_for :sidebar do %>
+    <%#= render :partial => "layouts/sidebar_favorites_menu" %>
+<% #end %>
