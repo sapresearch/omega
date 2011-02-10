@@ -16,7 +16,7 @@ class UserMailer < ActionMailer::Base
   def registration_confirmation(user)
     
     mail :to => user.email 
-    
+   
   end
   
   def parental_approval(user)

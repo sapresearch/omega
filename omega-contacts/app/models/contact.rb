@@ -77,7 +77,9 @@ class Contact < Omega::Model
   def sync_to_user
     SYNC_FIELDS.each { |attr| user.send("#{attr}=", send(attr)) }
     user.save(:validate => false)
-    UserMailer.registration_confirmation(user).deliver
+    mail = UserMailer.registration_confirmation(user).deliver
+     Delivery.create(:message_id => mail.message_id, :recipient => user.email,
+:content => '', :status => 'Sent' )
 
   end
 

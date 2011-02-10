@@ -117,14 +117,12 @@ class Volunteering::RecordsController < Omega::Controller
 #    end
     
     @user = Contact.where('id = ?', @record.contact_id)
-    
     @user = @user.first 
     
     UserMailer.parental_approval(@user).deliver
-    
     respond_with(@record)
+    
   end
-
   
   def update
     @record = Volunteering::Record.find(params[:id])
