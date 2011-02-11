@@ -1,0 +1,59 @@
+<%= context_box do %>
+<%= require_stylesheet 'omega_users'%>
+
+ <div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+      				 Hello  <%= @user.username %>
+
+		    	</h1>
+			</div>
+	
+		</div>
+	
+	
+<div class="main-box">
+	  
+ <div id="vcard">
+    <dl>
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @user.first_name %> <%= @user.last_name %>
+      </dd>
+    </dl>
+    <dl>
+      <dt>
+        Member since
+      </dt>
+      <dd>
+        <%= @user.created_at.strftime("%m-%d-%Y")  %>
+      </dd>
+    </dl>
+    <dl>
+      <dt>
+       Email
+      </dt>
+      <dd>
+        <%= @user.email  %>
+      </dd>
+    </dl>
+	
+	 
+  </div>
+  
+  <p>
+  	    <%= link_to "Edit", edit_user_path(@user)%>
+
+  </p>
+
+</div>
+	  
+<%# content_for :sidebar do %>
+    <%#= render :partial => "layouts/sidebar_user" %>
+<%# end %>
+<% end %>
