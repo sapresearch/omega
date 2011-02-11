@@ -80,7 +80,6 @@ class Contact < Omega::Model
     mail = UserMailer.registration_confirmation(user).deliver
     Delivery.create(:message_id => mail.message_id, :recipient => user.email,
 :content => '', :status => 'Sent' )
-    BounceReceiver.receive(user.email).receive
 
   end
 
