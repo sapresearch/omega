@@ -30,6 +30,11 @@ class UsersController < Omega::Controller
 
     respond_with(@user)
   end
+  
+  def role_assignment
+   @user = User.find(params[:id])
+
+  end
 
   def join
     @user = User.register(params[:user])
@@ -51,7 +56,8 @@ class UsersController < Omega::Controller
 
   def update
     @user.update_attributes(params[:user])
-    respond_with(@user)
+    
+    render "summary"
   end
 
   def destroy

@@ -1,5 +1,5 @@
 
-<%= form_for @user, :url => register_users_path do |f| %>
+<%= form_for @user do |f| %>
     <%= errors_for_form @user %>
 	
 	<%= f.fields_for :contact do |c|%>
@@ -86,10 +86,17 @@
 	    </span>
 			
 	    <%end%>	
+		
+		<%= with_permission(User::PERM_ADMIN) do %>
+
+		 <h3 class="application-form">ROLES & PERMISSIONS </h3> 
+
+         <%= render 'role_assignments', :form => f %>
+       <%end%>
 
     <p>
     <%= om_button do %>
-        <%= f.submit "REGISTER" %>
+        <%= f.submit "SAVE" %>
     <% end %>
     </p>
 

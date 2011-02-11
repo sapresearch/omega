@@ -1,5 +1,6 @@
 version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
 
+
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'omega'
@@ -26,4 +27,5 @@ Gem::Specification.new do |s|
   s.add_dependency('paperclip', '~>2.3')
   s.add_dependency('mime-types', '=1.16')
   s.add_dependency('will_paginate', '~>3.0.pre2')
+  
 end

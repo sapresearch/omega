@@ -1,15 +1,26 @@
 <%= context_box do %>
-    <h1 class="page-content-evergreen corners-top">
-      My time sheets
-    </h1>
-    <div class="page-content-evergreen corners-bottom">
+   <div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+			<div class="left-heading">
+				<h1 class="page-content">
+      				Time Sheets
+		    	</h1>
+			</div>
+	
+		</div>
+
+
       <div class="right">
-        <%= om_button(:icon=>'sort-az') do %>
-            <a href="">Implement Sort</a>
+      	<br/>
+        <%= om_button(:icon=>'sort-az', :small => true) do %>
+            <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
         <% end %>
-        <%= om_button(:icon=>'sort-za') do %>
-            <a href="">Implement sort</a>
+        <%= om_button(:icon=>'sort-za', :small => true) do %>
+            <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
         <% end %>
+
       </div>
       <div class="clear"></div>
       <% if @timesheets.empty? %>
@@ -45,7 +56,7 @@
                 <% end %>
           <% end %>
           <%= om_button(:icon => 'clock') do %>
-          <%= link_to 'Record Hours Now!', mine_volunteering_positions_path %>
+          <%= link_to 'Record Hours Now!', new_volunteering_time_entries_path(:id => @record) %>
       <% end %>
       <% end %>
 </div>
