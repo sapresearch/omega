@@ -20,7 +20,7 @@ body {
 }
 
 body.evergreen {
-	background: url("/images/om_sprite_evergreen.png") repeat-x #CBC8A0;
+	background: url("/images/om_sprite_evergreen.png") repeat-x #FFFFFF;
 }
 
 body.evergreen > #wrapper {
