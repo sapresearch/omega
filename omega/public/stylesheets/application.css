@@ -697,7 +697,7 @@ tr.odd {
     width: 250px;
     margin-top: -89px;
     float: right;
-	background: #000;
+	background: #6B83AC;
 	min-height: 716px;
 	    -moz-border-radius-bottomright: 16px;
     -webkit-border-radius-bottomright: 16px;
@@ -915,7 +915,7 @@ div.sidebar-menu-content {
 }
 
 h1.side-bar-evergreen {
-    margin: 10px 10px 0 10px;
+    margin: 20px 15px 0 15px;
 	background: url("/images/h1_sidebar_bg_evergreen.png") repeat-x bottom #D6D7C6;
     text-shadow: #E3E3D7 1px 1px 1px;
 	color: #524427;
@@ -925,7 +925,7 @@ h1.side-bar-evergreen {
 }
 
 div.sidebar-evergreen-menu-content {
-    margin: 10px 10px 10px 10px;
+    margin: 0 15px 20px 15px;
     padding: 5px;
 	border: 1px solid #99976A;
     background: #fff;

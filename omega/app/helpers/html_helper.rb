@@ -86,12 +86,12 @@ module HtmlHelper
   end
 
   def side_bar_box(title, &block)
-    content_tag(:div, :class => 'box-shadow') do
+   # content_tag(:div, :class => 'box-shadow') do
       content_tag(:h1, title, :class=>'side-bar-evergreen corners-top') +
               content_tag(:div, :class => 'corners-bottom sidebar-evergreen-menu-content') do
                 capture(&block)
               end
-    end
+ #   end
 
 
   end
