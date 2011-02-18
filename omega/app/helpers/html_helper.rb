@@ -97,10 +97,9 @@ module HtmlHelper
   end
 
   def context_box(&block)
-    #%Q{<div class="box-shadow content-box">#{capture(&block)}</div>}.html_safe
+    %Q{<div id="content_box">#{capture(&block)}</div>}.html_safe
     
-    %Q{<div class=" content-box">#{capture(&block)}</div>}.html_safe
-
+    
   end
 
 

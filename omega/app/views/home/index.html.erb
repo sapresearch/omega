@@ -1,26 +1,22 @@
-<% require_stylesheet 'omega_home' %>
+<% require_stylesheet 'omega_home'%>
 <% require_javascript 'omega_home/omega_home','thirdParty/jquery.timepicker' %>
-<%= context_box do %>
 
-<div class="main-page-content-evergreen">
 
-<div class="main-content-left">
+<div class="content-evergreen circle-corners-bottom-left">
+
+	
 	<p>
-     <span class="first-evergreen-1">E</span>
+    <span class="first-evergreen-1">E</span>
 
 vergreen Brick Works is a community environmental centre that inspires and equips visitors to live, work and play more sustainably. Evergreen, a national charity, has transformed the former Don Valley Brick Works from a collection of deteriorating heritage buildings into an international showcase for urban sustainability and green design that is open year-round.
 
-
+</p>
 	
-
-</ul>
-
-
-
 
 
 <p>
-
+<img src="/images/evergreen-main-1.png" alt="" /> 
+   <img src="/images/evergreen-main-2.png" alt="" /></br/>
 
   <span class="first-evergreen-1">E</span>
   vergreen is a national charity that makes cities more livable. By deepening the connection between people and nature, and empowering Canadians to take a hands-on approach to their urban environments, Evergreen is improving the health of our cities—now and for the future.??
@@ -32,45 +28,24 @@ Evergreen Brick Works, our most innovative project to date, is both a stage and 
 Learn more about Evergreen’s work across Canada at evergreen.ca.
 
   <br/>
-  <br/>  
+  <br/> 
+</p>
 <p>
    <span class="first-evergreen-1">T</span>his project addresses a range of social and environmental challenges and it will help charitable, non-profit organizations and socially conscious private enterprises working on these issues expand their reach and impact by providing innovative program and office space. Working collaboratively with some of Canada’s leading non-profit organizations, Evergreen Brick Works will offer visitors the chance to experience nature, culture and community in the city.
-
+   
 </p>
+
+
+	
 </div>
 
-	<div class="main-content-right">
 	
-	
-		<br/>
-		<br/>
-  
-		<img src="/images/evergreen-main-1.png" alt="" /> <br/> <br/>
-		<img src="/images/evergreen-main-2.png" alt="" />
 
-	
-	
-	</div>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_wheretofind" %>
+<% end %>
 
-<p>
-
-
-
-
-  
-
-
-
-
-
-
-
-</div>
-    <% end %>
-<%# content_for :sidebar do %>
-    <%#= render :partial => "layouts/sidebar_wheretofind" %>
-<%# end %>
-<%# content_for :sidebar do %>
-    <%#= render :partial => "layouts/sidebar_volunteering_positions" %>
-<%# end %>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_volunteering_positions" %>
+<% end %>
 

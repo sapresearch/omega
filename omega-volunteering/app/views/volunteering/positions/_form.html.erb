@@ -4,8 +4,11 @@
 
 <%= form_for(@position, :html => {:id => 'volunteer_position_form'}) do |f| %>
     <%= errors_for_form(@position, 'position') %>
-    <fieldset>
-      <p>
+     
+	  <h3 class="application-form">Assignment Detail</h3> 
+ 
+	  
+	  <p>
         <%= f.label :name %>
         <%= f.text_field :name, :'data-tooltip '=> 'descriptive name for position', :class => 'broad-text' %>
       </p>
@@ -23,6 +26,7 @@
       <p>
         <%= f.label :reoccurs %>
         <%= f.radio_button :recurrent, true %>
+		
         <%= f.label :one_time_only %>
         <%= f.radio_button :recurrent, false %>
       </p>
@@ -32,13 +36,15 @@
         <p>
           <%= f.label :start_date %>
           <%= f.text_field :start_date, :class=>'datepickr', :autocomplete => 'off' %>
-          <%= f.label :end_date %>
+		 
+          <%= f.label :end_date %>  
           <%= f.text_field :end_date, :class=>'datepickr', :autocomplete => 'off' %>
         </p>
         <p>
 
           <%= f.label :start_time %>
           <%= f.text_field :start_time, :class=>'tpickr', :autocomplete => 'off' %>
+		  
           <%= f.label :end_time %>
           <%= f.text_field :end_time, :class=>'tpickr',  :autocomplete => 'off' %>
         </p>
@@ -46,17 +52,14 @@
 
       <%= recurrence(f) %>
 
-
-
     <p>
         <%= f.label :Num_Volunteers %>
         <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
         <%= f.text_field :volunteers_required,:value => 1,:class => "inputSmall" %>
         <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
       </p>
-    </fieldset>
-<fieldset>
-  <legend>Synchronization</legend>
+  	 <h3 class="application-form">Synchronization</h3> 
+
     <div class="explanation">
       By checking the selectbox below and choosing a calendar you can make this volunteering position to appear in the selected calendar
     </div>
@@ -65,15 +68,13 @@
       <%= es.label :'synchronize?' %> <%= es.check_box :synchronize %><br>
           <%= es.label :'Calendar' %> <%= es.select :calendar_id, options_from_collection_for_select(Calendar.scoped, :id, :calendar_name, es.object.calendar_id) %>
       <% end %>
-  </fieldset>
 
     <div id="vp_contact">
-      <fieldset>
-        <legend>Contact for this position</legend>
+         	 <h3 class="application-form">Contact for this position</h3> 
+
         <% [['none', 'no contact'], ['existing', 'existing contact'], ['new', 'new contact']].each do |value, text| %>
             <%= radio_button_tag 'contact_assignment', value, value == @contact_assignment %><%= text %>
         <% end %>
-      </fieldset>
       <fieldset id="position_exisiting_contact" class="hide">
         <legend>Assign an existing contact</legend>
         <table>
@@ -81,7 +82,7 @@
             <td><%= f.label "contact_name(s)" %></td>
             <td>
               
-                  <span id="add-contacts">
+              <span id="add-contacts">
                <span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add contact"></span>
                 Add an exisitng contact
                   </span>
@@ -108,7 +109,7 @@
 
 
       <fieldset id="position_new_contact" class="hide">
-        <legend>Create a new contact</legend>
+        <h2 class="application-form-content-heading">Create a new contact</h2>
         <%= f.fields_for :contacts do |ff| %>
             <%= render 'contact_form', :f => ff %>
         <% end %>
@@ -116,8 +117,8 @@
 
 
     </div>
-    <fieldset>
-      <legend>Skills and Interests</legend>
+	
+       <h3 class="application-form">Skills and Interests</h3>
       <p>
         <%= f.label :skills %>
         <%= f.text_field :skills_values, :'data-tokeninput' => volunteering_skills_path(:json),
@@ -128,7 +129,6 @@
         <%= f.label :interests %>
         <%= f.text_field :interests_values, :'data-tokeninput' => volunteering_interests_path(:json),
                          :'data-tokeninput-prepopulate' => @position.interests.map { |s| { :id => s.name, :name => s.name } }.to_json %>
-    </fieldset>
     <p>
       <%= om_button(:icon=>'save') do %>
           <%= f.submit %>

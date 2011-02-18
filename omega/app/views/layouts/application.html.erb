@@ -22,28 +22,27 @@
 
   <%= render :partial => "layouts/head" %>
 
-  <div id="content" class="evergreen center_content">
+   <div id="content_box">
 
     <%= render(:layout => "layouts/columns") do
         render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
             yield
         end
     end %>
-  </div>
+	
+   </div>
 </div>
 
 <div id="banner_wrapper">
 
-	<div id="banner-left">
-		  	  			
-	</div>
+
 	
    <div id="banner-right">
 		
 	</div>
 </div> 
+  <%= render :partial => "layouts/footer" %>
 
- <%= render :partial => "layouts/footer" %>
 
 </body>
 
