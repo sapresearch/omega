@@ -673,6 +673,8 @@ tr.odd {
     width: 950px;
     padding: 0 0 0 auto;
 	min-height: 720px;
+	    margin-top: -89px;
+
 
 	
 }
@@ -689,13 +691,11 @@ tr.odd {
     text-align:justify;
     float: left;
     width: 700px;
-    margin-top: -89px;
 }
 
 #right {
     text-align: left !important;
     width: 250px;
-    margin-top: -89px;
     float: right;
 	background: #6B83AC;
 	min-height: 716px;
