@@ -1,14 +1,11 @@
 <% require_javascript 'omega_favorites' %>
-<%= context_box do %>
-<div class="page-content circle-corners-bottom  corners-top">
+<div class="content-evergreen circle-corners-bottom  corners-top">
     	
-		<div class="heading-main">
+		<div class="heading-main-columns">
 	
-			<div class="left-heading">
 				<h1 class="page-content">
       				Favorites
 		    	</h1>
-			</div>
 	
 		</div>
 
@@ -43,7 +40,6 @@
 </div>
         <% end  %>
 </div>
-    <% end %>
-<%# content_for :sidebar do %>
-    <%#= render :partial => "layouts/sidebar_favorites_menu" %>
-<% #end %>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_favorites_menu" %>
+<% end %>

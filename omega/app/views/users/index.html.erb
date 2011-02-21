@@ -1,15 +1,12 @@
 <%= require_stylesheet 'omega_users' %>
 <%= require_javascript 'omega_users' %>
-<%= context_box do %>
- <div class="page-content circle-corners-bottom  corners-top">
+ <div class="content-evergreen circle-corners-bottom  corners-top">
     	
-		<div class="heading-main">
+		<div class="heading-main-columns">
 	
-			<div class="left-heading">
 				<h1 class="page-content">
       				Users
 		    	</h1>
-			</div>
 	
 		</div>
 
@@ -54,9 +51,8 @@
 </div>
 	  </div>
 
-<%# content_for :sidebar do %>
-        <%#= render :partial => "partials/sidebar_search" %>
-        <%#= render :partial => "layouts/sidebar_users" %>
+<% content_for :sidebar do %>
+        <%= render :partial => "partials/sidebar_search" %>
+        <%= render :partial => "layouts/sidebar_users" %>
 
-<%# end %>
 <% end %>

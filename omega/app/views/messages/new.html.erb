@@ -1,14 +1,23 @@
-<%= context_box do %>
-<h1 class="content corners-top">
-  New Message
-</h1>
+<div class="content-evergreen circle-corners-top circle-corners-bottom">
+
+<div class="heading-main-columns">
+	
+		<h1 class="page-content">
+ 		    New Message
+ 		</h1>
+	
+	
+	    
+</div>
 
 
+	
 
 
 <%= render('form') %>
 
-    <% end %>
-<%# content_for :sidebar do %>
-    <%#= render :partial => "layouts/sidebar_messages_menu" %>
-<%# end %>
+</div>
+
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_messages_menu" %>
+<% end %>

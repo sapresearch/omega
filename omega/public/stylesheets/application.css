@@ -669,13 +669,14 @@ tr.odd {
 }
 
 #content_box{
-    text-align: left;
     width: 950px;
     padding: 0 0 0 auto;
-	min-height: 720px;
-	    margin-top: -89px;
-
-
+	min-height: 700px;
+	margin-top: -89px;
+    background:#F7F7F7;
+    -moz-box-shadow: 0 0 1px #666;
+    -webkit-box-shadow: 0 0 1px #666;
+    box-shadow: 0 0 1px #666;
 	
 }
 
@@ -684,27 +685,34 @@ tr.odd {
     width: 950px;
     padding: 0 0 8em auto;
 	min-height: 400px;
-
 }
 
 #left {
-    text-align:justify;
-    float: left;
-    width: 700px;
+    position: relative;
+	z-index: 10;
+	float: left;
+	left:0;
+	margin-left: 10px;
+    width: 688px;
+    background: #fff;
+	border-left: 1px solid #C4B991;
+	border-right: 1px solid #C4B991;
+	border-bottom: 1px solid #C4B991;
+	-moz-box-shadow: 0 0 8px #444;
+    -webkit-box-shadow: 0 0 8px #444;
+    box-shadow: 0 0 8px #444;
+	
 }
 
 #right {
-    text-align: left !important;
     width: 250px;
-    float: right;
-	background: #6B83AC;
-	min-height: 716px;
-	    -moz-border-radius-bottomright: 16px;
-    -webkit-border-radius-bottomright: 16px;
-    border-bottom-right-radius: 16px;
+	min-height: 715px;
+    background: #F7F7F7;
+	right:0;
+	float:right;
+
+
 }
-
-
 
 div.arrow {
 	position: relative;
@@ -751,7 +759,6 @@ div.mandatory-field {
 div.content {
     background: #fff;
     padding: 15px;
-	border: 1px solid #C4B991;
 
 }
 
@@ -759,7 +766,6 @@ div.content-evergreen {
     background: #fff;
     padding: 45px 20px 20px 20px;
 	height: auto;
-	border: 1px solid #C4B991;
 	min-height: 650px;
 
 
@@ -783,10 +789,19 @@ div.main-content-right {
 
 
 div.heading-main {
-	width: 948px;
+	width: 950px;
 	height: 80px;
+	margin: -45px 0 0 -20px;
 	background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #E1DFCB;
 
+
+}
+
+div.heading-main-columns {
+	width: 688px;
+	height: 80px;
+	margin: -45px 0 0 -20px;
+	background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #E1DFCB;
 
 }
 
@@ -895,14 +910,14 @@ div.wizard_intro {
 }
 
 div.sidebar-menu {
-
     margin: 10px 10px 10px 10px;
 }
 
 h1.side-bar {
     text-shadow: #333 1px 1px 1px;
     margin: 0;
-    background: url("/images/bg_dark.png") bottom repeat-x #80bdfb;
+  /*  background: url("/images/bg_dark.png") bottom repeat-x #80bdfb;*/
+    background: #E1DFCB;
     color: #fff;
     padding: 5px;
 }
@@ -910,16 +925,19 @@ h1.side-bar {
 div.sidebar-menu-content {
     margin: 10px 10px 20px 10px;
     padding: 5px;
-    border: 1px solid #4096ee;
+    border: 1px solid #E1DFCB;
     background: #fff;
 }
 
 h1.side-bar-evergreen {
     margin: 20px 15px 0 15px;
-	background: url("/images/h1_sidebar_bg_evergreen.png") repeat-x bottom #D6D7C6;
+	/*background: url("/images/h1_sidebar_bg_evergreen.png") repeat-x bottom #D6D7C6;*/
+    background: #E1DFCB;
     text-shadow: #E3E3D7 1px 1px 1px;
+	line-height: 20px;
 	color: #524427;
-	font-size: 17px;
+	font-size: 15px;
+	font-family: "Trebuchet MS";
 	font-weight: bold;
     padding-left: 0.6em;
 }
@@ -927,7 +945,7 @@ h1.side-bar-evergreen {
 div.sidebar-evergreen-menu-content {
     margin: 0 15px 20px 15px;
     padding: 5px;
-	border: 1px solid #99976A;
+	border: 1px solid #E1DFCB;
     background: #fff;
 }
 
@@ -1096,8 +1114,6 @@ li.list-item {
     background: url("/images/bg_menu_evergreen.png") repeat-x;  /* Evergreen */
    
 }
-
-
 
 
 #topnav li {
@@ -1791,8 +1807,9 @@ div.pagination span.disabled {
 #footer_wrapper {
 	min-width: 1200px;
 	width: 100%;
-	background: url("/images/footer_bg.png") repeat-x #CBC8A0;
-	margin-top: 40px;
+/*	background: url("/images/footer_bg.png") repeat-x #CBC8A0;*/
+    background: #333;
+	margin-top: 100px;
   
 }
 

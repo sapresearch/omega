@@ -1,16 +1,13 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_javascript 'omega_volunteering' %>
-<%= context_box do %>
 
-    <div class="page-content circle-corners-bottom  corners-top">
+    <div class="content-evergreen circle-corners-bottom-left">
     	
-		<div class="heading-main">
+		<div class="heading-main-columns">
 	
-			<div class="left-heading">
 				<h1 class="page-content">
       				Current Volunteering Opportunities
 		    	</h1>
-			</div>
 	
 		</div>
 
@@ -93,8 +90,8 @@
       <%= will_paginate @positions %>
       <div class="clear"></div>
     </div>
+
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_positions_skills" %>
+    <%= render :partial => "layouts/sidebar_positions_interests" %>
 <% end %>
-<%# content_for :sidebar do %>
-    <%#= render :partial => "layouts/sidebar_positions_skills" %>
-    <%#= render :partial => "layouts/sidebar_positions_interests" %>
-<%# end %>

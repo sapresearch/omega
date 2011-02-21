@@ -1,15 +1,13 @@
 <% require_stylesheet 'omega_services' %>
 <% require_javascript 'omega_services' %>
 
-   <div class="page-content circle-corners-bottom  corners-top">
+   <div class="content-evergreen circle-corners-bottom  corners-top">
     	
-		<div class="heading-main">
+		<div class="heading-main-columns">
 	
-			<div class="left-heading">
 				<h1 class="page-content">
       				Services Offered
 		    	</h1>
-			</div>
 	
 		</div>
 
@@ -87,6 +85,6 @@
   <div class="clear"></div>
 
 </div>
-<% #content_for :sidebar do %>
-    <%#= render :partial => "layouts/services_menu" %>
-<% #end %>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/services_menu" %>
+<% end %>
