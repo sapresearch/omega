@@ -1,14 +1,14 @@
 <div id="top-pane">
   <div class="center-content">
 <%= with_permission(User::PERM_VIEW) do %>
-       <div id="user_custom_bar-evergreen" class="corners-bottom left" >
+       <div id="user_custom_bar" class="corners-bottom left" >
       <%= render('layouts/partials/messages') %>
       <%= render('layouts/partials/favorites') %>
     </div>
       <% end %>
 
     
-    <div id="ctlrBar-evergreen" class="corners-bottom right">
+    <div id="ctlrBar" class="corners-bottom right">
       <% if current_user.is_anonymous? -%>
           <span id="trigger"><a class="btnLoginCtrl" rel="test" href="#"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
           | <%= link_to content_tag(:span, t(:sign_up)), register_users_url %>

@@ -69,6 +69,8 @@ module HtmlHelper
     plain = options[:plain] ? 'plain' : nil
     small = options[:small] ? 'small' : nil
     contact = options[:contact] ? 'contact' : nil
+    sidebar = options[:sidebar] ? 'sidebar' : nil
+
 
     if options[:icon]
       icon_class = 'icon'
@@ -78,7 +80,7 @@ module HtmlHelper
       icon = ''.html_safe
     end
 
-    klass = ['om', plain, small, contact, icon_class, 'button'].compact.join('-')
+    klass = ['om', plain, small, contact, sidebar, icon_class, 'button'].compact.join('-')
 
     content_tag(:span, :class => klass) do
       icon + capture(&block)

@@ -1,19 +1,28 @@
 <% require_stylesheet 'omega_services' %>
 <% require_javascript 'omega_services' %>
 
-<h1 class="page-content corners-top">
-  Drafts/Incomplete Services 
-</h1>
-<div class="page-content corners-bottom">
-  <div class="right">
-    <%= om_button(:icon=>'sort-az') do %>
-        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'asc')) %>
-    <% end %>
-    <%= om_button(:icon=>'sort-za') do %>
-        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
-    <% end %>
-  </div>
-  <div class="clear"></div>
+<div class="content circle-corners-bottom-left">
+	
+	<div class="heading-main-columns">
+	
+				<h1 class="page-content">
+      				Draft/Unpublished Services
+		    	</h1>
+	
+		</div>
+		
+      <div class="right">
+      	<br/>
+        <%= om_button(:icon=>'sort-az', :small => true) do %>
+            <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
+        <% end %>
+        <%= om_button(:icon=>'sort-za', :small => true) do %>
+            <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+        <% end %>
+
+      </div>
+
+      <div class="clear"></div>
 
   <ul id="positions_list">
     <% @services.each do |s| %>

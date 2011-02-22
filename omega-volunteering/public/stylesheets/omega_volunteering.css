@@ -102,14 +102,14 @@ div.position-wrapper {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     /*border: 1px solid #e3e3e3;*/
-	border: 1px solid #A7C249;
+	border: 1px solid #BE8816;
 	background: #fff;
     /*background: url("/images/position_bg.png") repeat-x bottom #F2F1E1;*/
 }
 
 .position-hover {
     /*background: #4196ee !important; /*background:#c9c9c9 !important;*/
-    background: #BFD37A !important; /*background:#c9c9c9 !important;*/
+    background: #CA9813!important; /*background:#c9c9c9 !important;*/
 
 }
 
@@ -239,7 +239,7 @@ a.skill_tag-active span {
 /************ calendar list ********************/
 .pos-date {
     margin: 20px 10px 0 0;
-    background: url("/images/cal_bg_evergreen.png") no-repeat;
+    background: url("/images/cal-bg.png") no-repeat;
     text-align: center;
     font-size: 1.3em;
     padding: 5px 0 0 0;

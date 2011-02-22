@@ -1,17 +1,14 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% if notice != nil %><p class="notice"><%= notice %></p>
 <% end %>
-<%= context_box do %>
 
-    <div class="page-content circle-corners-bottom corners-top">
+    <div class="content circle-corners-bottom corners-top">
     	
-		<div class="heading-main">
+		<div class="heading-main-columns">
 	
-		<div class="left-heading">
 		<h1 class="page-content">
 			 <%= @position.name %>
 		</h1>
-		</div>
 	   
         </div>
 		
@@ -107,19 +104,18 @@
 	  </div>
     </div>
 
+<% content_for :sidebar do %>
+
+    <%= render :partial => "layouts/sidebar_position_show_menu" %>
+
+
+<% if @position.skills.any? %>
+    <%= render :partial => "layouts/sidebar_position_show_skills" %>
 <% end %>
-<%# content_for :sidebar do %>
 
-    <%#= render :partial => "layouts/sidebar_position_show_menu" %>
+<%if @position.interests.any? %>
+    <%= render :partial => "layouts/sidebar_position_show_interests" %>
+<% end %>
 
-
-<% #if @position.skills.any? %>
-    <%#= render :partial => "layouts/sidebar_position_show_skills" %>
-<%# end %>
-
-<% #if @position.interests.any? %>
-    <%#= render :partial => "layouts/sidebar_position_show_interests" %>
-<%# end %>
-
-<%# end %>
+<% end %>
 

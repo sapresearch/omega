@@ -3,7 +3,7 @@
   <ul>
     <%= with_permission(Volunteering::PERM_ADMIN) do %>
         <li>
-          <%= om_button(:icon=>'edit') do %>
+          <%= om_button(:icon=>'edit', :sidebar => true) do %>
               <%= link_to 'Edit', edit_volunteering_position_path(@position) %>
           <% end %>
         </li>
@@ -11,32 +11,32 @@
     <%= with_permission(Volunteering::PERM_APPLY) do %>
         <li>
           <% if already_favorite?(@position) %>
-              <%= om_button(:icon => 'favorite-remove') do %>
+              <%= om_button(:icon => 'favorite-remove', :sidebar => true) do %>
                   <%= link_to('Remove Favorite', favorite_path(@position), :remote => true, :'data-method' => :post, :'data-type' => :json, :class=> 'om-icon-space') %>
               <% end %>
           <% else %>
-              <%= om_button(:icon => 'favorite-add') do %>
+              <%= om_button(:icon => 'favorite-add', :sidebar => true) do %>
                   <%= link_to('Add Favorite', favorite_path(@position), :remote => true, :'data-method' => :post, :'data-type' => :json, :class=> 'om-icon-space') %>
               <% end %>
           <% end %>
         </li>
     <% end %>
     <li>
-      <%= om_button(:icon=>'back') do %>
+      <%= om_button(:icon=>'back', :sidebar => true) do %>
           <%= link_to 'Back', volunteering_positions_path %>
       <% end %>
     </li>
     <% if current_user.has_permission?('view_application_history') %>
         <li>
 
-          <%= om_button(:icon=>'clipboard-list ') do %>
+          <%= om_button(:icon=>'clipboard-list ', :sidebar => true) do %>
               <%= link_to 'Application History', history_volunteering_position_path(@position) %>
           <% end %>
         </li>
     <% end %>
     <li>
       <%= with_permission(Volunteering::PERM_APPLY) do %>
-          <%= om_button(:icon => 'apply') do %>
+          <%= om_button(:icon => 'apply', :sidebar => true) do %>
               <%= link_to 'Apply', new_volunteering_record_url(:id=>@position) %>
           <% end %>
       <% end %>
