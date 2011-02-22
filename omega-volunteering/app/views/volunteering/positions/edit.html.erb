@@ -1,16 +1,16 @@
-<%= context_box do %>
-
-<h1 class="page-content corners-top">
-  Edit <%= @position.name %>
+<div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+  					Edit <%= @position.name %>
+		    	</h1>
+	
+		</div>
   
-</h1>
+  <div class="main-box">
+  	        <%= render 'form' %>
 
-<div class="page-content corners-bottom">
-
-  <%= render 'form' %>
+  </div>
 
 </div>
-    <% end %>
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_position_show_menu" %>
-<% end %>

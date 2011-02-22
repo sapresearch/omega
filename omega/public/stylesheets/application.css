@@ -467,7 +467,7 @@ form label {
     font-family: "Arial";
 	font-weight: bold;
 	font-size: 14px;
-    width: 180px;
+    width: 120px;
     text-align: right;
     margin-right: 22px;
 	margin-top: 5px;
@@ -782,8 +782,14 @@ div.signup-box {
 	
 }
 
+div.form-box {
+	width:688px;
+	height:auto;
+    margin: 20px auto 70px -45px;
+}
+
 div.main-box {
-	width:880px;
+	width:auto;
 	height:auto;
     margin: 50px 10px 70px 40px;   
 
@@ -870,22 +876,6 @@ div.sidebar-menu {
 }
 
 h1.side-bar {
-    text-shadow: #333 1px 1px 1px;
-    margin: 0;
-  /*  background: url("/images/bg_dark.png") bottom repeat-x #80bdfb;*/
-    background: #E1DFCB;
-    color: #fff;
-    padding: 5px;
-}
-
-div.sidebar-menu-content {
-    margin: 10px 10px 20px 10px;
-    padding: 5px;
-    border: 1px solid #E1DFCB;
-    background: #fff;
-}
-
-h1.side-bar-evergreen {
     margin: 20px 15px 0 15px;
 	/*background: url("/images/h1_sidebar_bg_evergreen.png") repeat-x bottom #D6D7C6;*/
     background: #E1DFCB;
@@ -898,7 +888,7 @@ h1.side-bar-evergreen {
     padding-left: 0.6em;
 }
 
-div.sidebar-evergreen-menu-content {
+div.sidebar-menu-content {
     margin: 0 15px 20px 15px;
     padding: 5px;
 	border: 1px solid #E1DFCB;
@@ -1224,11 +1214,10 @@ form span.error {
 .om-button a, .om-button input, .om-button button, .om-icon-button input, .om-icon-button button {
     position: relative;
     text-transform: capitalize;
-    line-height: 12px;
+    line-height: 10px;
+	font-family:"Trebuchet MS";
     height: 30px;
     color: #1F1603;
-    font-weight: bold;
-    text-shadow: 1px 1px 1px #333;
     background: none;
     display: inline-block;
     white-space: nowrap;
@@ -1243,7 +1232,7 @@ form span.error {
 }
 
 .om-button input, .om-icon-button input {
-	margin-left: 35px;
+	margin-left: 5px;
 }
 
 .om-icon-button a {
@@ -1794,11 +1783,11 @@ div.pagination span.disabled {
 	margin-top: 100px;
   
 }
-
+/*
 #footer {
     width: 100%;
 	height: 100px;
-    /*margin: 0 auto;*/
+    /*margin: 0 auto;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
 
@@ -1828,36 +1817,36 @@ div.pagination span.disabled {
     padding: 0 10px 0 0;
     color: #C7CCCD;
 }
+*/
 
-
-#footer-evergreen {
+#footer {
 	height: 100px;
 	width: 950px;
     margin: 0 auto 2px;
 
 }
 
-#footer-evergreen table {
+#footer table {
     width: 950px;
     text-align: center;
 
 }
 
-#footer-evergreen h1 {
+#footer h1 {
     color: #C5C891;
 }
 
-#footer-evergreen table td {
+#footer table td {
     vertical-align: top;
     color: #333;
 }
 
-#footer-evergreen div.footer-content {
+#footer div.footer-content {
     padding: 1em;
     text-align: left;
 }
 
-#footer-evergreen span.date {
+#footer span.date {
     padding: 0 10px 0 0;
     color: #FF8A18;
 }

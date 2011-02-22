@@ -1,20 +1,27 @@
 <% require_javascript 'omega_messages.js' %>
   <%= form_for @message do |f| %>
+  <p>
         <%= f.label :to %> <%= text_field_tag :'ac-users' %>
         <%= f.hidden_field :to_id %>
+</p>
 
+<p>
         <%= f.label :subject %>
         <%= f.text_field :subject,:class => 'broad-text' %>
+</p>
 
+<p>
         <%= f.label :body %>
         <%= f.text_area :body, :class => 'broad-text' %>
+</p>
 
+<p>
       <%= om_button(:icon => 'mail') do %>
           <%= f.submit :value => 'Send Message' %>
       <% end %>
 
 
-      <%= om_button(:icon => 'cancel') do %>
-          <%= link_to 'Cancel', messages_path %>
-      <% end %>
+     
+	  </p>
+	  
   <% end %>
