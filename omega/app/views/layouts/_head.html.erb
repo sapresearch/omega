@@ -1,13 +1,16 @@
 <div id="top-pane">
   <div class="center-content">
-<%= with_permission(User::PERM_VIEW) do %>
-       <div id="user_custom_bar" class="corners-bottom left" >
+       <div id="user_custom_bar" class="corners-bottom left">
+         <%= with_permission(User::PERM_VIEW) do %>
       <%= render('layouts/partials/messages') %>
       <%= render('layouts/partials/favorites') %>
+        <% end %>
+        <%= with_permission('cms_admin') do %>
+          <%= link_to 'Edit Page', current_page_path %>
+        <% end %>
     </div>
-      <% end %>
 
-    
+
     <div id="ctlrBar" class="corners-bottom right">
       <% if current_user.is_anonymous? -%>
           <span id="trigger"><a class="btnLoginCtrl" rel="test" href="#"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
@@ -39,10 +42,10 @@
     <%= breadcrumbs %>
   </div>
 
-  
-  	  	
+
+
 
 </div>
 	<div id="logo">
-		
+
 	</div>
