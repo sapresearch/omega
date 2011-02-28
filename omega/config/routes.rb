@@ -11,7 +11,7 @@ Omega::Module.routes.draw do
   end
 
   resources :uploads do
-    
+
   end
   
   resources :images do
@@ -64,7 +64,14 @@ Omega::Module.routes.draw do
     get :dispatch_ui_element, :path => 'dispatch_ui_element/:element'
     get :dispatch_element_properties, :path => 'dispatch_element_properties/:element'
   end
-  
+
+  resources :pages, :glob_id => true do
+    resources :blocks
+    resources :components
+  end
+  resources :blocks
+  resources :components
+
   scope :module => 'omega' do
     match '*url' => '#not_found'
   end

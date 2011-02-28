@@ -1,6 +1,32 @@
-<% explanation = content_for?(:explanation) ? "_explanation" : "" %>
+<%# explanation = content_for?(:explanation) ? "_explanation" : "" %>
 
-<% columns = content_for?(:sidebar) ? "two" : "one" %>
-<% rows = content_for?(:rows) ? "two" : "one" %>
-<% content = yield %>
-<%= render(:layout => "layouts/#{columns}col_#{rows}rows#{explanation}") { content } %>
+<%# columns = content_for?(:sidebar) ? "two" : "one" %>
+<%# rows = content_for?(:rows) ? "two" : "one" %>
+<%# content = yield %>
+<%#= render(:layout => "layouts/#{columns}col_#{rows}rows#{explanation}") { content } %>
+
+<% if blocks? || content_for?(:sidebar) %>
+  <div id="left">
+    <%= yield %>
+    <% @components.each do |component| %>
+      <div class="content circle-corners-bottom-left">
+        <div class="header-main-columns"><h1><%= component.title %></h1></div>
+        <%= with_permission('cms_admin') do %>
+          <%= link_to 'Edit', [:edit, @page, component] %>
+        <% end %>
+        <%== component.content %>
+      </div>
+    <% end if @components %>
+  </div>
+  <div id="right">
+    <%= yield(:sidebar) if content_for?(:sidebar) %>
+    <% @blocks.each do |block| %>
+      <%= side_bar_box(block.title) do %>
+        <%== block.content %>
+      <% end %>
+    <% end if blocks? %>
+  </div>
+  <div class="clear"></div>
+<% else %>
+  <%= yield %>
+<% end%>
