@@ -14,19 +14,15 @@ table, tbody, tfoot, thead, tr, th, td {
     font: 12px/1.5em Lucida Grande,Arial,sans-serif,helvetica, arial, freesans, clean;
 }
 
-body {
-    /*background: url("/images/om_sprite.png") repeat-x #f7f7f7;*/
-	background: url("/images/om_sprite.png") repeat-x #fff;
-}
 
-body.evergreen {
+body {
 	background: url("/images/om_sprite_evergreen.png") repeat-x #FFFFFF;
 }
 
-body.evergreen > #wrapper {
+body > #wrapper {
 	width: 950px;
 	margin: 0 auto;
-    min-height: 100%;
+    min-height: 800px;
 }
 
 html, body, #wrapper {
@@ -90,21 +86,6 @@ h1.page-content {
 	line-height: 25px
 }  
 
-h1.page-content-evergreen {
-    /*background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #F3F1E9;*/
-    text-shadow: #ddd 0.02em 0.02em 0.02em;
-	font-family: Arial Black, Helvetica, sans-serif;
-	font-weight: bold;
-	color:#36361B;
-	font-size: 24px;
-    padding-left: 0.6em;
-	height: 25px;
-/*	border-top: 1px solid #C4B991;
-    border-left: 1px solid #C4B991;
-	border-right: 1px solid #C4B991;*/
-	line-height: 35px
-
-}
 
 h1.service_wizard {
 	font: bold Verdana, Geneva, Arial, Helvetica, sans-serif;
@@ -616,13 +597,13 @@ tr.odd {
 
 
 #banner-right {
-
-	float:right;
+	position: relative;
 	background: url("/images/top-banner-right.png") no-repeat right;
 	width: 100%;
 	height: 180px;
-	top:0;
+	top:-60px;
 	right: 0;
+	
 	
 }
 
@@ -667,18 +648,12 @@ tr.odd {
 #content_box{
     width: 950px;
     padding: 0 0 0 auto;
-	min-height: 700px;
-	margin-top: -89px;
+	margin-top:13px;
     background:#F7F7F7;
+    padding-bottom: -20px;
+	min-height: 650px;
   
 	
-}
-
-#content-box.evergreen {
-    text-align: left;
-    width: 950px;
-    padding: 0 0 8em auto;
-	min-height: 400px;
 }
 
 #content_box_bottom {
@@ -696,28 +671,23 @@ tr.odd {
     position: relative;
 	z-index: 10;
 	float: left;
-	left:0;
 	margin-left: 10px;
     width: 688px;
-    background: #fff;
-	border-left: 1px solid #C4B991;
-	border-right: 1px solid #C4B991;
-	border-bottom: 1px solid #C4B991;
-	-moz-box-shadow: 0 0 8px #444;
-    -webkit-box-shadow: 0 0 8px #444;
-    box-shadow: 0 0 8px #444;
+	
 	
 }
 
 #right {
     width: 250px;
-	min-height: 715px;
     background: #F7F7F7;
 	right:0;
 	float:right;
+	height: auto;
+	
 
 
 }
+
 
 div.arrow {
 	position: relative;
@@ -762,21 +732,20 @@ div.mandatory-field {
 }
 
 div.content {
-    background: #fff;
-    padding: 15px;
-
-}
-
-div.content-evergreen {
-    background: #fff;
+     background: #fff;
     padding: 45px 20px 20px 20px;
-	height: auto;
+	border-left: 1px solid #C4B991;
+	border-right: 1px solid #C4B991;
+	border-bottom: 1px solid #C4B991;
+	-moz-box-shadow: 0 0 8px #444;
+    -webkit-box-shadow: 0 0 8px #444;
+    box-shadow: 0 0 8px #444;
+	margin-bottom: -10px;
 	min-height: 650px;
-
-
-
+	height: auto;
 
 }
+
 
 div.main-content-left {
 	float: left;
@@ -794,21 +763,20 @@ div.main-content-right {
 
 
 div.heading-main {
-	width: 950px;
+	width: 948px;
 	height: 80px;
 	margin: -45px 0 0 -20px;
 	background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #E1DFCB;
-
-
 }
 
 div.heading-main-columns {
-	width: 688px;
+	width: 686px;
 	height: 80px;
 	margin: -45px 0 0 -20px;
 	background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #E1DFCB;
 
 }
+
 
 div.left-heading {
 	float:left;
