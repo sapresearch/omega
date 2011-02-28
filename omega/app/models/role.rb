@@ -21,3 +21,6 @@ class Role < Omega::Model
                             :uniqueness => true,
                             :if => :locked?
 end
+
+
+

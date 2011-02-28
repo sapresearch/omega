@@ -13,6 +13,13 @@ Omega::Module.routes.draw do
   resources :uploads do
     
   end
+  
+  resources :images do
+    collection do
+   get :edit_logo
+   put :update_logo
+   end
+  end
 
   resources :sessions do
     collection do

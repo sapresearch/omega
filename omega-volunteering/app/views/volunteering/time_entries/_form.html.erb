@@ -25,15 +25,13 @@
                 <% day = d.object %>
                 <% hours_errors << day.errors unless day.errors.empty? %>
 
-
-                <td>   <%= d.hidden_field :day %>         <%= ed.day %>
+                <td> <%= d.hidden_field :day %>         <%= ed.day %>
                 </td>
                 <td>
                   <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
                   <%= d.text_field :hours, :class => 'inputSmall'%>
                 <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>  
                   <%= hours_errors.size unless day.errors.empty? %>
-
                 </td>
               </tr>
           <% end %>

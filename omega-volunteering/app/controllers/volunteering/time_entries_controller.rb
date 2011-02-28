@@ -35,6 +35,8 @@ class Volunteering::TimeEntriesController < Omega::Controller
       respond_with(@entry)
       
     end
+    
+    
 
     
   end

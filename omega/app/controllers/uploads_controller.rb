@@ -88,4 +88,18 @@ class UploadsController < Omega::Controller
       format.xml  { head :ok }
     end
   end
+  
+  
+  def edit_logo
+    
+    @logo = Image.new
+    
+  end
+  
+  
+  def update_logo
+    @logo = Image.create(params[:image])
+    
+    
+  end
 end

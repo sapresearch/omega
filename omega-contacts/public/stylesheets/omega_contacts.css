@@ -49,7 +49,7 @@
 }
 
 
-#contacts_groups, #contacts,#contacts_contact_pane{
+#contacts_groups, #contacts {
     
     padding: 1px;
     height: 570px;
@@ -94,12 +94,13 @@ padding:1em;
     width:200px;
 }
 #contacts_contact_pane{
+overflow-y:scroll;
+z-index: 3;
+position: relative;
+top: -570px;
+left: 410px;
+width:490px;
 height:570px;
-
-position:absolute;
-right:325px;
-top:386px;
-width:480px;
 
  
 }

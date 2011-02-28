@@ -15,14 +15,14 @@ table, tbody, tfoot, thead, tr, th, td {
 }
 
 body {
-    background: url("/images/om_sprite.png") repeat-x #f7f7f7;
+    background: url("/images/om_sprite.png") repeat-x #fff;
 }
 
 
 body > #wrapper {
 	width: 950px;
 	margin: 0 auto;
-    min-height: 100%;
+    min-height: 800px;
 }
 
 html, body, #wrapper {
@@ -397,10 +397,10 @@ form input[type=text], form input[type=email], form input[type=password], textar
     border: 1px solid #999;
     color: #314D4B;
 	width: 280px;
-	-moz-border-radius-topleft: 4px;
-    -moz-border-radius-topright: 4px;
-    -moz-border-radius-bottomleft: 4px;
-    -moz-border-radius-bottomright: 4px;
+	-moz-border-radius-topleft: 12px;
+    -moz-border-radius-topright: 12px;
+    -moz-border-radius-bottomleft: 12px;
+    -moz-border-radius-bottomright: 12px;
     -webkit-border-radius-bottomleft:4px;
     -webkit-border-radius-bottomright: 4px;
 	-webkit-border-radius-bottomleft: 4px;
@@ -412,6 +412,11 @@ form input[type=text], form input[type=email], form input[type=password], textar
     border-top-right-radius: 4px;
 }
 
+form input[type=file] {
+
+    color: #314D4B;
+	
+}
 form input[type=checkbox] {
     margin-top:15px;
 }
@@ -595,22 +600,22 @@ tr.odd {
 
 #logo {
 	position: relative;
-	top: -170px;
-	left: 50px;
-    background: url("/images/") no-repeat center;
-    width: 230px;
-	height: 100px;
+	top: 40px;
+	left: 170px;
+    background: url("/images/application/logo.png") no-repeat left;
+    width: 260px;
+	height: 60px;
 	z-index: 1;
 }
 
 
 #banner-right {
 
-	float:right;
-	background: url("/images/") no-repeat right;
+	position: relative;
+	background: url("/images/banner-image.png") no-repeat right;
 	width: 100%;
 	height: 180px;
-	top:0;
+	top:-60px;
 	right: 0;
 	
 }
@@ -643,10 +648,10 @@ tr.odd {
 #content_box{
     width: 950px;
     padding: 0 0 0 auto;
-	min-height: 700px;
-	margin-top: -89px;
+	margin-top:13px;
     background:#F7F7F7;
-  
+    padding-bottom: -20px;
+	min-height: 650px;
 	
 }
 
@@ -655,20 +660,19 @@ tr.odd {
     position: relative;
 	z-index: 10;
 	float: left;
-	left:0;
 	margin-left: 10px;
     width: 688px;
-    background: #fff;
 	
 	
 }
 
 #right {
     width: 250px;
-	min-height: 715px;
     background: #F7F7F7;
 	right:0;
 	float:right;
+	height: auto;
+	
 
 
 }
@@ -718,14 +722,15 @@ div.mandatory-field {
 div.content {
     background: #fff;
     padding: 45px 20px 20px 20px;
-	height: auto;
-	min-height: 650px;
 	border-left: 1px solid #C4B991;
 	border-right: 1px solid #C4B991;
 	border-bottom: 1px solid #C4B991;
 	-moz-box-shadow: 0 0 8px #444;
     -webkit-box-shadow: 0 0 8px #444;
     box-shadow: 0 0 8px #444;
+	margin-bottom: -10px;
+	min-height: 650px;
+	height: auto;
 
 }
 
@@ -742,15 +747,11 @@ div.main-content-right {
 	height: auto;
 }
 
-
-
 div.heading-main {
 	width: 948px;
 	height: 80px;
 	margin: -45px 0 0 -20px;
 	background: url("/images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #E1DFCB;
-
-
 }
 
 div.heading-main-columns {
@@ -796,11 +797,12 @@ div.main-box {
 	
 }
 
-div.login-box {
-	background: url("/images/login_box_bg_evergreen_1.png") repeat;
+div.bg-box {
+	background: #C9DBE4;
 	width: 500px;
 	height:250px;
 	padding: 20px 20px 20px 20px;
+	margin-top: 40px;
 }
 
 div.form-signup {
@@ -1083,7 +1085,7 @@ li.list-item {
     display: none;
     width: 200px;
    /* background: #a32d5a;  */
-	background: #BE8816;      /*Evergreen*/
+	background: #BE8816;   
     color: #fff;
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 4px 4px;
@@ -1299,8 +1301,8 @@ span.om-plain-icon-button span.om-icon {
     height: 16px;
     min-width: 16px;
     min-height: 16px;
-    *display: inline;
-    *zoom: 1;
+    display: inline;
+    zoom: 1;
 
 }
 
@@ -1337,8 +1339,8 @@ span.om-contact-icon-button span.om-icon {
     height: 16px;
     min-width: 16px;
     min-height: 16px;
-    *display: inline;
-    *zoom: 1;
+    display: inline;
+    zoom: 1;
 
 }
 
@@ -1444,8 +1446,8 @@ span.om-sidebar-icon-button span.om-icon,
     margin: 0 2px;
     cursor: pointer;
     display: inline-block;
-    *display: inline;
-    *zoom: 1;
+    display: inline;
+    zoom: 1;
     height: 16px;
     width: 16px;
 
@@ -1472,8 +1474,8 @@ span.om-small-icon-button span.om-icon {
     height: 16px;
     min-width: 16px;
     min-height: 16px;
-    *display: inline;
-    *zoom: 1;
+    display: inline;
+    zoom: 1;
 
 }
 

@@ -29,3 +29,21 @@ Gem::Specification.new do |s|
   s.add_dependency('will_paginate', '~>3.0.pre2')
   
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
