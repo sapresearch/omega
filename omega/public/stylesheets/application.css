@@ -21,8 +21,7 @@ body {
 
 body > #wrapper {
 	width: 950px;
-	margin: 0 auto;
-    min-height: 800px;
+    margin: 0 auto 2px;
 }
 
 html, body, #wrapper {
@@ -61,7 +60,7 @@ ol, ul {
 
 h1, h2, h3, h4 {
     text-transform: capitalize;
-    font: bold "Century Schoolbook", Georgia, Times, serif;
+    font-family: "Century Schoolbook", Georgia, Times, serif;
 }
 
 h1, .h1 {
@@ -87,7 +86,7 @@ h1.page-content {
 }  
 
 h1.service_wizard {
-	font: bold Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	color: #FFF;
 	text-shadow: #333 1px 1px 1px;
@@ -163,7 +162,6 @@ h3.application-form {
 	margin: 45px 0 25px 0;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
-    border-top-radius: 8px;
 	
 }
 
@@ -311,7 +309,6 @@ span.form-text {
 	text-align: justify;
 	-moz-border-radius: 8px;
     -webkit-border-radius: 8px;
-    border-top-radius: 8px;
 }
 
 span.form-agreement {
@@ -328,7 +325,6 @@ span.form-agreement {
 	text-align: justify;
 	-moz-border-radius: 8px;
     -webkit-border-radius: 8px;
-    border-top-radius: 8px;
 	overflow-x: auto;
 }
 
@@ -595,13 +591,13 @@ tr.odd {
 	top: 29px;
 	left: 0;
 	width: 100%;
-	height: auto;
+	height: 180px;
 }
 
 #logo {
 	position: relative;
 	top: 40px;
-	left: 170px;
+	left: 280px;
     background: url("/images/application/logo.png") no-repeat left;
     width: 260px;
 	height: 60px;
@@ -647,12 +643,10 @@ tr.odd {
 
 #content_box{
     width: 950px;
-    padding: 0 0 0 auto;
-	margin-top:13px;
     background:#F7F7F7;
-    padding-bottom: -20px;
 	min-height: 650px;
-	
+	margin: 13px auto 2px;
+
 }
 
 

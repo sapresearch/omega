@@ -82,11 +82,9 @@
         <li> <%= link_to "Users", users_url %></li>
     <% end %>
 	
-	<li>
 		 <%= with_permission(User::PERM_ADMIN) do %>
         <li> <%= link_to "Edit Logo", edit_logo_images_url %></li>
     <% end %>
-    </li>		
     <%#= with_permission(Group::PERM_VIEW) do %>
         <li> <%#= link_to "Groups", groups_url %></li>
     <%# end %>

@@ -408,6 +408,13 @@ form input[type=checkbox] {
     margin-top:15px;
 }
 
+
+form input[type=file] {
+
+    color: #314D4B;
+	
+}
+
 select {
     width:200px;
     margin: 0;
@@ -459,7 +466,7 @@ form label {
     font-family: "Arial";
 	font-weight: bold;
 	font-size: 14px;
-    width: 180px;
+    width: 120px;
     text-align: right;
     margin-right: 22px;
 	margin-top: 5px;
@@ -582,26 +589,28 @@ tr.odd {
 	top: 29px;
 	left: 0;
 	width: 100%;
-	height: auto;
+	height: 180px;
 }
 
 #logo {
+
 	position: relative;
-	top: -170px;
-	left: 50px;
-    background: url("/images/logo-evergreen.png") no-repeat center;
-    width: 230px;
-	height: 100px;
+	top: 10px;
+	left:330px;
+    background: url("/images/logo-evergreen.png") no-repeat left;
+    width: 260px;
+	height: 80px;
 	z-index: 1;
 }
 
 
 #banner-right {
+	
 	position: relative;
 	background: url("/images/top-banner-right.png") no-repeat right;
 	width: 100%;
 	height: 180px;
-	top:-60px;
+	top:-80px;
 	right: 0;
 	
 	
@@ -647,12 +656,10 @@ tr.odd {
 
 #content_box{
     width: 950px;
-    padding: 0 0 0 auto;
-	margin-top:13px;
     background:#F7F7F7;
-    padding-bottom: -20px;
 	min-height: 650px;
-  
+  	margin: 13px auto 2px;
+
 	
 }
 
@@ -687,7 +694,6 @@ tr.odd {
 
 
 }
-
 
 div.arrow {
 	position: relative;
@@ -777,6 +783,11 @@ div.heading-main-columns {
 
 }
 
+div.form-box {
+	width:688px;
+	height:auto;
+    margin: 20px auto 70px -45px;
+}
 
 div.left-heading {
 	float:left;
@@ -799,8 +810,16 @@ div.signup-box {
 	
 }
 
+div.bg-box {
+	background: #C9DBE4;
+	width: 500px;
+	height:250px;
+	padding: 20px 20px 20px 20px;
+	margin-top: 40px;
+}
+
 div.main-box {
-	width:880px;
+	width:auto;
 	height:auto;
     margin: 50px 10px 70px 40px;   
 
@@ -887,23 +906,7 @@ div.sidebar-menu {
 }
 
 h1.side-bar {
-    text-shadow: #333 1px 1px 1px;
-    margin: 0;
-  /*  background: url("/images/bg_dark.png") bottom repeat-x #80bdfb;*/
-    background: #E1DFCB;
-    color: #fff;
-    padding: 5px;
-}
-
-div.sidebar-menu-content {
-    margin: 10px 10px 20px 10px;
-    padding: 5px;
-    border: 1px solid #E1DFCB;
-    background: #fff;
-}
-
-h1.side-bar-evergreen {
-    margin: 20px 15px 0 15px;
+      margin: 20px 15px 0 15px;
 	/*background: url("/images/h1_sidebar_bg_evergreen.png") repeat-x bottom #D6D7C6;*/
     background: #E1DFCB;
     text-shadow: #E3E3D7 1px 1px 1px;
@@ -915,7 +918,8 @@ h1.side-bar-evergreen {
     padding-left: 0.6em;
 }
 
-div.sidebar-evergreen-menu-content {
+
+div.sidebar-menu-content {
     margin: 0 15px 20px 15px;
     padding: 5px;
 	border: 1px solid #E1DFCB;
@@ -940,7 +944,6 @@ div.sidebar-menu-content li {
 li.menu-li-last-divider {
     border-bottom-width: 0 !important;
 }
-
 /* breadcrumbs to display the current path */
 #breadcrumb {
 	position: relative;
@@ -1246,11 +1249,10 @@ form span.error {
 .om-button a, .om-button input, .om-button button, .om-icon-button input, .om-icon-button button {
     position: relative;
     text-transform: capitalize;
-    line-height: 12px;
+    line-height: 10px;
+	font-family:"Trebuchet MS";
     height: 30px;
-    color: #eee;
-    font-weight: bold;
-    text-shadow: 1px 1px 1px #333;
+    color: #1F1603;
     background: none;
     display: inline-block;
     white-space: nowrap;
@@ -1265,17 +1267,14 @@ form span.error {
 }
 
 .om-button input, .om-icon-button input {
-	margin-left: 35px;
+	margin-left: 5px;
 }
 
 .om-icon-button a {
-    color: #fff;
+    color: #1F1603;
     font-weight: bold;
     padding-left: 35px;
 	font-size: 14px;
-
-	
-
 }
 
 .om-button button {
@@ -1291,10 +1290,10 @@ span.om-icon-button {
     border-radius: 16px;
     display: inline-block;
     height: 30px;
-    background: url("/images/om_button_bg.png") repeat-x bottom transparent;
+    background: url("/images/om_button_bg_evergreen.png") repeat-x bottom transparent;
     border-width: 1px;
     border-style: solid;
-    border-color:  #B3BF82 #B3BF82 #7E9403;
+    border-color:  #777 #555 #555;
     margin-left: 135px;
 	margin-top: 40px;
 	margin-bottom: 5px;
@@ -1312,7 +1311,7 @@ span.om-plain-button, span.om-plain-icon-button {
 }
 
 span.om-plain-button a, span.om-plain-icon-button a {
-    color: #333;
+    color: #1F1603;
 	font-weight: bold;	
 }
 
@@ -1335,8 +1334,8 @@ span.om-plain-icon-button span.om-icon {
     height: 16px;
     min-width: 16px;
     min-height: 16px;
-    *display: inline;
-    *zoom: 1;
+    display: inline;
+    zoom: 1;
 
 }
 
@@ -1350,7 +1349,7 @@ span.om-contact-button, span.om-contact-icon-button {
 }
 
 span.om-contact-button a, span.om-contact-icon-button a {
-    color: #333;
+    color: #1F1603;
 	font-weight: bold;	
 }
 
@@ -1373,8 +1372,8 @@ span.om-contact-icon-button span.om-icon {
     height: 16px;
     min-width: 16px;
     min-height: 16px;
-    *display: inline;
-    *zoom: 1;
+    display: inline;
+    zoom: 1;
 
 }
 
@@ -1387,17 +1386,17 @@ span.om-small-button, span.om-small-icon-button {
 	-moz-border-radius: 16px;
     -webkit-border-radius: 16px;
     border-radius: 16px;
-    background: url("/images/om_button_bg.png") repeat-x bottom transparent;
+    background: url("/images/om_button_bg_evergreen.png") repeat-x bottom transparent;
     border-width: 1px;
     border-style: solid;
-    border-color: #B3BF82 #B3BF82 #7E9403;
+    border-color: #777 #555 #555;
 	width: 100px;
     height: 25px;
     margin: 0 0 0 20px;
 }
 
 span.om-small-button a, span.om-small-icon-button a {
-    color: #000;
+    color: #1F1603;
 	font-weight: bold;
 	margin-left: 35px;
 	padding-top: 15px;
@@ -1423,17 +1422,17 @@ span.om-sidebar-button, span.om-sidebar-icon-button {
 	-moz-border-radius: 16px;
     -webkit-border-radius: 16px;
     border-radius: 16px;
-    background: url("/images/om_button_bg.png") repeat-x bottom transparent;
+    background: url("/images/om_button_bg_evergreen.png") repeat-x bottom transparent;
     border-width: 1px;
     border-style: solid;
-    border-color: #B3BF82 #B3BF82 #7E9403;
+    border-color: #777 #555 #555;
 	width: 150px;
     height: 25px;
     margin: 0 0 0 20px;
 }
 
 span.om-sidebar-button a, span.om-sidebar-icon-button a {
-    color: #000;
+    color: #1F1603;
 	font-weight: bold;
 	margin-left: 35px;
 	padding-top: 15px;
@@ -1480,8 +1479,8 @@ span.om-sidebar-icon-button span.om-icon,
     margin: 0 2px;
     cursor: pointer;
     display: inline-block;
-    *display: inline;
-    *zoom: 1;
+    display: inline;
+    zoom: 1;
     height: 16px;
     width: 16px;
 
@@ -1508,12 +1507,12 @@ span.om-small-icon-button span.om-icon {
     height: 16px;
     min-width: 16px;
     min-height: 16px;
-    *display: inline;
-    *zoom: 1;
+    display: inline;
+    zoom: 1;
 
 }
 
-span.first-evergreen-1 {
+span.first-letter-bold {
 	color: #342B21;
 	font-size: 1.7em;
     font-weight: bold
@@ -1750,6 +1749,7 @@ span.om-icon-back {
 .om-icon-home {
     background-position: 0 -1136px;
 }
+
 
 /**************************** END *****************************/
 

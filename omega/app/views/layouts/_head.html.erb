@@ -3,10 +3,10 @@
        <div id="user_custom_bar" class="corners-bottom left">
          <%= with_permission(User::PERM_VIEW) do %>
       <%= render('layouts/partials/messages') %>
-      <%= render('layouts/partials/favorites') %>
+      | <%= render('layouts/partials/favorites') %>
         <% end %>
         <%= with_permission('cms_admin') do %>
-          <%= link_to 'Edit Page', current_page_path %>
+         | <%= link_to 'Edit Page', current_page_path %>
         <% end %>
     </div>
 
@@ -41,14 +41,13 @@
   <div id="breadcrumb">
     <%= breadcrumbs %>
   </div>
+  
+  
 
 
 </div>
 	
-</div>
-	<div id="logo">
 
-	</div>
 
 	
 	
