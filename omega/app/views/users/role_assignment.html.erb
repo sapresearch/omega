@@ -1,16 +1,13 @@
-<%= context_box do %>
 <%= require_stylesheet 'omega_users'%>
 
- <div class="page-content circle-corners-bottom  corners-top">
+ <div class="content circle-corners-bottom-left">
     	
-		<div class="heading-main">
+		<div class="heading-main-columns">
 	
-			<div class="left-heading">
 				<h1 class="page-content">
       				 Hello  <%= @user.username %>
 
 		    	</h1>
-			</div>
 	
 		</div>
 	
@@ -52,8 +49,9 @@
   </p>
 
 </div>
+
+</div>
 	  
-<%# content_for :sidebar do %>
-    <%#= render :partial => "layouts/sidebar_user" %>
-<%# end %>
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/sidebar_user" %>
 <% end %>

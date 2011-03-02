@@ -1,9 +1,9 @@
-<div class="signup-box bgcolor">	
+
+<div class="login-box">
 
 <div id="loginFailed">
 </div>
 
-<div class="login-box">
 	<%= form_for Session.new, :remote => true, :'data-type' => 'json' do |f| %>
     <p>
       <%= f.label :username %>
@@ -29,4 +29,3 @@
 	
 </div>
 
-</div>

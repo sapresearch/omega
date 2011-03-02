@@ -2,8 +2,8 @@
     <ul>
       <li>
 
-        <%= om_button(:icon=>'edit') do %>
-            <%= link_to 'Edit', edit_user_path %>
+        <%= om_button(:icon=>'edit', :sidebar => true) do %>
+            <%= link_to 'Edit', edit_user_path(@user) %>
         <% end %>
       </li>
 

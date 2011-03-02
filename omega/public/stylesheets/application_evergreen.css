@@ -652,7 +652,7 @@ tr.odd {
 
 #content_box{
     width: 950px;
-    background:#F7F7F7;
+    background:#EBEBDE;
 	min-height: 650px;
   	margin: 13px auto 2px;
 
@@ -682,7 +682,6 @@ tr.odd {
 
 #right {
     width: 250px;
-    background: #F7F7F7;
 	right:0;
 	float:right;
 	height: auto;
@@ -695,7 +694,7 @@ div.arrow {
 	position: relative;
 	left: 15px;
     z-index: 1;
-	top: 1;
+	top: 1px;
 	background-image: url("/images/sign_up_content_arrow.png");
     background-repeat: no-repeat;
     width: 60px;
@@ -705,7 +704,7 @@ div.arrow {
 div.mandatory-field {
 	position: relative;
     z-index: 1;
-	left: 195px;
+	left: 135px;
 	background-image: url("/images/mandatory-field.png");
     background-repeat: no-repeat;
     width: 10px;

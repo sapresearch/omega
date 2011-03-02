@@ -11,9 +11,9 @@
       <% end %>
   <% end %>
 
-       <%= with_permission(Volunteering::PERM_RECORD_HOURS) do %>
+       <%= with_permission(Volunteering::PERM_ADMIN) do %>
           <%= om_button(:contact => true, :icon => 'clock') do %>
-              <%= link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user)), :'data-tooltip' => 'Log hours for this position') %>
+              <%= link_to 'Log Hours', all_timesheets_volunteering_time_entries_url(:id => position, :'data-tooltip' => 'Log hours for this position') %>
           <% end %>
       <% end %>
 	  

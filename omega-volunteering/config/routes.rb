@@ -41,7 +41,11 @@ Omega::Volunteering::Module.routes.draw do
       end
     end
 
-    resources :time_entries
+    resources :time_entries do
+    	collection do
+    		get :all_timesheets
+    	end
+    end
 
 
 

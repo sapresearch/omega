@@ -1,0 +1,93 @@
+<% require_javascript 'new_time_entry' %>
+
+ 
+ <div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+      				Timesheets
+		    	</h1>
+	
+		</div>
+
+
+       <br/>
+       
+       <strong> Volunteering Position: <%=@position.name%> </strong>
+       
+
+<%= form_tag :action=> 'create' do %>
+
+   <br/>
+   
+   Choose a week: <%= text_field 'weekDate', :class => 'datepickr'%> 
+    <% #hours_errors = [] %>
+    <%#= errors_for_form @entry %>
+  <table  class="width-100">
+      <th class="ui-state-default">Volunteer</th>
+      <th class="ui-state-default">Mon</th>
+      <th class="ui-state-default">Tue</th>
+      <th class="ui-state-default">Wed</th>
+      <th class="ui-state-default">Thur</th>
+      <th class="ui-state-default">Fri</th>
+      <th class="ui-state-default">Sat</th>
+      <th class="ui-state-default">Sun</th>
+          
+
+    <% @entries.each_with_index do |entry, index| %>
+
+    <%= fields_for "entries[#{index}]", entry do |f| %>
+
+          <p>
+
+          <%= f.hidden_field :week, :value => "2011-03-07"%>
+
+     
+     </p>
+
+    
+    <%= f.hidden_field :record_id, :value =>  entry.record_id %>
+
+   
+    
+      <tr class="<%= cycle("even", "odd") -%>">
+      	<td> <%=Contact.find(Volunteering::Record.find(entry.record_id).contact_id).first_name%></td>
+      <%entry.days.each_with_index do |ed| %>
+          <%= f.fields_for "days", ed do |d| %>
+                <% day = d.object %>
+                <% hours_errors << day.errors unless day.errors.empty? %>
+
+                <%= d.hidden_field :id%>
+                <%= d.hidden_field :day, :value => day.day%>
+                <td>
+                  <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+                  <%= d.text_field :hours, :class => 'inputSmall'%>
+                <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>  
+                  <%= hours_errors.size unless day.errors.empty? %>
+                </td>
+                
+          <% end %>
+      <% end %>
+                    
+      </tr>
+
+    
+    <%end%>
+    <% end %>   
+          </table>
+
+
+    <p>
+    <%= om_button(:icon=>'save') do %>
+        <%= submit_tag "Save" %>
+    <% end %>
+
+    </p>
+
+
+<% end %>
+
+</div>
+
+       

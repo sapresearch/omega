@@ -675,7 +675,7 @@ div.arrow {
 	position: relative;
 	left: 15px;
     z-index: 1;
-	top: 1;
+	top: 1px;
 	background-image: url("/images/sign_up_content_arrow.png");
     background-repeat: no-repeat;
     width: 60px;
@@ -685,7 +685,7 @@ div.arrow {
 div.mandatory-field {
 	position: relative;
     z-index: 1;
-	left: 195px;
+	left: 135px;
 	background-image: url("/images/mandatory-field.png");
     background-repeat: no-repeat;
     width: 10px;
