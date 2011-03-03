@@ -61,7 +61,7 @@ ol, ul {
 
 h1, h2, h3, h4 {
     text-transform: capitalize;
-    font: bold "Century Schoolbook", Georgia, Times, serif;
+    font-family: "Century Schoolbook", Georgia, Times, serif;
 }
 
 h1, .h1 {
@@ -88,7 +88,7 @@ h1.page-content {
 
 
 h1.service_wizard {
-	font: bold Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	color: #FFF;
 	text-shadow: #333 1px 1px 1px;
@@ -164,7 +164,6 @@ h3.application-form {
 	margin: 45px 0 25px 0;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
-    border-top-radius: 8px;
 	
 }
 
@@ -456,7 +455,7 @@ form input.inputMid {
 }
 
 form input.datepickr, form input.tpickr {
-    width: 100px;
+    width: 130px;
 }
 
 form label {
@@ -1312,8 +1311,8 @@ span.om-plain-button a, span.om-plain-icon-button a {
 
 span.om-plain-button span.om-icon,
 span.om-plain-icon-button span.om-icon,
-.om-icon-only, .om-footer-symbol {
-    background-image: url(../images/icons/iconSprite.png);
+.om-footer-symbol {
+    background-image: url("/images/icons/iconSprite.png");
     background-repeat: no-repeat;
 }
 
@@ -1350,7 +1349,7 @@ span.om-contact-button a, span.om-contact-icon-button a {
 
 span.om-contact-button span.om-icon,
 span.om-contact-icon-button span.om-icon,
-.om-icon-only, .om-footer-symbol {
+.om-footer-symbol {
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
@@ -1404,7 +1403,7 @@ span.om-button span.om-icon,
 span.om-icon-button span.om-icon,
 span.om-small-button span.om-icon,
 span.om-small-icon-button span.om-icon,
-.om-icon-only, .om-footer-symbol {
+.om-footer-symbol {
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
@@ -1438,7 +1437,7 @@ span.om-sidebar-button a, span.om-sidebar-icon-button a {
 
 span.om-sidebar-button span.om-icon,
 span.om-sidebar-icon-button span.om-icon,
-.om-icon-only, .om-footer-symbol {
+.om-footer-symbol {
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
@@ -1474,11 +1473,6 @@ span.om-sidebar-icon-button span.om-icon,
     margin: 0 2px;
     cursor: pointer;
     display: inline-block;
-    display: inline;
-    zoom: 1;
-    height: 16px;
-    width: 16px;
-
 }
 
 span.om-button-active {
@@ -1518,6 +1512,23 @@ span.first-letter-bold {
     width: 14px;
 }
 
+.om-green-icon {
+	height: 35px;
+    width: 35px;
+    background: url("/images/ui-icons-green-large.png");
+
+}
+
+.ui-icon-previous-week {
+     background-position: -159px -35px;
+
+}
+
+.ui-icon-next-week {
+     background-position: -95px -35px;
+
+}
+    
 span.om-icon-button span.om-icon {
     margin-left: 13px;
 	margin-top: 5px;

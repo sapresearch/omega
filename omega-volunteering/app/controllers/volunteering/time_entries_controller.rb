@@ -21,7 +21,7 @@ class Volunteering::TimeEntriesController < Omega::Controller
       @entry = Volunteering::TimeEntry.new
       @entry.record = Volunteering::Record.find(params[:id])
       
-
+      
       ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |day|
         @entry.days.build(:day => day)
       end
@@ -36,17 +36,14 @@ class Volunteering::TimeEntriesController < Omega::Controller
   		@timesheets = params[:entries].values.collect{ 	|entry| 
   			                                                    if Volunteering::TimeEntry.find_by_record_id(entry["record_id"]).nil?
   			                                                    	@entry = Volunteering::TimeEntry.new(entry) 
-  			                                                    	@entry.save 
+  			                                                    	@entry.save! 
   			                                                    else
   													                @entry = Volunteering::TimeEntry.find_by_record_id(entry["record_id"]) 
   													                @entry.update_attributes(:week => entry["week"], :days_attributes => entry["days_attributes"])
   														        end 
   														 }
-  			
-  	#	 @timesheets.each(&:save!) 
-  		
-  		
-   	    redirect_to :root
+  
+   	    redirect_to :volunteering_positions
     end
     
     def all_timesheets 
@@ -55,15 +52,25 @@ class Volunteering::TimeEntriesController < Omega::Controller
       
       @position = Volunteering::Position.find(params[:id])
       
-      @records= Volunteering::Record.where('position_id = ?', @position.id)
+      start = Time.utc(@position.start.strftime('%Y-%m-%d %H:%M:%S'))
+           
+      @start = start - (start.wday-1)*24*60*60 - start.hour*60*60 - start.min*60 - start.sec
+
+      @start = @start.strftime('%Y-%m-%d')
+      
+      @records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',@position.id)
       
       @records.each do |r|
         @entry = Volunteering::TimeEntry.new 
         @entry.record_id = r.id
               
-       ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |d|
-       		@entry.days.build(:day => d)
-      	end unless @entry =  Volunteering::TimeEntry.find_by_record_id(r.id)
+        if Volunteering::TimeEntry.find_by_record_id(r.id).nil?      
+       		['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |d|
+       			@entry.days.build
+      		end 
+       	else
+       		@entry = Volunteering::TimeEntry.find_by_record_id(r.id)
+       	end
        	
        @entries << @entry
 

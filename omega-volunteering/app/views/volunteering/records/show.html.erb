@@ -1,13 +1,16 @@
-<%= context_box do %>
 
-<div class="page-content circle-corners-bottom  corners-top">
+<div class="content circle-corners-bottom-left corners-top">
 
+			<div class="heading-main">
 	
-<div class="signup-box">	
-	<h2 class="summary">
+				<h1 class="page-content">
 		<%= @record.position.name %>
-	</h2>
+		    	</h1>
 	
+		</div>
+
+<div class="main-box">	
+
 		<p class="summary"> 
 		
 		 <h3 class="application-form">Applicant Information</h3>
@@ -58,12 +61,11 @@
 		
 		
 </div>
-		
+		</div>
 	
 
   <%#= om_button(:icon => 'next') do %>
             <%#= link_to "Go To Volunteering Positions", volunteering_positions_url %>
         <%# end %>
 
-</div>
-     <% end %>
+
