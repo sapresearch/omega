@@ -29,6 +29,40 @@ class Volunteering::TimeEntriesController < Omega::Controller
       respond_with(@entry)
 
     end
+    
+    def new_timesheets
+       	       	              
+       @entries = Volunteering::TimeEntry.where('week = ?', params[:week])
+       @records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',params[:position])
+
+       if @entries.empty?
+       
+       		@entries = Array.new
+
+       		@records.each do |r|
+        		
+        		@entry = Volunteering::TimeEntry.new 
+        		@entry.record_id = r.id
+              
+#        		if Volunteering::TimeEntry.find_by_record_id(r.id).nil?      
+       			['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |d|
+       				@entry.days.build
+      		    end 
+      		    
+      		    @entries << @entry
+      		end
+      		
+ #      	else
+  
+ #      		@records.each do |r|
+ #      			@entry = Volunteering::TimeEntry.find_by_record_id(r.id)
+ #      		end
+       	end
+             
+       render :partial => 'new_timesheets'
+
+          	
+    end
 
     def create
   #    @entry = Volunteering::TimeEntry.create(params[:volunteering_time_entry])
@@ -42,7 +76,6 @@ class Volunteering::TimeEntriesController < Omega::Controller
   													                @entry.update_attributes(:week => entry["week"], :days_attributes => entry["days_attributes"])
   														        end 
   														 }
-  
    	    redirect_to :volunteering_positions
     end
     

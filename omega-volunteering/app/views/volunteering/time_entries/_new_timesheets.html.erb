@@ -1,59 +1,4 @@
-<% require_javascript 'new_time_entry' %>
-<% require_stylesheet 'thirdParty/date.f-0.5.0', 'omega_volunteering' %>
-
- 
- <div class="content circle-corners-bottom-left">
-    	
-		<div class="heading-main">
-	
-				<h1 class="page-content">
-      				Timesheets
-		    	</h1>
-	
-		</div>
-
-        <div class="right">
-      	<br/>
-        <%= om_button(:icon=>'sort-az', :small => true) do %>
-            <%= link_to 'sort A-Z', url_for(params.merge(:first_name => 'asc')) %>
-        <% end %>
-        <%= om_button(:icon=>'sort-za', :small => true) do %>
-            <%= link_to 'sort Z-A', url_for(params.merge(:first_name => 'desc')) %>
-        <% end %>
-
-      </div>
-       <br/>
-       
-       <p>
-       <strong> Volunteering Position: <%=@position.name%> </strong>
-       </p>
-       
-       <br/>
-       
-       <div id="box">
-    	<% if @records.empty? %>
-        <p>
-
-    	No Volunteers have been assigned yet!
-        </p>   
-	
-    	<%else%>
-    	
-    	
-    	Choose a week:
-    	<br/>
-    	<span data-tooltip="Previous Week" class="om-icon-only om-green-icon ui-icon-previous-week decrease"></span>
-         <%= text_field_tag 'weekDate', @start, :class => "datepickr", :'data-tooltip '=> 'Choose the Start of the Week' %>
-        <span data-tooltip="Next Week" class="om-icon-only om-green-icon ui-icon-next-week increase"></span>
-    	<%#= text_field_tag 'weekDate' , @start , :class => 'datepickr' %> 
-    	
-    	<%= hidden_field_tag 'position',@position.id %>
-    	
-    	<%end%>
-    	</div>
-       <div id="main-box">
-
-			<%= form_tag :action=> 'create' do %>
+		<%= form_tag :action=> 'create' do %>
 
    		
         
@@ -122,9 +67,5 @@
 
 		<% end %>
 
-
-
-	   </div>
-</div>
 
        

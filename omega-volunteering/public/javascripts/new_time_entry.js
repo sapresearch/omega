@@ -359,6 +359,8 @@ window.Date.prototype.isDayLightSavingsDay = function() {
 
 $(function() {
 
+    var position = document.getElementById('position').value;
+    
     // datepicker to select only a week not an actual day as weeks get recorded
     $('.datepickr').datepicker({
         firstDay:1,
@@ -371,12 +373,24 @@ $(function() {
         }, dateFormat: 'yy-mm-dd',
         onSelect: function(dateText) {
             $(this).val(dateText);
+            
+            $.ajax({
+        		type: "GET",
+       			url: "/volunteering/time_entries/new_timesheets",
+        		data: {  position: position, week: dateText} ,
+            
+        		success: function(html) {
+            	$("#main-box").html(html);
+        		}	
+    		});
+    
         },
         weekHeader: 'W' ,
         showWeek: true
 
     });
-    $('#main-box').find('span.decrease').click(function() {
+    
+    $('#box').find('span.decrease').click(function() {
         
         var ipt = $(this).next('input');
             
@@ -388,12 +402,22 @@ $(function() {
          
         var lastMonday = new Date(thisMonday.getFullYear(), thisMonday.getMonth(), day -7).f('yyyy-MM-dd');
 
+		     		
         ipt.val(lastMonday);
         
-
+         $.ajax({
+        		type: "GET",
+       			url: "/volunteering/time_entries/new_timesheets",
+        		data: {  position: position, week: lastMonday} ,
+            
+        		success: function(html) {
+            	$("#main-box").html(html);
+        		}	
+    		});
+        
     });
     
-     $('#main-box').find('span.increase').click(function() {
+     $('#box').find('span.increase').click(function() {
       
         var ipt = $(this).prev('input');
             
@@ -406,6 +430,16 @@ $(function() {
         var nextMonday = new Date(thisMonday.getFullYear(), thisMonday.getMonth(), day +7).f('yyyy-MM-dd');
 
         ipt.val(nextMonday);
+        
+         $.ajax({
+        		type: "GET",
+       			url: "/volunteering/time_entries/new_timesheets",
+        		data: {  position: position, week: nextMonday} ,
+            
+        		success: function(html) {
+            	$("#main-box").html(html);
+        		}	
+    		});
          
     });
 
