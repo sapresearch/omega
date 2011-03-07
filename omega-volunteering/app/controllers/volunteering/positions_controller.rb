@@ -78,8 +78,15 @@ class Volunteering::PositionsController < Omega::Controller
   end
 
   def mine
-    #@positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
-    @positions = Volunteering::Position.where('id = ?', Volunteering::Record.where('contact_id =? ', Contact.for(current_user)).first.position_id)
+    @postions = Array.new
+    
+    @my_records = Volunteering::Record.where('contact_id = ?', Contact.for(current_user))
+    @my_records.each do |r|
+    	@positions << Volunteering::Position.find(t.position_id) 
+    end
+    
+    @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
+
     breadcrumb 'My Positions' => :mine_volunteering_positions
     respond_with(@positions)
   end
