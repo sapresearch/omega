@@ -105,23 +105,22 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def create
-    record = params[:volunteering_record]
+ #   record = params[:volunteering_record]
 
 #    @record.contact_id = record['contact_attributes']['id'] if record['contact_attributes']
 #    @record.action = 'To Be Taken'
     @record = Volunteering::Record.create(params[:volunteering_record])
-    @record.action = 'To Be Taken'
+    @record.update_attributes(:action => 'To Be Taken')
     
-    @record.save
 #    @record = Volunteering::Record.create(params[:volunteering_record]) do |p|
 #      p.action = 'To Be Taken'
 #    end
     
-    @user = Contact.find(@record.contact_id)
+    #@user = Contact.find(@record.contact_id)
    
     
-    UserMailer.parental_approval(@user).deliver
-    respond_with(@record)
+    #UserMailer.parental_approval(@user).deliver
+    #respond_with(@record)
     
   end
   
