@@ -17,7 +17,7 @@
         <% if (!current_user.is_anonymous?) %>
 
             <%= link_to "My Assignments", mine_volunteering_positions_path %>
-            <%= link_to "Time Sheets", my_time_sheets_volunteering_positions_path %>
+            <%#= link_to "Time Sheets", my_time_sheets_volunteering_positions_path %>
 
 
             <%= with_permission(Volunteering::PERM_ADMIN) do %>

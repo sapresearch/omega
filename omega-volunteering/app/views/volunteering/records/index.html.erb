@@ -32,8 +32,9 @@
     </thead>
     <% if @records.empty? %>
         <h2> No Applications to Show!</h2>
-    <% end %>
+    <% else %>
     <%= render :partial => 'record_row', :collection => @records, :as => :record %>
+    <%end%>
   </table>
     <%= will_paginate @positions %>
   <div class="clear"></div>
