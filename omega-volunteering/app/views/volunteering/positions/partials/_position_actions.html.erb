@@ -30,6 +30,20 @@
           <%= om_button(:contact => true, :icon => 'clock') do %>
               <%= link_to 'Enroll a Volunteer', new_volunteer_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>         
           <% end %>
-	  <%end%>  
+	  <%end%> 
+	  
+	 <% unless current_user.is_anonymous? %>
+      <% if already_favorite?(position) %>
+          <%= om_button(:contact => true, :icon => 'favorite-remove') do %>
+              <%= link_to('Remove from Favorites', favorite_path(position), :remote => true, :'data-method' => :post, :'data-tooltip' => 'Remove this position to your favorites') %>
+          <% end %>
+      <% else %>
+          <%= om_button(:contact => true, :icon => 'favorite-add') do %>
+              <%= link_to('Add as Favorite', favorite_path(position), :remote => true, :'data-method' => :post,  :'data-tooltip' => 'Add this position to your favorites') %>
+          <% end %>
+      <% end %>
+      
+     <% end %>
+   
 	
 </div>
