@@ -25,6 +25,11 @@
 		  	<%end%>
           <%end%>
       <%end%>
-	  
+      
+      <%= with_permission(Volunteering::PERM_ADMIN) do %>
+          <%= om_button(:contact => true, :icon => 'clock') do %>
+              <%= link_to 'Enroll a Volunteer', new_volunteer_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>         
+          <% end %>
+	  <%end%>  
 	
 </div>
