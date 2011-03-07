@@ -110,7 +110,7 @@ class Volunteering::RecordsController < Omega::Controller
     @record = Volunteering::Record.new
 #    @record.contact_id = record['contact_attributes']['id'] if record['contact_attributes']
 #    @record.action = 'To Be Taken'
-    @record.update_attributes(params[:volunteering_record])
+    @record.create(params[:volunteering_record])
     @record.action = 'To Be Taken'
     
     @record.save
