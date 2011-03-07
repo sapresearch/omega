@@ -32,7 +32,7 @@
           <% end %>
 	  <%end%> 
 	  
-	 <% unless current_user.is_anonymous? %>
+	 <% if !current_user.is_anonymous? %>
       <% if already_favorite?(position) %>
           <%= om_button(:contact => true, :icon => 'favorite-remove') do %>
               <%= link_to('Remove from Favorites', favorite_path(position), :remote => true, :'data-method' => :post, :'data-tooltip' => 'Remove this position to your favorites') %>
