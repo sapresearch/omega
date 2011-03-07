@@ -302,7 +302,6 @@ span.form-text {
 	text-align: justify;
 	-moz-border-radius: 8px;
     -webkit-border-radius: 8px;
-    border-top-radius: 8px;
 }
 
 span.form-agreement {
@@ -319,7 +318,6 @@ span.form-agreement {
 	text-align: justify;
 	-moz-border-radius: 8px;
     -webkit-border-radius: 8px;
-    border-top-radius: 8px;
 	overflow-x: auto;
 }
 
@@ -501,7 +499,7 @@ legend.services {
     border-color: #ddd;
     border-style: solid;
     border-width: 1px 1px 1px;
-	font: bold Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	color: #3F3F3F;
     font-size: 1.2em;

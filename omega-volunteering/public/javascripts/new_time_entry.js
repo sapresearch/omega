@@ -359,7 +359,9 @@ window.Date.prototype.isDayLightSavingsDay = function() {
 
 $(function() {
 
-    var position = document.getElementById('position').value;
+      var position = document.getElementById('position').value;
+    
+    var week = document.getElementById('weekDate').value;
     
     // datepicker to select only a week not an actual day as weeks get recorded
     $('.datepickr').datepicker({
@@ -380,7 +382,7 @@ $(function() {
         		data: {  position: position, week: dateText} ,
             
         		success: function(html) {
-            	$("#main-box").html(html);
+            	$("#box").html(html);
         		}	
     		});
     
@@ -390,7 +392,7 @@ $(function() {
 
     });
     
-    $('#box').find('span.decrease').click(function() {
+    $('#main-box').find('span.decrease').click(function() {
         
         var ipt = $(this).next('input');
             
@@ -411,13 +413,15 @@ $(function() {
         		data: {  position: position, week: lastMonday} ,
             
         		success: function(html) {
-            	$("#main-box").html(html);
+            	$("#box").html(html);
         		}	
     		});
+    		
+    	
         
     });
     
-     $('#box').find('span.increase').click(function() {
+     $('#main-box').find('span.increase').click(function() {
       
         var ipt = $(this).prev('input');
             
@@ -437,10 +441,23 @@ $(function() {
         		data: {  position: position, week: nextMonday} ,
             
         		success: function(html) {
-            	$("#main-box").html(html);
+            	$("#box").html(html);
         		}	
     		});
          
     });
+    
+  
+    
+    var indeces = document.getElementById('timesheets').rows.length
+   
+  	for (i=0;i<indeces;i++)
+	{	
+	    document.getElementById('entries_'+i+'_week').value = week;
+	    
+
+	}
+    
+    
 
 });

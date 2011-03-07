@@ -12,16 +12,8 @@
 	
 		</div>
 
-        <div class="right">
-      	<br/>
-        <%= om_button(:icon=>'sort-az', :small => true) do %>
-            <%= link_to 'sort A-Z', url_for(params.merge(:first_name => 'asc')) %>
-        <% end %>
-        <%= om_button(:icon=>'sort-za', :small => true) do %>
-            <%= link_to 'sort Z-A', url_for(params.merge(:first_name => 'desc')) %>
-        <% end %>
-
-      </div>
+        
+      
        <br/>
        
        <p>
@@ -30,7 +22,13 @@
        
        <br/>
        
-       <div id="box">
+      
+       <div id="main-box">
+       	   	   
+       	   	   
+       <%= form_tag :action=> 'create' do %>
+
+    	
     	<% if @records.empty? %>
         <p>
 
@@ -45,24 +43,24 @@
     	<span data-tooltip="Previous Week" class="om-icon-only om-green-icon ui-icon-previous-week decrease"></span>
          <%= text_field_tag 'weekDate', @start, :class => "datepickr", :'data-tooltip '=> 'Choose the Start of the Week' %>
         <span data-tooltip="Next Week" class="om-icon-only om-green-icon ui-icon-next-week increase"></span>
-    	<%#= text_field_tag 'weekDate' , @start , :class => 'datepickr' %> 
     	
     	<%= hidden_field_tag 'position',@position.id %>
     	
+    	
     	<%end%>
-    	</div>
-       <div id="main-box">
+           	
 
-			<%= form_tag :action=> 'create' do %>
+        <div id="box">
 
-   		
+
+
         
     	<br/>
     	<% #hours_errors = [] %>
     	<% #= errors_for_form @entry %>
     
     
-  		<table  class="width-100">
+  		<table  id = "timesheets" class="width-100">
      	 <th class="ui-state-default">Volunteer</th>
      	 <th class="ui-state-default">Mon</th>
      	 <th class="ui-state-default">Tue</th>
@@ -124,6 +122,8 @@
 
 
 
+	   </div>
+	   
 	   </div>
 </div>
 

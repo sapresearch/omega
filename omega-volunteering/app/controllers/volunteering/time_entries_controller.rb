@@ -52,14 +52,13 @@ class Volunteering::TimeEntriesController < Omega::Controller
       		    @entries << @entry
       		end
       		
- #      	else
-  
- #      		@records.each do |r|
- #      			@entry = Volunteering::TimeEntry.find_by_record_id(r.id)
- #      		end
+         
        	end
+       	
+       	@date = params[:week]
              
-       render :partial => 'new_timesheets'
+        
+        render :partial => 'new_timesheets'
 
           	
     end
@@ -68,11 +67,11 @@ class Volunteering::TimeEntriesController < Omega::Controller
   #    @entry = Volunteering::TimeEntry.create(params[:volunteering_time_entry])
   #    respond_with(@entry)
   		@timesheets = params[:entries].values.collect{ 	|entry| 
-  			                                                    if Volunteering::TimeEntry.find_by_record_id(entry["record_id"]).nil?
+  			                                                    if Volunteering::TimeEntry.find_by_week_and_record_id(entry["week"],entry["record_id"]).nil?
   			                                                    	@entry = Volunteering::TimeEntry.new(entry) 
   			                                                    	@entry.save! 
   			                                                    else
-  													                @entry = Volunteering::TimeEntry.find_by_record_id(entry["record_id"]) 
+  													                @entry = Volunteering::TimeEntry.find_by_week_and_record_id(entry["week"],entry["record_id"]) 
   													                @entry.update_attributes(:week => entry["week"], :days_attributes => entry["days_attributes"])
   														        end 
   														 }
