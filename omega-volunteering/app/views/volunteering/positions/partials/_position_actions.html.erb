@@ -1,4 +1,4 @@
-<div id="actions-<%= position.id %>" class="position-actions">
+<div class="position-actions" id="actions-<%= position.id %>" >
   <%= with_permission(Volunteering::PERM_ADMIN) do %>
       <%= om_button(:contact => true, :icon => 'delete') do %>
           <%= link_to 'Delete', volunteering_position_path(position), :remote=> true,  :method=>:delete, :'data-tooltip' => 'Delete this position' %>
