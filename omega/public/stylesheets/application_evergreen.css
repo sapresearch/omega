@@ -124,6 +124,16 @@ h2 {
     padding: 0.2em;
 }
 
+h2.summary {
+	font-family: "Arial Rounded MT Bold";
+	font-size: 35px;
+	color: #666;
+	margin-top: -20px;
+	margin-left: -5px;
+	margin-bottom: -10px;
+}
+
+
 h2.application-form {
 	font-family:"Arial Rounded MT Bold";
 	font-size: 25px;
