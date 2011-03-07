@@ -16,7 +16,7 @@
  <div class="main-box">
   <ul id="records-list" class="item-list">
     <% if @records.empty? %>
-        <h2> No Applications to Show!</h2>
+        	<span class="text-style1">No Applications to Show! Apply for a Volunteering Opportunity Now! </span>
     <% end %>
     <% @records.each do |a| %>
         <%= render 'user_applications', :record => a %>

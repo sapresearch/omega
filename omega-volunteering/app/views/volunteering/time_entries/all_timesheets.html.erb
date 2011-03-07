@@ -15,11 +15,11 @@
         
       
        <br/>
-       
        <p>
-       <strong> Volunteering Position: <%=@position.name%> </strong>
+       <span class="heading-2">
+			Volunteering Position: <%=@position.name%>
+	   </span> 
        </p>
-       
        <br/>
        
       
@@ -32,7 +32,7 @@
     	<% if @records.empty? %>
         <p>
 
-    	No Volunteers have been assigned yet!
+    	<span class="text-style1">No Volunteers have been assigned yet!</span>
         </p>   
 	
     	<%else%>

@@ -174,12 +174,12 @@ h4 {
     padding: 2px;
 }
 
-h2.summary {
+span.heading-2 {
 	font-family: "Arial Rounded MT Bold";
-	font-size: 35px;
+	font-size: 25px;
 	color: #666;
 	margin-top: -20px;
-	margin-left: -10px;
+	margin-left: -5px;
 	margin-bottom: -10px;
 }
 
