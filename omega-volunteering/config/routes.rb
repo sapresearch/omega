@@ -45,6 +45,7 @@ Omega::Volunteering::Module.routes.draw do
     	collection do
     		get :all_timesheets
     		get :new_timesheets
+    		get :summary
     	end
     end
 

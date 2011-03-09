@@ -1,0 +1,80 @@
+<% require_javascript 'thirdParty/jquery.dataTables.min.js' %>
+<% require_javascript 'omega_volunteering_records', 'new_time_entry' %>
+<% require_stylesheet 'omega_volunteering' %>
+<% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
+
+<div class="content circle-corners-bottom corners-top">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+  					Timesheet Summary
+		    	</h1>
+	
+        </div>
+		
+
+   <div id="main-box">
+   	
+   	
+   	<p>
+   			
+
+
+   	</p>
+   	<p>
+   		
+   		
+   	</p>
+   	
+   	<br/>
+   	<p>
+	   <strong>Week: <%=session[:week] %>
+</strong>
+</p>
+	   <table class="width-100 clear" id="records-table">
+    			<thead>
+    				<tr>
+      					<th>Volunteer</th>
+      					<th>Mon</th>
+      					<th>Tue</th>
+      					<th>Wed</th>
+      					<th>Thurs</th>
+      					<th>Fri</th>
+      					<th>Sat</th>
+     					<th>Sun</th>
+
+    				</tr>
+    			</thead>
+   
+
+     		<% @entries.each do |entry| %>
+
+         			
+    		      <tr id="record-<%= entry.record.id %>">
+                   <td> <%=Contact.find(Volunteering::Record.find(entry.record_id).contact_id).first_name%></td>
+          
+                   <%entry.days.each do |d|%>
+                   
+                   	<td>
+                   		<%=d.hours%>
+                    </td>
+                   
+                   <%end%>
+
+                   
+                
+      	
+        
+                   </tr>
+
+     		<% end %>   
+     		
+
+ 			</table>  
+ 			
+ 			<%= om_button(:contact => true, :icon => 'apply') do %>
+              <%= link_to 'Edit', all_timesheets_volunteering_time_entries_url(:id=> @position), :'data-tooltip' => 'Apply for this position' %>
+		  	<%end%> 
+   </div>
+</div>

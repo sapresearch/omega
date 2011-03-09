@@ -34,7 +34,8 @@ class Volunteering::TimeEntriesController < Omega::Controller
        	       	              
        @entries = Volunteering::TimeEntry.where('week = ?', params[:week])
        @records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',params[:position])
-       @date = params[:week]
+       @start = params[:week]
+       session[:week] = params[:week]
 
        if @entries.empty?
        
@@ -52,9 +53,8 @@ class Volunteering::TimeEntriesController < Omega::Controller
       		    
       		    @entries << @entry
       		end
-      		
-    
        end
+       
                     
          	
     end
@@ -70,44 +70,62 @@ class Volunteering::TimeEntriesController < Omega::Controller
   													                @entry = Volunteering::TimeEntry.find_by_week_and_record_id(entry["week"],entry["record_id"]) 
   													                @entry.update_attributes(:week => entry["week"], :days_attributes => entry["days_attributes"])
   														        end 
+  														        
+  														        session[:week] = entry["week"]
   														 }
-   	    redirect_to :volunteering_positions
+   	    redirect_to summary_volunteering_time_entries_url(:id => session[:position])
+
+    end
+    
+    def summary
+    	
+    	@position = Volunteering::Position.find(params[:id])
+    	@records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',params[:id])
+
+        @entries = Volunteering::TimeEntry.where('week =? ', session[:week])
+    	
     end
     
     def all_timesheets 
+           
+      @position = Volunteering::Position.find(params[:id])
+      @records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',@position.id)
+      session[:position] = params[:id]
+      
+      @start = session[:week]	
+      
+      if @start.nil?
+      	 start = Time.utc(@position.start.strftime('%Y-%m-%d %H:%M:%S'))
+           
+         @start = start - (start.wday-1)*24*60*60 - start.hour*60*60 - start.min*60 - start.sec
+
+         @start = @start.strftime('%Y-%m-%d') 
+      end
+      
+     
       
       @entries = Array.new
-      
-      @position = Volunteering::Position.find(params[:id])
-      
-      start = Time.utc(@position.start.strftime('%Y-%m-%d %H:%M:%S'))
-           
-      @start = start - (start.wday-1)*24*60*60 - start.hour*60*60 - start.min*60 - start.sec
-
-      @start = @start.strftime('%Y-%m-%d')
-      
-      @records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',@position.id)
-      
+      	   
       @records.each do |r|
-        @entry = Volunteering::TimeEntry.new 
-        @entry.record_id = r.id
+        	
+        	@entry = Volunteering::TimeEntry.new 
+        	@entry.record_id = r.id
               
-        if Volunteering::TimeEntry.find_by_record_id(r.id).nil?      
+      if Volunteering::TimeEntry.find_by_record_id(r.id).nil?      
        		['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |d|
        			@entry.days.build
       		end 
-       	else
-       		@entry = Volunteering::TimeEntry.find_by_record_id(r.id)
-       	end
+      else
+       		@entry = Volunteering::TimeEntry.find_by_record_id_and_week(r.id,session[:week])
+   	  end
        	
-       @entries << @entry
+            @entries << @entry
 
       end  
-      
-     
-      respond_with(@position)
-      
-      
+           
     end
+  
+  
+  
        
   end

@@ -3,7 +3,7 @@
 <head>
   <title><%= "#{params[:controller] } #{controller.action_name}" %> </title>
   <% require_stylesheet 'application_evergreen', 'thirdParty/jquery-ui-1.8.4.custom' %>
-  <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.tipsy','application' %>
+  <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.tipsy','application', 'thirdParty/jquery.dataTables.min.js'  %>
   <%= csrf_meta_tag %>
   <%= flash_session_meta_tag %>
   <!--[if IE]>
