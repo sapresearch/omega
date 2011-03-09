@@ -26,14 +26,14 @@
 
           <p>
 
-         <%= f.hidden_field :week, :value => @date %>
+         <%= f.hidden_field :week, :value => start %>
      
           </p>
 
     
     	<%= f.hidden_field :record_id, :value =>  entry.record_id %>
     
-      	 	<%= render 'record_row', :entry => entry, :f => f, :start => @date %>
+      	 	<%= render 'record_row', :entry => entry, :f => f, :start => start %>
     
     	<%end%>
     	<% end %> 

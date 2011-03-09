@@ -111,8 +111,8 @@ class Volunteering::RecordsController < Omega::Controller
    
    @record.save
     
-  # @user = Contact.find(@record.contact_id)
-  # UserMailer.parental_approval(@user).deliver
+   @user = Contact.find(@record.contact_id)
+   UserMailer.parental_approval(@user).deliver
   
    respond_with(@record)
     

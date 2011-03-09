@@ -29,18 +29,23 @@
         </p>   
 	
     	<%else%>
-    	<br/>
-    	<p>
-    	Choose a week:
-    	<br/>
     	
+    	<p>
+    		
+    		<br/>
+    		
+        	
+    	<strong>Choose a week:</strong>
+    	<br/>
+    	<br/>
     	<span data-tooltip="Previous Week" class="om-icon-only om-green-icon ui-icon-previous-week decrease"></span>
          <%= text_field_tag 'weekDate', @start, :class => "datepickr", :'data-tooltip '=> 'Choose the Start of the Week' %>
         <span data-tooltip="Next Week" class="om-icon-only om-green-icon ui-icon-next-week increase"></span>
     	
     	<%= hidden_field_tag 'position',@position.id %>
     	</p>
-    	<br/>
+
+
     	  <div id="box">
 
   			<table class="width-100 clear" id="records-table">
