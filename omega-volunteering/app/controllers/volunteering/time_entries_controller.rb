@@ -34,6 +34,7 @@ class Volunteering::TimeEntriesController < Omega::Controller
        	       	              
        @entries = Volunteering::TimeEntry.where('week = ?', params[:week])
        @records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',params[:position])
+       @date = params[:week]
 
        if @entries.empty?
        
@@ -52,21 +53,16 @@ class Volunteering::TimeEntriesController < Omega::Controller
       		    @entries << @entry
       		end
       		
-         
-       	end
-       	
-       	@date = params[:week]
-             
-        
-        render :partial => 'new_timesheets'
-
-          	
+    
+       end
+                    
+         	
     end
 
     def create
   #    @entry = Volunteering::TimeEntry.create(params[:volunteering_time_entry])
   #    respond_with(@entry)
-  		@timesheets = params[:entries].values.collect{ 	|entry| 
+  		@timesheets = params[:entries].values.collect{ |entry| 
   			                                                    if Volunteering::TimeEntry.find_by_week_and_record_id(entry["week"],entry["record_id"]).nil?
   			                                                    	@entry = Volunteering::TimeEntry.new(entry) 
   			                                                    	@entry.save! 

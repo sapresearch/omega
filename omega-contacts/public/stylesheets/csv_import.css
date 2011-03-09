@@ -8,13 +8,6 @@ div.csv-container{
 
 }
 
-div.content{
-    height: auto;
-    overflow:hidden;
-    min-height:70px;
-    width: 100%;
-
-}
 
 div.helptext{
     height: auto;
@@ -22,6 +15,7 @@ div.helptext{
     -moz-border-radius: 4px;
     background: #ffffdd;
     padding: 0.5em;
+    margin-top: 10px;
     border: 1px solid #dddddd;
 
 
@@ -222,23 +216,25 @@ span.read-more{
 #import_list{
     float:left;
 	width:220px;
-    height: 500px;
+    height: 600px;
 	top:4px;
 	left:4px;
 	padding: 0;
     overflow-y: scroll;
     overflow-x: hidden;
-    background: url("/images/bg_import_list.png") repeat-x scroll center bottom transparent;
+  /* background: url("/images/bg_import_list.png") repeat-x scroll center bottom transparent;*/
 }
 
 #import_preview{
-	width:698px;
+	width:685px;
     float: right;
-    height: 500px;
+    min-height: 600px;
+        height: 600px;
+
 	top:4px;
-    overflow-y:scroll;
+	overflow-y: scroll;
     overflow-x: hidden;
-    background: url("/images/bg_import_list_2.png") repeat-x scroll center bottom transparent;
+  /*  background: url("/images/bg_import_list_2.png") repeat-x scroll center bottom transparent;*/
     
 }
 

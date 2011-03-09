@@ -1,25 +1,25 @@
+   
+      <%= form_tag :action=> 'create' do %>
 
-		
-		<%= form_tag :action=> 'create' do %>
 
-   		
-        
-    	<br/>
-    	<% #hours_errors = [] %>
-    	<% #= errors_for_form @entry %>
-    
-    
-  		<table  class="width-100">
-     	 <th class="ui-state-default">Volunteer</th>
-     	 <th class="ui-state-default">Mon</th>
-     	 <th class="ui-state-default">Tue</th>
-     	 <th class="ui-state-default">Wed</th>
-     	 <th class="ui-state-default">Thur</th>
-     	 <th class="ui-state-default">Fri</th>
-     	 <th class="ui-state-default">Sat</th>
-     	 <th class="ui-state-default">Sun</th>
-          
+        <table class="width-100 clear" id="records-table">
+    			<thead>
+    				<tr>
+      					<th class="ui-state-default">
+      						Volunteer </th>
+      					<th class="ui-state-default">Mon</th>
+      					<th class="ui-state-default">Tue</th>
+      					<th class="ui-state-default">Wed</th>
+      					<th class="ui-state-default">Thurs</th>
+      					<th class="ui-state-default">Fri</th>
+      					<th class="ui-state-default">Sat</th>
+     					<th class="ui-state-default">Sun</th>
 
+    				</tr>
+    			</thead>
+   
+            
+    		
     	<% @entries.each_with_index do |entry, index| %>
 
     	<%= fields_for "entries[#{index}]", entry do |f| %>
@@ -32,32 +32,13 @@
 
     
     	<%= f.hidden_field :record_id, :value =>  entry.record_id %>
-
-   
     
-      	<tr class="<%= cycle("even", "odd") -%>">
-      		<td> <%=Contact.find(Volunteering::Record.find(entry.record_id).contact_id).first_name%></td>
-      	<%entry.days.each_with_index do |ed| %>
-          <%= f.fields_for "days", ed do |d| %>
-                <% day = d.object %>
-                <% hours_errors << day.errors unless day.errors.empty? %>
-
-                <%= d.hidden_field :id%>
-                <%= d.hidden_field :day, :value => day.day%>
-                <td>
-                  <%= d.text_field :hours, :class => 'inputSmall'%>
-                  <%= hours_errors.size unless day.errors.empty? %>
-                </td>
-                
-          <% end %>
-      	<% end %>
-                    
-      	</tr>
-
+      	 	<%= render 'record_row', :entry => entry, :f => f, :start => @date %>
     
     	<%end%>
-    	<% end %>   
-          </table>
+    	<% end %> 
+    	
+    	</table>  
 
     	</p>
    	 	<p>

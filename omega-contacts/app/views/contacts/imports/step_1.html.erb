@@ -1,38 +1,45 @@
 <% require_stylesheet 'csv_import' %>
 <% require_javascript 'import' %>
+
 <%= content_for :explanation do %>
     <%= render :partial => 'contacts/partials/steps' %>
 <% end %>
 
-
-<h1 class="page-content-evergreen corners-top">
-Import Wizard Introduction - Step (1/4)  </h1>
-<div class="page-content-evergreen corners-bottom">
-
-  <div class="helptext ">
-
-    This wizard allows easy import of contact records from other applications into Omega. <br/> For example,
-    if your organization has contacts exported from a data-source in csv format, you can 'import' <br/> these contacts for use in omega
-    with the help of this wizard.
-
-  </div>
+    <div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+					Import Wizard Introduction - Step (1/4)  
+		    	</h1>
+	
+		</div>
 
 
-  <br/>
-  <br/>
+  		<div class="helptext ">
+
+    	This wizard allows easy import of contact records from other applications into Omega. <br/> For example,
+    	if your organization has contacts exported from a data-source in csv format, you can 'import' <br/> these contacts for use in omega
+    	with the help of this wizard.
+
+  		</div>
+
+
+ 		 <br/>
+ 		 <br/>
 
   
-<%= om_button(:icon=>'next') do %>
-    <%= link_to 'Continue', csv_import_wizard_contact_imports_url(:step => '2')%>
-    <% session[:last_page] = "intro" %>
-<%end%>
+		<%= om_button(:icon=>'next') do %>
+    		<%= link_to 'Continue', csv_import_wizard_contact_imports_url(:step => '2')%>
+    		<% session[:last_page] = "intro" %>
+		<%end%>
 
-<%= om_button(:icon=>'cancel') do %>
-    <%= link_to 'Cancel', contacts_url()%>
-<%end%>
+		<%= om_button(:icon=>'cancel') do %>
+    		<%= link_to 'Cancel', contacts_url()%>
+		<%end%>
 
 
-</div>
+	</div>
 
 
 

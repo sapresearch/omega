@@ -75,16 +75,19 @@ class Contact < Omega::Model
   end
 
   def sync_to_user
+  	unless user.nil?
     SYNC_FIELDS.each { |attr| user.send("#{attr}=", send(attr)) }
     user.save(:validate => false)
     mail = UserMailer.registration_confirmation(user).deliver
     Delivery.create(:message_id => mail.message_id, :recipient => user.email,
 :content => '', :status => 'Sent' )
-
+   end
   end
 
-  def synced?
+ def synced?
+ 	unless user.nil?
     SYNC_FIELDS.all? { |attr| send(attr) == user.send(attr) }
+   end
   end
 
   private

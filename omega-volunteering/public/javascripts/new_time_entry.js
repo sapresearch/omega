@@ -359,9 +359,7 @@ window.Date.prototype.isDayLightSavingsDay = function() {
 
 $(function() {
 
-      var position = document.getElementById('position').value;
-    
-    var week = document.getElementById('weekDate').value;
+    var position = document.getElementById('position').value;
     
     // datepicker to select only a week not an actual day as weeks get recorded
     $('.datepickr').datepicker({
@@ -382,7 +380,6 @@ $(function() {
         		data: {  position: position, week: dateText} ,
             
         		success: function(html) {
-            	$("#box").html(html);
         		}	
     		});
     
@@ -410,10 +407,9 @@ $(function() {
          $.ajax({
         		type: "GET",
        			url: "/volunteering/time_entries/new_timesheets",
-        		data: {  position: position, week: lastMonday} ,
+        		data: {  position: position, week: lastMonday},
             
         		success: function(html) {
-            	$("#box").html(html);
         		}	
     		});
     		
@@ -441,23 +437,10 @@ $(function() {
         		data: {  position: position, week: nextMonday} ,
             
         		success: function(html) {
-            	$("#box").html(html);
         		}	
     		});
          
     });
     
   
-    
-    var indeces = document.getElementById('timesheets').rows.length
-   
-  	for (i=0;i<indeces;i++)
-	{	
-	    document.getElementById('entries_'+i+'_week').value = week;
-	    
-
-	}
-    
-    
-
 });

@@ -1,21 +1,22 @@
 <% require_stylesheet 'csv_import' %>
 <% require_javascript 'import' %>
 
-<h1 class="page-content-evergreen corners-top">
-
-  Map CSV Fields to Omega Fields - Step (3/4)
-
-</h1>
-
-<div class="page-content-evergreen corners-bottom">
 <%= content_for :explanation do %>
     <%= render :partial => 'contacts/partials/steps' %>
 <% end %>
 
+ <div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+  Map CSV Fields to Omega Fields - Step (3/4)
 
+		    	</h1>
+	
+  </div>
   <div class="csv-container">
 
-    <div class="content">
 
       <%= form_tag '/contacts/imports/update_csv' do %>
           
@@ -113,7 +114,6 @@
       <%end%>
     </div>
 
-  </div>
 
 </div>
 
