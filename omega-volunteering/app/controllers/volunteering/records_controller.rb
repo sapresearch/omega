@@ -83,7 +83,7 @@ class Volunteering::RecordsController < Omega::Controller
     @record.contact.addresses.build
     @record.contact.phone_numbers.build
     
-
+    respond_with(@record)
   end
 
   def new_volunteer
@@ -94,8 +94,7 @@ class Volunteering::RecordsController < Omega::Controller
       c.phone_numbers.build
     end 
     
-    @record.contact.addresses.build
-    @record.contact.phone_numbers.build
+    
     respond_with(@record)
   end
 
