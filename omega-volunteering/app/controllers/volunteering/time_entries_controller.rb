@@ -89,7 +89,7 @@ class Volunteering::TimeEntriesController < Omega::Controller
     def all_timesheets 
            
       @position = Volunteering::Position.find(params[:id])
-      @records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',@position.id)
+      @records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',params[:id])
       session[:position] = params[:id]
       
       @start = session[:week]	
