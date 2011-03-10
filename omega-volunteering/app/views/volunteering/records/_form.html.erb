@@ -10,6 +10,8 @@
 
     <%# if @record.contact.new_record? %>
     <%= f.fields_for :contact do |c| %>
+    
+       <%= c.hidden_field :id %>
 	
 	   <h3 class="application-form">PERSONAL INFORMATION </h3> 
         <p>

@@ -73,6 +73,7 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def new
+  	
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
     @record.contact = Contact.for(current_user)
@@ -103,7 +104,7 @@ class Volunteering::RecordsController < Omega::Controller
 
   def create
   
-   @record = Volunteering::Record.new(params[:volunteering_record])
+   @record = Volunteering::Record.create(params[:volunteering_record])
    @record.action = 'To Be Taken'
    @record.save
     
