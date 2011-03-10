@@ -103,7 +103,8 @@
 	      <%= f.label :volunteering_reason %> <div class="mandatory-field"></div>
           <%= f.text_area :volunteering_reason, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
 		</p>
-					    <%= f.text_field :position_id %>
+					    <%= f.hidden_field :position_id %>
+					    <%= f.hidden_field :contact_id, :value => @contact.id %>
 
 				
 		<p>
