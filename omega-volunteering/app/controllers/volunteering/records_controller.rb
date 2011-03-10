@@ -73,7 +73,8 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def new
-  	
+  	    
+  	 @contact = Contact.find(1)
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
 
@@ -82,7 +83,6 @@ class Volunteering::RecordsController < Omega::Controller
       c.phone_numbers.build
     end 
     
-    @contact = Contact.find_by_user_id(current_user)
     
     respond_with(@record)
   end
