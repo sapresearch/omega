@@ -8,7 +8,7 @@
 
 
     <%# if @record.contact.new_record? %>
-    <%= f.fields_for :contact do |c| %>
+    <%= f.fields_for :contact, @contact do |c| %>
     	
 	   <h3 class="application-form">PERSONAL INFORMATION </h3> 
         <p>

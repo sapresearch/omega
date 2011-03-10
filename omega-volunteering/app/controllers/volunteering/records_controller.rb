@@ -82,7 +82,7 @@ class Volunteering::RecordsController < Omega::Controller
       c.phone_numbers.build
     end 
     
-    @record.contact = Contact.for(current_user)
+    @contact = Contact.for(current_user)
     
     respond_with(@record)
   end
@@ -105,6 +105,7 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def create
+   
    contact = params[:volunteering_record].delete(params[:contact_attributes])
 
    @record = Volunteering::Record.create(params[:volunteering_record])
