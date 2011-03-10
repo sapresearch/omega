@@ -82,7 +82,7 @@ class Volunteering::RecordsController < Omega::Controller
       c.phone_numbers.build
     end 
     
-    @record.contact = Contact.for(current_user)
+  #  @record.contact = Contact.for(current_user)
 
     respond_with(@record)
   end
