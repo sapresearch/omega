@@ -75,13 +75,11 @@ class Volunteering::RecordsController < Omega::Controller
   def new
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
-    @record.build_contact do |c|
+    @record.contact = Contact.for(current_user)
+    @record.contact do |c|
       c.addresses.build
       c.phone_numbers.build
-    end unless @record.contact = Contact.for(current_user)
-    
-    @record.contact.addresses.build
-    @record.contact.phone_numbers.build
+    end  
     
     respond_with(@record)
   end
