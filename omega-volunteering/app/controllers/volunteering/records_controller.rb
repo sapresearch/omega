@@ -73,8 +73,7 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def new
-  	    
-  	 @contact = Contact.find(1)
+  	
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
 
@@ -83,11 +82,13 @@ class Volunteering::RecordsController < Omega::Controller
       c.phone_numbers.build
     end 
     
+    @contact = Contact.for(current_user)
     
     respond_with(@record)
   end
 
   def new_volunteer
+   
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
     @record.build_contact do |c|
@@ -105,9 +106,12 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def create
-   
-   contact = params[:volunteering_record].delete(params[:contact_attributes])
+   contact = params[:volunteering_record][:contact]
+   params[:volunteering_record].delete(:contact)
+    
+   logger.debug("Params^^^^^^^^^^^55555555555555555#{ params[:volunteering_record] }")
 
+   
    @record = Volunteering::Record.create(params[:volunteering_record])
    @record.action = 'To Be Taken'
    @record.save

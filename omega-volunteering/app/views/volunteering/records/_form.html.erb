@@ -13,7 +13,7 @@
 	   <h3 class="application-form">PERSONAL INFORMATION </h3> 
         <p>
           <%= c.label :title %> <div class="mandatory-field"></div>
-          <%= c.select :title, %w{Mr Miss Ms Mrs} ,{},:selected => @record.contact.title , :include_blank => false  %>
+          <%= c.select :title, %w{Mr Miss Ms Mrs} ,{},:selected => '' , :include_blank => false  %>
         </p>
 
         <p>

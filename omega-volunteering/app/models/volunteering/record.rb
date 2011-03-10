@@ -3,8 +3,13 @@ class Volunteering::Record < Omega::Model
   MAX_RECORDS_PER_PAGE = 100
 
   belongs_to  :position, :inverse_of => :records
-  has_one  :contact, :validate => false
+  belongs_to  :contact, :validate => false
   has_many    :time_entries
+  
+  
+  before_validation( :on => :new) do
+      self.contact = Contact.for(current_user)
+  end
         
   before_validation( :on => :create) do
       self.status = "Applied"
@@ -12,7 +17,6 @@ class Volunteering::Record < Omega::Model
 
   default_scope order('created_at desc')
 
-  accepts_nested_attributes_for :contact
 
   before_validation(:on => :create) do
       self.status = "Applied"
