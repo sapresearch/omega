@@ -6,6 +6,8 @@ class Volunteering::Record < Omega::Model
   belongs_to  :contact, :validate => false
   has_many    :time_entries
     
+  attr_accessible :contact_attributes
+    
   before_validation( :on => :create) do
       self.status = "Applied"
   end

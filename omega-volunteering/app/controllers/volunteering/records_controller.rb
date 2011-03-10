@@ -102,8 +102,8 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def create
-  	   
-   @record = Volunteering::Record.create(params[:volunteering_record])
+  
+   @record = Volunteering::Record.new(params[:volunteering_record])
    @record.action = 'To Be Taken'
    @record.save
     
