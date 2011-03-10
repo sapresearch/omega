@@ -82,8 +82,8 @@ class Volunteering::RecordsController < Omega::Controller
       c.phone_numbers.build
     end 
     
-  #  @record.contact = Contact.for(current_user)
-
+    @record.contact = Contact.for(current_user)
+    
     respond_with(@record)
   end
 
@@ -105,10 +105,15 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def create
-  logger.debug("Params^^^^^^^^^^^^^^^^^^^#{params[:volunteering_record]}")
-   @record = Volunteering::Record.new(params[:volunteering_record])
+   contact = params[:volunteering_record].delete(params[:contact_attributes])
+
+   @record = Volunteering::Record.create(params[:volunteering_record])
    @record.action = 'To Be Taken'
    @record.save
+    
+   @contact = Contact.find(@record.contact_id)
+   @contact.update_attributes(contact)
+   
     
    @user = Contact.find(@record.contact_id)
    UserMailer.parental_approval(@user).deliver
