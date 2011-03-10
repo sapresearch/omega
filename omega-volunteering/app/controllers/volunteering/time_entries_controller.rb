@@ -111,13 +111,15 @@ class Volunteering::TimeEntriesController < Omega::Controller
         	@entry = Volunteering::TimeEntry.new 
         	@entry.record_id = r.id
               
-      if Volunteering::TimeEntry.find_by_record_id(r.id).nil?      
-       		['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |d|
-       			@entry.days.build
-      		end 
-      else
+            if Volunteering::TimeEntry.find_by_record_id(r.id).nil?      
+       		    ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |d|
+       			   @entry.days.build
+      		    end 
+            else
+       		
        		@entry = Volunteering::TimeEntry.find_by_record_id_and_week(r.id,session[:week])
-   	  end
+   	        
+   	        end
        	
             @entries << @entry
 
