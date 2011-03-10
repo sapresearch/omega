@@ -6,13 +6,10 @@
 
     <%= errors_for_form @record %>
 
-    <%= f.hidden_field :position_id %>
 
     <%# if @record.contact.new_record? %>
     <%= f.fields_for :contact do |c| %>
-    
-       <%= c.hidden_field :id %>
-	
+    	
 	   <h3 class="application-form">PERSONAL INFORMATION </h3> 
         <p>
           <%= c.label :title %> <div class="mandatory-field"></div>
@@ -106,7 +103,8 @@
 	      <%= f.label :volunteering_reason %> <div class="mandatory-field"></div>
           <%= f.text_area :volunteering_reason, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
 		</p>
-		
+					    <%= f.text_field :position_id %>
+
 				
 		<p>
 	      <%= f.label :my_idea %>
@@ -227,7 +225,7 @@
 			
 	    <span class="form-text-plain"> 
 		<%= f.check_box :agreement%> <span class="application-form-content">I Agree</span>		<br/>
-			
+
 
 		</span>
 		</p>
