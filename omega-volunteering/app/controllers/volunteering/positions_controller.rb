@@ -82,7 +82,7 @@ class Volunteering::PositionsController < Omega::Controller
     
     @my_records = Volunteering::Record.where('contact_id = ?', Contact.for(current_user))
     @my_records.each do |r|
-    	@positions << Volunteering::Position.find(t.position_id) 
+    	@positions << Volunteering::Position.find(r.position_id) 
     end
     
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
