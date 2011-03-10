@@ -64,12 +64,11 @@
     			</thead>
    
 
-     		<% @entries.each_with_index do |entry, index| %>
+     		<%= @entries.each_with_index do |entry, index| %>
 
     			<%= fields_for "entries[#{index}]", entry do |f| %>
          			
     		    <%#= render 'record_row', :entry => entry, :f => f, :start => @start %>
- <%=entry%>
     			<%end%>
      		<% end %>   
      		
