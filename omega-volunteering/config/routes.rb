@@ -27,6 +27,7 @@ Omega::Volunteering::Module.routes.draw do
       collection do
         get :my_applications
         get :pending
+        put :create_volunteer
         get :newest
         get :completed
         get :admin_page

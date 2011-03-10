@@ -96,6 +96,7 @@ class Volunteering::RecordsController < Omega::Controller
       c.phone_numbers.build
     end 
     
+    @contact = Contact.new
     
     respond_with(@record)
   end
@@ -106,12 +107,9 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def create
-   contact = params[:volunteering_record][:contact]
-   params[:volunteering_record].delete(:contact)
-    
-   logger.debug("Params^^^^^^^^^^^55555555555555555#{ params[:volunteering_record] }")
-
    
+   contact = params[:volunteering_record][:contact]
+   params[:volunteering_record].delete(:contact) 
    @record = Volunteering::Record.create(params[:volunteering_record])
    @record.action = 'To Be Taken'
    @record.save
@@ -120,6 +118,24 @@ class Volunteering::RecordsController < Omega::Controller
    @contact.update_attributes(contact)
    
     
+   @user = Contact.find(@record.contact_id)
+   UserMailer.parental_approval(@user).deliver
+  
+   respond_with(@record)
+    
+  end
+  
+  def create_volunteer
+   
+   contact = params[:volunteering_record][:contact]
+   params[:volunteering_record].delete(:contact) 
+   @record = Volunteering::Record.create(params[:volunteering_record])
+   @record.action = 'To Be Taken'
+   @record.save
+    
+   @contact = Contact.find(@record.contact_id)
+   @contact.update_attributes(contact)
+   
    @user = Contact.find(@record.contact_id)
    UserMailer.parental_approval(@user).deliver
   

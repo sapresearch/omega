@@ -2,19 +2,18 @@
 <% require_javascript 'thirdParty/jquery.timepicker', 'new_volunteering_position', 'jquery.tokeninput' %>
 
 
-<%= form_for(@record) do |f| %>
+<%= form_for @record, :html => {:action => "create_volunteer", :method => :put} do |f| %>
 
     <%= errors_for_form @record %>
 
-    <%= f.hidden_field :position_id %>
 
     <%# if @record.contact.new_record? %>
-    <%= f.fields_for :contact do |c| %>
-	
+    <%= f.fields_for :contact, @contact do |c| %>
+    	
 	   <h3 class="application-form">PERSONAL INFORMATION </h3> 
         <p>
-          <%= c.label :title %>
-          <%= c.select :title, options_for_select(Contact::TITLES) %>
+          <%= c.label :title %> <div class="mandatory-field"></div>
+          <%= c.select :title, %w{Mr Miss Ms Mrs} ,{},:selected => '' , :include_blank => false  %>
         </p>
 
         <p>
@@ -23,7 +22,7 @@
         </p>
 
         <p>
-          <%= c.label :last_name %>
+          <%= c.label :last_name %> <div class="mandatory-field"></div>
           <%= c.text_field :last_name , :'data-tooltip' => 'Plese type in your last name' %>
         </p>
 		
@@ -33,7 +32,7 @@
         </p>
 		
         <p>
-          <%= c.label :primary_email %>
+          <%= c.label :primary_email %> <div class="mandatory-field"></div>
           <%= c.text_field :email , :'data-tooltip' => 'Plese type in your primary email'%>
         </p>
 
@@ -83,41 +82,30 @@
 		<h3 class="application-form">EMERGENCY CONTACT INFO</h3>
 		<p>
 			
-        <%= c.label :contact_name%>
-		<%= c.text_field :emergency_contact_name%>
+        <%= c.label :contact_name%>  <div class="mandatory-field"></div>
+		<%= c.text_field :emergency_contact_name%>  
 
 		</p>
 		
 		<p>
 			
-        <%= c.label :contact_number%>
+        <%= c.label :contact_number%><div class="mandatory-field"></div>
 		<%= c.text_field :emergency_contact_number%>
 
 		</p>
-		
-		<h3 class="application-form">VOLUNTEER HISTORY</h3>
-		
-		<p>
-	      <%= c.label :volunteered_with_us_before? %>
-          <%= c.check_box :volunteered_before, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
-		</p>
-		
-		<p>
-			<br/>
-	      <%= c.label "if yes, when and where" %>
-          <%= c.text_area :volunteerd_when_where, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
-		</p>
-		
+			
 		<%end%>
 		
 	    <h3 class="application-form">WHAT I BRING</h3>
 
 
 		<p>
-	      <%= f.label :volunteering_reason %>
+	      <%= f.label :volunteering_reason %> <div class="mandatory-field"></div>
           <%= f.text_area :volunteering_reason, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
 		</p>
-		
+					    <%= f.hidden_field :position_id %>
+					    <%= f.hidden_field :contact_id, :value => @contact.id %>
+
 				
 		<p>
 	      <%= f.label :my_idea %>
@@ -127,7 +115,7 @@
 		<%= f.fields_for :contact do |c| %>
 		
 		<p>
-          <%= c.label "Skills/Qualifications" %>
+          <%= c.label "Skills/Qualifications" %> <div class="mandatory-field"></div>
           <%= c.text_field :skills_values , :'data-tooltip' => 'Plese type in your skills, seperated by comma: e.g. thougtful, helpful' %>
         </p>
 
@@ -152,13 +140,13 @@
 		</p>
 		
 		<p>
-		  <%= c.label "parent's name" %>
+		  <%= c.label "parent's name" %> <div class="mandatory-field"></div>
           <%= c.text_field :parent_name, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
 	
 	 	</p>
 		
 		<p>
-		  <%= c.label "parent's email" %>
+		  <%= c.label "parent's email" %> <div class="mandatory-field"></div>
           <%= c.text_field :parent_email, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
 	
 	 	</p>
@@ -168,15 +156,18 @@
 		<h3 class="application-form">AVAILABILITY</h3>
 		
 		<p>
-	      <%= f.label :can_commit_to %>
+	      <%= f.label :can_commit_to %> <div class="mandatory-field"></div>
+		  <br/>
+		  <span class="checkbox-block">
 		  <% ['Event Only', 'Casual', 'Up to 3 months', 'More than 3 months','# of hours per week' ].each do |o|%>
-          <span class="radio-button-set"><%= f.radio_button :availability, o %> <%=o%>	<br/>
+          <%= f.radio_button :availability, o %> <%=o%>	<br/> 
 		  <%end%>
-		  </span>
+          </span>
 		</p>
 		
-			
+		
 		<p>
+			<br/>
 		  <%= f.label :Number_of_hours_per_week %> 
           <%= f.text_field :hours_per_week, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
 
@@ -184,16 +175,15 @@
 				
 		<p>
 			<br/>
-	      <%= f.label :time_of_the_day %>
-          <span class="check-box-set"> Weekday <%= f.check_box :day_preference%> <%= f.select :day_time, %w{DayTime Evening} %>	<br/>
-		  Weekend <%= f.check_box :evening_preference%> <%= f.select :evening_time, %w{DayTime Evening} %>
-		  </span>
+	      <%= f.label :time_of_the_day %> <div class="mandatory-field"></div>
+          <%= f.select :day_time, ['Weekdays','Week Nights','Weekend Days','Weekend Nights'] %>	<br/>
+		
 		</p>
 		
 		
 		
 		<p>
-		  <%= f.label :can_start_on %> 
+		  <%= f.label :can_start_on %> <div class="mandatory-field"></div>
           <%= f.text_field :start_date, :class=>'datepickr',:'data-tooltip' => 'Plese type in your interests, seperated by comma', :value => 'date' %>	
 	      <%= f.text_field :start_time, :class=>'tpickr', :'data-tooltip' => 'Plese type in your interests, seperated by comma', :value => "time" %>	
 
@@ -234,17 +224,12 @@
 		
 		<p>
 			
-	    <span class="form-text-plain">
-		<%= f.check_box :agreement%> <strong>I Agree</strong>		<br/>
-			
-		<%= f.fields_for :contact do |c|%>
-			
-		    <%= c.check_box :no_bulk_emails%>  Evergreen respects your privacy. Contact information is collected to send you information about Evergreen programs, events, and special appeals. This includes the regular volunteer newsletter. Please tick this box if you <strong>DO NOT</strong> wish to receive these benefits.
-				
-		<%end%>	
+	    <span class="form-text-plain"> 
+		<%= f.check_box :agreement%> <span class="application-form-content">I Agree</span>		<br/>
+
+
 		</span>
 		</p>
-        <%= f.hidden_field :contact_id %>
     
 		<p>
 		

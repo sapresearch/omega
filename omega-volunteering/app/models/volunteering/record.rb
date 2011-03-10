@@ -5,12 +5,7 @@ class Volunteering::Record < Omega::Model
   belongs_to  :position, :inverse_of => :records
   belongs_to  :contact, :validate => false
   has_many    :time_entries
-  
-  
-  before_validation( :on => :new) do
-      self.contact = Contact.for(current_user)
-  end
-        
+          
   before_validation( :on => :create) do
       self.status = "Applied"
   end
