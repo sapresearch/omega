@@ -683,10 +683,12 @@ tr.odd {
 }
 
 #content_box{
+	position: relative;
     width: 950px;
     background:#F7F7F7;
 	min-height: 650px;
-	margin: 13px auto 2px;
+	margin: -25px auto 2px;
+	z-index:1;
 
 }
 
