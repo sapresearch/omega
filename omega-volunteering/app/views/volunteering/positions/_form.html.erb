@@ -23,18 +23,28 @@
         <%= f.text_field :hours, :value=> 1, :class => "inputSmall", :'data-tooltip '=> 'approximate number of hours per week needed' %>
         <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
       </p>
+      
+      <p>
+        <%= f.label :volunteers_required %>
+        <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
+        <%= f.text_field :volunteers_required,:value => 1,:class => "inputSmall" %>
+        <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
+      </p>
+      <br/>
       <p>
         <%= f.label :reoccurs %>
-        <%= f.radio_button :recurrent, false %>
+        <%= f.radio_button :recurrent, true, :checked => true %>
       </p>
       
       <p>		
         <%= f.label :one_time_only %>
-        <%= f.radio_button :recurrent, true %>
+        <%= f.radio_button :recurrent, false %>
       </p>
 
       <div id="non_recurrent">
-        <br/>
+        
+        <h3 class="application-form">Timeline</h3> 
+
         <p>
           <%= f.label :start_date %>
           <%= f.text_field :start_date, :class=>'datepickr', :autocomplete => 'off' %>
@@ -57,20 +67,15 @@
 
       <%= recurrence(f) %>
 
-    <p>
-        <%= f.label :Num_Volunteers %>
-        <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
-        <%= f.text_field :volunteers_required,:value => 1,:class => "inputSmall" %>
-        <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
-      </p>
-  	 <h3 class="application-form">Synchronization</h3> 
+    
+  	 <h3 class="application-form">Calendar Synchronization</h3> 
 
-    <div class="explanation">
+    <div class="helptext">
       By checking the selectbox below and choosing a calendar you can make this volunteering position to appear in the selected calendar
     </div>
 
       <%= f.fields_for :event_source do |es| %>
-      <%= es.label :'synchronize?' %> <%= es.check_box :synchronize %><br>
+      <%= es.label :'synchronize?' %> <%= es.check_box :synchronize %><br/><br/>
           <%= es.label :'Calendar' %> <%= es.select :calendar_id, options_from_collection_for_select(Calendar.scoped, :id, :calendar_name, es.object.calendar_id) %>
       <% end %>
 
@@ -80,8 +85,8 @@
         <% [['none', 'no contact'], ['existing', 'existing contact'], ['new', 'new contact']].each do |value, text| %>
             <%= radio_button_tag 'contact_assignment', value, value == @contact_assignment %><%= text %>
         <% end %>
-      <fieldset id="position_exisiting_contact" class="hide">
-        <legend>Assign an existing contact</legend>
+      <div id="position_exisiting_contact" class="hide">
+        <h2 class="application-form-content-heading">Assign Exisiting Contact</h2>
         <table>
           <tr>
             <td><%= f.label "contact_name(s)" %></td>
@@ -110,19 +115,19 @@
         <%= f.hidden_field :contact_ids %>
 
 
-      </fieldset>
 
 
-      <fieldset id="position_new_contact" class="hide">
-        <h2 class="application-form-content-heading">Create a new contact</h2>
-        <%= f.fields_for :contacts do |ff| %>
-            <%= render 'contact_form', :f => ff %>
-        <% end %>
-      </fieldset>
+      
 
 
     </div>
 	
+	<div id="position_new_contact" class="hide">
+        <h2 class="application-form-content-heading">Create a new contact</h2>
+        <%= f.fields_for :contacts do |ff| %>
+            <%= render 'contact_form', :f => ff %>
+        <% end %>
+      </div>
       <h3 class="application-form">Skills and Interests</h3>
       <p>
         <%= f.label :skills %>

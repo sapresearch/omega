@@ -229,11 +229,28 @@ a.skill_tag-active span {
     padding:10px;
     width:200px;
 }
+
+#scheduler-range{
+    margin:10px;
+    padding:10px;
+    width:500px;
+}
 .schedules{
     display:none;
+    height: auto;
 }
+
+
 #scheduler{
     display:none;
+    min-height: 850px;
+    height: auto;
+    padding-bottom: 10px;
+}
+
+#schedule {
+    margin-top: 15px;
+    height:auto;
 }
 
 /************ calendar list ********************/
