@@ -637,6 +637,16 @@ tr.odd {
 	z-index: 1;
 }
 
+#sap-logo {
+	position: relative;
+	top: -73px;
+	left: 850px;
+    background: url("/images/sap_logo.png") no-repeat left;
+    width: 76px;
+	height: 40px;
+	z-index: 9999;
+}
+
 
 #banner-right {
 	position: relative;
@@ -645,6 +655,7 @@ tr.odd {
 	height: 180px;
 	top:-80px;
 	right: 0;
+	z-index: 1;
 }
 
 

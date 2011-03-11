@@ -636,13 +636,14 @@ tr.odd {
 
 #sap-logo {
 	position: relative;
-	top: 80px;
-	right: 320px;
-    background: url("/images/sap-logo.png") no-repeat left;
-    width: 260px;
-	height: 60px;
-	z-index: 1;
+	top: -73px;
+	left: 850px;
+    background: url("/images/sap_logo.png") no-repeat left;
+    width: 76px;
+	height: 40px;
+	z-index: 9999;
 }
+
 
 
 #banner-right {
