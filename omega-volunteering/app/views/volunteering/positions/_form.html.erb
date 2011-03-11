@@ -1,3 +1,5 @@
+<% require_stylesheet 'omega_volunteering' %>
+<% require_javascript 'thirdParty/jquery.timepicker', 'new_volunteering_position', 'jquery.tokeninput' %>
 
 
 <%= form_for(@position, :html => {:id => 'volunteer_position_form'}) do |f| %>
@@ -23,18 +25,21 @@
       </p>
       <p>
         <%= f.label :reoccurs %>
-        <%= f.radio_button :recurrent, true %>
-		
-        <%= f.label :one_time_only %>
         <%= f.radio_button :recurrent, false %>
+      </p>
+      
+      <p>		
+        <%= f.label :one_time_only %>
+        <%= f.radio_button :recurrent, true %>
       </p>
 
       <div id="non_recurrent">
-
+        <br/>
         <p>
           <%= f.label :start_date %>
           <%= f.text_field :start_date, :class=>'datepickr', :autocomplete => 'off' %>
-		 
+		</p> 
+		<p>
           <%= f.label :end_date %>  
           <%= f.text_field :end_date, :class=>'datepickr', :autocomplete => 'off' %>
         </p>
@@ -42,7 +47,9 @@
 
           <%= f.label :start_time %>
           <%= f.text_field :start_time, :class=>'tpickr', :autocomplete => 'off' %>
-		  
+		</p>
+		
+		<p>
           <%= f.label :end_time %>
           <%= f.text_field :end_time, :class=>'tpickr',  :autocomplete => 'off' %>
         </p>
@@ -116,7 +123,7 @@
 
     </div>
 	
-       <h3 class="application-form">Skills and Interests</h3>
+      <h3 class="application-form">Skills and Interests</h3>
       <p>
         <%= f.label :skills %>
         <%= f.text_field :skills_values, :'data-tokeninput' => volunteering_skills_path(:json),
