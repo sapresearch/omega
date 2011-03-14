@@ -5,7 +5,7 @@
 		<div class="steps">		
 		   <%= render :partial => 'services/partials/steps-columns' %>
 		</div>
-		
+   <div id="service_preview-columns" >		
     <%= form_for @service_type, :html => {:id =>'edit-service' , :action => "service_wizard" } do |f| %>
         <% if @service_type.icon_file_name != 'missing.png' %>
             <%#= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
@@ -68,8 +68,11 @@
               <% end %>
           <% end %>
         </fieldset>
-        <div class="bottom-buttons">
-          <%= om_button(:icon=>'back') do %>
+         </div>
+
+
+ 		<div id="buttons_wizard">
+          <%= om_button(:icon=>'back', :small => true) do %>
               <%= link_to 'Back', service_wizard_service_types_url(:step => 1) %>
           <% end %>
           <%= om_button(:icon=>'next') do %>
@@ -79,9 +82,12 @@
           <%#= om_button(:icon=>'cancel') do %>
           <%#= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
           <%# end %>
-    <% end %>
     </div>
+          <% end %>
+  
 <% end %>
+  
+  
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_form_builder_elements" %>
     <%= render :partial => "layouts/sidebar_form_builder_edit" %>

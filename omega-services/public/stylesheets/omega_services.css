@@ -330,6 +330,19 @@ div #service_preview {
 	padding: 0 1.5em 0 1.5em;
 }
 
+div #service_preview-columns {
+	background: #F9F9F3;
+/*	background: url("/images/wizard/preview_bg.png") repeat-y;*/
+	height: 650px;
+	width: auto;
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding: 0 1.5em 0 1.5em;
+}
+
 div.intro_image {
 	width:380px;
 	height: 190px;
