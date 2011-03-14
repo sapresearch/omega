@@ -853,9 +853,6 @@ div.form-signup {
 
 }
 
-
-
-
 div.page-content-services{
 	position: relative;
 	background: #FFF;;
@@ -864,10 +861,10 @@ div.page-content-services{
     border-right: 1px solid #999;
 	height: auto;
 	min-height: 400px;
-	max-height: 800px;
+	max-height: 1000px;
 }
 
-div.wizard-header-services{
+div.wizard-header-services {
   	/*background: #dddd88;*/
 	/*background: #052443;
 	/*background: url("/images/wizard/wizard_header_bg.png") repeat-x bottom;*/
@@ -879,6 +876,7 @@ div.wizard-header-services{
     border-left-width: 1px;
     border-right-width: 1px;
 	height: 25px;
+	
 }
 
 div.steps {

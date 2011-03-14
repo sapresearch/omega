@@ -5,29 +5,24 @@
         <fieldset class="services">
           <legend class="services"> Type Form Fields</legend>
 
-          <p>
-            <%= label_tag :service_type %>
-            <%= @service_type.type_name %>
-          </p>
-		  
-          <p>
-             <%= label_tag :type_description %>
-             <%= text_area_tag :description%>
-          </p>
-
- 		  <p>
-             <%= label_tag :name_for_type %>
-             <%= text_field_tag :type_name%>
-          </p>
-
           <ul id="service-details" class="elements-list">
 
-            <% unless @details.empty? %>
+            <li class="list-item"> <%= label_tag :service_type %>
+            <%= @service_type.type_name %> </li>
+		  
+             <li class="list-item"> <%= label_tag :type_description %>
+             <%= text_area_tag :description%> </li>
+
+             <li class="list-item"> <%= label_tag :name_for_type %>
+             <%= text_field_tag :type_name%> </li>
+
+
+            <%# unless @details.empty? %>
                 <% @details.each_with_index do |detail, index| %>
-                    <% @field =  Service::TypeTemplateField.find_by_type_template_id_and_field_category(detail.type_template_id, "Service Details") %>
+                    <% @field =  Service::TypeTemplateField.find_by_id(detail.type_template_id) %>
                         <%= render "form_builder/partials/#{@field.field_type_class}", :index => @field.id %>
                     <% end %>
-            <% end %>
+            <% #end %>
           
           </ul>
 		  

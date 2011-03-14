@@ -65,18 +65,15 @@
 		
 		
 	<div id="buttons_wizard">
-
+          		
           <%= om_button(:icon=>'back') do %>
               <%= link_to 'Back', service_wizard_service_types_url(:step => 'introduction') %>
           <% end %>
-		  
+          
           <%= om_button(:icon=>'next') do %>
               <%= submit_tag "Next", :name => "next" %>
           <% end %>
-  
-          <%= om_button(:icon=>'cancel') do %>
-          <%= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
-          <% end %>
+    
 		  
 	</div>
 

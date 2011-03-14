@@ -21,6 +21,12 @@
     cursor: pointer;
 }
 
+span .buttons-block {
+
+	display: in-line-block;
+	line-height: 25px;
+	
+}
 #scheduler {
     margin: 2em 0;
     display: none;
@@ -43,8 +49,16 @@ h3.services {
     color: #215487;
     font-size: 1.2em;
 	text-align:center;
+	font-family:"Arial Rounded MT Bold";
 }
 
+h3.services-columns {
+    color: #215487;
+    font-size: 0.9em;
+	font-family:"Arial Rounded MT Bold";
+	margin: 10px 0 0 60px;
+	width: 200px;
+}
 ul.service_types 
 {
 	list-style-image:none;
@@ -251,6 +265,31 @@ span.skill_tag_active {
     color:#421325;
 }
 
+#wizard-intro-columns li{
+    float:left;
+    width:165px;
+    margin:10px !important;
+}
+
+#wizard-intro-columns li {
+    color: #333;
+   /* border-top: 1px solid #4096ee;*/
+    height: auto;
+    padding: 5px 21px 0px 11px;
+    /*background: url("/images/omega_services.png") top left no-repeat #fff;*/
+}
+
+#wizard-intro-columns li.active {
+    font-weight:bold;
+    color: #cf3a72;
+    /*border-top: 1px solid #cf3a72;*/
+   /* background-position: 0 -110px*/
+}
+#wizard-intro-columns li.active h3{
+    color:#421325;
+}
+
+
 .hidden { 
 	display: none;
  }
@@ -268,12 +307,12 @@ div #type_templates {
 
 div #buttons_wizard {
 	padding: 20px;
-	overflow: auto;
+	overflow: hidden;
 	background: #F9F9F9;
 	border-color: #ddd ;
     border-style: solid;
     border-top-width: 1px;
-	height: 25px;
+	height: 90px;
 }
 
 div #service_preview {
@@ -312,6 +351,14 @@ div.step-nail {
     width: 302px;
     height: 22px;
 }
+
+div.step-nail-columns {
+    background-image: url("/images/omega_services.png");
+    background-repeat: no-repeat;
+    width: 220px;
+    height: 22px;
+}
+
 
 div.arrow {
 	position: absolute;

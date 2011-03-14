@@ -3,8 +3,8 @@ class FormBuilderController < Omega::Controller
   respond_to :html, :xml, :js, :json
 
   def dispatch_ui_element
-    @field = Service::Field.new
-    @field.build_detail
+    @field = Service::TypeField.new
+    @field.build_value
 
     type = ''
     type_class = ''
@@ -16,13 +16,13 @@ class FormBuilderController < Omega::Controller
         type = 'text'
         type_class = 'input'
         field = "Input Field"
-        default = "Enter Text/Number/Email"
+        default = "text"
 
       when 'textarea'
         type = 'text'
         type_class = 'textarea'
         field = "Text Field"
-        default = "Enter Text"
+        default = "text"
 
       when 'selectbox'
         type = 'text'
@@ -39,7 +39,7 @@ class FormBuilderController < Omega::Controller
     end
 
     @field.field_name = field
-    @field.detail.field_value = default
+    @field.value.field_value = default
     @field.field_type = type
     @field.field_type_class = type_class
 

@@ -6,7 +6,7 @@ class CreateServiceTypeTemplateFields < ActiveRecord::Migration
       t.string :field_type
       t.string :field_type_class
       t.string :field_category
-      t.integer :template_id, :null => false
+      t.integer :type_template_id, :null => false
       
       t.timestamps
     end
