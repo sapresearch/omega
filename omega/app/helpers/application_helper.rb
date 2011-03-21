@@ -9,4 +9,12 @@ module ApplicationHelper
 
     %(<meta name="flash-session-key" content="#{session_key}"/>\n<meta name="flash-session-cookie" content="#{session_cookie}"/>).html_safe
   end
+  
+   def title(page_title)
+  	content_for(:title) {
+  		page_title
+  	}
+  end
+  
+  
 end

@@ -1078,7 +1078,7 @@
     .ui-resizable-handle {
         position: absolute;
         font-size: 0.1px;
-        z-index: 99999;
+        z-index: 99999999;
         display: block;
     }
 
@@ -1161,7 +1161,7 @@
     */
     .ui-selectable-helper {
         position: absolute;
-        z-index: 100;
+        z-index: 999999;
         border: 1px dotted black;
     }
 

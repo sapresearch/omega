@@ -2,6 +2,10 @@
 <%= content_for :explanation do %>
     <%= render :partial => 'services/partials/steps' %>
 <% end %>
+
+<%- title "Omega Services - Create Service Type Wizard: Step 3" %>
+
+
 <%= render :layout => 'layouts/services_wizard' do %>
     <%= form_for @service, :html => {:id =>'edit-service' , :action => "service_wizard" } do |f| %>
         <%= errors_for_form(@service, 'service') %>

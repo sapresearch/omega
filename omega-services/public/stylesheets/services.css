@@ -70,7 +70,6 @@ div.container{
     width: 760px;
     text-align: left;
     overflow: hidden;    
-    background-color: rgba(255, 255, 255, 0.5);
     border:2px solid #999;
     padding:0.5em;
     -moz-border-radius:8px;
@@ -99,7 +98,6 @@ div.container-show{
     text-align: left;
     overflow: hidden;
     padding:0.5em;
-    background-color: rgba(255, 255, 255, 0.9);
     border:1px solid #0B6ADD;
     -moz-border-radius:8px;
     -webkit-border-radius:8px;
@@ -156,7 +154,6 @@ div.step3{
 }
 
 .rounded-corners {
-  behavior: url(border-radius.htc);
 }
 
 div.step4{

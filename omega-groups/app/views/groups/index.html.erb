@@ -1,6 +1,9 @@
 <%= require_javascript 'thirdParty/jquery.jscrollpane.min.js', 'omega_groups' %>
 <%= require_stylesheet 'omega_groups' %>
-<%= context_box do %>
+    
+  <%- title "Omega - Groups" %>
+  
+    
     <h1 class="page-content-evergreen corners-top">
       Group Overview
     </h1>
@@ -29,4 +32,3 @@
     <%= render :partial => "partials/sidebar_search" %>
     <%= render :partial => "partials/sidebar_groups" %>
     <%= render :partial => "partials/sidebar_groups_search" %>
-<% end %>

@@ -1,6 +1,9 @@
 <% require_stylesheet 'services.css' %>
 
 
+<%- title "Omega Services - Modify Service Type" %>
+
+
 <h1 class="page-content corners-top">
 
   Edit <%= @service.service_name %> - <%= @service.service_type %>
@@ -86,7 +89,7 @@
 
                     <%= ff.check_box '_destroy' %> <%= d.field_name %>
                     <%= ff.hidden_field :field_name %>
-                    <%= ff.hidden_field :field_type %>
+                    <%= ff.hidden_field :field_type%>
 
                     <br/>
 
@@ -98,7 +101,6 @@
 
 
         <div class="bottom-buttons">
-
 
           <%= om_button(:icon=>'next-step') do %>
               <%= f.submit "Update", :name => "update" %>
