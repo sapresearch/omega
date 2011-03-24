@@ -4,5 +4,4 @@
 <%= hidden_field_tag "fields[#{index}][field_type_class]", @field.field_type_class %>
 <%= hidden_field_tag "fields[#{index}][value_attributes][id]", @field.value.id if @field.value.id? %>
 <%= hidden_field_tag "fields[#{index}][value_attributes][field_value]", @field.value.field_value %>
-<%= hidden_field_tag "fields[#{index}][_destroy]", 'false' %>
 <%= hidden_field_tag "fields[#{index}][field_category]", "Service Details" %>

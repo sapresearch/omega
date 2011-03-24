@@ -8,7 +8,7 @@ $(function() {
     $('.tpickr').timepicker();
 
     /* jqueryui datepicker defaults */
-    $('#volunteer_position_form').find(".datepickr").datepicker();
+    $('#volunteer_position_form').find(".datepickr").datepicker({ minDate: 0 });
 
 
     // selector caching

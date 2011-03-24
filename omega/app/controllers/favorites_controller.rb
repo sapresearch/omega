@@ -32,7 +32,7 @@ class FavoritesController < Omega::Controller
     @favorite.try(:destroy)
 
   end
-
+  
   private
     def klass
       @klass ||= params[:klass].singularize.camelize.constantize

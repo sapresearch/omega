@@ -38,6 +38,7 @@ $(function() {
                                     var category = $(this).parents('.elements-list').attr('id');
                                     var em_preview = $(this).parents('li').find('.ui-em-preview');
                                     var ui_em = em_preview.attr('ui-data');
+                                    
                                     var em_id = em_preview.attr('id');
                                     // listen for click event to determine which ui element gets edited.
                                     // invoke dispatch_element_properties with right element. ui-em.js.erb gets rendered which inserts the html and js for

@@ -318,15 +318,13 @@ div #buttons_wizard {
 div #service_preview {
 	background: #F9F9F3;
 /*	background: url("/images/wizard/preview_bg.png") repeat-y;*/
-	border: 1px solid #A8929B;
-	height: 375px;
-	width: 670px;
-	position: absolute;
-	top: 160px;
-	left: 245px;
+	height: 650px;
+	min-width: 850px;
+	width: auto;
+	top: 0;
+	left: 0;
 	overflow-y: auto;
 	overflow-x: hidden;
-	margin-left: -1.2em;
 	padding: 0 1.5em 0 1.5em;
 }
 

@@ -31,7 +31,7 @@
            <li class="list-item">  <%= f.label :description, :id => "service-description" %>
              <%= f.text_area :description, :class=>'field-value' %> </li>
 
-
+              
 
             <% unless @details.empty? %>
                 <% @details.each_with_index do |detail, index| %>
@@ -39,6 +39,7 @@
                         <%= render "form_builder/partials/#{@field.field_type_class}", :index => @field.id %>
                 <% end %>
             <% end %>
+            
           </ul>
         </fieldset>
         <fieldset class="services">
@@ -58,6 +59,7 @@
                 </li>
             
           </ul>
+          
           <% unless @registration_fields.empty? %>
               <% @registration_fields.each_with_index do |field, index| %>
                   <%= f.fields_for "fields_attributes[#{index}]", field do |ff| %>
@@ -69,21 +71,22 @@
               <% end %>
           <% end %>
         </fieldset>
-         </div>
-
-
- 		<div id="buttons_wizard">
+        
+        <div id="buttons_wizard">
           <%= om_button(:icon=>'back', :small => true) do %>
               <%= link_to 'Back', service_wizard_service_types_url(:step => 1) %>
           <% end %>
           <%= om_button(:icon=>'next') do %>
               <%= f.submit "Next", :name => "next" %>
           <% end %>
-  
+  <br/>
           <%#= om_button(:icon=>'cancel') do %>
           <%#= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
           <%# end %>
-    </div>
+        </div>
+         </div>
+
+ 		
           <% end %>
   
 <% end %>

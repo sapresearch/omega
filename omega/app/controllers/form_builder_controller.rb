@@ -35,7 +35,7 @@ class FormBuilderController < Omega::Controller
         type_class = 'date'
         field = "Date"
         default = Date.today
-
+        
     end
 
     @field.field_name = field

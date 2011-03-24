@@ -21,6 +21,7 @@ class Services::TypesController < Omega::Controller
   #@service_types = get_service_types # Populates the List of Service Types Existing in the Library
 
    @service_types = Service::TypeTemplate.all
+   
    @service_type = Service::Type.find_by_id(session[:service_id]) # Retrieve the Service Object to work on in the Wizard
 
 
@@ -104,6 +105,55 @@ class Services::TypesController < Omega::Controller
     logger.debug("session[:service_id]: #{session[:service_id]}")
     
   end
+  
+  def update
+
+    @service_type = Service::Type.find_by_id(session[:service_id])
+    @service_type.update_attributes(params[:service_type])
+
+    # build nested attributes - fields ----------
+   # if fields = params[:fields]
+      #@service_type.type_fields_attributes = fields
+    #  @service_type.type_fields.build = params[:fields]
+     # @service_type.type_fields.each do |field|
+     #   field.build_value unless field.value
+      #  field.value.type_id ||= @service_type.id
+     # end
+    #end
+	
+    unless params[:fields].nil?
+      params[:fields].each_value { |field| @service_type.type_fields.build(field) do |f| 
+      	                                  
+           										f.build_value unless f.value
+           										f.value.type_id ||= @service_type.id
+    										end   
+    										
+    										}
+    
+    
+    
+     end 
+      
+   
+    #-------------------------------------------------------
+    @current_step = session[:current_step]
+
+ 
+
+    if params[:next] # Proceed to next step in the wizard
+       @service_type.save
+       session[:service_id] = @service_type.id
+      redirect_to service_wizard_service_types_url(:step => 3)
+
+    end
+
+    if params[:update] # Update after an edit action
+      @service_type.save
+      respond_with(@service_type)
+
+    end
+  end
+
 
 
 #----------------------------------------------------------------------------------------------------------

@@ -142,7 +142,7 @@ class ServicesController < Omega::Controller
 
   def update
 
-    @service = Service.find_by_id(session[:service_id])
+    @service = Service.find(session[:service_id])
     @service.update_attributes(params[:service])
 
     # build nested attributes - fields ----------

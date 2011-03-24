@@ -895,7 +895,7 @@ div.page-content-services{
 	border-left: 1px solid #999;
     border-right: 1px solid #999;
 	height: auto;
-	min-height: 400px;
+	min-height: 450px;
 	max-height: 800px;
 }
 
@@ -2157,7 +2157,6 @@ div.pagination span.disabled {
 
 .right {
     float: right;
-
 }
 
 .left {

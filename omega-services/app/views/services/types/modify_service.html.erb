@@ -1,13 +1,9 @@
 <% require_stylesheet 'services.css' %>
 
-
 <%- title "Omega Services - Modify Service Type" %>
 
-
 <h1 class="page-content corners-top">
-
   Edit <%= @service.service_name %> - <%= @service.service_type %>
-
 </h1>
 
 <div class="page-content corners-bottom">
@@ -15,7 +11,6 @@
  <%= form_for @service do |f| %>
 
         <%= errors_for_form(@service, 'service') %>
-
         <p class="left2">
 
           <strong>Service Type:</strong>
@@ -24,13 +19,9 @@
 
           <strong>Icon:</strong>
           <% if @service.icon_file_name != 'missing.png'%>
-
-             <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
-
+             <%= image_tag @service.icon.url(:small), :width => '65'%><br/>
           <%else%>
-
              <%= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
-
           <%end%>
 
           <%= f.hidden_field :icon %>
@@ -44,20 +35,16 @@
           <%= @service.service_category %><br/>
 
           <br/>
-
           <strong>Name/Title - <%= @service.service_type %> Service</strong> <br/>
 
           <br/>
-
           <%= f.text_field :service_name %><br/>
 
           <br/>
           <strong>Description</strong> <br/>
-
           <%= f.text_area :description, :value => @service.description %><br/>
 
           <% unless @details.empty? %>
-
               <% @details.each_with_index do |detail, index| %>
 
                   <%= f.fields_for "details_attributes[#{index}]", detail do |ff| %>
@@ -67,7 +54,6 @@
                       <%= ff.hidden_field :field_id %>
 
                       <strong><%= Service::Field.find_by_id(detail.field_id).field_name %></strong> <br/>
-
                       <%= ff.text_field :field_value %> <br/>
 
                 <% end %>
@@ -75,40 +61,31 @@
         <% end %>
 
         <% unless @service_fields.empty? %>
-
         <p class="left2">
-
+        	
              <strong>Select Fields You Would Want to Remove</strong>
-
              <br/><br/>
 
              <% @service_fields.each_with_index do |d| %>
 
-
                 <%= f.fields_for "fields", d do |ff| %>
 
-                    <%= ff.check_box '_destroy' %> <%= d.field_name %>
+                    <%= ff.check_box '_destroy' %><%= d.field_name %>
                     <%= ff.hidden_field :field_name %>
                     <%= ff.hidden_field :field_type%>
-
+                    
                     <br/>
 
                 <% end %>
-
              <% end %>
-
         <% end %>
 
-
         <div class="bottom-buttons">
-
           <%= om_button(:icon=>'next-step') do %>
               <%= f.submit "Update", :name => "update" %>
           <% end %>
-
-
         </div>
-
+        
     <% end %>
 
 </div>

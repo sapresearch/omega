@@ -112,6 +112,7 @@ class Calendar
       self.recurrence_start      = attributes['start']
       self.recurrence_end_on     = attributes['end_on']
 
+
       case recurrence_pattern
         when DAILY
           if daily = attributes['daily_attributes']

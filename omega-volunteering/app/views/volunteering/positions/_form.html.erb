@@ -16,13 +16,6 @@
         <%= f.label :description %>
         <%= f.text_area :description, :rows => 6, :'data-tooltip '=> 'describe what work the volunteer will be doing in this position', :class => 'broad-text' %>
       </p>
-      <p>
-        <%= f.label :hours %>
-
-        <span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>
-        <%= f.text_field :hours, :value=> 1, :class => "inputSmall", :'data-tooltip '=> 'approximate number of hours per week needed' %>
-        <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
-      </p>
       
       <p>
         <%= f.label :volunteers_required %>
@@ -46,15 +39,11 @@
         <h3 class="application-form">Timeline</h3> 
 
         <p>
-          <%= f.label :start_date %>
+          <%= f.label :date %>
           <%= f.text_field :start_date, :class=>'datepickr', :autocomplete => 'off' %>
-		</p> 
-		<p>
-          <%= f.label :end_date %>  
-          <%= f.text_field :end_date, :class=>'datepickr', :autocomplete => 'off' %>
+
         </p>
         <p>
-
           <%= f.label :start_time %>
           <%= f.text_field :start_time, :class=>'tpickr', :autocomplete => 'off' %>
 		</p>
@@ -133,14 +122,18 @@
       <h3 class="application-form">Skills and Interests</h3>
       <p>
         <%= f.label :skills %>
-        <%= f.text_field :skills_values, :'data-tokeninput' => volunteering_skills_path(:json),
-                         :'data-tokeninput-prepopulate' => @position.skills.map { |s| { :id => s.name, :name => s.name } }.to_json %>
+        <%#= f.text_field :skills_values, :'data-tokeninput' => volunteering_skills_path(:json),
+                         #:'data-tokeninput-prepopulate' => @position.skills.map { |s| { :id => s.name, :name => s.name } }.to_json %>
+                         
+        <%= f.text_field :skills_values%>
       </p>
 
       <p>
         <%= f.label :interests %>
-        <%= f.text_field :interests_values, :'data-tokeninput' => volunteering_interests_path(:json),
-                         :'data-tokeninput-prepopulate' => @position.interests.map { |s| { :id => s.name, :name => s.name } }.to_json %>
+        <%#= f.text_field :interests_values, :'data-tokeninput' => volunteering_interests_path(:json),
+                        # :'data-tokeninput-prepopulate' => @position.interests.map { |s| { :id => s.name, :name => s.name } }.to_json %>
+        <%= f.text_field :interests_values%>
+
     <p>
       <%= om_button(:icon=>'save') do %>
           <%= f.submit %>
