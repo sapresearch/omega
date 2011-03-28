@@ -5,7 +5,7 @@ class Volunteering::Position < Omega::Model
 
   has_many :contact_positions
   has_many :contacts, :through => :contact_positions
-
+  
 #  belongs_to :contact
   has_many :records, :dependent => :destroy, :inverse_of => :position
   has_one :schedule

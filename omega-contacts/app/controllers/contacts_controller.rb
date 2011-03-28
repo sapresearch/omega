@@ -30,7 +30,7 @@ class ContactsController < Omega::Controller
   def list
     respond_with(@contacts)
   end
-
+  
   def show
     @contact_groups = Contact::Group.scoped
     respond_with(@contact)

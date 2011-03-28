@@ -4,7 +4,7 @@
     <% @contacts.each do |c| %>
         <li ui-data="<%= c.id %>">
           <span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add this contact" ></span>
-          <%= c.first_name %><%= c.last_name %>
+          <%= c.last_name %>,<%= c.first_name %>
         </li>
 
     <% end %>

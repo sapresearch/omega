@@ -6,12 +6,9 @@ class CreateVolunteeringPositions < ActiveRecord::Migration
       t.text       :hours
       t.integer    :volunteers_required, :null => false
       t.references :contact
-
       t.datetime   :start
       t.datetime   :end
-
       t.timestamps
-
       t.boolean    :recurrent
       t.belongs_to :recurrence_series
 
@@ -28,6 +25,7 @@ class CreateVolunteeringPositions < ActiveRecord::Migration
       t.string     :recurrence_end_on
       t.date       :recurrence_end_at
       t.integer    :recurrence_end_after
+
     end
   end
 

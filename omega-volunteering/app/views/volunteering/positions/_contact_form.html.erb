@@ -2,10 +2,9 @@
     <%= errors_for_model f.object %>
 
        <p>
-				<%= f.label :title %>
-				<%= f.select :title, options_for_select(Contact::TITLES) %>
+			<%= f.label :title %>
+			<%= f.select :title, options_for_select(Contact::TITLES) %>
        </p>
-
 
         <p>
             <%=f.label :first_name %>
@@ -24,7 +23,6 @@
 
 
         <%= f.fields_for :phone_numbers do |fff| %>
-
             <%= render 'phone_form', :f => fff %>
 
         <%end%>

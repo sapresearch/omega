@@ -1,6 +1,7 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_javascript 'thirdParty/jquery.timepicker', 'new_volunteering_position', 'jquery.tokeninput' %>
 
+<div id="assignment">              </div>
 
 <%= form_for(@position, :html => {:id => 'volunteer_position_form'}) do |f| %>
     <%= errors_for_form(@position, 'position') %>

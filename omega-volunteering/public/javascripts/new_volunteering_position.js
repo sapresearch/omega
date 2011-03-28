@@ -83,8 +83,6 @@ $(function() {
 
     });
 
-
-
     // selector caching
     var $assigned_contacts = $('#assigned_contacts');
     var $vp_contact_id = $('#volunteering_position_contact_ids');
@@ -95,7 +93,6 @@ $(function() {
             url     : '/contacts/list',
             dataType: 'script',
             success : function(data) {
-
             }
         })
     });
@@ -109,9 +106,9 @@ $(function() {
 
       $(this).prevAll('input[type="radio"]').attr('checked',true)
     }).end().find('select').change(function(){
+    	
       $(this).prevAll('input[type="radio"]').attr('checked',true)  
     });
-
 
    $('#volunteer_position_form').find('span.increase').click(function() {
         var ipt = $(this).next('input');
@@ -133,6 +130,7 @@ $(function() {
     var pattern = '#schedule-' + $(this).val();
     $('#schedule').find('div.schedules:visible').hide();
     $(pattern).show();
+    
 });
 
 });
@@ -153,3 +151,4 @@ function update_cid_values() {
 
     $('#volunteering_position_contact_ids').val(serialized_cids);
 }
+

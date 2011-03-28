@@ -1,11 +1,10 @@
-$('body').append('<%= escape_javascript(render(:partial => 'contacts/partials/contact_list.html')) %>');
+$('@assignment').append('<%= escape_javascript(render(:partial => 'contacts/partials/contact_list.html')) %>');
         $('#contact-assignment').dialog({autoOpen : true,
             title: 'Add Contact'});
         $('#contact-assignment-list').delegate('li', 'click', function() {
             var self = $(this);
 
             $('#volunteering_position_contact_ids').val(self.attr('ui-data'));
-
 
             $('#assigned_contacts').append(
                             '<li ui-data="'
@@ -15,10 +14,12 @@ $('body').append('<%= escape_javascript(render(:partial => 'contacts/partials/co
                             + self.text().trim()
                             + '</span></li>');
 
-
             $('div.tipsy').remove();
             
             update_cid_values();
-        });
+
+});
+
+
 
 
