@@ -167,6 +167,16 @@ h2.application-form-content-heading {
 	
 }
 
+h2.application-form-content-heading-2 {
+	margin-top: 40px;
+	margin-left: 20px;
+    margin-bottom: 20px;
+	width: 760px;
+	font-family:"Arial Rounded MT Bold";
+	font-size: 18px;
+	color: #768B2E;
+	
+}
 h3 {
     color: #4096ee;
     font-size: 1.2em;

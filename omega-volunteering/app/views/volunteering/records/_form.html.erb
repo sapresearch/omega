@@ -201,7 +201,8 @@
           <%= f.check_box :volunteering_to_meet_requirements %>	
 			
 		</p>
-		
+					<br/>
+
 		<p>
 			<br/>
 		  <%= f.label "if yes, how many hours"%>
@@ -210,7 +211,7 @@
 		</p>
 		
 		
-		<h2 class="application-form-content-heading">By submitting this application, I understand that:</h2>
+		<h2 class="application-form-content-heading-2">By submitting this application, I understand that:</h2>
 
 		<p>
 	
@@ -225,7 +226,7 @@
 		<p>
 			
 	    <span class="form-text-plain"> 
-		<%= f.check_box :agreement, false%> <span class="application-form-content">I Agree</span>		<br/>
+		<%= f.check_box :agreement, :checked=> false%> <span class="application-form-content">I Agree</span>		<br/>
 
 
 		</span>
