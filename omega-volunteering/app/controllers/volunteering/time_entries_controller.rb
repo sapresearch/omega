@@ -100,7 +100,7 @@ class Volunteering::TimeEntriesController < Omega::Controller
            
          @start = start - (start.wday-1)*24*60*60 - start.hour*60*60 - start.min*60 - start.sec
          
-         @start = @strat.strftime('%Y-%m-%d')
+         @start = @start.strftime('%Y-%m-%d')
       end
            
       
