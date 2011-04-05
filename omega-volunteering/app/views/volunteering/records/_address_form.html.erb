@@ -2,11 +2,11 @@
 
     <%= errors_for_model f.object %>
     <p>
-      <%= f.label :address_type %> <div class="mandatory-field"></div>
+      <%= f.label :address_type , :class => "mandatory-field"%>
       <%= f.select :address_type, options_for_select(Contact::Address::ADDRESS_TYPES) %>
     </p>
     <p>
-      <%= f.label :street %>
+      <%= f.label :street , :class => "mandatory-field"%>
       <%= f.text_field :street %>
     </p>
 	
@@ -16,15 +16,15 @@
     </p>
 	
     <p>
-      <%= f.label :city %><div class="mandatory-field"></div>
+      <%= f.label :city , :class => "mandatory-field"%>
       <%= f.text_field :city %>
     </p>
     <p>
-      <%= f.label 'Province/State' %>
+      <%= f.label 'Province/State' , :class => "mandatory-field"%>
       <%= f.text_field :state %>
     </p>
     <p>
-      <%= f.label :postal_code %><div class="mandatory-field"></div>
+      <%= f.label :postal_code , :class => "mandatory-field"%>
       <%= f.text_field :zip_code %>
     </p>
     <p>

@@ -55,15 +55,16 @@ class Contact < Omega::Model
 
   #validates :title,      :presence  => true,
                         # :inclusion => { :in => TITLES }
-  #validates :email,      :presence  => true,
-   #                      :length    => 6..80,
-    #                     :email     => true
+  validates :email,      :presence  => true,
+  						 :confirmation => true,
+                         :length    => 6..80,
+                         :email     => true
                          
- # validates :first_name, :length    => 0..80,
-  #                       :unless    => :has_user?
-  #validates :last_name,  :presence  => true,
-   #                      :length    => 1..80,
-    #                     :unless    => :has_user?
+  validates :first_name, :length    => 0..80,
+                         :unless    => :has_user?
+  validates :last_name,  :presence  => true,
+                         :length    => 1..80,
+                         :unless    => :has_user?
 
   after_save :sync_to_user, :unless => :synced?
 
@@ -79,8 +80,7 @@ class Contact < Omega::Model
     SYNC_FIELDS.each { |attr| user.send("#{attr}=", send(attr)) }
     user.save(:validate => false)
     mail = UserMailer.registration_confirmation(user).deliver
-    Delivery.create(:message_id => mail.message_id, :recipient => user.email,
-:content => '', :status => 'Sent' )
+    Delivery.create(:message_id => mail.message_id, :recipient => user.email, :content => '', :status => 'Sent' )
    end
   end
 

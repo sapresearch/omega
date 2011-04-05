@@ -64,8 +64,6 @@ class User < Omega::Model
                          :length => 5..40,
                          :if => :save_password?
 
- 
-
   before_create :create_salt, :save_password
   before_update :save_password
   before_save   :ensure_has_authenticated_role

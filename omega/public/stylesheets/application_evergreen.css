@@ -225,6 +225,24 @@ p.summary {
 	margin-left: -4px;
 }
 
+
+em { 
+	font-weight: bold; 
+	padding-right: 0.7em; 
+	vertical-align: top; 
+	color: #ff0000;
+	font-family: "Tahoma"; 
+	font-size: 16px; 
+
+}
+
+form label.error { 
+	float: none;
+	color: red; 
+	padding-left: .5em; 
+	vertical-align: top; 
+}
+
 span.text-style1 {
 	font-family: "Trebuchet MS";
 	font-size: 14px;
@@ -233,8 +251,8 @@ span.text-style1 {
 
 span.checkbox-block {
 	display:inline-block;
-	margin-left: 210px;
-	margin-top: -50px;
+	margin-left: 0;
+	margin-top: 0;
 	
 }
 
@@ -272,10 +290,32 @@ p.left-margin {
 	margin-left: 14px;
 }
 
+p.left-align {
+	
+	text-align: left;
+	margin-top: -10px;
+	margin-left: -65px;
+}
+
+p.right-align {
+	
+	text-align: right;
+	margin-top: 30px;
+	margin-right: 95px;
+}
+
+
 p.info-text {
 	text-align:right;
 	margin-top: 40px;
 	margin-right: 30px;
+}
+
+p.red-text {
+
+	color: #952500;
+	font-family: "Trebuchet MS";
+	font-size: small;
 }
 
 span.calendar-top-right {
@@ -396,6 +436,7 @@ span.check-box-set {
 
 a {
     color: #162D3D;
+    font-weight: bold;
     text-decoration: none;
     list-style-type: none;
 }
@@ -511,15 +552,21 @@ form label {
     font-family: "Arial";
 	font-weight: bold;
 	font-size: 14px;
-    width: 120px;
-    text-align: right;
-    margin-right: 22px;
+    width: 150px;
+    text-align: left;
+    margin-left: 80px;
+    margin-right: 10px;
 	margin-top: 5px;
     text-transform: capitalize;
 
 }
 
+.login {
 
+	margin-left: 40px;
+	width: 110px;
+
+}
 fieldset {
     margin: 1.3em 0;
     padding: 1.3em;
@@ -757,16 +804,30 @@ div.arrow {
     height: 30px;
 }
 
-div.mandatory-field {
-	position: relative;
-    z-index: 1;
-	left: 135px;
-	background-image: url("/images/mandatory-field.png");
+.mandatory-field {
+	/*position: relative;
+    z-index: 999;
+	left: 235px;
+	top:  14px;*/
+	background: url("/images/mandatory-field.png") top right;
     background-repeat: no-repeat;
-    width: 10px;
-    height: 10px;
+    
+
 }
 
+.margin-left {
+	margin-left: 20px;
+}
+
+div.form-field-space {
+	position: relative;
+    z-index: 999;
+    top: 10px;
+	left: 150px;
+    width: 10px;
+    height: 10px;
+
+}
 /*.content-box {
    margin: 0 0 0;
 */
@@ -905,7 +966,7 @@ div.page-content-services{
 	border-left: 1px solid #999;
     border-right: 1px solid #999;
 	height: auto;
-	min-height: 450px;
+	min-height: 780px;
 	max-height: 800px;
 }
 
@@ -1540,23 +1601,6 @@ span.om-button-active {
     color: #0063dc;
 }
 
-span.om-button span.om-icon,
-span.om-icon-button span.om-icon,
-span.om-small-button span.om-icon,
-span.om-small-icon-button span.om-icon {
-
-    position: absolute;
-    top: 2px;
-    margin: 0 0 0 -20px;
-    display: block;
-    width: 16px;
-    height: 16px;
-    min-width: 16px;
-    min-height: 16px;
-    display: inline;
-    zoom: 1;
-
-}
 
 span.first-letter-bold {
 	color: #342B21;

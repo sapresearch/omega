@@ -99,6 +99,7 @@ class UsersController < Omega::Controller
 
   def lost_password
     if params[:username]
+     
       @username = params[:username]
       @user = User.find_by_username(@username)
 
@@ -112,9 +113,9 @@ class UsersController < Omega::Controller
 
   SORT_KEYS = ['username']
   SORT_DIRECTIONS = ['asc', 'desc']
+  
   def sort
     @users = User.scoped
-
     params.each do |attr, direction|
       next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
       @users = @users.order("#{attr} #{direction}")

@@ -5,6 +5,5 @@ class Contact::PhoneNumber < Omega::Model
 
  # validates :number_type, :presence => true,
   #                        :inclusion => { :in => NUMBER_TYPES }
- # validates :number,      :presence => true,
-  #                        :phone_number => true
+  validates :number,:presence => true, :phone_number => true
 end

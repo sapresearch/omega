@@ -72,6 +72,7 @@ class Volunteering::TimeEntriesController < Omega::Controller
   														        end 
   														        
   														        session[:week] = entry["week"]
+  														        
   														 }
    	    redirect_to summary_volunteering_time_entries_url(:id => session[:position])
 
@@ -98,11 +99,10 @@ class Volunteering::TimeEntriesController < Omega::Controller
       	 start = Time.utc(@position.start.strftime('%Y-%m-%d %H:%M:%S'))
            
          @start = start - (start.wday-1)*24*60*60 - start.hour*60*60 - start.min*60 - start.sec
-
-         @start = @start.strftime('%Y-%m-%d') 
+         
+         @start = @strat.strftime('%Y-%m-%d')
       end
-      
-     
+           
       
       @entries = Array.new
       	   

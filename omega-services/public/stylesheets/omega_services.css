@@ -299,7 +299,7 @@ span.skill_tag_active {
  }
  
 div #type_templates {
-	min-height: 400px;
+	min-height: 504px;
 	width: 200px;
 	padding: 20px;
 	overflow: auto;
@@ -318,20 +318,22 @@ div #buttons_wizard {
 div #service_preview {
 	background: #F9F9F3;
 /*	background: url("/images/wizard/preview_bg.png") repeat-y;*/
-	height: 650px;
-	min-width: 850px;
-	width: auto;
-	top: 0;
-	left: 0;
+	border: 1px solid #A8929B;
+	height: 475px;
+	width: 670px;
+	position: absolute;
+	top: 160px;
+	left: 245px;
 	overflow-y: auto;
 	overflow-x: hidden;
+	margin-left: -1.2em;
 	padding: 0 1.5em 0 1.5em;
 }
 
 div #service_preview-columns {
 	background: #F9F9F3;
 /*	background: url("/images/wizard/preview_bg.png") repeat-y;*/
-	height: 650px;
+	height: 710px;
 	width: auto;
 	position: relative;
 	top: 0;
@@ -340,6 +342,20 @@ div #service_preview-columns {
 	overflow-x: hidden;
 	padding: 0 1.5em 0 1.5em;
 }
+
+div #service_preview_summary {
+	background: #F9F9F3;
+/*	background: url("/images/wizard/preview_bg.png") repeat-y;*/
+	height: 710px;
+	width: 890px;
+	float:left;
+	top: 0;
+	left: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding: 0 1.5em 0 1.5em;
+}
+
 
 div.intro_image {
 	width:380px;

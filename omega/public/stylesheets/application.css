@@ -221,6 +221,16 @@ span.main-bullet-list {
     display: block;	
 }
 
+
+em { 
+	font-weight: bold; 
+	padding-right: 1em; 
+	vertical-align: top; 
+	color: #35567B;
+	font-family: Verdana; 
+	font-size: 14px; 
+}
+
 span.text-style1 {
 	font-family: "Trebuchet MS";
 	font-size: 14px;
@@ -391,6 +401,7 @@ span.check-box-set {
 }
 
 a {
+	font-weight: bold;
     color: #162D3D;
     text-decoration: none;
     list-style-type: none;
@@ -492,15 +503,16 @@ form input.datepickr, form input.tpickr {
 }
 
 form label {
-    color:#555;
+   color:#555;
     display: inline-block;
     zoom: 1;
     font-family: "Arial";
 	font-weight: bold;
 	font-size: 14px;
-    width: 120px;
-    text-align: right;
-    margin-right: 22px;
+    width: 150px;
+    text-align: left;
+    margin-left: 80px;
+    margin-right: 10px;
 	margin-top: 5px;
     text-transform: capitalize;
 
@@ -725,14 +737,21 @@ div.arrow {
     height: 30px;
 }
 
-div.mandatory-field {
-	position: relative;
-    z-index: 1;
-	left: 135px;
-	background-image: url("/images/mandatory-field.png");
+.mandatory-field {
+
+	background: url("/images/mandatory-field.png") top right;
     background-repeat: no-repeat;
+
+}
+
+div.form-field-space {
+	position: relative;
+    z-index: 999;
+    top: 10px;
+	left: 150px;
     width: 10px;
     height: 10px;
+
 }
 
 /*.content-box {

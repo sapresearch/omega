@@ -1,12 +1,13 @@
 <% require_stylesheet 'omega_form_builder.css' %>
 
 <%= render :layout => 'layouts/services_wizard' do %>
-<%- title "Omega Services - Create Service Type Wizard: Step 2" %>
+<%- title "Omega Services - Create Service Type Wizard: Step 3" %>
 
 		<div class="steps">		
 		   <%= render :partial => 'services/partials/steps' %>
 		</div>
-   <div id="service_preview" >		
+  
+   <div id="service_preview_summary" >		
     <%= form_for @service_type, :html => {:id =>'edit-service' , :action => "service_wizard" } do |f| %>
         <%= errors_for_form(@service_type, 'service') %>
         <% if @service_type.icon_file_name != 'missing.png' %>

@@ -134,7 +134,26 @@
         <%#= f.text_field :interests_values, :'data-tokeninput' => volunteering_interests_path(:json),
                         # :'data-tokeninput-prepopulate' => @position.interests.map { |s| { :id => s.name, :name => s.name } }.to_json %>
         <%= f.text_field :interests_values%>
+	</p>
+	
 
+	
+	<p>
+		<%= f.label :disclaimer_agreement%>
+		<% ['Required','Not Required'].each do |c|%>	
+		
+			<%= f.radio_button :disclaimer_agreement, c%> <%=c%><br/>
+		<%end%>
+	</p>
+	
+	<div id="agreement">
+		<p>
+		<%= f.label :agreement_detail%>
+		<%= f.text_area :agreement%>
+		</p>
+	</div>
+	
+	
     <p>
       <%= om_button(:icon=>'save') do %>
           <%= f.submit %>

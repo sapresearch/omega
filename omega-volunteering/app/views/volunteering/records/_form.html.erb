@@ -12,7 +12,7 @@
     	
 	   <h3 class="application-form">PERSONAL INFORMATION </h3> 
         <p>
-          <%= c.label :title %> <div class="mandatory-field"></div>
+          <%= c.label :title %> 
           <%= c.select :title, %w{Mr Miss Ms Mrs} ,{},:selected => @contact.title , :include_blank => false  %>
         </p>
 
@@ -22,17 +22,17 @@
         </p>
 
         <p>
-          <%= c.label :last_name %> <div class="mandatory-field"></div>
+          <%= c.label :last_name , :class => "mandatory-field"%>
           <%= c.text_field :last_name , :'data-tooltip' => 'Plese type in your last name' %>
         </p>
 		
 	    <p>
           <%= c.label :middle_name %>
-          <%= c.text_field :middle_name , :'data-tooltip' => 'Middle name if any' %>
+          <%= c.text_field :middle_name, :'data-tooltip' => 'Middle name if any' %>
         </p>
 		
         <p>
-          <%= c.label :primary_email %> <div class="mandatory-field"></div>
+          <%= c.label :primary_email , :class => "mandatory-field"%>
           <%= c.text_field :email , :'data-tooltip' => 'Plese type in your primary email'%>
         </p>
 
@@ -82,14 +82,14 @@
 		<h3 class="application-form">EMERGENCY CONTACT INFO</h3>
 		<p>
 			
-        <%= c.label :contact_name%>  <div class="mandatory-field"></div>
+        <%= c.label :contact_name, :class => "mandatory-field"%>
 		<%= c.text_field :emergency_contact_name%>  
 
 		</p>
 		
 		<p>
 			
-        <%= c.label :contact_number%><div class="mandatory-field"></div>
+        <%= c.label :contact_number, :class => "mandatory-field"%>
 		<%= c.text_field :emergency_contact_number%>
 
 		</p>
@@ -100,7 +100,7 @@
 
 
 		<p>
-	      <%= f.label :volunteering_reason %> <div class="mandatory-field"></div>
+	      <%= f.label :volunteering_reason, :class => "mandatory-field"%>
           <%= f.text_area :volunteering_reason, :'data-tooltip' => 'Please include the reason why you are applying for this assignment' %>	
 		</p>
 					    <%= f.hidden_field :position_id %>
@@ -115,7 +115,7 @@
 		<%= f.fields_for :contact do |c| %>
 		
 		<p>
-          <%= c.label "Skills and/or Qualifications" %> <div class="mandatory-field"></div>
+          <%= c.label "Skills and/or Qualifications" , :class => "mandatory-field"%>
           <%= c.text_field :skills_values , :'data-tooltip' => 'Plese type in your skills, seperated by comma: e.g. thougtful, helpful' %>
         </p>
 
@@ -140,13 +140,13 @@
 		</p>
 		
 		<p>
-		  <%= c.label "parent's name" %> <div class="mandatory-field"></div>
+		  <%= c.label "parent's name", :class => "mandatory-field"%>
           <%= c.text_field :parent_name, :'data-tooltip' => "For parental approval type in your parent's full name" %>	
 	
 	 	</p>
 		
 		<p>
-		  <%= c.label "parent's email" %> <div class="mandatory-field"></div>
+		  <%= c.label "parent's email" , :class => "mandatory-field"%>
           <%= c.text_field :parent_email, :'data-tooltip' => "Please include your parent's email where they could be contacted" %>	
 	
 	 	</p>
@@ -156,7 +156,7 @@
 		<h3 class="application-form">AVAILABILITY</h3>
 		
 		<p>
-	      <%= f.label :can_commit_to %> <div class="mandatory-field"></div>
+	      <%= f.label :can_commit_to, :class => "mandatory-field"%>
 		  <br/>
 		  <span class="checkbox-block">
 		  <% ['Event Only', 'Casual', 'Up to 3 months', 'More than 3 months','# of hours per week' ].each do |o|%>
@@ -169,22 +169,21 @@
 		<p>
 			<br/>
 		  <%= f.label :Number_of_hours_per_week %> 
-          <%= f.text_field :hours_per_week, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>	
+          <%= f.text_field :hours_per_week, :'data-tooltip' => 'How many hours each week' %>	
 
 	 	</p>
 				
 		<p>
 			<br/>
-	      <%= f.label :time_of_the_day %> <div class="mandatory-field"></div>
+	      <%= f.label :time_of_the_day , :class => "mandatory-field"%>
           <%= f.select :day_time, ['Weekdays','Week Nights','Weekend Days','Weekend Nights'] %>	<br/>
 		
 		</p>
 		
 		
-		
 		<p>
-		  <%= f.label :can_start_on %> <div class="mandatory-field"></div>
-          <%= f.text_field :start_date, :class=>'datepickr' %>	
+		  <%= f.label :can_start_on , :class => "mandatory-field"%>
+          <%= f.text_field :start_date, :class=>'datepickr'%>	
 	      <%= f.text_field :start_time, :class=>'tpickr' %>	
 
 	 	</p>
@@ -210,28 +209,25 @@
 	
 		</p>
 		
-		
+		<%unless @record.position.agreement.nil?%>
 		<h2 class="application-form-content-heading-2">By submitting this application, I understand that:</h2>
 
 		<p>
 	
 	    <span class="form-agreement">
-		Volunteer placement is made on the basis of the program requirements, the skills and experience of the applicant and, when appropriate, successful reference checks. Evergreen may need to collect personal information appropriate to the position(s) applied for concerning my academic background and employment/volunteering history, and to conduct reference checks.
-		Evergreen adheres to the Freedom of Information and Protection of Privacy Act. Evergreen respects your privacy and will not trade or sell your personal information to other organizations. I agree to respect the confidentiality of all information I may have access to at Evergreen.
-		If I require volunteer hours to qualify for community service, I will have my hours validated when I volunteer and/or sign in at the event.
-		By selecting the “I agree” box below, you acknowledge that the information provided is true and accurate and that you have read understand the points above.
+	    	<%= @record.position.agreement%>
 		</span>
 	    </p>
 		
 		<p>
 			
 	    <span class="form-text-plain"> 
-		<%= f.check_box :agreement, :checked=> false%> <span class="application-form-content">I Agree</span>		<br/>
+		<%= f.check_box :agreement, :checked=> @record.position.disclaimer_agreement%> <span class="application-form-content mandatory-field">I Agree &nbsp;   </span>		<br/>
 
 
 		</span>
 		</p>
-    
+        <%end%>
 		<p>
 		
      		<%= om_button(:icon => 'apply') do %>
