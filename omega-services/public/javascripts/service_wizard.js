@@ -18,15 +18,19 @@ $(function() {
      */
     $('#ui-elements').find('li.ui-em').click(function() {
         var ui_em = $(this).find('span.add-ui-em').attr('ui-data');
+        
+		var section = $("input[name='part']:checked").val();        
+       			
         $('#admin-edit-em').empty();
         // retrieve the html for the new ui element and append it to the list
         $.ajax({
 
             url:'/form_builder/dispatch_ui_element/' + ui_em ,
+            data: 'section=' + section,
             success:function(data) {
                 var part = '#' + $('#ui-elements').find('input[name="part"]:checked').val() + "-details";
 
-                                                      $(part).append(data);
+                     $(part).append(data);
 
             }
         })
@@ -50,9 +54,10 @@ $(function() {
                                         dataType: 'script'
                                     })
 
-
                                 }).delegate('span.delete-ui-em', 'click', function() {
+                                	
         $(this).parents('li').hide();
+        
         //mark element for delete with the submission of the form
         var em_id = $(this).parents('li').find('.ui-em-preview').attr('id').replace(/ui-em-/, '');
         $('#fields_' + em_id + '__destroy').val('true');

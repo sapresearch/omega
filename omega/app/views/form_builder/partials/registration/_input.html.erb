@@ -2,22 +2,22 @@
   <div class="item-list-actions-wrapper corners">
     <div class="item-list-actions">
                     <span class="om-plain-icon-button"><span class="om-icon om-icon-edit"></span>
-                    <span class="edit-ui-em">Edit </span> </span> <br/>
+                    <span class="edit-ui-em">Edit</span> </span><br/>
       <span class="om-plain-icon-button"><span class="om-icon om-icon-delete"></span>
                     <span class="delete-ui-em">Delete </span> </span>
     </div>
   </div>
 
   <div id="<%= "ui-em-#{index}" %>" class="ui-em-preview" ui-data="input">
-    <%= label_tag @field.field_name, nil, :id=>"fields_#{index}_field_name_preview", :class =>'label-preview' %>
+    <%= label_tag field.field_name, nil, :id=>"fields_#{index}_field_name_preview", :class =>'label-preview' %>
 
     <span id="<%= "value-preview-#{index}" %>">
-           <input class="service" disabled="disabled" type="text" value="<%= @field.value.field_value %>"/>
+           <input class="service" disabled="disabled" type="text" value=""/>
 
 
      </span>
   </div>
 <input type="hidden" id="<%= "value-preview-#{index}" %>">
-  <%= render :partial => "form_builder/partials/hidden_fields", :locals => { :index => index}%>
+  <%= render :partial => "form_builder/partials/registration/hidden_fields", :locals => { :index => index}%>
 
 </li>

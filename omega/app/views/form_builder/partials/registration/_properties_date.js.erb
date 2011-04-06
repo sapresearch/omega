@@ -1,6 +1,6 @@
 $('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "form_builder/partials/properties_date.html") %>').effect('highlight');
 
-        $('#ui-em-<%="#{@em_id}"%>').append('<input type="hidden" value="Service Details" name="fields[<%="#{@em_id}"%>][field_category]" >');
+        $('#ui-em-<%="#{@em_id}"%>').append('<input type="hidden" value="Registration Details" name="fields[<%="#{@em_id}"%>][field_category]" >');
 
 
         $('#edit-label-value').keyup(function() {
@@ -12,9 +12,4 @@ $('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "f
         });
 
 
-        $('.datepicker').datepicker({
-            onSelect: function(dateText, inst) {
-            $("#<%="value-preview-#{@em_id}"%>").empty().append(dateText);
-            $('#fields_<%="#{@em_id}"%>_field_type').val(dateText);
-            }
-        });
+        

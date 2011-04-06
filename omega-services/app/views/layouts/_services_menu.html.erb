@@ -1,37 +1,38 @@
 <%= side_bar_box(:"Services Menu") do %>
 
-
+<!--
     <ul>
 
-      <% @services.each do |s| %>
+      <% #@types.each do |s| %>
 
-            <% if (s.published !=true) and !current_user.is_anonymous? %>
+            <%# if (s.published !=true) and !current_user.is_anonymous? %>
               <li>
-                <h3>  <%= s.service_type %> - <%= s.service_type %> Service </h3>
+                <h3>  <%#= s.service_type %> - <%#= s.service_type %> Service </h3>
 
+				<p>
+                <%#= om_button(:icon=>'sort-za', :sidebar => true) do %>
+                    <%#= link_to "Saved Draft", service_wizard_service_types_url(:step => 2, :id => s) %>
+                <%# end %>
+                
+                </p>
+				<p>
+                <%#= om_button(:icon=>'delete', :sidebar => true) do %>
+                    <%#= link_to "Delete", s, :confirm => 'Are You Sure?', :method => :delete %>
+                <% #end %>
+				</p>
+            <%# end %>
 
-                <%= om_button(:icon=>'sort-za') do %>
-                    <%= link_to "Saved Draft", service_wizard_services_url(:step => 2, :id => s) %>
-                <% end %>
+      <% #end %>
 
-                <%= om_button(:icon=>'delete') do %>
-                    <%= link_to "Delete", s, :confirm => 'Are You Sure?', :method => :delete %>
-                <% end %>
-</li>
-
-            <% end %>
-
-      <% end %>
-
-    </ul>
+    </ul>-->
 
     <% if !current_user.is_anonymous? %>
-        <br>
+        <p>
         <%= om_button(:icon=>'', :sidebar => true ) do %>
 
-            <%= link_to 'Add a New Service', service_wizard_services_url(:step => "introduction") %>
+            <%= link_to 'Create New Type', service_wizard_service_types_url(:step => "introduction") %>
         <% end %>
-
+		</p>
 
         <%#= link_to 'Export Services to a File', export_to_csv_services_path%>
 

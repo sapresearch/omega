@@ -10,5 +10,5 @@ $('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "f
         $('#edit-field-value').keyup(function() {
             var v = $(this).val();
             $("#<%="value-preview-#{@em_id}"%>").empty().append(v);
-            $('#fields_<%="#{@em_id}"%>_detail_attributes_field_value').val(v)
+            $('#fields_<%="#{@em_id}"%>_value_attributes_field_value').val(v)
         });

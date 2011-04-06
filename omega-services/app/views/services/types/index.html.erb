@@ -1,22 +1,33 @@
 <% require_stylesheet 'omega_services' %>
 <% require_javascript 'omega_services' %>
 
-<h1 class="page-content corners-top">
-  Services Offered
-</h1>
-<div class="page-content corners-bottom">
-  <div class="right">
-    <%= om_button(:icon=>'sort-az') do %>
-        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'asc')) %>
-    <% end %>
-    <%= om_button(:icon=>'sort-za') do %>
-        <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
-    <% end %>
-  </div>
+ <div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main-columns">
+	
+				<h1 class="page-content">
+      				All Created Types
+		    	</h1>
+	
+		</div>
+
+
+      <div class="right">
+      	<br/>
+        <%= om_button(:icon=>'sort-az', :small => true) do %>
+            <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
+        <% end %>
+        <%= om_button(:icon=>'sort-za', :small => true) do %>
+            <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+        <% end %>
+
+      </div>
+
   <div class="clear"></div>
+
   <ul id="positions_list">
-    <% @services.each do |s| %>
-        <li class="clearfix">
+    <% @types.each do |s| %>
+        <li >
           <div class="position_slider">
             <div class="position_actions">
               <% if !current_user.is_anonymous? %>
@@ -30,7 +41,7 @@
                   <% if Service::Registration.find_by_contact_id_and_service_id(Contact.for(current_user), s).nil? %>
                       <%= om_button(:plain => true, :icon => 'apply') do %>
                       
-                      <%= link_to "Register", new_service_service_registration_url(s), :'data-tooltip' => 'register for this position' %>
+                      <%= link_to "Create a Service", new_service_service_registration_url(s), :'data-tooltip' => 'register for this position' %>
 
                   <% end %>
               <% end %>
@@ -38,7 +49,7 @@
               <%else%>
 
                <%= om_button(:plain => true, :icon => 'apply') do %>
-                  <%= link_to "Publish", finalize_services_url(:id => s), :'data-tooltip' => 'publish this position' %>
+                  <%= link_to "Publish", finalize_service_types_url(:id => s), :'data-tooltip' => 'publish this position' %>
                <%end%>
               <%end%>
               <%= toggle_favorite(s) if !current_user.is_anonymous? %>
@@ -51,7 +62,7 @@
                
 
 
-                    <%= link_to s.service_name, service_url(s) %>
+                    <%= link_to s.type_name, service_types_url(s) %>
 
 
               </h2>
@@ -68,12 +79,11 @@
 
     <% end %>
   </ul>
-
-<%#= will_paginate @services %>
-
-  <div class="clear"></div>
-
 </div>
+<%#= will_paginate @types %>
+
+
+
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/services_menu" %>
 <% end %>

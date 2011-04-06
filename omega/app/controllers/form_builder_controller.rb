@@ -11,6 +11,15 @@ class FormBuilderController < Omega::Controller
     field = ''
     default = ''
    
+    logger.debug("params: #{params[:section]}")
+    
+    if params[:section] == "service"
+    	@field.field_category = "Service Details"
+    else
+    	@field.field_category = "Registration Details"
+
+    end
+    
     case params[:element]
       when 'input'
         type = 'text'
@@ -43,8 +52,7 @@ class FormBuilderController < Omega::Controller
     @field.field_type = type
     @field.field_type_class = type_class
 
-    render :partial => "form_builder/partials/#{type_class}", :locals => { :index => Time.now.to_i }
-
+    render :partial => "form_builder/partials/#{type_class}", :locals => { :index => Time.now.to_i}
   end
 
   def dispatch_element_properties

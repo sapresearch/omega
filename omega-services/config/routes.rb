@@ -35,7 +35,6 @@ Omega::Services::Module.routes.draw do
   resources :services do
     collection do
       match :service_wizard, :to => 'services#service_wizard', :path => 'wizard/step/:step'
-      match :finalize, :to => 'services#finalize', :path => 'finalize/:id'
       match :modify_service, :to => 'services#modify_service', :path => 'modify_service/:id'
       get :retrieve_existing_type
       get :define_service_type

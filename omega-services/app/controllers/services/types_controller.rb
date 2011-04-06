@@ -1,19 +1,33 @@
 class Services::TypesController < Omega::Controller
+  
+  respond_to :html, :xml, :js, :json
 
+  def index
 
+    @types = Service::Type.all
+	respond_with(@types)
+  end
+  
+  def show
+
+    @service_type = Service::Type.find(params[:id])
+    respond_with(@service_type)
+
+  end
+  	
   def service_preview
    
     @service_type = Service::TypeTemplate.find(params[:id])
     
     @registration_fields = Service::TypeTemplateField.where("type_template_id = ? and field_category = ? ", params[:id], "Registration Details")
     @service_fields = Service::TypeTemplateField.where("type_template_id = ? and field_category = ? ", params[:id], "Service Details")
-    @details = Service::TypeTemplateField::Value.where("type_template_id =? ", params[:id])
+    @details = Service::TypeTemplateField::Value.where("type_template_id = ?", params[:id])
     
-    
+   
     render :partial => 'service_preview'
   end
 
-
+	
   def service_wizard
 
    session[:current_step] = params[:step]
@@ -87,15 +101,21 @@ class Services::TypesController < Omega::Controller
     
     @type.type_template_fields.each do |f|
       attributes = f.attributes.delete_if{|key, value| key == "id" || key =="type_template_id"}
+      
+      unless f.value.nil?
       value_attributes = f.value.attributes.delete_if{|key, value| key == "id" || key =="type_template_id" || key == "type_template_field_id"}
+      end
+      
       @field = Service::TypeField.new(attributes) 
       @field.type_id = @service_type.id
       @field.save
       
+      unless value_attributes.nil?
       @field_value = Service::TypeField::Value.new(value_attributes) 
       @field_value.type_id = @service_type.id
       @field_value.type_field_id = @field.id
       @field_value.save
+      end
       
     end
     session[:service_id] = @service_type.id
@@ -121,18 +141,24 @@ class Services::TypesController < Omega::Controller
      # end
     #end
 	
-    unless params[:fields].nil?
-      params[:fields].each_value { |field| @service_type.type_fields.build(field) do |f| 
-      	                                  
-           										f.build_value unless f.value
-           										f.value.type_id ||= @service_type.id
-    										end   
-    										
-    										}
+   unless params[:fields].nil?
+      params[:fields].each_value { |field| s_field = Service::TypeField.find_by_field_name(field.fetch("field_name"))
+      	                                        if s_field.nil? 
+      	                                        	@service_type.type_fields.build(field) do |f| 
+      	                                        
+      	                                        		if f.field_category == "Service Details" 
+      	                                        			f.build_value unless f.value
+           													f.value.type_id ||= @service_type.id
+      	                                        		end
+           										
+    												end 
+	
+    											
+    											end      										
+    							  }
+    end 
     
     
-    
-     end 
       
    
     #-------------------------------------------------------
@@ -141,9 +167,11 @@ class Services::TypesController < Omega::Controller
  
 
     if params[:next] # Proceed to next step in the wizard
+    	    											      
        @service_type.save
+
        session[:service_id] = @service_type.id
-      redirect_to service_wizard_service_types_url(:step => 3)
+       redirect_to service_wizard_service_types_url(:step => 3)
 
     end
 
@@ -154,7 +182,14 @@ class Services::TypesController < Omega::Controller
     end
   end
 
+  def finalize # Publish the Service
 
+    @service_type = Service::Type.find(params[:id])
+    @service_type.update_attributes(:published => '1')
+
+    redirect_to service_types_url(@service_type)
+
+  end
 
 #----------------------------------------------------------------------------------------------------------
 

@@ -2,7 +2,7 @@
 
 
 <h1 class="page-content corners-top">
-  <%= @service.service_name %> Service 
+  <%= @service_type.service_name %> Service 
 </h1>
 <div class="page-content corners-bottom">
 
@@ -10,12 +10,12 @@
 
   <br/>
   <strong>Service Type:</strong>
-           <%= @service.service_type %><br/>
+           <%= @service_type.service_type %><br/>
 
            <strong>Icon:</strong>
-           <% if @service.icon_file_name != 'missing.png'%>
+           <% if @service_type.icon_file_name != 'missing.png'%>
 
-              <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
+              <%= image_tag @service_type.icon.url(:small), :width =>  '65' %><br/>
 
            <%else%>
 
@@ -25,7 +25,7 @@
 
            <br/>
            <strong>Published: </strong>
-           <% if @service.published.to_s == "true" %>
+           <% if @service_type.published.to_s == "true" %>
 
               Yes
 
@@ -37,12 +37,12 @@
 
            <br/>
            <strong>Category:</strong>
-           <%= @service.service_category %><br/>
+           <%= @service_type.service_category %><br/>
 
            <br/>
 
 
-  <% Service::Field.find_all_by_field_category_and_service_id("Service Details", @service.id).each do |s| %>
+  <% Service::Field.find_all_by_field_category_and_service_id("Service Details", @service_type.id).each do |s| %>
       <p>
 
         <%= s.field_name %>:
@@ -53,7 +53,6 @@
 
   <br/><span class="style2">Registration Details </span> <br/>
 
-  <% if @service.service_category.eql?("Enrollable") %>
 
               <strong> First Name <br/>
               Last Name <br/>
@@ -62,19 +61,10 @@
               Notes <br/>
               </strong>
 
-              <%else%>
+              
 
-              <strong>
-              Email <br/>
-              Phone Numbers <br/>
-              Notes <br/>
-              Questions <br/>
 
-              </strong>
-
-          <%end%>
-
-  <% Service::Field.find_all_by_field_category_and_service_id("Registration Details", @service.id).each do |s| %>
+  <% Service::Field.find_all_by_field_category_and_service_id("Registration Details", @service_type.id).each do |s| %>
       <p>
         <%= s.field_name %>
       </p>
