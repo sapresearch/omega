@@ -8,7 +8,7 @@ class Service < ActiveRecord::Base
 
    has_many :fields, :dependent => :destroy
    has_many :registrations, :dependent => :destroy
-   has_many :values, :dependent => :destroy
+   has_many :values
    belongs_to :type
    has_one :event
 

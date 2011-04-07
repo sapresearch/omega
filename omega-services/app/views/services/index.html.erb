@@ -10,7 +10,22 @@
 		    	</h1>
 	
 		</div>
+  <br/>
+  <br/>
+  <% if @services.empty?%>
+  	   <p>
+  	   	No Service is being offered at the moment! <br/><br/>
+  	   	
+  	   	 <%= with_permission(Volunteering::PERM_ADMIN) do %>
+          <%= om_button(:contact => true, :icon => 'clock') do %>
+  	   	  	<%= link_to 'Create a New Service', service_wizard_services_url(:step => "introduction") %>
+          <% end %>
+         <% end %>
+  	   	
 
+  	   	
+  	   </p>
+  <%else%>
       <div class="right">
       	<br/>
         <%= om_button(:icon=>'sort-az', :small => true) do %>
@@ -31,7 +46,8 @@
             <div class="position_actions">
               <% if !current_user.is_anonymous? %>
                   <%= om_button(:plain => true, :icon => 'delete') do %>
-                      <%= link_to 'Delete', s, :method => :delete, :'data-tooltip' => 'Delete this Service' %>
+                      <%= link_to 'Delete' ,service_url(:id => s),  :method => :delete, :'data-tooltip' => 'Delete this Service' %>
+
                   <% end %>
               <% end %>
 
@@ -61,7 +77,7 @@
                
 
 
-                    <%= link_to s.service_name, show_services_url(:id => s) %>
+                    <%= link_to s.service_name, service_url(:id => s) %>
 
 
               </h2>
@@ -78,6 +94,7 @@
 
     <% end %>
   </ul>
+  <%end%>
 </div>
 <%#= will_paginate @types %>
 

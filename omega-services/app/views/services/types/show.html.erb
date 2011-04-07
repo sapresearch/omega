@@ -1,28 +1,22 @@
 <% require_stylesheet 'services.css' %>
 
 
-<h1 class="page-content corners-top">
-  <%= @service_type.service_name %> Service 
-</h1>
-<div class="page-content corners-bottom">
+<div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+      				<%= @service_type.type_name%> Type
+		    	</h1>
+	
+		</div>
 
-  <span class="style2">Service Details </span> <br/>
+  <p>    
+
+  <span class="style2">Service Type Details </span> <br/>
 
   <br/>
-  <strong>Service Type:</strong>
-           <%= @service_type.service_type %><br/>
-
-           <strong>Icon:</strong>
-           <% if @service_type.icon_file_name != 'missing.png'%>
-
-              <%= image_tag @service_type.icon.url(:small), :width =>  '65' %><br/>
-
-           <%else%>
-
-              <%= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
-
-           <%end%>
-
+           
            <br/>
            <strong>Published: </strong>
            <% if @service_type.published.to_s == "true" %>
@@ -35,25 +29,20 @@
 
            <%end%><br/>
 
-           <br/>
-           <strong>Category:</strong>
-           <%= @service_type.service_category %><br/>
+  </p>
 
-           <br/>
-
-
-  <% Service::Field.find_all_by_field_category_and_service_id("Service Details", @service_type.id).each do |s| %>
+  <% Service::TypeField.where("field_category = ? and type_id = ?", "Service Details", @service_type.id).each do |s| %>
       <p>
 
-        <%= s.field_name %>:
-        <%= Service::Detail.find_by_field_id(s.id).field_value %>
+        <strong><%= s.field_name %>: </strong>
+        <%= Service::TypeField::Value.find_by_type_field_id(s.id).field_value %>
 		
       </p>
   <% end %>
-
+  <p>
   <br/><span class="style2">Registration Details </span> <br/>
 
-
+              <br/>
               <strong> First Name <br/>
               Last Name <br/>
               Email <br/>
@@ -62,11 +51,11 @@
               </strong>
 
               
+  </p>
 
-
-  <% Service::Field.find_all_by_field_category_and_service_id("Registration Details", @service_type.id).each do |s| %>
+  <% Service::TypeField.find_all_by_field_category_and_type_id("Registration Details", @service_type.id).each do |s| %>
       <p>
-        <%= s.field_name %>
+        <strong><%= s.field_name %></strong>
       </p>
   <% end %>
 
@@ -74,5 +63,5 @@
 
 
 <% content_for :sidebar do %>
-    <%= render :partial => "layouts/show_service_menu" %>
+    <%#= render :partial => "layouts/show_service_menu" %>
 <% end %>

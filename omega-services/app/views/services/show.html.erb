@@ -1,10 +1,17 @@
 <% require_stylesheet 'services.css' %>
 
 
-<h1 class="page-content corners-top">
-  <%= @service.service_name %> Service 
-</h1>
-<div class="page-content corners-bottom">
+<div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main-columns">
+	
+				<h1 class="page-content">
+      				<%= @service.service_name%> Service
+		    	</h1>
+	
+		</div>
+
+  <p>    
 
   <span class="style2">Service Details </span> <br/>
 
@@ -12,17 +19,7 @@
   <strong>Service Type:</strong>
            <%= @service.type.type_name %><br/>
 
-           <strong>Icon:</strong>
-           <% if @service.icon_file_name != 'missing.png'%>
-
-              <%= image_tag @service.icon.url(:small), :width =>  '65' %><br/>
-
-           <%else%>
-
-              <%= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
-
-           <%end%>
-
+           
            <br/>
            <strong>Published: </strong>
            <% if @service.published.to_s == "true" %>
@@ -35,22 +32,20 @@
 
            <%end%><br/>
 
-           <br/>
+  </p>
 
-
-
-  <% Service::Field.find_all_by_field_category_and_service_id("Service Details", @service.id).each do |s| %>
+  <% Service::Field.where("field_category = ? and service_id = ?", "Service Details", @service.id).each do |s| %>
       <p>
 
-        <%= s.field_name %>:
+        <strong><%= s.field_name %>: </strong>
         <%= Service::Field::Value.find_by_field_id(s.id).field_value %>
 		
       </p>
   <% end %>
-
+  <p>
   <br/><span class="style2">Registration Details </span> <br/>
 
-
+              <br/>
               <strong> First Name <br/>
               Last Name <br/>
               Email <br/>
@@ -59,11 +54,11 @@
               </strong>
 
               
+  </p>
 
-
-  <% Service::Field.find_all_by_field_category_and_service_id("Registration Details", @service_type.id).each do |s| %>
+  <% Service::Field.find_all_by_field_category_and_service_id("Registration Details", @service.id).each do |s| %>
       <p>
-        <%= s.field_name %>
+        <strong><%= s.field_name %></strong>
       </p>
   <% end %>
 

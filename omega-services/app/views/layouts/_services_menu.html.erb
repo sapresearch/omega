@@ -25,10 +25,9 @@
       <% #end %>
 
     </ul>-->
-
-    <% if !current_user.is_anonymous? %>
+	<%= with_permission(Volunteering::PERM_ADMIN) do %>
         <p>
-        <%= om_button(:icon=>'', :sidebar => true ) do %>
+        <%= om_button( :sidebar => true ) do %>
 
             <%= link_to 'Create New Type', service_wizard_service_types_url(:step => "introduction") %>
         <% end %>
@@ -36,6 +35,5 @@
 
         <%#= link_to 'Export Services to a File', export_to_csv_services_path%>
 
-    <% end %>
-
+	<%end%>
 <% end %>

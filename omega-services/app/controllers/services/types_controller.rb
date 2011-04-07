@@ -4,7 +4,7 @@ class Services::TypesController < Omega::Controller
 
   def index
 
-    @types = Service::Type.all
+    @types = Service::Type.where("type_name != ?","Blank/New")
 	respond_with(@types)
   end
   
@@ -187,10 +187,18 @@ class Services::TypesController < Omega::Controller
     @service_type = Service::Type.find(params[:id])
     @service_type.update_attributes(:published => '1')
 
-    redirect_to service_types_url(@service_type)
+    redirect_to service_type_url(:id=> @service_type)
 
   end
 
+
+  def destroy
+    @service_type = Service::Type.find(params[:id])
+    @service_type.destroy
+    
+    redirect_to service_types_url
+    
+  end
 #----------------------------------------------------------------------------------------------------------
 
  private

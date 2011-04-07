@@ -145,6 +145,20 @@ class ServicesController < Omega::Controller
     #end
 	
   
+    unless params[:fields].nil?
+      params[:fields].each_value { |field| s_field = Service::Field.find_by_field_name(field.fetch("field_name"))
+      	                                        if s_field.nil? 
+      	                                        	@service.fields.build(field) do |f| 
+      	                                        
+      	                                        			f.build_value unless f.value
+           													f.value.type_id ||= @service.id
+           										
+    												end 
+	
+    											
+    											end      										
+    							  }
+    end 
     
     
       
@@ -174,6 +188,13 @@ class ServicesController < Omega::Controller
 
   end
 
+  def destroy
+    
+    @service = Service.find(params[:id])
+    @service.destroy
+    
+    redirect_to services_url
+  end
 #----------------------------------------------------------------------------------------------------------
 
  private

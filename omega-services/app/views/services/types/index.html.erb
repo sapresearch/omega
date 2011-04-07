@@ -10,8 +10,20 @@
 		    	</h1>
 	
 		</div>
-
-
+  <br/>
+  <br/>
+  <% if @types.empty?%>
+  	   <p>
+  	   	No Service Type has been created yet! <br/><br/>
+  	   	
+		<%= with_permission(Volunteering::PERM_ADMIN) do %>
+          <%= om_button(:contact => true, :icon => 'clock') do %>
+  	   	  <%= link_to 'Create a New Type', service_wizard_service_types_url(:step => "introduction") %>
+          <% end %>
+         <% end %>
+  	   	
+  	   </p>
+  <%else%>
       <div class="right">
       	<br/>
         <%= om_button(:icon=>'sort-az', :small => true) do %>
@@ -24,7 +36,7 @@
       </div>
 
   <div class="clear"></div>
-
+ 
   <ul id="positions_list">
     <% @types.each do |s| %>
         <li >
@@ -32,7 +44,7 @@
             <div class="position_actions">
               <% if !current_user.is_anonymous? %>
                   <%= om_button(:plain => true, :icon => 'delete') do %>
-                      <%= link_to 'Delete', s, :method => :delete, :'data-tooltip' => 'Delete this Service' %>
+                      <%= link_to 'Delete', service_type_url(:id => s), :remote => true, :method => :delete, :'data-tooltip' => 'Delete this Service' %>
                   <% end %>
               <% end %>
 
@@ -79,6 +91,8 @@
 
     <% end %>
   </ul>
+  
+  <%end%>
 </div>
 <%#= will_paginate @types %>
 
