@@ -1,8 +1,13 @@
 <% require_stylesheet 'omega_form_builder.css' %>
-<%= content_for :explanation do %>
-    <%= render :partial => 'services/partials/steps' %>
-<% end %>
+
 <%= render :layout => 'layouts/services_wizard' do %>
+<%- title "Omega Services - Create Service Type Wizard: Step 3" %>
+
+		<div class="steps">		
+		   <%= render :partial => 'services/partials/steps' %>
+		</div>
+  
+   <div id="service_preview_summary" >		
     <%= form_for @service, :html => {:id =>'edit-service' , :action => "service_wizard" } do |f| %>
         <%= errors_for_form(@service, 'service') %>
         <% if @service.icon_file_name != 'missing.png' %>
@@ -10,50 +15,36 @@
         <% else %>
             <%#= image_tag "/images/icons/services/types/default/missing.png", :width =>  '65' %><br/>
         <% end %>
-        <%= f.hidden_field :service_type %>
-        <%= f.hidden_field :icon %>
-        <%= f.hidden_field :published %>
-        <fieldset>
-          <legend><%= @service.service_type %></legend>
-          <p>
-            <%= f.label :category %>
-            <%= @service.service_category %>
-          </p>
+
+         <fieldset class="services">
+          <legend class="services">Service Details</legend>
+
           <ul id="service-details" class="elements-list">
-            <li class="list-item relative">
 
-              <div id="<%= "ui-em-#{rand(1000)}" %>" class="ui-em-preview" ui-data="textfield">
-                <%= f.label :name_for_service, :id =>'service-name' %>
-                <span class="field-value-preview">
-            <%= @service.service_name %>
-            </span>
-                <%= f.hidden_field :service_name, :class=>'field-value' %>
-              </div>
-            </li>
-            <li class="list-item relative">
-         
-             
-              <div id="<%= "ui-em-#{rand(1000)}" %>" class="ui-em-preview" ui-data="textfield">
-                <%= f.label :description, :id => "service-description" %>
-                <span class="field-value-preview">
-            <%= @service.description %>
-            </span>
+           <li class="list-item"> <%= f.label :service_type %>
+            <%= @service.type.type_name %> </li>
 
-                <%= f.hidden_field :description, :class=>'field-value' %>
-              </div>
-            </li>
-            <% unless @details.empty? %>
-                <% @details.each_with_index do |detail, index| %>
-                    <% @field =  Service::Field.find_by_id_and_field_category(detail.field_id, "Service Details") %>
-                        <%= render "form_builder/partials/#{@field.field_type_class}", :index => @field.id %>
+           <li class="list-item">  <%= f.label :name_for_service, :id =>'service-name' %>
+             <%= f.text_field :service_name, :class=>'field-value'%> </li>
+
+           <li class="list-item">  <%= f.label :description, :id => "service-description" %>
+             <%= f.text_area :description, :class=>'field-value' %> </li>
+
+                <% unless @details.empty? %>
+                	<% @details.each_with_index do |detail, index| %>
+                    	<% @field =  Service::Field.find(detail.field_id) %>
+                    	   <% if @field.field_category == "Service Details"%>
+
+                        	<%= render "form_builder/partials/#{@field.field_type_class}", :index => @field.id %>
+                        	
+                           <%end%>
+                		<% end %>
                 <% end %>
-            <% end %>
           </ul>
         </fieldset>
-        <fieldset>
-          <legend>Registration Details</legend>
+        <fieldset class="services">
+          <legend class="services">Registration Details</legend>
           <ul id="registration-details" class="elements-list">
-            <% if @service.service_category.eql?("Enrollable") %>
                 <li class="list-item">
                   <label>First Name</label><input type="text" disabled="disabled">
                 </li>
@@ -61,28 +52,25 @@
                 <li class="list-item"><label>Email</label><input type="text" disabled="disabled"></li>
                 <li class="list-item"><label>Phone</label><input type="text" disabled="disabled"></li>
                 <li class="list-item">
-                  <label>Notest</label><textarea disabled="disabled"></textarea></li>
-            <% else %>
-                <strong>
-                  Email <br/>
-                  Phone Numbers <br/>
-                  Notes <br/>
-                  Questions <br/>
-                </strong>
-            <% end %>
-          </ul>
+                
+                <label>Notes</label><textarea disabled="disabled"></textarea></li>
+                
+    
+          
+          
+                
+    
+                   
           <% unless @registration_fields.empty? %>
               <% @registration_fields.each_with_index do |field, index| %>
-                  <%= f.fields_for "fields_attributes[#{index}]", field do |ff| %>
-                      <%= ff.hidden_field :id %>
-                      <%= ff.hidden_field :service_id %>
-                      <%= ff.hidden_field :field_category %>
-                      <strong><%= field.field_name %> </strong>
-                  <% end %>
+                        	<%= render "form_builder/partials/registration/#{field.field_type_class}", :index => field.id, :field => field %>
               <% end %>
           <% end %>
+          
+          
+                </ul>
         </fieldset>
-        <div class="bottom-buttons">
+        <div class="buttons_wizard">
           <%= om_button(:icon=>'back') do %>
               <%= link_to 'Back', service_wizard_services_url(:step => 2) %>
           <% end %>
@@ -90,9 +78,7 @@
            <%= om_button(:icon=>'save') do %>
               <%= link_to  "Publish", finalize_services_url(:id => @service)%>
           <% end %>
-          <%= om_button(:icon=>'save') do %>
-              <%= f.submit "Save", :name => "save" %>
-          <% end %>
+
         </div>
     <% end %>
     

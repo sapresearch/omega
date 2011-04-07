@@ -8,8 +8,8 @@ $(document).ready(function() {
 			$("#arrow6").hide();
 			$("#arrow7").hide();
 			
-		    document.forms[0]["types[service_type]"].value = $('ul#services li:first').attr("id");
-			service_preview($('ul#services li:first').attr("id"));
+			service_preview(1);
+		    document.forms[0]["templates[service_type]"].value = "1";
 
     $('#services li').hover(function() {
 
@@ -102,7 +102,7 @@ $(document).ready(function() {
 
 		service_preview(this.id);
 		
-		document.forms[0]["types[service_type]"].value = this.id;
+		document.forms[0]["templates[service_type]"].value = this.id;
 
 		
     }, function() {
@@ -127,7 +127,7 @@ function service_preview(value) {
 	
     $.ajax({
         type: "GET",
-        url: "/services/service_preview",
+        url: "/services/types/service_preview",
         data: "id=" + value,
         success: function(html) {
             $("#service_preview").html(html);

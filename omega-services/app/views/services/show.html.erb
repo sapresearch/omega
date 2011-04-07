@@ -1,23 +1,16 @@
 <% require_stylesheet 'services.css' %>
 
-<%- title "Omega Services - #{@service.service_name}" %>
 
+<h1 class="page-content corners-top">
+  <%= @service.service_name %> Service 
+</h1>
+<div class="page-content corners-bottom">
 
-  <div class="content circle-corners-bottom-left">
-    	
-		<div class="heading-main-columns">
-	
-				<h1 class="page-content">
-  						<%= @service.service_name %> Service 
-		    	</h1>
-	
-		</div>
-		
   <span class="style2">Service Details </span> <br/>
 
   <br/>
   <strong>Service Type:</strong>
-           <%= @service.service_type %><br/>
+           <%= @service.type.type_name %><br/>
 
            <strong>Icon:</strong>
            <% if @service.icon_file_name != 'missing.png'%>
@@ -43,24 +36,20 @@
            <%end%><br/>
 
            <br/>
-           <strong>Category:</strong>
-           <%= @service.service_category %><br/>
 
-           <br/>
 
 
   <% Service::Field.find_all_by_field_category_and_service_id("Service Details", @service.id).each do |s| %>
       <p>
 
         <%= s.field_name %>:
-        <%= Service::Detail.find_by_field_id(s.id).field_value %>
+        <%= Service::Field::Value.find_by_field_id(s.id).field_value %>
 		
       </p>
   <% end %>
 
   <br/><span class="style2">Registration Details </span> <br/>
 
-  <% if @service.service_category.eql?("Enrollable") %>
 
               <strong> First Name <br/>
               Last Name <br/>
@@ -69,19 +58,10 @@
               Notes <br/>
               </strong>
 
-              <%else%>
+              
 
-              <strong>
-              Email <br/>
-              Phone Numbers <br/>
-              Notes <br/>
-              Questions <br/>
 
-              </strong>
-
-          <%end%>
-
-  <% Service::Field.find_all_by_field_category_and_service_id("Registration Details", @service.id).each do |s| %>
+  <% Service::Field.find_all_by_field_category_and_service_id("Registration Details", @service_type.id).each do |s| %>
       <p>
         <%= s.field_name %>
       </p>

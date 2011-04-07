@@ -1,6 +1,7 @@
-class CreateServiceDetails < ActiveRecord::Migration
+class CreateServiceFieldValues < ActiveRecord::Migration
+
   def self.up
-     create_table :service_details do |t|
+     create_table :service_field_values do |t|
 
       t.references :field, :null => false
       t.integer :service_id
@@ -12,6 +13,6 @@ class CreateServiceDetails < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :service_details
+    drop_table :service_field_values
   end
 end

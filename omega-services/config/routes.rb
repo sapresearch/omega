@@ -36,6 +36,7 @@ Omega::Services::Module.routes.draw do
     collection do
       match :service_wizard, :to => 'services#service_wizard', :path => 'wizard/step/:step'
       match :modify_service, :to => 'services#modify_service', :path => 'modify_service/:id'
+      match :finalize, :to => 'services#finalize', :path => 'finalize/:id'
       get :retrieve_existing_type
       get :define_service_type
       get :service_create
@@ -44,6 +45,7 @@ Omega::Services::Module.routes.draw do
       get :add_service_field
       get :add_registration_field
       get :remove_field
+      get :service_preview
       
     end
 

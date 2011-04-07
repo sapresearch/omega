@@ -1,18 +1,15 @@
 <% require_stylesheet 'omega_services' %>
 <% require_javascript 'omega_services' %>
 
-<%- title "Omega - Services" %>
-
-   <div class="content circle-corners-bottom-left">
+ <div class="content circle-corners-bottom-left">
     	
 		<div class="heading-main-columns">
 	
 				<h1 class="page-content">
-      				Services Offered
+      				All Offered Services
 		    	</h1>
 	
 		</div>
-
 
       <div class="right">
       	<br/>
@@ -25,11 +22,11 @@
 
       </div>
 
-      <div class="clear"></div>
+  <div class="clear"></div>
 
   <ul id="positions_list">
     <% @services.each do |s| %>
-        <li class="clearfix">
+        <li >
           <div class="position_slider">
             <div class="position_actions">
               <% if !current_user.is_anonymous? %>
@@ -60,28 +57,31 @@
           <div class="position">
             <div class="position-wrapper">
 
-              <h2>              
-                    <%= link_to s.service_name, service_url(s) %> 
+              <h2>
+               
+
+
+                    <%= link_to s.service_name, show_services_url(:id => s) %>
+
+
               </h2>
 
               <p>
-                <%= s.service_type %> Service
+                <%= s.type.type_name %> Service  <br/>
                 <%= s.description%>
               </p>
 
-            </div>     
+            </div>
           </div>
+
         </li>
 
     <% end %>
   </ul>
-
-<%#= will_paginate @services %>
-
-<div class="clear">
 </div>
-  
-</div>
+<%#= will_paginate @types %>
+
+
 
 <% content_for :sidebar do %>
     <%= render :partial => "layouts/services_menu" %>
