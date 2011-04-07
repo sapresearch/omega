@@ -170,7 +170,6 @@ class ServicesController < Omega::Controller
 
     if params[:next] # Proceed to next step in the wizard
     	    											      
-
        session[:service_id] = @service.id
        redirect_to service_wizard_services_url(:step => 3)
 

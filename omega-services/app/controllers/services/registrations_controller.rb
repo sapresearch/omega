@@ -18,7 +18,7 @@ class Services::RegistrationsController < Omega::Controller
   end
 
   def my_registrations
-    @services = Service.joins(:registrations).where('service_registrations.contact_id = ?', Contact.for(current_user))
+    @registrations = Service.joins(:registrations).where('service_registrations.contact_id = ?', Contact.for(current_user))
   end
 
   def new
