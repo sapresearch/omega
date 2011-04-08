@@ -1,0 +1,20 @@
+<li class="list-item relative">
+  <div class="item-list-actions-wrapper corners">
+    <div class="item-list-actions">
+  
+      <span class="om-plain-icon-button"><span class="om-icon om-icon-delete"></span>
+                    <span class="delete-ui-em">Delete</span> </span>
+    </div>
+  </div>
+
+
+<div id="<%= "ui-em-#{index}" %>" class="ui-em-preview" ui-data="text">
+
+<span id="<%="value-preview-#{index}"%>">
+            <%= @field.value.field_value %>
+     </span>
+<%= render :partial => 'form_builder/partials/service/hidden_fields', :locals => { :index => index }%>
+
+  </div>
+
+</li>
