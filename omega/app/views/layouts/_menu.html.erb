@@ -39,7 +39,7 @@
       <div>
         <%= link_to "All Offered Services", services_url %>
 
-
+        <% if (!current_user.is_anonymous?) %>
         <%= with_permission(Service::PERM_ADMIN) do %>
             <%#= link_to "My Draft Services", show_drafts_services_url %>
             <%= link_to "All Service Types", service_types_url %>
@@ -51,6 +51,7 @@
             <%= link_to "My Service Registrations", my_registrations_service_registrations_url %>
             <%end%>
         <% end %>
+        <%end%>
       </div>
 
     </li>

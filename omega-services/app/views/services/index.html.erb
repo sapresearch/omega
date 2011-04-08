@@ -44,7 +44,7 @@
         <li >
           <div class="position_slider">
             <div class="position_actions">
-            	
+              <% if (!current_user.is_anonymous?) %>	
             	<%= with_permission(Volunteering::PERM_ADMIN) do %>
   	   	
                   <%= om_button(:plain => true, :icon => 'delete') do %>
@@ -70,6 +70,8 @@
                <%end%>
               <%end%>
               <%= toggle_favorite(s) if !current_user.is_anonymous? %>
+              
+            <%end%>  
             </div>
           </div>
           <div class="position">

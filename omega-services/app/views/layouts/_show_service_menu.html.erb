@@ -1,5 +1,9 @@
 <%= side_bar_box(:"Services Menu") do %>
+
+
 <ul>
+	<% if (!current_user.is_anonymous?) %>	
+
   <li>
 
     <%= om_button(:icon=>'', :sidebar => true) do %>
@@ -14,7 +18,7 @@
             <%= link_to 'Edit', service_wizard_services_url(:step => "2" )%>
         <% end %>
   </li>
-
+<%end%>
   <li>
     <%= om_button(:icon=>'', :sidebar => true) do %>
             <%= link_to 'All Services ', services_url %>
