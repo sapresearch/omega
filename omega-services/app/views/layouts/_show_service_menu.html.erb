@@ -2,20 +2,21 @@
 <ul>
   <li>
 
-    <%= om_button(:icon=>'') do %>
+    <%= om_button(:icon=>'', :sidebar => true) do %>
             <%= link_to 'Add a Field', new_service_service_field_url(@service.id) %>
         <% end %>
   </li>
 
    <li>
 
-    <%= om_button(:icon=>'') do %>
-            <%= link_to 'Edit', modify_service_services_url(@service.id) %>
+    <%= om_button(:icon=>'', :sidebar => true) do %>
+             <% session[:service_id] = @service.id %>
+            <%= link_to 'Edit', service_wizard_services_url(:step => "2" )%>
         <% end %>
   </li>
 
   <li>
-    <%= om_button(:icon=>'') do %>
+    <%= om_button(:icon=>'', :sidebar => true) do %>
             <%= link_to 'All Services ', services_url %>
         <% end %>
   </li>

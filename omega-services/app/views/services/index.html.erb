@@ -44,16 +44,18 @@
         <li >
           <div class="position_slider">
             <div class="position_actions">
-              <% if !current_user.is_anonymous? %>
+            	
+            	<%= with_permission(Volunteering::PERM_ADMIN) do %>
+  	   	
                   <%= om_button(:plain => true, :icon => 'delete') do %>
                       <%= link_to 'Delete' ,service_url(:id => s),  :method => :delete, :'data-tooltip' => 'Delete this Service' %>
 
                   <% end %>
-              <% end %>
+         		<% end %>
 
               <% if s.published == true %>
 
-                  <% if Service::Registration.find_by_contact_id_and_service_id(Contact.for(current_user), s).nil? %>
+                  <% if Service::Registration.find_by_contact_id_and_service_id(Contact.for(current_user), s).nil? && !Contact.for(current_user).nil? %>
                       <%= om_button(:plain => true, :icon => 'apply') do %>
                       
                       <%= link_to "Register", new_service_service_registration_url(s), :'data-tooltip' => 'register for this position' %>

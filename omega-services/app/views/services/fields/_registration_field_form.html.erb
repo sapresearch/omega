@@ -4,7 +4,7 @@
 
       <%= f.hidden_field :service_id, :value => @service.id %>
 
-      <p class="left-align">
+      <p>
 
       <strong>Field Name</strong><br/>
       <%= f.text_field :field_name %><br/>
@@ -15,7 +15,7 @@
 
       <br/>
 
-       <%= f.hidden_field :field_type_class%>
+       <%= f.hidden_field :field_type_class, :value => 'input'%>
        <%= f.hidden_field :field_category, :value => "Registration Details" %> <br/>
 
 

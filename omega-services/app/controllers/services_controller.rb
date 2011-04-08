@@ -193,7 +193,9 @@ class ServicesController < Omega::Controller
     @service.destroy
     
     redirect_to services_url
+    
   end
+  
 #----------------------------------------------------------------------------------------------------------
 
  private

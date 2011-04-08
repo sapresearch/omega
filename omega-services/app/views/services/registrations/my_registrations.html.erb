@@ -46,28 +46,12 @@
             <div class="position_actions">
               <% if !current_user.is_anonymous? %>
                   <%= om_button(:plain => true, :icon => 'delete') do %>
-                      <%= link_to 'Delete' ,service_url(:id => s),  :method => :delete, :'data-tooltip' => 'Delete this Service' %>
+                      <%= link_to 'Delete' , service_registration_url(:id => s),  :remote => true, :method => :delete, :'data-tooltip' => 'Delete this Service' %>
 
                   <% end %>
               <% end %>
 
-              <% if s.published == true %>
-
-                  <% if Service::Registration.find_by_contact_id_and_service_id(Contact.for(current_user), s).nil? %>
-                      <%= om_button(:plain => true, :icon => 'apply') do %>
-                      
-                      <%= link_to "Register", new_service_service_registration_url(s), :'data-tooltip' => 'register for this position' %>
-
-                  <% end %>
-              <% end %>
-
-              <%else%>
-
-               <%= om_button(:plain => true, :icon => 'apply') do %>
-                  <%= link_to "Publish", finalize_services_url(:id => s), :'data-tooltip' => 'publish this position' %>
-               <%end%>
-              <%end%>
-              <%= toggle_favorite(s) if !current_user.is_anonymous? %>
+              
             </div>
           </div>
           <div class="position">

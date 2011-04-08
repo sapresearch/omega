@@ -1,12 +1,19 @@
 <% require_stylesheet 'services' %>
 
-<h1 class="page-content corners-top">
-   Service Registration Summary
-</h1>
 
-<div class="page-content corners-bottom">
+ <div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+   						Service Registration Summary
+		    	</h1>
+	
+		</div>
+  <br/>
+  
 
-<p class="left-align">
+
 
 <span class="style1" >
   Service Details
@@ -16,12 +23,12 @@
 <br/>
 
 <strong>Service: </strong><%= @registration.service.service_name%> <br/>
-<strong>Type: </strong><%= @registration.service.service_type%> <br/>
+<strong>Type: </strong><%= @registration.service.type.type_name%> <br/>
 
-<% @registration.service.fields.each do |f| %>
+<% @registration.service.fields.where('field_category = ?', "Registration Details").each do |f| %>
 
-  <strong> <%= f.field_name%> :</strong> <%= f.detail.field_value%> <br/>
-
+  <strong> <%= f.field_name%> :</strong><%= f.fieldvalue.field_value%> <br/> 
+   
 <%end%>
 
 <strong>Questions:</strong> <%=@registration.questions%> <br/> <br/>

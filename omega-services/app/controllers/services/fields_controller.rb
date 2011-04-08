@@ -7,7 +7,7 @@ class Services::FieldsController < Omega::Controller
      def new
 
        @field = Service::Field.new
-       @field.build_detail
+       @field.build_value
 
        respond_with(@field)
 
@@ -16,7 +16,7 @@ class Services::FieldsController < Omega::Controller
      def create
 
        @field = Service::Field.create(params[:service_field])
-       @field.save
+       
        redirect_to service_url(@field.service_id)
 
 

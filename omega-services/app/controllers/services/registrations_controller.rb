@@ -47,8 +47,10 @@ class Services::RegistrationsController < Omega::Controller
   end
 
   def destroy
+    
     @registration = Service::Registration.find_by_service_id_and_contact_id(params[:id],Contact.for(current_user))
     @registration.destroy
+    
     redirect_to my_registrations_service_registrations_url
   end
 

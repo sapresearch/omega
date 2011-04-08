@@ -42,26 +42,31 @@
         <li >
           <div class="position_slider">
             <div class="position_actions">
-              <% if !current_user.is_anonymous? %>
-                  <%= om_button(:plain => true, :icon => 'delete') do %>
+            	
+            	<%= with_permission(Volunteering::PERM_ADMIN) do %>
+            		<%= om_button(:plain => true, :icon => 'delete') do %>
                       <%= link_to 'Delete', service_type_url(:id => s), :remote => true, :method => :delete, :'data-tooltip' => 'Delete this Service' %>
-                  <% end %>
-              <% end %>
 
+                  <% end %>
+         		<% end %>
+         		
+                 
+			  
               <% if s.published == true %>
 
-                  <% if Service::Registration.find_by_contact_id_and_service_id(Contact.for(current_user), s).nil? %>
+                  
+                  <%= with_permission(Volunteering::PERM_ADMIN) do %>
                       <%= om_button(:plain => true, :icon => 'apply') do %>
                       
-                      <%= link_to "Create a Service", new_service_service_registration_url(s), :'data-tooltip' => 'register for this position' %>
+                      	<%= link_to "Create a Service", service_wizard_services_url(:step => "introduction") %>
 
+                      <% end %>
                   <% end %>
-              <% end %>
 
               <%else%>
 
                <%= om_button(:plain => true, :icon => 'apply') do %>
-                  <%= link_to "Publish", finalize_service_types_url(:id => s), :'data-tooltip' => 'publish this position' %>
+                  <%= link_to "Publish", finalize_service_types_url(:id => s), :'data-tooltip' => 'publish this type' %>
                <%end%>
               <%end%>
               <%= toggle_favorite(s) if !current_user.is_anonymous? %>
@@ -74,7 +79,7 @@
                
 
 
-                    <%= link_to s.type_name, service_types_url(s) %>
+                    <%= link_to s.type_name, service_type_url(:id => s) %>
 
 
               </h2>

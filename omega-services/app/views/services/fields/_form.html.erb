@@ -2,16 +2,19 @@
 <% require_stylesheet 'services.css' %>
 
 
-<h1 class="page-content corners-top">
+<div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+      				  Add Fields to <%= @service.service_name %> 
 
-  Add More Fields to <%= @service.service_name %> - <%= @service.service_type %>
-
-</h1>
-
-<div class="page-content corners-bottom">
-
-  <p class="left-align">
-           <span class="style3">Please Choose:</span> <br/>
+		    	</h1>
+	
+		</div>
+  <br/>
+  
+  <p><span class="style3">Please Choose:</span> <br/>
 
            <br/>
            <% [["Add a Service Detail", "checked"], ["Add a Registration Detail", ""]].each do |choice, check| %>
@@ -19,21 +22,16 @@
                <%= choice %> <br/>
 
            <% end %>
-         </p>
 
 
-
+  </p>
   <div id="service_fields">
-
     <%= render :partial => "service_field_form" %>
-
   </div>
 
 
   <div id="registration_fields">
-
     <%= render :partial => "registration_field_form" %>
-
 
   </div>
 

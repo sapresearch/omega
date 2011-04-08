@@ -47,7 +47,9 @@
             <%= link_to "Create a Service Type", service_wizard_service_types_url(:step => 'introduction')  %>
         <% end %>
         <%= with_permission(Service::PERM_APPLY) do %>
+            <% unless Contact.for(current_user).nil?%>
             <%= link_to "My Service Registrations", my_registrations_service_registrations_url %>
+            <%end%>
         <% end %>
       </div>
 
