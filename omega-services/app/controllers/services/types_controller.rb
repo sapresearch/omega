@@ -142,20 +142,39 @@ class Services::TypesController < Omega::Controller
     #end
 	
    unless params[:fields].nil?
-      params[:fields].each_value { |field| s_field = Service::TypeField.find_by_field_name(field.fetch("field_name"))
-      	                                        if s_field.nil? 
-      	                                        	@service_type.type_fields.build(field) do |f| 
-      	                                        
-      	                                        		if f.field_category == "Service Details" 
-      	                                        			f.build_value unless f.value
-           													f.value.type_id ||= @service_type.id
-      	                                        		end
-           										
-    												end 
-	
-    											
-    											end      										
+      params[:fields].each_value { |field| 	
+      	
+      							    existing_field = Service::TypeField.find_by_field_name(field["field_name"])
+      							    
+      							    if existing_field.nil?
+      							    	
+      							    	@service_type.type_fields.build(field) do |f|
+      							    		
+      							    		f.field_name = field["field_name"]
+      							    		f.field_type = field["field_type"]
+      							    		f.type_id = @service_type.id
+      							    		f.value.type_id = @service_type.id
+      							    		f.value.field_value = field["value_attributes"]["field_value"]
+      							    		
+      							    	end	
+      							    	
+      							    	@service_type.save
+      							    	
+      							    else
+      							    	
+      							    	existing_field.field_name = field["field_name"]
+      							    	existing_field.field_type = field["field_type"]
+      							    	unless field["value_attributes"].nil?
+      							    	existing_field.value.field_value = field["value_attributes"]["field_value"]
+										end
+										
+										existing_field.save
+      							    		
+      							    end
+      							         							    
     							  }
+    							  
+    							  
     end 
     
     
@@ -168,7 +187,6 @@ class Services::TypesController < Omega::Controller
 
     if params[:next] # Proceed to next step in the wizard
     	    											      
-       @service_type.save
 
        session[:service_id] = @service_type.id
        redirect_to service_wizard_service_types_url(:step => 3)
@@ -176,7 +194,6 @@ class Services::TypesController < Omega::Controller
     end
 
     if params[:update] # Update after an edit action
-      @service_type.save
       respond_with(@service_type)
 
     end

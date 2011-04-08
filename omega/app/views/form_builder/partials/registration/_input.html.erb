@@ -18,6 +18,6 @@
      </span>
   </div>
 <input type="hidden" id="<%= "value-preview-#{index}" %>">
-  <%= render :partial => "form_builder/partials/registration/hidden_fields", :locals => { :index => index}%>
+  <%= render :partial => "form_builder/partials/registration/hidden_fields", :locals => { :index => index, :field => field}%>
 
 </li>

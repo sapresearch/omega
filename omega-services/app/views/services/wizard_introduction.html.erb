@@ -3,6 +3,16 @@
 
 <%- title "Omega Services - Create a Service Wizard: Introduction" %>
 
+<%if @service_types.empty?%>
+
+	<p >
+		<br/>
+		<br/>
+		<strong> No service type has been created yet! Please create a service type first! </strong>
+	</p>
+
+<%else%>
+
 <div class="wizard-header-services corners-top">
 			
     <h1 class="service_wizard " >
@@ -64,4 +74,4 @@
 	</div>
 
 </div>
-
+<%end%>

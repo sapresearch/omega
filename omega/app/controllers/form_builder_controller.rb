@@ -53,7 +53,7 @@ class FormBuilderController < Omega::Controller
 
     else
     	@field.field_category = "Registration Details"
-    	render :partial => "form_builder/partials/registration/#{type_class}", :locals => { :index => Time.now.to_i}
+    	render :partial => "form_builder/partials/registration/#{type_class}", :locals => { :index => Time.now.to_i, :field => @field}
 
 
     end

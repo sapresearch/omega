@@ -10,7 +10,7 @@
 
   
     <div id="<%= "ui-em-#{index}" %>" class="ui-em-preview" ui-data="textarea">
-    <%= label_tag @field.field_name, nil, :id=>"fields_#{index}_field_name_preview", :class =>'label-preview' %>
+    <%= label_tag field.field_name, nil, :id=>"fields_#{index}_field_name_preview", :class =>'label-preview' %>
 
         <span id="<%="value-preview-#{index}"%>">
           <textarea disabled="disabled"> </textarea>
@@ -19,6 +19,6 @@
      </span>
   </div>
 
-   <%= render :partial => 'form_builder/partials/registration/hidden_fields', :locals => { :index => index }%>
+   <%= render :partial => 'form_builder/partials/registration/hidden_fields', :locals => { :index => index, :field => field }%>
 
 </li>

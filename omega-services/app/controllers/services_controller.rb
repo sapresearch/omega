@@ -147,16 +147,7 @@ class ServicesController < Omega::Controller
   
     unless params[:fields].nil?
       params[:fields].each_value { |field| s_field = Service::Field.find_by_field_name(field.fetch("field_name"))
-      	                                        if s_field.nil? 
-      	                                        	@service.fields.build(field) do |f| 
-      	                                        
-      	                                        			f.build_value unless f.value
-           													f.value.type_id ||= @service.id
-           										
-    												end 
-	
-    											
-    											end      										
+      	                                        s_field.value.field_value = field.fetch("field_value")										
     							  }
     end 
     
