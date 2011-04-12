@@ -428,16 +428,16 @@ input {
 
 form input[type=text], form input[type=email], form input[type=password], textarea, select {
 
-    padding-top: 6px; 
+     padding-top: 6px; 
 	padding-bottom:6px; 
 	padding-left: 6px;
     border: 1px solid #999;
     color: #314D4B;
 	width: 280px;
-	-moz-border-radius-topleft: 12px;
-    -moz-border-radius-topright: 12px;
-    -moz-border-radius-bottomleft: 12px;
-    -moz-border-radius-bottomright: 12px;
+	-moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-bottomright: 4px;
     -webkit-border-radius-bottomleft:4px;
     -webkit-border-radius-bottomright: 4px;
 	-webkit-border-radius-bottomleft: 4px;
@@ -503,7 +503,7 @@ form input.datepickr, form input.tpickr {
 }
 
 form label {
-   color:#555;
+  color:#555;
     display: inline-block;
     zoom: 1;
     font-family: "Arial";
@@ -515,6 +515,8 @@ form label {
     margin-right: 10px;
 	margin-top: 5px;
     text-transform: capitalize;
+
+
 
 }
 
@@ -554,6 +556,12 @@ legend.services {
 
 }
 
+.login {
+
+	margin-left: 40px;
+	width: 110px;
+
+}
 
 legend {
 
