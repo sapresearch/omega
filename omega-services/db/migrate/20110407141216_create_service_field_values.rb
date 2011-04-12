@@ -6,7 +6,7 @@ class CreateServiceFieldValues < ActiveRecord::Migration
       t.references :field, :null => false
       t.integer :service_id
       t.string :field_value, :null => false
-
+      t.text :service_value
 
        t.timestamps
      end
