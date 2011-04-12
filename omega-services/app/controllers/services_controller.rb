@@ -146,8 +146,9 @@ class ServicesController < Omega::Controller
 	
   
     unless params[:fields].nil?
-      params[:fields].each_value { |field| s_field = Service::Field.find_by_field_name(field.fetch("field_name"))
-      	                                        s_field.value.field_value = field.fetch("field_value")										
+      params[:fields].each_value { |field| existing_field = Service::Field.find_by_field_name(field["field_name"])
+      	                                   existing_field.value.service_value = field["service_value"]   
+									       existing_field.save
     							  }
     end 
     

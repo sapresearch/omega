@@ -8,11 +8,10 @@ class Service < ActiveRecord::Base
 
    has_many :fields, :dependent => :destroy
    has_many :registrations, :dependent => :destroy
-   has_many :values
    belongs_to :type
    has_one :event
 
-   accepts_nested_attributes_for :fields, :values, :type, :event, :allow_destroy => true
+   accepts_nested_attributes_for :fields, :type, :event, :allow_destroy => true
 
    has_attached_file :icon, :styles => { :small => "65x65>" },
                             :url => "/images/icons/services/:basename.:extension",

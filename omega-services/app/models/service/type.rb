@@ -2,7 +2,7 @@ class Service::Type < ActiveRecord::Base
 
   has_many :type_fields, :dependent => :destroy
 
-  has_many :services
+  has_many :services, :dependent => :destroy
 
  # validates :service_type, :presence => true, :uniqueness => true
   validates :description, :presence => true

@@ -53,22 +53,24 @@
                   <% end %>
          		<% end %>
 
-              <% if s.published == true %>
+              	<% if s.published == true %>
 
                   <% if Service::Registration.find_by_contact_id_and_service_id(Contact.for(current_user), s).nil? && !Contact.for(current_user).nil? %>
                       <%= om_button(:plain => true, :icon => 'apply') do %>
                       
                       <%= link_to "Register", new_service_service_registration_url(s), :'data-tooltip' => 'register for this position' %>
 
+                      <% end %>
                   <% end %>
-              <% end %>
 
-              <%else%>
+              	<%else%>
 
-               <%= om_button(:plain => true, :icon => 'apply') do %>
+               	<%= om_button(:plain => true, :icon => 'apply') do %>
                   <%= link_to "Publish", finalize_services_url(:id => s), :'data-tooltip' => 'publish this position' %>
-               <%end%>
-              <%end%>
+               	<%end%>
+               
+              	<%end%>
+              
               <%= toggle_favorite(s) if !current_user.is_anonymous? %>
               
             <%end%>  
