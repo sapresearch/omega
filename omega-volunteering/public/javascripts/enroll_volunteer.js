@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+    $('.tpickr').timepicker();
+    $('.datepickr').datepicker({minDate: 0});
+    
     $('#search_volunteer').hide();
     $('#create_volunteer').hide();
 
