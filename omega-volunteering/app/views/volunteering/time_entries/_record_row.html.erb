@@ -1,7 +1,7 @@
 
         
-        <%unless entry.nil?%>
-       
+        <%unless entry.nil? || entry.record.nil?%>
+        
         <tr id="record-<%= entry.record.id %>">
           <%= f.hidden_field :week, :value => start %>   
     				<%= f.hidden_field :record_id, :value => entry.record_id %>
