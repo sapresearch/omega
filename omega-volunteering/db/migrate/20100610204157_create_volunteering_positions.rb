@@ -12,7 +12,6 @@ class CreateVolunteeringPositions < ActiveRecord::Migration
       t.timestamps
       t.boolean    :recurrent
       t.belongs_to :recurrence_series
-
       t.time       :recurrence_start_time
       t.time       :recurrence_end_time
       t.string     :recurrence_pattern
