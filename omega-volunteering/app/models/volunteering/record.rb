@@ -4,7 +4,7 @@ class Volunteering::Record < Omega::Model
 
   belongs_to  :position, :inverse_of => :records
   belongs_to  :contact
-  has_many    :time_entries
+  has_many    :time_entries, :dependent => :destroy
           
   
   before_validation( :on => :create) do
