@@ -7,8 +7,8 @@ Omega::Volunteering::Module.routes.draw do
         get :mine
         get :my_time_sheets
         
-        get :skills, :path => 'skills/:skills'
-        get :interests, :path => 'interests/:interests'
+        get :skills
+        get :interests
 
         resources :skills, :only => [:index, :edit, :update, :destroy]
         resources :interests, :only => [:index, :edit, :update, :destroy]

@@ -90,12 +90,15 @@ class Volunteering::PositionsController < Omega::Controller
 
     breadcrumb 'My Positions' => :mine_volunteering_positions
     respond_with(@positions)
+    
   end
 
   def my_time_sheets
+  	
     @entry_days = Volunteering::TimeEntry::Day.all
     @timesheets = Array.new
     @records = Volunteering::Record.find_all_by_contact_id(Contact.for(current_user))
+    
     @records.each do |r|
       @timesheets << Volunteering::TimeEntry.find_all_by_record_id(r.id)
     end
@@ -110,8 +113,8 @@ class Volunteering::PositionsController < Omega::Controller
     respond_with(@records)
   end
 
-
   private
+  
   def get_positions
     @positions = Volunteering::Position.includes(:skills, :records).order
 

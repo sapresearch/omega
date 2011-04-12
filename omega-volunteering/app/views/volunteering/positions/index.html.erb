@@ -25,15 +25,15 @@
 
       <div class="clear"></div>
 
-      <% if tags = @skills_tags or tags = @interests_tags %>
+      <%# if tags = @skills_tags or tags = @interests_tags %>
           <p>
-            <% tags.each do |tag| %>
-                <%= link_to nil, tag, :class => 'skill-tag-active' do %>
-                    <span> <%= tag %> </span>
-                <% end %>
-            <% end %>
+            <%# tags.each do |tag| %>
+                <%#= link_to nil, tag, :class => 'skill-tag-active' do %>
+                    <span> <%#= tag %> </span>
+                <%# end %>
+            <%# end %>
           </p>
-      <% end %>
+      <%# end %>
       
       <ul id="positions-list">
         <% @positions.each do |position| %>
