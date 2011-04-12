@@ -57,26 +57,27 @@
         <div id="scheduler-pattern" class="left">
         	
         <span class="radio-button-block"> 	
-          <%= r.label t(:'calendar.recurrence.daily') %> <%= r.radio_button :pattern, Calendar::Recurrence::DAILY  %>
+         <%= r.radio_button :pattern, Calendar::Recurrence::DAILY  %> <strong>Daily </strong>
                </span>
   
           <br/>
           
         <span class="radio-button-block"> 	
   
-          <%= r.label t(:'calendar.recurrence.weekly') %> <%= r.radio_button :pattern, Calendar::Recurrence::WEEKLY %>
+         <%= r.radio_button :pattern, Calendar::Recurrence::WEEKLY %> <strong>Weekly </strong>
         </span> 
           <br/>
           
         <span class="radio-button-block"> 	
  
-          <%= r.label t(:'calendar.recurrence.monthly') %><%= r.radio_button :pattern, Calendar::Recurrence::MONTHLY %>
+          <%= r.radio_button :pattern, Calendar::Recurrence::MONTHLY %> <strong>Monthly </strong>
         </span>          	
 
           <br/>
           
         <span class="radio-button-block">   
-          <%= r.label t(:'calendar.recurrence.yearly') %><%= r.radio_button :pattern, Calendar::Recurrence::YEARLY, :checked => true %>
+          <%#= r.label t(:'calendar.recurrence.yearly') %>
+          <%= r.radio_button :pattern, Calendar::Recurrence::YEARLY, :checked => true %> <strong>Yearly </strong>
         </span>
        
         </div>

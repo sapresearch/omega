@@ -13,8 +13,6 @@ class FormBuilderController < Omega::Controller
    
     logger.debug("params: #{params[:section]}")
     
-   
-    
     case params[:element]
       when 'input'
         type = 'text'
@@ -92,6 +90,7 @@ class FormBuilderController < Omega::Controller
       	if params[:field_category] == "service-details"
 
         render :partial => 'form_builder/partials/properties_selectbox'
+        
        else
        	        render :partial => 'form_builder/partials/registration/properties_selectbox'
 

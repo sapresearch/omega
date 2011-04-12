@@ -243,13 +243,13 @@ a.skill_tag-active span {
 
 #scheduler{
     display:none;
-    min-height: 850px;
+    min-height: 800px;
     height: auto;
     padding-bottom: 10px;
 }
 
 #schedule {
-    margin-top: 15px;
+    margin-top: 5px;
     height:auto;
 }
 

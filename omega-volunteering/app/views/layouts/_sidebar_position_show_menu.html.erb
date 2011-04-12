@@ -36,10 +36,13 @@
     <% end %>
     <li>
       <%= with_permission(Volunteering::PERM_APPLY) do %>
+          <% unless Contact.for(current_user).nil? %>
           <%= om_button(:icon => 'apply', :sidebar => true) do %>
               <%= link_to 'Apply', new_volunteering_record_url(:id=>@position) %>
           <% end %>
+          <%end%>
       <% end %>
+      
     </li>
   </ul>
 </div>

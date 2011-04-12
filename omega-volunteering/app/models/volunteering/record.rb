@@ -21,4 +21,7 @@ class Volunteering::Record < Omega::Model
 
   #validates :status, :presence => true,
                      #:inclusion => { :in => [:applied, :declined, :accepted] }
+                     
+  accepts_nested_attributes_for :contact
+  
 end

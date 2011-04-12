@@ -443,7 +443,10 @@ a {
 
 span.radio-button-block {
 	display: inline-block;
-	line-height: 15px;
+	line-height: 10px;
+	font-family: "Arial";
+	font-size: 14px;
+	color: #555555;
 }
 a:hover {
     color: #0063dc;

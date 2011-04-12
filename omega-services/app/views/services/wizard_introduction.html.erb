@@ -5,7 +5,7 @@
 
 <%if @service_types.empty?%>
 
-	<p >
+	<p>
 		<br/>
 		<br/>
 		<strong> No service type has been created yet! Please create a service type first! </strong>
@@ -31,8 +31,6 @@
    <%= render :partial => 'services/partials/service_steps' %>
 
 </div>
-
-
 
   <div class="wizard_intro">
 	
@@ -68,7 +66,7 @@
           <% end %>
   
           <%= om_button(:icon=>'cancel') do %>
-          <%= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
+          	<%= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
           <% end %>
 		  
 	</div>

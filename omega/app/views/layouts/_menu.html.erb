@@ -13,13 +13,14 @@
         <%= with_permission(Volunteering::PERM_ADMIN) do %>
             <%= link_to "Create an Assignment", new_volunteering_position_path %>
         <% end %>
-
-        <% if (!current_user.is_anonymous?) %>
+        
+        <% unless Contact.for(current_user).nil? %>
 
             <%= link_to "My Assignments", mine_volunteering_positions_path %>
             <%#= link_to "Time Sheets", my_time_sheets_volunteering_positions_path %>
 
-
+        <%end%>
+        
             <%= with_permission(Volunteering::PERM_ADMIN) do %>
                 <%= link_to "Manage Applications", volunteering_records_path %>
             <%end%>
@@ -29,7 +30,6 @@
             	<%= link_to "My Applications", my_applications_volunteering_records_path %>
             <% end %>
 
-        <% end %>
 
       </div>
 

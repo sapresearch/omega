@@ -96,11 +96,13 @@ class Volunteering::TimeEntriesController < Omega::Controller
       @start = session[:week]	
       
       if @start.nil?
+      	 unless @position.start.nil?
       	 start = Time.utc(@position.start.strftime('%Y-%m-%d %H:%M:%S'))
            
          @start = start - (start.wday-1)*24*60*60 - start.hour*60*60 - start.min*60 - start.sec
          
          @start = @start.strftime('%Y-%m-%d')
+        end
       end
            
       

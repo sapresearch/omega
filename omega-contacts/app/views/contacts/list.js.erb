@@ -1,4 +1,4 @@
-$('@assignment').append('<%= escape_javascript(render(:partial => 'contacts/partials/contact_list.html')) %>');
+$('body').append('<%= escape_javascript(render(:partial => 'contacts/partials/contact_list.html')) %>');
         $('#contact-assignment').dialog({autoOpen : true,
             title: 'Add Contact'});
         $('#contact-assignment-list').delegate('li', 'click', function() {
