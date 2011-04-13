@@ -45,7 +45,7 @@
           <div class="position_slider">
             <div class="position_actions">
               <% if !current_user.is_anonymous? %>
-                  <%= om_button(:plain => true, :icon => 'delete') do %>
+                  <%= om_button(:contact => true, :icon => 'delete') do %>
                       <%= link_to 'Delete' , service_registration_url(:id => s),  :remote => true, :method => :delete, :'data-tooltip' => 'Delete this Service' %>
 
                   <% end %>
