@@ -34,8 +34,8 @@
   <% Service::TypeField.where("field_category = ? and type_id = ?", "Service Details", @service_type.id).each do |s| %>
       <p>
 
-        <strong><%= s.field_name %>: </strong>
-        <%= Service::TypeField::Value.find_by_type_field_id(s.id).field_value %>
+        <strong><%= s.field_name %> </strong>
+        <%#= Service::TypeField::Value.find_by_type_field_id(s.id).field_value %>
 		
       </p>
   <% end %>
@@ -46,7 +46,7 @@
               <strong> First Name <br/>
               Last Name <br/>
               Email <br/>
-              Phone Numbers <br/>
+              Phone Number <br/>
               Notes <br/>
               </strong>
 
