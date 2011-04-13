@@ -83,7 +83,7 @@ class Volunteering::PositionsController < Omega::Controller
   def mine
     @postions = Array.new
     
-    @my_records = Volunteering::Record.where('contact_id = ?', Contact.for(current_user))
+    @my_records = Volunteering::Record.where('contact_id = ? and action = ?', Contact.for(current_user), "Accepted")
     @my_records.each do |r|
     	@positions << Volunteering::Position.find(r.position_id) 
     end
