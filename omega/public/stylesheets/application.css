@@ -669,7 +669,7 @@ tr.odd {
 	height: 400px;
 
 
-
+}
 #banner-right {
 
 	position: relative;
@@ -1362,9 +1362,9 @@ span.om-plain-button a, span.om-plain-icon-button a {
 	font-weight: bold;	
 }
 
-span.om-plain-button span.om-icon,
-span.om-plain-icon-button span.om-icon,
-.om-icon-only, .om-footer-symbol {
+span.om-plain-button,
+span.om-plain-icon-button,
+{
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
@@ -1400,9 +1400,9 @@ span.om-contact-button a, span.om-contact-icon-button a {
 	font-weight: bold;	
 }
 
-span.om-contact-button span.om-icon,
-span.om-contact-icon-button span.om-icon,
-.om-icon-only, .om-footer-symbol {
+span.om-contact-button,
+span.om-contact-icon-button,
+{
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
@@ -1452,11 +1452,10 @@ span.om-small-button a, span.om-small-icon-button a {
 	
 }
 
-span.om-button span.om-icon,
-span.om-icon-button span.om-icon,
-span.om-small-button span.om-icon,
-span.om-small-icon-button span.om-icon,
-.om-icon-only, .om-footer-symbol {
+
+span.om-small-button,
+span.om-small-icon-button,
+{
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
@@ -1488,9 +1487,9 @@ span.om-sidebar-button a, span.om-sidebar-icon-button a {
 	
 }
 
-span.om-sidebar-button span.om-icon,
-span.om-sidebar-icon-button span.om-icon,
-.om-icon-only, .om-footer-symbol {
+span.om-sidebar-button,
+span.om-sidebar-icon-button,
+{
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
@@ -1526,11 +1525,6 @@ span.om-sidebar-icon-button span.om-icon,
     margin: 0 2px;
     cursor: pointer;
     display: inline-block;
-    display: inline;
-    zoom: 1;
-    height: 16px;
-    width: 16px;
-
 }
 
 span.om-button-active {
