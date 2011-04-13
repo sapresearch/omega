@@ -21,6 +21,7 @@ class ServicesController < Omega::Controller
   def coming_soon
   	
   end
+  
   def service_preview
    
     @service_type = Service::Type.find(params[:id])
