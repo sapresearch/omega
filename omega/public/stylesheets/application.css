@@ -1399,8 +1399,9 @@ span.om-contact-button a, span.om-contact-icon-button a {
 	font-weight: bold;	
 }
 
-span.om-contact-button,
-span.om-contact-icon-button,
+span.om-contact-button span.om-icon, 
+span.om-contact-icon-button span.om-icon,
+ .om-footer-symbol
 {
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
