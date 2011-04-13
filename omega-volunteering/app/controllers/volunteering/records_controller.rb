@@ -91,15 +91,13 @@ class Volunteering::RecordsController < Omega::Controller
    
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
-    @record.build_contact do |c|
+
+	@record.build_contact do |c|
       c.addresses.build
       c.phone_numbers.build
     end 
     
-    @contact = Contact.new
-    
-    respond_with(@record)
-  end
+   end
 
   def edit
     @record = Volunteering::Record.find(params[:id])
@@ -108,38 +106,44 @@ class Volunteering::RecordsController < Omega::Controller
 
   def create
    
-  # contact = params[:volunteering_record][:contact]
-  # params[:volunteering_record].delete(:contact) 
-  # @record = Volunteering::Record.create(params[:volunteering_record])
-  # @record.action = 'To Be Taken'
-  # @record.save
-    
-   #@contact = Contact.find(@record.contact_id)
-   #@contact.update_attributes(contact)
+   contact = params[:volunteering_record][:contact]
+   params[:volunteering_record].delete(:contact) 
+   @record = Volunteering::Record.create(params[:volunteering_record])
+   @record.action = 'To Be Taken'
+   @record.save
+
+   if @record.contact_id.nil? 
+   	@contact = Contact.create(contact)
+   	@record.contact_id = @contact.id
+   	@record.action = "accepted"
+   	   @record.save
+
+   else
+   	@contact = Contact.find(@record.contact_id)	   
+    @contact.update_attributes(contact)
+   end
    
-    
- #  @user = Contact.find(@record.contact_id)
-  # UserMailer.parental_approval(@user).deliver
-  
+   
+   unless @record.contact_id.nil?
+   @user = Contact.find(@record.contact_id)
+   UserMailer.parental_approval(@user).deliver
+   end
    respond_with(@record)
     
   end
   
   def create_volunteer
    
-   contact = params[:volunteering_record][:contact]
-   params[:volunteering_record].delete(:contact) 
    @record = Volunteering::Record.create(params[:volunteering_record])
-   @record.action = 'To Be Taken'
+   @record.action = 'Accepted'
    @record.save
     
-   @contact = Contact.find(@record.contact_id)
-   @contact.update_attributes(contact)
    
    @user = Contact.find(@record.contact_id)
+   
    UserMailer.parental_approval(@user).deliver
   
-   respond_with(@record)
+   respond_wit(@record)
     
   end
   
