@@ -75,6 +75,8 @@ class Volunteering::PositionsController < Omega::Controller
 
   def interests
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
+     breadcrumb 'Interests' => 'interests'
+    
     render :index
   end
 
