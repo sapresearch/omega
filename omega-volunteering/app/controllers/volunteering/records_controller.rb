@@ -97,6 +97,8 @@ class Volunteering::RecordsController < Omega::Controller
       c.phone_numbers.build
     end 
     
+    @contact = Contact.new
+    
    end
 
   def edit
