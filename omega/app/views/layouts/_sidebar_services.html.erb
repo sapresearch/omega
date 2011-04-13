@@ -1,0 +1,11 @@
+<%= side_bar_box('Services Offered') do %>
+    <% @services.each do |p| %>
+        <h3>
+          <span class="om-icon-only om-blue-icon ui-icon-folder-open"></span>
+
+          <%= link_to truncate( p.service_name  ,:length => 30 ) , service_url(:id => p) %>
+
+        </h3>
+    <% end %>
+
+<% end %>
