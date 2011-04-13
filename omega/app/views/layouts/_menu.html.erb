@@ -25,11 +25,12 @@
                 <%= link_to "Manage Applications", volunteering_records_path %>
             <%end%>
 			            
+		 <% unless Contact.for(current_user).nil? %>	            
 			<%= with_permission(Volunteering::PERM_APPLY) do %>
 
             	<%= link_to "My Applications", my_applications_volunteering_records_path %>
             <% end %>
-
+         <%end%>
 
       </div>
 
