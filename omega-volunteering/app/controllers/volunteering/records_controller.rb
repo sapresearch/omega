@@ -108,11 +108,11 @@ class Volunteering::RecordsController < Omega::Controller
 
   def create
    
-   contact = params[:volunteering_record][:contact]
-   params[:volunteering_record].delete(:contact) 
-   @record = Volunteering::Record.create(params[:volunteering_record])
-   @record.action = 'To Be Taken'
-   @record.save
+  # contact = params[:volunteering_record][:contact]
+  # params[:volunteering_record].delete(:contact) 
+  # @record = Volunteering::Record.create(params[:volunteering_record])
+  # @record.action = 'To Be Taken'
+  # @record.save
     
    #@contact = Contact.find(@record.contact_id)
    #@contact.update_attributes(contact)
