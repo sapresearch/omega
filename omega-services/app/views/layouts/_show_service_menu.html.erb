@@ -5,10 +5,11 @@
 	<% if (!current_user.is_anonymous?) %>	
 
   <li>
-
-    <%= om_button(:icon=>'', :sidebar => true) do %>
+	<%= with_permission(Volunteering::PERM_ADMIN) do %>
+    	<%= om_button(:icon=>'', :sidebar => true) do %>
             <%= link_to 'Add a Field', new_service_service_field_url(@service.id) %>
         <% end %>
+    <%end%>
   </li>
 
    <li>
