@@ -113,22 +113,13 @@ class Volunteering::RecordsController < Omega::Controller
    
    @record.save
 
-   if @record.contact_id.nil? 
-   	@contact = Contact.create(contact)
-   	@record.contact_id = @contact.id
-   	@record.action = "accepted"
-   	@record.save
-
-   else
+   
    	@contact = Contact.find(@record.contact_id)	   
     @contact.update_attributes(contact)
-   end
-   
-   
-   unless @record.contact_id.nil?
+  
    @user = Contact.find(@record.contact_id)
    UserMailer.parental_approval(@user).deliver
-   end
+  
    respond_with(@record)
     
   end
