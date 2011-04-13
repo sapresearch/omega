@@ -109,19 +109,19 @@ span:hover.service_type {
 
 div.position_slider {
 
-    text-align: right;
+     text-align: right;
     border: none;
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
+    margin: 20px 0 20px -15px;
     height: 22px;
     width: 650px;
     position: absolute;
     top: 42px;
-    background: url("/images/bg_dark_evergreen.png") repeat-x bottom;
-    color: #000 !important;
-    display: none;
 	left:20px;
-    margin: 20px 0 20px -15px;
+    background: url("/images/bg_dark.png") repeat-x bottom;
+    color: #000;
+    display: none;
    
 }
 
