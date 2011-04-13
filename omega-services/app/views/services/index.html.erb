@@ -48,7 +48,8 @@
             	<%= with_permission(Volunteering::PERM_ADMIN) do %>
   	   	
                   <%= om_button(:plain => true, :icon => 'delete') do %>
-                      <%= link_to 'Delete' ,service_url(:id => s),  :method => :delete, :'data-tooltip' => 'Delete this Service' %>
+                      <%#= link_to 'Delete' ,service_url(:id => s),  :method => :delete, :'data-tooltip' => 'Delete this Service' %>
+                      <%= link_to "Delete"%>
 
                   <% end %>
          		<% end %>
