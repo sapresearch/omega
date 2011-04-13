@@ -114,12 +114,12 @@ class Volunteering::RecordsController < Omega::Controller
    @record.action = 'To Be Taken'
    @record.save
     
-   @contact = Contact.find(@record.contact_id)
-   @contact.update_attributes(contact)
+   #@contact = Contact.find(@record.contact_id)
+   #@contact.update_attributes(contact)
    
     
-   @user = Contact.find(@record.contact_id)
-   UserMailer.parental_approval(@user).deliver
+ #  @user = Contact.find(@record.contact_id)
+  # UserMailer.parental_approval(@user).deliver
   
    respond_with(@record)
     
