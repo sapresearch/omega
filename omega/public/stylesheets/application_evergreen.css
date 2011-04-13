@@ -1540,11 +1540,8 @@ span.om-small-button a, span.om-small-icon-button a {
 	
 }
 
-span.om-button span.om-icon,
-span.om-icon-button span.om-icon,
-span.om-small-button span.om-icon,
-span.om-small-icon-button span.om-icon,
-.om-footer-symbol {
+span.om-small-button span.om-icon, span.om-small-icon-button span.om-icon, .om-footer-symbol
+ {
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
@@ -1576,9 +1573,8 @@ span.om-sidebar-button a, span.om-sidebar-icon-button a {
 	
 }
 
-span.om-sidebar-button span.om-icon,
-span.om-sidebar-icon-button span.om-icon,
-.om-footer-symbol {
+span.om-sidebar-button span.om-icon, span.om-sidebar-icon-button span.om-icon, .om-footer-symbol
+{
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }

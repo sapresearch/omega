@@ -18,7 +18,7 @@
   	   	
   	   	 <%= with_permission(Volunteering::PERM_ADMIN) do %>
           <%= om_button(:contact => true, :icon => 'clock') do %>
-  	   	  	<%= link_to 'Create a New Service', service_wizard_services_url(:step => "introduction") %>
+  	   	  	<%= link_to 'Create a New Service', coming_soon_services_url %>
           <% end %>
          <% end %>
   	   	
