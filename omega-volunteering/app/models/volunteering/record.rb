@@ -3,7 +3,7 @@ class Volunteering::Record < Omega::Model
   MAX_RECORDS_PER_PAGE = 100
 
   belongs_to  :position, :inverse_of => :records
-  belongs_to  :contact
+  has_one  :contact
   has_many    :time_entries, :dependent => :destroy
           
   
@@ -22,6 +22,6 @@ class Volunteering::Record < Omega::Model
   #validates :status, :presence => true,
                      #:inclusion => { :in => [:applied, :declined, :accepted] }
                      
-  #accepts_nested_attributes_for :contact
+  accepts_nested_attributes_for :contact
   
 end

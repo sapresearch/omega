@@ -97,8 +97,6 @@ class Volunteering::RecordsController < Omega::Controller
       c.phone_numbers.build
     end 
     
-    @contact = Contact.new
-    
    end
 
   def edit
@@ -112,19 +110,17 @@ class Volunteering::RecordsController < Omega::Controller
    params[:volunteering_record].delete(:contact) 
    @record = Volunteering::Record.create(params[:volunteering_record])
    @record.action = 'To Be Taken'
-   @record.save
 
    if @record.contact_id.nil? 
    	@contact = Contact.create(contact)
    	@record.contact_id = @contact.id
    	@record.action = "accepted"
-   	   @record.save
-
    else
    	@contact = Contact.find(@record.contact_id)	   
     @contact.update_attributes(contact)
    end
    
+   @record.save
    
    unless @record.contact_id.nil?
    @user = Contact.find(@record.contact_id)
