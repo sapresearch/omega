@@ -45,6 +45,7 @@ Omega::Services::Module.routes.draw do
       get :add_registration_field
       get :remove_field
       get :service_preview
+      get :coming_soon
       
     end
 

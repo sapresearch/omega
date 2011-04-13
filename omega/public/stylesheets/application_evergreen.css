@@ -643,6 +643,12 @@ tr.odd {
     background: #EEF3DA !important;;
 }
 
+.large {
+	width: 800px;
+	height: 400px;
+
+}
+
 /* style rule for the ajax loading animation and flash notice*/
 #notification-flash-wrapper {
     opacity: 0.90;
@@ -867,6 +873,12 @@ div.content {
 
 }
 
+div.blank-content {
+    background: #fff;
+	height: 680px;
+	width: 100%;
+
+}
 
 div.main-content-left {
 	float: left;
@@ -927,11 +939,18 @@ div.signup-box {
 
 div.bg-box {
 	background: #C9DBE4;
-	width: 500px;
-	height:250px;
 	padding: 20px 20px 20px 20px;
 	margin-top: 40px;
 }
+
+div.bg-box-coming-soon {
+	background: url("/images/coming_soon.png") no-repeat center #C9DBE4;
+	padding: 20px 20px 20px 60px;
+	margin-top: 40px;
+	width: auto;
+}
+
+
 
 div.main-box {
 	width:auto;
@@ -1359,6 +1378,8 @@ form span.error {
     margin-left: 4px;
     float: right;
 }
+
+
 /**************************** ICONS *****************************/
 /* OM-COLORED-ICON-BUTTONS */
 .om-button a, .om-button input, .om-button button, .om-icon-button input, .om-icon-button button {

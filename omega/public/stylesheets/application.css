@@ -134,6 +134,7 @@ div.helptext{
 
 }
 
+
 h2.application-form {
 	font-family:"Arial Rounded MT Bold";
 	font-size: 25px;
@@ -663,6 +664,9 @@ tr.odd {
 	height: 40px;
 	z-index: 9999;
 }
+.large {
+	width: 800px;
+	height: 400px;
 
 
 
@@ -731,6 +735,12 @@ tr.odd {
 	height: auto;
 	
 
+
+}
+
+.large {
+	width: 800px;
+	height: 800px;
 
 }
 
@@ -863,11 +873,17 @@ div.main-box {
 
 div.bg-box {
 	background: #C9DBE4;
-	width: 500px;
-	height:250px;
 	padding: 20px 20px 20px 20px;
 	margin-top: 40px;
 }
+
+div.bg-box-coming-soon {
+	background: url("/images/coming_soon.png") no-repeat center #C9DBE4;
+	padding: 20px 20px 20px 60px;
+	margin-top: 40px;
+	width: auto;
+}
+
 
 div.form-signup {
 	width: 600px;
@@ -1248,6 +1264,8 @@ form span.error {
     background: #3EB17B;
     color: #fff;
 }
+
+
 /**************************** END *****************************/
 
 #search_wrapper {
