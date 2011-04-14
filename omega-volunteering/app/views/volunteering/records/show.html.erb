@@ -38,14 +38,13 @@
 			 <strong>Action:</strong>
 			<span class="application-detail"> <%= @record.action %>  </span> <br/><br/><br/><br/>
 		
-		<%= om_button(:plain => true, :icon => 'folder-open') do %>
-                <%= link_to "Take Action Now!" , administer_volunteering_record_url(@record), :remote => 'true' %>
+		    <%= om_button(:contact => true, :icon => 'folder-open') do %>
+                <%= link_to "Take Action Now!" , administer_volunteering_record_url(@record), :remote => 'true' %> 
             <% end %>	
 			
-			
-			| <%= om_button(:plain => true, :icon => 'folder-open') do %>
+			 <%= om_button(:contact => true, :icon => 'user') do %>
                 <%= link_to "Edit Applicant" , edit_volunteering_record_url(@record)%>
-            <% end %>	
+             <% end %>	
 		 
          <% end %>
 		 
