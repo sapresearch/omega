@@ -101,9 +101,18 @@ class Volunteering::RecordsController < Omega::Controller
 
   def edit
     @record = Volunteering::Record.find(params[:id])
+    @record.build_contact do |c|
+      c.addresses.build
+      c.phone_numbers.build
+    end 
+    
+    @contact = Contact.find(@record.contact_id)
+    
     respond_with(@record)
   end
 
+  
+  
   def create
    
    contact = params[:volunteering_record][:contact]
@@ -176,8 +185,15 @@ class Volunteering::RecordsController < Omega::Controller
       @message.save
     end
 
-
+	contact = params[:volunteering_record][:contact]
+    params[:volunteering_record].delete(:contact) 
+    
     @record.update_attributes(params[:volunteering_record])
+    
+    @contact = Contact.find(@record.contact_id)
+
+	@contact.update_attributes(contact)
+
     respond_with(@record)
   end
 

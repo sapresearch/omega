@@ -91,7 +91,6 @@ class Volunteering::PositionsController < Omega::Controller
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
 
     breadcrumb 'My Positions' => :mine_volunteering_positions
-    respond_with(@positions)
     
   end
 
