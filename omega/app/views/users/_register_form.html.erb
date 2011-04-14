@@ -72,8 +72,60 @@
 	  <%#= f.label :time_zone %>
 	  <%#= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
 		
-		 			
+		 			<h2 class="application-form-content-heading">Newsletters</h2>
+
+		<%= f.fields_for :contact do |c|%>
+		
+		<br/>
+			<p>
+		    <span class="checkbox-newsletter"> 
+
+			<%= c.check_box :evergreen_news%>
+	    	 Evergreen News <br/>
 			
+		
+			<%= c.check_box :evergreen_bw_news%>
+			Evergreen Brick Works News<br/>
+
+		
+			<%= c.check_box :gta_volunteer_news%> 
+			Dig In! GTA (Volunteer News and Opportunities<br/>
+
+		
+		
+ 			<%= c.check_box :vancouver_volunteer_news%>
+			Dig In! Vancouver (Volunteer News and Opportunities	<br/>		
+ 
+				
+ 			<%= c.check_box :outdoor_classroom%> 
+		    The Outdoor Classroom (School Ground Greening Newsletter	<br/>	
+
+			
+ 			<%= c.check_box :la_classe_en_plein_air%>
+			La classe en plein air (French edition of The Outdoor Classroom)	<br/>	
+ 
+		
+			<%= c.check_box :evergreen_funding_opp%> 
+		    Evergreen Funding Opportunities			<br/>
+
+		
+ 			<%= c.check_box :evergreen_bw_school_program%> 
+			Evergreen Brick Works School Program	<br/>
+
+ 			
+		
+			<%= c.check_box :evergreen_bw_family_program%>
+			Evergreen Brick Works Family Programming	<br/>
+ 
+			
+		</span>
+
+				
+		</p>
+		
+			
+	    <%end%>	
+
     <%= om_button do %>
         <%= f.submit "REGISTER" %>
     <% end %>

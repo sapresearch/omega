@@ -33,7 +33,7 @@ class Volunteering::Position < Omega::Model
                           :unless   => :recurrent?
 
   def active_volunteers
-    records.includes(:contact).where('action = ?', 'Accept').collect(&:contact)
+    records.includes(:contact).where('action = ?', 'Accepted').collect(&:contact)
   end
 
   def missing_volunteers
