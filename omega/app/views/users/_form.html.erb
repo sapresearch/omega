@@ -82,6 +82,7 @@
        <%end%>
 	  <%#= f.label :time_zone %>
 	  <%#= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
+		<% unless Contact.for(current_user).nil?%>
 		
 	 			<h2 class="application-form-content-heading">Newsletters</h2>
 
@@ -123,7 +124,6 @@
  			<%= c.check_box :evergreen_bw_school_program%> 
 			Evergreen Brick Works School Program	<br/>
 
- 			
 		
 			<%= c.check_box :evergreen_bw_family_program%>
 			Evergreen Brick Works Family Programming	<br/>
@@ -137,7 +137,8 @@
 			
 	    <%end%>	
 
-
+     <%end%>
+     
 
 		
 		
