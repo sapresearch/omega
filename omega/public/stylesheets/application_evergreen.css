@@ -1461,7 +1461,12 @@ span.om-plain-icon-button span.om-icon,
 }
 
 
-
+span.om-button span.om-icon,
+span.om-icon-button span.om-icon,
+span.om-contact-button span.om-icon,
+span.om-contact-icon-button span.om-icon,
+span.om-small-button span.om-icon,
+span.om-small-icon-button span.om-icon,
 span.om-plain-button span.om-icon,
 span.om-plain-icon-button span.om-icon {
     position: absolute;
@@ -1477,6 +1482,20 @@ span.om-plain-icon-button span.om-icon {
 
 }
 
+span.om-sidebar-button span.om-icon,
+span.om-sidebar-icon-button span.om-icon  {
+    position: absolute;
+    top: 2px;
+    margin: 0 0 0 15px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    display: inline;
+    zoom: 1;
+
+}
 
 span.om-contact-button, span.om-contact-icon-button {
     cursor: pointer;
@@ -1491,28 +1510,12 @@ span.om-contact-button a, span.om-contact-icon-button a {
 	font-weight: bold;	
 }
 
-span.om-contact-button span.om-icon,
+span.om-contact-button span.om-icon, 
 span.om-contact-icon-button span.om-icon,
-.om-footer-symbol {
+ .om-footer-symbol
+{
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
-}
-
-
-
-span.om-contact-button span.om-icon,
-span.om-contact-icon-button span.om-icon {
-    position: absolute;
-    top: 2px;
-    margin: 0 0 0 -20px;
-    display: block;
-    width: 16px;
-    height: 16px;
-    min-width: 16px;
-    min-height: 16px;
-    display: inline;
-    zoom: 1;
-
 }
 
 
@@ -1544,7 +1547,7 @@ span.om-small-button a, span.om-small-icon-button a {
 }
 
 span.om-small-button span.om-icon, span.om-small-icon-button span.om-icon, .om-footer-symbol
- {
+{
     background-image: url(../images/icons/iconSprite.png);
     background-repeat: no-repeat;
 }
@@ -1569,7 +1572,7 @@ span.om-sidebar-button, span.om-sidebar-icon-button {
 span.om-sidebar-button a, span.om-sidebar-icon-button a {
     color: #1F1603;
 	font-weight: bold;
-	margin-left: 35px;
+	margin-left: 40px;
 	padding-top: 15px;
 	line-height: 25px;
     height: 25px;

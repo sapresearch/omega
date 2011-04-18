@@ -275,9 +275,6 @@ tr.even {
 }
 
 
-
-
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Misc
  */
@@ -479,6 +476,7 @@ tr.odd.gradeU td.sorting_1 {
 tr.odd.gradeU td.sorting_2 {
 	background-color: #d1d1d1;
 }
+
 
 tr.odd.gradeU td.sorting_3 {
 	background-color: #d1d1d1;

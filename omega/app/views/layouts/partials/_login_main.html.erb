@@ -17,12 +17,13 @@
 </p>    
 
 <p class= "left-align">
-     <%= om_button(:icon => 'mail') do %>
-          <%= f.submit :value => 'Login' %>
-      <% end %>
+        <%= om_button(:icon => 'login') do %>
+       	 	<%= f.submit %>
+    	<% end %>
 </p>
 
 <p class="right-align">
+	
 	  <%= link_to 'Lost your username?', lost_username_path %> <br>
   	  <%= link_to 'Lost your password?', lost_password_path %>
 	
