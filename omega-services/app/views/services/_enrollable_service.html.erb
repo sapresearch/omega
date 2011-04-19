@@ -29,7 +29,8 @@
       <br/>
 
       <strong>
-      Description </strong> <br/>
+      Description </strong> 
+      <br/>
 
       <%= f.text_area :description , :value => "Some Description for your new Enrollable Service Type"%>
 
@@ -55,11 +56,9 @@
            <%end%>
     <% end %>
 
-
     <% Service::CategoryField.find_all_by_service_category("Enrollable").each do |e|%>
 
              <%= f.fields_for :fields do |ff| %>
-
                 <%= ff.hidden_field :field_name, :value => e.field_name%>
                 <%= ff.hidden_field :field_type, :value => e.field_type%>
                 <%= ff.hidden_field :field_type_class, :value => e.field_type_class%>
@@ -68,7 +67,6 @@
                 <%= ff.fields_for :detail do |d|%>
                     <%= d.hidden_field :field_value, :value => "Enter Value" %>
                 <%end%>
-
              <%end%>
     <%end%>
 

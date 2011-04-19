@@ -15,7 +15,7 @@ class FormBuilderController < Omega::Controller
     
     case params[:element]
       when 'input'
-        type = 'text'
+        type = 'string'
         type_class = 'input'
         field = "Input Field"
         default = "text"
@@ -27,13 +27,13 @@ class FormBuilderController < Omega::Controller
         default = "text"
 
       when 'selectbox'
-        type = 'text'
+        type = 'boolean'
         type_class = 'selectbox'
         field = "Select List"
         default = "Option1;Option2"
 
       when 'date'
-        type = 'text'
+        type = 'date'
         type_class = 'date'
         field = "Date"
         default = Date.today
@@ -59,7 +59,16 @@ class FormBuilderController < Omega::Controller
   end
 
   def dispatch_element_properties
+    
     @em_id = params[:em_id].gsub(/ui-em-/,"")
+    
+    @field = Service::TypeField.find_by_id(@em_id)
+    
+    if @field.nil?
+    	@field = Service::TypeField.new
+    	@field.build_value
+    end  
+    
     @category = params[:field_category]
     case params[:element]
       when 'input'

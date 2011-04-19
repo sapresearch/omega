@@ -91,7 +91,7 @@ div #search_volunteer {
 	height: 150px;
 	margin: 50px 0 0 50px;
 	padding: 20px 0 20px 0;
-	 -moz-border-radius: 8px;
+	-moz-border-radius: 8px;
     -webkit-border-radius: 8px;
 	
 }
@@ -134,10 +134,12 @@ margin:4px;
     text-decoration: none;
     vertical-align: middle;
 }
+
 a.skill-tag:hover{
     background-position: right bottom;
     color:#666;
 }
+
 a.skill-tag span {
     background: url("/images/tag_evergreen.png") no-repeat scroll left top transparent;
     display: block;
@@ -149,9 +151,11 @@ a.skill-tag span {
     white-space: nowrap;
 
 }
+
 a.skill-tag span:hover {
 background: url("/images/tag_evergreen.png") no-repeat scroll left bottom transparent;
 }
+
 
 span.skill-tag-active {
 margin:4px;

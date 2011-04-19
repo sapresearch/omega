@@ -1,13 +1,13 @@
 <ul>
   <li>
     Label<br>
-    <input id="edit-label-value" type="text"> </input>
+    <input id="edit-label-value" type="text" value="<%=@field.field_name%>"> </input>
 
   </li>
   <li>
-    Enter Comma Separated Select List Options
+    Enter Semicolon Separated Select List Options
     <br>
-    <input id="select-values"/>
+    <input id="select-values" value="<%=@field.value.field_value%>"/>
   </li>
   <li>
     <input type="checkbox" name="required">Is this field required?

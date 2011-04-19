@@ -4,7 +4,7 @@ class Service::TypeField < ActiveRecord::Base
   
   has_one :value, :dependent => :destroy
 
-  accepts_nested_attributes_for :value
+  accepts_nested_attributes_for :value 
 
 end
 

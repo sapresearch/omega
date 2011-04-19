@@ -131,51 +131,19 @@ class Services::TypesController < Omega::Controller
     @service_type = Service::Type.find_by_id(session[:service_id])
     @service_type.update_attributes(params[:service_type])
 
-    # build nested attributes - fields ----------
-   # if fields = params[:fields]
-      #@service_type.type_fields_attributes = fields
-    #  @service_type.type_fields.build = params[:fields]
-     # @service_type.type_fields.each do |field|
-     #   field.build_value unless field.value
-      #  field.value.type_id ||= @service_type.id
-     # end
-    #end
-	
-   unless params[:fields].nil?
-      params[:fields].each_value { |field| 	
-      	
-      							    existing_field = Service::TypeField.find_by_field_name(field["field_name"])
-      							    
-      							    if existing_field.nil?
-      							    	
-      							    	@service_type.type_fields.build(field) do |f|
-      							    		
-      							    		f.field_name = field["field_name"]
-      							    		f.field_type = field["field_type"]
-      							    		f.type_id = @service_type.id
-      							    		f.value.type_id = @service_type.id
-      							    		f.value.field_value = field["value_attributes"]["field_value"]
-      							    		
-      							    	end	
-      							    	
-      							    	@service_type.save
-      							    	
-      							    else
-      							    	
-      							    	existing_field.field_name = field["field_name"]
-      							    	existing_field.field_type = field["field_type"]
-      							    	unless field["value_attributes"].nil?
-      							    	existing_field.value.field_value = field["value_attributes"]["field_value"]
-										end
-										
-										existing_field.save
-      							    		
-      							    end
-      							         							    
-    							  }
+    	
+      							    # build nested attributes - fields ----------
+    if fields = params[:fields]
+      @service_type.type_fields_attributes = fields
+
+      @service_type.type_fields.each do |field|
+        field.build_value unless field.value
+        field.value.type_id ||= @service_type.id
+      end
+    end
+
     							  
     							  
-    end 
     
     
       
@@ -187,7 +155,7 @@ class Services::TypesController < Omega::Controller
 
     if params[:next] # Proceed to next step in the wizard
     	    											      
-
+       @service_type.save
        session[:service_id] = @service_type.id
        redirect_to service_wizard_service_types_url(:step => 3)
 

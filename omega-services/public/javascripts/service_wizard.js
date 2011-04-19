@@ -1,5 +1,11 @@
 $(function() {
 
+    
+    if($('#step').val() == 3){
+    	$('.item-list-actions').hide();
+    }
+    
+    
     /**
      * show actions on hover
      */
@@ -44,6 +50,8 @@ $(function() {
                                     var ui_em = em_preview.attr('ui-data');
                                     
                                     var em_id = em_preview.attr('id');
+                                    
+                                   
                                     // listen for click event to determine which ui element gets edited.
                                     // invoke dispatch_element_properties with right element. ui-em.js.erb gets rendered which inserts the html and js for
                                     // editing the element
@@ -62,5 +70,6 @@ $(function() {
         var em_id = $(this).parents('li').find('.ui-em-preview').attr('id').replace(/ui-em-/, '');
         $('#fields_' + em_id + '__destroy').val('true');
     });
+    
 });
 

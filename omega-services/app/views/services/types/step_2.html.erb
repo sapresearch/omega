@@ -24,7 +24,7 @@
            <li class="list-item"> <%= f.label :type_template %>
             <%= @service_type.type_name %> </li>
 
-           <li class="list-item">  <%= f.label :name_for_service, :id =>'service-name' %>
+           <li class="list-item">  <%= f.label :name_for_type, :id =>'service-name' %>
              <%= f.text_field :type_name, :class=>'field-value'%> </li>
 
 
@@ -75,7 +75,7 @@
           <%= om_button(:icon=>'next') do %>
               <%= f.submit "Next", :name => "next" %>
           <% end %>
-  <br/>
+  	<br/>
           <%#= om_button(:icon=>'cancel') do %>
           <%#= link_to 'Cancel', @service, :confirm => 'Do You Want to Quit?', :method => :delete %>
           <%# end %>

@@ -3,9 +3,11 @@ class Service::Type < ActiveRecord::Base
   has_many :type_fields, :dependent => :destroy
 
   has_many :services, :dependent => :destroy
+  
+  accepts_nested_attributes_for :type_fields, :allow_destroy => true
 
  # validates :service_type, :presence => true, :uniqueness => true
-  validates :description, :presence => true
+  #validates :description, :presence => true
 
 
   has_attached_file :icon, :styles => { :small => "65x65>" },
@@ -13,6 +15,6 @@ class Service::Type < ActiveRecord::Base
                             :path => ":rails_root/public/images/icons/services/types/:basename.:extension",
                             :default_url => "/images/icons/services/types/default/missing.png"
 
-  accepts_nested_attributes_for :type_fields
+
   
 end
