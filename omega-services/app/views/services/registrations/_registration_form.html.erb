@@ -6,8 +6,20 @@
         <p>
         	
         	 <label><%=field.field_name%> </label>  
-        			<%= f.text_field :field_value%>
-        	
+        	 
+        	 	    <% if field.type == "date"%>
+        				<%= f.text_field :field_value, :class => 'datepickr'%>
+        	        <%else if field.type == "input"%>
+        	            <%= f.text_field :field_value%>
+        	        <%else if field.type == "selectbox"%>
+        	                    	           
+        	            <%= f.select :field_value, field.value.field_value%>
+
+        	        <%else if field.type == "textarea"%>
+        	        
+        	            <%= f.text_area :field_value%>
+
+        	        <%end%>
         </p>    
        
 
