@@ -64,7 +64,7 @@ class Volunteering::PositionsController < Omega::Controller
   def destroy
     @position = Volunteering::Position.find(params[:id])
     @position.destroy
-    respond_with(@position)
+    redirect_to volunteering_positions_url
   end
 
   def skills
