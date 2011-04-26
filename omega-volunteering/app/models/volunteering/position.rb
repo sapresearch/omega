@@ -27,8 +27,9 @@ class Volunteering::Position < Omega::Model
 #
 #  before_save :combine_times
 
-  validates :name, :description, :volunteers_required, :presence => true
+  validates :description, :volunteers_required, :presence => true
 
+  validates :name, :uniqueness => true
   validates :start, :end, :presence => true,
                           :unless   => :recurrent?
 
