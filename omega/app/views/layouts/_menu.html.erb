@@ -84,7 +84,7 @@
 		
 
     <li> <%= link_to "Calendar", calendars_url %></li>
-    <%= with_permission(User::PERM_VIEW) do %>
+    <%= with_permission(User::PERM_ADMIN) do %>
         <li> <%= link_to "Users", users_url %></li>
     <% end %>
 	
