@@ -71,7 +71,7 @@
         </li>
     <% end %>
 
-    <%= with_permission(Contact::PERM_VIEW) do %>
+    <%= with_permission(Contact::PERM_ADMIN) do %>
         <li> <%= link_to "Contacts", contacts_url %>
           <div>
             <%= link_to 'import contacts', csv_import_wizard_contact_imports_url(:step=> '1') %>

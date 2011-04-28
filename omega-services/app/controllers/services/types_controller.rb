@@ -142,12 +142,7 @@ class Services::TypesController < Omega::Controller
       end
     end
 
-    							  
-    							  
-    
-    
-      
-   
+ 						  
     #-------------------------------------------------------
     @current_step = session[:current_step]
 
