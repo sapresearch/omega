@@ -56,6 +56,8 @@ class ServicesController < Omega::Controller
       get_service_fields
 
       session[:service_id] = @service.id
+      
+      @fields = Service::Field.find_all_by_field_category("Service Details")
 
     end
     # ------------------------------------------
@@ -138,23 +140,11 @@ class ServicesController < Omega::Controller
     @service = Service.find_by_id(session[:service_id])
     @service.update_attributes(params[:service])
 
-    # build nested attributes - fields ----------
-   # if fields = params[:fields]
-      #@service_type.type_fields_attributes = fields
-    #  @service_type.type_fields.build = params[:fields]
-     # @service_type.type_fields.each do |field|
-     #   field.build_value unless field.value
-      #  field.value.type_id ||= @service_type.id
-     # end
-    #end
+   
+
 	
   
-    unless params[:fields].nil?
-      params[:fields].each_value { |field| existing_field = Service::Field.find_by_field_name(field["field_name"])
-      	                                   existing_field.value.service_value = field["service_value"]   
-									       existing_field.save
-    							  }
-    end 
+    
     
     
       

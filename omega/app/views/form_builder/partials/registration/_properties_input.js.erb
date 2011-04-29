@@ -5,6 +5,7 @@ $('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "f
 
             var v = $(this).val();
             $('#fields_<%="#{@em_id}"%>_field_name_preview').empty().append(v);
+            $('#fields_<%="#{@em_id}"%>_field_name').val(v)
 
         });
 

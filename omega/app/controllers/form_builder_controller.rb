@@ -1,19 +1,20 @@
 class FormBuilderController < Omega::Controller
-
+  
   respond_to :html, :xml, :js, :json
 
+  #creates a new field and renders it 
+ 
   def dispatch_ui_element
+    
     @field = Service::TypeField.new
     @field.build_value
 
-    type = ''
-    type_class = ''
-    field = ''
-    default = ''
-   
-    logger.debug("params: #{params[:section]}")
-    
-    case params[:element]
+    type = ''   # datatype, for validation purposes
+    type_class = ''   # field/element type  
+    field = ''   # name of the field
+    default = '' # default value
+       
+    case params[:element] #type of field to be added
       when 'input'
         type = 'string'
         type_class = 'input'
@@ -30,7 +31,7 @@ class FormBuilderController < Omega::Controller
         type = 'boolean'
         type_class = 'selectbox'
         field = "Select List"
-        default = "Option1;Option2"
+        default = "Option1;Option2"  # For the selectbox the options need to be included through a semi-colon separated list
 
       when 'date'
         type = 'date'
@@ -58,62 +59,49 @@ class FormBuilderController < Omega::Controller
    
   end
 
+
+  # edit/modify properties of an already added field
+  
   def dispatch_element_properties
     
-    @em_id = params[:em_id].gsub(/ui-em-/,"")
+    @em_id = params[:em_id].gsub(/ui-em-/,"") # parse the field id
     
     @field = Service::TypeField.find_by_id(@em_id)
     
-    if @field.nil?
+    if @field.nil?                          # create an empty field, for the partials to get empty values   
     	@field = Service::TypeField.new
     	@field.build_value
     end  
     
     @category = params[:field_category]
-    case params[:element]
-      when 'input'
-      	if params[:field_category] == "service-details"
-          render :partial => 'form_builder/partials/properties_input'
+    
+    if @category == "service-details"
+          partial = "partials"
        else
-       	  render :partial => 'form_builder/partials/registration/properties_input'
-
-       end
+       	  partial = "partials/registration"
+    end
+       
+    case params[:element]
+             
+      when 'input'
+          
+          render :partial => "form_builder/#{partial}/properties_input"
+       	
       when 'text'
-      	if params[:field_category] == "service-details"
-                render :partial => 'form_builder/partials/properties_text'
-        else
-                render :partial => 'form_builder/partials/registration/properties_text'
-	
-        end
+      	
+          render :partial => "form_builder/#{partial}/properties_text"
         
       when 'textarea'
       	
-      	if params[:field_category] == "service-details"
-        	render :partial => 'form_builder/partials/properties_textarea'
-        else
-                render :partial => 'form_builder/partials/registration/properties_textarea'
-	
-        end
-      when 'selectbox'
-      	
-      	if params[:field_category] == "service-details"
-
-        render :partial => 'form_builder/partials/properties_selectbox'
+          render :partial => "form_builder/#{partial}/properties_textarea"
         
-       else
-       	        render :partial => 'form_builder/partials/registration/properties_selectbox'
-
-       end
+      when 'selectbox'
+          
+          render :partial => "form_builder/#{partial}/properties_selectbox"
        
       when 'date'
       	
-      	if params[:field_category] == "service-details"
-
-        render :partial => 'form_builder/partials/properties_date'
-        else
-        	        render :partial => 'form_builder/partials/registration/properties_date'
-
-        end
+      	  render :partial => "form_builder/#{partial}/properties_date"
         
     end
   end

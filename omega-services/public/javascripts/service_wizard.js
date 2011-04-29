@@ -5,7 +5,7 @@ $(function() {
     	$('.item-list-actions').hide();
     }
     
-    
+    $('.datepickr').datepicker();
     /**
      * show actions on hover
      */

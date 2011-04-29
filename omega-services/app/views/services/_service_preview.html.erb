@@ -20,7 +20,7 @@
             <% unless @details.empty? %>
                 <% @details.each_with_index do |detail, index| %>
                     <% @field =  Service::TypeField.find(detail.type_field_id) %>
-                        <%= render "form_builder/partials/#{@field.field_type_class}", :index => @field.id %>
+                        <%= render "form_builder/partials/#{@field.field_type_class}", :index => @field.id unless @field.field_category == "Registration Details"%>
                 <% end %>
             <% end %>
           

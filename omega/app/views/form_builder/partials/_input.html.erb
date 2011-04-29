@@ -11,8 +11,8 @@
   <div id="<%= "ui-em-#{index}" %>" class="ui-em-preview" ui-data="input">
     <%= label_tag @field.field_name, nil, :id=>"fields_#{index}_field_name_preview", :class =>'label-preview' %>
 
-    <span id="<%= "value-preview-#{index}" %>">
-           <input class="service" disabled="disabled" type="text" value="<%= @field.value.field_value %>"/>
+    <span >
+           <input id="<%= "value-preview-#{index}" %>" class="service" disabled="disabled" type="text" value="<%= @field.value.field_value %>"/>
 
 
      </span>

@@ -137,8 +137,9 @@ class Services::TypesController < Omega::Controller
       @service_type.type_fields_attributes = fields
 
       @service_type.type_fields.each do |field|
-        field.build_value unless field.value
-        field.value.type_id ||= @service_type.id
+      	
+        	field.build_value unless field.value
+        	field.value.type_id ||= @service_type.id 
       end
     end
 

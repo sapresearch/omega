@@ -37,12 +37,12 @@
 
                 <% unless @details.empty? %>
                 	<% @details.each_with_index do |detail, index| %>
-                    	<% @field =  Service::TypeField.find(detail.type_field_id) %>
-                    	   <% if @field.field_category == "Service Details"%>
+                    	<% @field =  Service::TypeField.find_by_id(detail.type_field_id) %>
+                    	   		<% if @field.field_category == "Service Details"%>
 
-                        	<%= render "form_builder/partials/#{@field.field_type_class}", :index => @field.id %>
+                        			<%= render "form_builder/partials/#{@field.field_type_class}", :index => @field.id %>
                         	
-                           <%end%>
+                           		<%end%>
                 		<% end %>
                 <% end %>
           </ul>

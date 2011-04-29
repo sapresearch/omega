@@ -14,7 +14,7 @@ $('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "f
 
         $('.datepicker').datepicker({
             onSelect: function(dateText, inst) {
-            $("#<%="value-preview-#{@em_id}"%>").empty().append(dateText);
+            $("#<%="value-preview-#{@em_id}"%>").val(dateText);
             $('#fields_<%="#{@em_id}"%>_value_attributes_field_value').val(dateText)
             }
         });

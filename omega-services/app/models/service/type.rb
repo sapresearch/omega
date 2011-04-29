@@ -4,6 +4,7 @@ class Service::Type < ActiveRecord::Base
 
   has_many :services, :dependent => :destroy
   
+  
   accepts_nested_attributes_for :type_fields, :allow_destroy => true
 
  # validates :service_type, :presence => true, :uniqueness => true
