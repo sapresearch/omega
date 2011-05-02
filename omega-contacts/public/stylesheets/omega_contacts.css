@@ -14,7 +14,7 @@
 #contact_filter_wrapper{
 	margin-left: 10px;
 	margin-top: 10px;
-	background:url("/images/filterBg.png");
+	background:url("../images/filterBg.png");
 	width:148px;
 	height:24px;
 }
@@ -78,7 +78,7 @@ padding:1em;
 #contacts_alphabet li span{
     display:block;
     -moz-border-radius: 2px 2px 2px 2px;
-    background: url("/images/om_button_bg.png") repeat-x scroll center bottom transparent;
+    background: url("../images/om_button_bg.png") repeat-x scroll center bottom transparent;
     border: 1px solid #BBBBBB;
     color: #002A5C !important;
     margin: 2px;

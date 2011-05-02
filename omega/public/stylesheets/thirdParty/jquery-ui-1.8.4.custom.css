@@ -128,9 +128,9 @@
 
     .ui-widget-header {
         /*border: 1px solid #4196ee;
-        background: url("/images/bg_dark.png") repeat-x scroll center bottom #80BDFB;*/
+        background: url("../../images/bg_dark.png") repeat-x scroll center bottom #80BDFB;*/
 		border: 1px solid #45521B;
-        background: url("/images/bg_dark_evergreen.png") repeat-x scroll center bottom #C9DA8F;
+        background: url("../../images/bg_dark_evergreen.png") repeat-x scroll center bottom #C9DA8F;
         font-family: "Trebuchet MS";
 		color: #45521B;
         font-weight: bold;

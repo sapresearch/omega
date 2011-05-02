@@ -78,7 +78,7 @@
 
 .jspArrow
 {
-	background: url("/images/ui-icons_448be2_256x240.png") no-repeat scroll 0 0 #fff;
+	background: url("../../images/ui-icons_448be2_256x240.png") no-repeat scroll 0 0 #fff;
 	text-indent: -20000px;
 	display: block;
 	cursor: pointer;

@@ -175,7 +175,7 @@ h2.fc-header-title{
 
 .fc-header .fc-state-default span {
 	border-color: #fff #fff #f2f2f2; /* inner border */
-	background: url("/images/om_button_bg.png") repeat-x scroll center bottom transparent;
+	background: url("../../images/om_button_bg.png") repeat-x scroll center bottom transparent;
 	}
 	
 /* PRESSED button COLORS (down and active) */
@@ -381,7 +381,7 @@ h2.fc-header-title{
 	}
 	
 .fc .fc-grid th {
-    background: url("/images/bg_light.png") repeat-x scroll top;
+    background: url("../../images/bg_light.png") repeat-x scroll top;
 	border-width: 0 0 0 1px;
 	text-align: center;
 	}

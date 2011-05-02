@@ -22,7 +22,7 @@
 
 .tipsy-arrow {
     position: absolute;
-    background: url('/images/tipsy.gif') no-repeat top left;
+    background: url("../../images/tipsy.gif') no-repeat top left;
     width: 9px;
     height: 5px;
 }

@@ -76,12 +76,12 @@ li.service_type
 li.mouse_enter
 {
 	  /*  background: #F8F8EF;*/
-	background:url('/images/wizard/arrow_list_services_preview.png') right center no-repeat;
+	background:url("../images/wizard/arrow_list_services_preview.png') right center no-repeat;
 
 }
 
 span.service_type  {
-	background:url('/images/wizard/bullet_blue.png') left top no-repeat;
+	background:url("../images/wizard/bullet_blue.png') left top no-repeat;
 	padding: 4px 15px;	
 	font: 1.2em helvetica, arial, freesans, clean, sans-serif;
 	color: #307AC5;
@@ -89,7 +89,7 @@ span.service_type  {
 }
 
 span:hover.service_type {
-	background:url('/images/wizard/bullet_pink.png') left top no-repeat;
+	background:url("../images/wizard/bullet_pink.png') left top no-repeat;
 	padding: 4px 15px;	
 }
 
@@ -119,7 +119,7 @@ div.position_slider {
     position: absolute;
     top: 42px;
 	left:20px;
-    background: url("/images/bg_dark.png") repeat-x bottom;
+    background: url("../images/bg_dark.png") repeat-x bottom;
     color: #000;
     display: none;
    
@@ -191,7 +191,7 @@ span.skill_tag {
     -moz-border-radius: 12px;
     -webkit-border-radius: 12px;
     display: inline-block;
-    background: url("/images/om_button_bg.png") repeat-x bottom;
+    background: url("../images/om_button_bg.png") repeat-x bottom;
 }
 
 span.skill_tag_active {
@@ -229,7 +229,7 @@ span.skill_tag_active {
 
 .position-r {
     border-bottom: 1px solid #EBEBEB;
-    background: url("/images/h1BgLight.png") repeat-x bottom #FFF;
+    background: url("../images/h1BgLight.png") repeat-x bottom #FFF;
     margin: 1em 0;
     padding: 0.5em;
 }
@@ -259,7 +259,7 @@ span.skill_tag_active {
    /* border-top: 1px solid #4096ee;*/
     height: auto;
     padding: 5px 21px 0px 11px;
-    /*background: url("/images/omega_services.png") top left no-repeat #fff;*/
+    /*background: url("../images/omega_services.png") top left no-repeat #fff;*/
 }
 
 #wizard-intro li.active {
@@ -283,7 +283,7 @@ span.skill_tag_active {
    /* border-top: 1px solid #4096ee;*/
     height: auto;
     padding: 5px 21px 0px 11px;
-    /*background: url("/images/omega_services.png") top left no-repeat #fff;*/
+    /*background: url("../images/omega_services.png") top left no-repeat #fff;*/
 }
 
 #wizard-intro-columns li.active {
@@ -324,7 +324,7 @@ div #buttons_wizard {
 
 div #service_preview {
 	background: #F9F9F3;
-/*	background: url("/images/wizard/preview_bg.png") repeat-y;*/
+/*	background: url("../images/wizard/preview_bg.png") repeat-y;*/
 	border: 1px solid #A8929B;
 	height: 475px;
 	width: 670px;
@@ -339,7 +339,7 @@ div #service_preview {
 
 div #service_preview-columns {
 	background: #F9F9F3;
-/*	background: url("/images/wizard/preview_bg.png") repeat-y;*/
+/*	background: url("../images/wizard/preview_bg.png") repeat-y;*/
 	height: 710px;
 	width: auto;
 	position: relative;
@@ -352,7 +352,7 @@ div #service_preview-columns {
 
 div #service_preview_summary {
 	background: #F9F9F3;
-/*	background: url("/images/wizard/preview_bg.png") repeat-y;*/
+/*	background: url("../images/wizard/preview_bg.png") repeat-y;*/
 	height: 710px;
 	width: 890px;
 	float:left;
@@ -367,27 +367,27 @@ div #service_preview_summary {
 div.intro_image {
 	width:380px;
 	height: 190px;
-	background: url("/images/wizard/wizard_intro_help_image_.png") no-repeat;
+	background: url("../images/wizard/wizard_intro_help_image_.png") no-repeat;
     z-index: 1;
 	margin: -365px 200px 100px 40px;
     	
 }
 div #heading {
-    background-image: url("/images/wizard/horizontal_partition.png");
+    background-image: url("../images/wizard/horizontal_partition.png");
     background-repeat: no-repeat;
 	min-height: 800px;
 	width: 250px;
 }
 
 div.step-nail {
-    background-image: url("/images/omega_services.png");
+    background-image: url("../images/omega_services.png");
     background-repeat: no-repeat;
     width: 302px;
     height: 22px;
 }
 
 div.step-nail-columns {
-    background-image: url("/images/omega_services.png");
+    background-image: url("../images/omega_services.png");
     background-repeat: no-repeat;
     width: 220px;
     height: 22px;
@@ -400,7 +400,7 @@ div.arrow {
     z-index: 1;
 	top: 185px;
     margin-left: -1.1em;
-	background-image: url("/images/wizard/arrow_preview_service.png");
+	background-image: url("../images/wizard/arrow_preview_service.png");
     background-repeat: no-repeat;
     width: 7px;
     height: 31px;
@@ -496,7 +496,7 @@ div.step-5 {
 /************ calendar list ********************/
 .pos-date {
     margin: 20px 10px 0 0;
-    background: url("/images/cal_bg.png") no-repeat;
+    background: url("../images/cal_bg.png") no-repeat;
     text-align: center;
     font-size: 1.3em;
     padding: 5px 0 0 0;
@@ -507,7 +507,7 @@ div.step-5 {
 
 .pos-recurrent {
     margin: 20px 10px 0 0;
-    background: url("/images/recurrent_bg.png") no-repeat;
+    background: url("../images/recurrent_bg.png") no-repeat;
     float: left;
     width: 45px;
     height: 60px;

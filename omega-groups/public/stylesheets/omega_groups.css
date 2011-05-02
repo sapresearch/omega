@@ -5,7 +5,7 @@
 
 #letter-list li span {
     -moz-border-radius: 2px 2px 2px 2px;
-    background: url("/images/om_button_bg.png") repeat-x scroll center bottom transparent;
+    background: url("../images/om_button_bg.png") repeat-x scroll center bottom transparent;
     border: 1px solid #BBBBBB;
     color: #002A5C !important;
     margin-right: 2px;
@@ -26,7 +26,7 @@
 }
 
 #sidebar-search {
-    background: url("/images/search_blue.png");
+    background: url("../images/search_blue.png");
     display: block;
     width: 218px;
     height: 45px;
@@ -51,7 +51,7 @@
 }
 
 .filter-wrapper {
-    background: url("/images/filterBg.png") repeat scroll 0 0 transparent;
+    background: url("../images/filterBg.png") repeat scroll 0 0 transparent;
     float: left;
     height: 24px;
     width: 148px;

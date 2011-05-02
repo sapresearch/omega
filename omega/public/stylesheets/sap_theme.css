@@ -16,7 +16,7 @@ table, tbody, tfoot, thead, tr, th, td {
 
 body {
 
-    background: url("/images/om_body_bg.png") repeat-x #f2f2f2;
+    background: url("../images/om_body_bg.png") repeat-x #f2f2f2;
 }
 
 html, body, #wrapper {
@@ -57,7 +57,7 @@ h1, .h1 {
 }
 
 h1.page-content {
-    background: url("/images/bg_light.png") repeat-x bottom #f1f2f1;
+    background: url("../images/bg_light.png") repeat-x bottom #f1f2f1;
     border-color: #DDDDDD #DDDDDD #C3C3C3;
     border-style: solid;
     border-width: 1px;
@@ -365,7 +365,7 @@ div.sidebar-menu {
 h1.side-bar {
     text-shadow: #333 1px 1px 1px;
     margin: 0;
-    background: url("/images/bg_dark.png") bottom repeat-x #80bdfb;
+    background: url("../images/bg_dark.png") bottom repeat-x #80bdfb;
     color: #fff;
     padding: 5px;
 }
@@ -495,7 +495,7 @@ li.list-item {
     list-style: none;
     position: relative;
     font-size: 1em;
-    background: url("/images/bg_f0ab00.png") repeat-x ;
+    background: url("../images/bg_f0ab00.png") repeat-x ;
 }
 
 #topnav li {
@@ -540,7 +540,7 @@ li.list-item {
 
 /*--Since we declared a link style on the parent list link, we will correct it back to its original state--*/
 #topnav li div a:hover {
-    background: url("/images/bg_f0ab00.png") repeat-x ;
+    background: url("../images/bg_f0ab00.png") repeat-x ;
     text-decoration: none;
 }
 
@@ -730,7 +730,7 @@ span.om-icon-button {
     border-radius: 10px;
     display: inline-block;
     height: 20px;
-    background: url("/images/om_button_bg.png") repeat-x bottom transparent;
+    background: url("../images/om_button_bg.png") repeat-x bottom transparent;
     border-width: 1px;
     border-style: solid;
     border-color: #ccc #bbb #a0a0a0;
@@ -793,7 +793,7 @@ span.om-plain-icon-button span.om-icon,
 }
 
 span.om-button-active {
-    background: url("/images/om_button_bg_active.png") repeat-x bottom transparent;
+    background: url("../images/om_button_bg_active.png") repeat-x bottom transparent;
     border-width: 1px;
     border-style: solid;
     border-color: #ccc #bbb #a0a0a0;
@@ -1066,7 +1066,7 @@ div.pagination a {
     padding: 2px 6px 1px;
     text-decoration: none !important;
     text-shadow: 0 1px 0 #FFFFFF;
-    background: url("/images/om_button_bg.png") repeat-x scroll center bottom transparent;
+    background: url("../images/om_button_bg.png") repeat-x scroll center bottom transparent;
 }
 
 div.pagination em {
@@ -1077,14 +1077,14 @@ div.pagination em {
     margin-right: 4px;
     padding: 2px 6px 1px;
     text-decoration: none !important;
-    background: url("/images/details_bg.png") repeat-x scroll center bottom transparent;
+    background: url("../images/details_bg.png") repeat-x scroll center bottom transparent;
 }
 
 div.pagination a:hover {
     border: 1px solid #0063dc;
     text-shadow: none !important;
     color: #fff !important;
-    background: url("/images/details_bg.png") repeat-x scroll center bottom transparent;
+    background: url("../images/details_bg.png") repeat-x scroll center bottom transparent;
 }
 
 div.pagination span.disabled {
@@ -1239,7 +1239,7 @@ form span.error {
 /************ calendar list ********************/
 .pos-date {
     margin: 0 10px 0 0;
-    background: url("/images/cal_bg.png") no-repeat;
+    background: url("../images/cal_bg.png") no-repeat;
     text-align: center;
     font-size: 1.3em;
     padding: 5px 0 0 0;
@@ -1313,7 +1313,7 @@ form span.error {
 
 .tipsy-arrow {
     position: absolute;
-    background: url('/images/tipsy.gif') no-repeat top left;
+    background: url("../images/tipsy.gif') no-repeat top left;
     width: 9px;
     height: 5px;
 }
@@ -1508,7 +1508,7 @@ form span.error {
 }
 
 .jspArrow {
-    background: url("/images/ui-icons_448be2_256x240.png") no-repeat scroll 0 0 #fff;
+    background: url("../images/ui-icons_448be2_256x240.png") no-repeat scroll 0 0 #fff;
     text-indent: -20000px;
     display: block;
     cursor: pointer;
