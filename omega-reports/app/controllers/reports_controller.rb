@@ -2,7 +2,7 @@ class ReportsController < Omega::Controller
   respond_to :html
 
   def index
-    @graph = open_flash_chart_object(600,300,"/reports/graph_code")
+    @graph = open_flash_chart_object(600,300,"/sandbox/reports/graph_code")
   end
 
   def graph_code
