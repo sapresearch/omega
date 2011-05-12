@@ -15,4 +15,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
 
   s.add_dependency('omega', version)
+  s.add_dependency('ruport')
+  s.add_dependency('ruport-util')
+  s.add_dependency('acts_as_reportable')
 end

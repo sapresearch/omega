@@ -1,0 +1,98 @@
+<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+<style type="text/css">
+  .google-visualization-table-table{width:100%}
+</style>
+
+<script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>
+
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Work Hours Overview</a></li>
+    <li><a href="#tabs-2">By User</a></li>
+    <li><a href="#tabs-3">By Position</a></li>
+  </ul>
+  <div id="tabs-1">
+    <p>
+      <script type='text/javascript'>
+          google.load('visualization', '1', {packages:['table']});
+          google.setOnLoadCallback(drawTable);
+          function drawTable() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Name');
+            data.addColumn('number', 'Hours');
+            data.addRows(4);
+            data.setCell(0, 0, 'Mike');
+            data.setCell(0, 1, 20);
+            data.setCell(1, 0, 'Jim');
+            data.setCell(1, 1, 5);
+            data.setCell(2, 0, 'Alice');
+            data.setCell(2, 1, 10);
+            data.setCell(3, 0, 'Bob');
+            data.setCell(3, 1, 15);
+
+            var table = new google.visualization.Table(document.getElementById('table_div_1'));
+            table.draw(data, {showRowNumber: true});
+          }
+      </script>
+      <div id='table_div_1'></div>
+    </p>
+  </div>
+  <div id="tabs-2">
+    <p>
+      <%= select_tag(:names, options_for_select([["Mike",1],["Jim",2],["Alice",3],["Bob",4]])) %>
+      <script type='text/javascript'>
+          google.load('visualization', '1', {packages:['table']});
+          google.setOnLoadCallback(drawTable);
+          function drawTable() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Position');
+            data.addColumn('number', 'Hours');
+            data.addRows(4);
+            data.setCell(0, 0, 'ESL teacher');
+            data.setCell(0, 1, 2);
+            data.setCell(1, 0, 'Helper');
+            data.setCell(1, 1, 5);
+            data.setCell(2, 0, 'Cashier');
+            data.setCell(2, 1, 10);
+            data.setCell(3, 0, 'Assistant');
+            data.setCell(3, 1, 3);
+
+            var table = new google.visualization.Table(document.getElementById('table_div_2'));
+            table.draw(data, {showRowNumber: true});
+          }
+      </script>
+      <div id='table_div_2'></div>
+    </p>
+  </div>
+  <div id="tabs-3">
+    <p>
+      <%= select_tag(:positions, options_for_select([["ESL teacher",1],["Helper",2],["Cashier",3],["Assistant",4]])) %>
+      <script type='text/javascript'>
+          google.load('visualization', '1', {packages:['table']});
+          google.setOnLoadCallback(drawTable);
+          function drawTable() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Position');
+            data.addColumn('number', 'Hours');
+            data.addRows(4);
+            data.setCell(0, 0, 'Mike');
+            data.setCell(0, 1, 2);
+            data.setCell(1, 0, 'Jim');
+            data.setCell(1, 1, 1);
+            data.setCell(2, 0, 'Alice');
+            data.setCell(2, 1, 4);
+            data.setCell(3, 0, 'Bob');
+            data.setCell(3, 1, 3);
+
+            var table = new google.visualization.Table(document.getElementById('table_div_3'));
+            table.draw(data, {showRowNumber: true});
+          }
+      </script>
+      <div id='table_div_3'></div>
+    </p>
+  </div>
+</div>
