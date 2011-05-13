@@ -5,44 +5,41 @@ class ReportsController < Omega::Controller
   def index    
   end
 
-  module DataFeed
-    class User
-      attr_accessor :name, :jobs
+    class DUser
+      attr_accessor :name, :jobs, :total_hours
       def initialize(name, jobs)
         @name = name
         @jobs = jobs
+        @total_hours = @jobs.inject(0){|s,j|s+j.hour}
       end
-
-      class Job
-        attr_accessor :position, :hour
-        def initialize(position, hour)
-          @position = position
-          @hour = hour
-        end
-      end
-      
-      class Position
-        attr_accessor :name
-        def initialize(name)
-          @name = name
-        end
-      end      
     end
-  end
+
+    class DJob
+      attr_accessor :position, :hour
+      def initialize(position, hour)
+        @position = position
+        @hour = hour
+      end
+    end
+
+    class DPosition
+      attr_accessor :name
+      def initialize(name)
+        @name = name
+      end
+    end
 
   def init_data_feeds
-=begin
-    p1 = Datafeed::Position.new("ESL teacher")
-    p2 = Datafeed::Position.new("Helper")
-    p3 = Datafeed::Position.new("Cashier")
-    p4 = Datafeed::Position.new("Assistant")
+    p1 = DPosition.new("ESL teacher")
+    p2 = DPosition.new("Helper")
+    p3 = DPosition.new("Cashier")
+    p4 = DPosition.new("Assistant")
     @ps = [p1,p2,p3,p4]
-    u1 = DataFeed::User.new("Mike",[Datafeed::Job.new(p1,5), Datafeed::Job.new(p2,3), Datafeed::Job.new(p3,2)])
-    u2 = DataFeed::User.new("Jim",[Datafeed::Job.new(p1,1), Datafeed::Job.new(p2,10), Datafeed::Job.new(p4,1)])
-    u3 = DataFeed::User.new("Alice",[Datafeed::Job.new(p2,1), Datafeed::Job.new(p3,7), Datafeed::Job.new(p4,2)])
-    u4 = DataFeed::User.new("Bob",[Datafeed::Job.new(p1,6), Datafeed::Job.new(p2,8), Datafeed::Job.new(p3,3)])
+    u1 = DUser.new("Mike",[DJob.new(p1,5), DJob.new(p2,3), DJob.new(p3,2)])
+    u2 = DUser.new("Jim",[DJob.new(p1,1), DJob.new(p2,10), DJob.new(p4,1)])
+    u3 = DUser.new("Alice",[DJob.new(p2,1), DJob.new(p3,7), DJob.new(p4,2)])
+    u4 = DUser.new("Bob",[DJob.new(p1,6), DJob.new(p2,8), DJob.new(p3,3)])
     @us = [u1,u2,u3,u4]
-=end
   end
 
   # open flash chart test
@@ -74,4 +71,3 @@ class ReportsController < Omega::Controller
   end
 
 end
-
