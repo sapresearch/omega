@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Sample Non-PDF output</title>
+<script src="../CollinsHTML.js" language=javascript></script>
+</head>
+<script language=javascript>
+//====================================================================================
+//							execute
+//====================================================================================
+function execute()
+{
+	var myOutput;
+	
+	html = new html$();
+	html.parse('<b><font color=red size=3>Hello World</font></b>');
+	
+	myOutput = new myDocument$(html);
+	html.writeToPdf(myOutput);
+
+	myOutput.saveToFile();
+}
+//=====================================================================
+//							myDocument$
+//=====================================================================
+function myDocument$(html)
+{
+
+	html.initilizeForeignOutput(this);	// initilize my object to look like collinsPDF;
+
+//----------------- my properties -------------------------------------
+
+	this.data					= '';
+	this.bold					= false;
+	this.italic					= false;
+	this.underline				= false;
+	this.fontSize				= 0;
+	this.fontColor				= '';
+
+//-------------------- my methods ------------------------------------
+
+	this.saveToFile				= myDocument$saveToFile;
+
+//-------- methods called by CollinsHTML I want to use ---------------
+
+	this.placeText				= myDocument$pdf_placeText;
+	this.pageBreak				= myDocument$pdf_pageBreak;
+	this.setFont				= myDocument$pdf_setFont;
+}
+//====================================================================================
+//							myDocument$saveToFile
+//====================================================================================
+function myDocument$saveToFile()
+{
+		alert(this.data);
+}
+//=====================================================================
+//							myDocument$pdf_placeText
+//=====================================================================
+function myDocument$pdf_placeText(x,y,text,href)
+{
+	if (this.data != '') this.data += '\r\n';
+	this.data += 'placeText -- x: ' + x + ' y: ' + y + ' "' + text + '"';
+
+	this.data += ' color: ' + this.fontColor;
+	this.data +=  ' size: ' + this.fontSize;
+	
+	if (this.bold     ) this.data += ' BOLD';
+	if (this.underline) this.data += ' ITALIC';
+	if (this.italic   ) this.data += ' UNDERLINE';
+}
+//=====================================================================
+//							myDocument$pdf_pageBreak
+//=====================================================================
+function myDocument$pdf_pageBreak()
+{
+	if (this.data != '') this.data += '\r\n';
+	this.data += 'pagebreak';
+}
+//=====================================================================
+//							myDocument$pdf_setFont
+//=====================================================================
+function myDocument$pdf_setFont(color,size,bold,italic,underline,name,sub,sup)
+{
+	this.bold 			= bold;
+	this.italic 		= italic;
+	this.underline 		= underline;
+
+	this.fontColor		= color;
+	this.fontSize		= size;
+}
+</script>
+
+<body>
+
+<input type=button value="Create Non-PDF output using CollinsHTML" onclick="execute()">
+
+&nbsp;</body></html>

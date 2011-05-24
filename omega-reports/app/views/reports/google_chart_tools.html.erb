@@ -1,12 +1,23 @@
-<script type='text/javascript' src='https://www.google.com/jsapi'></script>
-<style type="text/css">
-  .google-visualization-table-table{width:100%}
-</style>
+<% require_javascript 'https://www.google.com/jsapi' %>
+<% require_stylesheet 'reports.css' %>
 
-<script>
+<div id="report">
+<script type="text/javascript">
   $(function() {
     $( "#tabs" ).tabs();
   });
+  var employees = []
+  var positions = []
+  var jobs = []
+  <% @employees.each do |e| %>
+    employees.push(<%= raw e.to_json %>)
+  <% end %>
+  <% @positions.each do |p| %>
+    positions.push(<%= raw p.to_json %>)
+  <% end %>
+  <% @jobs.each do |j| %>
+    jobs.push(<%= raw j.to_json %>)
+  <% end %>
 </script>
 
 <div id="tabs">
@@ -24,13 +35,13 @@
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Name');
             data.addColumn('number', 'Hours');
-            data.addRows(<%= @us.size %>);
-            
-            <% (0..@us.size-1).each do |id| %>
-              var id = <%= id %>
-              data.setCell(id, 0, '<%= @us[id].name %>');
-              data.setCell(id, 1, <%= @us[id].total_hours %>);
-            <% end %>
+            data.addRows(employees.length);
+
+            for(var i=0; i<employees.length; i++)
+            {
+              data.setCell(i, 0, employees[i].name);
+              data.setCell(i, 1, employees[i].total_hours);
+            }
 
             var table = new google.visualization.Table(document.getElementById('table_div_1'));
             table.draw(data, {showRowNumber: true});
@@ -41,28 +52,23 @@
   </div>
   <div id="tabs-2">
     <p>
-      <% options = @us.map{|u|[u.name, @us.index(u)]} %>
-      <%= select_tag(:select_users, options_for_select(options), :onchange => "drawPositionTable()") %>
-      <script type='text/javascript'>
-        var us=[]
-        <% @us.each do |u| %>
-          us.push(<%= raw u.to_json %>)
-        <% end %>
-        
-          google.load('visualization', '1', {packages:['table']});
+      <% options = @employees.map{|e|[e.name, @employees.index(e)]} %>
+      <%= select_tag(:select_employees, options_for_select(options), :onchange => "drawPositionTable()") %>
+      <script type='text/javascript'>       
+          //google.load('visualization', '1', {packages:['table']});
           google.setOnLoadCallback(drawPositionTable);
           function drawPositionTable() {
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Position');
             data.addColumn('number', 'Hours');
             
-            var uid = $("#select_users").val();
-            var jobs = us[uid].jobs
+            var eid = $("#select_employees").val();
+            var jobs = employees[eid].jobs
             data.addRows(jobs.length);
 
             for(var i=0; i<jobs.length; i++)
             {
-              data.setCell(i, 0, jobs[i].position.name);
+              data.setCell(i, 0, jobs[i].position_name);
               data.setCell(i, 1, jobs[i].hour);
             }
 
@@ -75,43 +81,24 @@
   </div>
   <div id="tabs-3">
     <p>
-      <% options = @ps.map{|p|[p.name, @ps.index(p)]} %>
-      <%= select_tag(:select_positions, options_for_select(options), :onchange => "drawUserTable()") %>
-      <script type='text/javascript'>
-        var us=[]
-        <% @us.each do |u| %>
-          us.push(<%= raw u.to_json %>)
-        <% end %>
-          
-          google.load('visualization', '1', {packages:['table']});
-          google.setOnLoadCallback(drawUserTable);
-          function drawUserTable() {
+      <% options = @positions.map{|p|[p.name, @positions.index(p)]} %>
+      <%= select_tag(:select_positions, options_for_select(options), :onchange => "drawEmployeeTable()") %>
+      <script type='text/javascript'>         
+          //google.load('visualization', '1', {packages:['table']});
+          google.setOnLoadCallback(drawEmployeeTable);
+          function drawEmployeeTable() {
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Name');
             data.addColumn('number', 'Hours');
 
             var pid = $("#select_positions").val();
-            var position_name = $("#select_positions>option[value='"+pid+"']").html()
-            var users = []
-            for(var i=0;i<us.length;i++)
-              for(var j=0;j<us[i].jobs.length;j++)
-                if(us[i].jobs[j].position.name==position_name)
-                  users.push(us[i])
+            var jobs = positions[pid].jobs;
+            data.addRows(jobs.length);
 
-            data.addRows(users.length);
-
-            var hour;
-            for(var i=0; i<users.length; i++)
+            for(var i=0; i<jobs.length; i++)
             {
-              data.setCell(i, 0, users[i].name);
-              for(var j=0; j<users[i].jobs.length; j++)
-                if(users[i].jobs[j].position.name==position_name)
-                {
-                  hour = users[i].jobs[j].hour
-                  break;
-                }
-
-              data.setCell(i, 1, hour);
+              data.setCell(i, 0, jobs[i].employee_name);
+              data.setCell(i, 1, jobs[i].hour);
             }
 
             var table = new google.visualization.Table(document.getElementById('table_div_3'));
@@ -122,5 +109,21 @@
     </p>
   </div>
 </div>
+</div>
 
-<a href="http://pdfcrowd.com/url_to_pdf/">Convert this page to a PDF</a>
+<script type="text/javascript">
+function print_file()
+{
+    var head_html = $("head").html()
+    var report_html = $("#report").html()
+    $("#head_html").val(head_html)
+    $("#report_html").val(report_html)
+    $("#html_form").submit()
+}
+</script>
+<%= form_tag "print_file", :method=>:post, :id=>"html_form" do -%>
+  <input type="hidden" id="head_html" name="head_html"/>
+  <input type="hidden" id="report_html" name="report_html"/>
+<% end -%>
+
+<div id="print_link"><%= link_to_function "Print Report", "print_file()" %></div>

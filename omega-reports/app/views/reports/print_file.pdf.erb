@@ -1,0 +1,179 @@
+
+<style>
+/* Copyright 2008 Google Inc. All Rights Reserved. */
+
+.google-visualization-table-table {
+  font-family: arial, helvetica;
+  font-size: 10pt;
+  cursor: default;
+  margin: 0;
+  background: white;
+  border-spacing: 0;
+}
+
+.google-visualization-table-table tbody {
+  background: transparent;
+}
+
+.google-visualization-table-table * {
+  margin: 0;
+  vertical-align: middle;
+  padding: 2px;
+}
+
+.google-visualization-table-tr-head, .google-visualization-table-tr-head td, .google-visualization-table-tr-head-nonstrict {
+  font-weight: bold;
+  background: #fff url(title-bg.gif) repeat-x left bottom;
+  text-align: center;
+}
+
+.google-visualization-table-tr-even, .google-visualization-table-tr-even td, .google-visualization-table-tr-even-nonstrict {
+  background-color: #fff;
+}
+
+.google-visualization-table-tr-odd, .google-visualization-table-tr-odd td, .google-visualization-table-tr-odd-nonstrict {
+  background-color: #fafafa;
+}
+
+.google-visualization-table-tr-sel, .google-visualization-table-tr-sel td, .google-visualization-table-tr-sel-nonstrict {
+  background-color: #d6e9f8;
+}
+
+.google-visualization-table-tr-over, .google-visualization-table-tr-over td, .google-visualization-table-tr-over-nonstrict {
+  background-color: #e7e9f9;
+}
+
+.google-visualization-table-sorthdr {
+  cursor: pointer;
+}
+
+.google-visualization-table-sortind {
+  color: #ccc;
+  font-size: 9px;
+  padding-left: 6px; /* do not chage - see table.js */
+}
+
+.google-visualization-table-th {
+  border: 1px solid #eee;
+  padding: 6px;
+}
+
+.google-visualization-table-th-webkit td, .google-visualization-table-th-webkit-nonstrict {
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 6px;
+}
+
+.google-visualization-table-td-freeze-rightmost {
+  border-right-width: 4px;
+}
+
+.google-visualization-table-td {
+  border: 1px solid #eee;
+  padding-right: 3px;
+  padding-left: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.google-visualization-table-td-bool {
+  text-align: center;
+  font-family: Arial Unicode MS, Arial, Helvetica;
+}
+
+.google-visualization-table-td-center {
+  text-align: center;
+}
+
+.google-visualization-table-td-number {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.google-visualization-table-seq {
+  text-align: right;
+  color: #666;
+}
+
+.google-visualization-table-div-page {
+  margin: 2px 0 0 0;
+  padding: 0;
+}
+
+/** Created from css_binary ./css:table_css */
+html>body .goog-inline-block{display:-moz-inline-box;display:inline-block;}.goog-inline-block{position:relative;display:inline-block}* html .goog-inline-block{display:inline}*:first-child+html .goog-inline-block{display:inline}.goog-custom-button{margin:2px;border:0;pa\
+dding:0;font-family:Arial,sans-serif;color:#000;background:#ddd url(//ssl.gstatic.com/editor/button-bg.png) repeat-x top left;text-decoration:none;list-style:none;vertical-align:middle;cursor:default;outline:none}.goog-custom-button-outer-box,.goog-custom-button-inner-\
+box{border-style:solid;border-color:#aaa;vertical-align:top}.goog-custom-button-outer-box{margin:0;border-width:1px 0;padding:0}.goog-custom-button-inner-box{-moz-box-orient:vertical;margin:0 -1px;border-width:0 1px;padding:3px 4px;white-space:nowrap;}* html .goog-cust\
+om-button-inner-box{left:-1px}* html .goog-custom-button-rtl .goog-custom-button-outer-box{left:-1px}* html .goog-custom-button-rtl .goog-custom-button-inner-box{right:auto}*:first-child+html .goog-custom-button-inner-box{left:-1px}*:first-child+html .goog-custom-butto\
+n-rtl .goog-custom-button-inner-box{left:1px}::root .goog-custom-button,::root .goog-custom-button-outer-box{line-height:0}::root .goog-custom-button-inner-box{line-height:normal}.goog-custom-button-disabled{background-image:none!important;opacity:0.3;-moz-opacity:0.3;\
+filter:alpha(opacity=30)}.goog-custom-button-disabled .goog-custom-button-outer-box,.goog-custom-button-disabled .goog-custom-button-inner-box{color:#333!important;border-color:#999!important}* html .goog-custom-button-disabled{margin:2px 1px!important;padding:0 1px!im\
+portant}*:first-child+html .goog-custom-button-disabled{margin:2px 1px!important;padding:0 1px!important}.goog-custom-button-hover .goog-custom-button-outer-box,.goog-custom-button-hover .goog-custom-button-inner-box{border-color:#9cf #69e #69e #7af!important;}.goog-cu\
+stom-button-active,.goog-custom-button-checked{background-color:#bbb;background-position:bottom left}.goog-custom-button-focused .goog-custom-button-outer-box,.goog-custom-button-focused .goog-custom-button-inner-box{border-color:orange}.goog-custom-button-collapse-rig\
+ht,.goog-custom-button-collapse-right .goog-custom-button-outer-box,.goog-custom-button-collapse-right .goog-custom-button-inner-box{margin-right:0}.goog-custom-button-collapse-left,.goog-custom-button-collapse-left .goog-custom-button-outer-box,.goog-custom-button-col\
+lapse-left .goog-custom-button-inner-box{margin-left:0}.goog-custom-button-collapse-left .goog-custom-button-inner-box{border-left:1px solid #fff}.goog-custom-button-collapse-left.goog-custom-button-checked .goog-custom-button-inner-box{border-left:1px solid #ddd}* htm\
+l .goog-custom-button-collapse-left .goog-custom-button-inner-box{left:0}*:first-child+html .goog-custom-button-collapse-left .goog-custom-button-inner-box{left:0}.goog-flat-button{position:relative;margin:2px;border:1px solid #000;padding:2px 6px;font:normal 13px "Tre\
+buchet MS",Tahoma,Arial,sans-serif;color:#fff;background-color:#8c2425;cursor:pointer;outline:none;-moz-outline:none}.goog-flat-button-disabled{border-color:#888;color:#888;background-color:#ccc;cursor:default}.goog-flat-button-hover{border-color:#8c2425;color:#8c2425;\
+background-color:#eaa4a5}.goog-flat-button-active,.goog-flat-button-selected,.goog-flat-button-checked{border-color:#5b4169;color:#5b4169;background-color:#d1a8ea}.goog-flat-button-focused{border-color:#5b4169}.goog-flat-button-collapse-right{margin-right:0}.goog-flat-\
+button-collapse-left{margin-left:0;border-left:none}.goog-button{color:#036;border-color:#036;background-color:#69c}.goog-button-disabled{border-color:#333;color:#333;background-color:#999}.goog-button-hover{color:#369;border-color:#369;background-color:#9cf}.goog-butt\
+on-active{color:#69c;border-color:#69c}
+/* End */
+
+.google-visualization-table-div-page .goog-custom-button-inner-box {
+  padding: 1px 5px;
+}
+</style>
+
+  
+  
+
+  
+
+  
+
+  
+
+<link href="http://10.6.74.88:3000/stylesheets/application_evergreen.css?1305222035" media="screen" rel="stylesheet" type="text/css">
+<link href="http://10.6.74.88:3000/stylesheets/thirdParty/jquery-ui-1.8.4.custom.css?1305210080" media="screen" rel="stylesheet" type="text/css">
+<link href="http://10.6.74.88:3000/stylesheets/reports.css?1306271707" media="screen" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/static/modules/gviz/1.0/table/table.css"><div id='report_headline'>Omega Report</div>
+
+
+<div class="ui-tabs ui-widget ui-widget-content ui-corner-all" id="tabs">
+  <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">Work Hours Overview</a></li>
+    <li class="ui-state-default ui-corner-top"><a href="#tabs-2">By User</a></li>
+    <li class="ui-state-default ui-corner-top"><a href="#tabs-3">By Position</a></li>
+  </ul>
+  <div class="ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-1">
+    <p>
+      
+      </p><div id="table_div_1"><div style="position: relative;"><div style="position: relative;"><table class="google-visualization-table-table" cellspacing="0"><tbody><tr class="google-visualization-table-tr-head"><td class="google-visualization-table-th">&nbsp;</td><td class="google-visualization-table-th google-visualization-table-sorthdr">Name</td><td class="google-visualization-table-th google-visualization-table-sorthdr">Hours</td></tr><tr class="google-visualization-table-tr-even"><td class="google-visualization-table-td google-visualization-table-seq">1</td><td class="google-visualization-table-td">Mike</td><td class="google-visualization-table-td google-visualization-table-td-number">10</td></tr><tr class="google-visualization-table-tr-odd"><td class="google-visualization-table-td google-visualization-table-seq">2</td><td class="google-visualization-table-td">Jim</td><td class="google-visualization-table-td google-visualization-table-td-number">12</td></tr><tr class="google-visualization-table-tr-even"><td class="google-visualization-table-td google-visualization-table-seq">3</td><td class="google-visualization-table-td">Alice</td><td class="google-visualization-table-td google-visualization-table-td-number">10</td></tr><tr class="google-visualization-table-tr-odd"><td class="google-visualization-table-td google-visualization-table-seq">4</td><td class="google-visualization-table-td">Bob</td><td class="google-visualization-table-td google-visualization-table-td-number">17</td></tr></tbody></table></div></div></div>
+    <p></p>
+  </div>
+  <div class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" id="tabs-2">
+    <p>
+      <select id="select_employees" name="select_employees" onchange="drawPositionTable()"><option value="0">Mike</option>
+<option value="1">Jim</option>
+<option value="2">Alice</option>
+<option value="3">Bob</option></select>
+      
+      </p><div id="table_div_2"><div style="position: relative;"><div style="position: relative;"><table class="google-visualization-table-table" cellspacing="0"><tbody><tr class="google-visualization-table-tr-head"><td class="google-visualization-table-th">&nbsp;</td><td class="google-visualization-table-th google-visualization-table-sorthdr">Position</td><td class="google-visualization-table-th google-visualization-table-sorthdr">Hours</td></tr><tr class="google-visualization-table-tr-even"><td class="google-visualization-table-td google-visualization-table-seq">1</td><td class="google-visualization-table-td">ESL teacher</td><td class="google-visualization-table-td google-visualization-table-td-number">5</td></tr><tr class="google-visualization-table-tr-odd"><td class="google-visualization-table-td google-visualization-table-seq">2</td><td class="google-visualization-table-td">Helper</td><td class="google-visualization-table-td google-visualization-table-td-number">3</td></tr><tr class="google-visualization-table-tr-even"><td class="google-visualization-table-td google-visualization-table-seq">3</td><td class="google-visualization-table-td">Cashier</td><td class="google-visualization-table-td google-visualization-table-td-number">2</td></tr></tbody></table></div></div></div>
+    <p></p>
+  </div>
+  <div class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" id="tabs-3">
+    <p>
+      <select id="select_positions" name="select_positions" onchange="drawEmployeeTable()"><option value="0">ESL teacher</option>
+<option value="1">Helper</option>
+<option value="2">Cashier</option>
+<option value="3">Assistant</option></select>
+      
+      </p><div id="table_div_3"><div style="position: relative;"><div style="position: relative;"><table class="google-visualization-table-table" cellspacing="0"><tbody><tr class="google-visualization-table-tr-head"><td class="google-visualization-table-th">&nbsp;</td><td class="google-visualization-table-th google-visualization-table-sorthdr">Name</td><td class="google-visualization-table-th google-visualization-table-sorthdr">Hours</td></tr><tr class="google-visualization-table-tr-even"><td class="google-visualization-table-td google-visualization-table-seq">1</td><td class="google-visualization-table-td">Mike</td><td class="google-visualization-table-td google-visualization-table-td-number">5</td></tr><tr class="google-visualization-table-tr-odd"><td class="google-visualization-table-td google-visualization-table-seq">2</td><td class="google-visualization-table-td">Jim</td><td class="google-visualization-table-td google-visualization-table-td-number">1</td></tr><tr class="google-visualization-table-tr-even"><td class="google-visualization-table-td google-visualization-table-seq">3</td><td class="google-visualization-table-td">Bob</td><td class="google-visualization-table-td google-visualization-table-td-number">6</td></tr></tbody></table></div></div></div>
+    <p></p>
+  </div>
+</div>

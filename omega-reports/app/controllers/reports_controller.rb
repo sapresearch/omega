@@ -1,47 +1,15 @@
 class ReportsController < Omega::Controller
   respond_to :html
-  before_filter :init_data_feeds
+  #require_permission Volunteering::PERM_ADMIN
 
-  def index    
+  require "report_app_adapter.rb"
+  include ReportsHelper
+  include ReportAppAdapter
+  before_filter :init_data_feeds, :only=>[:index, :open_flash_chart, :high_charts, :google_chart_tools] 
+  
+  def index
   end
-
-    class DUser
-      attr_accessor :name, :jobs, :total_hours
-      def initialize(name, jobs)
-        @name = name
-        @jobs = jobs
-        @total_hours = @jobs.inject(0){|s,j|s+j.hour}
-      end
-    end
-
-    class DJob
-      attr_accessor :position, :hour
-      def initialize(position, hour)
-        @position = position
-        @hour = hour
-      end
-    end
-
-    class DPosition
-      attr_accessor :name
-      def initialize(name)
-        @name = name
-      end
-    end
-
-  def init_data_feeds
-    p1 = DPosition.new("ESL teacher")
-    p2 = DPosition.new("Helper")
-    p3 = DPosition.new("Cashier")
-    p4 = DPosition.new("Assistant")
-    @ps = [p1,p2,p3,p4]
-    u1 = DUser.new("Mike",[DJob.new(p1,5), DJob.new(p2,3), DJob.new(p3,2)])
-    u2 = DUser.new("Jim",[DJob.new(p1,1), DJob.new(p2,10), DJob.new(p4,1)])
-    u3 = DUser.new("Alice",[DJob.new(p2,1), DJob.new(p3,7), DJob.new(p4,2)])
-    u4 = DUser.new("Bob",[DJob.new(p1,6), DJob.new(p2,8), DJob.new(p3,3)])
-    @us = [u1,u2,u3,u4]
-  end
-
+  
   # open flash chart test
   def open_flash_chart
     @graph = open_flash_chart_object(600,300,"/sandbox/reports/graph_code")
@@ -67,7 +35,25 @@ class ReportsController < Omega::Controller
   end
 
   #google chart tools test
-  def google_chart_tools   
+  def google_chart_tools
+  end
+
+  # note: use wicked_pdf layouts?
+  def print_file   
+    @head_html = params[:head_html]
+    @report_html = params[:report_html]
+    @title = "Omega_report"
+    @template = "reports/print_file.pdf.erb"
+
+    # this line will be changed in the final version
+    tmp_file_path = "#{RAILS_ROOT}/../omega-reports/app/views/reports/print_file.pdf.erb"
+
+    File.open(tmp_file_path, "w") do |f|
+      f.write(process_head_html(@head_html))
+      f.write(process_report_html(@report_html))
+    end
+    render :pdf => @title,
+           :template => @template
   end
 
 end
