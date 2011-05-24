@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
 
   s.add_dependency('omega', version)
-  s.add_dependency('ruport')
-  s.add_dependency('ruport-util')
-  s.add_dependency('acts_as_reportable')
+  #s.add_dependency('ruport')
+  #s.add_dependency('ruport-util')
+  #s.add_dependency('acts_as_reportable')
   s.add_dependency('wkhtmltopdf')
   s.add_dependency('wkhtmltopdf-binary')
   s.add_dependency('wicked_pdf')
