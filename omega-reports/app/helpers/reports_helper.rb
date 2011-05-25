@@ -134,14 +134,15 @@ on-active{color:#69c;border-color:#69c}
     html = delete_meta_tags(html)
     html = delete_javascript_tags(html)
     html = delete_comments(html)
+    html = set_utf8_encoding_meta_tag(html)
     html = process_stylesheet_tags(html)
   end
   
   def process_report_html(html)
     html = add_title(html)
     html = delete_javascript_tags(html)
-    html = delete_comments(html)
-    html = clean_up(html)
+    html = delete_comments(html)    
+    #html = clean_up(html)
     html = process_stylesheet_tags(html)
   end
 
@@ -176,6 +177,10 @@ on-active{color:#69c;border-color:#69c}
 
   def delete_comments(html)
     html.gsub!(/<!--.*?-->/m, "") || html
+  end
+
+  def set_utf8_encoding_meta_tag(html)
+    html = '<meta http-equiv="content-type" content="text/html; charset=utf-8" />'+html
   end
 
   # unfinished

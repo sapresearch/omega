@@ -3,7 +3,6 @@ class ReportsController < Omega::Controller
   #require_permission Volunteering::PERM_ADMIN
 
   require "report_app_adapter.rb"
-  include ReportsHelper
   include ReportAppAdapter
   before_filter :init_data_feeds, :only=>[:index, :open_flash_chart, :high_charts, :google_chart_tools] 
   
@@ -42,18 +41,12 @@ class ReportsController < Omega::Controller
   def print_file
     @head_html = params[:head_html]
     @report_html = params[:report_html]
-    @title = "Omega_report"
+    @file_name = "omega_report"
     @template = "reports/print_file_template.pdf.erb"
 
-    # this line will be changed in the final version
-    tmp_file_path = "#{RAILS_ROOT}/../omega-reports/app/views/reports/print_file_template.pdf.erb"
-
-    File.open(tmp_file_path, "w") do |f|
-      f.write(process_head_html(@head_html))
-      f.write(process_report_html(@report_html))
-    end
-    render :pdf => @title,
-           :template => @template
+    render :pdf => @file_name,
+           #:layout => 'report.html',
+           :template => @template          
   end
 
 end
