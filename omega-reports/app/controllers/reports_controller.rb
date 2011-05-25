@@ -39,14 +39,14 @@ class ReportsController < Omega::Controller
   end
 
   # note: use wicked_pdf layouts?
-  def print_file   
+  def print_file
     @head_html = params[:head_html]
     @report_html = params[:report_html]
     @title = "Omega_report"
-    @template = "reports/print_file.pdf.erb"
+    @template = "reports/print_file_template.pdf.erb"
 
     # this line will be changed in the final version
-    tmp_file_path = "#{RAILS_ROOT}/../omega-reports/app/views/reports/print_file.pdf.erb"
+    tmp_file_path = "#{RAILS_ROOT}/../omega-reports/app/views/reports/print_file_template.pdf.erb"
 
     File.open(tmp_file_path, "w") do |f|
       f.write(process_head_html(@head_html))
