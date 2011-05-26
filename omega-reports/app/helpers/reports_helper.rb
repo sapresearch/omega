@@ -1,7 +1,7 @@
 module ReportsHelper
 
   REPORT_HEADLINE = "Omega Report"
-  #EXTRA_STYLESHEETS = ["table.css"]
+  EXTRA_STYLESHEETS = ["table.css"]
   EXTRA_STYLE = '
 <style>
 /* Copyright 2008 Google Inc. All Rights Reserved. */

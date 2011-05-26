@@ -1,0 +1,16 @@
+<script>
+$(function() {
+	$( "#sortable" ).sortable({
+		placeholder: "ui-state-highlight"
+	});
+	$( "#sortable" ).disableSelection();
+});
+</script>
+
+<ul id="sortable">
+  <% @report_items.each_key do |item| %>
+    <li class="ui-state-default"><%= link_to item, {:action=>:show, :report=>item}, :remote=>true %></li>
+  <% end %>
+</ul>
+
+

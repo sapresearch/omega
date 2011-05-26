@@ -5,13 +5,11 @@
     
     <%= wicked_pdf_stylesheet_link_tag "application_evergreen" -%>
     <%= wicked_pdf_stylesheet_link_tag "thirdParty/jquery-ui-1.8.4.custom" -%>
-    <%= wicked_pdf_stylesheet_link_tag "reports" -%>
+    <%= wicked_pdf_stylesheet_link_tag "report" -%>
     <%= wicked_pdf_stylesheet_link_tag "table" -%>
     <%#= wicked_pdf_javascript_include_tag "" %>
   </head>
   <body>
-    <div>
-      <%= yield %>
-    </div>
+    <%= yield %>
   </body>
 </html>

@@ -1,10 +1,9 @@
 class ReportsController < Omega::Controller
-  respond_to :html
   #require_permission Volunteering::PERM_ADMIN
 
   require "report_app_adapter.rb"
   include ReportAppAdapter
-  before_filter :init_data_feeds, :only=>[:index, :open_flash_chart, :high_charts, :google_chart_tools] 
+  before_filter :init_data_feeds, :only=>[:index, :show, :open_flash_chart, :high_charts, :google_chart_tools]
   
   def index
   end
@@ -35,9 +34,14 @@ class ReportsController < Omega::Controller
 
   #google chart tools test
   def google_chart_tools
+    
   end
 
-  # note: use wicked_pdf layouts?
+  def show
+    @report = params[:report]
+  end
+
+  # note: alternative use wicked_pdf layout
   def print_file
     @head_html = params[:head_html]
     @report_html = params[:report_html]

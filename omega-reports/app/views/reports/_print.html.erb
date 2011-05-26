@@ -1,0 +1,16 @@
+<script type="text/javascript">
+function print_file()
+{
+    var head_html = $("head").html()
+    var report_html = $("#report_content").html()
+    $("#head_html").val(head_html)
+    $("#report_html").val(report_html)
+    $("#html_form").submit()
+}
+</script>
+<%= form_tag "print_file", :method=>:post, :id=>"html_form" do -%>
+  <input type="hidden" id="head_html" name="head_html"/>
+  <input type="hidden" id="report_html" name="report_html"/>
+<% end -%>
+
+<div id="print_link"><%= link_to_function "Print Report", "print_file()" %></div>

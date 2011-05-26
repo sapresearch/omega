@@ -7,6 +7,7 @@ module ReportAppAdapter
     init_positions
     init_jobs
     complete_associations
+    init_items
   end
 
   def init_employees
@@ -53,6 +54,10 @@ module ReportAppAdapter
       p.employee_names = p.jobs.inject([]){|r,j|r<<j.employee_name}
       p.total_hours = p.jobs.inject(0){|r,j|r+j.hour}
     end
+  end
+
+  def init_items
+    @report_items = {"Volunteer Working Hour"=>"working_hour","item1"=>"","item2"=>"","item3"=>"","item4"=>"","item5"=>""}
   end
 
   # Option2: Abstract layer functions, available for AJAX call
