@@ -8,9 +8,11 @@ function print_file()
     $("#html_form").submit()
 }
 </script>
-<%= form_tag "print_file", :method=>:post, :id=>"html_form" do -%>
+<%#= form_tag "print_file", :method=>:post, :id=>"html_form" do -%>
+<form action="/reports/print_file" method="post" id="html_form">
   <input type="hidden" id="head_html" name="head_html"/>
   <input type="hidden" id="report_html" name="report_html"/>
-<% end -%>
+</form>
+<%# end -%>
 
 <div id="print_link"><%= link_to_function "Print Report", "print_file()" %></div>

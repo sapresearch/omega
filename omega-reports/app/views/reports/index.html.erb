@@ -1,9 +1,19 @@
-<%= link_to "Open Flash Chart", :controller=>:reports, :action=>:open_flash_chart %><br/>
-<%= link_to "HighCharts", :controller=>:reports, :action=>:high_charts %><br/>
-<%= link_to "Google Chart Tools", :controller=>:reports, :action=>:google_chart_tools %><br/>
+<% require_javascript 'https://www.google.com/jsapi' %>
+<% require_javascript 'report.js' %>
+<% require_stylesheet 'report.css' %>
 
+<div id="report_menu">
+  <%= render "menu" %>
+</div>
+<div id="report_submenu">
+  <%#= render "submenu" %>
+</div>
 
+<div id="report_content">
+  <%= render "content" %>
+</div>
 
-
-
+<div id="report_print">
+  <%= render "print" %>
+</div>
 

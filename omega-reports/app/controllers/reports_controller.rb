@@ -33,8 +33,7 @@ class ReportsController < Omega::Controller
   end
 
   #google chart tools test
-  def google_chart_tools
-    
+  def google_chart_tools    
   end
 
   def show
