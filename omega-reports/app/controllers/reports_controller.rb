@@ -44,12 +44,10 @@ class ReportsController < Omega::Controller
   def print_file
     @head_html = params[:head_html]
     @report_html = params[:report_html]
-    @file_name = "omega_report"
-    @template = "reports/print_file_template.pdf.erb"
 
-    render :pdf => @file_name,
-           #:layout => 'report.html',
-           :template => @template          
+    render :pdf => "omega_report",
+           :layout => 'report.html',
+           :template => "reports/print_file_template.pdf.erb"
   end
 
 end
