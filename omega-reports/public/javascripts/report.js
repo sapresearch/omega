@@ -18,7 +18,6 @@
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Position');
             data.addColumn('number', 'Hours');
-
             var eid = $("#select_employees").val();
             var jobs = employees[eid].jobs
             data.addRows(jobs.length);
@@ -51,3 +50,17 @@
             var table = new google.visualization.Table(document.getElementById('table_div_3'));
             table.draw(data, {showRowNumber: true});
           }
+
+function process_report_html(html)
+{
+    html = "<div id='report_headline'>Omega Report</div>"+html          //add title
+    html = html.replace(/<script.*?>(.|\n)*?<\/script>/mig, "")         //delete js tags
+    html = html.replace(/<!--(.|\n)*?-->/mig, "")                       //delete comments
+
+    $("select").each(function() {
+        var regex = new RegExp("<select.*?id=('|\")"+$(this).attr("id")+"('|\")(.|\\n)*?>(.|\\n)*?</select>","")
+        html = html.replace(regex, "<select><option>"+$("option[value='"+$(this).val()+"']", this).html()+"</option></select>");
+    });
+
+    return html;
+}

@@ -4,6 +4,7 @@ function print_file()
     //var head_html = $("head").html()
     var report_html = $("#report_content").html()
     //$("#head_html").val(head_html)
+    report_html = process_report_html(report_html)
     $("#report_html").val(report_html)
     $("#html_form").submit()
 }

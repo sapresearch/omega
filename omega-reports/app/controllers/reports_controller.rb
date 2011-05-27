@@ -46,7 +46,7 @@ class ReportsController < Omega::Controller
     @report_html = params[:report_html]
 
     render :pdf => "omega_report",
-           :layout => 'report.html',
+           :layout => 'report_pdf.html',
            :template => "reports/print_file_template.pdf.erb"
   end
 
