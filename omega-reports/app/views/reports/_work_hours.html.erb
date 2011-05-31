@@ -31,14 +31,14 @@
   <div id="tabs-2">
     <p>
       <% options = @employees.map{|e|[e.name, @employees.index(e)]} %>
-      <%= select_tag(:select_employees, options_for_select(options), :onchange => "drawPositionTable()") %>
+      <%= select_tag(:select_employees, options_for_select(options), :onchange => "drawPositionsTable()") %>
       <div id='table_div_2'></div>
     </p>
   </div>
   <div id="tabs-3">
     <p>
       <% options = @positions.map{|p|[p.name, @positions.index(p)]} %>
-      <%= select_tag(:select_positions, options_for_select(options), :onchange => "drawEmployeeTable()") %>
+      <%= select_tag(:select_positions, options_for_select(options), :onchange => "drawEmployeesTable()") %>
       <div id='table_div_3'></div>
     </p>
   </div>
