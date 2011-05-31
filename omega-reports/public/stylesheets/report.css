@@ -12,22 +12,29 @@
     font-weight:bolder;
     text-align: center
 }
-
 #report_menu{
     width:200px;
     float:left;
     margin:5px 5px 5px 0px;
 }
-
+#report_menu ul a{ 
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.li_selected_report {
+    margin: 1px;
+    color:black;
+    background-color:transparent;
+    border:1px #fff solid;
+}
 /*
 #report_submenu{
     height:30px;
     margin-left: 200px;
 }*/
 
-#report_content{
-    margin-left: 200px;
-}
+#report_content{ margin-left: 200px; }
 
 
 

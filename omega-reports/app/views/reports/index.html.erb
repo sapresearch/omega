@@ -1,7 +1,14 @@
+<% require_stylesheet 'report.css' %>
 <% require_javascript 'https://www.google.com/jsapi' %>
 <% require_javascript 'util.js' %>
 <% require_javascript 'report.js' %>
-<% require_stylesheet 'report.css' %>
+
+<script type="text/javascript">
+  google.load('visualization', '1', {packages:['table','gauge']});
+  $(function() { 
+    $("#li_<%= session[:report_partial_name] %>").attr("class","li_selected_report")
+  });
+</script>
 
 <div id="report_menu">
   <%= render "menu" %>
@@ -11,7 +18,7 @@
 </div>
 
 <div id="report_content">
-  <%= render "content" %>
+  <%= render session[:report_partial_name] %>
 </div>
 
 <div id="report_print">

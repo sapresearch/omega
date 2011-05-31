@@ -7,7 +7,7 @@ module ReportAppAdapter
     init_positions
     init_jobs
     complete_associations
-    init_items
+    init_reports
   end
 
   def init_employees
@@ -56,8 +56,14 @@ module ReportAppAdapter
     end
   end
 
-  def init_items
-    @report_items = {"Volunteer Working Hour"=>"working_hour","item1"=>"","item2"=>"","item3"=>"","item4"=>"","item5"=>""}
+  def init_reports
+    @reports = []
+    @reports << Report.new("Volunteer Work Hours", "work_hours")
+    @reports << Report.new("Assets", "assets")
+    @reports << Report.new("Contacts", "contacts")
+    @reports << Report.new("Services", "services")
+    @reports << Report.new("Events", "events")
+    session[:report_partial_name]= @reports[0].partial_name if session[:report_partial_name].nil?
   end
 
   # Option2: Abstract layer functions, available for AJAX call

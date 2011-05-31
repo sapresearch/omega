@@ -2,7 +2,7 @@
   $(function() {
     $( "#tabs" ).tabs();
   });
-  
+
   var employees = []
   var positions = []
   var jobs = []
@@ -15,8 +15,6 @@
   <% @jobs.each do |j| %>
     jobs.push(<%= raw j.to_json %>)
   <% end %>
-
-  google.load('visualization', '1', {packages:['table']});
 </script>
 
 <div id="tabs">
@@ -48,6 +46,6 @@
 
 <script type="text/javascript">
   drawOverviewTable();
-  drawPositionTable();
-  drawEmployeeTable();
+  drawPositionsTable();
+  drawEmployeesTable();
 </script>
