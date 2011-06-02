@@ -79,6 +79,7 @@ function drawEmployeesTable() {
 
 
 /********* assets */
+//dummy data 
 function drawAssetsGauge() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Label');

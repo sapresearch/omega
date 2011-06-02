@@ -1,7 +1,7 @@
 class ReportsController < Omega::Controller
   #require_permission Volunteering::PERM_ADMIN
 
-  load "report_app_adapter.rb"
+  require "report_app_adapter.rb"
   include ReportAppAdapter
   before_filter :init_data_feeds, :only=>[:index, :show]
   
