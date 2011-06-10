@@ -1,0 +1,30 @@
+Service0:
+  id: 1000
+  name: French Class 1 (service0)
+  description: service 0 description
+  service_type_id: 1000
+Service1:
+  id: 1001
+  name: French Class 2 (service1)
+  description: service 1 description
+  service_type_id: 1000
+Service2:
+  id: 1002
+  name: French Class 3 (service2)
+  description: service 2 description
+  service_type_id: 1000
+Service3:
+  id: 1003
+  name: Spanish Class 1 (service3)
+  description: service 3 description
+  service_type_id: 1001
+Service4:
+  id: 1004
+  name: Spanish Class 2 (service4)
+  description: service 4 description
+  service_type_id: 1001
+Service5:
+  id: 1005
+  name: French Wedding 1 (service5)
+  description: service 5 description
+  service_type_id: 1002

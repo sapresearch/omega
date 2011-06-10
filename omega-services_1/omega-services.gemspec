@@ -9,12 +9,14 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.8.7'
 
-  s.author            = 'Kexia Tang'
-  s.email             = 'kexia.tang@sap.com'
+  s.author            = 'Samuel Kadolph'
+  s.email             = 'samuel.kadolph@sap.com'
   s.homepage          = 'http://omegaportal.org'
 
   s.files        = Dir['CHANGELOG', 'README', 'LICENSE', 'lib/**/*']
   s.require_path = 'lib'
 
   s.add_dependency('omega', version)
+
+  s.add_dependency('paperclip', '~>2.3')
 end

@@ -44,12 +44,20 @@
         <%= with_permission(Service::PERM_ADMIN) do %>
             <%#= link_to "My Draft Services", show_drafts_services_url %>
             <%= link_to "All Service Types", service_types_url %>
-            <%= link_to "Create a Service ", coming_soon_services_url %>
-            <%= link_to "Create a Service Type", service_wizard_service_types_url(:step => 'introduction')  %>
+        <!-- original
+            <%#= link_to "Create a Service ", coming_soon_services_url %>
+            <%#= link_to "Create a Service Type", service_wizard_service_types_url(:step => 'introduction')  %>
+        -->
+            <%= link_to "All Service Categories", service_categories_url  %>
+            <%= link_to "Create a Service ", {} %>
+            <%= link_to "Create a Service Type", {} %>
         <% end %>
         <%= with_permission(Service::PERM_APPLY) do %>
             <% unless Contact.for(current_user).nil?%>
-            <%= link_to "My Service Registrations", my_registrations_service_registrations_url %>
+        <!-- original
+            <%#= link_to "My Service Registrations", my_registrations_service_registrations_url %>
+        -->
+            <%= link_to "My Service Registrations", {} %>
             <%end%>
         <% end %>
         <%end%>
@@ -89,7 +97,10 @@
     <% end %>
 	
 		 <%= with_permission(User::PERM_ADMIN) do %>
-        <li> <%= link_to "Edit Logo", coming_soon_services_url %></li>
+        <!-- original
+          <li> <%#= link_to "Edit Logo", coming_soon_services_url %></li>
+        -->
+        <li> <%= link_to "Edit Logo", {} %></li>
     <% end %>
 
     <%= with_permission(User::PERM_ADMIN) do %>

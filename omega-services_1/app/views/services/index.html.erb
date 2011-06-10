@@ -1,0 +1,111 @@
+<% require_stylesheet 'omega_services' %>
+<% require_javascript 'omega_services' %>
+
+ <div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main-columns">
+	
+				<h1 class="page-content">
+      				All Offered Services
+		    	</h1>
+	
+		</div>
+  <br/>
+  <br/>
+  <% if @services.empty?%>
+  	   <p>
+  	   	No Service is being offered at the moment! <br/><br/>
+  	   	
+  	   	 <%= with_permission(Volunteering::PERM_ADMIN) do %>
+          <%= om_button(:contact => true, :icon => 'clock') do %>
+  	   	  	<%= link_to 'Create a New Service', coming_soon_services_url %>
+          <% end %>
+         <% end %>
+  	   	
+
+  	   	
+  	   </p>
+  <%else%>
+      <div class="right">
+      	<br/>
+        <%= om_button(:icon=>'sort-az', :small => true) do %>
+            <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
+        <% end %>
+        <%= om_button(:icon=>'sort-za', :small => true) do %>
+            <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+        <% end %>
+
+      </div>
+
+  <div class="clear"></div>
+
+  <ul id="positions_list">
+    <% @services.each do |s| %>
+        <li >
+          <div class="position_slider">
+            <div class="position_actions">
+              <% if (!current_user.is_anonymous?) %>	
+            	<%= with_permission(Volunteering::PERM_ADMIN) do %>
+  	   	
+                  <%= om_button(:contact => true, :icon => 'delete') do %>
+                      <%= link_to 'Delete' ,service_url(:id => s), :method => :delete, :'data-tooltip' => 'Delete this Service' %>
+                      <%# link_to "Delete"%>
+
+                  <% end %>
+         		<% end %>
+
+              	<% if s.published == true %>
+
+                  <% if Service::Registration.find_by_contact_id_and_service_id(Contact.for(current_user), s).nil? && !Contact.for(current_user).nil? %>
+                      <%= om_button(:contact => true, :icon => 'apply') do %>
+                      
+                      <%= link_to "Register", new_service_service_registration_url(s), :'data-tooltip' => 'register for this position' %>
+
+                      <% end %>
+                  <% end %>
+
+              	<%else%>
+
+               	<%= om_button(:contact => true, :icon => 'apply') do %>
+                  <%= link_to "Publish", finalize_services_url(:id => s), :'data-tooltip' => 'publish this position' %>
+               	<%end%>
+               
+              	<%end%>
+              
+              
+            <%end%>  
+            </div>
+          </div>
+          <div class="position">
+            <div class="position-wrapper">
+
+              <h2>
+               
+
+
+                    <%= link_to s.service_name, service_url(:id => s) %>
+
+
+              </h2>
+              <%unless s.type.nil?%>
+              <p>
+                <%= s.type.type_name %> Service  <br/>
+                <%= s.description%>
+              </p>
+              <%end%>
+            </div>
+          </div>
+
+        </li>
+
+    <% end %>
+  </ul>
+  <%end%>
+</div>
+<%#= will_paginate @types %>
+
+
+
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/services_menu" %>
+<% end %>
