@@ -45,3 +45,20 @@
 .right_links{
     float:right;
 }
+
+
+
+
+/*--------- form builder */
+#form_builder_area{
+    float:left;
+    width:500px;
+    height:500px;
+    background-color: green;
+}
+#form_builder_tools{
+    margin-left:520px;
+    width:200px;
+    height:500px;
+    background-color: black;
+}
