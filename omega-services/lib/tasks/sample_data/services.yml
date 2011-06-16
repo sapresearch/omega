@@ -1,30 +1,34 @@
 Service0:
   id: 1000
-  name: French Class 1 (service0)
+  name: Classes (level 1)
   description: service 0 description
-  service_type_id: 1000
 Service1:
   id: 1001
-  name: French Class 2 (service1)
+  name: Weddings (level 1)
   description: service 1 description
-  service_type_id: 1000
 Service2:
   id: 1002
-  name: French Class 3 (service2)
+  name: French Class (level 2)
   description: service 2 description
-  service_type_id: 1000
+  super_service_id: 1000
 Service3:
   id: 1003
-  name: Spanish Class 1 (service3)
+  name: Spanish Classes (level 2)
   description: service 3 description
-  service_type_id: 1001
+  super_service_id: 1000
 Service4:
   id: 1004
-  name: Spanish Class 2 (service4)
+  name: French Weddings (level 2)
   description: service 4 description
-  service_type_id: 1001
+  super_service_id: 1001
 Service5:
   id: 1005
-  name: French Wedding 1 (service5)
+  name: Spanish Class 1 (level 3)
   description: service 5 description
-  service_type_id: 1002
+  super_service_id: 1003
+Service6:
+  id: 1006
+  name: Spanish Class 2 (level 3)
+  description: service 6 description
+  super_service_id: 1003
+  

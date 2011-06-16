@@ -7,6 +7,11 @@ class Service < ActiveRecord::Base
   PERM_VIEW        = 'service_view'
   # end app-spec
 
-  belongs_to :service_type
+  belongs_to :super_service, :class_name => "Service"
+  has_many :sub_services, :class_name => "Service", :foreign_key => "super_service_id", :dependent => :destroy
+
+  def is_top_level?
+    super_service.nil?
+  end
   
 end

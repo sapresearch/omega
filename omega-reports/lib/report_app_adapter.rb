@@ -63,7 +63,7 @@ module ReportAppAdapter
     @reports << Report.new("Contacts", "contacts")
     @reports << Report.new("Services", "services")
     @reports << Report.new("Events", "events")
-    session[:report_partial_name]= @reports[0].partial_name if session[:report_partial_name].nil?
+    session[:report_partial_name] ||= @reports[0].partial_name
   end
 
   # Option2: Abstract layer functions, available for AJAX call

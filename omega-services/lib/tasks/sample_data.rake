@@ -3,9 +3,9 @@ require 'active_record'
 require 'active_record/fixtures'
 
 namespace :db do
-  DATA_DIRECTORY = "#{RAILS_ROOT}/lib/tasks/sample_data"
+  DATA_DIRECTORY = "#{Rails.root.to_s}/lib/tasks/sample_data"
   namespace :sample_data do 
-    TABLES = %w(services service_types service_categories)
+    TABLES = %w(services)
     MIN_ID = 1000    # Starting user id for the sample data
   
     desc "Load sample data"
@@ -23,8 +23,6 @@ namespace :db do
     desc "Remove sample data" 
     task :delete => :environment do |t|
       Service.delete_all("id >= #{MIN_ID}")
-      ServiceType.delete_all("id >= #{MIN_ID}")
-      ServiceCategory.delete_all( "id >= #{MIN_ID}")
     end
   end
 end
