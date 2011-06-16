@@ -1,0 +1,14 @@
+  <% if @services.empty? %>
+    <%= render "index_no_service_message" %>
+  <% else %>
+    <div class="services_search_box">
+      <%= render "index_search_box" %>
+    </div>
+    <div class="services_list">
+      <%= render "index_list" %>
+    </div>
+  <% end %>
+
+  <div class="services_operation_links">
+    <%= render "index_operation_links" %>
+  </div> 
