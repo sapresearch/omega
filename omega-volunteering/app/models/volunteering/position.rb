@@ -27,11 +27,18 @@ class Volunteering::Position < Omega::Model
 #
 #  before_save :combine_times
 
-  validates :description, :volunteers_required, :presence => true
+  validates :description, :presence => true
+  validates :volunteers_required, :presence => true,
+																	:numericality => {:only_integer => true}
 
   validates :name, :uniqueness => true
   validates :start, :end, :presence => true,
                           :unless   => :recurrent?
+  validates :end, :numericality => {:greater_than => :start}
+
+	## Haven't gotten this work yet.
+	## I'm not sure which model :number was assigned to.
+	#validates :number, :format => {:with => %r{[-\.\(\)1-9]*}}
 
   def active_volunteers
     records.includes(:contact).where('action = ?', 'Accepted').collect(&:contact)
