@@ -1,0 +1,83 @@
+<script type="text/javascript">
+  $(function() {
+    // jquery UI visual effects
+    $( "#tabs" ).tabs();
+    $( "#service_detail" ).sortable({
+	placeholder: "ui-state-highlight"
+    });
+    $( "#service_detail" ).disableSelection();
+    $( "#service_registration" ).sortable({
+	placeholder: "ui-state-highlight"
+    });
+    $( "#service_registration" ).disableSelection();
+
+    // set default environment to service details
+    set_leaf_service_env();
+    set_service_detail_env();
+  });
+
+  // parse relative objects to json for client process without Ajaxing
+  var services_with_detail_template = []
+  var services_with_registration_template = []
+  <% @services_with_detail_template.each do |s| %>
+    services_with_detail_template.push(new service_with_detail_template(<%= raw s.to_json %>,"<%= s.detail_html %>"))
+  <% end %>
+  <% @services_with_registration_template.each do |s| %>
+    services_with_registration_template.push(new service_with_registration_template(<%= raw s.to_json %>,"<%= s.registration_html %>"))
+  <% end %>
+</script>
+
+<%= form_for(@service) do |form| %>
+  <div class="service_form_builder_tabs" id="tabs">
+    <ul id="service_form_builder_nav">
+      <li><a href="#tabs-1" onclick="set_service_detail_env()" >Service <%= "Category" if @service_level=="inner" %> Details</a></li>
+      <li><a href="#tabs-2" onclick="set_service_registration_env()" >Registration <%= "Template" if @service_level=="inner" %> Details</a></li>
+    </ul>
+    <div id="tabs-1">
+      <div class="tab_content_options">
+        Use Existing Template:
+        <% options = ["none"].concat(@services_with_detail_template.map{|s|[s.name, s.id]}) %>
+        <% default_option_value = @default_service_with_detail_template ? @default_service_with_detail_template.id : "none" %>
+        <%= select_tag(:select_service_detail_templates, options_for_select(options, default_option_value), :onchange => "refresh_service_detail()") %>
+        <label for="save_as_detail_template" >Make this a new template</label>
+        <input id="save_as_detail_template" name="save_as_detail_template" type="checkbox" />       
+      </div>
+      <hr/>
+
+      <div class="tab_content" id='table_div_1'>
+        <ul>
+          <li>
+            <%= form.label :name %>
+            <%= form.text_field :name, :maxlength=>100, :size=>30 %>
+          </li>
+          <li>
+            <%= form.label :description %>
+            <%= form.text_area :description, :cols=>30, :rows=>3 %>
+          </li>
+        </ul>
+        
+        <ul class="editable_list" id="service_detail" >
+          <%= @super_service.default_service_with_detail_template.detail_html unless @super_service.nil? || @super_service.default_service_with_detail_template.nil? %>
+        </ul>
+      </div>
+    </div>
+    
+    <div id="tabs-2">
+      <div class="tab_content_options">
+        Use Existing Template:
+        <% options = ["none"].concat(@services_with_registration_template.map{|s|[s.name, s.id]}) %>
+        <% default_option_value = @default_service_with_registration_template ? @default_service_with_registration_template.id : "none" %>
+        <%= select_tag(:select_service_registration_templates, options_for_select(options, default_option_value), :onchange => "refresh_service_registration()") %>
+        <label for="save_as_registration_template" >Make this a new template</label>
+        <input id="save_as_registration_template" name="save_as_registration_template" type="checkbox" />
+      </div>
+      <hr/>
+
+      <div class="tab_content" id='table_div_2'>
+        <ul class="editable_list" id="service_registration">
+          <%= @super_service.default_service_with_registration_template.registration_html unless @super_service.nil? || @super_service.default_service_with_registration_template.nil? %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>

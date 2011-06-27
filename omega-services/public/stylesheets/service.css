@@ -8,6 +8,16 @@
 .services_page_content{
     padding:5px 30px;
 }
+.services_page_content label{
+    margin:5px 0px 5px 20px;
+    float:none;
+    text-align: right;
+    width:auto;
+    text-transform:none;
+}
+.services_page_content input{
+    margin: 5px;
+}
 
 .services_search_box{
     width:100%;
@@ -18,35 +28,16 @@
     font-size:12px;
 }
 
-.services_search_box label{
-    margin:5px 0px 5px 20px;
-    float:none;
-    text-align: right;
-    width:auto;
-}
-.service_search_box input{
-    margin: 5px;
-}
-.services_new_options label{
-    margin:5px 0px 5px 20px;
-    float:none;
-    text-align: right;
-    width:auto;
-}
-.service_new_options input{
-    margin: 5px;
-}
-
 .services_list{
     padding:10px 0px;
     max-height:450px;
     overflow: auto;
 }
 
-.service_left_links{ float:left; }
-.service_right_links{ float:right; }
-.services_left_links{ float:left; }
-.services_right_links{ float:right; }
+.service_left_links { float:left; }
+.service_right_links { float:right; }
+.services_left_links a{ float:left; margin-right:20px}
+.services_right_links a{ float:right; }
 
 .services_operation_links{
     padding:10px 10px;    
@@ -57,25 +48,58 @@
 
 
 
-
-
-
 /*--------- form builder */
-#form_builder_tools{
+.service_form_builder_tools{
     padding:5px;
-    float:left;
+    margin-left:680px;
     width:200px;
     height:520px;
 }
-#form_builder_tools fieldset{   
-    height:470px;
-}
-#form_builder_view{
+
+.service_form_builder_view{
     padding:5px;
-    margin-left:210px;
+    float:left;
     width:670px;
     height:520px;
 }
-#form_builder_view fieldset{  
-    height:470px;
+
+.service_form_builder_tabs{
+    height:520px;
 }
+.service_form_builder_tabs .tab_content_options{
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight:bold;
+}
+.service_form_builder_tabs .tab_content{
+    height:410px;
+    overflow:auto;
+    color:black;
+}
+.service_form_builder_tabs .tab_content label{
+  width: 10em;
+  float: left;
+  text-align: right;
+  margin-right: 10px;
+  display: block;
+}
+
+.service_form_builder_tabs .tab_content li { clear:both; padding:5px 0px;}
+.service_form_builder_tabs .tab_content li input{ display:block;}
+.service_form_builder_tabs .tab_content li textarea{ display:block;}
+.service_form_builder_tabs .tab_content li select{ display:block;}
+.service_form_builder_tabs .tab_content .editable_list li:hover {cursor:move; background-color: #bbb}
+
+.service_form_builder_tabs .tab_content .editing{background-color: #ddd}
+
+
+/* for fixing jquery UI component*/
+#service_form_builder_nav{ height:32px; }
+
+
+/* app-spec */
+.item-list-actions-wrapper{ right:42px; }
+.service_form_builder_tabs .tab_content li:hover .item-list-actions-wrapper {display:block;}
+#admin-edit-em input { width:90%; font-size:14px;}
+#admin-edit-em textarea {width:100%; height:100px;}
+/* end app-spec */

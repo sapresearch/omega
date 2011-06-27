@@ -12,9 +12,17 @@ class ServicesController < Omega::Controller
   def new
     @super_service = super_service
     @service = new_sub_service_of(@super_service)
+    @default_service_with_detail_template = @super_service ? @super_service.default_service_with_detail_template : nil
+    @default_service_with_registration_template = @super_service ? @super_service.default_service_with_registration_template : nil
 
     # for js
-    @service_level = params[:service_level] || "leaf"  # default to be leaf service
+    @service_level = params[:service_level] || "leaf"  # default to be leaf service, otherwise "inner"
+    @services_with_detail_template = Service.services_with_detail_template
+    @services_with_registration_template = Service.services_with_registration_template
+  end
+
+  def create
+    @service = Service.create(params[:service])
   end
 
   # working on this
