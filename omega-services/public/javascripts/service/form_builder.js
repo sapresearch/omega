@@ -83,32 +83,22 @@ function radio_button(){
     
 }
 
-// set environment for editing
-function set_leaf_service_env(){
-    
-}
-function set_inner_service_env(){
-    
-}
-function set_service_detail_env(){
-    $(".service_registration_only").hide()
-}
-function set_service_registration_env(){
-    $(".service_registration_only").show()
-}
-
 //functions to append a field inside an element visually
 function append_text_field(element_id){
-    $("#"+element_id).append(pack_field(text_field("new text", {"maxlength":100})))
+    $("#"+element_id).append(prepare_field(text_field("new text", {"maxlength":100})))
+    check_field_exists();
 }
 function append_text_area(element_id){
-    $("#"+element_id).append(pack_field(text_area("new text", {"maxlength":300})))
+    $("#"+element_id).append(prepare_field(text_area("new text", {"maxlength":300})))
+    check_field_exists();
 }
 function append_select_list(element_id){
-    $("#"+element_id).append(pack_field(select_list("new select", {}, {"option1":"option1", "option2":"option2"})))
+    $("#"+element_id).append(prepare_field(select_list("new select", {}, {"option1":"option1", "option2":"option2"})))
+    check_field_exists();
 }
 function append_date_picker(element_id){
-    $("#"+element_id).append(pack_field(date_picker("new date", {})))
+    $("#"+element_id).append(prepare_field(date_picker("new date", {})))
+    check_field_exists();
 }
 
 //functions to generate html for editing different field elements
@@ -165,11 +155,17 @@ function str_to_options_html(str){
     return html;
 }
 
+// hide or show the checkbox for making template depending on if the fields are empty.
+function check_field_exists(){
+    is_empty_html(service_detail_html()) ? $("#check_service_detail_template").css("visibility", "hidden") : $("#check_service_detail_template").css("visibility", "visible")
+    is_empty_html(service_registration_html()) ? $("#check_service_registration_template").css("visibility", "hidden") : $("#check_service_registration_template").css("visibility", "visible")
+}
+
 //delete an element with visual effect
 function delete_element(element_id)
-{
-    $("#"+element_id).hide("slow", function(){$(this).remove()})
-    cancel_editing_element();
+{    
+    $("#"+element_id).hide("slow", function(){ $(this).remove(); check_field_exists();})
+    cancel_editing_element();    
 }
 
 // return the currently active service section element id
@@ -202,8 +198,8 @@ function field_operation_links(){
             </div>\
           </div>"
 }
-function pack_field(field_html){
-    return "<li id='li_"+new Date().getTime()+"' class='relative' >"+field_operation_links()+field_html+"</li>"
+function prepare_field(field_html){
+    return "<li id='li_"+new Date().getTime()+"' class='relative' ondblclick='edit_field(this.id)' >"+field_operation_links()+field_html+"</li>"
 }
 function edit_field(parent_element_id){
     editing_element(parent_element_id)

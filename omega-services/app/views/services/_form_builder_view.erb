@@ -20,18 +20,18 @@
   var services_with_detail_template = []
   var services_with_registration_template = []
   <% @services_with_detail_template.each do |s| %>
-    services_with_detail_template.push(new service_with_detail_template(<%= raw s.to_json %>,"<%= s.detail_html %>"))
+    services_with_detail_template.push(<%= raw s.to_json(:include=>{:service_detail_form=>{:only=>:html}}) %>)
   <% end %>
   <% @services_with_registration_template.each do |s| %>
-    services_with_registration_template.push(new service_with_registration_template(<%= raw s.to_json %>,"<%= s.registration_html %>"))
+    services_with_registration_template.push(<%= raw s.to_json(:include=>{:service_registration_form=>{:only=>:html}}) %>)
   <% end %>
 </script>
 
 <%= form_for(@service) do |form| %>
   <div class="service_form_builder_tabs" id="tabs">
     <ul id="service_form_builder_nav">
-      <li><a href="#tabs-1" onclick="set_service_detail_env()" >Service <%= "Category" if @service_level=="inner" %> Details</a></li>
-      <li><a href="#tabs-2" onclick="set_service_registration_env()" >Registration <%= "Template" if @service_level=="inner" %> Details</a></li>
+      <li><a id="service_detail_tab_link" href="#tabs-1" onclick="set_service_detail_env()" >Service Details</a></li>
+      <li><a id="service_registration_tab_link" href="#tabs-2" onclick="set_service_registration_env()" >Registration Form</a></li>
     </ul>
     <div id="tabs-1">
       <div class="tab_content_options">
@@ -39,8 +39,10 @@
         <% options = ["none"].concat(@services_with_detail_template.map{|s|[s.name, s.id]}) %>
         <% default_option_value = @default_service_with_detail_template ? @default_service_with_detail_template.id : "none" %>
         <%= select_tag(:select_service_detail_templates, options_for_select(options, default_option_value), :onchange => "refresh_service_detail()") %>
-        <label for="save_as_detail_template" >Make this a new template</label>
-        <input id="save_as_detail_template" name="save_as_detail_template" type="checkbox" />       
+        <span id="check_service_detail_template" >
+          <label for="hass_service_detail_template" >Make this a new template</label>
+          <input id="has_service_detail_template" name="has_service_detail_template" type="checkbox" />
+        </span>
       </div>
       <hr/>
 
@@ -68,8 +70,10 @@
         <% options = ["none"].concat(@services_with_registration_template.map{|s|[s.name, s.id]}) %>
         <% default_option_value = @default_service_with_registration_template ? @default_service_with_registration_template.id : "none" %>
         <%= select_tag(:select_service_registration_templates, options_for_select(options, default_option_value), :onchange => "refresh_service_registration()") %>
-        <label for="save_as_registration_template" >Make this a new template</label>
-        <input id="save_as_registration_template" name="save_as_registration_template" type="checkbox" />
+        <span id="check_service_registration_template">
+          <label for="has_service_registration_template" >Make this a new template</label>
+          <input id="has_service_registration_template" name="has_service_registration_template" type="checkbox" />
+        </span>
       </div>
       <hr/>
 
@@ -80,4 +84,9 @@
       </div>
     </div>
   </div>
+  <%= form.hidden_field :super_service_id, :value=>@service.super_service_id %>
+  <%= form.hidden_field :status %>
+  <%= hidden_field_tag :service_detail_html %>
+  <%= hidden_field_tag :service_registration_html %>
+  <%= hidden_field_tag :service_level %>
 <% end %>

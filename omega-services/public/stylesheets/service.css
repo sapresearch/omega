@@ -4,6 +4,10 @@
     font-weight:bolder;
     background-color:#ccc;
 }
+.services_page_title #title_category{
+    font-size:20px;
+    font-weight:bolder;
+}
 
 .services_page_content{
     padding:5px 30px;
@@ -93,8 +97,9 @@
 .service_form_builder_tabs .tab_content .editing{background-color: #ddd}
 
 
-/* for fixing jquery UI component*/
+/* for adjusting jquery UI component*/
 #service_form_builder_nav{ height:32px; }
+.service_leaf{ background:none; background-color:green}
 
 
 /* app-spec */

@@ -14,11 +14,15 @@ class Service < ActiveRecord::Base
   has_one :service_registration_form, :dependent => :destroy
   has_one :service_registration_template, :through => :service_registration_form
   has_one :service_leaf, :dependent => :destroy
+  has_many :service_registrations, :through => :service_leaf
 
   # abstraction layer functions for different implementation in database
   class << self
     def service_leaves
       ServiceLeaf.all.map{|sl|sl.service}
+    end
+    def service_roots
+      Service.where(:super_service_id => nil)
     end
     def services_with_detail_form
       ServiceDetailForm.all.map{|sdf|sdf.service}
@@ -34,7 +38,7 @@ class Service < ActiveRecord::Base
     end
   end
 
-  def is_top_level?
+  def is_root?
     super_service.nil?
   end
 

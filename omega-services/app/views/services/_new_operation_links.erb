@@ -1,6 +1,6 @@
       <div class="services_left_links">
-        <%= link_to "Create", {} %>
-        <%= link_to "Create and Publish", {} %>
+        <%= link_to_function "Create", "create_service('private')" %>
+        <%= link_to_function "Create and Publish", "create_service('public')" %>
       </div>
       <div class="services_right_links">
         <%= link_to "Back to "+(@super_service.nil? ? "All Services" : @super_service.name), services_url %>

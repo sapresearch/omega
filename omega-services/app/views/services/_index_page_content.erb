@@ -1,3 +1,4 @@
+<div class="services_body">
   <% if @services.empty? %>
     <%= render "index_no_service_message" %>
   <% else %>
@@ -8,7 +9,8 @@
       <%= render "index_list" %>
     </div>
   <% end %>
+</div>
 
-  <div class="services_operation_links">
-    <%= render "index_operation_links" %>
-  </div> 
+<div class="services_operation_links">
+  <%= render "index_operation_links" %>
+</div> 

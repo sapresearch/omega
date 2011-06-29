@@ -4,7 +4,7 @@
       </div>
       <div class="services_right_links">
         <% unless @super_service.nil? %>
-          <%= link_to "Back to "+(@super_service.is_top_level? ? "All Services" : @super_service.super_service.name),
-            services_url(:super_service_id=>(@super_service.is_top_level? ? "root" : @super_service.super_service.id)), :remote=>true %>
+          <%= link_to "Back to "+(@super_service.is_root? ? "All Services" : @super_service.super_service.name),
+            services_url(:super_service_id=>(@super_service.is_root? ? "root" : @super_service.super_service.id)), :remote=>true %>
         <% end %>
       </div>
