@@ -38,8 +38,11 @@
     <li>
       <%= link_to "Services", services_url %>
       <div>
-        <%= link_to "All Offered Services", services_url %>
-
+        <!-- original
+        <%#= link_to "All Offered Services", services_url %>
+        -->
+        <%= link_to "All Offered Services", services_url(:super_service_id=>"root") %>
+        
         <% if (!current_user.is_anonymous?) %>
         <%= with_permission(Service::PERM_ADMIN) do %>
             <%#= link_to "My Draft Services", show_drafts_services_url %>     
@@ -48,8 +51,8 @@
             <%#= link_to "Create a Service ", coming_soon_services_url %>
             <%#= link_to "Create a Service Type", service_wizard_service_types_url(:step => 'introduction')  %>
         -->
-            <%= link_to "Create a Service ", {} %>
-            <%= link_to "Create a Service Type", {} %>
+            <%= link_to "Create a Service", new_service_url %>
+
         <% end %>
         <%= with_permission(Service::PERM_APPLY) do %>
             <% unless Contact.for(current_user).nil?%>
