@@ -1,0 +1,9 @@
+<% field_values = ActiveSupport::JSON.decode(service.detail_field_values) %>
+
+<% field_values.each do |field, value| %>  
+    <span><strong><%= field %>:</strong></span>
+    <span><%= value %></span>
+    <br/>
+<% end %>
+
+

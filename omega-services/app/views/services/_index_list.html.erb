@@ -3,6 +3,7 @@
           <h3 id="service_title_<%= service.id %>" <%= "class='service_leaf'" if service.is_leaf? %> ><a href="#"><%= service.name %></a></h3>
           <div id="service_body_<%= service.id %>" >
             <p><%= service.description %></p>
+            <p><%= render "index_service_detail", :service=>service %></p>
             <div class="service_left_links">
               <% if is_admin?(current_user) %>
                 <p>
