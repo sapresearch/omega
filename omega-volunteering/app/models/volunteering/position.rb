@@ -1,3 +1,66 @@
+module ActiveRecord
+	module Validations
+		module ClassMethods
+		
+			#----------------------------------------------------------
+		 
+			@@end_is_after_start_msg = 'The end hour must be after the start hour.'
+			@@will_match_anything = /.*/
+		
+			#----------------------------------------------------------
+		
+			def validates_end_is_after_start(*attr_names)
+		
+				end_hour = attr_names[0].to_s
+				start_hour = attr_names[1].to_s
+
+				end_hour = /[0-9]{1,2}:00:00/.match(end_hour)
+				start_hour = /[0-9]{1,2}:00:00/.match(start_hour)
+
+				end_hour = end_hour.to_s.gsub(/:00:00/, "")
+				start_hour = start_hour.to_s.gsub(/:00:00/, "")
+
+				@@end_hour_msg = "End must be after the start hour"
+		
+				attr_names.pop
+
+		    #if end_hour > start_hour then
+		    if start_hour.to_i == 2 then
+					configuration = {
+						:message   => 'This should have worked',
+						:with      => @@will_match_anything } # So that it matches anything and always validates.
+
+					validates_format_of attr_names, configuration
+	
+		    #elsif end_hour < start_hour then
+		    elsif end_hour.to_i == 1 then
+					configuration = {
+						:message   => "#{end_hour} is the end hour and #{start_hour} is the start hour hour hour",
+						:with      => /thiswillnevermatch/ } # So that it matches anything and always validates.
+
+					validates_format_of attr_names, configuration
+
+				else
+					configuration = {
+						:message   => "didn't go into any loop",
+						:with      => /thiswillnevermatch/ } # So that it matches anything and always validates.
+
+					validates_format_of attr_names, configuration
+				end
+		
+			#	configuration.update(attr_names.pop)# if attr_names.last.is_a?(Hash)
+		
+			end
+						
+		  #----------------------------------------------------------
+
+		end
+	end
+end
+
+
+
+
 class Volunteering::Position < Omega::Model
   include Calendar::Recurrence
 
@@ -27,18 +90,17 @@ class Volunteering::Position < Omega::Model
 #
 #  before_save :combine_times
 
-  validates :description, :presence => true
-  validates :volunteers_required, :presence => true,
-																	:numericality => {:only_integer => true}
+#-------------------------------------------------------------------------------------------------
 
-  validates :name, :uniqueness => true
-  validates :start, :end, :presence => true,
-                          :unless   => :recurrent?
-  validates :end, :numericality => {:greater_than => :start}
-
-	## Haven't gotten this work yet.
-	## I'm not sure which model :number was assigned to.
+  validates_presence_of :description, :volunteers_required, :skills, :interests, :name
+	validates_numericality_of :volunteers_required, :only_integer => true, :greater_than => 0
+  validates_uniqueness_of :name
+  validates_presence_of :start, :end, :unless => :recurrent?
+	validates_presence_of :agreement, :if => :disclaimer_agreement
+	#validates_end_is_after_start :end, :start
 	#validates :number, :format => {:with => %r{[-\.\(\)1-9]*}}
+
+#-------------------------------------------------------------------------------------------------
 
   def active_volunteers
     records.includes(:contact).where('action = ?', 'Accepted').collect(&:contact)
