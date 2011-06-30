@@ -56,6 +56,11 @@ class Service < ActiveRecord::Base
     service_detail_form.field_values
   end
 
+  def detail_field_values_hash
+    return nil if service_detail_form.nil?
+    ActiveSupport::JSON.decode(service_detail_form.field_values)
+  end
+
   def registration_html
     return nil if service_registration_form.nil?
     service_registration_form.html.html_safe
