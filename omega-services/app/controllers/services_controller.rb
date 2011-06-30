@@ -28,13 +28,14 @@ class ServicesController < Omega::Controller
     @service.create_service_leaf if @service_level=="leaf"
 
     @service_detail_html = params[:service_detail_html]
-    @service_registration_html = params[:service_registration_html]
-    @service_detail_form = @service.create_service_detail_form(:html => @service_detail_html) unless @service_detail_html.empty?
-    @service_registration_form = @service.create_service_registration_form(:html => @service_registration_html) unless @service_registration_html.empty?
-
+    @service_detail_field_values = params[:service_detail_field_values]
+    @service_detail_form = @service.create_service_detail_form(:html => @service_detail_html, :field_values=>@service_detail_field_values) unless @service_detail_html.empty?
     @has_service_detail_template = params[:has_service_detail_template]
-    @has_service_registration_template = params[:has_service_registration_template]
     @service_detail_form.create_service_detail_template if @has_service_detail_template == "on" && @service_detail_form
+
+    @service_registration_html = params[:service_registration_html]   
+    @service_registration_form = @service.create_service_registration_form(:html => @service_registration_html) unless @service_registration_html.empty?   
+    @has_service_registration_template = params[:has_service_registration_template]
     @service_registration_form.create_service_registration_template if @has_service_registration_template == "on" && @service_registration_form
 
     redirect_to services_url

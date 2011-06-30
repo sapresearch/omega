@@ -93,9 +93,7 @@
 .service_form_builder_tabs .tab_content li textarea{ display:block;}
 .service_form_builder_tabs .tab_content li select{ display:block;}
 .service_form_builder_tabs .tab_content .editable_list li:hover {cursor:move; background-color: #bbb}
-
 .service_form_builder_tabs .tab_content .editing{background-color: #ddd}
-
 
 /* for adjusting jquery UI component*/
 #service_form_builder_nav{ height:32px; }
@@ -105,6 +103,10 @@
 /* app-spec */
 .item-list-actions-wrapper{ right:42px; }
 .service_form_builder_tabs .tab_content li:hover .item-list-actions-wrapper {display:block;}
-#admin-edit-em input { width:90%; font-size:14px;}
+#admin-edit-em input[type="text"] { width:90%; font-size:14px;}
 #admin-edit-em textarea {width:100%; height:100px;}
 /* end app-spec */
+
+#required_label{width:150px; margin-left:0px}
+#required_checkbox{float:left; width:15px; margin:7px 0px 7px 7px}
+.required{color:green}

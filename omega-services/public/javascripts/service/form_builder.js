@@ -102,18 +102,24 @@ function append_date_picker(element_id){
 }
 
 //functions to generate html for editing different field elements
-function required_checkbox(){
-    var html = "<input type='checkbox' >Is this field required?"
+function required_checkbox(label_element_id){
+    var html = "<input id='required_checkbox' type='checkbox' "
+    if($("#"+label_element_id).hasClass("required"))
+        html += "checked='checked'"
+    html += "onclick='if($(this).is(\":checked\")) $(\"#"+label_element_id+"\").addClass(\"required\"); else $(\"#"+label_element_id+"\").removeClass(\"required\");' />"
+    html += "<label id='required_label' for='required_checkbox' >Is this field required?</label>"
     return html;
 }
 function edit_label(label_element_id){
     var html = "Label:"
-    html += "<input type='text' value='"+$("#"+label_element_id).html()+"' onkeyup='$(\"#"+label_element_id+"\").html($(this).val())' />"
+    html += "<input type='text' value='"+$("#"+label_element_id).html()+"' "
+    html += "onkeyup='$(\"#"+label_element_id+"\").html($(this).val())' />"
     return html;
 }
 function edit_text_field(text_field_element_id){
     var html = "Value:"
-    html += "<input type='text' value='"+$("#"+text_field_element_id).val()+"' onkeyup='$(\"#"+text_field_element_id+"\").val($(this).val())' />"
+    html += "<input type='text' value='"+$("#"+text_field_element_id).val()+"' "
+    html += "onkeyup='$(\"#"+text_field_element_id+"\").val($(this).val())' />"
     return html;
 }
 function edit_text_area(text_area_element_id){
@@ -214,9 +220,9 @@ function edit_field(parent_element_id){
                 case "text":
                 case "TEXT":
                     if($("#"+field.id).hasClass("date_picker"))
-                        $("#admin-edit-em").html(edit_label(label.id)+edit_date_picker(field.id))
+                        $("#admin-edit-em").html(edit_date_picker(field.id))
                     else
-                        $("#admin-edit-em").html(edit_label(label.id)+edit_text_field(field.id))
+                        $("#admin-edit-em").html(edit_text_field(field.id))
                     break;
                 default:
                     break;
@@ -224,15 +230,18 @@ function edit_field(parent_element_id){
             break;
         case "textarea":
         case "TEXTAREA":
-            $("#admin-edit-em").html(edit_label(label.id)+edit_text_area(field.id))
+            $("#admin-edit-em").html(edit_text_area(field.id))
             break;
         case "select":
         case "SELECT":
-            $("#admin-edit-em").html(edit_label(label.id)+edit_select_list(field.id))
+            $("#admin-edit-em").html(edit_select_list(field.id))
             break;
         default:
             break;
     }
+    $("#admin-edit-em").prepend(edit_label(label.id))
+    if(active_service_section_element_id()=="service_registration")
+        $("#admin-edit-em").append(required_checkbox(label.id))
     $("#admin-edit-em").effect("highlight")
 }
 //***** end app-spec

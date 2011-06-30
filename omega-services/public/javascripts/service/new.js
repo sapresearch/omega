@@ -42,6 +42,23 @@ function set_service_registration_env(){
     $(".service_registration_only").show()
 }
 
+function field_values_to_json(element_id, is_required_field_included){
+    var field_values = is_required_field_included ? {"required":{}, "optional":{}} : {}
+    $("#"+element_id+" label").each(function(){
+        var target_id = $(this).attr("for")
+        if(is_required_field_included)
+        {
+            if($(this).hasClass("required"))
+                field_values.required[$(this).text()]=$("#"+target_id).val()
+            else
+                field_values.optional[$(this).text()]=$("#"+target_id).val()
+        }
+        else
+            field_values[$(this).text()]=$("#"+target_id).val()
+    })
+    return field_values
+}
+
 //creating service
 function create_service(status)
 {
@@ -49,9 +66,15 @@ function create_service(status)
     cancel_editing_element();
 
     if(!is_empty_html(service_detail_html()))
+    {
         $('#service_detail_html').val(service_detail_html())
+        $('#service_detail_field_values').val(JSON.stringify(field_values_to_json("service_detail", false)))
+    }
     if(!is_empty_html(service_registration_html()))
+    {
         $('#service_registration_html').val(service_registration_html())
+        //$('#service_registration_field_values').val(JSON.stringify(field_values_to_json("service_registration", true))) //this might only be necessary in real registration
+    }
 
     $('#new_service').submit()
 }
