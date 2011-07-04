@@ -110,3 +110,8 @@
 #required_label{width:150px; margin-left:0px}
 #required_checkbox{float:left; width:15px; margin:7px 0px 7px 7px}
 .required{color:green}
+
+.bread_crumb a{
+    font-style:italic;
+    color:navy
+}
