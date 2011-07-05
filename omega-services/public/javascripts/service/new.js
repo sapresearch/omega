@@ -37,9 +37,11 @@ function set_inner_service_env(){
 }
 function set_service_detail_env(){
     $(".service_registration_only").hide()
+    cancel_editing_element()
 }
 function set_service_registration_env(){
     $(".service_registration_only").show()
+    cancel_editing_element()
 }
 
 function field_values_to_json(element_id, is_required_field_included){
