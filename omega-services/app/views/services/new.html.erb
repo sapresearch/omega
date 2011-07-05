@@ -3,11 +3,29 @@
 <% require_javascript 'service/form_builder.js' %>
 <% require_javascript 'service/new.js' %>
 
-<div class="services_page_title">
+<!-- app-spec -->
+<div class="content circle-corners-bottom-left" >
+<!-- end app-spec -->
+
+  <!-- original
+  <div class="services_page_title">
+  -->
+  <!-- app-spec -->
+  <div class="heading-main">
+    <h1 class="page-content">
+  <!-- end app-spec -->
+  
   <%= render "new_page_title" %>
-</div>
 
-<div class="services_page_content">
-  <%= render "new_page_content" %>
-</div>
+  <!-- app-spec -->
+    </h1>
+  <!-- end app-spec -->
+  </div>
 
+  <div class="services_page_content">
+    <%= render "new_page_content" %>
+  </div>
+
+<!-- app-spec -->
+</div>
+<!-- end app-spec -->
