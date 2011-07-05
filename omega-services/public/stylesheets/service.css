@@ -9,6 +9,17 @@
     font-weight:bolder;
 }
 
+/* app-spec */
+#title_category{
+    color: #36361B;
+    font-family: "Trebuchet MS",Arial Black,Geneva,Arial,Helvetica,sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    height: 35px;
+    line-height: 25px;
+}
+/* end app-spec */
+
 .services_page_content{
     padding:5px 30px;
 }
