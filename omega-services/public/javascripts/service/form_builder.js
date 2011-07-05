@@ -60,8 +60,10 @@ function date_picker(label_inner_html, attributes_hash){
     var year = date.getFullYear();
     var month = date.getMonth()+1;
     var day = date.getDate()
-    attributes_hash["value"]=year+"-"+(month<10 ? "0"+month : month)+"-"+(day<10 ? "0"+day : day)
+   
     attributes_hash["class"]="date_picker"
+    if(attributes_hash["value"]==null)
+        attributes_hash["value"]=year+"-"+(month<10 ? "0"+month : month)+"-"+(day<10 ? "0"+day : day)
 
     var time_stamp = date.getTime();
     var default_date_picker_id = "date_picker_"+time_stamp;
@@ -97,7 +99,10 @@ function append_select_list(element_id){
     check_field_exists();
 }
 function append_date_picker(element_id){
-    $("#"+element_id).append(prepare_field(date_picker("new date", {})))
+    var attributes_hash = {}
+    if(element_id=="service_registration")
+        attributes_hash["value"]=""
+    $("#"+element_id).append(prepare_field(date_picker("new date", attributes_hash)))
     check_field_exists();
 }
 
@@ -156,7 +161,8 @@ function str_to_options_html(str){
     for(var i=0; i<strs.length; i++)
     {
         strs[i]=jQuery.trim(strs[i])
-        html += "<option value="+strs[i]+" >"+strs[i]+"</option>"
+        if(strs[i].length>0)
+            html += "<option value="+strs[i]+" >"+strs[i]+"</option>"
     }
     return html;
 }

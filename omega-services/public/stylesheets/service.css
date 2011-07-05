@@ -98,6 +98,7 @@
 /* for adjusting jquery UI component*/
 #service_form_builder_nav{ height:32px; }
 .service_leaf{ background:none; background-color:green}
+.dialog{ display:none }
 
 
 /* app-spec */
@@ -111,7 +112,5 @@
 #required_checkbox{float:left; width:15px; margin:7px 0px 7px 7px}
 .required{color:green}
 
-.bread_crumb a{
-    font-style:italic;
-    color:navy
-}
+.bread_crumb a{ font-style:italic; color:navy }
+.service_registration_status{ float:right; }

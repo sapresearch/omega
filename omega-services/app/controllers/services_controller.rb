@@ -1,6 +1,6 @@
 class ServicesController < Omega::Controller
 
-  load "service_app_adapter.rb"
+  require "service_app_adapter.rb"
   include ServiceAppAdapter
   
   def index
