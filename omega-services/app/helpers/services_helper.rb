@@ -20,9 +20,11 @@ module ServicesHelper
     return false if service.service_registrations.empty?
     # app-spec
     return false if current_user.is_anonymous?
-    service_registration = ServiceRegistration.find_by_service_leaf_id_and_contact_id(service.service_leaf.id, Contact.for(current_user).id)
+#testing
+    #service_registration = ServiceRegistration.find_by_service_leaf_id_and_contact_id(service.service_leaf.id, Contact.for(current_user).id)
     # end app-spec
-    not service_registration.nil?
+    #not service_registration.nil?
+    false
   end
   
 end
