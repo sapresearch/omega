@@ -72,6 +72,7 @@ function new_service_registration(service_id){
                 }
             },
             close: function() {
+                $( "#service-registration-new-dialog-form" ).dialog('destroy')
                 //allFields.val( "" ).removeClass( "ui-state-error" );
             }
         });
@@ -80,6 +81,7 @@ function new_service_registration(service_id){
     {
         $( "#service-registration-new-dialog-confirm" ).attr("title", service.service.name + " Registration")
         $( "#service-registration-new-dialog-confirm" ).dialog({
+            width: 'auto',
             modal: true,
             resizable: false,
             buttons: {
@@ -90,6 +92,10 @@ function new_service_registration(service_id){
                 Cancel: function() {
                     $( this ).dialog( "close" );
                 }
+            },
+            close: function() {
+                $( "#service-registration-new-dialog-confirm" ).dialog('destroy')
+                //allFields.val( "" ).removeClass( "ui-state-error" );
             }
         });
     }     

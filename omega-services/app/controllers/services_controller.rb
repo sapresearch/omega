@@ -2,7 +2,11 @@ class ServicesController < Omega::Controller
 
   require "service_app_adapter.rb"
   include ServiceAppAdapter
-  
+
+  # app-spec
+  breadcrumb 'Services' => :services
+  # end app-spec
+
   def index
     session[:super_service_id] = params[:super_service_id] || session[:super_service_id]
     @super_service = super_service

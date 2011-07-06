@@ -8,7 +8,8 @@ class ServiceRegistrationsController < Omega::Controller
 
   def create
     # app-spec
-    @contact = Contact.for(current_user)   
+    @contact = Contact.for(current_user)
+    @contact = current_user  # testing
     # end app-spec
     
     @service = Service.find(params[:service_id])     

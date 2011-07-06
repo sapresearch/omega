@@ -12,7 +12,10 @@
       <div id="accordion">
         <% @services.each do |service| %>
           <h3 id="service_title_<%= service.id %>" <%= "class='service_leaf'" if service.is_leaf? %> >
-            <a href="#"><%= service.name %><span class="service_registration_status"></span></a>
+            <a href="#">
+              <%= service.name %>
+              <span id="service_registration_status_<%= service.id %>" class="service_registration_status"></span>
+            </a>
           </h3>
           <div id="service_body_<%= service.id %>" >
             <p><%= service.description %></p>
