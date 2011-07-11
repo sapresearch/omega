@@ -1,31 +1,52 @@
+<% require_javascript "thirdParty/jquery.timepicker.js", "thirdParty/jquery.fullcalendar.js", "calendars.js" %>
+<% require_stylesheet "thirdParty/jquery.fullcalendar.css", "omega_calendars.css" %>
+
+
 <%- title "Omega Calendar - #{@calendar.calendar_name}" %>
 
+<div class="content circle-corners-bottom-left">
+
+		<div class="heading-main">
+
+				<h1 class="page-content">
+  					Calendar
+		    	</h1>
 
 
-<h1><%=@calendar.calendar_name%> Calendar</h1>
+        </div>
 
 
 
-<table>
-  <tr>
-    <th>Events</th>
-  </tr>
-  <% for event in @events %>
-      <%if @calendar.id == event.calendar_id%>
-        <tr>
-            <td><%= link_to event.title, :controller => 'events', :action => 'show', :id => event.id %><br/>
-            </td>
-      </tr>
-      <%end%>
+<div class="main-box">
+<p>
+  <% if flash.any? %>
+    <% flash.each do |key, msg| %>
+      <%= key %>: <%= msg %>
+    <% end %>
   <% end %>
-</table>
 
-<p>
-  <%= link_to 'Show All Events in '+ @calendar.calendar_name+ ' Calendar', calendar_events_path(@calendar) %>
+	 <span class="calendar-top-right">
+
+
+	  				<%= select( nil, "calendars", Calendar.all.collect {|p| [ p.calendar_name, p.id ] })  %>
+</span>
+
+<span class="calendar-top-left">
+	<%= om_button(:icon => "calendar") do %>
+        				<%= link_to "Create Calendar", new_calendar_url, :remote  => true %>
+    				<% end %>
+              	<%= om_button() do %>
+                      				<%= link_to "Share Calendar", share_calendar_url(@calendar) %>
+                  				<% end %> <br/>
+</span>
 </p>
 
-<p>
-  <%= link_to 'Add an Event to '+@calendar.calendar_name+ ' Calendar', calendar_events_path(@calendar) %>
-</p>
 
 
+
+  <div id="cal">
+  </div>
+
+
+</div>
+</div>

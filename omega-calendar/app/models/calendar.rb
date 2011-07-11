@@ -5,4 +5,6 @@ class Calendar < Omega::Model
   require_dependency 'calendar/recurrence'
 
   has_many :events, :dependent => :destroy
+
+  has_many :shares
 end
