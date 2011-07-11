@@ -1,0 +1,6 @@
+#new_service_registration label{ width:100px; text-align: right; margin-top:0px;}
+#new_service_registration li { clear:both; padding:5px 0px;}
+#new_service_registration input{ display:block;}
+#new_service_registration textarea{ display:block;}
+#new_service_registration li select{ display:block;}
+

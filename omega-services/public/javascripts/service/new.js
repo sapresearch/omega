@@ -1,12 +1,3 @@
-  function find_service_by_id(services, id){
-    if(isNaN(id)) return null;
-    for(var i=0; i<services.length; i++){
-      if(services[i].service.id == id)
-        return services[i];
-    }
-    return null;
-  }
-
   function refresh_service_detail(){
     var sid=$('#select_service_detail_templates').val();
     $('#service_detail').html(isNaN(sid) ? "" : find_service_by_id(services_with_detail_template,sid).service.service_detail_form.html)
@@ -44,28 +35,17 @@ function set_service_registration_env(){
     cancel_editing_element()
 }
 
-function field_values_to_json(element_id, is_required_field_included){
-    var field_values = is_required_field_included ? {"required":{}, "optional":{}} : {}
-    $("#"+element_id+" label").each(function(){
-        var target_id = $(this).attr("for")
-        if(is_required_field_included)
-        {
-            if($(this).hasClass("required"))
-                field_values.required[$(this).text()]=$("#"+target_id).val()
-            else
-                field_values.optional[$(this).text()]=$("#"+target_id).val()
-        }
-        else
-            field_values[$(this).text()]=$("#"+target_id).val()
-    })
-    return field_values
+// prepare clean html ready to save to database
+function clean_service_form_html()
+{
+    cancel_editing_element();
+    $('.hasDatepicker').removeClass('hasDatepicker');
 }
-
 //creating service
 function create_service(status)
 {
+    clean_service_form_html();
     $('#service_status').val(status);
-    cancel_editing_element();
 
     if(!is_empty_html(service_detail_html()))
     {

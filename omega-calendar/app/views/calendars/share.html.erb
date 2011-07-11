@@ -1,0 +1,5 @@
+<%= form_for [@calendar, @share] do |f| %>
+  <%= f.select :shared_to_id, options_from_collection_for_select(User.scoped, :id, :username) %>
+
+  <%= f.submit %>
+<% end %>

@@ -1,12 +1,33 @@
 <% require_stylesheet 'service.css' %>
+<% require_stylesheet 'service_registration.css' %>
 <% require_javascript 'service/share.js' %>
 <% require_javascript 'service/index.js' %>
+<% require_javascript 'service_registration/new.js' %>
 
-<div class="services_page_title">
-  <%= render "index_page_title" %>
-</div>
+<!-- app-spec -->
+<div class="content circle-corners-bottom-left" >
+<!-- end app-spec -->
 
-<div class="services_page_content">
-  <%= render "index_page_content" %>
+  <!-- original
+  <div class="services_page_title">
+  -->
+  <!-- app-spec -->
+  <div class="heading-main">
+    <h1 class="page-content services_page_title">
+  <!-- end app-spec -->
+
+      <%= render "index_page_title" %>
+  
+  <!-- app-spec -->
+    </h1>
+  <!-- end app-spec -->
+  </div>
+
+  <div class="services_page_content">
+    <%= render "index_page_content" %>
+  </div>
+
+<!-- app-spec -->
 </div>
+<!-- end app-spec -->
 

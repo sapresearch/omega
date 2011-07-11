@@ -1,3 +1,4 @@
+/* original
 .services_page_title{
     padding: 10px 0px 5px 30px;
     font-size:20px;
@@ -8,6 +9,17 @@
     font-size:20px;
     font-weight:bolder;
 }
+*/
+/* app-spec */
+#title_category{
+    color: #36361B;
+    font-family: "Trebuchet MS",Arial Black,Geneva,Arial,Helvetica,sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    height: 35px;
+    line-height: 25px;
+}
+/* end app-spec */
 
 .services_page_content{
     padding:5px 30px;
@@ -98,6 +110,7 @@
 /* for adjusting jquery UI component*/
 #service_form_builder_nav{ height:32px; }
 .service_leaf{ background:none; background-color:green}
+.dialog{ display:none }
 
 
 /* app-spec */
@@ -111,7 +124,5 @@
 #required_checkbox{float:left; width:15px; margin:7px 0px 7px 7px}
 .required{color:green}
 
-.bread_crumb a{
-    font-style:italic;
-    color:navy
-}
+.bread_crumb a{ font-style:italic; color:navy }
+.service_registration_status{ float:right; }
