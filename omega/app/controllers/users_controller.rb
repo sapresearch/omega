@@ -1,7 +1,3 @@
-require '~/omega/omega-volunteering/app/controllers/volunteering/positions_controller.rb'
-require '~/omega/omega-volunteering/app/controllers/volunteering/records_controller.rb'
-require '~/omega/omega-volunteering/app/models/volunteering/record.rb'
-
 class UsersController < Omega::Controller
   respond_to :html, :xml, :js, :json
   crud_helper User
