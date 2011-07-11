@@ -10,7 +10,7 @@ module ServicesHelper
       html = " > ".html_safe + (link_to service.name, services_url(:super_service_id=>service.id), :remote=>true) + html
       service = service.super_service
     end
-    html = (link_to "All services", services_url(:super_service_id=>"root"), :remote=>true) + html;
+    html = (link_to "All services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID), :remote=>true) + html;
     html = "<div class='bread_crumb'>".html_safe + "Location: " + html
     html += "</div>".html_safe
   end

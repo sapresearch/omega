@@ -1,6 +1,6 @@
 $("#service_title_<%= @service.id %>").hide('slow', function(){ $(this).remove();})
 $("#service_body_<%= @service.id %>").hide('slow', function(){ $(this).remove();})
 <% if @services.empty? %>
-   $(".services_list").html("<%= escape_javascript( render "index_no_service_message") %>")
+   $(".services_list_body").html("<%= escape_javascript( render "index_no_service_message") %>")
 <% end %>
 

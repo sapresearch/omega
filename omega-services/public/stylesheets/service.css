@@ -49,6 +49,9 @@
     max-height:450px;
     overflow: auto;
 }
+.service_body{
+    border:1px solid #ccc;
+}
 
 .service_left_links { float:left; }
 .service_right_links { float:right; }
@@ -101,16 +104,17 @@
 }
 
 .service_form_builder_tabs .tab_content li { clear:both; padding:5px 0px;}
+.service_form_builder_tabs .tab_content li label{ line-height: 100%; }
 .service_form_builder_tabs .tab_content li input{ display:block;}
 .service_form_builder_tabs .tab_content li textarea{ display:block;}
-.service_form_builder_tabs .tab_content li select{ display:block;}
+.service_form_builder_tabs .tab_content li select{ display:block; width:280px;}
 .service_form_builder_tabs .tab_content .editable_list li:hover {cursor:move; background-color: #bbb}
 .service_form_builder_tabs .tab_content .editing{background-color: #ddd}
 
 /* for adjusting jquery UI component*/
 #service_form_builder_nav{ height:32px; }
 .service_leaf{ background:none; background-color:green}
-.dialog{ display:none }
+.dialog{ display:none; }
 
 
 /* app-spec */
@@ -126,3 +130,5 @@
 
 .bread_crumb a{ font-style:italic; color:navy }
 .service_registration_status{ float:right; }
+
+

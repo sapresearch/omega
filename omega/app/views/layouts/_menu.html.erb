@@ -35,36 +35,54 @@
       </div>
 
     </li>
+    <!-- original
     <li>
       <%= link_to "Services", services_url %>
-      <div>
-        <!-- original
-        <%#= link_to "All Offered Services", services_url %>
-        -->
-        <%= link_to "All Offered Services", services_url(:super_service_id=>"root") %>
-        
+      <div>       
+        <%#= link_to "All Offered Services", services_url %>      
         <% if (!current_user.is_anonymous?) %>
         <%= with_permission(Service::PERM_ADMIN) do %>
             <%#= link_to "My Draft Services", show_drafts_services_url %>     
-        <!-- original
             <%#= link_to "All Service Types", service_types_url %>
             <%#= link_to "Create a Service ", coming_soon_services_url %>
             <%#= link_to "Create a Service Type", service_wizard_service_types_url(:step => 'introduction')  %>
-        -->
-            <%= link_to "Create a Service", new_service_url %>
-
         <% end %>
         <%= with_permission(Service::PERM_APPLY) do %>
             <% unless Contact.for(current_user).nil?%>
-        <!-- original
             <%#= link_to "My Service Registrations", my_registrations_service_registrations_url %>
-        -->
-            <%= link_to "My Service Registrations", {} %>
             <%end%>
         <% end %>
         <%end%>
       </div>
+    </li>
+    -->
 
+    <li>
+      <% require_javascript 'service/tree.js' %>
+      
+      <%= link_to "Services", services_url(:super_service_id=>"root") %>
+      
+      <% services_nested_menu_id = "services_nested_menu" %>
+      <%= render "services/tree", :services=>Service.service_roots, :id=>services_nested_menu_id %>
+      <script>         
+        nested_menu('<%= services_nested_menu_id %>',{})
+      </script>
+      
+        <!--
+        <div>
+        <% if (!current_user.is_anonymous?) %>
+          <%= with_permission(Service::PERM_ADMIN) do %>
+            <%#= link_to "My Draft Services", show_drafts_services_url %>
+            <%= link_to "Create a Service", new_service_url %>
+          <% end %>
+          <%= with_permission(Service::PERM_APPLY) do %>
+            <% unless Contact.for(current_user).nil?%>
+              <%= link_to "My Service Registrations", {} %>
+            <% end %>
+          <% end %>
+        <% end %>
+        </div>
+        -->     
     </li>
 
     <li><%= link_to "Favorites", favorites_path %></li>

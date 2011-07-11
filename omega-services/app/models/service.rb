@@ -7,6 +7,8 @@ class Service < ActiveRecord::Base
   PERM_VIEW        = 'service_view'
   # end app-spec
 
+  ROOT_SUPER_SERVICE_ID = 'root'
+
   belongs_to :super_service, :class_name => "Service"
   has_many :sub_services, :class_name => "Service", :foreign_key => "super_service_id", :dependent => :destroy
   has_one :service_detail_form, :dependent => :destroy
@@ -44,6 +46,10 @@ class Service < ActiveRecord::Base
 
   def is_leaf?
     ServiceLeaf.all.map{|sl|sl.service}.include?(self)
+  end
+
+  def super_service_id
+    is_root? ? ROOT_SUPER_SERVICE_ID : super_service.id
   end
 
   def detail_html

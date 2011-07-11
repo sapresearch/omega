@@ -1,0 +1,17 @@
+<%unless services.empty? || services.nil? %>
+  <ul id="<%= id %>" class="services_tree">
+    <% services.each do |service| %>
+      <li id="<%= id.to_s %>_li_<%= service.id.to_s %>">
+        <%= link_to service.name, services_url(:super_service_id => service.super_service_id, :service_id=>service.id) %>
+        <% unless service.sub_services.empty? %>
+          <%= render "services/tree", :services => service.sub_services, :id => id.to_s+"_ul_"+service.id.to_s  %>
+        <% end %>
+      </li>
+    <% end %>
+    <% if is_admin?(current_user) %>
+      <li>
+        <%= link_to "New", new_service_url(:super_service_id=>services[0].super_service_id), :class=>"nested_menu_new_link" %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

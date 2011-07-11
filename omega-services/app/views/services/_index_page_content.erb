@@ -5,11 +5,13 @@
 <div class="services_list">
   <%= bread_crumb(@super_service) %>
   <hr/>
-  <% if @services.empty? %>
-    <%= render "index_no_service_message" %>
-  <% else %>
-    <%= render "index_list" %>
-  <% end %>
+  <div class="services_list_body">
+    <% if @services.empty? %>
+      <%= render "index_no_service_message" %>
+    <% else %>
+      <%= render "index_list" %>
+    <% end %>
+  </div>
 </div>
 
 <div class="services_operation_links">

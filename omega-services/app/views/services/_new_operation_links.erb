@@ -1,7 +1,10 @@
       <div class="services_left_links">
-        <%= link_to_function "Create", "create_service('private')" %>
-        <%= link_to_function "Create and Publish", "create_service('public')" %>
+        <%= link_to_function "Create", "create_service('private')", :class=>"services_new_operation_button" %>
+        <%= link_to_function "Create and Publish", "create_service('public')", :class=>"services_new_operation_button" %>
       </div>
       <div class="services_right_links">
-        <%= link_to "Back to "+(@super_service.nil? ? "All Services" : @super_service.name), services_url %>
+        <%= link_to "Back to "+(@super_service.nil? ? "All Services" : @super_service.name), services_url, :class=>"services_new_operation_button" %>
       </div>
+      <script type="text/javascript">
+        $('.services_new_operation_button').button({ icons: {primary:'ui-icon-gear'} });
+      </script>

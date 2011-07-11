@@ -85,7 +85,7 @@
       </div>
     </div>
   </div>
-  <%= form.hidden_field :super_service_id, :value=>@service.super_service_id %>
+  <%= form.hidden_field :super_service_id, :value=>@service.is_root? ? nil : @service.super_service.id %>
   <%= form.hidden_field :status %>
   <%= hidden_field_tag :service_detail_html %>
   <%= hidden_field_tag :service_detail_field_values %>

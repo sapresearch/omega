@@ -7,13 +7,16 @@ class ServicesController < Omega::Controller
   breadcrumb 'Services' => :services
   # end app-spec
 
-  def index
+  def index   
     session[:super_service_id] = params[:super_service_id] || session[:super_service_id]
     @super_service = super_service
     @services = sub_services_of(@super_service)
+    @service_id = params[:service_id]
+    @service = Service.find(@service_id) unless @service_id.nil?
   end
 
   def new
+    session[:super_service_id] = params[:super_service_id] || session[:super_service_id]
     @super_service = super_service
     @service = new_sub_service_of(@super_service)
     @default_service_with_detail_template = @super_service ? @super_service.default_service_with_detail_template : nil
@@ -42,13 +45,13 @@ class ServicesController < Omega::Controller
     @has_service_registration_template = params[:has_service_registration_template]
     @service_registration_form.create_service_registration_template if @has_service_registration_template == "on" && @service_registration_form
 
-    redirect_to services_url
+    redirect_to services_url(:service_id=>@service.id)
   end
 
   # problem using redirect_to services_url: always back to top level, sending DELETE /services request which is invalid.
   def destroy
     @service = Service.find(params[:id])
-    session[:super_service_id] = @service.is_root? ? "root" : @service.super_service.id    # session get lost and need to reset?
+    session[:super_service_id] = @service.super_service_id    # session get lost and need to reset?
     @service.destroy
     # redirect_to services_url   
     @super_service = super_service
@@ -59,7 +62,7 @@ class ServicesController < Omega::Controller
   private
 
   def super_service
-    (session[:super_service_id] && session[:super_service_id]!="root" ) ? Service.find(session[:super_service_id]) : nil
+    (session[:super_service_id] && session[:super_service_id]!=Service::ROOT_SUPER_SERVICE_ID ) ? Service.find(session[:super_service_id]) : nil
   end
 
   def sub_services_of(super_service)

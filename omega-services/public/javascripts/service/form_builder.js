@@ -194,7 +194,7 @@ function editing_element(element_id){
 //***** app-spec
 function cancel_editing_element(){
     $(".editing").removeClass("editing");
-    $("#admin-edit-em").html("Hover over the field you want to edit or delete to choose from the two options")
+    $("#admin-edit-em").html("Hover over the field you want to edit or delete and choose from the two options")
 }
 function field_operation_links(){
   return "<div class='item-list-actions-wrapper corners' >\

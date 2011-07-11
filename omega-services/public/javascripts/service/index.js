@@ -1,6 +1,12 @@
-function services_accordion(){
+function services_accordion(service_id){
+    var service = find_service_by_id(services, service_id)
+    var index = jQuery.inArray(service, services)
+    if(index<0)
+        index = false;
+    //var index = services.indexOf(service) // IE incompatible
+
     $( "#accordion" ).accordion({
-         active: false,
+         active: index,
          clearStyle: true,
          navigation: false,
          collapsible: true

@@ -15,7 +15,8 @@ function set_leaf_service_env(){
     $("#service_detail_tab_link").html("Service Detail");
     $("#service_registration_tab_link").html("Registration Form");
     
-    $("#service_name").val("new service")
+    $("#service_name").val("New Service")
+    $("#service_name").select();
     $("#service_level").val("leaf");
 }
 function set_inner_service_env(){
@@ -23,7 +24,8 @@ function set_inner_service_env(){
     $("#service_detail_tab_link").html("Service Category Detail");
     $("#service_registration_tab_link").html("Registration Form Template");
 
-    $("#service_name").val("new service category")
+    $("#service_name").val("New Service Category")
+    $("#service_name").select();
     $("#service_level").val("inner");
 }
 function set_service_detail_env(){
