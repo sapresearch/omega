@@ -1,0 +1,37 @@
+<%= require_stylesheet 'omega_users' %>
+<%= require_javascript 'omega_users' %>
+	<div class="content circle-corners-bottom-left">
+    	
+	<div class="heading-main">
+	
+		<h1 class="page-content">
+			Hello <%= current_user.first_name %>
+			<%= current_user.username if current_user.first_name.blank? %>
+	 	</h1>
+
+	</div>
+	
+
+
+			<h2>MY VOLUNTEERING</h2> 
+
+
+	<% @positions.each do |element| %>
+		<p><%= element[:position].name %></p>
+		<p><%= element[:position].class %></p>
+		<p><%= element[:position].inspect %></p>
+		<p><%= element[:record].status %></p>
+		<p><%= element[:record].action %></p>
+		<p><%= element[:record].class %></p>
+		<p><%= element[:record].inspect %></p>
+	<% end %>
+
+	<p><%= @positions.inspect %></p>
+	
+
+			<h2>SHARING</h2> 
+
+			<h2>MY VOLUNTEERING</h2> 
+
+
+	</div>

@@ -1,3 +1,7 @@
+require '~/omega/omega-volunteering/app/controllers/volunteering/positions_controller.rb'
+require '~/omega/omega-volunteering/app/controllers/volunteering/records_controller.rb'
+require '~/omega/omega-volunteering/app/models/volunteering/record.rb'
+
 class UsersController < Omega::Controller
   respond_to :html, :xml, :js, :json
   crud_helper User
@@ -121,5 +125,22 @@ class UsersController < Omega::Controller
       @users = @users.order("#{attr} #{direction}")
     end
   end
+
+
+
+################################
+
+	def my_page
+		@positions = Array.new
+ 		records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
+		records.each do |record|
+			sub_hash = Hash.new
+			result = Volunteering::Position.where(:id => record.position_id)
+			sub_hash[:position] = result[0]
+			sub_hash[:record] = record
+			@positions.push(sub_hash)
+		end
+    #@my_applications = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
+	end
 
 end
