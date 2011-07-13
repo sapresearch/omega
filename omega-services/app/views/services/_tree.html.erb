@@ -1,17 +1,34 @@
-<%unless services.empty? || services.nil? %>
+<% services = super_service_id==Service::ROOT_SUPER_SERVICE_ID ? Service.service_roots : Service.find(super_service_id).sub_services %>
+
   <ul id="<%= id %>" class="services_tree">
-    <% services.each do |service| %>
-      <li id="<%= id.to_s %>_li_<%= service.id.to_s %>">
-        <%= link_to service.name, services_url(:super_service_id => service.super_service_id, :service_id=>service.id) %>
-        <% unless service.sub_services.empty? %>
-          <%= render "services/tree", :services => service.sub_services, :id => id.to_s+"_ul_"+service.id.to_s  %>
-        <% end %>
-      </li>
-    <% end %>
-    <% if is_admin?(current_user) %>
+
+    <% if super_service_id==Service::ROOT_SUPER_SERVICE_ID %>
       <li>
-        <%= link_to "New", new_service_url(:super_service_id=>services[0].super_service_id), :class=>"nested_menu_new_link" %>
+        <%= link_to "All Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID), :class=>"nested_menu_root_link" %>
       </li>
     <% end %>
+
+    <%unless services.empty? || services.nil? %>
+      <% services.each do |service| %>
+        <li id="<%= id.to_s %>_li_<%= service.id.to_s %>">
+          <%= link_to service.name, services_url(:super_service_id => service.super_service_id, :service_id=>service.id), :class=>"nested_menu_link" %>
+          <% unless service.is_leaf? %>
+            <%= render "services/tree", :super_service_id => service.id, :id => id.to_s+"_ul_"+service.id.to_s  %>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+
+    <!-- app-spec -->
+    <% if is_admin?(current_user) %>
+    <!-- end app-spec -->
+      <li>
+        <%= link_to "Create Service", new_service_url(:super_service_id=>super_service_id, :service_level=>Service::LEAF_LEVEL), :class=>"nested_menu_new_link" %>
+      </li>
+      <li>
+        <%= link_to "Create Service Category", new_service_url(:super_service_id=>super_service_id, :service_level=>Service::INNER_LEVEL), :class=>"nested_menu_new_link" %>
+      </li>
+    <% end %>
+      
   </ul>
-<% end %>
+

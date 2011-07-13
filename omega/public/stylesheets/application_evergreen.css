@@ -2432,10 +2432,11 @@ div.pagination span.disabled {
     text-decoration: none;
 }
 
-#services_nested_menu .nested_menu_new_link{
+#services_nested_menu .nested_menu_link{
     background:#79823E;
     /*background:#8A7F4D;*/
 }
-#services_nested_menu .nested_menu_new_link:hover{
+#services_nested_menu .nested_menu_link:hover{
     color:green;
 }
+

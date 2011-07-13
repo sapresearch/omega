@@ -8,6 +8,8 @@ class Service < ActiveRecord::Base
   # end app-spec
 
   ROOT_SUPER_SERVICE_ID = 'root'
+  LEAF_LEVEL = "leaf"
+  INNER_LEVEL = "inner"
 
   belongs_to :super_service, :class_name => "Service"
   has_many :sub_services, :class_name => "Service", :foreign_key => "super_service_id", :dependent => :destroy

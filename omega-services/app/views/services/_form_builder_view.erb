@@ -12,7 +12,12 @@
     $( "#service_registration" ).disableSelection();
 
     // set default environment to service details
-    set_leaf_service_env();
+    <% if @service_level == "leaf" %>
+      set_leaf_service_env();
+    <% else %>
+      set_inner_service_env();
+    <% end %>
+      
     set_service_detail_env();
     check_field_exists();
   });

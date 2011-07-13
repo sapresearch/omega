@@ -17,6 +17,7 @@ class ServicesController < Omega::Controller
 
   def new
     session[:super_service_id] = params[:super_service_id] || session[:super_service_id]
+    @service_level = params[:service_level] || Service::LEAF_LEVEL
     @super_service = super_service
     @service = new_sub_service_of(@super_service)
     @default_service_with_detail_template = @super_service ? @super_service.default_service_with_detail_template : nil

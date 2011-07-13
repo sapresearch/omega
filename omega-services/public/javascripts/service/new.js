@@ -11,6 +11,7 @@
 
 // set environment for editing
 function set_leaf_service_env(){
+    $("#service_leaf_level_radio").attr("checked","checked")
     $("#title_category").hide();
     $("#service_detail_tab_link").html("Service Detail");
     $("#service_registration_tab_link").html("Registration Form");
@@ -20,6 +21,7 @@ function set_leaf_service_env(){
     $("#service_level").val("leaf");
 }
 function set_inner_service_env(){
+    $("#service_inner_level_radio").attr("checked","checked")
     $("#title_category").show();
     $("#service_detail_tab_link").html("Service Category Detail");
     $("#service_registration_tab_link").html("Registration Form Template");
