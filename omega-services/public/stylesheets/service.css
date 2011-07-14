@@ -53,9 +53,10 @@
     border:1px solid #ccc;
 }
 
+.service_operation_links span.om-contact-icon-button a{ color:navy; }
 .service_left_links { float:left; }
 .service_right_links { float:right; }
-.services_left_links a{ float:left; margin-right:20px}
+.services_left_links a{ float:left; margin-right:20px; }
 .services_right_links a{ float:right; }
 
 .services_operation_links{

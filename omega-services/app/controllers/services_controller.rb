@@ -52,7 +52,6 @@ class ServicesController < Omega::Controller
   # problem using redirect_to services_url: always back to top level, sending DELETE /services request which is invalid.
   def destroy
     @service = Service.find(params[:id])
-    session[:super_service_id] = @service.super_service_id    # session get lost and need to reset?
     @service.destroy
     # redirect_to services_url   
     @super_service = super_service

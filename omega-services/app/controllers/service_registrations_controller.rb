@@ -18,6 +18,18 @@ class ServiceRegistrationsController < Omega::Controller
     
     @service_registration = ServiceRegistration.create(:service_leaf_id=>@service_leaf_id, :status=>@status, :contact_id=>@contact.id)
     @service_registration.create_service_registration_form_value(:field_values => @field_values) unless @field_values.nil?
+
+    # for js
+    @services = @service.sibling_services
+  end
+
+  def destroy
+    @service_registration = ServiceRegistration.find(params[:id])
+    @service = @service_registration.service
+    @service_registration.destroy
+
+    # for js
+    @services = @service.sibling_services
   end
 end
 

@@ -106,7 +106,7 @@ function register_service(service_id, status, has_form)
     var data_hash={service_id:service_id, status:status}
     if(has_form)
         data_hash["field_values"] = JSON.stringify(field_values_to_json("new_service_registration", false))
-    
+
     $.ajax({
         url: service_registrations_url,
         type: "POST",
@@ -119,6 +119,9 @@ function register_service(service_id, status, has_form)
                     Ok: function() {
                         $( this ).dialog( "close" );
                     }
+                },
+                close: function() {
+                    $( "#service-registration-created-dialog-message" ).dialog('destroy')
                 }
             });
         }

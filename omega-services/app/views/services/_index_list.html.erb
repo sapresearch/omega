@@ -14,12 +14,12 @@
 </script>
 
       <div id="accordion">
-        <% services.each do |service| %>
-          <h3 id="service_title_<%= service.id %>" <%= "class='service_leaf'" if service.is_leaf? %> >
-            <%= render "show_title", :service=>service %>
+        <% services.each do |s| %>
+          <h3 id="service_title_<%= s.id %>" <%= "class='service_leaf'" if s.is_leaf? %> >
+            <%= render "services/show_title", :service=>s %>
           </h3>        
-          <div id="service_body_<%= service.id %>" class="service_body" >
-            <%= render "show_body", :service=>service %>
+          <div id="service_body_<%= s.id %>" class="service_body" >
+            <%= render "services/show_body", :service=>s %>
           </div>
         <% end %>
       </div>

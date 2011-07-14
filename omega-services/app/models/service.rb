@@ -50,6 +50,10 @@ class Service < ActiveRecord::Base
     ServiceLeaf.all.map{|sl|sl.service}.include?(self)
   end
 
+  def sibling_services
+    is_root? ? Service.service_roots : super_service.sub_services
+  end
+
   def super_service_id
     is_root? ? ROOT_SUPER_SERVICE_ID : super_service.id
   end

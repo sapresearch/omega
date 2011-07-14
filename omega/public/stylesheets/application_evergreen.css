@@ -1686,6 +1686,10 @@ span.om-small-icon-button span.om-icon {
 
 }
 
+.om-icon-search {
+    background-position: 0 -96px;
+}
+
 .om-icon-user {
     background-position: 0 -112px;
 }
