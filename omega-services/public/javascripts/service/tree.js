@@ -41,24 +41,20 @@ function nested_menu(ul_element_id, options){
     })
     
     list_items.each(function(){
-        var timer;
+        //var timer;
         $(this).hover(
             function(){
                 //$('>ul',this).show()
-                //$('>ul',this).animate({"opacity": "show"}, "slow");
-                //setTimeout(function(){$('>ul',this).show('slide', {direction:"left"}, 200)},200)
-                //$('>ul',this).show('slide', {direction:"left"}, 200, function(){} );
+                //$('>ul',this).show('slide', {direction:"left"}, 200);
+                //
                 //clearTimeout(timer);
-                $('>ul',this).show('slide', {direction:"left"}, 200 );
+                $(this).siblings("li:has(ul)").children("ul").stop(true,true).hide()
+                $('>ul',this).animate({opacity:"show"}, 'normal');
             },
             function(){
-                //$('>ul',this).hide()
-                //$('>ul',this).animate({"opacity": "hide"}, "slow");
-                //setTimeout(function(){$('>ul',this).hide('slide', {direction:"left"}, 200)},200)
-                //$('>ul',this).hide('slide', {direction:"left"}, 200, function(){} );
                 //clearTimeout(timer);
                 //timer=setTimeout(function(){
-                    $('>ul',this).hide('slide', {direction:"left"}, 200);
+                    $('>ul',this).hide();
 		//}, 500);
             }
         )

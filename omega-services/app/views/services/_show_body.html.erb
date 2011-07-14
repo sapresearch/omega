@@ -1,0 +1,25 @@
+          <p><%= service.description %></p>
+            <p><%= render "index_service_detail", :service=>service %></p>
+            <div class="service_operation_links" >
+              <div class="service_left_links">
+                <p>
+                  <% if service.is_leaf? %>
+                    <% if registered?(service) %>
+                      <%= link_to_function "Cancel Registration", "cancel_service_registration(#{service.id})", :class=>"service_operation_button" %>
+                    <% else %>
+                      <%= link_to_function "Register >>", "new_service_registration(#{service.id})", :class=>"service_operation_button" %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to "View Services >>", services_url(:super_service_id=>service.id), :remote=>true, :class=>"service_operation_button" %>
+                  <% end %>
+                </p>
+              </div>
+              <div class="service_right_links">
+                <% if is_admin?(current_user) %>
+                  <p>
+                    <%= link_to "Edit", edit_service_url(service), :class=>"service_operation_button" %>
+                    <%= link_to_function "Delete", "delete_service('#{service_url(service)}')", :class=>"service_operation_button" %>
+                  </p>
+                <% end %>
+              </div>
+            </div>

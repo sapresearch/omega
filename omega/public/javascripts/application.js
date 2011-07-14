@@ -86,13 +86,13 @@ jQuery(function($) {
     $("ul#topnav li a").mouseover(function() { //Hover over event on list item
 
         $(this).parent().find("div").delay(200).slideDown('fast'); //Show the subnav
-        $(this).parent().find("#services_nested_menu").delay(200).slideDown('fast'); //special case for services
+        $(this).parent().find("#services_nested_menu_ul_root").delay(200).slideDown('fast'); //special case for services
     });
 
     $("ul#topnav li").mouseleave(function() {
 
         $(this).find("div").slideUp('fast'); //Hide the subnav
-        $(this).find("#services_nested_menu").slideUp('fast'); //special case for services
+        $(this).find("#services_nested_menu_ul_root").slideUp('fast'); //special case for services
     });
 
     /* jquerui datepicker defaults */

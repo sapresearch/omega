@@ -7,12 +7,12 @@ class ServicesController < Omega::Controller
   breadcrumb 'Services' => :services
   # end app-spec
 
-  def index   
-    session[:super_service_id] = params[:super_service_id] || session[:super_service_id]
-    @super_service = super_service
-    @services = sub_services_of(@super_service)
+  def index
     @service_id = params[:service_id]
     @service = Service.find(@service_id) unless @service_id.nil?
+    session[:super_service_id] = @service.nil? ? (params[:super_service_id] || session[:super_service_id]) : @service.super_service_id
+    @super_service = super_service
+    @services = sub_services_of(@super_service)   
   end
 
   def new

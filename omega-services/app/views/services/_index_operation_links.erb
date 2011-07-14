@@ -6,7 +6,7 @@
       <div class="services_right_links">
         <% unless @super_service.nil? %>
           <%= link_to "Back to "+(@super_service.is_root? ? "All Services" : @super_service.super_service.name),
-            services_url(:super_service_id=>(@super_service.is_root? ? "root" : @super_service.super_service.id)), :class=>"services_index_operation_button", :remote=>true %>
+            services_url(:super_service_id=>(@super_service.is_root? ? "root" : @super_service.super_service.id), :service_id=>@super_service.id), :class=>"services_index_operation_button", :remote=>true %>
         <% end %>
       </div>
       <script type="text/javascript">

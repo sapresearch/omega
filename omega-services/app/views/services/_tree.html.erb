@@ -1,6 +1,6 @@
 <% services = super_service_id==Service::ROOT_SUPER_SERVICE_ID ? Service.service_roots : Service.find(super_service_id).sub_services %>
 
-  <ul id="<%= id %>" class="services_tree">
+  <ul id="<%= id.to_s %>_ul_<%= super_service_id.to_s %>" class="services_tree">
 
     <% if super_service_id==Service::ROOT_SUPER_SERVICE_ID %>
       <li>
@@ -13,7 +13,7 @@
         <li id="<%= id.to_s %>_li_<%= service.id.to_s %>">
           <%= link_to service.name, services_url(:super_service_id => service.super_service_id, :service_id=>service.id), :class=>"nested_menu_link" %>
           <% unless service.is_leaf? %>
-            <%= render "services/tree", :super_service_id => service.id, :id => id.to_s+"_ul_"+service.id.to_s  %>
+            <%= render "services/tree", :super_service_id => service.id, :id => id  %>
           <% end %>
         </li>
       <% end %>

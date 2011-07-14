@@ -1,14 +1,8 @@
-<% require_javascript "superfish-1.4.8/superfish-1.4.8/js/superfish.js" %>
 <% require_javascript 'service/tree.js' %>
 
 <% services_nested_menu_id = "services_nested_menu" %>
 <%= render "services/tree", :super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :id=>services_nested_menu_id %>
 <script type="text/javascript" >
-  /*
-  $('<%= services_nested_menu_id %>').superfish({
-      dropShadows: false, //optional, but I prefer this option disabled.
-      autoArrows: false
-   });*/
-  nested_menu('<%= services_nested_menu_id %>',{})
+  nested_menu('<%= services_nested_menu_id %>_ul_<%= Service::ROOT_SUPER_SERVICE_ID %>',{})
 </script>
 
