@@ -29,6 +29,9 @@ class Service < ActiveRecord::Base
     def service_leaves
       ServiceLeaf.all.map{|sl|sl.service}
     end
+    def public_service_leaves
+      ServiceLeaf.all.inject([]){|r, sl|s=sl.service; r<<s if s.is_public?; r}
+    end
     def service_roots
       Service.where(:super_service_id => nil)
     end

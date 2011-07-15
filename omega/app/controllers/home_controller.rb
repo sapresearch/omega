@@ -3,7 +3,8 @@ class HomeController < Omega::Controller
 
   def index
     @positions =  Volunteering::Position.limit(5)
-    @services = Service.limit(5)
+    # @services = Service.limit(5) # original
+    @services = Service.public_service_leaves[0,5]
     @events = Calendar::Event.limit(6)
 
    # if @page = Page.find_by_path!('home')

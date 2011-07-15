@@ -9,12 +9,10 @@
     -->
 
     <% @services.each do |s| %>
-      <% if s.is_public? && s.is_leaf? %>
-        <h3>
-          <span class="om-icon-only om-blue-icon ui-icon-folder-open"></span>
-          <%= link_to truncate( s.name  ,:length => 30 ) , services_url(:service_id => s.id) %>
-        </h3>
-      <% end %>
+      <h3>
+        <span class="om-icon-only om-blue-icon ui-icon-folder-open"></span>
+        <%= link_to truncate( s.name  ,:length => 30 ) , services_url(:service_id => s.id) %>
+      </h3>
     <% end %>
 
 <% end %>
