@@ -6,8 +6,7 @@
       | <%= render('layouts/partials/favorites') %>
         <% end %>
         <%= with_permission('cms_admin') do %>
-         | <%#= link_to 'Edit Page', current_page_path %>
-         <%= link_to 'Edit Page' %>
+         | <%= link_to 'Edit Page', current_page_path %>
         <% end %>
     </div>
 
@@ -34,24 +33,23 @@
 </div>
 
 
- 
+
 <div id="head">
 
-  
+
   <%= render :partial => "layouts/menu" %>
-  
+
   <div id="breadcrumb">
     <%= breadcrumbs %>
   </div>
- 
 
 
-  
-  
+
+
+
 
 
 </div>
-	
 
-	
-	
+
+
