@@ -1,7 +1,12 @@
-$("#service_title_<%= @service.id %>").hide('slow', function(){ $(this).remove();})
-$("#service_body_<%= @service.id %>").hide('slow', function(){ $(this).remove();})
-$("#services_nested_menu_li_<%= @service.id %>").remove();
-<% if @services.empty? %>
+$("#service_title_<%= @service.id %>").hide('slow', function(){ $(this).remove(); })
+$("#service_body_<%= @service.id %>").hide('slow', function(){
+  $(this).remove();
+  <% if @services.empty? %>
    $(".services_list_body").html("<%= escape_javascript( render "index_no_service_message") %>")
-<% end %>
+  <% end %>
+})
+$("#services_nested_menu_li_<%= @service.id %>").remove();
+
+$(".tipsy").remove();
+
 

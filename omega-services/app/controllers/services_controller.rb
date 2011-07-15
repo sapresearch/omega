@@ -33,7 +33,7 @@ class ServicesController < Omega::Controller
 
     # set the service level
     @service_level = params[:service_level]
-    @service.create_service_leaf if @service_level=="leaf"
+    @service.create_service_leaf if @service_level==Service::LEAF_LEVEL
 
     @service_detail_html = params[:service_detail_html]
     @service_detail_field_values = params[:service_detail_field_values]

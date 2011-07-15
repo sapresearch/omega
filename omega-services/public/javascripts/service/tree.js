@@ -46,7 +46,6 @@ function nested_menu(ul_element_id, options){
             function(){
                 //$('>ul',this).show()
                 //$('>ul',this).show('slide', {direction:"left"}, 200);
-                //
                 //clearTimeout(timer);
                 $(this).siblings("li:has(ul)").children("ul").stop(true,true).hide()
                 $('>ul',this).animate({opacity:"show"}, 'normal');

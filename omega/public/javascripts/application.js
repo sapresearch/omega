@@ -65,7 +65,7 @@ jQuery(function($) {
 
     /* Applicationwide - tooltip */
     $('span[data-tooltip]').tipsy({live:true});
-    $('a[data-tooltip]').tipsy();
+    $('a[data-tooltip]').tipsy({live:true}); // make it live for ajax. changed on 2011-7-15
     $('form').find('input[data-tooltip],textarea[data-tooltip] ').tipsy({gravity: 'w',
         trigger : 'focus'
     });
