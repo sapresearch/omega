@@ -49,6 +49,24 @@
                   <!-- app-spec -->
                   <% if is_admin?(current_user) %>
                   <!-- end app-pec -->
+
+                    <% if service.is_private? %>
+                      <%= om_button(:contact => true, :icon=>'mail-open') do %>
+                        <% if service.is_leaf? %>
+                          <%= link_to "Publish", service_url(service, :type=>"publish"), :remote=>true, :method=>:put, "data-tooltip"=>"Publish this service" %>
+                        <% else %>
+                          <%= link_to_function "Publish", "update_service_status('#{service_url(service, :type=>"publish")}')", "data-tooltip"=>"Publish this service category" %>
+                        <% end %>
+                      <% end %>
+                    <% elsif service.is_public? %>
+                      <%= om_button(:contact => true, :icon=>'mail') do %>
+                        <% if service.is_leaf? %>
+                          <%= link_to "Unpublish", service_url(service, :type=>"unpublish"), :remote=>true, :method=>:put, "data-tooltip"=>"Unpublish this service" %>
+                        <% else %>
+                          <%= link_to_function "Unpublish", "update_service_status('#{service_url(service, :type=>"unpublish")}')", "data-tooltip"=>"Unpublish this service category" %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
                     
                     <%= om_button(:contact => true, :icon=>'edit') do %>
                       <%= link_to "Edit", edit_service_url(service), "data-tooltip"=>"Edit this service" %>

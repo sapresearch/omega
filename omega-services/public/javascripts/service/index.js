@@ -9,6 +9,7 @@ function services_accordion(service_id){
          active: index,
          //event: "mouseover",
          //animated: 'bounceslide',
+         autoHeight: false,
          clearStyle: true,
          navigation: false,
          collapsible: true      

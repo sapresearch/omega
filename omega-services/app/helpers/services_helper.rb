@@ -1,8 +1,8 @@
 module ServicesHelper
 
   #testing
-  def is_admin?(user)
-    true
+  def is_admin?(user=current_user)
+    user.has_permission?(Service::PERM_ADMIN)
   end
 
   def bread_crumb(service)

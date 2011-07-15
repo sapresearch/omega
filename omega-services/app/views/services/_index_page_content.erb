@@ -6,7 +6,7 @@
   <%= bread_crumb(@super_service) %>
   <hr/>
   <div class="services_list_body">
-    <% if @services.empty? %>
+    <% if @services.empty? || (!Service.open? && !is_admin?) %>
       <%= render "index_no_service_message" %>
     <% else %>
       <%= render "index_list" %>
@@ -17,10 +17,3 @@
 <div class="services_operation_links">
   <%= render "index_operation_links" %>
 </div> 
-
-<%= render "service_registrations/new_dialog_form" %>
-<%= render "service_registrations/new_dialog_confirm" %>
-<%= render "service_registrations/destroy_dialog_confirm" %>
-<%= render "service_registrations/destroyed_dialog_message" %>
-<%= render "service_registrations/created_dialog_message" %>
-<%= render "delete_dialog_confirm" %>

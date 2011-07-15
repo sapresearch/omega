@@ -22,6 +22,10 @@ class Service < ActiveRecord::Base
 
   # abstraction layer functions for different implementation in database
   class << self
+    def open?
+      service_roots.each{|sr|return true if sr.status=="public"}
+      false
+    end    
     def service_leaves
       ServiceLeaf.all.map{|sl|sl.service}
     end
@@ -56,6 +60,32 @@ class Service < ActiveRecord::Base
 
   def super_service_id
     is_root? ? ROOT_SUPER_SERVICE_ID : super_service.id
+  end
+
+  def is_public?
+    is_root? ? status=="public" : (status=="public" && super_service.is_public?)
+  end
+
+  def is_private?
+    status=="private"
+  end
+
+  def publish(recursive)
+    if recursive
+      update_attribute("status", "public")
+      sub_services.each{|s|s.publish(true)}
+    else
+      update_attribute("status", "public")
+    end
+  end
+
+  def unpublish(recursive)
+    if recursive
+      update_attribute("status", "private")
+      sub_services.each{|s|s.unpublish(true)}
+    else
+      update_attribute("status", "private")
+    end
   end
 
   def detail_html

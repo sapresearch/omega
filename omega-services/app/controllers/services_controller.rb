@@ -49,6 +49,21 @@ class ServicesController < Omega::Controller
     redirect_to services_url(:service_id=>@service.id)
   end
 
+  def update
+    @service = Service.find(params[:id])
+    @recursive = (params[:recursive]=="true"||params[:recursive]==true) ? true :false
+    case params[:type]
+      when "publish"
+        @service.publish(@recursive)
+      when "unpublish"
+        @service.unpublish(@recursive)
+      else        
+    end
+
+    # for js
+    @services = @service.sibling_services
+  end
+
   # problem using redirect_to services_url: always back to top level, sending DELETE /services request which is invalid.
   def destroy
     @service = Service.find(params[:id])
