@@ -26,7 +26,7 @@
         <%= link_to "Create Service", new_service_url(:super_service_id=>super_service_id, :service_level=>Service::LEAF_LEVEL), :class=>"nested_menu_new_link" %>
       </li>
       <li>
-        <%= link_to "Create Service Category", new_service_url(:super_service_id=>super_service_id, :service_level=>Service::INNER_LEVEL), :class=>"nested_menu_new_link" %>
+        <%= link_to "Create Service Category", new_service_url(:super_service_id=>super_service_id, :service_level=>Service::BRANCH_LEVEL), :class=>"nested_menu_new_link" %>
       </li>
     <% end %>
       

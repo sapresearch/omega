@@ -2,7 +2,7 @@
 <!-- all the om_button elements, with original link below -->
 <!-- end app-spec -->
 
-            <p><%= service.description %></p>
+            <p><%= nl2br service.description %></p>
             <p><%= render "services/index_service_detail", :service=>service %></p>
 
             <div class="service_operation_links" >
@@ -46,9 +46,7 @@
               
               <div class="service_right_links">
                 <p>
-                  <!-- app-spec -->
-                  <% if is_admin?(current_user) %>
-                  <!-- end app-pec -->
+                  <% if is_admin? %>
 
                     <% if service.is_private? %>
                       <%= om_button(:contact => true, :icon=>'mail-open') do %>
@@ -78,9 +76,7 @@
                     <% end %>
                     <%#= link_to_function "Delete", "destroy_service('#{service_url(service)}')", :class=>"service_operation_button" %>
                                       
-                  <!-- app-spec -->
                   <% end %>
-                  <!-- end app-spec -->
                 </p>
               </div>
               

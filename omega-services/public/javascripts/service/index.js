@@ -4,7 +4,7 @@ function services_accordion(service_id){
     if(index<0)
         index = false;
     //var index = services.indexOf(service) // IE incompatible
-
+    
     $( "#accordion" ).accordion({
          active: index,
          //event: "mouseover",

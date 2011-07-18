@@ -9,7 +9,7 @@ class Service < ActiveRecord::Base
 
   ROOT_SUPER_SERVICE_ID = 'root'
   LEAF_LEVEL = "leaf"
-  INNER_LEVEL = "inner"
+  BRANCH_LEVEL = "branch"
 
   belongs_to :super_service, :class_name => "Service"
   has_many :sub_services, :class_name => "Service", :foreign_key => "super_service_id", :dependent => :destroy
@@ -29,8 +29,19 @@ class Service < ActiveRecord::Base
     def service_leaves
       ServiceLeaf.all.map{|sl|sl.service}
     end
-    def public_service_leaves
-      ServiceLeaf.all.inject([]){|r, sl|s=sl.service; r<<s if s.is_public?; r}
+    def real_public_service_leaves
+      ServiceLeaf.all.inject([]){|r, sl|s=sl.service; r<<s if s.is_real_public?; r}
+    end
+    def real_public_services(super_service=nil)
+      services = super_service.nil? ? Service.service_roots : super_service.sub_services
+      services.select!{|s| s.is_public? }.each{|s| services.concat(real_public_services(s))}
+      services
+    end
+    def public_services
+      Service.where(:status=>"public")
+    end
+    def private_services
+      Service.where(:status=>"private")
     end
     def service_roots
       Service.where(:super_service_id => nil)
@@ -65,30 +76,27 @@ class Service < ActiveRecord::Base
     is_root? ? ROOT_SUPER_SERVICE_ID : super_service.id
   end
 
+  def is_real_public?
+    is_root? ? status=="public" : (status=="public" && super_service.is_real_public?)
+  end
+  
   def is_public?
-    is_root? ? status=="public" : (status=="public" && super_service.is_public?)
+    status=="public"
   end
 
   def is_private?
     status=="private"
   end
 
+  # should we consider publish all parent services?
   def publish(recursive)
-    if recursive
-      update_attribute("status", "public")
-      sub_services.each{|s|s.publish(true)}
-    else
-      update_attribute("status", "public")
-    end
+    update_attribute("status", "public")
+    sub_services.each{|s|s.publish(true)} if recursive
   end
 
   def unpublish(recursive)
-    if recursive
-      update_attribute("status", "private")
-      sub_services.each{|s|s.unpublish(true)}
-    else
-      update_attribute("status", "private")
-    end
+    update_attribute("status", "private")
+    sub_services.each{|s|s.unpublish(true)} if recursive
   end
 
   def detail_html

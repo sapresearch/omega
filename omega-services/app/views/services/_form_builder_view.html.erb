@@ -11,11 +11,15 @@
     });
     $( "#service_registration" ).disableSelection();
 
-    // set default environment to service details
-    <% if @service_level == "leaf" %>
+    //global variables
+    service_leaf_level = '<%= Service::LEAF_LEVEL %>'
+    service_branch_level = '<%= Service::BRANCH_LEVEL %>'
+
+    // set default environment
+    <% if @service_level == Service::LEAF_LEVEL %>
       set_leaf_service_env();
     <% else %>
-      set_inner_service_env();
+      set_branch_service_env();
     <% end %>
       
     set_service_detail_env();

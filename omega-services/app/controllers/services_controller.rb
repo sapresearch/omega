@@ -12,7 +12,7 @@ class ServicesController < Omega::Controller
     @service = Service.find(@service_id) unless @service_id.nil?
     session[:super_service_id] = @service.nil? ? (params[:super_service_id] || session[:super_service_id]) : @service.super_service_id
     @super_service = super_service
-    @services = sub_services_of(@super_service)   
+    @services = sub_services_of(@super_service)
   end
 
   def new

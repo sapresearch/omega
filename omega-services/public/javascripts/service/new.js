@@ -18,17 +18,17 @@ function set_leaf_service_env(){
     
     $("#service_name").val("New Service")
     $("#service_name").select();
-    $("#service_level").val("leaf");
+    $("#service_level").val(service_leaf_level);
 }
-function set_inner_service_env(){
-    $("#service_inner_level_radio").attr("checked","checked")
+function set_branch_service_env(){
+    $("#service_branch_level_radio").attr("checked","checked")
     $("#title_category").show();
     $("#service_detail_tab_link").html("Service Category Detail");
     $("#service_registration_tab_link").html("Registration Form Template");
 
     $("#service_name").val("New Service Category")
     $("#service_name").select();
-    $("#service_level").val("inner");
+    $("#service_level").val(service_branch_level);
 }
 function set_service_detail_env(){
     $(".service_registration_only").hide()

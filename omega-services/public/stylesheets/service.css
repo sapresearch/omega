@@ -44,9 +44,12 @@
     font-size:12px;
 }
 
+.services_bread_crumb{
+    padding-top:10px;
+}
 .services_list{
-    padding:10px 0px;
-    max-height:450px;
+    padding-bottom:10px;
+    max-height:470px;
     overflow: auto;
 }
 .service_body{
