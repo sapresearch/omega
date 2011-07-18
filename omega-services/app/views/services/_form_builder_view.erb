@@ -36,8 +36,8 @@
 <%= form_for(@service) do |form| %>
   <div class="service_form_builder_tabs" id="tabs">
     <ul id="service_form_builder_nav">
-      <li><a id="service_detail_tab_link" href="#tabs-1" onclick="set_service_detail_env()" >Service Details</a></li>
-      <li><a id="service_registration_tab_link" href="#tabs-2" onclick="set_service_registration_env()" >Registration Form</a></li>
+      <li><a id="service_detail_tab_link" href="#tabs-1" onclick="set_service_detail_env()" data-tooltip="Detailed information about the service that you want user to know" >Service Details</a></li>
+      <li><a id="service_registration_tab_link" href="#tabs-2" onclick="set_service_registration_env()" data-tooltip="Customized form to collect user registration information" >Registration Form</a></li>
     </ul>
     <div id="tabs-1">
       <div class="tab_content_options">

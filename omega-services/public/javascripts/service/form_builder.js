@@ -117,7 +117,7 @@ function required_checkbox(label_element_id){
 }
 function edit_label(label_element_id){
     var html = "Label:"
-    html += "<input type='text' value='"+$("#"+label_element_id).html()+"' "
+    html += "<input id='text_field_edit_label' type='text' value='"+$("#"+label_element_id).html()+"' "
     html += "onkeyup='$(\"#"+label_element_id+"\").html($(this).val())' />"
     return html;
 }
@@ -249,5 +249,6 @@ function edit_field(parent_element_id){
     if(active_service_section_element_id()=="service_registration")
         $("#admin-edit-em").append(required_checkbox(label.id))
     $("#admin-edit-em").effect("highlight")
+    $("#text_field_edit_label").select();
 }
 //***** end app-spec
