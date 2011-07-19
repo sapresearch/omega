@@ -8,6 +8,8 @@ class Service < ActiveRecord::Base
   # end app-spec
 
   ROOT_SUPER_SERVICE_ID = 'root'
+  LEAF_LEVEL = "leaf"
+  BRANCH_LEVEL = "branch"
 
   belongs_to :super_service, :class_name => "Service"
   has_many :sub_services, :class_name => "Service", :foreign_key => "super_service_id", :dependent => :destroy
@@ -20,24 +22,57 @@ class Service < ActiveRecord::Base
 
   # abstraction layer functions for different implementation in database
   class << self
+
+    def open?
+      service_roots.each{|sr|return true if sr.status=="public"}
+      false
+    end
+
     def service_leaves
       ServiceLeaf.all.map{|sl|sl.service}
     end
+
+    def real_public_service_leaves
+      ServiceLeaf.all.inject([]){|r, sl|s=sl.service; r<<s if s.is_real_public?; r}
+    end
+
+    #avoid direct iteration for performance
+    def real_public_services(service=nil)
+      services = service.nil? ? Service.service_roots : service.sub_services
+      services = services.select{|s| s.is_public? }
+      services_tmp = services[0, services.length]
+      services_tmp.each{|s| services.concat(Service.real_public_services(s))}
+      services
+    end
+
+    def public_services
+      Service.where(:status=>"public")
+    end
+
+    def private_services
+      Service.where(:status=>"private")
+    end
+
     def service_roots
       Service.where(:super_service_id => nil)
     end
+
     def services_with_detail_form
       ServiceDetailForm.all.map{|sdf|sdf.service}
     end
+
     def services_with_detail_template
       ServiceDetailTemplate.all.map{|sdt|sdt.service_detail_form.service}
     end
+
     def services_with_registration_form
       ServiceRegistrationForm.all.map{|srf|srf.service}
     end
+
     def services_with_registration_template
       ServiceRegistrationTemplate.all.map{|srt|srt.service_registration_form.service}
     end
+    
   end
 
   def is_root?
@@ -48,8 +83,35 @@ class Service < ActiveRecord::Base
     ServiceLeaf.all.map{|sl|sl.service}.include?(self)
   end
 
+  def sibling_services
+    is_root? ? Service.service_roots : super_service.sub_services
+  end
+
   def super_service_id
     is_root? ? ROOT_SUPER_SERVICE_ID : super_service.id
+  end
+
+  def is_real_public?
+    is_root? ? status=="public" : (status=="public" && super_service.is_real_public?)
+  end
+  
+  def is_public?
+    status=="public"
+  end
+
+  def is_private?
+    status=="private"
+  end
+
+  # should we consider publish all parent services?
+  def publish(recursive)
+    update_attribute("status", "public")
+    sub_services.each{|s|s.publish(true)} if recursive
+  end
+
+  def unpublish(recursive)
+    update_attribute("status", "private")
+    sub_services.each{|s|s.unpublish(true)} if recursive
   end
 
   def detail_html

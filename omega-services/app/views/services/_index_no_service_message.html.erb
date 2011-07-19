@@ -1,0 +1,9 @@
+
+    <p class="explanation">
+      No Service is being offered<%= @super_service ? " for "+@super_service.name : "" %> at the moment! <br/><br/>
+      <% if is_admin? %>
+        <%= om_button(:contact => true, :icon => 'clock') do %>
+          <%= link_to 'Create a New Service', new_service_url %>
+        <% end %>
+      <% end %>
+    </p>

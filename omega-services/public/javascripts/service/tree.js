@@ -17,7 +17,7 @@ function nested_menu(ul_element_id, options){
     var sub_lists = $("#"+ul_element_id+" ul");    
 
     expandable_list_items.each(function(){
-        $('>a',this).append("<span style='float:right'>>></span>")
+        $('>a',this).append("<span style='float:right'>&nbsp;&nbsp;&#187;</span>")
     })   
 
     if(options['wrap']==false)
@@ -41,12 +41,20 @@ function nested_menu(ul_element_id, options){
     })
     
     list_items.each(function(){
+        //var timer;
         $(this).hover(
             function(){
-                $('>ul',this).show('slide', {direction:"left"}, 200);
+                //$('>ul',this).show()
+                //$('>ul',this).show('slide', {direction:"left"}, 200);
+                //clearTimeout(timer);
+                $(this).siblings("li:has(ul)").children("ul").stop(true,true).hide()
+                $('>ul',this).animate({opacity:"show"}, 'normal');
             },
             function(){
-                $('>ul',this).hide('slide', {direction:"left"}, 200);
+                //clearTimeout(timer);
+                //timer=setTimeout(function(){
+                    $('>ul',this).hide();
+		//}, 500);
             }
         )
     })

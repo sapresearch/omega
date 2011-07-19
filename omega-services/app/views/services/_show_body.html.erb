@@ -1,0 +1,83 @@
+<!-- app-spec -->
+<!-- all the om_button elements, with original link below -->
+<!-- end app-spec -->
+
+            <p><%= nl2br service.description %></p>
+            <p><%= render "services/index_service_detail", :service=>service %></p>
+
+            <div class="service_operation_links" >
+              
+              <div class="service_left_links">
+                <p>
+                  <% if service.is_leaf? %>
+                    <!-- app-spec -->
+                    <% unless current_user.is_anonymous? %>
+                      <% service_registration = ServiceRegistration.find_by_service_leaf_id_and_contact_id(service.service_leaf.id, Contact.for(current_user).id) %>
+                    <!-- end app-spec -->
+                      <% unless service_registration.nil? %>
+
+                        <%= om_button(:contact => true, :icon=>'user-remove') do %>
+                          <%= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", "data-tooltip"=>"Unregister this service" %>
+                        <% end %>
+                        <%#= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", :class=>"service_operation_button" %>
+                        <span class="service_registration_status" style="float:left"><strong>status:</strong> <%= service_registration.status %></span>
+
+                      <% else %>
+
+                        <%= om_button(:contact => true, :icon=>'user-add') do %>
+                          <%= link_to_function "Register", "new_service_registration(#{service.id})", "data-tooltip"=>"Register this service" %>
+                        <% end %>
+                        <%#= link_to_function "Register >>", "new_service_registration(#{service.id})", :class=>"service_operation_button" %>
+
+                      <% end %>
+                    <!-- app-spec -->
+                    <% end %>
+                    <!-- end app-spec -->
+                  <% else %>
+
+                    <%= om_button(:contact => true, :icon=>'search') do %>
+                      <%= link_to "View Services", services_url(:super_service_id=>service.id), :remote=>true, "data-tooltip"=>"View services in this category" %>
+                    <% end %>
+                    <%#= link_to "View Services >>", services_url(:super_service_id=>service.id), :remote=>true, :class=>"service_operation_button" %>
+                    
+                  <% end %>
+                </p>
+              </div>
+              
+              <div class="service_right_links">
+                <p>
+                  <% if is_admin? %>
+
+                    <% if service.is_private? %>
+                      <%= om_button(:contact => true, :icon=>'mail-open') do %>
+                        <% if service.is_leaf? %>
+                          <%= link_to "Publish", service_url(service, :type=>"publish"), :remote=>true, :method=>:put, "data-tooltip"=>"Publish this service" %>
+                        <% else %>
+                          <%= link_to_function "Publish", "update_service_status('#{service_url(service, :type=>"publish")}')", "data-tooltip"=>"Publish this service category" %>
+                        <% end %>
+                      <% end %>
+                    <% elsif service.is_public? %>
+                      <%= om_button(:contact => true, :icon=>'mail') do %>
+                        <% if service.is_leaf? %>
+                          <%= link_to "Unpublish", service_url(service, :type=>"unpublish"), :remote=>true, :method=>:put, "data-tooltip"=>"Unpublish this service" %>
+                        <% else %>
+                          <%= link_to_function "Unpublish", "update_service_status('#{service_url(service, :type=>"unpublish")}')", "data-tooltip"=>"Unpublish this service category" %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                    
+                    <%= om_button(:contact => true, :icon=>'edit') do %>
+                      <%= link_to "Edit", edit_service_url(service), "data-tooltip"=>"Edit this service" %>
+                    <% end %>
+                    <%#= link_to "Edit", edit_service_url(service), :class=>"service_operation_button" %>
+
+                    <%= om_button(:contact => true, :icon=>'delete-icon') do %>
+                      <%= link_to_function "Delete", "destroy_service('#{service_url(service)}')", "data-tooltip"=>"Delete this service" %>
+                    <% end %>
+                    <%#= link_to_function "Delete", "destroy_service('#{service_url(service)}')", :class=>"service_operation_button" %>
+                                      
+                  <% end %>
+                </p>
+              </div>
+              
+            </div>

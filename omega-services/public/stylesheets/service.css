@@ -44,18 +44,22 @@
     font-size:12px;
 }
 
+.services_bread_crumb{
+    padding-top:10px;
+}
 .services_list{
-    padding:10px 0px;
-    max-height:450px;
+    padding-bottom:10px;
+    max-height:470px;
     overflow: auto;
 }
 .service_body{
     border:1px solid #ccc;
 }
 
+.service_operation_links span.om-contact-icon-button a{ color:navy; }
 .service_left_links { float:left; }
 .service_right_links { float:right; }
-.services_left_links a{ float:left; margin-right:20px}
+.services_left_links a{ float:left; margin-right:20px; }
 .services_right_links a{ float:right; }
 
 .services_operation_links{
@@ -113,6 +117,7 @@
 
 /* for adjusting jquery UI component*/
 #service_form_builder_nav{ height:32px; }
+#service_form_builder_nav a{cursor:pointer;}
 .service_leaf{ background:none; background-color:green}
 .dialog{ display:none; }
 

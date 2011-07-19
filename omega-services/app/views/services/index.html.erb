@@ -2,7 +2,10 @@
 <% require_stylesheet 'service_registration.css' %>
 <% require_javascript 'service/share.js' %>
 <% require_javascript 'service/index.js' %>
+<% require_javascript 'service/destroy.js' %>
+<% require_javascript 'service/update.js' %>
 <% require_javascript 'service_registration/new.js' %>
+<% require_javascript 'service_registration/destroy.js' %>
 
 <!-- app-spec -->
 <div class="content circle-corners-bottom-left" >
@@ -30,3 +33,12 @@
 <!-- app-spec -->
 </div>
 <!-- end app-spec -->
+
+
+<%= render "service_registrations/dialog_new_form" %>
+<%= render "service_registrations/dialog_new_confirm" %>
+<%= render "service_registrations/dialog_destroy_confirm" %>
+<%= render "service_registrations/dialog_destroyed_message" %>
+<%= render "service_registrations/dialog_created_message" %>
+<%= render "dialog_delete_confirm" %>
+<%= render "dialog_update_status_confirm" %>

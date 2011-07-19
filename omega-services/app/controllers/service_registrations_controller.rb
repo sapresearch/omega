@@ -9,7 +9,6 @@ class ServiceRegistrationsController < Omega::Controller
   def create
     # app-spec
     @contact = Contact.for(current_user)
-    @contact = current_user  # testing
     # end app-spec
     
     @service = Service.find(params[:service_id])     
@@ -20,8 +19,17 @@ class ServiceRegistrationsController < Omega::Controller
     @service_registration = ServiceRegistration.create(:service_leaf_id=>@service_leaf_id, :status=>@status, :contact_id=>@contact.id)
     @service_registration.create_service_registration_form_value(:field_values => @field_values) unless @field_values.nil?
 
-    session[:super_service_id] = @service.super_service.id unless @service.is_root?
-    redirect_to services_url
+    # for js
+    @services = @service.sibling_services
+  end
+
+  def destroy
+    @service_registration = ServiceRegistration.find(params[:id])
+    @service = @service_registration.service
+    @service_registration.destroy
+
+    # for js
+    @services = @service.sibling_services
   end
 end
 

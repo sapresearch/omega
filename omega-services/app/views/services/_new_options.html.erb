@@ -1,0 +1,14 @@
+<!-- app-spec
+  data-tooltip atributes
+-->
+
+  <form>
+    <span data-tooltip="service that can be registered">
+      <label for="service_leaf_level_radio" >Service</label>
+      <input id="service_leaf_level_radio" name="service_level" type="radio" checked="checked" onclick="set_leaf_service_env()" />
+    </span>
+    <span data-tooltip="service category that contains services">
+      <label for="service_branch_level_radio" >Service Category</label>
+      <input id="service_branch_level_radio" name="service_level" type="radio" onclick="set_branch_service_env()" />
+    </span>
+  </form>

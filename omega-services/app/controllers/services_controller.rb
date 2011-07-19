@@ -7,16 +7,17 @@ class ServicesController < Omega::Controller
   breadcrumb 'Services' => :services
   # end app-spec
 
-  def index   
-    session[:super_service_id] = params[:super_service_id] || session[:super_service_id]
-    @super_service = super_service
-    @services = sub_services_of(@super_service)
+  def index
     @service_id = params[:service_id]
     @service = Service.find(@service_id) unless @service_id.nil?
+    session[:super_service_id] = @service.nil? ? (params[:super_service_id] || session[:super_service_id]) : @service.super_service_id
+    @super_service = super_service
+    @services = sub_services_of(@super_service)
   end
 
   def new
     session[:super_service_id] = params[:super_service_id] || session[:super_service_id]
+    @service_level = params[:service_level] || Service::LEAF_LEVEL
     @super_service = super_service
     @service = new_sub_service_of(@super_service)
     @default_service_with_detail_template = @super_service ? @super_service.default_service_with_detail_template : nil
@@ -32,7 +33,7 @@ class ServicesController < Omega::Controller
 
     # set the service level
     @service_level = params[:service_level]
-    @service.create_service_leaf if @service_level=="leaf"
+    @service.create_service_leaf if @service_level==Service::LEAF_LEVEL
 
     @service_detail_html = params[:service_detail_html]
     @service_detail_field_values = params[:service_detail_field_values]
@@ -48,17 +49,31 @@ class ServicesController < Omega::Controller
     redirect_to services_url(:service_id=>@service.id)
   end
 
+  def update
+    @service = Service.find(params[:id])
+    @recursive = (params[:recursive]=="true"||params[:recursive]==true) ? true :false
+    case params[:type]
+      when "publish"
+        @service.publish(@recursive)
+      when "unpublish"
+        @service.unpublish(@recursive)
+      else        
+    end
+
+    # for js
+    @services = @service.sibling_services
+  end
+
   # problem using redirect_to services_url: always back to top level, sending DELETE /services request which is invalid.
   def destroy
     @service = Service.find(params[:id])
-    session[:super_service_id] = @service.super_service_id    # session get lost and need to reset?
     @service.destroy
     # redirect_to services_url   
     @super_service = super_service
     @services = sub_services_of(@super_service)
   end
 
-  # private methods
+
   private
 
   def super_service
@@ -72,6 +87,6 @@ class ServicesController < Omega::Controller
   def new_sub_service_of(super_service)
     super_service ? super_service.sub_services.build : Service.new({:super_service_id=>nil})
   end
-  
+
 end
 

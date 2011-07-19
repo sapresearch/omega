@@ -1,0 +1,11 @@
+<% unless service.detail_field_values.nil?%>
+  <% field_values_hash = service.detail_field_values_hash%>
+
+  <% field_values_hash.each do |field, value| %>
+      <span><strong><%= field %>:</strong></span>
+      <span><%= nl2br value %></span>
+      <br/>
+  <% end %>
+<% end %>
+
+

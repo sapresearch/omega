@@ -35,6 +35,7 @@
       </div>
 
     </li>
+    
     <!-- original
     <li>
       <%= link_to "Services", services_url %>
@@ -58,15 +59,8 @@
     -->
 
     <li>
-      <% require_javascript 'service/tree.js' %>
-      
-      <%= link_to "Services", services_url(:super_service_id=>"root") %>
-      
-      <% services_nested_menu_id = "services_nested_menu" %>
-      <%= render "services/tree", :services=>Service.service_roots, :id=>services_nested_menu_id %>
-      <script>         
-        nested_menu('<%= services_nested_menu_id %>',{})
-      </script>
+      <%= link_to "Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID) %>
+      <%= render "services/nested_menu" %>
       
         <!--
         <div>

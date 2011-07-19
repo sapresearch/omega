@@ -14,38 +14,15 @@
 </script>
 
       <div id="accordion">
-        <% services.each do |service| %>
-          <h3 id="service_title_<%= service.id %>" <%= "class='service_leaf'" if service.is_leaf? %> >
-            <a href="#">
-              <%= service.name %>
-              <span id="service_registration_status_<%= service.id %>" class="service_registration_status"></span>
-            </a>
-          </h3>
-          <div id="service_body_<%= service.id %>" class="service_body" >
-            <p><%= service.description %></p>
-            <p><%= render "index_service_detail", :service=>service %></p>
-            <div class="service_left_links">
-              <p>
-                <% if service.is_leaf? %>
-                  <% if registered?(service) %>
-                    <%= link_to_function "Cancel Registration", "", :class=>"service_operation_button" %>
-                  <% else %>
-                    <%= link_to_function "Register >>", "new_service_registration(#{service.id})", :class=>"service_operation_button" %>
-                  <% end %>
-                <% else %>
-                  <%= link_to "View Services >>", services_url(:super_service_id=>service.id), :remote=>true, :class=>"service_operation_button" %>
-                <% end %>
-              </p>
+        <% services.each do |s| %>
+          <% if(is_admin? || s.is_public?) %>
+            <h3 id="service_title_<%= s.id %>" <%= "class='service_leaf'" if s.is_leaf? %> >
+              <%= render "services/show_title", :service=>s %>
+            </h3>
+            <div id="service_body_<%= s.id %>" class="service_body" >
+              <%= render "services/show_body", :service=>s %>
             </div>
-            <div class="service_right_links">
-              <% if is_admin?(current_user) %>
-                <p>
-                  <%= link_to "Edit", edit_service_url(service), :class=>"service_operation_button" %>
-                  <%= link_to_function "Delete", "delete_service('#{service_url(service)}')", :class=>"service_operation_button" %>
-                </p>
-              <% end %>            
-            </div>
-          </div>
+           <% end %>
         <% end %>
       </div>
       <script type="text/javascript">

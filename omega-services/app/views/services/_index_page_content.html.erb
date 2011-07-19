@@ -1,0 +1,20 @@
+<div class="services_search_box">
+  <%= render "index_search_box" %>
+</div>
+
+<div class="services_bread_crumb">
+  <%= bread_crumb(@super_service) %>
+  <hr/>
+</div>
+
+<div class="services_list">  
+  <% if @services.empty? || (!Service.open? && !is_admin?) %>
+    <%= render "index_no_service_message" %>
+  <% else %>
+    <%= render "index_list" %>
+  <% end %>
+</div>
+
+<div class="services_operation_links">
+  <%= render "index_operation_links" %>
+</div> 
