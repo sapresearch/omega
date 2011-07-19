@@ -1,4 +1,5 @@
 <% require_javascript 'service/tree.js' %>
+<% require_stylesheet 'services_nested_menu' # seperate css to solve firefox css length limit problem %>
 
 <% services_nested_menu_id = "services_nested_menu" %>
 <%= render "services/tree", :super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :id=>services_nested_menu_id %>

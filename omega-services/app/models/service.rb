@@ -36,7 +36,7 @@ class Service < ActiveRecord::Base
       ServiceLeaf.all.inject([]){|r, sl|s=sl.service; r<<s if s.is_real_public?; r}
     end
 
-    #avoid direct iteration for better performance
+    #avoid direct iteration for performance
     def real_public_services(service=nil)
       services = service.nil? ? Service.service_roots : service.sub_services
       services = services.select{|s| s.is_public? }
