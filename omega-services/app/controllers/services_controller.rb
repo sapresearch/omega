@@ -73,7 +73,7 @@ class ServicesController < Omega::Controller
     @services = sub_services_of(@super_service)
   end
 
-  # private methods
+
   private
 
   def super_service
@@ -87,6 +87,6 @@ class ServicesController < Omega::Controller
   def new_sub_service_of(super_service)
     super_service ? super_service.sub_services.build : Service.new({:super_service_id=>nil})
   end
-  
+
 end
 
