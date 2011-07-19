@@ -1,0 +1,34 @@
+<% require_stylesheet 'omega_volunteering' %>
+
+<body>
+
+<div class="heading-main-columns">
+  <h1 class="page-content">
+		Settings
+  </h1>
+</div>
+
+<h3 class="application-form"> Accounts to Connect </h3>
+
+<p><%= @settings.inspect %></p>
+
+<div class="container">
+	<nav class="round">
+		<ul>
+			<li><%= link_to 'new', :controller => "settings", :action => "new" %></li>
+		</ul>
+	</nav>
+</div>
+
+	<%= render 'layouts/facebook' %>
+
+	<p> Testing Only </p>
+	<p><a href="#" onclick="load_FB();">Load Facebook</a></p>
+	<p><a href="#" onclick="get_FB_login_status();">get login status</a></p>
+	<p><a href="#" onclick="publish_wall_post();">Publish wall post</a></p>
+	<p><a href="#" onclick="login_to_FB();">login to FB</a></p>
+
+
+	<p id="login_response"> Nothing yet for login response </p>
+	<p id="login_attempt"> Nothing yet for login attmept </p>
+</body>

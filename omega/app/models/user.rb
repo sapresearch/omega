@@ -51,6 +51,7 @@ class User < Omega::Model
 
   has_many :favorites
   has_many :favorite_items, :through => :favorites, :source => :item
+	has_one :setting
   
   accepts_nested_attributes_for :contact
 

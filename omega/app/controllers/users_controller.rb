@@ -127,6 +127,7 @@ class UsersController < Omega::Controller
 ################################
 
 	def my_page
+
 		@positions = Array.new
  		records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
 		records.each do |record|
@@ -136,7 +137,16 @@ class UsersController < Omega::Controller
 			sub_hash[:record] = record
 			@positions.push(sub_hash)
 		end
-    #@my_applications = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
+
+		@calendar = Calendar.where(:user_id => current_user)
+		@accounts = Array.new
+
+		@sap_profile_id = 100002599482156
+		@sap_profile_id_2 = 253183958028424 
+		@sap_profile_id_secret_2 = "7b4684019a0ea345ce8976f8d3a7d57a"
+
+		@settings = Setting.new
+		
 	end
 
 end

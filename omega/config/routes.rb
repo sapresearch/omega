@@ -31,6 +31,14 @@ Omega::Module.routes.draw do
     end
   end
 
+	resources :settings do
+		collection do
+			get :index
+			get 'settings/new'
+			get 'settings/error'
+		end
+	end
+
   resources :users do
     collection do
       get :register
@@ -38,9 +46,7 @@ Omega::Module.routes.draw do
       get :autocomplete
       get :role_assignment
       match :letter, :path => ':letter', :constraints => { :letter => /[a-z]/i }
-			###################
 			get :my_page
-			##################
     end
   end
 

@@ -1,37 +1,107 @@
+<% require_stylesheet 'omega_volunteering' %>
+<% require_stylesheet 'settings' %>
 <%= require_stylesheet 'omega_users' %>
 <%= require_javascript 'omega_users' %>
-	<div class="content circle-corners-bottom-left">
-    	
-	<div class="heading-main">
-	
-		<h1 class="page-content">
-			Hello <%= current_user.first_name %>
-			<%= current_user.username if current_user.first_name.blank? %>
-	 	</h1>
 
-	</div>
-	
+<style type="text/css">
+	h3.application-form {width: 622px;}
+</style>
 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 
-			<h2>MY VOLUNTEERING</h2> 
+<script type="text/javascript">
 
+function makeURL()
+{
+	text_val = oForm.forms["messageForm"]["message"].value;
+	alert("this is n alert");
+	//document.getElementById("demo").innerHTML=text_val;
+}
 
-	<% @positions.each do |element| %>
-		<p><%= element[:position].name %></p>
-		<p><%= element[:position].class %></p>
-		<p><%= element[:position].inspect %></p>
-		<p><%= element[:record].status %></p>
-		<p><%= element[:record].action %></p>
-		<p><%= element[:record].class %></p>
-		<p><%= element[:record].inspect %></p>
-	<% end %>
+</script>
 
-	<p><%= @positions.inspect %></p>
-	
-
-			<h2>SHARING</h2> 
-
-			<h2>MY VOLUNTEERING</h2> 
+<body>
 
 
-	</div>
+<div id="right">
+	<h1 class="side-bar corners-top"> My Calendar </h1>
+		<p> <%= @calendar.inspect unless @calendar.empty? %></p>
+		<p> <%= "calendar is empty" if @calendar.empty? %></p>
+</div>
+
+
+<div id="left">
+<div class="content circle-corners-bottom-left">
+
+<div class="heading-main-columns">
+	<h1 class="page-content">
+		<%= current_user.first_name + "'s" %>
+		<%= current_user.username + "'s" if current_user.first_name.blank? %>MyOmega Page
+	</h1>
+</div>
+
+
+
+  	<h3 class="application-form"> My Volunteering </h3>
+			<table border="1" cellpadding="9" cellspacing="1">
+				<tr>
+					<th>Volunteering Opportunity</th>
+					<th>Date</th>
+					<th>Application Status</th>
+				</tr>
+
+				<% @positions.each do |element| %>
+					<tr>
+         		<td> <%= element[:position].name %></td>
+         		<td> <%= element[:position].start_date %></td>
+         		<td> <%= element[:record].action %></td>
+					</tr>
+				<% end %>
+			</table>
+
+
+  		<h3 class="application-form"> Sharing </h3>
+				<table class="accounts">
+					<th> My Accounts</th>
+						<tr><td> Test account </td></tr>
+						<tr><td> Test account 2 </td></tr>
+					<% if @accounts.count == 0 then %>
+						<tr><td> No Accounts </td></tr>
+					<% elsif @accounts.count > 0 then %>
+						<% @accounts.each do |account| %>
+							<tr><td> account.inspect </td></tr>
+						<% end %>
+					<% end %>
+				</table>
+
+
+				<p id="demo"></p>
+				<br />
+				<form name="messageForm" onsubmit="publish_stuff();">
+					Your message: <input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="Submit"><br />
+				</form>
+
+
+	<%= render 'layouts/facebook' %>
+
+
+	<p>For Testing Only</p>
+	<p><a href="#" onclick="loadFB();">Load Facebook</a></p>
+	<p><a href="#" onclick="checkIfLoaded();">Check if it loaded</a></p>
+	<p><a href="#" onclick="publish_wall_post();">Publish</a></p>
+	<p><%= @setting %></p>
+	<p><%= @setting.class %></p>
+	<p><%= @setting.methods %></p>
+
+
+
+
+
+								<p id="response"> No rsponse yet</p>
+								<!--<button type="button" onclick="facebookFunc()"> Facebook Login </button> 
+								<p id="demo"></p>   !-->
+
+
+ </div>
+ </div>
+</body>
