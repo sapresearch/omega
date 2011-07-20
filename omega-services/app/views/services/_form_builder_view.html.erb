@@ -27,14 +27,8 @@
   });
 
   // parse relative objects to json for client process without Ajaxing
-  var services_with_detail_template = []
-  var services_with_registration_template = []
-  <% @services_with_detail_template.each do |s| %>
-    services_with_detail_template.push(<%= raw s.to_json(:include=>{:service_detail_form=>{:only=>:html}}) %>)
-  <% end %>
-  <% @services_with_registration_template.each do |s| %>
-    services_with_registration_template.push(<%= raw s.to_json(:include=>{:service_registration_form=>{:only=>:html}}) %>)
-  <% end %>
+  var services_with_detail_template = <%= raw @services_with_detail_template.to_json(:include=>{:service_detail_form=>{:only=>:html}}) %>
+  var services_with_registration_template = <%= raw @services_with_registration_template.to_json(:include=>{:service_registration_form=>{:only=>:html}}) %>
 </script>
 
 <%= form_for(@service) do |form| %>

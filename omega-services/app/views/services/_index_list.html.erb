@@ -2,16 +2,14 @@
 <% service_id = service.id unless service.nil? %>
 <% services = (@services.nil? ? [] : @services) if services.nil? %>
 
-<script type="text/javascript">
-  // global variables for jquery dialog 
-  var service_registrations_url = "<%= service_registrations_url %>"
+<% if services.empty? || (!Service.open? && !is_admin?) %>
+  <%= render "services/index_no_service_message" %>
+<% else %>
 
-  // parse relative objects to json for client process to avoid ajax
-  var services = []
-  <% services.each do |s| %>
-    services.push(<%= raw s.to_json(:include=>{:service_registration_form=>{:only=>:html}}) %>)
-  <% end %>
-</script>
+  <script type="text/javascript">
+    // parse relative objects to json for client process to avoid ajax          
+    var services = <%= raw services.to_json %>
+  </script>
 
       <div id="accordion">
         <% services.each do |s| %>
@@ -27,5 +25,7 @@
       </div>
       <script type="text/javascript">
         services_accordion('<%= service_id %>');
-        $('.service_operation_button').button();
+        //$('.service_operation_button').button();  //old style
       </script>
+
+<% end %>

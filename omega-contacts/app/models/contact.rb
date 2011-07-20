@@ -39,6 +39,15 @@ class Contact < Omega::Model
   has_upload :photo
 
   has_many :uploads, :as => 'binding'
+
+  #services associations
+  has_many :service_registrations, :dependent=>:destroy
+  has_many :service_leaves, :through=>:service_registrations
+  def registered_services
+    service_leaves.map{|sl|sl.service}
+  end
+
+
   accepts_nested_attributes_for :uploads
 
   accepts_flattened_values_for :interests, :skills, :languages, :value => :name

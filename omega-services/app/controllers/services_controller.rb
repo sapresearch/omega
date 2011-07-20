@@ -1,11 +1,15 @@
 class ServicesController < Omega::Controller
 
   require "service_app_adapter.rb"
+  require "service_lib.rb"
   include ServiceAppAdapter
+  include ServiceLib
 
   # app-spec
   breadcrumb 'Services' => :services
   # end app-spec
+
+  respond_to :html, :js, :xml, :json
 
   def index
     @service_id = params[:service_id]
@@ -13,6 +17,12 @@ class ServicesController < Omega::Controller
     session[:super_service_id] = @service.nil? ? (params[:super_service_id] || session[:super_service_id]) : @service.super_service_id
     @super_service = super_service
     @services = sub_services_of(@super_service)
+
+    # for my services
+    session[:my_services_switch] = params[:my_services_switch] || session[:my_services_switch]
+
+    @services = my_services(@services) if session[:my_services_switch]=="on"
+    respond_with(@services)
   end
 
   def new
@@ -26,6 +36,10 @@ class ServicesController < Omega::Controller
     # for js    
     @services_with_detail_template = Service.services_with_detail_template.sort{|s1,s2| s1.name<=>s2.name}
     @services_with_registration_template = Service.services_with_registration_template.sort{|s1,s2| s1.name<=>s2.name}
+
+    # automatically cancel my services switch when creating a new service in order to view it.
+    session[:my_services_switch]="off"
+    respond_with(@service)
   end
 
   def create
@@ -45,8 +59,8 @@ class ServicesController < Omega::Controller
     @service_registration_form = @service.create_service_registration_form(:html => @service_registration_html) unless @service_registration_html.empty?   
     @has_service_registration_template = params[:has_service_registration_template]
     @service_registration_form.create_service_registration_template if @has_service_registration_template == "on" && @service_registration_form
-
-    redirect_to services_url(:service_id=>@service.id)
+    
+    respond_with(@service, :location=>services_url(:service_id=>@service.id))
   end
 
   def update
@@ -62,15 +76,19 @@ class ServicesController < Omega::Controller
 
     # for js
     @services = @service.sibling_services
+
+    @services = my_services(@services) if session[:my_services_switch]=="on"
+    respond_with(@service)
   end
 
-  # problem using redirect_to services_url: always back to top level, sending DELETE /services request which is invalid.
   def destroy
     @service = Service.find(params[:id])
-    @service.destroy
-    # redirect_to services_url   
+    @service.destroy 
     @super_service = super_service
     @services = sub_services_of(@super_service)
+
+    @services = my_services(@services) if session[:my_services_switch]=="on"
+    respond_with(@service)
   end
 
 

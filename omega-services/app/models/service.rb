@@ -12,7 +12,7 @@ class Service < ActiveRecord::Base
   BRANCH_LEVEL = "branch"
 
   belongs_to :super_service, :class_name => "Service"
-  has_many :sub_services, :class_name => "Service", :foreign_key => "super_service_id", :dependent => :destroy
+  has_many :sub_services, :class_name => "Service", :foreign_key => "super_service_id", :dependent => :destroy, :order => "name"
   has_one :service_detail_form, :dependent => :destroy
   has_one :service_detail_template, :through => :service_detail_form
   has_one :service_registration_form, :dependent => :destroy
@@ -46,15 +46,15 @@ class Service < ActiveRecord::Base
     end
 
     def public_services
-      Service.where(:status=>"public")
+      Service.where(:status=>"public").order(:name)
     end
 
     def private_services
-      Service.where(:status=>"private")
+      Service.where(:status=>"private").order(:name)
     end
 
     def service_roots
-      Service.where(:super_service_id => nil)
+      Service.where(:super_service_id => nil).order(:name)
     end
 
     def services_with_detail_form
@@ -81,6 +81,22 @@ class Service < ActiveRecord::Base
 
   def is_leaf?
     ServiceLeaf.all.map{|sl|sl.service}.include?(self)
+  end
+
+  def is_end?
+    sub_services.empty?
+  end
+
+  # to be tested
+  def is_ancestor_of?(service)
+    return false if is_end? || service.is_root?
+    service.super_service == self ? true : is_ancestor_of?(service.super_service)
+  end
+
+  # to be tested
+  def is_descendant_of?(service)
+    return false if is_root? || service.is_end?
+    super_service == service ? true : super_service.is_descendant_of?(service)
   end
 
   def sibling_services

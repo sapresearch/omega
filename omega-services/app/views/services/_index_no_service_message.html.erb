@@ -1,9 +1,19 @@
+<!-- om_button is app-spec -->
 
-    <p class="explanation">
-      No Service is being offered<%= @super_service ? " for "+@super_service.name : "" %> at the moment! <br/><br/>
+  <p class="explanation">
+    <% unless session[:my_services_switch]=="on" %>
+      No Service is being offered<%= @super_service ? " in "+@super_service.name : "" %> at the moment! 
       <% if is_admin? %>
+        <br/><br/>
         <%= om_button(:contact => true, :icon => 'clock') do %>
           <%= link_to 'Create a New Service', new_service_url %>
         <% end %>
       <% end %>
-    </p>
+    <% else %>
+      You have not registered any service<%= @super_service ? " in "+@super_service.name : "" %> at the moment!
+      <br/><br/>
+      <%= om_button(:contact => true, :icon => 'clock') do %>
+        <%= link_to_function 'View Services', "switch_off_my_services("+@service_id.to_s+")" %>
+      <% end %>
+    <% end %>
+  </p>
