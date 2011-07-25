@@ -111,10 +111,10 @@
     <% end %>
 	
 		 <%= with_permission(User::PERM_ADMIN) do %>
+          <li> <%= link_to "Edit Logo", edit_logo_images_url  %></li>
         <!-- original
-          <li> <%#= link_to "Edit Logo", coming_soon_services_url %></li>
+        <li> <%#= link_to "Edit Logo", {} %></li>
         -->
-        <li> <%= link_to "Edit Logo", {} %></li>
     <% end %>
 
     <%= with_permission(User::PERM_ADMIN) do %>

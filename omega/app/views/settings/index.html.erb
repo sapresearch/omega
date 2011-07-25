@@ -8,6 +8,19 @@
   </h1>
 </div>
 
+<h3 class="application-form"> Site-Wide Settings </h3>
+
+<%= form_for @image, :html => { :multipart => true} do |i| %>
+	<p>
+		Upload an image to use as the site-wide background logo:
+	</p>
+	<p>
+		<%= i.file_field :image %>
+	</p>
+<% end %>
+
+<%= Image.all %>
+
 <h3 class="application-form"> Accounts to Connect </h3>
 
 <p><%= @settings.inspect %></p>
@@ -26,9 +39,14 @@
 	<p><a href="#" onclick="load_FB();">Load Facebook</a></p>
 	<p><a href="#" onclick="get_FB_login_status();">get login status</a></p>
 	<p><a href="#" onclick="publish_wall_post();">Publish wall post</a></p>
+	<p><a href="#" onclick="doesFBexist();">does fb object exist?</a></p>
 	<p><a href="#" onclick="login_to_FB();">login to FB</a></p>
+	<p><a href="#" onclick="asyncInit();">async init to FB</a></p>
+	<p><a href="#" onclick="publishStream(); return false;">Click Here To Show A DEMO Stream Publish Box</a></p>
 
 
 	<p id="login_response"> Nothing yet for login response </p>
 	<p id="login_attempt"> Nothing yet for login attmept </p>
+	<p id="response"> Nothing yet for response </p>
+	<p id="asynch_attempt"> Nothing yet for asynch attmept </p>
 </body>

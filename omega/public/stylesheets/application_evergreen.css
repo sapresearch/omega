@@ -696,10 +696,8 @@ tr.odd {
 }
 
 #logo {
-	position: relative;
-	top: 10px;
 	left:330px;
-    background: url("../images/application/logo.png") no-repeat left;
+    background: url("../images/application/logo.png") no-repeat;
     width: 260px;
 	height: 80px;
 	z-index: 1;

@@ -2,6 +2,7 @@ class SettingsController < Omega::Controller
 
 	def index
 		@settings = Setting.find_or_create_by_user_id(current_user.id)
+		@image = Image.new
 		respond_to do |format|
 			format.html # index.html.erb
 			format.xml  { render :xml => @settings }

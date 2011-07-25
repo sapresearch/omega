@@ -652,7 +652,7 @@ tr.odd {
 	position: relative;
 	top: 40px;
 	left: 320px;
-    background: url("../images/application/logo.png") no-repeat left;
+    background: url("../images/application/logo.png") no-repeat;
     width: 260px;
 	height: 60px;
 	z-index: 1;

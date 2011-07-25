@@ -1,5 +1,6 @@
 <% require_stylesheet 'omega_volunteering' %>
 <% require_stylesheet 'settings' %>
+<%= require_stylesheet 'omega_users_table' %>
 <%= require_stylesheet 'omega_users' %>
 <%= require_javascript 'omega_users' %>
 
@@ -43,35 +44,46 @@ function makeURL()
 
 
   	<h3 class="application-form"> My Volunteering </h3>
-			<table border="1" cellpadding="9" cellspacing="1">
-				<tr>
-					<th>Volunteering Opportunity</th>
-					<th>Date</th>
-					<th>Application Status</th>
-				</tr>
-
-				<% @positions.each do |element| %>
-					<tr>
-         		<td> <%= element[:position].name %></td>
-         		<td> <%= element[:position].start_date %></td>
-         		<td> <%= element[:record].action %></td>
+			<table id="accounts">
+				<thead>
+					<tr id="accounts">
+						<th id="accounts">Volunteering<br/>Opportunity</th>
+						<th id="accounts">Date</th>
+						<th id="accounts">Application Status</th>
 					</tr>
-				<% end %>
+				</thead>
+
+				<tbody>
+					<% @positions.each do |element| %>
+						<tr id="accounts">
+	         		<td id="accounts"> <%= element[:position].name %></td>
+	         		<td id="accounts"> <%= element[:position].start_date %></td>
+	         		<td id="accounts"> <%= element[:record].action %></td>
+						</tr>
+					<% end %>
+				</tbody>
 			</table>
 
 
   		<h3 class="application-form"> Sharing </h3>
-				<table class="accounts">
-					<th> My Accounts</th>
-						<tr><td> Test account </td></tr>
-						<tr><td> Test account 2 </td></tr>
-					<% if @accounts.count == 0 then %>
-						<tr><td> No Accounts </td></tr>
-					<% elsif @accounts.count > 0 then %>
-						<% @accounts.each do |account| %>
-							<tr><td> account.inspect </td></tr>
+				<table id="accounts">
+					<thead>
+						<tr id="accounts">
+							<th id="accounts"> My Accounts</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr id="accounts"><td id="accounts"> Test account </td></tr>
+						<tr id="accounts"><td id="accounts"> Test account 2 </td></tr>
+						<% if @accounts.count == 0 then %>
+						<tr id="accounts"><td id="accounts"> No Accounts </td></tr>
+						<% elsif @accounts.count > 0 then %>
+							<% @accounts.each do |account| %>
+								<tr id="accounts"><td id="accounts"> account.inspect </td></tr>
+							<% end %>
 						<% end %>
-					<% end %>
+					</tbody>
 				</table>
 
 
@@ -89,9 +101,6 @@ function makeURL()
 	<p><a href="#" onclick="loadFB();">Load Facebook</a></p>
 	<p><a href="#" onclick="checkIfLoaded();">Check if it loaded</a></p>
 	<p><a href="#" onclick="publish_wall_post();">Publish</a></p>
-	<p><%= @setting %></p>
-	<p><%= @setting.class %></p>
-	<p><%= @setting.methods %></p>
 
 
 
