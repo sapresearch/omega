@@ -1,3 +1,6 @@
+// fix the problem service#destroy not rendering format.js when using respond_with
+jQuery.ajaxSetup({ beforeSend: function (xhr) { xhr.setRequestHeader("Accept", "text/javascript"); } });
+
 function is_empty_html(html){
     return html.match(/\w+/) ? false :true
 }

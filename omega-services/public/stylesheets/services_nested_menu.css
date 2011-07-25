@@ -1,4 +1,6 @@
-/* services drop down menu */
+/* this css is to be included in layout globally */
+
+/* services drop down menu css, initially copied from application_evergreen.css #topnav to override*/
 #services_nested_menu_ul_root{
     padding: 0 0 10px;
     margin: 0;
@@ -11,10 +13,11 @@
     border-radius: 4px;
     float:left;
 }
+
 #services_nested_menu_ul_root ul{
     padding: 0 0 10px;
     margin: 0;
-    background: #796F3E;      /*Evergreen*/
+    background: #796F3E;     
     color: #fff;
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 4px 4px;
@@ -30,6 +33,7 @@
 
 #services_nested_menu_ul_root li a{
     display:block;
+    height:90%;
     text-transform: capitalize;
     border-bottom: 1px dotted #312F20;
     background:#796F3E;
@@ -43,6 +47,10 @@
     text-decoration: none;
 }
 
+#services_nested_menu_ul_root li a .original_list_link{
+    font-weight: bold;
+}
+
 #services_nested_menu_ul_root .nested_menu_link{
     background:#79823E;
     /*background:#8A7F4D;*/
@@ -50,3 +58,4 @@
 #services_nested_menu_ul_root .nested_menu_link:hover{
     color:green;
 }
+

@@ -12,7 +12,7 @@
                   <% if service.is_leaf? %>
                     <!-- app-spec -->
                     <% unless current_user.is_anonymous? %>
-                      <% service_registration = ServiceRegistration.find_by_service_leaf_id_and_contact_id(service.service_leaf.id, Contact.for(current_user).id) %>
+                      <% service_registration = ServiceRegistration.find_by_service_leaf_id_and_contact_id(service.service_leaf.id, current_contact.id) %>
                     <!-- end app-spec -->
                       <% unless service_registration.nil? %>
 

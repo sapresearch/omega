@@ -59,7 +59,7 @@
     -->
 
     <li>
-      <%= link_to "Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID) %>
+      <%= link_to "Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
       <%= render "services/nested_menu" %>
       
         <!--

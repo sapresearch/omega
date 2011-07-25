@@ -1,0 +1,214 @@
+diff --git a/omega-services/app/helpers/services_helper.rb b/omega-services/app/helpers/services_helper.rb
+index cd0ee44..d2601af 100644
+--- a/omega-services/app/helpers/services_helper.rb
++++ b/omega-services/app/helpers/services_helper.rb
+@@ -1,5 +1,6 @@
+ module ServicesHelper
+ 
++  require "cgi"
+   require "service_lib.rb"
+   include ServiceLib
+ 
+diff --git a/omega-services/app/views/services/_index_no_service_message.html.erb b/omega-services/app/views/services/_index_no_service_message.html.erb
+index c8ce0e4..d08a2be 100644
+--- a/omega-services/app/views/services/_index_no_service_message.html.erb
++++ b/omega-services/app/views/services/_index_no_service_message.html.erb
+@@ -2,18 +2,18 @@
+ 
+   <p class="explanation">
+     <% unless session[:my_services_switch]=="on" %>
+-      No Service is being offered<%= @super_service ? " in "+@super_service.name : "" %> at the moment! 
++      No Service is being offered<%= " in "+@super_service.name if @super_service %> at the moment!
+       <% if is_admin? %>
+         <br/><br/>
+         <%= om_button(:contact => true, :icon => 'clock') do %>
+-          <%= link_to 'Create a New Service', new_service_url %>
++          <%= link_to 'Create a New Service'+(@super_service ? ' in '+@super_service.name : ''), new_service_url %>
+         <% end %>
+       <% end %>
+     <% else %>
+-      You have not registered any service<%= @super_service ? " in "+@super_service.name : "" %> at the moment!
++      You have not registered any service<%= " in "+@super_service.name if @super_service %> at the moment!
+       <br/><br/>
+       <%= om_button(:contact => true, :icon => 'clock') do %>
+-        <%= link_to_function 'View Services', "switch_off_my_services("+@service_id.to_s+")" %>
++        <%= link_to_function 'View Services'+(@super_service ? ' in '+@super_service.name : ''), "switch_off_my_services("+@service_id.to_s+")" %>
+       <% end %>
+     <% end %>
+   </p>
+diff --git a/omega-services/app/views/services/_nested_menu.html.erb b/omega-services/app/views/services/_nested_menu.html.erb
+index dd2ecec..8be4c81 100644
+--- a/omega-services/app/views/services/_nested_menu.html.erb
++++ b/omega-services/app/views/services/_nested_menu.html.erb
+@@ -1,9 +1,11 @@
+ <% require_javascript 'service/tree.js' %>
+ <% require_stylesheet 'services_nested_menu' # seperate css to solve firefox css length limit problem %>
+ 
+-<% services_nested_menu_id = "services_nested_menu" %>
+-<%= render "services/tree", :super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :id=>services_nested_menu_id %>
++<% services_nested_menu_id ||= "services_nested_menu" %>
++<% super_service_id ||= Service::ROOT_SUPER_SERVICE_ID %>
++
++<%= render "services/tree", :super_service_id=>super_service_id, :id=>services_nested_menu_id %>
+ <script type="text/javascript" >
+-  nested_menu('<%= services_nested_menu_id %>_ul_<%= Service::ROOT_SUPER_SERVICE_ID %>',{})
++  nested_menu('<%= services_nested_menu_id %>_ul_<%= super_service_id %>',{})
+ </script>
+ 
+diff --git a/omega-services/app/views/services/_tree.html.erb b/omega-services/app/views/services/_tree.html.erb
+index 51aed2d..4e2b550 100644
+--- a/omega-services/app/views/services/_tree.html.erb
++++ b/omega-services/app/views/services/_tree.html.erb
+@@ -11,7 +11,7 @@
+     <%unless services.empty? || services.nil? %>
+       <% services.each do |service| %>
+         <% if(is_admin? || service.is_public?) %>
+-          <li id="<%= id.to_s %>_li_<%= service.id.to_s %>">
++          <li id="<%= id.to_s %>_li_<%= service.id.to_s %>">            
+             <%= link_to service.name, services_url(:service_id=>service.id, :my_services_switch=>"off"), :class=>"nested_menu_link" %>
+             <% unless service.is_leaf? %>
+               <%= render "services/tree", :super_service_id => service.id, :id => id  %>
+diff --git a/omega-services/public/javascripts/service/tree.js b/omega-services/public/javascripts/service/tree.js
+index 4bd7c60..ad94cc3 100644
+--- a/omega-services/public/javascripts/service/tree.js
++++ b/omega-services/public/javascripts/service/tree.js
+@@ -1,9 +1,25 @@
++function set_width(jquery_ul_element, link_padding_left, link_padding_right){
++    if($(">li>a", jquery_ul_element).length==0)
++        return;
++    var max_width = 0
++    $(">li>a", jquery_ul_element).each(function(){
++        var width = $(">.original_list_link", this).outerWidth(true)
++        if($(">.expansion_mark", this))
++            width += $(">.expansion_mark", this).outerWidth(true)
++        if(width>max_width)
++            max_width = width
++    })
++    jquery_ul_element.css("width", max_width + link_padding_left + link_padding_right)
++}
++
+ function nested_menu(ul_element_id, options){
+     var default_options={
+         'width':"auto",
+         'wrap':false,
+-        'height':"20px",
+-        "visible":false
++        'height':20,
++        'link_padding_left':15,
++        'link_padding_right':15,
++        "visible":true
+     }
+     for(var key in default_options){
+         if(options[key]==null || options[key]==undefined)
+@@ -14,19 +30,32 @@ function nested_menu(ul_element_id, options){
+     var links = $("#"+ul_element_id+" a")
+     var list_items = $("#"+ul_element_id+" li");
+     var expandable_list_items = $("#"+ul_element_id+" li:has(ul)")
+-    var sub_lists = $("#"+ul_element_id+" ul");    
++    var sub_lists = $("#"+ul_element_id+" ul");
++
++    list_items.each(function(){
++        var html = "<span class='original_list_link' style='float:left'>"+$('>a',this).html()+"</span>"
++        $('>a',this).html(html)
++    })
+ 
+     expandable_list_items.each(function(){
+-        $('>a',this).append("<span style='float:right'>&nbsp;&nbsp;&#187;</span>")
+-    })   
++        $('>a',this).append("<span class='expansion_mark' style='float:right'>&nbsp;&nbsp;&#187;</span>")
++    })
++    
++    links.css("padding-left", options["link_padding_left"])
++    links.css("padding-right", options["link_padding_right"])
+ 
+     if(options['wrap']==false)
+         main_list.css("white-space","nowrap")
+-    
++
+     if(options['width']!="auto"){
+         main_list.css("width",options['width'])
+         sub_lists.css("width",options['width'])
+         main_list.css("white-space","normal") //force wrap when width is set.
++    }else{
++        set_width(main_list,options["link_padding_left"],options["link_padding_right"])
++        sub_lists.each(function(){
++            set_width($(this),options["link_padding_left"],options["link_padding_right"])
++        })
+     }
+ 
+     links.css("display","block")
+diff --git a/omega-services/public/javascripts/util.js b/omega-services/public/javascripts/util.js
+index d760355..9a91ef4 100644
+--- a/omega-services/public/javascripts/util.js
++++ b/omega-services/public/javascripts/util.js
+@@ -5,4 +5,20 @@ function array_diff(a1,a2){
+             diff.push(a1[i])
+     
+     return diff
++}
++
++function array_max(a){
++    var max = a[0]
++    for(var i=0; i<a.length; i++)
++        if(a[i]>max)
++            max=a[i]
++    return max
++}
++
++function array_min(a){
++    var min = a[0]
++    for(var i=0; i<a.length; i++)
++        if(a[i]<min)
++            min=a[i]
++    return min
+ }
+\ No newline at end of file
+diff --git a/omega-services/public/stylesheets/services_nested_menu.css b/omega-services/public/stylesheets/services_nested_menu.css
+index 3b32488..4634b77 100644
+--- a/omega-services/public/stylesheets/services_nested_menu.css
++++ b/omega-services/public/stylesheets/services_nested_menu.css
+@@ -1,4 +1,6 @@
+-/* services drop down menu */
++/* this css is to be included in layout globally */
++
++/* services drop down menu css, initially copied from application_evergreen.css #topnav to override*/
+ #services_nested_menu_ul_root{
+     padding: 0 0 10px;
+     margin: 0;
+@@ -11,10 +13,11 @@
+     border-radius: 4px;
+     float:left;
+ }
++
+ #services_nested_menu_ul_root ul{
+     padding: 0 0 10px;
+     margin: 0;
+-    background: #796F3E;      /*Evergreen*/
++    background: #796F3E;     
+     color: #fff;
+     -moz-border-radius: 0 0 4px 4px;
+     -webkit-border-radius: 4px 4px;
+@@ -30,6 +33,7 @@
+ 
+ #services_nested_menu_ul_root li a{
+     display:block;
++    height:90%;
+     text-transform: capitalize;
+     border-bottom: 1px dotted #312F20;
+     background:#796F3E;
+@@ -43,6 +47,10 @@
+     text-decoration: none;
+ }
+ 
++#services_nested_menu_ul_root li a .original_list_link{
++    font-weight: bold;
++}
++
+ #services_nested_menu_ul_root .nested_menu_link{
+     background:#79823E;
+     /*background:#8A7F4D;*/
+@@ -50,3 +58,4 @@
+ #services_nested_menu_ul_root .nested_menu_link:hover{
+     color:green;
+ }
++

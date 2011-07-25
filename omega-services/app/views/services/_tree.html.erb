@@ -4,15 +4,15 @@
 
     <% if super_service_id==Service::ROOT_SUPER_SERVICE_ID %>
       <li>
-        <%= link_to "All Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID), :class=>"nested_menu_root_link" %>
+        <%= link_to "All Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off"), :class=>"nested_menu_root_link" %>
       </li>
     <% end %>
 
     <%unless services.empty? || services.nil? %>
       <% services.each do |service| %>
         <% if(is_admin? || service.is_public?) %>
-          <li id="<%= id.to_s %>_li_<%= service.id.to_s %>">
-            <%= link_to service.name, services_url(:service_id=>service.id), :class=>"nested_menu_link" %>
+          <li id="<%= id.to_s %>_li_<%= service.id.to_s %>">            
+            <%= link_to service.name, services_url(:service_id=>service.id, :my_services_switch=>"off"), :class=>"nested_menu_link" %>
             <% unless service.is_leaf? %>
               <%= render "services/tree", :super_service_id => service.id, :id => id  %>
             <% end %>
