@@ -6,7 +6,7 @@
         <input id="requestable" name="requestable" type="checkbox" checked="checked" />
         <% unless current_user.is_anonymous? %>
           <label for="my_services" >My Services</label>
-          <input id="my_services" name="my_services" type="checkbox" onclick="switch_my_services('<%= @service_id %>')" />
+          <input id="my_services" name="my_services" type="checkbox" onclick="switch_my_services()" />
         <% end %>
       </form>
 

@@ -1,6 +1,6 @@
 class ServiceRegistration < ActiveRecord::Base
   # app-spec
-  belongs_to :contact
+  belongs_to :registrant, :class_name=>"Contact"
   # end app-spec
   belongs_to :service_leaf
   has_one :service_registration_form_value
@@ -8,7 +8,7 @@ class ServiceRegistration < ActiveRecord::Base
   class << self
     
     # select services that is registered by a contact, or contains any service registered by a contact from a collection of services
-    def filter_services_by_contact(services, contact)
+    def filter_services_by_registrant(services, contact)
       registered_services = contact.registered_services
 
       filtered_services = services.select do |s|

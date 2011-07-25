@@ -13,7 +13,14 @@ class ServicesController < Omega::Controller
 
   def index
     @service_id = params[:service_id]
-    @service = Service.find(@service_id) unless @service_id.nil?
+    @service = Service.find_by_id(@service_id) unless @service_id.nil?   # use find_by_id to return nil in case no record
+
+    # redirect again when the target service is missing
+    if @service_id && @service.nil?
+      redirect_to services_url
+      return
+    end
+    
     session[:super_service_id] = @service.nil? ? (params[:super_service_id] || session[:super_service_id]) : @service.super_service_id
     @super_service = super_service
     @services = sub_services_of(@super_service)
