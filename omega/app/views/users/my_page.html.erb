@@ -36,8 +36,11 @@ function makeURL()
 
 <div class="heading-main-columns">
 	<h1 class="page-content">
-		<%= current_user.first_name + "'s" %>
-		<%= current_user.username + "'s" if current_user.first_name.blank? %>MyOmega Page
+		<% if current_user.nil? then %>
+			<%= current_user.first_name + "'s" %>
+			<%= current_user.username + "'s" if current_user.first_name.blank? %>
+		<% end %>
+		MyOmega Page
 	</h1>
 </div>
 
