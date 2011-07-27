@@ -177,7 +177,8 @@ function check_field_exists(){
 function delete_element(element_id)
 {    
     $("#"+element_id).hide("slow", function(){ $(this).remove(); check_field_exists();})
-    cancel_editing_element();    
+    if(element_id==editing_element_id())
+        cancel_editing_element();
 }
 
 // return the currently active service section element id
@@ -186,9 +187,13 @@ function active_service_section_element_id(){
 }
 
 // highlight element being edited
-function editing_element(element_id){
+function set_editing_element(element_id){
     $(".editing").removeClass("editing");
     $("#"+element_id).addClass("editing");
+}
+
+function editing_element_id(){
+    return $(".editing").attr("id")
 }
 
 //***** app-spec
@@ -214,7 +219,7 @@ function prepare_field(field_html){
     return "<li id='li_"+new Date().getTime()+"' class='relative' ondblclick='edit_field(this.id)' >"+field_operation_links()+field_html+"</li>"
 }
 function edit_field(parent_element_id){
-    editing_element(parent_element_id)
+    set_editing_element(parent_element_id)
     var label = $("#"+parent_element_id).children()[1]
     var field = $("#"+parent_element_id).children()[2]
     switch(field.nodeName)

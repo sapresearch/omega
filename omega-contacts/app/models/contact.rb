@@ -43,6 +43,7 @@ class Contact < Omega::Model
   #services associations
   has_many :service_registrations, :dependent=>:destroy
   has_many :service_leaves, :through=>:service_registrations
+  has_many :service_sections
   def registered_services
     service_leaves.map{|sl|sl.service}
   end

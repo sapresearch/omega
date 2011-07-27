@@ -6,7 +6,7 @@ module ServiceLib
   end
   
   def my_services(services)
-    ServiceRegistration.filter_services_by_contact(services,current_contact)
+    ServiceRegistration.filter_services_by_registrant(services,current_contact)
   end
 
   def registered?(service, user=current_user)

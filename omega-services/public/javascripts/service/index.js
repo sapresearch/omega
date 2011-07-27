@@ -1,8 +1,6 @@
-function switch_my_services(service_id){
+function switch_my_services(){
     var val = $("#my_services").is(":checked") ? "on" : "off";
     var data = {"my_services_switch":val}
-    if(service_id)
-        data["service_id"]=service_id
 
     $.ajax({
         url: services_url,
@@ -12,14 +10,14 @@ function switch_my_services(service_id){
         cache: false
     })
 }
-function switch_on_my_services(service_id){
+function switch_on_my_services(){
     $("#my_services").attr("checked", "checked")
-    switch_my_services(service_id)
+    switch_my_services()
 }
 
-function switch_off_my_services(service_id){
+function switch_off_my_services(){
     $("#my_services").removeAttr("checked")
-    switch_my_services(service_id)
+    switch_my_services()
 }
 
 function services_accordion(service_id){
