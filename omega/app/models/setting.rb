@@ -1,6 +1,5 @@
-class Setting < ActiveRecord::Base
+class Setting < Omega::Model
 	belongs_to :user
-	has_one :image
-	attr_accessor :facebook_token, :twitter
+	attr_accessible :facebook_token, :twitter, :user_id
 	
 end

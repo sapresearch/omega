@@ -1,52 +1,56 @@
-<% require_stylesheet 'omega_volunteering' %>
+<head>
+	<% require_stylesheet 'settings' %>
+</head>
 
 <body>
 
-<div class="heading-main-columns">
-  <h1 class="page-content">
-		Settings
-  </h1>
-</div>
-
-<h3 class="application-form"> Site-Wide Settings </h3>
-
-<%= form_for @image, :html => { :multipart => true} do |i| %>
-	<p>
-		Upload an image to use as the site-wide background logo:
-	</p>
-	<p>
-		<%= i.file_field :image %>
-	</p>
-<% end %>
-
-<%= Image.all %>
-
-<h3 class="application-form"> Accounts to Connect </h3>
-
-<p><%= @settings.inspect %></p>
-
-<div class="container">
-	<nav class="round">
-		<ul>
-			<li><%= link_to 'new', :controller => "settings", :action => "new" %></li>
-		</ul>
-	</nav>
-</div>
-
-	<%= render 'layouts/facebook' %>
-
-	<p> Testing Only </p>
-	<p><a href="#" onclick="load_FB();">Load Facebook</a></p>
-	<p><a href="#" onclick="get_FB_login_status();">get login status</a></p>
-	<p><a href="#" onclick="publish_wall_post();">Publish wall post</a></p>
-	<p><a href="#" onclick="doesFBexist();">does fb object exist?</a></p>
-	<p><a href="#" onclick="login_to_FB();">login to FB</a></p>
-	<p><a href="#" onclick="asyncInit();">async init to FB</a></p>
-	<p><a href="#" onclick="publishStream(); return false;">Click Here To Show A DEMO Stream Publish Box</a></p>
+	<div class="heading-main-columns-settings">
+	  <h1 class="page-content">
+			Settings
+	  </h1>
+	</div>
 
 
-	<p id="login_response"> Nothing yet for login response </p>
-	<p id="login_attempt"> Nothing yet for login attmept </p>
-	<p id="response"> Nothing yet for response </p>
-	<p id="asynch_attempt"> Nothing yet for asynch attmept </p>
+
+	<h3 class="settings-form"> Site-Wide Settings </h3>
+		</br><p> Current Logo: <%= Image.find_by_last_id.image_file_name %></p>
+
+			<p>
+				<% if (Setting.find_by_user_id(current_user.id).nil?) then %>
+					<%= link_to 'Edit Logo', :controller => "settings", :action => "new" %>
+				<% else %>
+					<%= link_to 'Edit Logo', :controller => "settings", :action => "edit", :id => @settings.id %></p>
+				<% end %>
+			</p>
+
+		<div id="settings-logo" style="position: left"></div>
+
+
+
+	<h3 class="settings-form"> Your Accounts </h3>
+		<p>
+			<%= "No Accounts Added Yet" if (@settings.twitter.nil? and @settings.facebook_token.nil?) %>
+		</p>
+		<p>
+			<%= "Facebook" unless @settings.twitter.nil? %>
+		</p>
+		<p>
+			<%= "Twitter" unless @settings.facebook_token.nil? %>
+		</p>
+
+
+	<div class="container" style="margin-left: 42%">
+		<nav class="round">
+			<ul>
+				<li>
+				<% if (Setting.find_by_user_id(current_user.id).nil?) then %>
+					<%= link_to 'Edit Your Settings', :controller => "settings", :action => "new" %>
+				<% else %>
+					<%= link_to 'Edit Your Settings', :controller => "settings", :action => "edit", :id => @settings.id %></p>
+				<% end %>
+				</li>
+			</ul>
+		</nav>
+	</div>
+
 </body>

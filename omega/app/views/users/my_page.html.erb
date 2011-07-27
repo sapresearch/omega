@@ -44,7 +44,7 @@ function makeURL()
 
 
   	<h3 class="application-form"> My Volunteering </h3>
-			<table id="accounts">
+			<table class="accounts">
 				<thead>
 					<tr id="accounts">
 						<th id="accounts">Volunteering<br/>Opportunity</th>
@@ -67,26 +67,32 @@ function makeURL()
 
   		<h3 class="application-form"> Sharing </h3>
 				<table id="accounts">
-					<thead>
-						<tr id="accounts">
-							<th id="accounts"> My Accounts</th>
-						</tr>
-					</thead>
 
 					<tbody>
-						<tr id="accounts"><td id="accounts"> Test account </td></tr>
-						<tr id="accounts"><td id="accounts"> Test account 2 </td></tr>
-						<% if @accounts.count == 0 then %>
-						<tr id="accounts"><td id="accounts"> No Accounts </td></tr>
-						<% elsif @accounts.count > 0 then %>
-							<% @accounts.each do |account| %>
-								<tr id="accounts"><td id="accounts"> account.inspect </td></tr>
-							<% end %>
-						<% end %>
+						<tr id="accounts">
+							<td id="accounts"> Facebook: </td>
+							<td id="accounts">
+								<form name="messageForm" onsubmit="publish_stuff();">
+									<input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="Post Message"><br />
+								</form>
+							</td>
+						</tr>
+
+						<tr id="accounts">
+							<td id="accounts"> Twitter: </td>
+							<td id="accounts">
+								<form name="messageForm" onsubmit="publish_stuff();">
+									<input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="Post Message"><br />
+								</form>
+							</td>
+						</tr>
+
 					</tbody>
 				</table>
+					
 
 
+						<!--
 				<p id="demo"></p>
 				<br />
 				<form name="messageForm" onsubmit="publish_stuff();">
@@ -94,7 +100,6 @@ function makeURL()
 				</form>
 
 
-	<%= render 'layouts/facebook' %>
 
 
 	<p>For Testing Only</p>
@@ -107,7 +112,7 @@ function makeURL()
 
 
 								<p id="response"> No rsponse yet</p>
-								<!--<button type="button" onclick="facebookFunc()"> Facebook Login </button> 
+								<button type="button" onclick="facebookFunc()"> Facebook Login </button> 
 								<p id="demo"></p>   !-->
 
 

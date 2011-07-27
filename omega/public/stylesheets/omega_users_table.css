@@ -1,6 +1,11 @@
+table.accounts
+{
+	margin: 0 0 0 15%;
+}
+
 #accounts th
 {
-	font-size: 14px;
+	font-size: 18px;
 	font-weight: normal;
 	color: #039;
 	padding: 10px 20px;
@@ -11,6 +16,7 @@
 {
 	color: #669;
 	padding: 9px 20px 0px 20px;
+	font: 14px;
 }
 
 #accounts tbody tr:hover td

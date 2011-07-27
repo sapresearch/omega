@@ -1,0 +1,64 @@
+<head>
+	<% require_stylesheet 'settings' %>
+</head>
+
+<%= form_for @image, :html => { :multipart => true} do |i| %>
+	<body>
+	
+	<div class="heading-main-columns-settings">
+	  <h1 class="page-content">
+			Edit Settings
+	  </h1>
+	</div>
+	
+	
+	
+	<h3 class="settings-form"> Site-Wide Settings </h3>
+		<p>
+			Upload an image to use as the site-wide background logo:
+		</p>
+		<p>
+			<%= i.file_field :image %>
+		</p>
+	
+		</br>
+		<p> Current Logo: </p>
+	
+		<% if (i.respond_to?('image_file_name')) then %>
+			<% url = i.image_file_name %>
+			<div id="settings-logo" style="background:(<%= url %>)"</div>
+		<% else %>
+			<div id="settings-logo" style="position: left"></div>
+		<% end %>
+	<% end %>
+
+
+
+<h3 class="settings-form"> Sharing </h3>
+	<p> Social Media Accounts to Activate: </p>
+		<%= form_for(@setting) do |s| %>
+		
+			<% if @setting.facebook_token.nil? then %>
+				<div class="field" >
+					<%= s.label "Facebook App Token" %>
+					<%= s.text_field(:facebook_token) %>
+				</div>
+			<% end %>
+
+			<% if @setting.fb_secret.nil? then %>
+				<div class="field" >
+					<%= s.label "Faceebook Secret Token" %>
+					<%= s.text_field(:fb_secret) %>
+				</div>
+			<% end %>
+
+			<%= "You've added all available accounts" unless @setting.fb_secret.nil? and @setting.facebook_token.nil? %>
+		
+			</br>
+			<div class="actions" style="margin-left: 40%">
+				<p>
+					<%= s.submit "Update Settings" %>
+				</p>
+			</div>
+		<% end %>
+	</body>

@@ -34,8 +34,10 @@ Omega::Module.routes.draw do
 	resources :settings do
 		collection do
 			get :index
-			get 'settings/new'
+			post 'settings/new'
+			get 'settings/show'
 			get 'settings/error'
+			get 'settings/edit'
 		end
 	end
 

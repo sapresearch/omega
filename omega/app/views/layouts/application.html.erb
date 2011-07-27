@@ -49,11 +49,12 @@
 <div id="banner_wrapper">
 
 	<% if (!Image.all.empty?) then %>
-		<% last_logo_added_to_db = Image.find(1) %>
- 	 		<div id="logo" style="background:url(" . <%=last_logo_added_to_db%> . ") no-repeat scroll transparent" >
+		<% last_logo = Image.find_by_last_id %>
+				<% url = '../images/application/logo/' + last_logo.id.to_s + '.png' %>
+ 	 		<div id="logo" style="background:url(<%=url%>) no-repeat left scroll transparent" >
  			</div>
 	<% else %>
- 		<div id="logo">
+ 		<div id="logo" style="no-repeat left">
  		</div>
 	<% end %>
 

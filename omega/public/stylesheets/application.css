@@ -192,7 +192,6 @@ h3.application-form {
 	margin: 45px 0 25px 0;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
-	
 }
 
 h4 {
@@ -652,7 +651,7 @@ tr.odd {
 	position: relative;
 	top: 40px;
 	left: 320px;
-    background: url("../images/application/logo.png") no-repeat;
+    background: url("../images/application/logo.png") no-repeat left;
     width: 260px;
 	height: 60px;
 	z-index: 1;
@@ -835,7 +834,6 @@ div.heading-main-columns {
 	height: 80px;
 	margin: -45px 0 0 -20px;
 	background: url("../images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #E1DFCB;
-
 }
 
 div.left-heading {
