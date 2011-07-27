@@ -28,8 +28,8 @@ h3.settings-form {
 #settings-logo {
 	position: relative;
 	top: -25px;
-	left: 320px;
-    background: url("../images/application/logo.png") no-repeat;
+	left: 35%;
+    background: url("../images/application/logo.png") no-repeat left;
     width: 260px;
 	height: 60px;
 	z-index: 1;

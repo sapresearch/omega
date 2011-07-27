@@ -28,7 +28,7 @@
 			<% url = i.image_file_name %>
 			<div id="settings-logo" style="background:(<%= url %>)"</div>
 		<% else %>
-			<div id="settings-logo" style="left: 35%; position: relative"></div>
+			<div id="settings-logo"></div>
 		<% end %>
 	<% end %>
 
@@ -51,6 +51,18 @@
 					<%= s.text_field(:fb_secret) %>
 				</div>
 			<% end %>
+
+
+
+      <div id="fb-root"></div>
+      <script src="http://connect.facebook.net/en_US/all.js">
+      </script>
+      <script>
+         FB.init({ appId:'100002599482156', cookie:true, status:true, xfbml:true });
+         FB.ui({ method: 'feed', message: 'Facebook for Websites is super-cool'});
+      </script>
+
+
 
 			<%= "You've added all available accounts" unless @setting.fb_secret.nil? and @setting.facebook_token.nil? %>
 		
