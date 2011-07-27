@@ -15,13 +15,11 @@
 	<h3 class="settings-form"> Site-Wide Settings </h3>
 		</br><p> Current Logo </p>
 
-			<p>
 				<% if (Setting.find_by_user_id(current_user.id).nil?) then %>
 					<%= link_to 'Edit Logo', :controller => "settings", :action => "new" %>
 				<% else %>
 					<%= link_to 'Edit Logo', :controller => "settings", :action => "edit", :id => @settings.id %></p>
 				<% end %>
-			</p>
 
 		<div id="settings-logo" style="position: left"></div>
 
