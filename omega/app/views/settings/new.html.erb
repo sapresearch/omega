@@ -4,11 +4,6 @@
   <script src="http://connect.facebook.net/en_US/all.js"></script>
   <script>
      FB.init({ appId:'100002599482156', cookie:true, status:true, xfbml:true });
-     function fb_ui_message()
-			{
-				FB.ui({ method: 'feed', message: 'Facebook for Websites is super-cool'});
-			}
   </script>
-	<button onclick="fb_ui_message();"> Message to Facebook (UI) </button>
 	<fb:login-button perms="email,user_checkins">Login with Facebook</fb:login-button>
 </body>
