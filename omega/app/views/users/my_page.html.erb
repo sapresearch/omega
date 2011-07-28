@@ -5,7 +5,10 @@
 <%= require_javascript 'omega_users' %>
 
 <style type="text/css">
-	h3.application-form {width: 622px;}
+	h3.application-form{
+		width: 622px;
+  	background: #87B5CA;
+	}
 </style>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
@@ -26,8 +29,7 @@ function makeURL()
 
 <div id="right">
 	<h1 class="side-bar corners-top"> My Calendar </h1>
-		<p> <%= @calendar.inspect unless @calendar.empty? %></p>
-		<p> <%= "calendar is empty" if @calendar.empty? %></p>
+		<p> <%= "Your calendar is empty" %></p>
 </div>
 
 
