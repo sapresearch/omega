@@ -3,9 +3,13 @@
   <div id="fb-root"></div>
   <script src="http://connect.facebook.net/en_US/all.js"></script>
   <script>
-     FB.init({ appId: '117866098303408', cookie:true, status:true, xfbml:true });
-     FB.ui({ method: 'feed', message: 'Facebook for Websites is super-cool'});
+    FB.init({ appId: '117866098303408', cookie:true, status:true, xfbml:true });
+		function fb_message(){
+			FB.ui({ method: 'feed', message: 'Facebook for Websites is super-cool'});
+		}
   </script>
 	<%= render 'layouts/settings' %>
+	<button onclick="fb_message()"> Message to Facebook </button>
+	<button onclick="FB.ui({ method: 'feed', message: 'Facebook for Websites is super-cool'})"> Message to Facebook </button>
 	<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>
 </body>
