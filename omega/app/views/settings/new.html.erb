@@ -5,11 +5,18 @@
   <script>
     FB.init({ appId: '117866098303408', cookie:true, status:true, xfbml:true });
 		function fb_message(){
-			FB.ui({ method: 'feed', message: 'Facebook for Websites is super-cool'});
+			user_message = document.messageForm.message.value;
+			FB.ui({ method: 'feed', message: user_message});
 		}
   </script>
 	<%= render 'layouts/settings' %>
-	<button onclick="fb_message()"> Message to Facebook </button>
+	<!-- <button onclick="fb_message()"> Message to Facebook </button>
 	<button onclick="FB.ui({ method: 'feed', message: 'Facebook for Websites is super-cool'})"> Message to Facebook </button>
+	!-->
+
+	<form name="messageForm" onsubmit="fb_message()">
+		<input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="test alert"><br />
+	</form>
+
 	<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>
 </body>
