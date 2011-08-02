@@ -4,4 +4,6 @@ class ServiceLeaf < ActiveRecord::Base
   has_many :registrants, :class_name=>"Contact", :through=>:service_registrations
   has_many :service_sections, :dependent => :destroy
 
+  accepts_nested_attributes_for :service_sections
+
 end

@@ -46,8 +46,9 @@ class ServicesController < Omega::Controller
 
     # for service sections
     @contacts = Contact.all.sort{|c1,c2|c1.name<=>c2.name}
-    @service_section=@service.service_sections.build
-    @service_sections=@service.service_sections
+    @service_leaf = @service.build_service_leaf
+    @service_section=@service_leaf.service_sections.build
+    @service_sections=@service_leaf.service_sections
     @event = @service_section.build_event
 
     # automatically cancel my services switch when creating a new service in order to view it.

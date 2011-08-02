@@ -21,6 +21,8 @@ class Service < ActiveRecord::Base
   has_many :service_registrations, :through => :service_leaf
   has_many :service_sections, :through => :service_leaf
 
+  accepts_nested_attributes_for :service_leaf
+
   # abstraction layer functions for different implementation in database
   class << self
 
