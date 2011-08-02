@@ -20,7 +20,7 @@
                           <%= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", "data-tooltip"=>"Unregister this service" %>
                         <% end %>
                         <%#= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", :class=>"service_operation_button" %>
-                        <span class="service_registration_status" style="float:left"><strong>status:</strong> <%= service_registration.status %></span>
+                        <span class="service_registration_status" ><strong>status:</strong> <%= service_registration.status %></span>
 
                       <% else %>
 

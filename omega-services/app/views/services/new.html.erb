@@ -3,12 +3,25 @@
 <% require_javascript 'service/form_builder.js' %>
 <% require_javascript 'service/new.js' %>
 
+<!-- anytime jquery plugin -->
+<% require_stylesheet 'anytime.css' %>
+<% require_javascript 'anytime.js' %>
+<% require_javascript 'anytimetz.js' %>
+
 <script type="text/javascript">
   //global variables
   var service_leaf_level = '<%= Service::LEAF_LEVEL %>'
   var service_branch_level = '<%= Service::BRANCH_LEVEL %>'
+  var service = <%= raw @service.to_json(
+    :include=>{:service_leaf=>{
+      :include=>{:service_sections=>{
+        :include=>{:event=>{
+          :include=>:event_recurrence
+        }}
+      }}
+    }}) %>
 </script>
-  
+
 <!-- app-spec -->
 <div class="content circle-corners-bottom-left" >
 <!-- end app-spec -->
@@ -29,7 +42,7 @@
   </div>
 
   <div class="services_page_content">
-    <%= render "new_page_content" %>
+    <%= render "services/new/new_page_content" %>
   </div>
 
 <!-- app-spec -->

@@ -1,4 +1,4 @@
-$("#service_title_<%= @service.id %>").hide('slow', function(){ $(this).remove(); })
+$("#service_head_<%= @service.id %>").hide('slow', function(){ $(this).remove(); })
 $("#service_body_<%= @service.id %>").hide('slow', function(){
   $(this).remove();
   <% if @services.empty? %>

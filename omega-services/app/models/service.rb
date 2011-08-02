@@ -19,6 +19,7 @@ class Service < ActiveRecord::Base
   has_one :service_registration_template, :through => :service_registration_form
   has_one :service_leaf, :dependent => :destroy
   has_many :service_registrations, :through => :service_leaf
+  has_many :service_sections, :through => :service_leaf
 
   # abstraction layer functions for different implementation in database
   class << self
@@ -74,6 +75,7 @@ class Service < ActiveRecord::Base
     end
     
   end
+  
 
   def is_root?
     super_service.nil?

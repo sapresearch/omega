@@ -44,6 +44,12 @@ class ServicesController < Omega::Controller
     @services_with_detail_template = Service.services_with_detail_template.sort{|s1,s2| s1.name<=>s2.name}
     @services_with_registration_template = Service.services_with_registration_template.sort{|s1,s2| s1.name<=>s2.name}
 
+    # for service sections
+    @contacts = Contact.all.sort{|c1,c2|c1.name<=>c2.name}
+    @service_section=@service.service_sections.build
+    @service_sections=@service.service_sections
+    @event = @service_section.build_event
+
     # automatically cancel my services switch when creating a new service in order to view it.
     session[:my_services_switch]="off"
     respond_with(@service)

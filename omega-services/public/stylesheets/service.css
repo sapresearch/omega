@@ -34,6 +34,7 @@
 .services_page_content input{
     margin: 5px;
 }
+.services_page_content span.om-contact-icon-button a{ color:navy; } /* app-spec */
 
 .services_search_box{
     width:100%;
@@ -56,7 +57,6 @@
     border:1px solid #ccc;
 }
 
-.service_operation_links span.om-contact-icon-button a{ color:navy; }
 .service_left_links { float:left; }
 .service_right_links { float:right; }
 .services_left_links a{ float:left; margin-right:20px; }
@@ -69,6 +69,8 @@
     font-size: 15px;
 }
 
+.bread_crumb a{ font-style:italic; color:navy }
+.service_registration_status{ float:left; }
 
 
 /*--------- form builder */
@@ -106,6 +108,15 @@
   margin-right: 10px;
   display: block;
 }
+.service_form_builder_tabs .tab_content_options span label{
+    float:none;
+    width:auto;
+    font-size:14px;
+    margin:0px 0px 0px 20px;
+}
+.service_form_builder_tabs .tab_content_options span input{
+    display:inline;
+}
 
 .service_form_builder_tabs .tab_content li { clear:both; padding:5px 0px;}
 .service_form_builder_tabs .tab_content li label{ line-height: 100%; }
@@ -114,6 +125,10 @@
 .service_form_builder_tabs .tab_content li select{ display:block; width:280px;}
 .service_form_builder_tabs .tab_content .editable_list li:hover {cursor:move; background-color: #bbb}
 .service_form_builder_tabs .tab_content .editing{background-color: #ddd}
+
+#required_label{width:150px; margin-left:0px}
+#required_checkbox{float:left; width:15px; margin:7px 0px 7px 7px}
+.required{color:green}
 
 /* for adjusting jquery UI component*/
 #service_form_builder_nav{ height:32px; }
@@ -129,11 +144,102 @@
 #admin-edit-em textarea {width:100%; height:100px;}
 /* end app-spec */
 
-#required_label{width:150px; margin-left:0px}
-#required_checkbox{float:left; width:15px; margin:7px 0px 7px 7px}
-.required{color:green}
 
-.bread_crumb a{ font-style:italic; color:navy }
-.service_registration_status{ float:right; }
+/*----------------- service form --------------------*/
+.service_form .disabled{ color:#ccc }
+.service_form{
+}
 
+.service_form .part{
+    margin: 15px 0px;
+}
 
+.service_form .show_part{ border-top: 1px solid #aaa }
+
+/* title */
+.service_form h3{
+    font-size:16px;
+    font-family:"Trebuchet MS";
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+    height:25px;
+    padding: 5px 0 0 20px;
+    margin: 0px 0 10px 0;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    
+}
+.service_form .edit_part h3{
+    background: #B8CE6C;
+    text-shadow: 1px 1px 1px #666;
+    color: #fff;
+}
+.service_form .show_part h3{
+    color: green;  
+}
+.service_form .service_right_links{ margin-right:20px; }
+.service_form .update_links span.om-contact-icon-button a{ color:white; } /* app-spec */
+.service_form .show_part .update_links{ display:none; }
+.service_form .edit_part .edit_links{ display:none; }
+
+/* show body */
+.service_form .edit_part .show_body{ display:none; }
+.service_form .show_body{
+}
+.service_form .show_body span{
+    font-size:13px;
+}
+.service_form .show_body .item{
+    margin: 0px 0px 0px 20px;
+}
+.service_form .show_body .field{
+    margin: 0px 0px 0px 20px;
+}
+.service_form .show_body .label{
+    margin: 0px 5px 0px 0px;
+}
+.service_section_title{
+    font-weight:bolder;
+    font-size:16px;
+    font-style:italic;
+    color:#555;
+}
+
+/* edit body */
+.service_form .show_part .edit_body{ display:none; }
+.service_form .edit_body{
+}
+.service_form .edit_body label{
+    font-size:13px;
+    float:left;
+    line-height: 100%;
+    width:150px;
+    text-align:right;
+    margin:10px 10px 0px 20px;
+}
+.service_form .edit_body input{
+    font-size:13px;
+    display:block;
+}
+
+#service_description{ width:400px; }
+.service_form .edit_body .service_sections_recurrence_checkbox{ float:left; margin:10px 10px 0px 0px }
+.service_sections_recurrence_fields{display:none;}
+.service_sections_recurrence_interval span{
+    float:left;
+    font-size:13px;
+    line-height: 100%;
+    font-weight:bold;
+    color:#555;
+    margin:10px 5px 0px 0px
+}
+.service_sections_recurrence_interval input{
+    float:left;
+    width:30px;
+    font-size:13px;
+    line-height: 100%;
+    font-weight:bold;
+    color:#555;
+
+}
