@@ -173,10 +173,10 @@ function check_field_exists(){
     is_empty_html(service_registration_html()) ? $("#check_service_registration_template").css("visibility", "hidden") : $("#check_service_registration_template").css("visibility", "visible")
 }
 
-//delete an element with visual effect
-function delete_element(element_id)
-{    
-    $("#"+element_id).hide("slow", function(){ $(this).remove(); check_field_exists();})
+// delete a field
+function delete_field(element_id)
+{
+    $("#"+element_id).hide("slow", function(){ $(this).remove();check_field_exists(); })
     if(element_id==editing_element_id())
         cancel_editing_element();
 }
@@ -199,7 +199,7 @@ function editing_element_id(){
 //***** app-spec
 function cancel_editing_element(){
     $(".editing").removeClass("editing");
-    $("#admin-edit-em").html("Hover over the field you want to edit or delete and choose from the two options")
+    $("#admin-edit-em").html("Hover over the field you want to edit or delete and choose from the two options.<br/><br/>Tips: double click on a field to edit it's label, and single click to edit it's content. Drag & drop a field to reorder.")
 }
 function field_operation_links(){
   return "<div class='item-list-actions-wrapper corners' >\
@@ -208,7 +208,7 @@ function field_operation_links(){
                 <span class='om-icon om-icon-edit'></span>\
                 <span class='edit-ui-em'>Edit</span>\
               </span>\
-              <span class='om-plain-icon-button' onclick='delete_element($(this).parents(\"li\").attr(\"id\"))'>\
+              <span class='om-plain-icon-button' onclick='delete_field($(this).parents(\"li\").attr(\"id\"))'>\
                 <span class='om-icon om-icon-delete'></span>\
                 <span class='delete-ui-em'>Delete</span>\
               </span>\

@@ -224,6 +224,7 @@
 }
 
 #service_description{ width:400px; }
+.delete_service_section_link{float:right;}
 .service_form .edit_body .service_sections_recurrence_checkbox{ float:left; margin:10px 10px 0px 0px }
 .service_sections_recurrence_fields{display:none;}
 .service_sections_recurrence_interval span{

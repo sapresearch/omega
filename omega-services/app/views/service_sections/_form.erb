@@ -1,7 +1,13 @@
 
-        <fieldset>
+        <fieldset id="service_sections_<%= i.to_s %>">
           <legend>Section</legend>
-
+          
+          <div class="delete_service_section_link">
+            <%= om_button(:contact => true, :icon=>'delete') do %>
+              <%= link_to_function "Delete", "delete_element('service_sections_#{i.to_s}')" %>
+            <% end %>
+          </div>
+          
           <div class="field">
             <label for="service_sections_<%= i.to_s %>_contact_id">Contact</label>
             <select id="service_sections_<%= i.to_s %>_contact_id" name="service_sections[<%= i.to_s %>][contact_id]">
