@@ -134,25 +134,15 @@ function preview_service_customization_info(){
     </div>
 
     <div class="edit_body body">
-
-      <%= form.fields_for :service_leaf do |service_leaf_form| %>
-        <%= service_leaf_form.fields_for :service_sections do |service_section_form| %>
-          <%= render "service_sections/form", :form=>service_section_form %>
+      <div id="service_section_form_list">
+        <% @service_sections.each_with_index do |service_section, i| %>
+          <%= render "service_sections/form", :service_section=>service_section, :i=>i  %>
         <% end %>
+      </div>
 
-        <% new_text = lambda do %>
-          <span class="new_links" id="add_service_section_link">
-            <%= om_button(:contact => true, :icon=>'add') do %>
-              <strong>Add Another Section</strong>
-            <% end %>
-          </span>
-        <% end %>
-
-	<%= link_to_new_nested service_leaf_form, :service_sections, :text => new_text do |service_section_form| %>
-          <%= render "service_sections/form", :form=>service_section_form %>
-        <% end %>
-      <% end %>
-      
+      <div class="new_links" id="new_service_section_link">
+        <%= render "service_sections/new_link", :index=>@service_sections.length %>
+      </div>
     </div>
   </div>
 
