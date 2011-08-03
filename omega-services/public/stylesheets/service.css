@@ -80,6 +80,8 @@
     width:200px;
     height:520px;
 }
+.service_form_builder_tools #required_label{width:150px; margin-left:0px; float:none; font-size:12px; display:inline;}
+.service_form_builder_tools #required_checkbox{float:none; width:15px; margin:7px 7px 7px 7px; display:inline;}
 
 .service_form_builder_view{
     padding:5px;
@@ -96,6 +98,15 @@
     font-size: 14px;
     font-weight:bold;
 }
+.service_form_builder_tabs .tab_content_options span label{
+    float:none;
+    width:auto;
+    font-size:14px;
+    margin:0px 0px 0px 20px;
+}
+.service_form_builder_tabs .tab_content_options span input{
+    display:inline;
+}
 .service_form_builder_tabs .tab_content{
     height:410px;
     overflow:auto;
@@ -108,27 +119,18 @@
   margin-right: 10px;
   display: block;
 }
-.service_form_builder_tabs .tab_content_options span label{
-    float:none;
-    width:auto;
-    font-size:14px;
-    margin:0px 0px 0px 20px;
-}
-.service_form_builder_tabs .tab_content_options span input{
-    display:inline;
-}
+
 
 .service_form_builder_tabs .tab_content li { clear:both; padding:5px 0px;}
 .service_form_builder_tabs .tab_content li label{ line-height: 100%; }
 .service_form_builder_tabs .tab_content li input{ display:block;}
 .service_form_builder_tabs .tab_content li textarea{ display:block;}
-.service_form_builder_tabs .tab_content li select{ display:block; width:280px;}
+.service_form_builder_tabs .tab_content li select{ display:block; width:280px; height:30px;}
 .service_form_builder_tabs .tab_content .editable_list li:hover {cursor:move; background-color: #bbb}
 .service_form_builder_tabs .tab_content .editing{background-color: #ddd}
 
-#required_label{width:150px; margin-left:0px}
-#required_checkbox{float:left; width:15px; margin:7px 0px 7px 7px}
 .required{color:green}
+
 
 /* for adjusting jquery UI component*/
 #service_form_builder_nav{ height:32px; }
