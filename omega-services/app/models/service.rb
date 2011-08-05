@@ -25,6 +25,13 @@ class Service < ActiveRecord::Base
 
   # abstraction layer functions for different implementation in database
   class << self
+    def new_with_dependency
+      service = Service.new
+      service_leaf = service.build_service_leaf
+      service_section = service_leaf.service_sections.build
+      service_section.build_event
+      service
+    end
 
     def open?
       service_roots.each{|sr|return true if sr.status=="public"}

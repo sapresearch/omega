@@ -46,6 +46,7 @@ class ServicesController < Omega::Controller
 
     # for service sections
     @contacts = Contact.all.sort{|c1,c2|c1.name<=>c2.name}
+    @service.name = @service_level==Service::LEAF_LEVEL ? "New Service" : "New Service Category"
     @service_leaf = @service.build_service_leaf
     @service_section=@service_leaf.service_sections.build
     @service_sections=@service_leaf.service_sections

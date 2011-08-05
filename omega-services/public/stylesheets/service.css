@@ -193,13 +193,23 @@
     font-size:13px;
 }
 .service_form .show_body .item{
-    margin: 0px 0px 0px 20px;
+    margin: 0px 0px 10px 20px;
+    background-color:#eee;
+    padding: 5px;
 }
 .service_form .show_body .field{
     margin: 0px 0px 0px 20px;
 }
 .service_form .show_body .label{
-    margin: 0px 5px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    display:inline-block;
+    width:100px;
+    vertical-align: top;
+    float:left;
+}
+.service_form .show_body .value{
+    display:block;
+    margin-left:100px
 }
 .service_section_title{
     font-weight:bolder;
@@ -244,5 +254,4 @@
     line-height: 100%;
     font-weight:bold;
     color:#555;
-
 }
