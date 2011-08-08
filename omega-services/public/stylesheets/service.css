@@ -127,7 +127,7 @@
 .service_customization_form li textarea{ display:block;}
 .service_customization_form li select{ display:block; width:280px; height:30px;}
 .service_customization_form.editable_list li:hover {cursor:move; background-color: #bbb}
-.service_customization_form.editing{background-color: #ddd}
+.service_customization_form.editable_list .editing{background-color: #ddd}
 
 .required{color:green}
 
