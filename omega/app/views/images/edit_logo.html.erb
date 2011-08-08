@@ -37,11 +37,11 @@
 			<br/>
 			<%= f.label "Logo File" %> 
 			<%= f.file_field :image%> 
-					<p>
-						<%= f.label "Use this photo as:" %> 
-							Logo <%= f.radio_button :banner_or_logo, 'Logo', :checked => FALSE %> 
-							Banner <%= f.radio_button :banner_or_logo, 'Banner', :checked => FALSE %> 
-					</p>
+					<!--<p>
+						<%#= f.label "Use this photo as:" %> 
+							Logo <%#= f.radio_button :banner_or_logo, 'Logo', :checked => TRUE %> 
+							Banner <%#= f.radio_button :banner_or_logo, 'Banner', :checked => FALSE %>
+					</p> !-->
     	</p>
 
 	</br></br>
@@ -61,14 +61,16 @@
 
 					<p>
 						<%= f.label "Select this photo:" %> 
-						<%= f.radio_button :id,  i.id, :checked => FALSE, :onclick => "validate_logo_or_banner_present()" %>
+						<%= f.radio_button :id,  i.id, :checked => FALSE %>
 					</p>
 
+						<!--
 					<p>
-						<%= f.label "Use this photo as:" %> 
-							Logo <%= f.radio_button :banner_or_logo, 'Logo', :checked => TRUE %> 
-							Banner <%= f.radio_button :banner_or_logo, 'Banner', :checked => FALSE %> 
+						<%#= f.label "Use this photo as:" %> 
+							Logo <%#= f.radio_button :banner_or_logo, 'Logo', :checked => TRUE %> 
+							Banner <%#= f.radio_button :banner_or_logo, 'Banner', :checked => FALSE %> 
 					</p>
+						!-->
 					</br></br>
 				<% end %>
 			<% end %>
