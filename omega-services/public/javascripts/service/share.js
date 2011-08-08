@@ -38,3 +38,27 @@ function field_values_to_json(element_id, is_required_field_included){
     })
     return field_values
 }
+
+function check_service_sections_count(){
+    if(service_sections_count<=1)
+        $('.delete_service_section').hide()
+    else
+        $('.delete_service_section').show()
+    
+    
+}
+function refresh_service_section_index(){
+    $(".service_section_form .service_section_title").each(function(index){
+        $(this).html("Section "+(index+1))
+    })
+}
+
+function delete_service_section(element_id)
+{
+    service_sections_count -- ;
+    $("#"+element_id).hide("slow", function(){
+        $(this).remove();
+        refresh_service_section_index()
+    })
+    check_service_sections_count() 
+}

@@ -41,8 +41,8 @@ class ServiceSection < ActiveRecord::Base
   end
 
   def recurrence_end_at
-    return nil unless is_recurrent?
-    event.event_recurrence.end_at
+    return "TBD..." unless is_recurrent?
+    event.event_recurrence.end_at || "TBD..."
   end
 
   def recurrence_interval

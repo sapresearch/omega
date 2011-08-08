@@ -1,5 +1,17 @@
 <!-- om_button is app-spec -->
 
+<% require_javascript 'util.js' %>
+<% require_javascript 'ui_util.js'%>
+<% require_javascript 'service/share.js' %>
+<% require_javascript 'service/form.js' %>
+<% require_javascript 'service/form_builder.js' %>
+<% require_javascript 'service/new.js' %>
+
+<!-- anytime jquery plugin -->
+<% require_stylesheet 'anytime.css' %>
+<% require_javascript 'anytime.js' %>
+<% require_javascript 'anytimetz.js' %>
+
 <script type="text/javascript">
   $(function() {
     // jquery UI visual effects
@@ -29,117 +41,21 @@
 
     set_service_detail_env();
     check_field_exists();
+    preview_service_customization_info()
   });
 
   // parse relative objects to json for client process without Ajaxing
   var services_with_detail_template = <%= raw @services_with_detail_template.to_json(:include=>{:service_detail_form=>{:only=>:html}}) %>
   var services_with_registration_template = <%= raw @services_with_registration_template.to_json(:include=>{:service_registration_form=>{:only=>:html}}) %>
-
-function edit_service_basic_info(){
-  $(".edit_part .update_links a").click();
-  $('#service_basic_info').switchClass("show_part", "edit_part",0)
-}
-function preview_service_basic_info(){  
-  $('#service_name_preview').html($('#service_name').val())
-  $('#service_description_preview').html(nl2br($('#service_description').val()))
-  $('#service_basic_info').switchClass("edit_part", "show_part",0)
-}
-
-function edit_service_section(){
-  $(".edit_part .update_links a").click();
-  $('#service_section_info').switchClass("show_part", "edit_part",0)
-}
-function recurrence_interval(element)
-{
-  var str = ""
-  var year = $(".year",element).val()
-  var month = $(".month",element).val()
-  var day = $(".day",element).val()
-  var hour = $(".hour",element).val()
-  var minute = $(".minute",element).val()
-
-  if(year!='0')
-    str += (year + (year=='1' ? " year " : " years ") )
-  if(month!='0')
-    str += (month + (month=='1' ? " month " : " months ") )
-  if(day!='0')
-    str += (day + (day=='1' ? " day " : " days ") )
-  if(hour!='0')
-    str += (hour + (hour=='1' ? " hour " : " hours ") )
-  if(minute!='0')
-    str += (minute + (minute=='1' ? " minute " : " minutes ") )
-
-  return $.trim(str)
-}
-function preview_service_section(){ 
-  var html = ""
-  $('.service_section_form').each(function(i){
-    html += '<div class="item show_service_section" id="show_service_section_'+i+'">'
-    html += '<span class="service_section_title">Section '+(i+1)+':</span>'
-    html += '<div class="field">\
-              <span class="label"><strong>Contact:</strong></span>\
-              <span class="value">'+$(".contact option:selected", this).text()+'</span>\
-            </div>'
-    html += '<div class="field">\
-              <span class="label"><strong>Location:</strong></span>\
-              <span class="value">'+$(".location",this).val()+'</span>\
-            </div>'
-    html += '<div class="field">\
-              <span class="label"><strong>Start at:</strong></span>\
-              <span class="value">'+$(".start_at",this).val()+'</span>\
-            </div>'
-    html += '<div class="field">\
-              <span class="label"><strong>End at:</strong></span>\
-              <span class="value">'+$(".end_at",this).val()+'</span>\
-            </div>'
-    if($(".recurrence", this).is(":checked"))
-    {
-      html += '<div class="field">\
-                <span class="label"><strong>Reoccur:</strong></span>\
-                <span class="value">Every '+recurrence_interval(this)+'</span>\
-              </div>'
-      html += '<div class="field">\
-              <span class="label"><strong>Until:</strong></span>\
-              <span class="value">'+$(".recurrence_end_at",this).val()+'</span>\
-            </div>'
-    }
-    html += '</div>'
-  })
-  $('#service_section_info .show_body').html(html);
-  $('#service_section_info').switchClass("edit_part", "show_part",0)
-}
-
-function edit_service_customization_info(){
-  $(".edit_part .update_links a").click();
-  $('#service_customization_info').switchClass("show_part", "edit_part",0)
-}
-function preview_service_customization_info(){
-  var html = ""
-  if(!is_empty_html($('#service_detail').html()))
-  {
-    html += '<div class="item" id="show_service_detail_form">'
-    var service_detail_json = field_values_to_json("service_detail", false)
-    $.each(service_detail_json,function(key, val){
-      html += '<span class="label"><strong>'+key+':</strong></span>'
-      html += '<span class="value">'+nl2br(val)+'</span>'
-    })
-    html += '</div>'
-  }
-
-  if(!is_empty_html($('#service_registration').html()))
-  {
-    html += '<div class="item" id="show_service_registration_form">'
-    html += $('#service_registration').html()
-    html += '</div>'
-  }
-
-  $('#service_customization_info .show_body').html(html);
-  $('#service_customization_info').switchClass("edit_part", "show_part",0)
-}
+  var service_sections_count = 1;
 </script>
 <%= form_for(@service, :html=>{:class=>"service_form"}) do |form| %>
 
-  <div class="part show_part" id="service_basic_info">
+  <div class="service_new_options">
+    <%= render "new_options" %>
+  </div>
+
+  <div class="part edit_part" id="service_basic_info">
     <h3 class="head">
       Basic Information
       <span class="service_right_links edit_links">
@@ -198,7 +114,7 @@ function preview_service_customization_info(){
     <div class="show_body body">
       <% @service_sections.each_with_index do |service_section, i| %>
       <div class="item show_service_section" id="show_service_section_<%= i.to_s %>">
-          <span class="service_section_title">Section <%= i+1 %>:</span>
+          <span class="item_title service_section_title">Section <%= i+1 %>:</span>
           <div class="field">
             <span class="label"><strong>Contact:</strong></span>
             <span class="value"><%= service_section.contact_name %></span>
@@ -231,7 +147,7 @@ function preview_service_customization_info(){
 
     <div class="edit_body body">
       <div id="service_section_form_list">
-        <% @service_sections.each_with_index do |service_section, i| %>
+        <% @service_sections.each_with_index do |service_section, i| %>          
           <%= render "service_sections/form", :service_section=>service_section, :i=>i  %>
         <% end %>
       </div>
@@ -261,25 +177,16 @@ function preview_service_customization_info(){
     </h3>
     
     <div class="show_body body">
-      <% if @service.service_detail_form %>
-        <div class="item" id="show_service_detail_form">
-          <%= render "services/index_service_detail", :service=>@service %>
-        </div>
-      <% end %>
-      <% if @service.service_registration_form %>
-        <div class="item" id="show_service_registration_form">
-          <%= @service.registration_html %>
-        </div>
-      <% end %>
+
     </div>
 
     <div class="edit_body body">
       <div class="service_form_builder_view">
-        <%= render "services/new/form_builder_view", :form=>form %>
+        <%= render "services/form_builder_view", :form=>form %>
       </div>
 
       <div class="service_form_builder_tools">
-        <%= render "services/new/form_builder_tools" %>
+        <%= render "services/form_builder_tools" %>
       </div>
     </div>
   </div>

@@ -15,10 +15,13 @@ function set_leaf_service_env(){
     $("#title_category").hide();
     $("#service_detail_tab_link").html("Service Detail");
     $("#service_registration_tab_link").html("Registration Form");
-    
+
+    $('#service_name_preview').html("New Service")
     $("#service_name").val("New Service")
     $("#service_name").select();
     $("#service_level").val(service_leaf_level);
+
+    $('#service_section_info').show()
 }
 function set_branch_service_env(){
     $("#service_branch_level_radio").attr("checked","checked")
@@ -26,9 +29,12 @@ function set_branch_service_env(){
     $("#service_detail_tab_link").html("Service Category Detail");
     $("#service_registration_tab_link").html("Registration Form Template");
 
+    $('#service_name_preview').html("New Service Category")
     $("#service_name").val("New Service Category")
     $("#service_name").select();
     $("#service_level").val(service_branch_level);
+
+    $('#service_section_info').hide()
 }
 function set_service_detail_env(){
     $(".service_registration_only").hide()

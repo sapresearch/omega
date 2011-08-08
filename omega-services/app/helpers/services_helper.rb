@@ -4,7 +4,9 @@ module ServicesHelper
   include ServiceLib
 
   def is_admin?(user=current_user)
+    # app-spec
     user.has_permission?(Service::PERM_ADMIN)
+    # end app-spec
   end
 
   def bread_crumb(service)
