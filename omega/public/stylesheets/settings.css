@@ -29,7 +29,6 @@ h3.settings-form {
 	position: relative;
 	top: -25px;
 	left: 35%;
-    background: url("../images/application/logo.png") no-repeat left;
     width: 260px;
 	height: 60px;
 	border-style: solid;
@@ -44,3 +43,19 @@ div.heading-main-columns-settings {
 	background: url("../images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #E1DFCB;
 }
 
+div.image-library-left {
+	float:left;
+	width:280px;
+	position:relative
+}
+
+
+nav.link{
+	margin-left: 42%;
+}
+
+p.image {
+	font-size=16px;
+	font-weight=bold;
+}
+	

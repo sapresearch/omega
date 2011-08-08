@@ -1,3 +1,21 @@
+<head>
+	<% require_stylesheet 'settings' %>
+</head>
+
+<script type="text/javascript">
+	function validate_logo_or_banner_present(){
+		x = document.forms#new_image.value
+		if(x == "NULL"){
+			alert("To select an image, you must check the logo or banner button");
+			return false;
+		}
+		else{
+			alert(console.log(x));
+			return false;
+		}
+	}
+</script>
+
 <div class="content circle-corners-bottom-left">
     	
 		<div class="heading-main">
@@ -19,11 +37,47 @@
 			<br/>
 			<%= f.label "Logo File" %> 
 			<%= f.file_field :image%> 
+					<p>
+						<%= f.label "Use this photo as:" %> 
+							Logo <%= f.radio_button :banner_or_logo, 'Logo', :checked => FALSE %> 
+							Banner <%= f.radio_button :banner_or_logo, 'Banner', :checked => FALSE %> 
+					</p>
     	</p>
-	
+
+	</br></br>
+	<h2> Or choose an existing image: </h2>
+
+		<p>
+			<% Image.all.each do |i| %> 
+
+				<% if (!i.image.url.blank? and !i.image_content_type.nil? and i.image.exists?) then %>
+					<% url = i.image.url %>
+					<p>
+						<div class="image-library-left">
+	 	 					<div id="logo" style="background:url(<%=url%>) no-repeat left scroll transparent" >
+ 							</div>
+ 						</div>
+					</p>
+
+					<p>
+						<%= f.label "Select this photo:" %> 
+						<%= f.radio_button :id,  i.id, :checked => FALSE, :onclick => "validate_logo_or_banner_present()" %>
+					</p>
+
+					<p>
+						<%= f.label "Use this photo as:" %> 
+							Logo <%= f.radio_button :banner_or_logo, 'Logo', :checked => TRUE %> 
+							Banner <%= f.radio_button :banner_or_logo, 'Banner', :checked => FALSE %> 
+					</p>
+					</br></br>
+				<% end %>
+			<% end %>
+		</p>
+
+
 		<p>
 		    <%= om_button(:icon => 'apply') do %>
-              <%= f.submit 'Update' %>
+            <%= f.submit 'Update', :onclick => "validate_logo_or_banner_present()" %>
      		<% end %>
 		</p>
 	
@@ -34,18 +88,3 @@
  </div>
  
  </div>
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-

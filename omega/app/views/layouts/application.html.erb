@@ -48,18 +48,11 @@
 
 <div id="banner_wrapper">
 
-	<% if (!Image.all.empty?) then %>
-		<% last_logo = Image.find_by_last_id %>
-				<% url = '../images/application/logo/' + last_logo.id.to_s + '.png' %>
- 	 		<div id="logo" style="background:url(<%=url%>) no-repeat left scroll transparent" >
+ 	 		<div id="logo" style="background:url(<%=image_in_use_url("Logo")%>) no-repeat left scroll transparent" >
  			</div>
-	<% else %>
- 		<div id="logo" style="no-repeat left">
- 		</div>
-	<% end %>
+		
 
-
- 		<div id="banner-right">
+ 	 	<div id="banner-right" style="background:url(<%=image_in_use_url("Banner")%>) no-repeat right" >
  		</div>
 
 </div>

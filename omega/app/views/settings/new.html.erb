@@ -10,13 +10,31 @@
 		}
   </script>
 	<%= render 'layouts/settings' %>
-	<!-- <button onclick="fb_message()"> Message to Facebook </button>
-	<button onclick="FB.ui({ method: 'feed', message: 'Facebook for Websites is super-cool'})"> Message to Facebook </button>
-	!-->
 
-	<form name="messageForm" onsubmit="fb_message()">
-		<input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="test alert"><br />
-	</form>
 
-	<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>
+
+
+
+	<% if (current_user.is_admin? and !@fb_enabled) then %>
+		<!-- <button onclick="fb_message()"> Message to Facebook </button>
+		<button onclick="FB.ui({ method: 'feed', message: 'Facebook for Websites is super-cool'})"> Message to Facebook </button>
+		!-->
+		<form name="messageForm" onsubmit="fb_message()">
+			<input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="test alert"><br />
+		</form>
+		<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>
+
+
+
+
+
+	<% elsif (!current_user.is_admin? and @fb_enabled) then %> 
+		<p> Your organization has created a Facebook App.  Just click the link below to log into Facebook.  This will allow you to post from your MyOmega page and keep your friends informed on your organization's activites. <p>
+		<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>
+	<% end %>
+
+
+
+
+
 </body>

@@ -1,12 +1,18 @@
 class Image < Omega::Model
+	
+	attr_accessible :banner_or_logo
+	attr_accessible :image_in_use
+	attr_accessible :image
 
   has_attached_file :image,
                     #:url => "/images/application/logo.png",
                     #:path => ":rails_root/public/images/application/logo.png",
+                    #:styles => { :small => "260x60!" }
                     :url => "/images/application/logo/:id.png",
                     :path => ":rails_root/public/images/application/logo/:id.png",
-                    :styles => { :small => "260x60!" }
+                    :styles => { :small => "180x180!" }
 
+	#belongs_to :settings
   validates_attachment_content_type :image, :content_type => ['image/png', 'image/x-png', 'image/jpg', 'image/gif', 'image/jpeg' ]
 
 	def self.get_last_id

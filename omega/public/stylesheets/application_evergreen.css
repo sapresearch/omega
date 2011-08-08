@@ -698,8 +698,8 @@ tr.odd {
 #logo {
 	left:330px;
     background: url("../images/application/logo.png") no-repeat left;
-    width: 260px;
-	height: 80px;
+    width: 180px;
+	height: 180px;
 	z-index: 1;
 }
 

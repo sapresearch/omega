@@ -11,18 +11,21 @@
 	</div>
 
 
-
+ 
 	<h3 class="settings-form"> Site-Wide Settings </h3>
-		</br><p> Current Logo: </p>
-			<p>
-				<% if (Setting.find_by_user_id(current_user.id).nil?) then %>
-					<%= link_to 'Edit Logo', :controller => "settings", :action => "new" %>
-				<% else %>
-					<%= link_to 'Edit Logo', :controller => "settings", :action => "edit", :id => @settings.id %>
-				<% end %>
-			</p>
+		</br><p class="image"> Current Logo: </p>
+ 	 		<div id="settings-logo" style="background:url(<%=image_in_use_url("Logo")%>) no-repeat left" ></div>
 
-		<div id="settings-logo"></div>
+		</br><p> Current Banner: </p>
+ 	 		<div id="settings-logo" style="background:url(<%=image_in_use_url("Banner")%>) no-repeat left" ></div>
+
+		<nav class="link">
+			<ul>
+				<li>
+					<%= (link_to 'Edit Your Logo or Banner', :controller => "images", :action => "edit_logo") if current_user.is_admin? %>
+				</li>
+			</ul>
+		</nav>
 
 
 
@@ -38,18 +41,18 @@
 		</p>
 
 
-	<div class="container" style="margin-left: 42%">
-		<nav class="round">
+
+		<nav class="link">
 			<ul>
 				<li>
-				<% if (Setting.find_by_user_id(current_user.id).nil?) then %>
-					<%= link_to 'Edit Your Settings', :controller => "settings", :action => "new" %>
-				<% else %>
-					<%= link_to 'Edit Your Settings', :controller => "settings", :action => "edit", :id => @settings.id %></p>
-				<% end %>
+					<% if (Setting.find_by_user_id(current_user.id).nil?) then %>
+						<%= button_to 'Edit Your Settings', :controller => "settings", :action => "new" %>
+					<% else %>
+						<%#= button_to 'Edit Your Settings', :method => "get", :controller => "settings", :action => "edit", :id => @settings.id %>
+						<%= link_to 'Edit Your Settings', :controller => "settings", :action => "edit", :id => @settings.id %>
+					<% end %>
 				</li>
 			</ul>
 		</nav>
-	</div>
 
 </body>

@@ -1,6 +1,7 @@
 class SettingsController < Omega::Controller
 
 	def index
+		@fb_enabled = Setting.fb_enabled?(current_user)
 		@settings = Setting.find_by_user_id(current_user.id)
 		@settings.nil? ? @either_edit_or_new = "new" : @either_edit_or_new = "/edit"
 		@image = Image.new
@@ -11,6 +12,7 @@ class SettingsController < Omega::Controller
   end
 
 	def new
+		@fb_enabled = Setting.fb_enabled?(current_user)
 		@setting = Setting.new
 		@image = Image.new
 		respond_to do |format|
@@ -29,6 +31,7 @@ class SettingsController < Omega::Controller
 	end
 
 	def edit
+		@fb_enabled = Setting.fb_enabled?(current_user)
 		@setting = Setting.find(params[:id])
 		@image = Image.new
 		respond_to do |format|
@@ -39,7 +42,7 @@ class SettingsController < Omega::Controller
 
 	def show
 		@setting = Setting.all
-		#@setting = Setting.find(params[:id])
+		@setting = Setting.find(params[:id])
 	end
 
 	def error

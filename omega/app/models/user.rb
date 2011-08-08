@@ -85,6 +85,10 @@ class User < Omega::Model
     id.nil?
   end
 
+	def is_admin?
+		self.roles.at(0).internal_name == "administrator"
+	end
+
   def is_logged_in?
     !is_anonymous?
   end
