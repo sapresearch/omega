@@ -75,6 +75,7 @@ function preview_service_section(){
 
 function edit_service_customization_info(){
   $(".edit_part .update_links a").click();
+  $("#service_customization_info .show_body").empty();
   $('#service_customization_info').switchClass("show_part", "edit_part",0)
 }
 function preview_service_customization_info(){
