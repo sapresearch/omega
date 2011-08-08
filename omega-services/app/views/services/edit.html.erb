@@ -1,0 +1,11 @@
+<script type="text/javascript">
+  //global variables
+  var service = <%= raw @service.to_json(
+    :include=>{:service_leaf=>{
+      :include=>{:service_sections=>{
+        :include=>{:event=>{
+          :include=>:event_recurrence
+        }}
+      }}
+    }}) %>
+</script>

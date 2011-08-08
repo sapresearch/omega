@@ -1,0 +1,43 @@
+<!-- app sepc -->
+<h1 class="side-bar corners-top">Add a Field</h1>
+<div class="corners-bottom sidebar-menu-content">
+  <ul id="ui-elements">
+    <li class="ui-em">
+      <%= om_button(:plain => true, :icon => 'ui-textfield') do %>
+        <span class="blue add-ui-em" ui-data="input">
+          <%= link_to_function "Text Field", "append_text_field(active_service_section_element_id())" %>
+        </span>
+      <% end %>
+    </li>
+    <li class="ui-em">
+      <%= om_button(:plain => true, :icon => 'ui-textarea') do %>
+        <span class="blue add-ui-em" ui-data="textarea">
+          <%= link_to_function "Text Area", "append_text_area(active_service_section_element_id())" %>
+        </span>
+      <% end %>
+    </li>
+    <li class="ui-em service_registration_only">
+      <%= om_button(:plain => true, :icon => 'ui-selectbox') do %>
+        <span class="blue add-ui-em" ui-data="selectbox">
+          <%= link_to_function "Select List", "append_select_list(active_service_section_element_id())" %>
+        </span>
+      <% end %>
+    </li>
+    <li class="ui-em">
+      <%= om_button(:plain => true, :icon => 'calendar') do %>
+        <span class="blue add-ui-em" ui-data="date">
+          <%= link_to_function "Date", "append_date_picker(active_service_section_element_id())" %>
+        </span>
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<%= side_bar_box('Edit a Field') do %>
+  <div id="admin-edit-em">
+    Hover over the field you want to edit or delete and choose from the two options.
+    <br/><br/>
+    Tips: double click on a field to edit it's label, and single click to edit it's content. Drag & drop a field to reorder.
+  </div>
+<% end %>
+<!-- end app-spec -->

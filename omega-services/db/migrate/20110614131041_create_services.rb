@@ -2,7 +2,7 @@ class CreateServices < ActiveRecord::Migration
   def self.up
     create_table :services do |t|
 
-      t.string :name, :default => 'new service'
+      t.string :name
       t.text :description
       t.string :status, :null => false
       t.references :super_service

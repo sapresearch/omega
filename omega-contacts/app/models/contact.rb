@@ -48,6 +48,10 @@ class Contact < Omega::Model
     service_leaves.map{|sl|sl.service}
   end
 
+  def name
+    first_name.to_s + ", " + last_name.to_s
+  end
+
 
   accepts_nested_attributes_for :uploads
 

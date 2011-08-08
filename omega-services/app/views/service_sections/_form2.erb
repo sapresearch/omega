@@ -1,0 +1,28 @@
+        <fieldset>
+          <legend>Section</legend>
+          <div class="field">
+            <%= form.label :contact_id %>
+            <% options = ["TBD..."].concat(@contacts.map{|c|[c.name, c.id]}) %>
+            <%= form.select(:contact_id, options_for_select(options)) %>
+          </div>
+
+          <%= form.fields_for :event do |event_form| %>
+            <div class="field">
+              <%= event_form.label :location %>
+              <%= event_form.text_field :location, :size=>30, :maxlength=>100, :'data-tooltip'=>"Location of the section" %>                       
+            </div>
+          
+
+            <div class="field">
+              <%= event_form.label :start_at %>
+              <%= event_form.text_field :start_at, :size=>30 %>
+              <%= event_form.label :end_at %>
+              <%= event_form.text_field :end_at, :size=>30, :disabled=>"disabled" %>
+            </div>
+
+            <%= event_form.fields_for :event_recurrence do |event_recurrence_form| %>
+            <% end %>
+          <% end %>
+          
+        </fieldset>
+

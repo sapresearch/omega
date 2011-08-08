@@ -2,5 +2,5 @@
 #new_service_registration li label{ line-height:100%; text-align:right; width:140px; margin-left:20px;}
 #new_service_registration input{ display:block;}
 #new_service_registration textarea{ display:block;}
-#new_service_registration li select{ display:block; width:280px;}
+#new_service_registration li select{ display:block; width:280px; height:30px}
 

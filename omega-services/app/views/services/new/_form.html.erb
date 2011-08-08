@@ -1,0 +1,181 @@
+<!-- om_button is app-spec -->
+
+<script type="text/javascript">
+  $(function() {
+    // jquery UI visual effects
+    $( "#tabs" ).tabs();
+    $( "#service_detail" ).sortable({
+	placeholder: "ui-state-highlight"
+    });
+    $( "#service_detail" ).disableSelection();
+    $( "#service_registration" ).sortable({
+	placeholder: "ui-state-highlight"
+    });
+    $( "#service_registration" ).disableSelection();
+
+    // set default environment
+    <% if @service_level == Service::LEAF_LEVEL %>
+      set_leaf_service_env();
+    <% else %>
+      set_branch_service_env();
+    <% end %>
+
+    //prevent submitting by press enter.
+    $('input').keypress(function(event) {
+      if( event.which == 13 ){
+         event.preventDefault();
+      }
+    });
+
+    set_service_detail_env();
+    check_field_exists();
+  });
+
+  // parse relative objects to json for client process without Ajaxing
+  var services_with_detail_template = <%= raw @services_with_detail_template.to_json(:include=>{:service_detail_form=>{:only=>:html}}) %>
+  var services_with_registration_template = <%= raw @services_with_registration_template.to_json(:include=>{:service_registration_form=>{:only=>:html}}) %>
+
+function edit_service_basic_info(){
+  $(".edit_part .update_links a").click();
+  $('#service_basic_info').switchClass("show_part", "edit_part",0)
+}
+function preview_service_basic_info(){
+  $('#service_basic_info').switchClass("edit_part", "show_part",0)
+  $('#service_name_preview').html($('#service_name').val())
+  $('#service_description_preview').html($('#service_description').val())
+}
+
+function edit_service_section(){
+  $(".edit_part .update_links a").click();
+  $('#service_section_info').switchClass("show_part", "edit_part",0)
+}
+function preview_service_section(){
+  $('#service_section_info').switchClass("edit_part", "show_part",0)
+}
+
+function edit_service_customization_info(){
+  $(".edit_part .update_links a").click();
+  $('#service_customization_info').switchClass("show_part", "edit_part",0)
+}
+function preview_service_customization_info(){
+  $('#service_customization_info').switchClass("edit_part", "show_part",0)
+}
+</script>
+<%= form_for(@service, :html=>{:class=>"service_form"}) do |form| %>
+
+  <div class="part show_part" id="service_basic_info">
+    <h3 class="head">
+      Basic Information
+      <span class="service_right_links edit_links">
+        <%= om_button(:contact => true, :icon=>'edit') do %>
+          <%= link_to_function "Edit", "edit_service_basic_info()", "data-tooltip"=>"Edit Basic information" %>
+        <% end %>
+      </span>
+      <span class="service_right_links update_links">
+        <%= om_button(:contact => true, :icon=>'apply') do %>
+          <%= link_to_function "Preview", "preview_service_basic_info()", "data-tooltip"=>"Preview Basic information" %>
+        <% end %>
+      </span>
+    </h3>
+    <div class="show_body body">
+      <div class="field">
+        <span class="label"><strong>Name:</strong></span>
+        <span id="service_name_preview"><%= @service.name %></span>
+      </div>
+      <div class="field">
+        <span class="label"><strong>Description:</strong></span>
+        <span id="service_description_preview"><%= @service.description %></span>
+      </div>
+    </div>
+
+    <div class="edit_body body">
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, :maxlength=>100, :size=>30, :'data-tooltip' => "Name of the service" %>
+      </div>
+      <div class="field">
+        <%= form.label :description %>
+        <%= form.text_area :description, :cols=>30, :rows=>3, :'data-tooltip' => "Describe the service" %>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="part show_part" id="service_section_info">
+    <h3 class="head">
+      Sections
+      <span class="service_right_links edit_links">
+        <%= om_button(:contact => true, :icon=>'edit') do %>
+          <%= link_to_function "Edit", "edit_service_section()", "data-tooltip"=>"Edit sections" %>
+        <% end %>
+      </span>
+      <span class="service_right_links update_links">
+        <%= om_button(:contact => true, :icon=>'apply') do %>
+          <%= link_to_function "Preview", "preview_service_section()", "data-tooltip"=>"Preview sections" %>
+        <% end %>
+      </span>
+    </h3>
+    <div class="show_body body">
+      <ul>
+        <% @service_sections.each_with_index do |service_section, i| %>
+          <li>
+            <div class="item">
+              <span class="service_section_title">Section <%= i+1 %>:</span>
+              <div class="field">
+                <span class="label"><strong>Contact:</strong></span>
+                <span><%= service_section.contact %></span>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="edit_body body">
+      <div id="service_section_form_list">
+        <% @service_sections.each_with_index do |service_section, i| %>
+          <%= render "service_sections/form", :service_section=>service_section, :i=>i  %>
+        <% end %>
+      </div>
+
+      <div class="new_links" id="new_service_section_link">
+        <%= render "service_sections/new_link", :index=>@service_sections.length %>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="part show_part" id="service_customization_info">
+    <h3 class="head">
+      Customizations
+      <span class="service_right_links edit_links">
+        <%= om_button(:contact => true, :icon=>'edit') do %>
+          <%= link_to_function "Edit", "edit_service_customization_info()", "data-tooltip"=>"Edit customization information" %>
+        <% end %>
+      </span>
+      <span class="service_right_links update_links">
+        <%= om_button(:contact => true, :icon=>'apply') do %>
+          <%= link_to_function "Preview", "preview_service_customization_info()", "data-tooltip"=>"Preview customization information" %>
+        <% end %>
+      </span>
+    </h3>
+    <div class="show_body body">
+
+    </div>
+
+    <div class="edit_body body">
+      <div class="service_form_builder_view">
+        <%= render "services/new/form_builder_view", :form=>form %>
+      </div>
+
+      <div class="service_form_builder_tools">
+        <%= render "services/new/form_builder_tools" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
