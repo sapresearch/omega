@@ -50,12 +50,16 @@
 }
 .services_list{
     padding-bottom:10px;
-    max-height:470px;
-    overflow: auto;
+    /* max-height:470px;
+    overflow: auto; */    /* page length limit */
 }
 .service_body{
     border:1px solid #ccc;
 }
+.service_body .label{display:inline-block; min-width:100px;}
+.service_body .item{ margin:15px; padding:5px; background-color:#eee; }
+.service_body .item_title{ font-style:italic; color:#555; }
+.service_body .item .label{margin-left:20px; display:inline-block; min-width:100px;}
 
 .service_left_links { float:left; }
 .service_right_links { float:right; }

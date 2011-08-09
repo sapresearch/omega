@@ -114,35 +114,7 @@
     </h3>
     <div class="show_body body">
       <% @service_sections.each_with_index do |service_section, i| %>
-      <div class="item show_service_section" id="show_service_section_<%= i.to_s %>">
-          <span class="item_title service_section_title">Section <%= i+1 %>:</span>
-          <div class="field">
-            <span class="label"><strong>Contact:</strong></span>
-            <span class="value"><%= service_section.contact_name %></span>
-          </div>
-          <div class="field">
-            <span class="label"><strong>Location:</strong></span>
-            <span class="value"><%= service_section.location %></span>
-          </div>
-          <div class="field">
-            <span class="label"><strong>Start at:</strong></span>
-            <span class="value"><%= service_section.start_at %></span>
-          </div>
-          <div class="field">
-            <span class="label"><strong>End at:</strong></span>
-            <span class="value"><%= service_section.end_at %></span>
-          </div>
-          <% if service_section.is_recurrent? %>
-            <div class="field">
-              <span class="label"><strong>Reoccur:</strong></span>
-              <span class="value">Every <%= service_section.recurrence_interval %></span>
-            </div>
-            <div class="field">
-              <span class="label"><strong>Until:</strong></span>
-              <span class="value"><%= service_section.recurrence_end_at %></span>
-            </div>
-          <% end %>
-        </div>
+        <%= render "service_sections/service_section", :service_section=>service_section, :i=>i %>
       <% end %>
     </div>
 
