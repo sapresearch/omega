@@ -53,15 +53,16 @@
 				<% if (!i.image.url.blank? and !i.image_content_type.nil? and i.image.exists?) then %>
 					<% url = i.image.url %>
 					<p>
-						<div class="image-library-left">
+						 <div class="image-library-left">
 	 	 					<div id="logo" style="background:url(<%=url%>) no-repeat left scroll transparent" >
  							</div>
- 						</div>
-					</p>
 
-					<p>
-						<%= f.label "Select this photo:" %> 
-						<%= f.radio_button :id,  i.id, :checked => FALSE %>
+							<p>
+								<%= f.label "Select this photo:" %> 
+								<%= f.radio_button :id,  i.id, :checked => FALSE %>
+							</p>
+
+ 						</div>
 					</p>
 
 						<!--

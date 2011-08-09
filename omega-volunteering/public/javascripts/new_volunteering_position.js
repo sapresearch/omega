@@ -2,6 +2,9 @@
  * @author I823626
  */
 
+$(function(){
+	$("div.ui-dialog").css({"left":"55%"});
+});
 
 $(function() {
 
@@ -13,7 +16,7 @@ $(function() {
 
 
     // selector caching
-    var $recurrent = $('input[name=volunteering_position[recurrent]]');
+    var $recurrent = $('input[name="volunteering_position[recurrent]"]');
     var $scheduler = $('#scheduler');
     var $vp_contact = $('#vp_contact');
 
@@ -91,9 +94,10 @@ $(function() {
 
     $('#add-contacts').click(function() {
         $.ajax({
+						style   : 'left:65%',
             url     : '/contacts/list',
             dataType: 'script',
-            success : function(data) {
+            success : function(data){
             }
         })
     });

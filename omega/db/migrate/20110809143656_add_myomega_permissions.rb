@@ -1,4 +1,4 @@
-class AddPermissions < ActiveRecord::Migration
+class AddMyomegaPermissions < ActiveRecord::Migration
   class Permission < ActiveRecord::Base
 
   end

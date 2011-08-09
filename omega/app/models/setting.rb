@@ -1,6 +1,10 @@
 class Setting < Omega::Model
 	belongs_to :user
 	attr_accessible :facebook_token, :twitter, :user_id
+
+  PERM_ADMIN = 'myomega_admin'
+  PERM_VIEW  = 'myomega_view'
+
 	#has_many :images
 	#accepts_nested_attributes_for :images
 

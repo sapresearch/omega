@@ -45,8 +45,9 @@ div.heading-main-columns-settings {
 
 div.image-library-left {
 	float:left;
-	width:280px;
-	position:relative
+	width:70%;
+	position:relative;
+	padding:30px
 }
 
 
