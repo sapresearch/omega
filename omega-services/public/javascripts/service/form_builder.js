@@ -112,7 +112,7 @@ function required_checkbox(label_element_id){
     if($("#"+label_element_id).hasClass("required"))
         html += "checked='checked'"
     html += "onclick='if($(this).is(\":checked\")) $(\"#"+label_element_id+"\").addClass(\"required\"); else $(\"#"+label_element_id+"\").removeClass(\"required\");' />"
-    html += "<label id='required_label' for='required_checkbox' >Is this field required?</label>"
+    html += "<label id='required_label' for='required_checkbox' >Field Required</label>"
     return html;
 }
 function edit_label(label_element_id){

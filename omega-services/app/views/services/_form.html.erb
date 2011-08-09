@@ -44,11 +44,12 @@
     preview_service_customization_info()
   });
 
-  // parse relative objects to json for client process without Ajaxing
+  // parse relative objects to json for client read process to avoid ajax
   var services_with_detail_template = <%= raw @services_with_detail_template.to_json(:include=>{:service_detail_form=>{:only=>:html}}) %>
   var services_with_registration_template = <%= raw @services_with_registration_template.to_json(:include=>{:service_registration_form=>{:only=>:html}}) %>
   var service_sections_count = 1;
 </script>
+
 <%= form_for(@service, :html=>{:class=>"service_form"}) do |form| %>
 
   <div class="service_new_options">
