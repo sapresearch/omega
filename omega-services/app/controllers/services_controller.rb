@@ -46,6 +46,7 @@ class ServicesController < Omega::Controller
 
     # for service sections
     @contacts = Contact.all.sort{|c1,c2|c1.name<=>c2.name}
+    @service.name = @service_level==Service::LEAF_LEVEL ? "New Service" : "New Service Category"
     @service_leaf = @service.build_service_leaf
     @service_section=@service_leaf.service_sections.build
     @service_sections=@service_leaf.service_sections
@@ -57,22 +58,50 @@ class ServicesController < Omega::Controller
   end
 
   def create
-    @service = Service.create(params[:service])
+    Service.transaction do
+      @service = Service.create(params[:service])
 
-    # set the service level
-    @service_level = params[:service_level]
-    @service.create_service_leaf if @service_level==Service::LEAF_LEVEL
+      # set the service level
+      @service_level = params[:service_level]
+      @service_leaf = @service.create_service_leaf if @service_level==Service::LEAF_LEVEL
 
-    @service_detail_html = params[:service_detail_html]
-    @service_detail_field_values = params[:service_detail_field_values]
-    @service_detail_form = @service.create_service_detail_form(:html => @service_detail_html, :field_values=>@service_detail_field_values) unless @service_detail_html.empty?
-    @has_service_detail_template = params[:has_service_detail_template]
-    @service_detail_form.create_service_detail_template if @has_service_detail_template == "on" && @service_detail_form
+      # service detail
+      @service_detail_html = params[:service_detail_html]
+      @service_detail_field_values = params[:service_detail_field_values]
+      @service_detail_form = @service.create_service_detail_form(:html => @service_detail_html, :field_values=>@service_detail_field_values) unless @service_detail_html.empty?
+      @has_service_detail_template = params[:has_service_detail_template]
+      @service_detail_form.create_service_detail_template if @has_service_detail_template == "on" && @service_detail_form
 
-    @service_registration_html = params[:service_registration_html]   
-    @service_registration_form = @service.create_service_registration_form(:html => @service_registration_html) unless @service_registration_html.empty?   
-    @has_service_registration_template = params[:has_service_registration_template]
-    @service_registration_form.create_service_registration_template if @has_service_registration_template == "on" && @service_registration_form
+      # service registration
+      @service_registration_html = params[:service_registration_html]
+      @service_registration_form = @service.create_service_registration_form(:html => @service_registration_html) unless @service_registration_html.empty?
+      @has_service_registration_template = params[:has_service_registration_template]
+      @service_registration_form.create_service_registration_template if @has_service_registration_template == "on" && @service_registration_form
+
+      # service sections (re-factor to service_sections_contoller if nested form is used in the future)
+      if @service_leaf
+        @service_sections = params[:service_sections]
+        @service_sections.each_value do |service_section|
+          @contact_id = service_section["contact_id"]
+          @location = service_section["location"]
+          @start_at = service_section["start_at"]
+          @end_at = service_section["end_at"]
+          @event = Event.create(:location=>@location, :start_at=>@start_at, :end_at=>@end_at)
+          @service_section = @service_leaf.service_sections.create(:contact_id=>@contact_id, :event_id=>@event.id)
+          if service_section["recurrence"]=="on"
+            @recurrence_years = service_section[:recurrence_years]
+            @recurrence_months = service_section[:recurrence_months]
+            @recurrence_days = service_section[:recurrence_days]
+            @recurrence_hours = service_section[:recurrence_hours]
+            @recurrence_minutes = service_section[:recurrence_minutes]
+            @interval = ActiveSupport::JSON.encode({:years=>@recurrence_years, :months=>@recurrence_months, :days=>@recurrence_days, :hours=>@recurrence_hours, :minutes=>@recurrence_minutes}).to_s
+            @recurrence_end_at = service_section[:recurrence_end_at]
+            @event.create_event_recurrence(:interval=>@interval, :end_at=>@recurrence_end_at)
+          end
+        end
+      end
+      
+    end
     
     respond_with(@service, :location=>services_url(:service_id=>@service.id))
   end
@@ -85,7 +114,7 @@ class ServicesController < Omega::Controller
         @service.publish(@recursive)
       when "unpublish"
         @service.unpublish(@recursive)
-      else        
+      else
     end
 
     # for js

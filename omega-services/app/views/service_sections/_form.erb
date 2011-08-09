@@ -1,57 +1,67 @@
 
-        <fieldset id="service_sections_<%= i.to_s %>">
-          <legend>Section</legend>
+        <fieldset class="service_section_form" id="service_sections_<%= i.to_s %>">
+          <legend class="service_section_title">Section <%= i+1 %></legend>
           
-          <div class="delete_service_section_link">
+          <div class="delete_service_section">
             <%= om_button(:contact => true, :icon=>'delete') do %>
-              <%= link_to_function "Delete", "delete_element('service_sections_#{i.to_s}')" %>
+              <%= link_to_function "Delete", "delete_service_section('service_sections_#{i.to_s}');" %>
             <% end %>
           </div>
           
           <div class="field">
             <label for="service_sections_<%= i.to_s %>_contact_id">Contact</label>
-            <select id="service_sections_<%= i.to_s %>_contact_id" name="service_sections[<%= i.to_s %>][contact_id]">
+            <select id="service_sections_<%= i.to_s %>_contact_id" name="service_sections[<%= i.to_s %>][contact_id]" class="contact" >
               <% options = ["TBD..."].concat(@contacts.map{|c|[c.name, c.id]}) %>
-              <%= options_for_select(options) %>
+              <% default_option_value = service_section.contact ? service_section.contact_id : "TBD..." %>
+              <%= options_for_select(options, default_option_value) %>
             </select>
           </div>
 
           <div class="field">
             <label for="service_sections_<%= i.to_s %>_location">Location</label>
-            <input id="service_sections_<%= i.to_s %>_location" name="service_sections[<%= i.to_s %>][location]" size="30" maxlength="100" type="text" data-tooltip="Location of the section" />
+            <input id="service_sections_<%= i.to_s %>_location" name="service_sections[<%= i.to_s %>][location]" class="location" size="30" maxlength="100" type="text" data-tooltip="Location of the section"
+                   value="<%= service_section.location %>" onclick="$(this).select()" />
           </div>
 
           <div class="field">
             <label for="service_sections_<%= i.to_s %>_start_at">Start</label>
-            <input id="service_sections_<%= i.to_s %>_start_at" name="service_sections[<%= i.to_s %>][start_at]" size="30" type="text" />
+            <input id="service_sections_<%= i.to_s %>_start_at" name="service_sections[<%= i.to_s %>][start_at]" class="start_at" size="30" type="text"
+                   value="<%= service_section.start_at %>"/>
             <label for="service_sections_<%= i.to_s %>_end_at">Finish</label>
-            <input id="service_sections_<%= i.to_s %>_end_at" name="service_sections[<%= i.to_s %>][end_at]" size="30" type="text" disabled />
+            <input id="service_sections_<%= i.to_s %>_end_at" name="service_sections[<%= i.to_s %>][end_at]" class="end_at" size="30" type="text" disabled
+                   value="<%= service_section.end_at %>"/>
           </div>
 
           <div class="field">
             <label for="service_sections_<%= i.to_s %>_recurrence">Reoccur</label>
-            <input class="service_sections_recurrence_checkbox" id="service_sections_<%= i.to_s %>_recurrence" name="service_sections[<%= i.to_s %>][recurrence]" type="checkbox" />
+            <input class="service_sections_recurrence_checkbox recurrence" id="service_sections_<%= i.to_s %>_recurrence" name="service_sections[<%= i.to_s %>][recurrence]" type="checkbox" />
           </div>
 
           <div class="service_sections_recurrence_fields" id="service_sections_<%= i.to_s %>_recurrence_fields">
             <div class="field service_sections_recurrence_interval" id="service_sections_<%= i.to_s %>_recurrence_interval">
               <span>Every</span>
-              <input id="service_sections_<%= i.to_s %>_recurrence_year" name="service_sections[<%= i.to_s %>][recurrence_year]" class="numeric" value="0" /><span>Years</span>
-              <input id="service_sections_<%= i.to_s %>_recurrence_months" name="service_sections[<%= i.to_s %>][recurrence_months]" class="numeric" value="0"/><span>Months</span>
-              <input id="service_sections_<%= i.to_s %>_recurrence_days" name="service_sections[<%= i.to_s %>][recurrence_days]" class="numeric" value="7"/><span>Days</span>
-              <input id="service_sections_<%= i.to_s %>_recurrence_hours" name="service_sections[<%= i.to_s %>][recurrence_hours]" class="numeric" value="0"/><span>Hours</span>
-              <input id="service_sections_<%= i.to_s %>_recurrence_minutes" name="service_sections[<%= i.to_s %>][recurrence_minutes]" class="numeric" value="0"/><span>Minutes</span>
+              <input id="service_sections_<%= i.to_s %>_recurrence_year" name="service_sections[<%= i.to_s %>][recurrence_years]" class="numeric year" type="text"
+                     value="0" /><span>Years</span>
+              <input id="service_sections_<%= i.to_s %>_recurrence_months" name="service_sections[<%= i.to_s %>][recurrence_months]" class="numeric month" type="text"
+                     value="0"/><span>Months</span>
+              <input id="service_sections_<%= i.to_s %>_recurrence_days" name="service_sections[<%= i.to_s %>][recurrence_days]" class="numeric day" type="text"
+                     value="7"/><span>Days</span>
+              <input id="service_sections_<%= i.to_s %>_recurrence_hours" name="service_sections[<%= i.to_s %>][recurrence_hours]" class="numeric hour" type="text"
+                     value="0"/><span>Hours</span>
+              <input id="service_sections_<%= i.to_s %>_recurrence_minutes" name="service_sections[<%= i.to_s %>][recurrence_minutes]" class="numeric minute" type="text"
+                     value="0"/><span>Minutes</span>
             </div>
             <br clear="all" />
             <div class="field">
               <label for="service_sections_<%= i.to_s %>_recurrence_end_at">Until</label>
-              <input id="service_sections_<%= i.to_s %>_recurrence_end_at" name="service_sections[<%= i.to_s %>][recurrenc_end_at]" size="30" type="text" disabled />
+              <input id="service_sections_<%= i.to_s %>_recurrence_end_at" class="recurrence_end_at" name="service_sections[<%= i.to_s %>][recurrence_end_at]" size="30" type="text" disabled
+                     value="<%= service_section.recurrence_end_at %>"/>
             </div>
           </div>
 
           <script type="text/javascript">
 
-          // logic of three time fields
+            // logic of the three time fields
               var format = "%Y-%m-%d %H:%i"
               var range_conv = new AnyTime.Converter({format:format});
               $("#service_sections_<%= i.to_s %>_start_at").AnyTime_picker({format:format});
@@ -89,12 +99,15 @@
                 $("#service_sections_<%= i.to_s %>_recurrence_fields").hide();
             })
 
+            if(<%= service_section.is_recurrent? %>)
+              $('#service_sections_<%= i.to_s %>_recurrence').click();
+
             $(".numeric").each(function(){
               if($(this).val()=="0")
                 $(this).next("span").addClass("disabled")
             })
             $(".numeric").keyup(function(){
-              var parsed_value = parseInt($(this).val())
+              var parsed_value = parseInt($(this).val(), 10)
               $(this).val( isNaN(parsed_value) ? 0 : parsed_value)
               if($(this).val()=="0")
                 $(this).next("span").addClass("disabled")

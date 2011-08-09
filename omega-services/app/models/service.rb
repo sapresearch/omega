@@ -25,6 +25,13 @@ class Service < ActiveRecord::Base
 
   # abstraction layer functions for different implementation in database
   class << self
+    def new_with_dependency
+      service = Service.new
+      service_leaf = service.build_service_leaf
+      service_section = service_leaf.service_sections.build
+      service_section.build_event
+      service
+    end
 
     def open?
       service_roots.each{|sr|return true if sr.status=="public"}
@@ -91,13 +98,11 @@ class Service < ActiveRecord::Base
     sub_services.empty?
   end
 
-  # to be tested
   def is_ancestor_of?(service)
     return false if is_end? || service.is_root?
     service.super_service == self ? true : is_ancestor_of?(service.super_service)
   end
 
-  # to be tested
   def is_descendant_of?(service)
     return false if is_root? || service.is_end?
     super_service == service ? true : super_service.is_descendant_of?(service)
@@ -125,13 +130,17 @@ class Service < ActiveRecord::Base
 
   # should we consider publish all parent services?
   def publish(recursive)
-    update_attribute("status", "public")
-    sub_services.each{|s|s.publish(true)} if recursive
+    transaction do
+      update_attribute("status", "public")
+      sub_services.each{|s|s.publish(true)} if recursive
+    end
   end
 
   def unpublish(recursive)
-    update_attribute("status", "private")
-    sub_services.each{|s|s.unpublish(true)} if recursive
+    transaction do
+      update_attribute("status", "private")
+      sub_services.each{|s|s.unpublish(true)} if recursive
+    end
   end
 
   def detail_html

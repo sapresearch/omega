@@ -7,7 +7,7 @@
 <% else %>
 
   <script type="text/javascript">
-    // parse relative objects to json for client process to avoid ajax          
+    // parse relative objects to json for client process to avoid ajax
     var services = <%= raw services.to_json(:include=>{:service_registration_form=>{:only=>:html}}) %>
   </script>
 

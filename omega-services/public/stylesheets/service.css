@@ -50,12 +50,16 @@
 }
 .services_list{
     padding-bottom:10px;
-    max-height:470px;
-    overflow: auto;
+    /* max-height:470px;
+    overflow: auto; */    /* page length limit */
 }
 .service_body{
     border:1px solid #ccc;
 }
+.service_body .label{display:inline-block; min-width:100px;}
+.service_body .item{ margin:15px; padding:5px; background-color:#eee; }
+.service_body .item_title{ font-style:italic; color:#555; }
+.service_body .item .label{margin-left:20px; display:inline-block; min-width:100px;}
 
 .service_left_links { float:left; }
 .service_right_links { float:right; }
@@ -63,7 +67,8 @@
 .services_right_links a{ float:right; }
 
 .services_operation_links{
-    padding:10px 10px;    
+    padding:10px 10px;
+    margin-bottom:20px;
 }
 .services_operation_links a{
     font-size: 15px;
@@ -95,14 +100,14 @@
 }
 .service_form_builder_tabs .tab_content_options{
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight:bold;
 }
 .service_form_builder_tabs .tab_content_options span label{
     float:none;
     width:auto;
-    font-size:14px;
-    margin:0px 0px 0px 20px;
+    font-size:13px;
+    margin:0px 10px 0px 20px;
 }
 .service_form_builder_tabs .tab_content_options span input{
     display:inline;
@@ -120,14 +125,13 @@
   display: block;
 }
 
-
-.service_form_builder_tabs .tab_content li { clear:both; padding:5px 0px;}
-.service_form_builder_tabs .tab_content li label{ line-height: 100%; }
-.service_form_builder_tabs .tab_content li input{ display:block;}
-.service_form_builder_tabs .tab_content li textarea{ display:block;}
-.service_form_builder_tabs .tab_content li select{ display:block; width:280px; height:30px;}
-.service_form_builder_tabs .tab_content .editable_list li:hover {cursor:move; background-color: #bbb}
-.service_form_builder_tabs .tab_content .editing{background-color: #ddd}
+.service_customization_form li {padding:5px 0px;}
+.service_customization_form li label{ font-size:13px; text-align:right; float:left; display:block; width:150px; line-height: 100%; margin:10px 10px 0px 20px; text-transform:none;}
+.service_customization_form li input{ display:block; font:-webkit-small-control;}
+.service_customization_form li textarea{ display:block;}
+.service_customization_form li select{ display:block; width:280px; height:30px;}
+.service_customization_form.editable_list li:hover {cursor:move; background-color: #bbb}
+.service_customization_form.editable_list .editing{background-color: #ddd}
 
 .required{color:green}
 
@@ -143,7 +147,7 @@
 .item-list-actions-wrapper{ right:42px; }
 .service_form_builder_tabs .tab_content li:hover .item-list-actions-wrapper {display:block;}
 #admin-edit-em input[type="text"] { width:90%; font-size:14px;}
-#admin-edit-em textarea {width:100%; height:100px;}
+#admin-edit-em textarea {width:96%; height:100px;}
 /* end app-spec */
 
 
@@ -193,20 +197,30 @@
     font-size:13px;
 }
 .service_form .show_body .item{
-    margin: 0px 0px 0px 20px;
+    margin: 0px 0px 10px 20px;
+    background-color:#eee;
+    padding: 5px;
 }
 .service_form .show_body .field{
     margin: 0px 0px 0px 20px;
 }
 .service_form .show_body .label{
-    margin: 0px 5px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    display:inline-block;
+    width:100px;
+    vertical-align: top;
 }
-.service_section_title{
+.service_form .show_body .value{
+    display:inline-block;
+}
+.service_form .item_title{
     font-weight:bolder;
     font-size:16px;
     font-style:italic;
     color:#555;
 }
+.service_form .blank_sign{ color:#aaa }
+
 
 /* edit body */
 .service_form .show_part .edit_body{ display:none; }
@@ -226,7 +240,8 @@
 }
 
 #service_description{ width:400px; }
-.delete_service_section_link{float:right;}
+.service_section_form{}
+.delete_service_section{float:right; display:none;}
 .service_form .edit_body .service_sections_recurrence_checkbox{ float:left; margin:10px 10px 0px 0px }
 .service_sections_recurrence_fields{display:none;}
 .service_sections_recurrence_interval span{
@@ -237,12 +252,12 @@
     color:#555;
     margin:10px 5px 0px 0px
 }
-.service_sections_recurrence_interval input{
+.service_sections_recurrence_interval .numeric{
     float:left;
     width:30px;
+    padding:3px;
     font-size:13px;
     line-height: 100%;
     font-weight:bold;
     color:#555;
-
 }

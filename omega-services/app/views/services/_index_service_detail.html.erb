@@ -3,8 +3,8 @@
 
   <% field_values_hash.each do |field, value| %>
     <% if value.length > 0  %>
-      <span><strong><%= field %>:</strong></span>
-      <span><%= nl2br value %></span>
+      <span class="label"><strong><%= field %>:</strong></span>
+      <span class="value"><%= nl2br value %></span>
       <br/>
     <% end %>
   <% end %>

@@ -1,5 +1,5 @@
 <!-- om_button is app-spec -->
 
         <%= om_button(:contact => true, :icon=>'add') do %>
-          <%= link_to "Add Another Section", new_service_section_url(:index=>index), :remote=>true %>
+          <%= link_to "Add Another Section", new_service_section_url(:index=>index), :remote=>true, :onclick=>"$(this).parent().css('visibility','hidden')" %>
         <% end %>

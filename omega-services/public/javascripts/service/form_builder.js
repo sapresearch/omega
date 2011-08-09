@@ -87,22 +87,22 @@ function radio_button(){
 
 //functions to append a field inside an element visually
 function append_text_field(element_id){
-    $("#"+element_id).append(prepare_field(text_field("new text", {"maxlength":100})))
+    $("#"+element_id).append(prepare_field(text_field("New Text", {"maxlength":100})))
     check_field_exists();
 }
 function append_text_area(element_id){
-    $("#"+element_id).append(prepare_field(text_area("new text", {"maxlength":300})))
+    $("#"+element_id).append(prepare_field(text_area("New Text", {"maxlength":300})))
     check_field_exists();
 }
 function append_select_list(element_id){
-    $("#"+element_id).append(prepare_field(select_list("new select", {}, {"option1":"option1", "option2":"option2"})))
+    $("#"+element_id).append(prepare_field(select_list("New Select", {}, {"option1":"option1", "option2":"option2"})))
     check_field_exists();
 }
 function append_date_picker(element_id){
     var attributes_hash = {}
     if(element_id=="service_registration")
         attributes_hash["value"]=""
-    $("#"+element_id).append(prepare_field(date_picker("new date", attributes_hash)))
+    $("#"+element_id).append(prepare_field(date_picker("New Date", attributes_hash)))
     check_field_exists();
 }
 
@@ -112,7 +112,7 @@ function required_checkbox(label_element_id){
     if($("#"+label_element_id).hasClass("required"))
         html += "checked='checked'"
     html += "onclick='if($(this).is(\":checked\")) $(\"#"+label_element_id+"\").addClass(\"required\"); else $(\"#"+label_element_id+"\").removeClass(\"required\");' />"
-    html += "<label id='required_label' for='required_checkbox' >Is this field required?</label>"
+    html += "<label id='required_label' for='required_checkbox' >Field Required</label>"
     return html;
 }
 function edit_label(label_element_id){
@@ -199,7 +199,7 @@ function editing_element_id(){
 //***** app-spec
 function cancel_editing_element(){
     $(".editing").removeClass("editing");
-    $("#admin-edit-em").html("Hover over the field you want to edit or delete and choose from the two options.<br/><br/>Tips: double click on a field to edit it's label, and single click to edit it's content. Drag & drop a field to reorder.")
+    $("#admin-edit-em").html("Hover over the field you want to edit or delete and choose from the two options.<br/><br/>Tips: double click on a field to edit the label, and single click to edit the content. Drag & drop a field to reorder.")
 }
 function field_operation_links(){
   return "<div class='item-list-actions-wrapper corners' >\

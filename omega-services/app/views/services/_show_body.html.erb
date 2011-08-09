@@ -4,6 +4,12 @@
 
             <p><%= nl2br service.description %></p>
             <p><%= render "services/index_service_detail", :service=>service %></p>
+            
+            <% if service.is_leaf? %>
+              <% service.service_sections.each_with_index do |service_section, i| %>
+                <%= render "service_sections/service_section", :service_section=>service_section, :i=>i %>
+              <% end %>
+            <% end %>
 
             <div class="service_operation_links" >
               
