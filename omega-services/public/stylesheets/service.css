@@ -53,6 +53,8 @@
     /* max-height:470px;
     overflow: auto; */    /* page length limit */
 }
+
+.service_head .service_registration_status{float:right; margin:0px 10px 0px 0px; font-weight:bold; font-style:italic;}
 .service_body{
     border:1px solid #ccc;
 }
