@@ -13,8 +13,8 @@
 	
 	
 	
-	<h3 class="settings-form"> Site-Wide Settings </h3>
-		<p>
+	<h3 class="content-heading"> Site-Wide Settings </h3>
+		<p class="content">
 			Upload an image to use as the site-wide background logo:
 		</p>
 
@@ -38,8 +38,9 @@
 !-->
 
 
-<h3 class="settings-form"> Sharing </h3>
-	<p> Social Media Accounts to Activate: </p>
+<h3 class="content-heading"> Sharing </h3>
+	<div class="content">
+		<p> Social Media Accounts to Activate: </p>
 		
 			<% if @setting.facebook_token.nil? then %>
 				<div class="field" >
@@ -56,10 +57,12 @@
 			<% end %>
 
 			<!--<%#= link_to "Read about how to get started with Facebook sharing", :url => "developers.facebook.com" %>!-->
+			<br /><br />
 			<p><a href="http://www.developers.facebook.com"> Read about how to get started with Facebook sharing </a></p>
 
 
 			<%= "You've added all available accounts" unless @setting.fb_secret.nil? and @setting.facebook_token.nil? %>
+	</div>
 		
 			</br>
 			<div class="actions" style="margin-left: 40%">

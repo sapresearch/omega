@@ -12,12 +12,9 @@
 
 
  
-	<h3 class="settings-form"> Site-Wide Settings </h3>
+	<h3 class="content-heading"> Site-Wide Settings </h3>
 		</br><p class="image"> Current Logo: </p>
  	 		<div id="settings-logo" style="background:url(<%=image_in_use_url("Logo")%>) no-repeat left" ></div>
-
-		</br><p> Current Banner: </p>
- 	 		<div id="settings-logo" style="background:url(<%=image_in_use_url("Banner")%>) no-repeat left" ></div>
 
 		<nav class="link">
 			<ul>
@@ -29,7 +26,7 @@
 
 
 
-	<h3 class="settings-form"> Your Accounts </h3>
+	<h3 class="content-heading"> Your Accounts </h3>
 		<p>
 			<%= "No Accounts Added Yet" if (@settings.twitter.nil? and @settings.facebook_token.nil?) %>
 		</p>
