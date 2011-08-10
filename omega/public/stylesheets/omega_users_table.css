@@ -1,25 +1,38 @@
 table.accounts
 {
-	margin: 0 0 0 15%;
+	margin: 60px auto 0 auto;
 }
 
 #accounts th
 {
 	font-size: 18px;
-	font-weight: normal;
-	color: #039;
+	font-weight: bold;
+	color: #555;
 	padding: 10px 20px;
-	border-bottom: 2px solid #6678b1;
+	border-bottom: 2px solid #555;
 }
 
 #accounts td
 {
-	color: #669;
+	color: #555;
 	padding: 9px 20px 0px 20px;
-	font: 14px;
+	font-size: 16px;
+}
+
+#fb input 
+{
+	margin: 0 0 0 50px;
+	font-size: 16px;
+	color: #555;
 }
 
 #accounts tbody tr:hover td
 {
-	color: #009;
+	color: #555;
+	font-size: 16px;
+}
+
+#accounts td
+{
+	height: 40px;
 }

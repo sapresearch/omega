@@ -13,12 +13,16 @@
 
 
 
+		<form name="messageForm" onsubmit="fb_message()">
+			<input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="test alert"><br />
+		</form>
 
 
 	<% if (current_user.is_admin? and !@fb_enabled) then %>
 		<!-- <button onclick="fb_message()"> Message to Facebook </button>
 		<button onclick="FB.ui({ method: 'feed', message: 'Facebook for Websites is super-cool'})"> Message to Facebook </button>
 		!-->
+
 		<form name="messageForm" onsubmit="fb_message()">
 			<input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="test alert"><br />
 		</form>

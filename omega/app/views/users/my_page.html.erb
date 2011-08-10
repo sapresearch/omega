@@ -4,10 +4,11 @@
 <%= require_stylesheet 'omega_users' %>
 <%= require_javascript 'omega_users' %>
 
+
 <style type="text/css">
 	h3.application-form{
-		width: 622px;
   	background: #87B5CA;
+		margin: 45px 0 25px 35px;
 	}
 </style>
 
@@ -25,18 +26,30 @@ function makeURL()
 </script>
 
 <body>
+	<div id="fb">
+	  <div id="fb-root"></div>
+	  <script src="http://connect.facebook.net/en_US/all.js"></script>
+	  <script>
+	    FB.init({ appId: '117866098303408', cookie:true, status:true, xfbml:true });
+			function fb_message(){
+				user_message = " ";
+				FB.ui({ method: 'feed', message: user_message});
+			}
+	  </script>
 
 
-<div id="right">
+
+<!--<div id="right">
 	<h1 class="side-bar corners-top"> My Calendar </h1>
-		<p> <%= "Your calendar is empty" %></p>
-</div>
+		<p> <%#= "Your calendar is empty" %></p>
+</div>!-->
 
 
-<div id="left">
+<!--<div id="left">!-->
+ <!--<div id="content-box">!-->
 <div class="content circle-corners-bottom-left">
 
-<div class="heading-main-columns">
+<div class="heading-main">
 	<h1 class="page-content">
 		<% if current_user.nil? then %>
 			<%= current_user.first_name + "'s" %>
@@ -55,6 +68,7 @@ function makeURL()
 						<th id="accounts">Volunteering<br/>Opportunity</th>
 						<th id="accounts">Date</th>
 						<th id="accounts">Application Status</th>
+						<th id="accounts">Share with Facebook</th>
 					</tr>
 				</thead>
 
@@ -64,13 +78,19 @@ function makeURL()
 	         		<td id="accounts"> <%= element[:position].name %></td>
 	         		<td id="accounts"> <%= element[:position].start_date %></td>
 	         		<td id="accounts"> <%= element[:record].action %></td>
+	         		<td id="accounts"> 
+								<!--<button onsubmit="fb_message()"> Post </button>!-->
+								<form onsubmit="fb_message()">
+									<input type="hidden" id="fb" size="0" maxlength="0"> <input type="submit" value="Post"><br />
+								</form>
+							</td>
 						</tr>
 					<% end %>
 				</tbody>
 			</table>
 
 
-  		<h3 class="application-form"> Sharing </h3>
+  		<!--<h3 class="application-form"> Sharing </h3>
 				<table id="accounts">
 
 					<tbody>
@@ -93,7 +113,7 @@ function makeURL()
 						</tr>
 
 					</tbody>
-				</table>
+				</table>!-->
 					
 
 
@@ -122,5 +142,5 @@ function makeURL()
 
 
  </div>
- </div>
+ <!--</div>!-->
 </body>
