@@ -14,7 +14,7 @@
       <div id="accordion">
         <% services.each do |s| %>
           <% if(is_admin? || s.is_public?) %>
-            <h3 id="service_head_<%= s.id %>" <%= "class='service_leaf'" if s.is_leaf? %> >
+            <h3 id="service_head_<%= s.id %>" class="service_head<%= " service_leaf" if s.is_leaf? %>" >
               <%= render "services/show_head", :service=>s %>
             </h3>
             <div id="service_body_<%= s.id %>" class="service_body" >
