@@ -2,6 +2,20 @@
 	<% require_stylesheet 'settings' %>
 </head>
 
+
+<div id="fb">
+  <div id="fb-root"></div>
+  <script src="http://connect.facebook.net/en_US/all.js"></script>
+  <script>
+    FB.init({ appId: '117866098303408', cookie:true, status:true, xfbml:true });
+		function fb_message(){
+			user_message = document.messageForm.message.value;
+			FB.ui({ method: 'feed', message: user_message});
+		}
+  </script>
+
+
+
 <%= form_for(@setting) do |s| %>
 	<body>
 	
@@ -42,7 +56,11 @@
 	<div class="content sharing-content">
 		<p> Social Media Accounts to Activate: </p>
 		
-			<% if @setting.facebook_token.nil? then %>
+
+
+
+			<%= with_permission(Setting::PERM_ADMIN) do %>
+				<% if @setting.facebook_token.nil? then %>
 				<div class="field" >
 					<%= s.label "Facebook App Token" %>
 					<%= s.text_field(:facebook_token) %>
@@ -56,13 +74,18 @@
 				</div>
 			<% end %>
 
-			<!--<%#= link_to "Read about how to get started with Facebook sharing", :url => "developers.facebook.com" %>!-->
 			<br /><br />
 			<p><a href="http://www.developers.facebook.com"> Read about how to get started with Facebook sharing </a></p>
 
 
 			<%= "You've added all available accounts" unless @setting.fb_secret.nil? and @setting.facebook_token.nil? %>
 	</div>
+			<% end %> <!-- end of with_permission loop !-->
+
+
+
+		<!--<p> Your organization has created a Facebook App.  Just click the link below to log into Facebook.  This will allow you to post from your MyOmega page and keep your friends informed on your organization's activites. </p>!-->
+		<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>
 		
 			</br>
 			<div class="actions" style="margin-left: 40%">
@@ -71,4 +94,6 @@
 				</p>
 			</div>
 		<% end %>
-	</body>
+
+
+</body>

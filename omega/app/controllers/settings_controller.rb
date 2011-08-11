@@ -3,7 +3,12 @@ class SettingsController < Omega::Controller
 	def index
 		@fb_enabled = Setting.fb_enabled?(current_user)
 		@settings = Setting.find_by_user_id(current_user.id)
-		@settings.nil? ? @either_edit_or_new = "new" : @either_edit_or_new = "/edit"
+		#@settings.nil? ? @either_edit_or_new = "new" : @either_edit_or_new = "/edit"
+		@either_edit_or_new = "/edit"
+		if @settings.nil? then
+			@settings = Setting.create(:user_id => current_user.id)
+		end
+			
 		@image = Image.new
 		respond_to do |format|
 			format.html # index.html.erb
