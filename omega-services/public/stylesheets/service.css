@@ -242,8 +242,12 @@
 }
 
 #service_description{ width:400px; }
-.service_section_form{}
-.delete_service_section{float:right; display:none;}
+
+.service_section_form .delete_service_section,
+.service_section_form .remove_service_section{float:right; display:none;} /* .remove_service_section not in use */
+.service_section_form .remove_service_section label{width:auto; margin:0px 5px; float:left;} /* not in use */
+.service_section_form .remove_service_section input{width:auto; margin:0px; float:left;} /* not in use */
+
 .service_form .edit_body .service_sections_recurrence_checkbox{ float:left; margin:10px 10px 0px 0px }
 .service_sections_recurrence_fields{display:none;}
 .service_sections_recurrence_interval span{

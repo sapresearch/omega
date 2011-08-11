@@ -2,7 +2,7 @@
   <% field_values_hash = service.detail_field_values_hash%>
 
   <% field_values_hash.each do |field, value| %>
-    <% if value.length > 0  %>
+    <% if value.to_s.length > 0  %>
       <span class="label"><strong><%= field %>:</strong></span>
       <span class="value"><%= nl2br value %></span>
       <br/>

@@ -37,8 +37,11 @@ class ServicesController < Omega::Controller
     @service_level = params[:service_level] || Service::LEAF_LEVEL
     @super_service = super_service
     @service = new_sub_service_of(@super_service)
+    
     @default_service_with_detail_template = @super_service ? @super_service.default_service_with_detail_template : nil
     @default_service_with_registration_template = @super_service ? @super_service.default_service_with_registration_template : nil
+    @service_detail_html = @default_service_with_detail_template.detail_html if @default_service_with_detail_template
+    @service_registration_html = @default_service_with_registration_template.registration_html if @default_service_with_registration_template
 
     # for js    
     @services_with_detail_template = Service.services_with_detail_template.sort{|s1,s2| s1.name<=>s2.name}
@@ -106,6 +109,34 @@ class ServicesController < Omega::Controller
     respond_with(@service, :location=>services_url(:service_id=>@service.id))
   end
 
+  def edit
+    @service_id = params[:id]
+    @service = Service.find(@service_id)    
+    @super_service = super_service
+    @service_level = @service.is_leaf? ? Service::LEAF_LEVEL : Service::BRANCH_LEVEL
+
+    @default_service_with_detail_template = @service.default_service_with_detail_template
+    @default_service_with_registration_template = @service.default_service_with_registration_template
+    @service_detail_html = @default_service_with_detail_template.detail_html if @default_service_with_detail_template
+    @service_detail_html = @service.detail_html if @service.detail_html
+    @service_registration_html = @default_service_with_registration_template.registration_html if @default_service_with_registration_template
+    @service_registration_html = @service.registration_html if @service.registration_html
+
+    # for js
+    @services_with_detail_template = Service.services_with_detail_template.sort{|s1,s2| s1.name<=>s2.name}
+    @services_with_registration_template = Service.services_with_registration_template.sort{|s1,s2| s1.name<=>s2.name}
+
+    # for service sections
+    if @service_level == Service::LEAF_LEVEL
+      @contacts = Contact.all.sort{|c1,c2|c1.name<=>c2.name}
+      @service_sections = @service.service_sections
+    end
+
+    # automatically cancel my services switch
+    session[:my_services_switch]="off"
+    respond_with(@service)
+  end
+
   def update
     @service = Service.find(params[:id])
     @recursive = (params[:recursive]=="true"||params[:recursive]==true) ? true :false
@@ -113,15 +144,109 @@ class ServicesController < Omega::Controller
       when "publish"
         @service.publish(@recursive)
       when "unpublish"
-        @service.unpublish(@recursive)
+        @service.unpublish(@recursive)       
       else
+        Service.transaction do
+          @service.update_attributes(params[:service])
+
+          # get the service level
+          @service_level = params[:service_level]
+          @service_leaf = @service.service_leaf if @service_level==Service::LEAF_LEVEL
+
+          # service detail
+          @service_detail_html = params[:service_detail_html]
+          @service_detail_field_values = params[:service_detail_field_values]
+          @has_service_detail_template = params[:has_service_detail_template]
+          
+          if @service_detail_html.empty?
+            @service.service_detail_form.destroy if @service.has_service_detail_form?
+          elsif @service.has_service_detail_form?
+            @service_detail_form = @service.service_detail_form
+            @service_detail_form.update_attributes(:html => @service_detail_html, :field_values=>@service_detail_field_values)
+            if @service.has_service_detail_template? && @has_service_detail_template != "on"
+              @service.service_detail_template.destroy
+            elsif !@service.has_service_detail_template? && @has_service_detail_template == "on"
+              @service_detail_form.create_service_detail_template
+            end
+          else
+            @service_detail_form = @service.create_service_detail_form(:html => @service_detail_html, :field_values=>@service_detail_field_values)
+            @service_detail_form.create_service_detail_template if @has_service_detail_template == "on"
+          end
+
+          # service registration
+          @service_registration_html = params[:service_registration_html]
+          @has_service_registration_template = params[:has_service_registration_template]
+
+          if @service_registration_html.empty?
+            @service.service_registration_form.destroy if @service.has_service_registration_form?
+          elsif @service.has_service_registration_form?
+            @service_registration_form = @service.service_registration_form
+            @service_registration_form.update_attributes(:html => @service_registration_html)
+            if @service.has_service_registration_template? && @has_service_registration_template != "on"
+              @service.service_registration_template.destroy
+            elsif !@service.has_service_registration_template? && @has_service_registration_template == "on"
+              @service_registration_form.create_service_registration_template
+            end
+          else
+            @service_registration_form = @service.create_service_registration_form(:html => @service_detail_html)
+            @service_registration_form.create_service_registration_template if @has_service_registration_template == "on"
+          end
+
+          # service sections (re-factor to service_sections_contoller if nested form is used in the future)          
+          if @service_leaf
+            @service_section_ids=[]
+            @original_service_section_ids = @service.service_section_ids
+            @service_section_params = params[:service_sections]
+            @service_section_params.each_value do |service_section|
+              @contact_id = service_section["contact_id"]
+              @location = service_section["location"]
+              @start_at = service_section["start_at"]
+              @end_at = service_section["end_at"]
+              if service_section["recurrence"]=="on"
+                @recurrence_years = service_section[:recurrence_years]
+                @recurrence_months = service_section[:recurrence_months]
+                @recurrence_days = service_section[:recurrence_days]
+                @recurrence_hours = service_section[:recurrence_hours]
+                @recurrence_minutes = service_section[:recurrence_minutes]
+                @interval = ActiveSupport::JSON.encode({:years=>@recurrence_years, :months=>@recurrence_months, :days=>@recurrence_days, :hours=>@recurrence_hours, :minutes=>@recurrence_minutes}).to_s
+                @recurrence_end_at = service_section[:recurrence_end_at]
+              end
+              
+              @id = service_section["id"]
+              unless @id.empty?
+                @service_section_ids << @id.to_i
+                @service_section = ServiceSection.find(@id)
+                @event = @service_section.event
+                @event.update_attributes(:location=>@location, :start_at=>@start_at, :end_at=>@end_at)
+                @service_section.update_attributes(:contact_id=>@contact_id)
+                if service_section["recurrence"]=="on"
+                  if @service_section.is_recurrent?
+                    @event.event_recurrence.update_attributes(:interval=>@interval, :end_at=>@recurrence_end_at)
+                  else
+                    @event.create_event_recurrence(:interval=>@interval, :end_at=>@recurrence_end_at)
+                  end                
+                elsif service_section["recurrence"]!="on"
+                  if @service_section.is_recurrent?
+                    @event.event_recurrence.destroy
+                  end
+                end
+              else
+                @event = Event.create(:location=>@location, :start_at=>@start_at, :end_at=>@end_at)
+                @service_section = @service_leaf.service_sections.create(:contact_id=>@contact_id, :event_id=>@event.id)                
+                @event.create_event_recurrence(:interval=>@interval, :end_at=>@recurrence_end_at) if service_section["recurrence"]=="on"
+              end             
+            end
+            @service_section_ids_to_delete = @original_service_section_ids - @service_section_ids
+            ServiceSection.destroy(@service_section_ids_to_delete)
+          end
+        end
     end
 
     # for js
     @services = @service.sibling_services
 
     @services = my_services(@services) if session[:my_services_switch]=="on"
-    respond_with(@service)
+    respond_with(@service, :location=>services_url(:service_id=>@service.id))
   end
 
   def destroy

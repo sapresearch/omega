@@ -9,3 +9,6 @@ function nl2br(str)
     return str.replace(/\n/g,'<br/>')
 }
 
+function is_empty_html(html){
+    return html.match(/\w+/) ? false :true
+}

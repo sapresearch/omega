@@ -1,10 +1,6 @@
 // fix the problem service#destroy not rendering format.js when using respond_with
 jQuery.ajaxSetup({ beforeSend: function (xhr) { xhr.setRequestHeader("Accept", "text/javascript"); } });
 
-function is_empty_html(html){
-    return html.match(/\w+/) ? false :true
-}
-
 function service_detail_html(){
     return $('#service_detail').html();
 }
@@ -20,6 +16,18 @@ function find_service_by_id(services, id){
       return services[i];
   }
   return null;
+}
+
+function fill_service_detail(service_detail_field_values){
+    JSON.parse(service_detail_field_values, function(key, val){
+        $("#service_detail label").each(function(){
+            if($(this).html()==key)
+            {
+                var target_id = $(this).attr("for")
+                $("#"+target_id).val(val)
+            }
+        })
+    })
 }
 
 function field_values_to_json(element_id, is_required_field_included){
@@ -39,26 +47,72 @@ function field_values_to_json(element_id, is_required_field_included){
     return field_values
 }
 
-function check_service_sections_count(){
-    if(service_sections_count<=1)
-        $('.delete_service_section').hide()
-    else
-        $('.delete_service_section').show()
-    
-    
+function refresh_service_detail(){
+    var sid=$('#select_service_detail_templates').val();
+    $('#service_detail').html(isNaN(sid) ? "" : find_service_by_id(services_with_detail_template,sid).service.service_detail_form.html)
+    check_field_exists()
 }
-function refresh_service_section_index(){
-    $(".service_section_form .service_section_title").each(function(index){
-        $(this).html("Section "+(index+1))
-    })
+function refresh_service_registration(){
+    var sid=$('#select_service_registration_templates').val();
+    $('#service_registration').html(isNaN(sid) ? "" : find_service_by_id(services_with_registration_template,sid).service.service_registration_form.html)
+    check_field_exists()
 }
 
-function delete_service_section(element_id)
+// set environment for editing
+function set_leaf_service_env(){
+    $("#service_leaf_level_radio").attr("checked","checked")
+    $("#title_category").hide();
+    $("#service_detail_tab_link").html("Service Detail");
+    $("#service_registration_tab_link").html("Registration Form");
+
+    $("#service_name").select();
+    $("#service_level").val(service_leaf_level);
+
+    $('#service_section_info').show()
+}
+function set_branch_service_env(){
+    $("#service_branch_level_radio").attr("checked","checked")
+    $("#title_category").show();
+    $("#service_detail_tab_link").html("Service Category Detail");
+    $("#service_registration_tab_link").html("Registration Form Template");
+
+    $("#service_name").select();
+    $("#service_level").val(service_branch_level);
+
+    $('#service_section_info').hide()
+}
+function set_service_detail_env(){
+    $(".service_registration_only").hide()
+    cancel_editing_element()
+}
+function set_service_registration_env(){
+    $(".service_registration_only").show()
+    cancel_editing_element()
+}
+
+// prepare clean html ready to save to database
+function clean_service_form_html()
 {
-    service_sections_count -- ;
-    $("#"+element_id).hide("slow", function(){
-        $(this).remove();
-        refresh_service_section_index()
-    })
-    check_service_sections_count() 
+    cancel_editing_element();
+    $('.hasDatepicker').removeClass('hasDatepicker');
+}
+
+//submit the service form
+function submit_service_form(status)
+{
+    clean_service_form_html();
+    $('#service_status').val(status);
+
+    if(!is_empty_html(service_detail_html()))
+    {
+        $('#service_detail_html').val(service_detail_html())
+        $('#service_detail_field_values').val(JSON.stringify(field_values_to_json("service_detail", false)))
+    }
+    if(!is_empty_html(service_registration_html()))
+    {
+        $('#service_registration_html').val(service_registration_html())
+        //$('#service_registration_field_values').val(JSON.stringify(field_values_to_json("service_registration", true))) //this might only be necessary in real registration
+    }
+
+    $('.service_form').submit()
 }

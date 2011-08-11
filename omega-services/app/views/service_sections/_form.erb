@@ -1,7 +1,8 @@
 
         <fieldset class="service_section_form" id="service_sections_<%= i.to_s %>">
           <legend class="service_section_title">Section <%= i+1 %></legend>
-          
+          <%= hidden_field_tag "service_sections[#{i.to_s}][id]", service_section.id %>
+
           <div class="delete_service_section">
             <%= om_button(:contact => true, :icon=>'delete') do %>
               <%= link_to_function "Delete", "delete_service_section('service_sections_#{i.to_s}');" %>
@@ -20,16 +21,16 @@
           <div class="field">
             <label for="service_sections_<%= i.to_s %>_location">Location</label>
             <input id="service_sections_<%= i.to_s %>_location" name="service_sections[<%= i.to_s %>][location]" class="location" size="30" maxlength="100" type="text" data-tooltip="Location of the section"
-                   value="<%= service_section.location %>" onclick="$(this).select()" />
+                   value="<%= service_section.location %>" />
           </div>
 
           <div class="field">
             <label for="service_sections_<%= i.to_s %>_start_at">Start</label>
             <input id="service_sections_<%= i.to_s %>_start_at" name="service_sections[<%= i.to_s %>][start_at]" class="start_at" size="30" type="text"
-                   value="<%= service_section.start_at %>"/>
+                   value="<%= service_section.start_at %>" />
             <label for="service_sections_<%= i.to_s %>_end_at">Finish</label>
             <input id="service_sections_<%= i.to_s %>_end_at" name="service_sections[<%= i.to_s %>][end_at]" class="end_at" size="30" type="text" disabled
-                   value="<%= service_section.end_at %>"/>
+                   value="<%= service_section.end_at %>" />
           </div>
 
           <div class="field">
@@ -100,7 +101,10 @@
             })
 
             if(<%= service_section.is_recurrent? %>)
-              $('#service_sections_<%= i.to_s %>_recurrence').click();
+            {
+              $('#service_sections_<%= i.to_s %>_recurrence').attr('checked','checked')
+              $("#service_sections_<%= i.to_s %>_recurrence_fields").show();
+            }
 
             $(".numeric").each(function(){
               if($(this).val()=="0")

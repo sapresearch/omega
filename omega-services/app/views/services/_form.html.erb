@@ -1,12 +1,5 @@
 <!-- om_button is app-spec -->
 
-<% require_javascript 'util.js' %>
-<% require_javascript 'ui_util.js'%>
-<% require_javascript 'service/share.js' %>
-<% require_javascript 'service/form.js' %>
-<% require_javascript 'service/form_builder.js' %>
-<% require_javascript 'service/new.js' %>
-
 <!-- anytime jquery plugin -->
 <% require_stylesheet 'anytime.css' %>
 <% require_javascript 'anytime.js' %>
@@ -44,17 +37,19 @@
     preview_service_customization_info()
   });
 
+  //global variables 
+  var service_leaf_level = '<%= Service::LEAF_LEVEL %>'
+  var service_branch_level = '<%= Service::BRANCH_LEVEL %>'
+  
   // parse relative objects to json for client read process to avoid ajax
   var services_with_detail_template = <%= raw @services_with_detail_template.to_json(:include=>{:service_detail_form=>{:only=>:html}}) %>
   var services_with_registration_template = <%= raw @services_with_registration_template.to_json(:include=>{:service_registration_form=>{:only=>:html}}) %>
-  var service_sections_count = 1;
+  <% if @service.is_leaf? %>
+    var service_sections_count = <%= @service_sections.length %>;
+  <% end %>
 </script>
 
 <%= form_for(@service, :html=>{:class=>"service_form"}) do |form| %>
-
-  <div class="service_new_options">
-    <%= render "new_options" %>
-  </div>
 
   <div class="part edit_part" id="service_basic_info">
     <h3 class="head">
@@ -97,39 +92,41 @@
 
 
 
-
-  <div class="part show_part" id="service_section_info">
-    <h3 class="head">
-      Sections
-      <span class="service_right_links edit_links">
-        <%= om_button(:contact => true, :icon=>'edit') do %>
-          <%= link_to_function "Edit", "edit_service_section()", "data-tooltip"=>"Edit sections" %>
-        <% end %>
-      </span>
-      <span class="service_right_links update_links">
-        <%= om_button(:contact => true, :icon=>'apply') do %>
-          <%= link_to_function "Preview", "preview_service_section()", "data-tooltip"=>"Preview sections" %>
-        <% end %>
-      </span>
-    </h3>
-    <div class="show_body body">
-      <% @service_sections.each_with_index do |service_section, i| %>
-        <%= render "service_sections/service_section", :service_section=>service_section, :i=>i %>
-      <% end %>
-    </div>
-
-    <div class="edit_body body">
-      <div id="service_section_form_list">
-        <% @service_sections.each_with_index do |service_section, i| %>          
-          <%= render "service_sections/form", :service_section=>service_section, :i=>i  %>
+  <% if @service.is_leaf? %>
+    <div class="part show_part" id="service_section_info">
+      <h3 class="head">
+        Sections
+        <span class="service_right_links edit_links">
+          <%= om_button(:contact => true, :icon=>'edit') do %>
+            <%= link_to_function "Edit", "edit_service_section()", "data-tooltip"=>"Edit sections" %>
+          <% end %>
+        </span>
+        <span class="service_right_links update_links">
+          <%= om_button(:contact => true, :icon=>'apply') do %>
+            <%= link_to_function "Preview", "preview_service_section()", "data-tooltip"=>"Preview sections" %>
+          <% end %>
+        </span>
+      </h3>
+      
+      <div class="show_body body">
+        <% @service_sections.each_with_index do |service_section, i| %>
+          <%= render "service_sections/service_section", :service_section=>service_section, :i=>i %>
         <% end %>
       </div>
 
-      <div class="new_links" id="new_service_section_link">
-        <%= render "service_sections/new_link", :index=>@service_sections.length %>
+      <div class="edit_body body">
+        <div id="service_section_form_list">
+          <% @service_sections.each_with_index do |service_section, i| %>
+            <%= render "service_sections/form", :service_section=>service_section, :i=>i  %>
+          <% end %>
+        </div>
+
+        <div class="new_links" id="new_service_section_link">
+          <%= render "service_sections/new_link", :index=>@service_sections.length %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
 
 
@@ -155,7 +152,7 @@
 
     <div class="edit_body body">
       <div class="service_form_builder_view">
-        <%= render "services/form_builder_view", :form=>form %>
+        <%= render "services/form_builder_view" %>
       </div>
 
       <div class="service_form_builder_tools">
@@ -163,5 +160,13 @@
       </div>
     </div>
   </div>
+
+  <%= form.hidden_field :super_service_id, :value=>@service.is_root? ? nil : @service.super_service.id %>
+  <%= form.hidden_field :status %>
+  <%= hidden_field_tag :service_detail_html %>
+  <%= hidden_field_tag :service_detail_field_values %>
+  <%= hidden_field_tag :service_registration_html %>
+  <%#= hidden_field_tag :service_registration_field_values %> <!-- this might only be necessary when later in registration. Can be used to store default value -->
+  <%= hidden_field_tag :service_level %>
 
 <% end %>
