@@ -1,10 +1,10 @@
 <% require_stylesheet 'service.css' %>
-
-<script type="text/javascript">
-  //global variables
-  var service_leaf_level = '<%= Service::LEAF_LEVEL %>'
-  var service_branch_level = '<%= Service::BRANCH_LEVEL %>'
-</script>
+<% require_javascript 'util.js' %>
+<% require_javascript 'ui_util.js'%>
+<% require_javascript 'service/form.js' %>
+<% require_javascript 'service/form_builder.js' %>
+<% require_javascript 'service/share.js' %>
+<% require_javascript 'service/new.js' %>
 
 <!-- app-spec -->
 <div class="content circle-corners-bottom-left" >

@@ -91,7 +91,7 @@ class Service < ActiveRecord::Base
   end
 
   def is_leaf?
-    ServiceLeaf.all.map{|sl|sl.service}.include?(self)
+    not service_leaf.nil?
   end
 
   def is_end?
