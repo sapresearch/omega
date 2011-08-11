@@ -169,8 +169,17 @@ function str_to_options_html(str){
 
 // hide or show the checkbox for making template depending on if the fields are empty.
 function check_field_exists(){
-    is_empty_html(service_detail_html()) ? $("#check_service_detail_template").css("visibility", "hidden") : $("#check_service_detail_template").css("visibility", "visible")
-    is_empty_html(service_registration_html()) ? $("#check_service_registration_template").css("visibility", "hidden") : $("#check_service_registration_template").css("visibility", "visible")
+    if(is_empty_html(service_detail_html())){
+        $("#check_service_detail_template").css("visibility", "hidden")
+        $("#has_service_detail_template").removeAttr("checked")
+    }else
+        $("#check_service_detail_template").css("visibility", "visible")
+
+    if(is_empty_html(service_registration_html())){
+        $("#check_service_registration_template").css("visibility", "hidden")
+        $("#has_service_registration_template").removeAttr("checked")
+    }else
+        $("#check_service_registration_template").css("visibility", "visible")    
 }
 
 // delete a field
