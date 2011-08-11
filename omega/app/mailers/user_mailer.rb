@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "admin@evergreen.ca"
+  default :from => "admin@omegaportal.org"
 
   default_url_options = { :host => "omega.com" }
 
