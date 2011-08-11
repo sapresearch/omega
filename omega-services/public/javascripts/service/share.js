@@ -19,7 +19,7 @@ function find_service_by_id(services, id){
 }
 
 function fill_service_detail(service_detail_field_values){
-    var json = JSON.parse(service_detail_field_values, function(key, val){
+    JSON.parse(service_detail_field_values, function(key, val){
         $("#service_detail label").each(function(){
             if($(this).html()==key)
             {

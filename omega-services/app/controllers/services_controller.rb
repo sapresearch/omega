@@ -37,8 +37,11 @@ class ServicesController < Omega::Controller
     @service_level = params[:service_level] || Service::LEAF_LEVEL
     @super_service = super_service
     @service = new_sub_service_of(@super_service)
+    
     @default_service_with_detail_template = @super_service ? @super_service.default_service_with_detail_template : nil
     @default_service_with_registration_template = @super_service ? @super_service.default_service_with_registration_template : nil
+    @service_detail_html = @default_service_with_detail_template.detail_html if @default_service_with_detail_template
+    @service_registration_html = @default_service_with_registration_template.html if @default_service_with_registration_template
 
     # for js    
     @services_with_detail_template = Service.services_with_detail_template.sort{|s1,s2| s1.name<=>s2.name}
@@ -114,6 +117,10 @@ class ServicesController < Omega::Controller
 
     @default_service_with_detail_template = @service.default_service_with_detail_template
     @default_service_with_registration_template = @service.default_service_with_registration_template
+    @service_detail_html = @default_service_with_detail_template.detail_html if @default_service_with_detail_template
+    @service_detail_html = @service.detail_html if @service.detail_html
+    @service_registration_html = @default_service_with_registration_template.html if @default_service_with_registration_template
+    @service_registration_html = @service.registration_html if @service.registration_html
 
     # for js
     @services_with_detail_template = Service.services_with_detail_template.sort{|s1,s2| s1.name<=>s2.name}

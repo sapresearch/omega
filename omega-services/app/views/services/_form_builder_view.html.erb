@@ -9,6 +9,7 @@
           <label for="select_service_detail_templates">Use Existing Template:</label>
           <% options = ["none"].concat(@services_with_detail_template.map{|s|[s.name, s.id]}) %>
           <% default_option_value = @default_service_with_detail_template ? @default_service_with_detail_template.id : "none" %>
+          <% default_option_value = "none" if @service.id %>
           <%= select_tag(:select_service_detail_templates, options_for_select(options, default_option_value), :onchange => "refresh_service_detail()") %>
         </span>
         <span id="check_service_detail_template" >
@@ -20,7 +21,7 @@
 
       <div class="tab_content" id='table_div_1'>        
         <ul class="editable_list service_customization_form" id="service_detail" >
-          <%= @default_service_with_detail_template.detail_html unless @default_service_with_detail_template.nil? %>
+          <%= @service_detail_html %>
         </ul>
       </div>
     </div>
@@ -42,7 +43,7 @@
 
       <div class="tab_content" id='table_div_2'>
         <ul class="editable_list service_customization_form" id="service_registration">
-          <%= @default_service_with_registration_template.registration_html unless @default_service_with_registration_template.nil? %>
+          <%= @service_registration_html %>
         </ul>
       </div>
     </div>
