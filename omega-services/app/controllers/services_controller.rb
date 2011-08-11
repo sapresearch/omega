@@ -197,6 +197,7 @@ class ServicesController < Omega::Controller
             @service_section_ids=[]
             @original_service_section_ids = @service.service_section_ids
             @service_section_params = params[:service_sections]
+            
             @service_section_params.each_value do |service_section|
               @contact_id = service_section["contact_id"]
               @location = service_section["location"]

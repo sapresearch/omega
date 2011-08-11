@@ -138,3 +138,15 @@ function preview_service_customization_info(){
 }
 
 
+function init_text_editor(text_area_id){
+    $("body").addClass("yui-skin-sam")
+    var myEditor = new YAHOO.widget.Editor(text_area_id, {
+        height: '300px',
+        width: '522px',
+        dompath: true, //Turns on the bar at the bottom
+        animate: true //Animates the opening, closing and moving of Editor windows
+    });
+    myEditor.render();
+}
+
+

@@ -101,6 +101,7 @@ function clean_service_form_html()
 function submit_service_form(status)
 {
     clean_service_form_html();
+    $("input,textarea").removeAttr("disabled")
     $('#service_status').val(status);
 
     if(!is_empty_html(service_detail_html()))
