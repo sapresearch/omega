@@ -188,7 +188,7 @@ class ServicesController < Omega::Controller
               @service_registration_form.create_service_registration_template
             end
           else
-            @service_registration_form = @service.create_service_registration_form(:html => @service_detail_html)
+            @service_registration_form = @service.create_service_registration_form(:html => @service_registration_html)
             @service_registration_form.create_service_registration_template if @has_service_registration_template == "on"
           end
 

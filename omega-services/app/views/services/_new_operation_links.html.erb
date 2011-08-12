@@ -3,7 +3,7 @@
         <%= link_to_function "Create and Publish", "submit_service_form('public')", :class=>"services_new_operation_button" %>
       </div>
       <div class="services_right_links">
-        <%= link_to "Back to "+(@super_service.nil? ? "All Services" : @super_service.name), services_url, :class=>"services_new_operation_button" %>
+        <%= link_to_function "Back to "+(@super_service.nil? ? "All Services" : @super_service.name), "back_to_index_confirm('#{services_url}')", :class=>"services_new_operation_button" %>
       </div>
       <script type="text/javascript">
         $('.services_new_operation_button').button({ icons: {primary:'ui-icon-gear'} });

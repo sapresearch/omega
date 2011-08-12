@@ -78,6 +78,8 @@
 
 .bread_crumb a{ font-style:italic; color:navy }
 .service_registration_status{ float:left; }
+#service-registration-new-dialog-form .select_registrant{margin-left:50px}
+
 
 
 /*--------- form builder */
@@ -208,12 +210,14 @@
 }
 .service_form .show_body .label{
     margin: 0px 0px 0px 0px;
-    display:inline-block;
+    display:block;
+    float:left;
     width:100px;
     vertical-align: top;
 }
 .service_form .show_body .value{
-    display:inline-block;
+    display:block;
+    margin-left:110px;
 }
 .service_form .item_title{
     font-weight:bolder;

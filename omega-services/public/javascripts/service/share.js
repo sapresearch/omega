@@ -117,3 +117,24 @@ function submit_service_form(status)
 
     $('.service_form').submit()
 }
+
+
+function back_to_index_confirm(url){
+    $( "#back-to-index-dialog-confirm" ).dialog({
+        resizable: false,
+	height:200,
+	modal: true,
+	buttons: {
+            "OK": function() {
+		$( this ).dialog( "close" );
+                window.location.href = url
+            },
+            Cancel: function() {
+            	$( this ).dialog( "close" );
+            }
+	},
+        close: function() {
+            $( "#back-to-index-dialog-confirm" ).dialog('destroy')
+        }
+    });
+}

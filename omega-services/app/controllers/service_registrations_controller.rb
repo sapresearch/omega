@@ -12,7 +12,7 @@ class ServiceRegistrationsController < Omega::Controller
   end
 
   def create
-    @contact = current_contact
+    @contact = params[:contact_id] ? Contact.find(params[:contact_id]) : current_contact
     
     @service = Service.find(params[:service_id])     
     @service_leaf_id = @service.service_leaf.id
