@@ -1,3 +1,30 @@
-$(".services_list").html("<%= escape_javascript( render "services/index_list" ) %>")
+<% if @service_registration %>
+  $(".services_list").html("<%= escape_javascript( render "services/index_list" ) %>")
+  $( "#service-registration-created-dialog-message" ).dialog({
+      resizable: false,
+      modal: true,
+      buttons: {
+          Ok: function() {
+              $( this ).dialog( "close" );
+          }
+      },
+      close: function() {
+          $( "#service-registration-created-dialog-message" ).dialog('destroy')
+      }
+  });
+<% else %>
+  $( "#service-registration-create-failed-dialog-message" ).dialog({
+      resizable: false,
+      modal: true,
+      buttons: {
+          Ok: function() {
+              $( this ).dialog( "close" );
+          }
+      },
+      close: function() {
+          $( "#service-registration-create-failed-dialog-message" ).dialog('destroy')
+      }
+  });
+<% end %>
 
 $(".tipsy").remove();

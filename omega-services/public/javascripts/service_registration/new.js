@@ -112,20 +112,6 @@ function register_service(service_id, contact_id, status, has_form)
     $.ajax({
         url: service_registrations_url,
         type: "POST",
-        data: (data_hash),
-        success: function(msg){
-            $( "#service-registration-created-dialog-message" ).dialog({
-                resizable: false,
-                modal: true,
-                buttons: {
-                    Ok: function() {
-                        $( this ).dialog( "close" );
-                    }
-                },
-                close: function() {
-                    $( "#service-registration-created-dialog-message" ).dialog('destroy')
-                }
-            });
-        }
+        data: (data_hash)
     })
 }

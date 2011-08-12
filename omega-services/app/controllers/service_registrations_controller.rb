@@ -12,15 +12,20 @@ class ServiceRegistrationsController < Omega::Controller
   end
 
   def create
-    @contact = params[:contact_id] ? Contact.find(params[:contact_id]) : current_contact
+    @contact = params[:contact_id] ? Contact.find(params[:contact_id]) : current_contact    
     
     @service = Service.find(params[:service_id])     
     @service_leaf_id = @service.service_leaf.id
-    @status = params[:status] 
-    @field_values = params[:field_values]
-    
-    @service_registration = ServiceRegistration.create(:service_leaf_id=>@service_leaf_id, :status=>@status, :contact_id=>@contact.id)
-    @service_registration.create_service_registration_form_value(:field_values => @field_values) unless @field_values.nil?
+
+    ServiceRegistration.transaction do
+      if ServiceRegistration.find_by_contact_id_and_service_leaf_id(@contact.id, @service_leaf_id).nil?
+        @status = params[:status]
+        @field_values = params[:field_values]
+
+        @service_registration = ServiceRegistration.create(:service_leaf_id=>@service_leaf_id, :status=>@status, :contact_id=>@contact.id)
+        @service_registration.create_service_registration_form_value(:field_values => @field_values) unless @field_values.nil?
+      end
+    end
 
     # for js
     # not redirect to services#index for better performance
