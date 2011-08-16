@@ -1,5 +1,7 @@
 <% if @service_registration %>
-  $(".services_list").html("<%= escape_javascript( render "services/index_list" ) %>")
+  <% if @contact == current_contact %>
+    $(".services_list").html("<%= escape_javascript( render "services/index_list" ) %>")
+  <% end %>
   $( "#service-registration-created-dialog-message" ).dialog({
       resizable: false,
       modal: true,

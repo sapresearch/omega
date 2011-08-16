@@ -1,0 +1,27 @@
+<!-- originally copied from volunteering/positions/histroy.html -->
+<!-- app-spec:  class names for css; om-button -->
+
+<div class="accepted_registrant_count">
+  <%= om_button(:plain => true, :icon => 'counter') do %>
+    Accepted Registrants <span class="green"><%= @service.accepted_registrants.count %></span>
+  <% end %>
+</div>
+
+
+<table class="width-100 clear" id="service_registrations_table">
+  <thead>
+    <tr>
+      <th id="registrant">From</th>
+      <th id="registration_request">Request</th>     
+      <th id="registration_date_time">Datetime</th>
+      <th id="registration_action">Action</th>
+      <th id="registration_status">Status</th>
+    </tr>
+  </thead>
+  <%#= render 'service_registrations/index_table_row', :collection => @service_registrations, :as => :service_registration %>
+  <% @service_registrations.each do |sr| %>
+    <%= render 'service_registrations/index_table_row', :service_registration=>sr %>
+  <% end %>
+</table>
+
+<%#= will_paginate @service_registrations %>

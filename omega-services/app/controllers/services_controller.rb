@@ -15,7 +15,7 @@ class ServicesController < Omega::Controller
     @service_id = params[:service_id]
     @service = Service.find_by_id(@service_id) unless @service_id.nil?   # use find_by_id to return nil in case no record
 
-    # redirect again when the target service is missing
+    # redirect to default index when the target service is missing
     if @service_id && @service.nil?
       redirect_to services_url
       return

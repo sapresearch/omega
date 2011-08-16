@@ -63,8 +63,8 @@ function new_service_registration(service_id){
                                     bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
                                     */
                     if ( bValid ) {
-                        var contact_id = $("#service-registration-new-dialog-form .select_registrant .contacts_list").val()
-                        register_service(service_id, contact_id, "pending", true)
+                        var registrant_id = $("#service-registration-new-dialog-form .select_registrant .contacts_list").val()
+                        register_service(service_id, registrant_id, "pending", true)
                         $( this ).dialog( "close" );
                     }
                 },
@@ -87,8 +87,8 @@ function new_service_registration(service_id){
             resizable: false,
             buttons: {
                 "Register": function() {
-                    var contact_id = $("#service-registration-new-dialog-confirm .select_registrant .contacts_list").val()
-                    register_service(service_id, contact_id, "pending", false)
+                    var registrant_id = $("#service-registration-new-dialog-confirm .select_registrant .contacts_list").val()
+                    register_service(service_id, registrant_id, "pending", false)
                     $( this ).dialog( "close" );
                 },
                 Cancel: function() {
@@ -103,9 +103,9 @@ function new_service_registration(service_id){
     }     
 }
 
-function register_service(service_id, contact_id, status, has_form)
+function register_service(service_id, registrant_id, status, has_form)
 {    
-    var data_hash={service_id:service_id, contact_id:contact_id, status:status}
+    var data_hash={service_id:service_id, registrant_id:registrant_id, status:status}
     if(has_form)
         data_hash["field_values"] = JSON.stringify(field_values_to_json("new_service_registration", false))
 

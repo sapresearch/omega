@@ -1,0 +1,34 @@
+<!-- app-spec: class names for css -->
+
+<% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
+<% require_javascript 'thirdParty/jquery.dataTables.min.js' %>
+
+<% require_stylesheet 'service.css' %>
+<% require_stylesheet 'service_registration.css' %>
+<% require_javascript 'util.js' %>
+<% require_javascript 'ui_util.js'%>
+
+
+
+<script type="text/javascript">
+  $(function() {
+    $('#service_registrations_table').dataTable({
+        "bJQueryUI": true
+    });
+  });
+</script>
+
+<div class="content circle-corners-bottom" >
+
+  <div class="heading-main">
+    <h1 class="page-content services_page_title">
+      <%= render "index_page_title" %>
+    </h1>
+  </div>
+
+  <div class="services_page_content">
+    <%= render "index_page_content" %>
+  </div>
+
+</div>
+

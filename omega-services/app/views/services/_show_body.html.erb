@@ -18,7 +18,7 @@
                   <% if service.is_leaf? %>
                     <!-- app-spec -->
                     <% unless current_user.is_anonymous? %>
-                      <% service_registration = ServiceRegistration.find_by_service_leaf_id_and_contact_id(service.service_leaf.id, current_contact.id) %>
+                      <% service_registration = ServiceRegistration.find_by_service_leaf_id_and_registrant_id(service.service_leaf.id, current_contact.id) %>
                     <!-- end app-spec -->
                       <% unless service_registration.nil? %>
 
@@ -53,6 +53,12 @@
               <div class="service_right_links">
                 <p>
                   <% if is_admin? %>
+                  
+                    <% if service.is_leaf? %>
+                      <%= om_button(:contact => true, :icon=>'group') do %>
+                        <%= link_to "Registrations", service_registrations_url(:service_id=>service.id), "data-tooltip"=>"Manage registrations" %>
+                      <% end %>
+                    <% end %>
 
                     <% if service.is_private? %>
                       <%= om_button(:contact => true, :icon=>'mail-open') do %>

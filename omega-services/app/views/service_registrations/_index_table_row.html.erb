@@ -1,0 +1,22 @@
+<!-- app-spec: om_button -->
+
+<tr id="service_registration_<%= service_registration.id.to_s %>_tr">
+  <td>
+    <%= om_button(:plain => true, :icon => 'user') do %>
+      <%= link_to service_registration.registrant.name, contact_path(service_registration.registrant), :class => 'blue' %>
+    <% end %>
+  </td>
+  <td>
+    <%= om_button(:plain => true, :icon => 'clock') do %>
+      <span><%= service_registration.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
+    <% end %>
+  </td>
+  <td></td>
+  <td></td>
+  <td>
+    <%= om_button(:plain => true, :icon => 'mail-sent') do %>
+      <span><%= service_registration.status %></span>
+    <% end %>
+  </td>
+</tr>
+

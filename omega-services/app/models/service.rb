@@ -190,5 +190,10 @@ class Service < ActiveRecord::Base
     return nil if super_service.nil?
     return super_service.default_service_with_registration_template
   end
+
+  def accepted_registrants
+    return nil unless is_leaf?
+    service_leaf.accepted_registrants
+  end
   
 end

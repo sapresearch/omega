@@ -22,7 +22,7 @@
 /* end app-spec */
 
 .services_page_content{
-    padding:5px 30px;
+    padding:20px 20px;
 }
 .services_page_content label{
     margin:5px 0px 5px 20px;
@@ -39,7 +39,7 @@
 .services_search_box{
     width:100%;
     height: 30px;
-    padding: 10px 0px;
+    padding: 0px 0px 10px 0px;
 }
 #search_text{
     font-size:12px;
@@ -70,7 +70,7 @@
 
 .services_operation_links{
     padding:10px 10px;
-    margin-bottom:20px;
+    margin-bottom:5px;
 }
 .services_operation_links a{
     font-size: 15px;
