@@ -7,7 +7,7 @@ class ServiceLeaf < ActiveRecord::Base
   accepts_nested_attributes_for :service_sections
 
   def accepted_registrants
-    service_registrations.select{|sr|sr.status=="accepted"}
+    service_registrations.select{|sr|sr.status=="accepted"}.map{|sr|sr.registrant}
   end
 
 end

@@ -1,0 +1,16 @@
+<p>
+  <span class="label"><strong>Service:</strong></span>
+  <span class="value"><%= service_registration.service.name %></span>
+  <br/>
+
+  <span class="label"><strong>Registrant:</strong></span>
+  <span class="value"><%= service_registration.registrant.name %></span>
+  <br/>
+</p>
+
+<p class="validateTips explanation">Colored fields are required.</p>
+<form id="edit_service_registration">
+  <ul class="service_customization_form">    
+    <%= service_registration.service.registration_html %>
+  </ul>
+</form>

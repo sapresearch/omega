@@ -36,6 +36,23 @@ class ServiceRegistrationsController < Omega::Controller
     respond_with(@service_registration)
   end
 
+  def update
+    @service_registration = ServiceRegistration.find(params[:id])
+    
+    @status=params[:status]
+    @service_registration.update_attribute(:status,@status) if @status
+
+    @field_values=params[:field_values]
+    @service_registration.service_registration_form_value.update_attribute(:field_values,@field_values) if @field_values
+
+    @sorted_column = params[:sorted_column]
+    @sorting_method = params[:sorting_method]
+
+    #for js
+    @service = @service_registration.service
+    @service_registrations = @service.service_registrations
+  end
+
   def destroy
     @service_registration = ServiceRegistration.find(params[:id])
     @service = @service_registration.service

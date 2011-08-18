@@ -31,7 +31,9 @@
                       <% else %>
 
                         <%= om_button(:contact => true, :icon=>'user-add') do %>
-                          <%= link_to_function "Register", "new_service_registration(#{service.id})", "data-tooltip"=>"Register this service" %>
+                          <%= link_to_function "Register", 
+                            "new_service_registration(find_service_by_id(services, #{service.id}), '#{service_registrations_url}')",
+                            "data-tooltip"=>"Register this service" %>
                         <% end %>
                         <%#= link_to_function "Register >>", "new_service_registration(#{service.id})", :class=>"service_operation_button" %>
 

@@ -7,16 +7,10 @@
 <% require_stylesheet 'service_registration.css' %>
 <% require_javascript 'util.js' %>
 <% require_javascript 'ui_util.js'%>
+<% require_javascript 'service/share.js' %>
+<% require_javascript 'service_registration/index.js' %>
+<% require_javascript 'service_registration/new.js' %>
 
-
-
-<script type="text/javascript">
-  $(function() {
-    $('#service_registrations_table').dataTable({
-        "bJQueryUI": true
-    });
-  });
-</script>
 
 <div class="content circle-corners-bottom" >
 
@@ -31,4 +25,9 @@
   </div>
 
 </div>
+
+<%= render "service_registrations/dialog_update_status_form" %>
+<%= render "service_registrations/dialog_show_form" %>
+<%= render "service_registrations/dialog_edit_form" %>
+<%= render "service_registrations/dialog_new_form" %>
 

@@ -35,7 +35,7 @@
           <%= select_tag(:select_service_registration_templates, options_for_select(options, default_option_value), :onchange => "refresh_service_registration()") %>
         </span>
         <span id="check_service_registration_template">
-          <label for="has_service_registration_template" >Make this a new template:</label>
+          <label for="has_service_registration_template" >Make this a template:</label>
           <input id="has_service_registration_template" name="has_service_registration_template" type="checkbox" />
         </span>
       </div>
@@ -51,7 +51,7 @@
 
 <script type="text/javascript">
   var service_detail_field_values = '<%= raw @service.detail_field_values %>'
-  fill_service_detail(service_detail_field_values);
+  fill_field_values("service_detail",service_detail_field_values);
 
   <% if @service.has_service_detail_template? %>
     $("#has_service_detail_template").attr("checked", "checked")

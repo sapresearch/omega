@@ -29,8 +29,7 @@ function checkRegexp( o, regexp, n ) {
 	}
 }
 
-function new_service_registration(service_id){
-    var service = find_service_by_id(services, service_id);
+function new_service_registration(service, url){
     
     if(service.service.service_registration_form)
     {
@@ -64,7 +63,7 @@ function new_service_registration(service_id){
                                     */
                     if ( bValid ) {
                         var registrant_id = $("#service-registration-new-dialog-form .select_registrant .contacts_list").val()
-                        register_service(service_id, registrant_id, "pending", true)
+                        register_service(service.service.id, registrant_id, "pending", true, url)
                         $( this ).dialog( "close" );
                     }
                 },
@@ -88,7 +87,7 @@ function new_service_registration(service_id){
             buttons: {
                 "Register": function() {
                     var registrant_id = $("#service-registration-new-dialog-confirm .select_registrant .contacts_list").val()
-                    register_service(service_id, registrant_id, "pending", false)
+                    register_service(service.service.id, registrant_id, "pending", false, url)
                     $( this ).dialog( "close" );
                 },
                 Cancel: function() {
@@ -103,14 +102,14 @@ function new_service_registration(service_id){
     }     
 }
 
-function register_service(service_id, registrant_id, status, has_form)
+function register_service(service_id, registrant_id, status, has_form, url)
 {    
     var data_hash={service_id:service_id, registrant_id:registrant_id, status:status}
     if(has_form)
         data_hash["field_values"] = JSON.stringify(field_values_to_json("new_service_registration", false))
 
     $.ajax({
-        url: service_registrations_url,
+        url: url,
         type: "POST",
         data: (data_hash)
     })

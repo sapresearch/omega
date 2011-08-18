@@ -41,7 +41,7 @@ class Contact < Omega::Model
   has_many :uploads, :as => 'binding'
 
   #services associations
-  has_many :service_registrations, :dependent=>:destroy
+  has_many :service_registrations, :dependent=>:destroy, :foreign_key=>"registrant_id"
   has_many :service_leaves, :through=>:service_registrations
   has_many :service_sections
   def registered_services

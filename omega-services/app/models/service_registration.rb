@@ -32,4 +32,14 @@ class ServiceRegistration < ActiveRecord::Base
     service_leaf.service
   end
 
+  def field_values
+    return nil if service_registration_form_value.nil?
+    service_registration_form_value.field_values
+  end
+
+  def field_values_hash
+    return nil if service_registration_form_value.nil?
+    ActiveSupport::JSON.decode(service_registration_form_value.field_values)
+  end
+
 end

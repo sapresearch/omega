@@ -1,20 +1,32 @@
 <!-- originally copied from volunteering/positions/histroy.html -->
 <!-- app-spec:  class names for css; om-button -->
 
+<% sorted_column = @sorted_column || 2 %>
+<% sorting_method = @sorting_method || 'desc' %>
+<script type="text/javascript">
+  $(function() {
+    $('#service_registrations_table').dataTable({
+        "bJQueryUI": true,   
+        "aaSorting": [[ <%= sorted_column %>, "<%= sorting_method %>" ], [1,'asc']],
+        "iDisplayLength": 50
+    });
+  });
+</script>
+
 <div class="accepted_registrant_count">
   <%= om_button(:plain => true, :icon => 'counter') do %>
     Accepted Registrants <span class="green"><%= @service.accepted_registrants.count %></span>
   <% end %>
 </div>
 
-
 <table class="width-100 clear" id="service_registrations_table">
   <thead>
     <tr>
+      <th id="registration_detail"></th>
       <th id="registrant">From</th>
-      <th id="registration_request">Request</th>     
-      <th id="registration_date_time">Datetime</th>
-      <th id="registration_action">Action</th>
+      <!--<th id="registration_request">Request</th>-->
+      <th id="registration_created_at">Requesting Time</th>
+      <th id="registration_updated_at">Last Status Updating Time</th>
       <th id="registration_status">Status</th>
     </tr>
   </thead>
@@ -23,5 +35,9 @@
     <%= render 'service_registrations/index_table_row', :service_registration=>sr %>
   <% end %>
 </table>
+
+<div class="services_operation_links">
+  <%= render "index_operation_links" %>
+</div> 
 
 <%#= will_paginate @service_registrations %>
