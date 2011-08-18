@@ -28,11 +28,15 @@ class ServiceRegistrationsController < Omega::Controller
     end
 
     # for js
-    # not redirect to services#index for better performance
-    @super_service = @service.super_service
-    @services = @service.sibling_services
-
-    @services = my_services(@services) if session[:my_services_switch]=="on"
+    @from_page = params[:from_page]
+    if @from_page == "services#index"
+      @super_service = @service.super_service
+      @services = @service.sibling_services
+      @services = my_services(@services) if session[:my_services_switch]=="on"      
+    elsif @from_page == "service_registrations#index"
+      @service_registrations = @service.service_registrations
+    end
+    
     respond_with(@service_registration)
   end
 

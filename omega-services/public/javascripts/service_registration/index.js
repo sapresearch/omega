@@ -61,6 +61,7 @@ function show_service_registration(service_registration_id, field_values, show_h
         },
         close: function() {
             $( "#service-registration-show-dialog-form" ).dialog('destroy')
+            $("#service-registration-show-dialog-form").empty()
         }
     });
 }
@@ -87,6 +88,7 @@ function edit_service_registration(service_registration_id, field_values, edit_h
         },
         close: function() {
             $( "#service-registration-edit-dialog-form" ).dialog('destroy')
+            $( "#service-registration-edit-dialog-form" ).empty()
         }
     });
 }

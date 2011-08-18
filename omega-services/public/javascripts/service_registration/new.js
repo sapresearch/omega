@@ -29,7 +29,7 @@ function checkRegexp( o, regexp, n ) {
 	}
 }
 
-function new_service_registration(service, url){
+function new_service_registration(service, url, from_page){
     
     if(service.service.service_registration_form)
     {
@@ -63,7 +63,7 @@ function new_service_registration(service, url){
                                     */
                     if ( bValid ) {
                         var registrant_id = $("#service-registration-new-dialog-form .select_registrant .contacts_list").val()
-                        register_service(service.service.id, registrant_id, "pending", true, url)
+                        register_service(service.service.id, registrant_id, "pending", true, url, from_page)
                         $( this ).dialog( "close" );
                     }
                 },
@@ -73,6 +73,7 @@ function new_service_registration(service, url){
             },
             close: function() {
                 $( "#service-registration-new-dialog-form" ).dialog('destroy')
+                $( "#service-registration-new-dialog-form form ul").empty();
                 //allFields.val( "" ).removeClass( "ui-state-error" );
             }
         });
@@ -87,7 +88,7 @@ function new_service_registration(service, url){
             buttons: {
                 "Register": function() {
                     var registrant_id = $("#service-registration-new-dialog-confirm .select_registrant .contacts_list").val()
-                    register_service(service.service.id, registrant_id, "pending", false, url)
+                    register_service(service.service.id, registrant_id, "pending", false, url, from_page)
                     $( this ).dialog( "close" );
                 },
                 Cancel: function() {
@@ -102,9 +103,9 @@ function new_service_registration(service, url){
     }     
 }
 
-function register_service(service_id, registrant_id, status, has_form, url)
+function register_service(service_id, registrant_id, status, has_form, url, from_page)
 {    
-    var data_hash={service_id:service_id, registrant_id:registrant_id, status:status}
+    var data_hash={service_id:service_id, registrant_id:registrant_id, status:status, from_page:from_page}
     if(has_form)
         data_hash["field_values"] = JSON.stringify(field_values_to_json("new_service_registration", false))
 
