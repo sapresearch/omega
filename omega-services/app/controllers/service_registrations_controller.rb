@@ -64,10 +64,15 @@ class ServiceRegistrationsController < Omega::Controller
 
     # for js
     # not redirect to services#index for better performance
-    @super_service = @service.super_service
-    @services = @service.sibling_services
-
-    @services = my_services(@services) if session[:my_services_switch]=="on"
+    @type=params[:type]
+    if @type=="admin"
+      @service_registrations = @service.service_registrations
+    else
+      @super_service = @service.super_service
+      @services = @service.sibling_services
+      @services = my_services(@services) if session[:my_services_switch]=="on"
+    end
+    
     respond_with(@service_registration)
   end
 end

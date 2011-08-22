@@ -1,3 +1,7 @@
-$(".services_list").html("<%= escape_javascript( render "services/index_list" ) %>")
+<% if @type == "admin" %>
+  $(".services_page_content").html("<%= escape_javascript( render "service_registrations/index_page_content" ) %>") 
+<% else %>
+  $(".services_list").html("<%= escape_javascript( render "services/index_list" ) %>")
+<% end %>
 
 $(".tipsy").remove();

@@ -1,4 +1,10 @@
-function destroy_service_registration(url){
+function destroy_service_registration(url, pre_html){
+    var data={}
+    if(pre_html){
+        $( "#service-registration-destroy-dialog-confirm .pre_html" ).html("<p>"+pre_html+"</p>");
+        data["type"]="admin";
+    }
+    
     $( "#service-registration-destroy-dialog-confirm" ).dialog({
         width: 'auto',
         modal: true,
@@ -9,6 +15,7 @@ function destroy_service_registration(url){
                 $.ajax({
                     url: url,
                     type: "DELETE",
+                    data: data,
                     success: function(msg){
                         $( "#service-registration-destroyed-dialog-message" ).dialog({
                             resizable: false,
@@ -31,6 +38,7 @@ function destroy_service_registration(url){
         },
         close: function() {
             $( "#service-registration-destroy-dialog-confirm" ).dialog('destroy')
+            $( "#service-registration-destroy-dialog-confirm .pre_html" ).empty();
         }
     });
 }

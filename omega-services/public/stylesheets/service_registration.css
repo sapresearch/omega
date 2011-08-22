@@ -16,8 +16,9 @@
 #registration_created_at{width:25%}
 #registration_updated_at{width:25%}
 #registrant{width:30%}
-#registration_status{width:18%}
+#registration_status{width:16%}
 #registration_detail{width:2%}
+#delete_registration{width:2%}
 
 /* dialog */
 .dialog .label{display: inline-block; min-width: 100px;}

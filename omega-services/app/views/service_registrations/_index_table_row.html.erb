@@ -39,5 +39,11 @@
         :'data-tooltip'=>"Update Status" %>
     <% end %>
   </td>
+  <td>
+    <%= link_to_function om_button(:plain => true, :icon => 'delete'){},
+        "destroy_service_registration('#{service_registration_url(service_registration)}',
+          '#{escape_javascript( render "service_registrations/show_service_and_registrant", :service_registration=>service_registration )}')",
+        :'data-tooltip'=>"Delete this Record" %>
+  </td>
 </tr>
 
