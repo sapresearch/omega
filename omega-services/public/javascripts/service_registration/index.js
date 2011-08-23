@@ -78,7 +78,7 @@ function edit_service_registration(service_registration_id, field_values, edit_h
         modal: true,
         resizable: false,
         buttons: {
-            "Edit": function() {
+            "Update": function() {
                 update_service_registration(service_registration_id, url)
                 $( this ).dialog( "close" );
             },

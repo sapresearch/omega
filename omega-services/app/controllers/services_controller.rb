@@ -97,7 +97,7 @@ class ServicesController < Omega::Controller
             @recurrence_days = service_section[:recurrence_days]
             @recurrence_hours = service_section[:recurrence_hours]
             @recurrence_minutes = service_section[:recurrence_minutes]
-            @interval = ActiveSupport::JSON.encode({:years=>@recurrence_years, :months=>@recurrence_months, :days=>@recurrence_days, :hours=>@recurrence_hours, :minutes=>@recurrence_minutes}).to_s
+            @interval = ActiveSupport::JSON.encode({:year=>@recurrence_years, :month=>@recurrence_months, :day=>@recurrence_days, :hour=>@recurrence_hours, :minute=>@recurrence_minutes}).to_s
             @recurrence_end_at = service_section[:recurrence_end_at]
             @event.create_event_recurrence(:interval=>@interval, :end_at=>@recurrence_end_at)
           end
@@ -209,7 +209,7 @@ class ServicesController < Omega::Controller
                 @recurrence_days = service_section[:recurrence_days]
                 @recurrence_hours = service_section[:recurrence_hours]
                 @recurrence_minutes = service_section[:recurrence_minutes]
-                @interval = ActiveSupport::JSON.encode({:years=>@recurrence_years, :months=>@recurrence_months, :days=>@recurrence_days, :hours=>@recurrence_hours, :minutes=>@recurrence_minutes}).to_s
+                @interval = ActiveSupport::JSON.encode({:year=>@recurrence_years, :month=>@recurrence_months, :day=>@recurrence_days, :hour=>@recurrence_hours, :minute=>@recurrence_minutes}).to_s
                 @recurrence_end_at = service_section[:recurrence_end_at]
               end
               

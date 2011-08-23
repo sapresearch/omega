@@ -42,15 +42,15 @@
             <div class="field service_sections_recurrence_interval" id="service_sections_<%= i.to_s %>_recurrence_interval">
               <span>Every</span>
               <input id="service_sections_<%= i.to_s %>_recurrence_year" name="service_sections[<%= i.to_s %>][recurrence_years]" class="numeric year" type="text"
-                     value="0" /><span>Years</span>
-              <input id="service_sections_<%= i.to_s %>_recurrence_months" name="service_sections[<%= i.to_s %>][recurrence_months]" class="numeric month" type="text"
-                     value="0"/><span>Months</span>
-              <input id="service_sections_<%= i.to_s %>_recurrence_days" name="service_sections[<%= i.to_s %>][recurrence_days]" class="numeric day" type="text"
-                     value="7"/><span>Days</span>
-              <input id="service_sections_<%= i.to_s %>_recurrence_hours" name="service_sections[<%= i.to_s %>][recurrence_hours]" class="numeric hour" type="text"
-                     value="0"/><span>Hours</span>
-              <input id="service_sections_<%= i.to_s %>_recurrence_minutes" name="service_sections[<%= i.to_s %>][recurrence_minutes]" class="numeric minute" type="text"
-                     value="0"/><span>Minutes</span>
+                     value="<%= service_section.recurrence_year || 0 %>" /><span>Years</span>
+              <input id="service_sections_<%= i.to_s %>_recurrence_month" name="service_sections[<%= i.to_s %>][recurrence_months]" class="numeric month" type="text"
+                     value="<%= service_section.recurrence_month || 0 %>"/><span>Months</span>
+              <input id="service_sections_<%= i.to_s %>_recurrence_day" name="service_sections[<%= i.to_s %>][recurrence_days]" class="numeric day" type="text"
+                     value="<%= service_section.recurrence_day || 7 %>"/><span>Days</span>
+              <input id="service_sections_<%= i.to_s %>_recurrence_hour" name="service_sections[<%= i.to_s %>][recurrence_hours]" class="numeric hour" type="text"
+                     value="<%= service_section.recurrence_hour || 0 %>"/><span>Hours</span>
+              <input id="service_sections_<%= i.to_s %>_recurrence_minute" name="service_sections[<%= i.to_s %>][recurrence_minutes]" class="numeric minute" type="text"
+                     value="<%= service_section.recurrence_minute || 0 %>"/><span>Minutes</span>
             </div>
             <br clear="all" />
             <div class="field">
