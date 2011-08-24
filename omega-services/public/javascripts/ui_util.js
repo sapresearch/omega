@@ -9,6 +9,10 @@ function nl2br(str)
     return str.replace(/\n/g,'<br/>')
 }
 
+function blank_sign(){
+    return "<span class='blank_sign'>(blank)</span>"
+}
+
 function is_empty_html(html){
     return html.match(/\w+/) ? false :true
 }
@@ -40,4 +44,20 @@ function field_values_to_json(element_id, is_required_field_included){
             field_values[$(this).text()]=$("#"+target_id).val()
     })
     return field_values
+}
+
+function show_dialog(dialog_id){
+    var dialog = $("#"+dialog_id)
+    dialog.dialog({
+        resizable: false,
+        modal: true,
+        buttons: {
+            Ok: function() {
+                $(this).dialog( "close" );
+            }
+        },
+        close: function() {
+            dialog.dialog('destroy')
+        }
+    });
 }

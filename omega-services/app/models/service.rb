@@ -195,5 +195,10 @@ class Service < ActiveRecord::Base
     return nil unless is_leaf?
     service_leaf.accepted_registrants
   end
+
+  def capacity
+    return nil unless is_leaf?
+    service_leaf.capacity
+  end
   
 end

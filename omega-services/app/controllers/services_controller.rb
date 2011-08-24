@@ -66,7 +66,7 @@ class ServicesController < Omega::Controller
 
       # set the service level
       @service_level = params[:service_level]
-      @service_leaf = @service.create_service_leaf if @service_level==Service::LEAF_LEVEL
+      @service_leaf = @service.create_service_leaf(:capacity=>(params[:service_capacity]=="Unlimited" ? nil : params[:service_capacity])) if @service_level==Service::LEAF_LEVEL
 
       # service detail
       @service_detail_html = params[:service_detail_html]
@@ -151,7 +151,10 @@ class ServicesController < Omega::Controller
 
           # get the service level
           @service_level = params[:service_level]
-          @service_leaf = @service.service_leaf if @service_level==Service::LEAF_LEVEL
+          if @service_level==Service::LEAF_LEVEL
+            @service_leaf = @service.service_leaf
+            @service_leaf.update_attribute(:capacity, (params[:service_capacity]=="Unlimited" ? nil : params[:service_capacity]))
+          end
 
           # service detail
           @service_detail_html = params[:service_detail_html]

@@ -27,7 +27,14 @@ function edit_service_basic_info(){
 }
 function preview_service_basic_info(){
   $('#service_name_preview').html($('#service_name').val())
-  $('#service_description_preview').html(nl2br($('#service_description').val()))
+  
+  var service_description = nl2br($('#service_description').val());
+  if(is_empty_html(service_description))
+    $('#service_description_preview').html(blank_sign())
+  else
+    $('#service_description_preview').html(service_description)
+  
+  $('#service_capacity_preview').html($('#service_capacity').val())
   $('#service_basic_info').switchClass("edit_part", "show_part",0)
 }
 
@@ -114,7 +121,7 @@ function preview_service_customization_info(){
     $.each(service_detail_json,function(key, val){
         html += '<div class="field">'
         html += '<span class="label"><strong>'+key+':</strong></span>'
-        html += '<span class="value">'+(is_empty_html(val) ? '<span class="blank_sign">(blank)</span>' : nl2br(val))+'</span>'
+        html += '<span class="value">'+(is_empty_html(val) ? blank_sign() : nl2br(val))+'</span>'
         html += '</div>'
     })
     html += '</div>'

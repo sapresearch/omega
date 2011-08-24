@@ -21,11 +21,12 @@
                       <% service_registration = ServiceRegistration.find_by_service_leaf_id_and_registrant_id(service.service_leaf.id, current_contact.id) %>
                     <!-- end app-spec -->
                       <% unless service_registration.nil? %>
-
-                        <%= om_button(:contact => true, :icon=>'user-remove') do %>
-                          <%= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", "data-tooltip"=>"Unregister this service" %>
+                    
+                        <% unless service_registration.status=="rejected" %>
+                          <%= om_button(:contact => true, :icon=>'user-remove') do %>
+                            <%= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", "data-tooltip"=>"Unregister this service" %>
+                          <% end %>
                         <% end %>
-                        <%#= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", :class=>"service_operation_button" %>
                         <span class="service_registration_status" ><strong>status:</strong> <%= service_registration.status %></span>
 
                       <% else %>

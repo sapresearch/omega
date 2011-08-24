@@ -55,9 +55,8 @@
 }
 
 .service_head .service_registration_status{float:right; margin:0px 10px 0px 0px; font-weight:bold; font-style:italic;}
-.service_body{
-    border:1px solid #ccc;
-}
+.service_head .service_capacity{float:right; margin:0px 10px 0px 0px; font-weight:bold; font-style:italic;}
+.service_body{ border:1px solid #ccc; }
 .service_body .label{display:inline-block; min-width:100px;}
 .service_body .item{ margin:15px; padding:5px; background-color:#eee; }
 .service_body .item_title{ font-style:italic; color:#555; }
@@ -193,6 +192,7 @@
 .service_form .show_part .update_links{ display:none; }
 .service_form .edit_part .edit_links{ display:none; }
 
+
 /* show body */
 .service_form .edit_part .show_body{ display:none; }
 .service_form .show_body{
@@ -226,6 +226,7 @@
     color:#555;
 }
 .blank_sign{ color:#aaa }
+#service_capacity{ width:80px; }
 
 
 /* edit body */
@@ -271,3 +272,5 @@
     font-weight:bold;
     color:#555;
 }
+
+

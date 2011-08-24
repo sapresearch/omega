@@ -22,6 +22,10 @@ module ServicesHelper
   def nl2br(string)
     string.gsub("\n", "<br>").html_safe
   end
+
+  def blank_sign
+    content_tag("span", "(blank)", :class=>"blank_sign")
+  end
   
 end
 

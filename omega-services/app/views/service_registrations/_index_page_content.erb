@@ -15,7 +15,7 @@
 
 <div class="accepted_registrant_count">
   <%= om_button(:plain => true, :icon => 'counter') do %>
-    Number of Accepted Registrants: <span class="green"><%= @service.accepted_registrants.count %></span>
+    Number of Accepted Registrants: <span class="green"><%= @service.accepted_registrants.count %><%= " / "+@service.capacity.to_s if @service.capacity %></span>
   <% end %>
 </div>
 

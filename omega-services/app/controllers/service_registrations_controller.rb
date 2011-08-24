@@ -42,6 +42,31 @@ class ServiceRegistrationsController < Omega::Controller
 
   def update
     @service_registration = ServiceRegistration.find(params[:id])
+    @service = @service_registration.service
+
+    @status_update_success = true
+    @status=params[:status]
+    if @status
+      if @status=="accepted" && @service_registration.status!="accepted" && @service.accepted_registrants.count >= @service.capacity
+        @status_update_success = false
+      else
+        @service_registration.update_attribute(:status,@status)
+      end
+    end
+    
+    @field_values=params[:field_values]
+    @service_registration.service_registration_form_value.update_attribute(:field_values,@field_values) if @field_values
+
+    @sorted_column = params[:sorted_column]
+    @sorting_method = params[:sorting_method]
+
+    #for js
+    @service_registrations = @service.service_leaf.service_registrations(true) # discard cached objects for latest result in accepted_registrants
+  end
+
+=begin
+  def update
+    @service_registration = ServiceRegistration.find(params[:id])
     
     @status=params[:status]
     @service_registration.update_attribute(:status,@status) if @status
@@ -56,7 +81,8 @@ class ServiceRegistrationsController < Omega::Controller
     @service = @service_registration.service
     @service_registrations = @service.service_registrations
   end
-
+=end
+  
   def destroy
     @service_registration = ServiceRegistration.find(params[:id])
     @service = @service_registration.service
