@@ -81,6 +81,7 @@ function new_service_registration(service, url, from_page){
     else
     {
         $( "#service-registration-new-dialog-confirm" ).attr("title", service.service.name + " Registration")
+        $( "#service-registration-new-dialog-confirm .confirm_question" ).html("Are you sure to register "+service.service.name+"?")
         $( "#service-registration-new-dialog-confirm" ).dialog({
             width: 'auto',
             modal: true,
