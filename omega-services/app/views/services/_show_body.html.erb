@@ -29,15 +29,14 @@
                         <% end %>
                         <span class="service_registration_status" ><strong>status:</strong> <%= service_registration.status %></span>
 
-                      <% elsif !service.service_leaf.is_blocked? %>
-
-                        <%= om_button(:contact => true, :icon=>'user-add') do %>
-                          <%= link_to_function "Register", 
-                            "new_service_registration(find_service_by_id(services, #{service.id}), '#{service_registrations_url}', 'services#index')",
-                            "data-tooltip"=>"Register this service" %>
+                      <% else %>
+                        <% if !service.service_leaf.is_blocked? %>
+                          <%= om_button(:contact => true, :icon=>'user-add') do %>
+                            <%= link_to_function "Register",
+                              "new_service_registration(find_service_by_id(services, #{service.id}), '#{service_registrations_url}', 'services#index')",
+                              "data-tooltip"=>"Register this service" %>
+                          <% end %>
                         <% end %>
-                        <%#= link_to_function "Register >>", "new_service_registration(#{service.id})", :class=>"service_operation_button" %>
-
                       <% end %>
                     <!-- app-spec -->
                     <% end %>
