@@ -18,7 +18,7 @@ class ServiceRegistrationsController < Omega::Controller
     @service_leaf_id = @service.service_leaf.id
 
     ServiceRegistration.transaction do
-      if ServiceRegistration.find_by_registrant_id_and_service_leaf_id(@registrant.id, @service_leaf_id).nil?
+      if ServiceRegistration.find_by_registrant_id_and_service_leaf_id(@registrant.id, @service_leaf_id).nil? && !@service.service_leaf.is_blocked?
         @status = params[:status]
         @field_values = params[:field_values]
 
@@ -63,25 +63,6 @@ class ServiceRegistrationsController < Omega::Controller
     #for js
     @service_registrations = @service.service_leaf.service_registrations(true) # discard cached objects for latest result in accepted_registrants
   end
-
-=begin
-  def update
-    @service_registration = ServiceRegistration.find(params[:id])
-    
-    @status=params[:status]
-    @service_registration.update_attribute(:status,@status) if @status
-
-    @field_values=params[:field_values]
-    @service_registration.service_registration_form_value.update_attribute(:field_values,@field_values) if @field_values
-
-    @sorted_column = params[:sorted_column]
-    @sorting_method = params[:sorting_method]
-
-    #for js
-    @service = @service_registration.service
-    @service_registrations = @service.service_registrations
-  end
-=end
   
   def destroy
     @service_registration = ServiceRegistration.find(params[:id])

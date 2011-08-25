@@ -10,6 +10,12 @@
         "aaSorting": [[ <%= sorted_column %>, "<%= sorting_method %>" ], [1,'asc']],
         "iDisplayLength": 50
     });
+
+    <% if @service.service_leaf.is_blocked==true %>
+      $("#block_registration_checkbox").attr("checked", "checked")
+    <% else %>
+      $("#block_registration_checkbox").removeAttr("checked")
+    <% end %>
   });
 </script>
 
@@ -17,6 +23,11 @@
   <%= om_button(:plain => true, :icon => 'counter') do %>
     Number of Accepted Registrants: <span class="green"><%= @service.accepted_registrants.count %><%= " / "+@service.capacity.to_s if @service.capacity %></span>
   <% end %>
+</div>
+
+<div class="block_registration">
+  <label for="block_registration_checkbox" >Block Future Request</label>
+  <input id="block_registration_checkbox" type="checkbox" onclick="switch_block_service_registration('<%= service_url(@service) %>')" />
 </div>
 
 <table class="width-100 clear" id="service_registrations_table">

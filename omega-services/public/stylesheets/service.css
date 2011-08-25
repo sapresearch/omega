@@ -25,6 +25,7 @@
     padding:20px 20px;
 }
 .services_page_content label{
+    display:inline-block;
     margin:5px 0px 5px 20px;
     float:none;
     text-align: right;

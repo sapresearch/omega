@@ -105,3 +105,17 @@ function update_service_registration(service_registration_id, url){
         data: (data_hash)
     })
 }
+
+
+function switch_block_service_registration(url){
+    var type = $("#block_registration_checkbox").is(":checked") ? "block" : "unblock";
+    var data = {"type":type}
+
+    $.ajax({
+        url: url,
+        type: "PUT",
+        data: data,
+        dataType: 'script',
+        cache: false
+    })
+}

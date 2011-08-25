@@ -22,7 +22,7 @@
                     <!-- end app-spec -->
                       <% unless service_registration.nil? %>
                     
-                        <% unless service_registration.status=="rejected" %>
+                        <% unless service_registration.status=="rejected" || service.service_leaf.is_blocked %>
                           <%= om_button(:contact => true, :icon=>'user-remove') do %>
                             <%= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", "data-tooltip"=>"Unregister this service" %>
                           <% end %>

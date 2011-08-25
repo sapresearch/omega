@@ -143,6 +143,16 @@ class Service < ActiveRecord::Base
     end
   end
 
+  def block
+    return unless is_leaf?
+    service_leaf.block
+  end
+
+  def unblock
+    return unless is_leaf?
+    service_leaf.unblock
+  end
+
   def detail_html
     return nil if service_detail_form.nil?
     service_detail_form.html.html_safe

@@ -46,7 +46,7 @@ function field_values_to_json(element_id, is_required_field_included){
     return field_values
 }
 
-function show_dialog(dialog_id){
+function show_dialog_message(dialog_id){
     var dialog = $("#"+dialog_id)
     dialog.dialog({
         resizable: false,

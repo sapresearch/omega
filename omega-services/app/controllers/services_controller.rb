@@ -144,7 +144,11 @@ class ServicesController < Omega::Controller
       when "publish"
         @service.publish(@recursive)
       when "unpublish"
-        @service.unpublish(@recursive)       
+        @service.unpublish(@recursive)
+      when "block"
+        @service.block
+      when "unblock"
+        @service.unblock
       else
         Service.transaction do
           @service.update_attributes(params[:service])
