@@ -4,8 +4,24 @@ class AddPermissions < ActiveRecord::Migration
   end
 
   PERMISSIONS = {
-		'myomega_admin' => {},
-		'myomega_view' => {}
+    'permissions_assign_to_role' => {},
+    'permissions_view' => {},
+
+    'roles_admin' => {},
+    'roles_view' => {},
+
+    'users_admin' => {},
+    'users_assign_to_role' => {},
+    'users_change_own_username' => {},
+    'users_register' => {},
+    'users_view' => {},
+
+    'sessions_admin' => {},
+    'sessions_view' => {},
+
+    'messages_admin' => {},
+    'messages_send' => {},
+    'messages_view' => {}
   }
 
   def self.up
