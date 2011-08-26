@@ -56,7 +56,8 @@
 }
 
 .service_head .service_registration_status{float:right; margin:0px 10px 0px 0px; font-weight:bold; font-style:italic;}
-.service_head .service_capacity{float:right; margin:0px 10px 0px 0px; font-weight:bold; font-style:italic;}
+.service_head .service_capacity{float:right; margin:0px 10px 0px 0px;}
+.service_head .service_capacity span{font-weight:bold; font-style:italic;}
 .service_body{ border:1px solid #ccc; }
 .service_body .label{display:inline-block; min-width:100px;}
 .service_body .item{ margin:15px; padding:5px; background-color:#eee; }

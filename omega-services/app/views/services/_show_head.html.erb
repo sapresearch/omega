@@ -8,8 +8,12 @@
                 <% end %>
 
                 <% if service.capacity %>
-                  <span id="service_capacity_<%= service.id %>" class="service_capacity" ><%= service.accepted_registrants.count.to_s+" / "+service.capacity.to_s %></span>
+                  <span id="service_capacity_<%= service.id %>" class="service_capacity" >
+                    <%= om_button(:plain => true, :icon => 'user') do %>
+                      <%= service.accepted_registrants.count.to_s+" / "+service.capacity.to_s %>
+                    <% end %>
+                  </span>
                 <% end %>
-                  
+
               <% end %>
             </a>
