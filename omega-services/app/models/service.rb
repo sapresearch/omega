@@ -38,6 +38,10 @@ class Service < ActiveRecord::Base
       false
     end
 
+    def service_branches
+      Service.all(:order=>:name) - service_leaves
+    end
+
     def service_leaves
       ServiceLeaf.all.map{|sl|sl.service}
     end

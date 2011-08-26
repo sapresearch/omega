@@ -9,8 +9,8 @@ function nl2br(str)
     return str.replace(/\n/g,'<br/>')
 }
 
-function blank_sign(){
-    return "<span class='blank_sign'>(blank)</span>"
+function blank_sign(text){
+    return "<span class='blank_sign'>"+text+"</span>"
 }
 
 function is_empty_html(html){

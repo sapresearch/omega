@@ -11,7 +11,7 @@
 }
 */
 /* app-spec */
-#title_category{
+.page_title{
     color: #36361B;
     font-family: "Trebuchet MS",Arial Black,Geneva,Arial,Helvetica,sans-serif;
     font-size: 28px;
@@ -232,8 +232,7 @@
 
 /* edit body */
 .service_form .show_part .edit_body{ display:none; }
-.service_form .edit_body{
-}
+.service_form .edit_body .field select{ margin:5px 0px 2px 0px; }
 .service_form .edit_body label{
     font-size:13px;
     float:left;

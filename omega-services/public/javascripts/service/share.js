@@ -61,6 +61,14 @@ function set_service_registration_env(){
     cancel_editing_element()
 }
 
+function set_super_service_env(){
+    var super_service_name = $("#service_super_service_id option:selected").text();
+    if(super_service_name=="None")
+        $("#title_super_service").html("")
+    else
+        $("#title_super_service").html(" in "+super_service_name)
+}
+
 // prepare clean html ready to save to database
 function clean_service_form_html()
 {

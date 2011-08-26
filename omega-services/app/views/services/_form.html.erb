@@ -89,6 +89,11 @@
         <span id="service_description_preview" class="value"><%= @service.description || blank_sign %></span>
       </div>
 
+      <div class="field">
+        <span class="label"><strong>Belongs To:</strong></span>
+        <span id="super_service_preview" class="value"><%= @service.super_service ? @service.super_service.name : blank_sign("(none)") %></span>
+      </div>
+
       <% if @service.is_leaf? %>
         <div class="field service_leaf_specific">
           <span class="label"><strong>Capacity:</strong></span>
@@ -106,6 +111,19 @@
       <div class="field">
         <%= form.label :description %>
         <%= form.text_area :description, :cols=>30, :rows=>3, :'data-tooltip' => "Describe the service" %>
+      </div>
+
+      <div class="field">
+        <% options = [["None",nil]].concat(Service.service_branches.map{|s|[s.name, s.id]}) %>
+        <% options.delete [@service.name, @service.id] %>
+        <% default_option_value = @service.super_service_id %>
+
+        <%= form.label :super_service_id, "Belongs To" %>
+        <% if @service.id %>
+          <%= form.select :super_service_id, options_for_select(options, default_option_value) %>
+        <% else %>
+          <%= form.select :super_service_id, options_for_select(options, default_option_value), {}, :onchange=>"set_super_service_env()" %>
+        <% end %>
       </div>
 
       <% if @service.is_leaf? %>
@@ -204,7 +222,6 @@
     </div>
   </div>
 
-  <%= form.hidden_field :super_service_id, :value=>@service.is_root? ? nil : @service.super_service.id %>
   <%= form.hidden_field :status %>
   <%= hidden_field_tag :service_detail_html %>
   <%= hidden_field_tag :service_detail_field_values %>
