@@ -26,7 +26,11 @@ function edit_service_basic_info(){
   $("#service_name").select();
 }
 function preview_service_basic_info(){
-  $('#service_name_preview').html($('#service_name').val())
+  var service_name = $('#service_name').val();
+  if(is_empty_html(service_name))
+    $('#service_name_preview').html(blank_sign('(blank)'))
+  else
+    $('#service_name_preview').html(service_name)
   
   var service_description = nl2br($('#service_description').val());
   if(is_empty_html(service_description))

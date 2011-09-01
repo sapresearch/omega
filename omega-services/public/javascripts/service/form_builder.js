@@ -107,14 +107,47 @@ function append_date_picker(element_id){
 }
 
 //functions to generate html for editing different field elements
-function required_checkbox(label_element_id){
-    var html = "<input id='required_checkbox' type='checkbox' "
-    if($("#"+label_element_id).hasClass("required"))
-        html += "checked='checked'"
+function edit_field_required(label_element_id){
+    var html = "<div>"
+    html += "<label id='field_required_label' for='field_required_checkbox' >Field Required?</label>"
+    html += "<input id='field_required_checkbox' type='checkbox' "
     html += "onclick='if($(this).is(\":checked\")) $(\"#"+label_element_id+"\").addClass(\"required\"); else $(\"#"+label_element_id+"\").removeClass(\"required\");' />"
-    html += "<label id='required_label' for='required_checkbox' >Field Required</label>"
+    html += "</div>"
     return html;
 }
+function edit_field_format(label_element_id){
+    var html = "<div>"
+    html += "<label id='field_format_label' for='field_format_select' >Format:</label>"
+    html += "<select id='field_format_select' onchange='add_format_validation_to_field(\""+label_element_id+"\", $(this).val())'>"
+    html += "<option value='none'>None</option>"
+    html += "<option value='name'>Name</option>"
+    html += "<option value='email'>Email</option>"
+    html += "<option value='number'>Number</option>"
+    html += "</select>"
+    html += "</div>"
+    return html;
+}
+function get_edit_field_length(){
+    var lower_bound = parse_non_negative_integer($('#field_length_lower_bound').val())
+    var upper_bound = parse_unlimited_non_negative_integer($('#field_length_upper_bound').val())
+    return lower_bound+"-"+upper_bound
+}
+function edit_field_length(label_element_id){
+    var html = "<div>"
+    
+    html += "<label id='field_length_label' >Length Limit:</label><br/>"
+    html += "<input id='field_length_lower_bound' class='non_negative_integer' type='text' value='0' "
+    html += "onkeyup='add_length_validation_to_field(\""+label_element_id+"\", get_edit_field_length())' />"
+    html += "to"
+    html += "<input id='field_length_upper_bound' class='unlimited_non_negative_integer' type='text' value='unlimited' "
+    html += "onkeyup='add_length_validation_to_field(\""+label_element_id+"\", get_edit_field_length())' />"
+    
+    html += "</div>"
+    html += "<script>set_unlimited_non_negative_integer_field('field_length_upper_bound')</script>"
+    html += "<script>set_non_negative_integer_field('field_length_lower_bound')</script>"
+    return html;
+}
+
 function edit_label(label_element_id){
     var html = "Label:"
     html += "<input id='text_field_edit_label' type='text' value='"+$("#"+label_element_id).html()+"' "
@@ -154,6 +187,43 @@ function edit_date_picker(date_picker_element_id){
     return html;
 }
 
+function load_edit_field_settings(label_element_id){
+    var element = $("#"+label_element_id)
+    if(element.hasClass("required"))
+        $("#field_required_checkbox").attr("checked","checked")
+    else
+        $("#field_required_checkbox").removeAttr("checked")
+
+    var format = element.attr("data-format")
+    if(format!=undefined)
+        $("#field_format_select").val(format);
+
+    var length = element.attr("data-length")
+    if(length!=undefined){
+        var lengths = length.split("-")
+        var lower_bound = lengths[0];
+        var upper_bound = lengths[1];
+        $("#field_length_lower_bound").val(lower_bound);
+        $("#field_length_upper_bound").val(upper_bound);
+    }
+}
+
+// validations
+function add_format_validation_to_field(label_element_id, format){
+    var element = $("#"+label_element_id)
+    if(format=="none")
+        element.removeAttr("data-format")
+    else
+        element.attr("data-format", format);
+}
+function add_length_validation_to_field(label_element_id, length){
+    var element = $("#"+label_element_id)
+    if(length=="0-unlimited")
+        element.removeAttr("data-length");
+    else
+        element.attr("data-length", length);
+}
+
 // parse a string into options html for inserting into <select></select>
 function str_to_options_html(str){
     var strs = str.split("\n")
@@ -169,17 +239,21 @@ function str_to_options_html(str){
 
 // hide or show the checkbox for making template depending on if the fields are empty.
 function check_field_exists(){
-    if(is_empty_html(service_detail_html())){
-        $("#check_service_detail_template").css("visibility", "hidden")
-        $("#has_service_detail_template").removeAttr("checked")
-    }else
-        $("#check_service_detail_template").css("visibility", "visible")
-
-    if(is_empty_html(service_registration_html())){
-        $("#check_service_registration_template").css("visibility", "hidden")
-        $("#has_service_registration_template").removeAttr("checked")
-    }else
-        $("#check_service_registration_template").css("visibility", "visible")    
+    if(active_service_section_element_id()=="service_detail"){
+        if(is_empty_html(service_detail_html())){
+            $("#check_service_detail_template").css("visibility", "hidden")
+            $("#has_service_detail_template").removeAttr("checked")
+            cancel_editing_element();
+        }else
+            $("#check_service_detail_template").css("visibility", "visible")
+    }else{
+        if(is_empty_html(service_registration_html())){
+            $("#check_service_registration_template").css("visibility", "hidden")
+            $("#has_service_registration_template").removeAttr("checked")
+            cancel_editing_element();
+        }else
+            $("#check_service_registration_template").css("visibility", "visible")
+    }
 }
 
 // delete a field
@@ -199,17 +273,23 @@ function active_service_section_element_id(){
 function set_editing_element(element_id){
     $(".editing").removeClass("editing");
     $("#"+element_id).addClass("editing");
+    $("#edit_guide").hide();
+    $("#edit_content").empty();
+    $("#edit_validation").empty();
 }
 
 function editing_element_id(){
     return $(".editing").attr("id")
 }
 
-//***** app-spec
 function cancel_editing_element(){
     $(".editing").removeClass("editing");
-    $("#admin-edit-em").html("Hover over the field you want to edit or delete and choose from the two options.<br/><br/>Tips: double click on a field to edit the label, and single click to edit the content. Drag & drop a field to reorder.")
+    $("#edit_guide").show()
+    $("#edit_content").empty();
+    $("#edit_validation").empty();
 }
+
+//***** app-spec
 function field_operation_links(){
   return "<div class='item-list-actions-wrapper corners' >\
             <div class='item-list-actions'>\
@@ -240,9 +320,9 @@ function edit_field(parent_element_id){
                 case "text":
                 case "TEXT":
                     if($("#"+field.id).hasClass("date_picker"))
-                        $("#admin-edit-em").html(edit_date_picker(field.id))
+                        $("#edit_content").html(edit_date_picker(field.id))
                     else
-                        $("#admin-edit-em").html(edit_text_field(field.id))
+                        $("#edit_content").html(edit_text_field(field.id))
                     break;
                 default:
                     break;
@@ -250,18 +330,28 @@ function edit_field(parent_element_id){
             break;
         case "textarea":
         case "TEXTAREA":
-            $("#admin-edit-em").html(edit_text_area(field.id))
+            $("#edit_content").html(edit_text_area(field.id))
             break;
         case "select":
         case "SELECT":
-            $("#admin-edit-em").html(edit_select_list(field.id))
+            $("#edit_content").html(edit_select_list(field.id))
             break;
         default:
             break;
     }
-    $("#admin-edit-em").prepend(edit_label(label.id))
+    $("#edit_content").prepend(edit_label(label.id))
     if(active_service_section_element_id()=="service_registration")
-        $("#admin-edit-em").append(required_checkbox(label.id))
+    {
+        $("#edit_validation").append(edit_field_required(label.id))
+        if(target_of(label.id).attr("type")=="text")
+        {
+            $("#edit_validation").append(edit_field_format(label.id))
+            $("#edit_validation").append(edit_field_length(label.id))
+        }else if(field.nodeName=="textarea" || field.nodeName=="TEXTAREA"){
+            $("#edit_validation").append(edit_field_length(label.id))
+        }
+        load_edit_field_settings(label.id);
+    }    
     $("#admin-edit-em").effect("highlight")
     $("#text_field_edit_label").select();
 }

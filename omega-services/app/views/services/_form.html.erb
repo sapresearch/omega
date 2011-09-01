@@ -81,7 +81,7 @@
     <div class="show_body body">
       <div class="field">
         <span class="label"><strong>Name:</strong></span>
-        <span id="service_name_preview" class="value"><%= @service.name %></span>
+        <span id="service_name_preview" class="value"><%= @service.name || blank_sign %></span>
       </div>
 
       <div class="field">
@@ -129,22 +129,10 @@
       <% if @service.is_leaf? %>
         <div class="field service_leaf_specific">
           <label for="service_capacity">Capacity</label>
-          <input id="service_capacity" class="capacity" maxlength="20" name="service_capacity" size="5" type="text" value="<%= @service.service_leaf.capacity || "Unlimited" %>" data-tooltip="Size limit" />
+          <input id="service_capacity" class="capacity" maxlength="20" name="service_capacity" size="5" type="text" value="<%= @service.service_leaf.capacity || "unlimited" %>" data-tooltip="Size limit" />
         </div>
         <script type="text/javascript">
-          $(".capacity").click(function(){
-            var parsed_value = parseInt($(this).val(), 10)
-            if(isNaN(parsed_value))
-              $(this).select();
-          })
-          $(".capacity").keyup(function(){
-            var parsed_value = parseInt($(this).val(), 10)
-            if(isNaN(parsed_value)){
-              $(this).val("Unlimited")
-              $(this).select();
-            }else
-              $(this).val(parsed_value)           
-          });
+          set_unlimited_non_negative_integer_field("service_capacity")
         </script>
       <% end %>
     </div>
