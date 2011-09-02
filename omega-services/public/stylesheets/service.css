@@ -40,10 +40,11 @@ select:focus{
 }
 .constraint{ 
     display:inline-block;
+    vertical-align: top;
     background: none repeat scroll 0 0 lightyellow;
     border: 1px solid #ddd;
     color: #333333;
-    margin: 0 5px;;
+    margin: 4px 5px;;
     padding: 5px;
 }
 
@@ -59,7 +60,7 @@ select:focus{
     text-transform:none;
 }
 .services_page_content input{
-    margin: 5px;
+    margin: 5px 0px;
 }
 .services_page_content span.om-contact-icon-button a{ color:navy; } /* app-spec */
 
