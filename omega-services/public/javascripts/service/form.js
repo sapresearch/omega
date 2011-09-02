@@ -163,7 +163,7 @@ function preview_validations(){
             var lengths = label.attr("data-length").split("-")
             var min = lengths[0];
             var max = lengths[1];
-            $(this).append("<span class='constraint'><span class='bold'>Length:</span> "+min+"-"+max+"</span>");
+            $(this).append("<span class='constraint'><span class='bold'>Length:</span> "+min+" ~ "+max+"</span>");
         }
         if(label.attr("data-format")=="email")
             $(this).append("<span class='constraint'><span class='bold'>Format:</span> Email</span>");
