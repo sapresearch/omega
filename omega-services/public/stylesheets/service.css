@@ -38,6 +38,14 @@ select:focus{
     margin: 10px 0;
     padding: 10px;
 }
+.constraint{ 
+    display:inline-block;
+    background: none repeat scroll 0 0 lightyellow;
+    border: 1px solid #ddd;
+    color: #333333;
+    margin: 0 5px;;
+    padding: 5px;
+}
 
 .services_page_content{
     padding:20px 20px;
@@ -155,9 +163,9 @@ select:focus{
 
 .service_customization_form li {padding:5px 0px;}
 .service_customization_form li label{ font-size:13px; text-align:right; float:left; display:block; width:150px; line-height: 100%; margin:10px 10px 0px 20px; text-transform:none;}
-.service_customization_form li input{ display:block; font:-webkit-small-control;}
-.service_customization_form li textarea{ display:block;}
-.service_customization_form li select{ display:block; width:280px; height:30px;}
+.service_customization_form li input{ display:inline-block; font:-webkit-small-control;}
+.service_customization_form li textarea{ display:inline-block;}
+.service_customization_form li select{ display:inline-block; width:280px; height:30px;}
 .service_customization_form.editable_list li:hover {cursor:move; background-color: #bbb}
 .service_customization_form.editable_list .editing{background-color: #ddd}
 

@@ -151,7 +151,27 @@ function preview_service_customization_info(){
   }
 
   $('#service_customization_info .show_body').html(html);
+  preview_validations();
   $('#service_customization_info').switchClass("edit_part", "show_part",0)
+}
+
+
+function preview_validations(){
+    $("#show_service_registration_form .service_customization_form li").each(function(){
+        var label = $("label", this);
+        if(label.attr("data-length")){
+            var lengths = label.attr("data-length").split("-")
+            var min = lengths[0];
+            var max = lengths[1];
+            $(this).append("<span class='constraint'><span class='bold'>Length:</span> "+min+"-"+max+"</span>");
+        }
+        if(label.attr("data-format")=="email")
+            $(this).append("<span class='constraint'><span class='bold'>Format:</span> Email</span>");
+        if(label.attr("data-format")=="number")
+            $(this).append("<span class='constraint'><span class='bold'>Format:</span> Number</span>");
+        if(label.attr("data-format")=="name")
+            $(this).append("<span class='constraint'><span class='bold'>Format:</span> Name</span>");
+    })
 }
 
 
