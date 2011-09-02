@@ -59,8 +59,9 @@ select:focus{
     width:auto;
     text-transform:none;
 }
-.services_page_content input{
-    margin: 5px 0px;
+.services_page_content input,
+.services_page_content textarea{
+    margin: 5px 5px 5px 0px;
 }
 .services_page_content span.om-contact-icon-button a{ color:navy; } /* app-spec */
 
