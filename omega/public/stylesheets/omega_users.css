@@ -39,3 +39,7 @@
     height: 20px;
 	width: 130px;
 }
+
+#skills ul {
+	left-margin:50px;
+}

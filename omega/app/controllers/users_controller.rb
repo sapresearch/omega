@@ -122,9 +122,17 @@ class UsersController < Omega::Controller
     end
   end
 
+	def search
+		@skills = Contact::Skill.all
+		@interests = Contact::Interest.all
+		#Contact::Skill.all.each do |s|
+			#if s.contact.respond_to? 'user' then
+				#hash{word => s.contact.user}
+			#end
+		#end
 
-
-################################
+		#@word_user_hash = Contact.
+	end
 
 	def my_page
 

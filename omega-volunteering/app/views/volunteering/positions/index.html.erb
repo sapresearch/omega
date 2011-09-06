@@ -64,11 +64,11 @@
                   </h2>
 
                   <p>
-                    <%= truncate(position.description, :length=> 140) %>
+                    <%= truncate(position.description, :length=> 140) %> <%= link_to '( read more ... )', volunteering_position_path(position) %>
                   </p>
 
                   <p>
-                    <%= link_to '( read more ... )', volunteering_position_path(position) %>
+                    Priority: <%= position.priority %> <%= "Normal" if position.priority.nil? %>
                   </p>
 
               <span>

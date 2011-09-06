@@ -49,11 +49,14 @@ class User < Omega::Model
   has_many :sent_messages, :foreign_key => :from_id, :class_name => '::Message', :inverse_of => :from,
                            :conditions => ['deleted_by_from_at IS NULL']
 
+  has_and_belongs_to_many :skills,    :class_name => '::Contact::Skill',
+                                      :join_table => 'contact_skills_users'
   has_many :favorites
   has_many :favorite_items, :through => :favorites, :source => :item
 	has_one :setting
   
   accepts_nested_attributes_for :contact
+  accepts_flattened_values_for :skills, :value => :name
 
   attr_accessor :password, :password_confirmation
 

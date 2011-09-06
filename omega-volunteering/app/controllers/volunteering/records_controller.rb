@@ -77,7 +77,7 @@ class Volunteering::RecordsController < Omega::Controller
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
 
-	@record.build_contact do |c|
+		@record.build_contact do |c|
       c.addresses.build
       c.phone_numbers.build
     end 
@@ -92,12 +92,11 @@ class Volunteering::RecordsController < Omega::Controller
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
 
-	@record.build_contact do |c|
+		@record.build_contact do |c|
       c.addresses.build
       c.phone_numbers.build
     end 
-    
-   end
+  end
 
   def edit
     @record = Volunteering::Record.find(params[:id])
@@ -150,7 +149,7 @@ class Volunteering::RecordsController < Omega::Controller
    
    UserMailer.parental_approval(@user).deliver
   
-   respond_wit(@record)
+   respond_with(@record)
     
   end
   
@@ -209,5 +208,83 @@ class Volunteering::RecordsController < Omega::Controller
     @record.destroy
   end
 
+	def enroll_volunteers
+		@skills = Contact::Skill.all
+		@interests = Contact::Interest.all
+		@contacts = Contact.all
+		@position_id = Volunteering::Position.find(params[:id]).id
+		@records = Array.new
+		@contacts.each do |c|
+    	record = Volunteering::Record.new
+			record.position_id = @position_id # Volunteering::Position.find(params[:id])
+			record.contact_id = c.id
+			@records.push(record)
+		end
+
+		@records_to_search = Array.new
+		@contacts.each do |c|
+			@records_to_search.push(c.first_name) 
+			@records_to_search.push(c.last_name)
+		end
+		@interests.each { |i| @records_to_search.push(i.name) }
+		@skills.each { |s| @records_to_search.push(s.name) }
+
+		@contact_term_hash = Hash.new
+		Contact.all.each do |c| 
+			contact_hash = Hash.new
+			@contact_term_hash[c.id] = contact_hash
+			contact_hash[:first_name] = c.first_name
+			contact_hash[:last_name] = c.last_name
+			contact_hash[:id] = c.id
+			skills = String.new
+			c.skills.each { |s| skills << "#{s.name}," }
+			contact_hash[:skills] = skills
+			interests = String.new
+			c.interests.each { |i| interests << "#{i.name}," }
+			contact_hash[:interests] = interests
+		end
+		def @contact_term_hash.get_all(*keys)
+			return_array = Array.new
+			keys.each do |key|
+				self.each do |contact_id, contact|
+					contact[key].split(",").each { |v| return_array.push(v) }
+				end
+			end
+			return_array.uniq
+		end
+	end
+
+	def create_multiple
+
+
+		params[:records].each do |record_key, attributes|
+			position_id = params[:records][record_key][:position_id]
+			puts "\n\n" + position_id + "\n\n"
+			if (attributes[:status] == "accepted") then
+			puts "\n\n" + params[:records][record_key].inspect + "\n\n"
+				@record = Volunteering::Record.new(params[:records][record_key])
+				#@record = Volunteering::Record.create(params[:records][record_key])
+			end
+		end
+
+		#@records = params[:records]
+		#@correct_records = params[:records].reject { |k,v| v[:status] != "accepted"}
+			#puts "\n\n" + @correct_records.inspect + "\n\n"
+		#@correct_records.each do |k,v|
+			#puts "\n\n" + params[:records][k].inspect + "\n\n"
+			#Volunteering::Record.create[@correct_records]
+		#end
+
+
+		#i = 0
+		#params[:records].each do |k, v|
+		#	if (k.to_s == 2) then
+		#		params[:records[k]]) #.reject { |key, value| key == :status and value != "accepted" }
+		#		Volunteering::Record.create(params[:records[k]]) #.reject { |key, value| key == :status and value != "accepted" }
+		#	end
+		#	i += 1
+		#end
+    redirect_to my_applications_volunteering_records_url
+	end
 
 end

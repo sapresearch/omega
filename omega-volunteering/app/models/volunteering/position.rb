@@ -29,16 +29,26 @@ class Volunteering::Position < Omega::Model
 
 #-------------------------------------------------------------------------------------------------
 
+	validate :valid_dates
   validates_presence_of :description, :volunteers_required, :skills, :interests, :name
 	validates_numericality_of :volunteers_required, :only_integer => true, :greater_than => 0
   validates_uniqueness_of :name
   validates_presence_of :start, :end, :unless => :recurrent?
 	validates_presence_of :agreement, :if => :disclaimer_agreement
+	validates_presence_of :priority
 
-	validate :valid_dates
 	def valid_dates
-		if start_time >= end_time
-			self.errors.add :start, ' has to be before end time'
+		self.errors.clear
+		if !recurrence
+			if start_time >= end_time
+				self.errors.add :start, ' has to be before end time'
+			end
+		elsif recurrence
+			if :recurrence_attributes[start_time.to_i] >= :recurrence_attributes[end_time.to_i]
+				st = :recurrence_attributes[start_time.to_i].to_s
+				en = :recurrence_attributes[end_time.to_i].to_s
+				self.errors.add :start, " #{st} has to be before end time, which is #{en}"
+			end
 		end
 	end
 
@@ -104,4 +114,5 @@ class Volunteering::Position < Omega::Model
   def end_time=(value)
     self.end = "#{end_date} #{value}"
   end
+
 end

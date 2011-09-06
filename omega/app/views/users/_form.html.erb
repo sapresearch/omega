@@ -2,6 +2,12 @@
 <%= form_for @user do |f| %>
     <%= errors_for_form @user %>
 	
+<!-- where i'm editing !-->
+		<p>
+			<%= f.label :skills %>
+			<%= f.text_field :skills_values %>
+		</p>
+<!-- where i'm editing !-->
 	<%= f.fields_for :contact do |c|%>
 	
 	 <h3 class="application-form">PERSONAL INFORMATION </h3> 
@@ -36,8 +42,8 @@
 			<%= p.label :phone %>
 			<%= p.text_field :number, :'data-tooltip' => 'Phone number where you could be contacted'%>
 	    </p>
-		
 		<%end%>
+		
 	<%end%>
               
     <h3 class="application-form">LOG IN INFORMATION </h3> 

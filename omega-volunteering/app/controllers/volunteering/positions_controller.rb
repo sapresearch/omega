@@ -46,11 +46,17 @@ class Volunteering::PositionsController < Omega::Controller
   end
 
   def create
-    fix_view_to_model
-    @position = Volunteering::Position.create(params[:volunteering_position])
-    fix_model_to_view
-
-    respond_with(@position)
+		prepare_view_for_model
+    @position = Volunteering::Position.new(params[:volunteering_position])
+    if @position.save
+    	fix_model_to_view
+    	respond_with(@position)
+		else
+			reset_view_if_error
+    	respond_with(@position)
+		end
+		#reset_view_if_error
+    #fix_model_to_view
   end
 
   def update
@@ -214,6 +220,40 @@ class Volunteering::PositionsController < Omega::Controller
     end
   end
 
+  def prepare_view_for_model
+    case params[:contact_assignment]
+      when 'existing'
+        params[:volunteering_position].delete(:contacts_attributes)
+      when 'new'
+        params[:volunteering_position].delete(:contact_ids)
+      when 'none'
+        params[:volunteering_position].delete(:contact_ids)
+        params[:volunteering_position].delete(:contacts_attributes)
+    end
+
+    if contact_ids = params[:volunteering_position][:contact_ids]
+      params[:volunteering_position][:contact_ids] = JSON.parse(contact_ids)
+    end
+
+    if schedule = params[:volunteering_position].delete(:schedule_attributes)
+      case schedule[:schedule_type]
+        when 'daily'
+          params[:volunteering_position][:schedule_attributes] = schedule[:daily]
+          params[:volunteering_position][:schedule_attributes][:schedule_type] = 'daily'
+
+          if params[:daily_type] == 'every_week_day'
+            params[:volunteering_position][:schedule_attributes][:value] = 'weekday'
+          end
+
+        when 'weekly'
+          params[:volunteering_position][:schedule_attributes] = schedule[:weekly]
+          params[:volunteering_position][:schedule_attributes][:schedule_type] = 'weekly'
+          params[:volunteering_position][:schedule_attributes][:start_time] = '00:00'
+          params[:volunteering_position][:schedule_attributes][:end_time] = '00:00'
+      end
+    end
+  end
+
   def fix_model_to_view
     @position.build_event_source unless @position.event_source
 
@@ -233,6 +273,16 @@ class Volunteering::PositionsController < Omega::Controller
       @contact_assignment = 'existing'
     else
       @contact_assignment = 'none'
-     end
+    end
   end
+
+  def reset_view_if_error
+    @position.build_event_source unless @position.event_source
+  end
+
+	def start_before_end?
+		start_time = params[:volunteering_position][:start_time]
+		end_time = params[:volunteering_position][:end_time]
+		start_time <= end_time
+	end
 end

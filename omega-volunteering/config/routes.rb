@@ -32,6 +32,8 @@ Omega::Volunteering::Module.routes.draw do
         get :completed
         get :admin_page
         get :new_volunteer
+        get :enroll_volunteers
+        post :create_multiple
         get :summary
         get :user_history, :path => 'user_history/:contact_id'
       end

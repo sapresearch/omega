@@ -3,7 +3,7 @@
  */
 
 $(function(){
-	$("div.ui-dialog").css({"left":"55%"});
+	$("div.ui-dialog").css({"left":"15%"});
 });
 
 $(function() {
@@ -44,7 +44,7 @@ $(function() {
     });
 
     // restore the dom state on page refresh or edit
-    if ($recurrent.is(':checked')) {
+		if ($('input[name="volunteering_position[recurrent]"][value=true]').is(":checked")){
         var pattern = '#schedule-' + $scheduler.find('input:checked').val();
         $(pattern).show();
         $('#scheduler').show();
@@ -94,7 +94,7 @@ $(function() {
 
     $('#add-contacts').click(function() {
         $.ajax({
-						style   : 'left:65%',
+						//style   : 'left:70%',
             url     : '/contacts/list',
             dataType: 'script',
             success : function(data){

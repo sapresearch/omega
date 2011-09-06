@@ -49,6 +49,7 @@ Omega::Module.routes.draw do
       get :role_assignment
       match :letter, :path => ':letter', :constraints => { :letter => /[a-z]/i }
 			get :my_page
+			get :search
     end
   end
 

@@ -1,5 +1,5 @@
 module RecurrenceHelper
-  def recurrence(builder)
-    render('shared/recurrence', :builder => builder)
+  def recurrence(builder, hidden)
+    render('shared/recurrence', :builder => builder, :hidden => hidden )
   end
 end

@@ -24,7 +24,15 @@
         <%= f.text_field :volunteers_required,:value => 1,:class => "inputSmall" %>
         <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
       </p>
+
+			<p>
+				<%= f.label :priority%>
+				<% ['Normal','High', 'Urgent!'].each do |p|%>	
+					<%= f.radio_button :priority, p%> <%=p%>
+				<%end%>
+			</p>
       <br/>
+
       <p>
         <%= f.label :reoccurs %>
         <%= f.radio_button :recurrent, true %>
@@ -35,7 +43,7 @@
         <%= f.radio_button :recurrent, false %>
       </p>
 
-      <div id="non_recurrent">
+      <div id="non_recurrent" <%= %q{style="display:none;"}.html_safe if @position.recurrent? %>>
         
         <h3 class="application-form">Timeline</h3> 
 
@@ -47,15 +55,15 @@
         <p>
           <%= f.label :start_time %>
           <%= f.text_field :start_time, :class=>'tpickr', :autocomplete => 'off' %>
-		</p>
+				</p>
 		
-		<p>
+				<p>
           <%= f.label :end_time %>
           <%= f.text_field :end_time, :class=>'tpickr',  :autocomplete => 'off' %>
         </p>
       </div>
 
-      <%= recurrence(f) %>
+      <%= recurrence(f, !@position.recurrent?) %>
 
     
   	 <h3 class="application-form">Calendar Synchronization</h3> 
@@ -89,7 +97,7 @@
                 Add an exisitng contact
                   </span>
 
-              <ul id="assigned_contacts">
+              <ul id="assigned_contacts" style="margin-left:-120%">
 
                 <% @position.contacts.each do |c| %>
                     <li ui-data="<%= c.id %>">
@@ -101,6 +109,7 @@
             </td>
           </tr>
         </table>
+
 
         <%#= text_field_tag 'ac-contacts', nil %>
 
@@ -141,7 +150,6 @@
 	<p>
 		<%= f.label :disclaimer_agreement%>
 		<% ['Required','Not Required'].each do |c|%>	
-		
 			<%= f.radio_button :disclaimer_agreement, c%> <%=c%><br/>
 		<%end%>
 	</p>
@@ -160,7 +168,13 @@
       <% end %>
 
     </p>
-
+<!-- editing !-->
+<p>
+	<%= @a if !@a.nil? %>
+	<%= @b if !@b.nil? %>
+	<%= @c if !@c.nil? %>
+</p>
+<!-- editing !-->
 
 
 

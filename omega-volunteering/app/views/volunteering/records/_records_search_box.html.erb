@@ -1,0 +1,58 @@
+<br />
+ <form>
+        <input id="search_text" type="text" maxlength="100" size="50" value="Type here to search..." onfocus="$(this).val('')" onblur="$(this).val('Type here to search...')" />
+        <!--<label for="enrollable" >Enrollable</label>
+        <input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
+        <label for="requestable" >Requestable</label>
+        <input id="requestable" name="requestable" type="checkbox" checked="checked" />
+        <%# unless current_user.is_anonymous? %>
+          <label for="my_services" >My Services</label>
+          <input id="my_services" name="my_services" type="checkbox" onclick="switch_my_services()" />
+        <%# end %>!-->
+      </form>
+<br />
+
+<script type="text/javascript">
+var contact_term = new Array();
+<% @contact_term_hash.each do |contact_id, contact| %>
+	var contact_array = new Array();
+	contact_array["first_name"] = '<%=@contact_term_hash[2][:first_name]%>';
+	contact_array["last_name"] = '<%=contact[:last_name]%>';
+	contact_array["id"] = '<%=contact[:id]%>';
+	contact_array["skills"] = '<%=contact[:skills]%>';
+	contact_array["interests"] = '<%=contact[:interests]%>';
+	contact_term['<%=contact_id%>'] = contact_array;
+<% end %>
+
+  $( "#search_text" ).autocomplete({
+    source: <%= raw @records_to_search.to_json %>,
+		select: function(event, ui) {
+			search(ui.item.value);
+			//alert(ui.item.value + " and " + ui.item.label)
+		}
+  });
+
+search = function(needle){
+	var results = "";
+	var skills_interests = new Array("skills", "interests");
+	var match = 0;
+	contact_term.forEach(function(contact){
+		for(i=0; i < 2; i++){
+			if(contact[skills_interests[i]] != null){
+				var terms = contact[skills_interests[i]].split(",");
+				for(term = 0; term < terms.length; term++){
+					if(terms[term] == needle){
+						match++;
+						results += contact["first_name"] + ",";
+						results += contact["id"] + ",,";
+					}
+				}
+			}
+		}
+	});
+	alert("match is " + match);
+	alert("result is " + results);
+	generate_element(results, 'tag', '<%= @position_id %>');
+}
+
+</script>
