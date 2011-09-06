@@ -1,3 +1,7 @@
 <div id="service-registration-new-dialog-confirm" class="dialog" title="New Service Registration">
-  <p>Are you sure to register this serivce?</p>
+  <% type ||= "non-admin" %>
+  <% if type == 'admin' %>
+    <%= render "service_registrations/select_registrant" %>
+  <% end %>
+  <p class="confirm_question">Are you sure to register this service?</p>
 </div>

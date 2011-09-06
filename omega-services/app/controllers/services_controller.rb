@@ -15,7 +15,7 @@ class ServicesController < Omega::Controller
     @service_id = params[:service_id]
     @service = Service.find_by_id(@service_id) unless @service_id.nil?   # use find_by_id to return nil in case no record
 
-    # redirect again when the target service is missing
+    # redirect to default index when the target service is missing
     if @service_id && @service.nil?
       redirect_to services_url
       return
@@ -66,7 +66,7 @@ class ServicesController < Omega::Controller
 
       # set the service level
       @service_level = params[:service_level]
-      @service_leaf = @service.create_service_leaf if @service_level==Service::LEAF_LEVEL
+      @service_leaf = @service.create_service_leaf(:capacity=>(params[:service_capacity]=="unlimited" ? nil : params[:service_capacity])) if @service_level==Service::LEAF_LEVEL
 
       # service detail
       @service_detail_html = params[:service_detail_html]
@@ -97,7 +97,7 @@ class ServicesController < Omega::Controller
             @recurrence_days = service_section[:recurrence_days]
             @recurrence_hours = service_section[:recurrence_hours]
             @recurrence_minutes = service_section[:recurrence_minutes]
-            @interval = ActiveSupport::JSON.encode({:years=>@recurrence_years, :months=>@recurrence_months, :days=>@recurrence_days, :hours=>@recurrence_hours, :minutes=>@recurrence_minutes}).to_s
+            @interval = ActiveSupport::JSON.encode({:year=>@recurrence_years, :month=>@recurrence_months, :day=>@recurrence_days, :hour=>@recurrence_hours, :minute=>@recurrence_minutes}).to_s
             @recurrence_end_at = service_section[:recurrence_end_at]
             @event.create_event_recurrence(:interval=>@interval, :end_at=>@recurrence_end_at)
           end
@@ -144,14 +144,21 @@ class ServicesController < Omega::Controller
       when "publish"
         @service.publish(@recursive)
       when "unpublish"
-        @service.unpublish(@recursive)       
+        @service.unpublish(@recursive)
+      when "block"
+        @service.block
+      when "unblock"
+        @service.unblock
       else
         Service.transaction do
           @service.update_attributes(params[:service])
 
           # get the service level
           @service_level = params[:service_level]
-          @service_leaf = @service.service_leaf if @service_level==Service::LEAF_LEVEL
+          if @service_level==Service::LEAF_LEVEL
+            @service_leaf = @service.service_leaf
+            @service_leaf.update_attribute(:capacity, (params[:service_capacity]=="unlimited" ? nil : params[:service_capacity]))
+          end
 
           # service detail
           @service_detail_html = params[:service_detail_html]
@@ -188,7 +195,7 @@ class ServicesController < Omega::Controller
               @service_registration_form.create_service_registration_template
             end
           else
-            @service_registration_form = @service.create_service_registration_form(:html => @service_detail_html)
+            @service_registration_form = @service.create_service_registration_form(:html => @service_registration_html)
             @service_registration_form.create_service_registration_template if @has_service_registration_template == "on"
           end
 
@@ -197,6 +204,7 @@ class ServicesController < Omega::Controller
             @service_section_ids=[]
             @original_service_section_ids = @service.service_section_ids
             @service_section_params = params[:service_sections]
+            
             @service_section_params.each_value do |service_section|
               @contact_id = service_section["contact_id"]
               @location = service_section["location"]
@@ -208,7 +216,7 @@ class ServicesController < Omega::Controller
                 @recurrence_days = service_section[:recurrence_days]
                 @recurrence_hours = service_section[:recurrence_hours]
                 @recurrence_minutes = service_section[:recurrence_minutes]
-                @interval = ActiveSupport::JSON.encode({:years=>@recurrence_years, :months=>@recurrence_months, :days=>@recurrence_days, :hours=>@recurrence_hours, :minutes=>@recurrence_minutes}).to_s
+                @interval = ActiveSupport::JSON.encode({:year=>@recurrence_years, :month=>@recurrence_months, :day=>@recurrence_days, :hour=>@recurrence_hours, :minute=>@recurrence_minutes}).to_s
                 @recurrence_end_at = service_section[:recurrence_end_at]
               end
               

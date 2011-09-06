@@ -26,8 +26,25 @@ function edit_service_basic_info(){
   $("#service_name").select();
 }
 function preview_service_basic_info(){
-  $('#service_name_preview').html($('#service_name').val())
-  $('#service_description_preview').html(nl2br($('#service_description').val()))
+  var service_name = $('#service_name').val();
+  if(is_empty_html(service_name))
+    $('#service_name_preview').html(blank_sign('(blank)'))
+  else
+    $('#service_name_preview').html(service_name)
+  
+  var service_description = nl2br($('#service_description').val());
+  if(is_empty_html(service_description))
+    $('#service_description_preview').html(blank_sign('(blank)'))
+  else
+    $('#service_description_preview').html(service_description)
+
+  var super_service_name = $("#service_super_service_id option:selected").text();
+  if(super_service_name=="None")
+    $('#super_service_preview').html(blank_sign('(none)'))
+  else
+    $('#super_service_preview').html(super_service_name)
+  
+  $('#service_capacity_preview').html($('#service_capacity').val())
   $('#service_basic_info').switchClass("edit_part", "show_part",0)
 }
 
@@ -114,7 +131,7 @@ function preview_service_customization_info(){
     $.each(service_detail_json,function(key, val){
         html += '<div class="field">'
         html += '<span class="label"><strong>'+key+':</strong></span>'
-        html += '<span class="value">'+(is_empty_html(val) ? '<span class="blank_sign">(blank)</span>' : nl2br(val))+'</span>'
+        html += '<span class="value">'+(is_empty_html(val) ? blank_sign('(blank)') : nl2br(val))+'</span>'
         html += '</div>'
     })
     html += '</div>'
@@ -134,7 +151,39 @@ function preview_service_customization_info(){
   }
 
   $('#service_customization_info .show_body').html(html);
+  preview_validations();
   $('#service_customization_info').switchClass("edit_part", "show_part",0)
+}
+
+
+function preview_validations(){
+    $("#show_service_registration_form .service_customization_form li").each(function(){
+        var label = $("label", this);
+        if(label.attr("data-length")){
+            var lengths = label.attr("data-length").split("-")
+            var min = lengths[0];
+            var max = lengths[1];
+            $(this).append("<span class='constraint'><span class='bold'>Length:</span> "+min+" ~ "+max+"</span>");
+        }
+        if(label.attr("data-format")=="email")
+            $(this).append("<span class='constraint'><span class='bold'>Format:</span> Email</span>");
+        if(label.attr("data-format")=="number")
+            $(this).append("<span class='constraint'><span class='bold'>Format:</span> Number</span>");
+        if(label.attr("data-format")=="name")
+            $(this).append("<span class='constraint'><span class='bold'>Format:</span> Name</span>");
+    })
+}
+
+
+function init_text_editor(text_area_id){
+    $("body").addClass("yui-skin-sam")
+    var myEditor = new YAHOO.widget.Editor(text_area_id, {
+        height: '300px',
+        width: '522px',
+        dompath: true, //Turns on the bar at the bottom
+        animate: true //Animates the opening, closing and moving of Editor windows
+    });
+    myEditor.render();
 }
 
 

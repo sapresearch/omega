@@ -2,7 +2,7 @@
         <%= link_to_function "Update", "submit_service_form('#{@service.status}')", :class=>"services_edit_operation_button" %>
       </div>
       <div class="services_right_links">
-        <%= link_to "Back to "+(@super_service.nil? ? "All Services" : @super_service.name), services_url, :class=>"services_edit_operation_button" %>
+        <%= link_to_function "Back to "+(@super_service.nil? ? "All Services" : @super_service.name), "back_to_index_confirm('#{services_url(:service_id=>@service_id)}')", :class=>"services_edit_operation_button" %>
       </div>
       <script type="text/javascript">
         $('.services_edit_operation_button').button({ icons: {primary:'ui-icon-gear'} });

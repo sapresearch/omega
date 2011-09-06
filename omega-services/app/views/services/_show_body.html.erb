@@ -18,23 +18,25 @@
                   <% if service.is_leaf? %>
                     <!-- app-spec -->
                     <% unless current_user.is_anonymous? %>
-                      <% service_registration = ServiceRegistration.find_by_service_leaf_id_and_contact_id(service.service_leaf.id, current_contact.id) %>
+                      <% service_registration = ServiceRegistration.find_by_service_leaf_id_and_registrant_id(service.service_leaf.id, current_contact.id) %>
                     <!-- end app-spec -->
                       <% unless service_registration.nil? %>
-
-                        <%= om_button(:contact => true, :icon=>'user-remove') do %>
-                          <%= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", "data-tooltip"=>"Unregister this service" %>
+                    
+                        <% unless service_registration.status=="rejected" %>
+                          <%= om_button(:contact => true, :icon=>'user-remove') do %>
+                            <%= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", "data-tooltip"=>"Unregister this service" %>
+                          <% end %>
                         <% end %>
-                        <%#= link_to_function "Unregister", "destroy_service_registration('#{service_registration_url(service_registration)}')", :class=>"service_operation_button" %>
                         <span class="service_registration_status" ><strong>status:</strong> <%= service_registration.status %></span>
 
                       <% else %>
-
-                        <%= om_button(:contact => true, :icon=>'user-add') do %>
-                          <%= link_to_function "Register", "new_service_registration(#{service.id})", "data-tooltip"=>"Register this service" %>
+                        <% if !service.service_leaf.is_blocked? %>
+                          <%= om_button(:contact => true, :icon=>'user-add') do %>
+                            <%= link_to_function "Register",
+                              "new_service_registration(find_service_by_id(services, #{service.id}), '#{service_registrations_url}', 'services#index')",
+                              "data-tooltip"=>"Register this service" %>
+                          <% end %>
                         <% end %>
-                        <%#= link_to_function "Register >>", "new_service_registration(#{service.id})", :class=>"service_operation_button" %>
-
                       <% end %>
                     <!-- app-spec -->
                     <% end %>
@@ -53,6 +55,12 @@
               <div class="service_right_links">
                 <p>
                   <% if is_admin? %>
+                  
+                    <% if service.is_leaf? %>
+                      <%= om_button(:contact => true, :icon=>'group') do %>
+                        <%= link_to "Registrations", service_registrations_url(:service_id=>service.id), "data-tooltip"=>"Manage registrations" %>
+                      <% end %>
+                    <% end %>
 
                     <% if service.is_private? %>
                       <%= om_button(:contact => true, :icon=>'mail-open') do %>

@@ -1,52 +1,40 @@
+<!-- app-spec: class names for css -->
+
+<% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
+<% require_javascript 'thirdParty/jquery.dataTables.min.js' %>
+
 <% require_stylesheet 'service.css' %>
+<% require_stylesheet 'service_registration.css' %>
 <% require_javascript 'util.js' %>
 <% require_javascript 'ui_util.js'%>
 <% require_javascript 'service/share.js' %>
-<% require_javascript 'service/index.js' %>
-<% require_javascript 'service/destroy.js' %>
+<% require_javascript 'service_registration/index.js' %>
 <% require_javascript 'service_registration/new.js' %>
 <% require_javascript 'service_registration/destroy.js' %>
 
-<script type="text/javascript">
-  //global variables
-  var services_url = "<%= services_url %>"
-</script>
 
-<!-- app-spec -->
 <div class="content circle-corners-bottom" >
-<!-- end app-spec -->
 
-  <!-- original
-  <div class="services_page_title">
-  -->
-  <!-- app-spec -->
   <div class="heading-main">
     <h1 class="page-content services_page_title">
-  <!-- end app-spec -->
-
       <%= render "index_page_title" %>
-  
-  <!-- app-spec -->
     </h1>
-  <!-- end app-spec -->
   </div>
 
   <div class="services_page_content">
     <%= render "index_page_content" %>
   </div>
 
-<!-- app-spec -->
 </div>
-<!-- end app-spec -->
 
-
-<%= render "service_registrations/dialog_new_form" %>
-<%= render "service_registrations/dialog_new_confirm" %>
+<%= render "service_registrations/dialog_update_status_form" %>
+<%= render "service_registrations/dialog_update_status_failed_message" %>
+<%= render "service_registrations/dialog_show_form" %>
+<%= render "service_registrations/dialog_edit_form" %>
+<%= render "service_registrations/dialog_new_form", :type=>"admin" %>
+<%= render "service_registrations/dialog_new_confirm", :type=>"admin" %>
 <%= render "service_registrations/dialog_destroy_confirm" %>
 <%= render "service_registrations/dialog_destroyed_message" %>
 <%= render "service_registrations/dialog_created_message" %>
 <%= render "service_registrations/dialog_create_failed_message" %>
 <%= render "service_registrations/dialog_create_blocked_message" %>
-<%= render "dialog_delete_confirm" %>
-<%= render "dialog_update_status_confirm" %>
-

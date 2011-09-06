@@ -1,0 +1,28 @@
+
+/* adjust jquery UI */
+#service_registrations_table_filter input{font-size:12px;}
+#service_registrations_table_length{margin:5px;}
+.css_right{float:right;}
+.dataTables_wrapper{min-height: 0px;}
+#service_registrations_table tr{height:20px;}
+#service_registrations_table td{vertical-align:bottom;}
+
+/* top bar */
+.accepted_registrant_count{ margin-bottom:10px; float:left;}
+.block_registration{ float:right; }
+.block_registration label{margin-top:0px;font:12px/1.5em Lucida Grande,Arial,sans-serif,helvetica, arial, freesans, clean; color:#191919}
+
+/* status dialog style */
+#service_registration_status_form label{font-weight:normal; width:auto; margin:2px 20px 2px 5px; float:left;}
+#service_registration_status_form input{width:auto;float:left;}
+
+/* table column style */
+#registration_created_at{width:25%}
+#registration_updated_at{width:25%}
+#registrant{width:30%}
+#registration_status{width:16%}
+#registration_detail{width:2%}
+#delete_registration{width:2%}
+
+/* dialog */
+.dialog .label{display: inline-block; min-width: 100px;}

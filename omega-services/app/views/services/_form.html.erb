@@ -5,6 +5,18 @@
 <% require_javascript 'anytime.js' %>
 <% require_javascript 'anytimetz.js' %>
 
+<!-- Skin CSS file -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/skin.css" />
+<!-- Utility Dependencies -->
+<script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script>
+<!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+<script src="http://yui.yahooapis.com/2.9.0/build/container/container_core-min.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/menu/menu-min.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/button/button-min.js"></script>
+<!-- Source file for Rich Text Editor-->
+<script src="http://yui.yahooapis.com/2.9.0/build/editor/editor-min.js"></script>
+
 <script type="text/javascript">
   $(function() {
     // jquery UI visual effects
@@ -69,31 +81,68 @@
     <div class="show_body body">
       <div class="field">
         <span class="label"><strong>Name:</strong></span>
-        <span id="service_name_preview" class="value"><%= @service.name %></span>
+        <span id="service_name_preview" class="value"><%= @service.name || blank_sign %></span>
       </div>
+
       <div class="field">
         <span class="label"><strong>Description:</strong></span>
-        <span id="service_description_preview" class="value"><%= @service.description %></span>
+        <span id="service_description_preview" class="value"><%= @service.description || blank_sign %></span>
       </div>
-      <br clear="all"/>
+
+      <div class="field">
+        <span class="label"><strong>Belongs To:</strong></span>
+        <span id="super_service_preview" class="value"><%= @service.super_service ? @service.super_service.name : blank_sign("(none)") %></span>
+      </div>
+
+      <% if @service.is_leaf? %>
+        <div class="field service_leaf_specific">
+          <span class="label"><strong>Capacity:</strong></span>
+          <span id="service_capacity_preview" class="value"><%= @service.service_leaf.capacity || "unlimited" %></span>
+        </div>
+      <% end %>
     </div>
 
     <div class="edit_body body">
       <div class="field">
         <%= form.label :name %>
         <%= form.text_field :name, :maxlength=>100, :size=>30, :'data-tooltip' => "Name of the service" %>
-      </div>
+      </div>      
+      
       <div class="field">
         <%= form.label :description %>
         <%= form.text_area :description, :cols=>30, :rows=>3, :'data-tooltip' => "Describe the service" %>
       </div>
+
+      <div class="field">
+        <% options = [["None",nil]].concat(Service.service_branches.map{|s|[s.name, s.id]}) %>
+        <% options.delete [@service.name, @service.id] %>
+        <% default_option_value = @service.super_service_id %>
+
+        <%= form.label :super_service_id, "Belongs To" %>
+        <% if @service.id %>
+          <%= form.select :super_service_id, options_for_select(options, default_option_value) %>
+        <% else %>
+          <%= form.select :super_service_id, options_for_select(options, default_option_value), {}, :onchange=>"set_super_service_env()" %>
+        <% end %>
+      </div>
+
+      <% if @service.is_leaf? %>
+        <div class="field service_leaf_specific">
+          <label for="service_capacity">Capacity</label>
+          <input id="service_capacity" class="capacity" maxlength="20" name="service_capacity" size="5" type="text" value="<%= @service.service_leaf.capacity || "unlimited" %>" data-tooltip="Size limit" />
+        </div>
+        <script type="text/javascript">
+          set_unlimited_non_negative_integer_field("service_capacity")
+        </script>
+      <% end %>
     </div>
+    
   </div>
 
 
 
   <% if @service.is_leaf? %>
-    <div class="part show_part" id="service_section_info">
+    <div class="part show_part service_leaf_specific" id="service_section_info">
       <h3 class="head">
         Sections
         <span class="service_right_links edit_links">
@@ -161,7 +210,6 @@
     </div>
   </div>
 
-  <%= form.hidden_field :super_service_id, :value=>@service.is_root? ? nil : @service.super_service.id %>
   <%= form.hidden_field :status %>
   <%= hidden_field_tag :service_detail_html %>
   <%= hidden_field_tag :service_detail_field_values %>

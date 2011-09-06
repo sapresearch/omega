@@ -9,6 +9,96 @@ function nl2br(str)
     return str.replace(/\n/g,'<br/>')
 }
 
+function blank_sign(text){
+    return "<span class='blank_sign'>"+text+"</span>"
+}
+
+function target_id(label_id){
+    return $('#'+label_id).attr("for");
+}
+function target_of(label_id){
+    return $("#"+target_id(label_id));
+}
+
 function is_empty_html(html){
     return html.match(/\w+/) ? false :true
+}
+
+function fill_field_values(element_id, field_values){
+    JSON.parse(field_values, function(key, val){
+        $("#"+element_id+" label").each(function(){
+            if($(this).html()==key)
+            {
+                var target_id = $(this).attr("for")
+                $("#"+target_id).val(val)
+            }
+        })
+    })
+}
+
+function field_values_to_json(element_id, is_required_field_included){
+    var field_values = is_required_field_included ? {"required":{}, "optional":{}} : {}
+    $("#"+element_id+" label").each(function(){
+        var target_id = $(this).attr("for")
+        if(is_required_field_included)
+        {
+            if($(this).hasClass("required"))
+                field_values.required[$(this).text()]=$("#"+target_id).val()
+            else
+                field_values.optional[$(this).text()]=$("#"+target_id).val()
+        }
+        else
+            field_values[$(this).text()]=$("#"+target_id).val()
+    })
+    return field_values
+}
+
+function show_dialog_message(dialog_id){
+    var dialog = $("#"+dialog_id)
+    dialog.dialog({
+        resizable: false,
+        modal: true,
+        buttons: {
+            Ok: function() {
+                $(this).dialog( "close" );
+            }
+        },
+        close: function() {
+            dialog.dialog('destroy')
+        }
+    });
+}
+
+function set_unlimited_non_negative_integer_field(element_id){
+    var element = $("#"+element_id)
+    element.click(function(){
+        var parsed_value = parseInt($(this).val(), 10)
+        if(isNaN(parsed_value))
+            $(this).select();
+    })
+    element.keyup(function(){
+        var parsed_value = parseInt($(this).val(), 10)
+        if(isNaN(parsed_value)){
+            $(this).val("unlimited")
+            $(this).select();
+        }else
+            $(this).val(parsed_value)
+    });
+}
+
+function set_non_negative_integer_field(element_id){
+    var element = $("#"+element_id);
+    element.keyup(function(){
+        var parsed_value = parseInt($(this).val(), 10)
+        $(this).val( isNaN(parsed_value) ? 0 : parsed_value)
+    });
+}
+
+function parse_non_negative_integer(value){
+    var parsed_value = parseInt(value, 10)
+    return isNaN(parsed_value) ? 0 : parsed_value
+}
+function parse_unlimited_non_negative_integer(value){
+    var parsed_value = parseInt(value, 10)
+    return isNaN(parsed_value) ? "unlimited" : parsed_value
 }

@@ -11,7 +11,7 @@
 }
 */
 /* app-spec */
-#title_category{
+.page_title{
     color: #36361B;
     font-family: "Trebuchet MS",Arial Black,Geneva,Arial,Helvetica,sans-serif;
     font-size: 28px;
@@ -21,25 +21,54 @@
 }
 /* end app-spec */
 
+input:focus,
+textarea:focus,
+select:focus{
+    background-color:lightyellow;
+    -moz-box-shadow: 5px 5px 5px #ccc;
+    -webkit-box-shadow: 5px 5px 5px #ccc;
+    -box-shadow: 5px 5px 5px #ccc;
+}
+
+/* copy from application_evergreen.css due to firefox css length limit */
+.explanation {
+    background: none repeat scroll 0 0 #f3f3f3;
+    border: 1px solid #ddd;
+    color: #333333;
+    margin: 10px 0;
+    padding: 10px;
+}
+.constraint{ 
+    display:inline-block;
+    vertical-align: top;
+    background: none repeat scroll 0 0 lightyellow;
+    border: 1px solid #ddd;
+    color: #333333;
+    margin: 4px 5px;;
+    padding: 5px;
+}
+
 .services_page_content{
-    padding:5px 30px;
+    padding:20px 20px;
 }
 .services_page_content label{
+    display:inline-block;
     margin:5px 0px 5px 20px;
     float:none;
     text-align: right;
     width:auto;
     text-transform:none;
 }
-.services_page_content input{
-    margin: 5px;
+.services_page_content input,
+.services_page_content textarea{
+    margin: 5px 5px 5px 0px;
 }
 .services_page_content span.om-contact-icon-button a{ color:navy; } /* app-spec */
 
 .services_search_box{
     width:100%;
     height: 30px;
-    padding: 10px 0px;
+    padding: 0px 0px 10px 0px;
 }
 #search_text{
     font-size:12px;
@@ -55,9 +84,9 @@
 }
 
 .service_head .service_registration_status{float:right; margin:0px 10px 0px 0px; font-weight:bold; font-style:italic;}
-.service_body{
-    border:1px solid #ccc;
-}
+.service_head .service_capacity{float:right; margin:0px 10px 0px 0px;}
+.service_head .service_capacity span{font-weight:bold; font-style:italic;}
+.service_body{ border:1px solid #ccc; }
 .service_body .label{display:inline-block; min-width:100px;}
 .service_body .item{ margin:15px; padding:5px; background-color:#eee; }
 .service_body .item_title{ font-style:italic; color:#555; }
@@ -70,7 +99,7 @@
 
 .services_operation_links{
     padding:10px 10px;
-    margin-bottom:20px;
+    margin-bottom:5px;
 }
 .services_operation_links a{
     font-size: 15px;
@@ -78,6 +107,8 @@
 
 .bread_crumb a{ font-style:italic; color:navy }
 .service_registration_status{ float:left; }
+#service-registration-new-dialog-form .select_registrant{margin-left:50px}
+
 
 
 /*--------- form builder */
@@ -87,8 +118,13 @@
     width:200px;
     height:520px;
 }
-.service_form_builder_tools #required_label{width:150px; margin-left:0px; float:none; font-size:12px; display:inline;}
-.service_form_builder_tools #required_checkbox{float:none; width:15px; margin:7px 7px 7px 7px; display:inline;}
+
+.service_form_builder_tools #edit_validation label{float:none; width:auto; margin:5px 0px 5px 5px; font-size:12px; display:inline-block;}
+.service_form_builder_tools #edit_validation input{float:none; margin:5px 5px 5px 5px; display:inline-block;}
+.service_form_builder_tools #edit_validation select{float:none; width:95px; margin:5px 5px 5px 5px; padding:2px; display:inline-block;}
+.service_form_builder_tools #edit_content input[type="text"] { width:90%; font-size:14px;}
+.service_form_builder_tools #edit_validation .non_negative_integer{width:35px; padding:2px;}
+.service_form_builder_tools #edit_validation .unlimited_non_negative_integer{width:80px; padding:2px;}
 
 .service_form_builder_view{
     padding:5px;
@@ -129,26 +165,24 @@
 
 .service_customization_form li {padding:5px 0px;}
 .service_customization_form li label{ font-size:13px; text-align:right; float:left; display:block; width:150px; line-height: 100%; margin:10px 10px 0px 20px; text-transform:none;}
-.service_customization_form li input{ display:block; font:-webkit-small-control;}
-.service_customization_form li textarea{ display:block;}
-.service_customization_form li select{ display:block; width:280px; height:30px;}
+.service_customization_form li input{ display:inline-block; font:-webkit-small-control;}
+.service_customization_form li textarea{ display:inline-block;}
+.service_customization_form li select{ display:inline-block; width:280px; height:30px;}
 .service_customization_form.editable_list li:hover {cursor:move; background-color: #bbb}
 .service_customization_form.editable_list .editing{background-color: #ddd}
 
 .required{color:green}
-
 
 /* for adjusting jquery UI component*/
 #service_form_builder_nav{ height:32px; }
 #service_form_builder_nav a{cursor:pointer;}
 .service_leaf{ background:none; background-color:green}
 .dialog{ display:none; }
-
+.anytime-pkr .anytime-cur-btn{background: none;}
 
 /* app-spec */
 .item-list-actions-wrapper{ right:42px; }
 .service_form_builder_tabs .tab_content li:hover .item-list-actions-wrapper {display:block;}
-#admin-edit-em input[type="text"] { width:90%; font-size:14px;}
 #admin-edit-em textarea {width:96%; height:100px;}
 /* end app-spec */
 
@@ -191,6 +225,7 @@
 .service_form .show_part .update_links{ display:none; }
 .service_form .edit_part .edit_links{ display:none; }
 
+
 /* show body */
 .service_form .edit_part .show_body{ display:none; }
 .service_form .show_body{
@@ -208,12 +243,14 @@
 }
 .service_form .show_body .label{
     margin: 0px 0px 0px 0px;
-    display:inline-block;
+    display:block;
+    float:left;
     width:100px;
     vertical-align: top;
 }
 .service_form .show_body .value{
-    display:inline-block;
+    display:block;
+    margin-left:110px;
 }
 .service_form .item_title{
     font-weight:bolder;
@@ -221,13 +258,13 @@
     font-style:italic;
     color:#555;
 }
-.service_form .blank_sign{ color:#aaa }
+.blank_sign{ color:#aaa }
+#service_capacity{ width:80px; }
 
 
 /* edit body */
 .service_form .show_part .edit_body{ display:none; }
-.service_form .edit_body{
-}
+.service_form .edit_body .field select{ margin:5px 0px 2px 0px; }
 .service_form .edit_body label{
     font-size:13px;
     float:left;
@@ -267,3 +304,5 @@
     font-weight:bold;
     color:#555;
 }
+
+

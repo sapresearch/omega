@@ -45,6 +45,36 @@ class ServiceSection < ActiveRecord::Base
     event.event_recurrence.end_at || "TBD..."
   end
 
+  def recurrence_year
+    return nil unless is_recurrent?
+    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
+    return interval_values_hash["year"]
+  end
+
+  def recurrence_month
+    return nil unless is_recurrent?
+    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
+    return interval_values_hash["month"]
+  end
+
+  def recurrence_day
+    return nil unless is_recurrent?
+    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
+    return interval_values_hash["day"]
+  end
+
+  def recurrence_hour
+    return nil unless is_recurrent?
+    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
+    return interval_values_hash["hour"]
+  end
+
+  def recurrence_minute
+    return nil unless is_recurrent?
+    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
+    return interval_values_hash["minute"]
+  end
+
   def recurrence_interval
     return nil unless is_recurrent?
     interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)

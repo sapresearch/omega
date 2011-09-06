@@ -38,6 +38,10 @@ class Service < ActiveRecord::Base
       false
     end
 
+    def service_branches
+      Service.all(:order=>:name) - service_leaves
+    end
+
     def service_leaves
       ServiceLeaf.all.map{|sl|sl.service}
     end
@@ -143,6 +147,16 @@ class Service < ActiveRecord::Base
     end
   end
 
+  def block
+    return unless is_leaf?
+    service_leaf.block
+  end
+
+  def unblock
+    return unless is_leaf?
+    service_leaf.unblock
+  end
+
   def detail_html
     return nil if service_detail_form.nil?
     service_detail_form.html.html_safe
@@ -189,6 +203,16 @@ class Service < ActiveRecord::Base
     return self if has_service_registration_template?
     return nil if super_service.nil?
     return super_service.default_service_with_registration_template
+  end
+
+  def accepted_registrants
+    return nil unless is_leaf?
+    service_leaf.accepted_registrants
+  end
+
+  def capacity
+    return nil unless is_leaf?
+    service_leaf.capacity
   end
   
 end

@@ -14,7 +14,7 @@ module ServiceLib
     return false if service.service_registrations.empty?
     # app-spec
     return false if user.is_anonymous?
-    service_registration = ServiceRegistration.find_by_service_leaf_id_and_contact_id(service.service_leaf.id, Contact.for(user).id)
+    service_registration = ServiceRegistration.find_by_service_leaf_id_and_registrant_id(service.service_leaf.id, Contact.for(user).id)
     # end app-spec
     not service_registration.nil?
   end

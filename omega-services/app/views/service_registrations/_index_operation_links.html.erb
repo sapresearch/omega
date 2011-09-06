@@ -1,0 +1,11 @@
+      <div class="services_left_links">       
+        <%= link_to_function "New Registration", 
+          "new_service_registration(#{raw @service.to_json(:include=>{:service_registration_form=>{:only=>:html}})}, '#{service_registrations_url}', 'service_registrations#index')",
+          :class=>"services_registration_operation_button" %>
+      </div>
+      <div class="services_right_links">
+        <%= link_to "Back to "+(@service.super_service.nil? ? "All Services" : @service.super_service.name), services_url(:service_id=>@service.id), :class=>"services_registration_operation_button" %>
+      </div>
+      <script type="text/javascript">
+        $('.services_registration_operation_button').button({ icons: {primary:'ui-icon-gear'} });
+      </script>
