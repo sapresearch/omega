@@ -125,7 +125,7 @@ function preview_service_customization_info(){
     html += '<div class="item" id="show_service_detail">'
     html += '<span class="item_title">Service Details'
     if($('#has_service_detail_template').is(':checked'))
-      html += ' (Set as template)'
+      html += ' ( Set as template )'
     html += ':</span>'
     var service_detail_json = field_values_to_json("service_detail", false)
     $.each(service_detail_json,function(key, val){
@@ -142,7 +142,7 @@ function preview_service_customization_info(){
     html += '<div class="item" id="show_service_registration_form">'
     html += '<span class="item_title">Registration Form'
     if($('#has_service_registration_template').is(':checked'))
-      html += ' (Set as template)'
+      html += ' ( Set as template )'
     html += ':</span>'
     html += '<ul class="service_customization_form" >'
     html += $('#service_registration').html()

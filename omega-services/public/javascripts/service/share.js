@@ -2,11 +2,11 @@
 jQuery.ajaxSetup({ beforeSend: function (xhr) { xhr.setRequestHeader("Accept", "text/javascript"); } });
 
 function service_detail_html(){
-    return $('#service_detail').html();
+    return $.trim($('#service_detail').html());
 }
 
 function service_registration_html(){
-    return $('#service_registration').html();
+    return $.trim($('#service_registration').html());
 }
 
 function find_service_by_id(services, id){
@@ -132,7 +132,7 @@ function checkLength( o, n, min, max ) {
 	o.addClass( "ui-state-error" );
         o.focus();
 	updateTips( "Length of " + n + " must be between " +
-            min + " and " + max + "." );
+            min + " ~ " + max + "." );
 	return false;
     } else {
         return true;

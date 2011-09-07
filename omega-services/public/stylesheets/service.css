@@ -63,6 +63,8 @@ select:focus{
 .services_page_content textarea{
     margin: 5px 5px 5px 0px;
 }
+.services_page_content input[type="checkbox"]{ margin: 5px; }
+
 .services_page_content span.om-contact-icon-button a{ color:navy; } /* app-spec */
 
 .services_search_box{
@@ -132,6 +134,7 @@ select:focus{
     width:670px;
     height:520px;
 }
+#service_customization_info .service_form_builder_view .set_service_template label{margin-right:0px;}
 
 .service_form_builder_tabs{
     height:520px;
@@ -240,6 +243,7 @@ select:focus{
 }
 .service_form .show_body .field{
     margin: 0px 0px 0px 20px;
+    clear:both;
 }
 .service_form .show_body .label{
     margin: 0px 0px 0px 0px;

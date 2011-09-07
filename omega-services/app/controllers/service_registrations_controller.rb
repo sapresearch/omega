@@ -47,7 +47,7 @@ class ServiceRegistrationsController < Omega::Controller
     @status_update_success = true
     @status=params[:status]
     if @status
-      if @status=="accepted" && @service_registration.status!="accepted" && @service.accepted_registrants.count >= @service.capacity
+      if @status=="accepted" && @service_registration.status!="accepted" && @service.capacity && @service.accepted_registrants.count >= @service.capacity
         @status_update_success = false
       else
         @service_registration.update_attribute(:status,@status)

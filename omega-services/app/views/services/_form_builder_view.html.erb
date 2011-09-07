@@ -12,7 +12,7 @@
           <% default_option_value = "none" if @service.id %>
           <%= select_tag(:select_service_detail_templates, options_for_select(options, default_option_value), :onchange => "refresh_service_detail()") %>
         </span>
-        <span id="check_service_detail_template" >
+        <span id="check_service_detail_template" class="set_service_template">
           <label for="has_service_detail_template" >Make this a template:</label>
           <input id="has_service_detail_template" name="has_service_detail_template" type="checkbox" />
         </span>
@@ -34,7 +34,7 @@
           <% default_option_value = @default_service_with_registration_template ? @default_service_with_registration_template.id : "none" %>
           <%= select_tag(:select_service_registration_templates, options_for_select(options, default_option_value), :onchange => "refresh_service_registration()") %>
         </span>
-        <span id="check_service_registration_template">
+        <span id="check_service_registration_template" class="set_service_template">
           <label for="has_service_registration_template" >Make this a template:</label>
           <input id="has_service_registration_template" name="has_service_registration_template" type="checkbox" />
         </span>
