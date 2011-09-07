@@ -20,30 +20,54 @@ function delete_service_section(element_id)
     check_service_sections_count()
 }
 
+// general transformation functions, not tested, not in use
+function edit_to_show_body(part_id){
+    var part_element = $("#"+part_id)
+    var show_body_element = $(".show_body", part_element)
+    var edit_body_element = $(".edit_body", part_element)
+    $(".field", edit_body_element).each(function(){
+        show_body_element.append(edit_to_show_field_html($(this)))
+    })
+}
+function edit_to_show_field_html(field_element){
+    var label_element = $("label", field_element);
+    var value_field_element = $("#"+label_element.attr("for"));
+    var value = value_field_element.val();
+
+    return '<div class="field">\
+                <span class="label"><strong>'+label_element.text()+'</strong></span>\
+                <span class="value">'+value+'</span>\
+            </div>'
+}
+
 function edit_service_basic_info(){
   $(".edit_part .update_links a").click();
   $('#service_basic_info').switchClass("show_part", "edit_part",0)
   $("#service_name").select();
 }
 function preview_service_basic_info(){
+  // name
   var service_name = $('#service_name').val();
   if(is_empty_html(service_name))
     $('#service_name_preview').html(blank_sign('(blank)'))
   else
     $('#service_name_preview').html(service_name)
-  
+
+  // description
   var service_description = nl2br($('#service_description').val());
   if(is_empty_html(service_description))
     $('#service_description_preview').html(blank_sign('(blank)'))
   else
     $('#service_description_preview').html(service_description)
 
+  // belongs to
   var super_service_name = $("#service_super_service_id option:selected").text();
   if(super_service_name=="None")
     $('#super_service_preview').html(blank_sign('(none)'))
   else
     $('#super_service_preview').html(super_service_name)
-  
+
+  $('#service_register_type_preview').html($('#service_register_type').val())
   $('#service_capacity_preview').html($('#service_capacity').val())
   $('#service_basic_info').switchClass("edit_part", "show_part",0)
 }

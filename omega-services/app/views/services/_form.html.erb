@@ -95,13 +95,10 @@
       </div>
 
       <% if @service.is_leaf? %>
-
-<!-- working on
         <div class="field service_leaf_specific">
-          <span class="label"><strong>Type:</strong></span>
-          <span id="service_type_preview" class="value"><%= @service.service_leaf.type || @service.default_type %></span>
+          <span class="label"><strong>Register Type:</strong></span>
+          <span id="service_register_type_preview" class="value"><%= @service.service_leaf.register_type || @service.default_register_type %></span>
         </div>
--->
       
         <div class="field service_leaf_specific">
           <span class="label"><strong>Capacity:</strong></span>
@@ -135,15 +132,12 @@
       </div>
 
       <% if @service.is_leaf? %>
-
-<!-- working on
         <div class="field service_leaf_specific">
-          <label for="service_type">Type</label>
+          <label for="service_type">Register Type</label>
           <% options = [["Enrollable","enrollable"],["Requestable","requestable"]] %>
-          <% default_option_value = @service.service_leaf.type || @service.default_type %>
-          <%= select_tag :service_type, options_for_select(options, default_option_value) %>
+          <% default_option_value = @service.service_leaf.register_type || @service.default_register_type %>
+          <%= select_tag :service_register_type, options_for_select(options, default_option_value) %>
         </div>
--->
       
         <div class="field service_leaf_specific">
           <label for="service_capacity">Capacity</label>

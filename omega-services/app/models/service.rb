@@ -213,10 +213,10 @@ class Service < ActiveRecord::Base
   end
 
   # return the type of majority service leaves in the parent category.
-  def default_type
+  def default_register_type
     return nil unless is_leaf?
     sample_service_leaves = is_root? ? Service.service_leaves : super_service.service_leaves
-    count_hash = sample_service_leaves.map{|s|s.service_leaf}.inject({}){ |r,sl| r[sl.type].nil? ? r[sl.type]==0 : r[sl.type]+=1; r } # count the number of each type
+    count_hash = sample_service_leaves.map{|s|s.service_leaf}.inject({}){ |r,sl| r[sl.register_type].nil? ? r[sl.register_type]==0 : r[sl.register_type]+=1; r } # count the number of each type
     count_hash.keys.max{ |a,b| count_hash[a]<=>count_hash[b] } || "enrollable" # return the type with max value, if no type is defined return 'enrollable'
   end
 
