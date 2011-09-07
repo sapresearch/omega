@@ -247,14 +247,14 @@ select:focus{
 }
 .service_form .show_body .label{
     margin: 0px 0px 0px 0px;
-    display:block;
-    float:left;
+    display:inline-block;
+    float:none;
     width:100px;
     vertical-align: top;
 }
 .service_form .show_body .value{
-    display:block;
-    margin-left:110px;
+    display:inline-block;
+    margin-left:10px;
 }
 .service_form .item_title{
     font-weight:bolder;
