@@ -2,7 +2,7 @@
 
   <p class="explanation">
     <% unless session[:my_services_switch]=="on" %>
-      No Service is being offered<%= " in "+@super_service.name if @super_service %> at the moment!
+      No service is being offered<%= " in "+@super_service.name if @super_service %> at the moment based on the filter settings.
       <% if is_admin? %>
         <br/><br/>
         <%= om_button(:contact => true, :icon => 'clock') do %>
@@ -10,7 +10,7 @@
         <% end %>
       <% end %>
     <% else %>
-      You have not registered any service<%= " in "+@super_service.name if @super_service %> at the moment!
+      You have not registered any service<%= " in "+@super_service.name if @super_service %> at the moment based on the filter settings.
       <br/><br/>
       <%= om_button(:contact => true, :icon => 'clock') do %>
         <%= link_to_function 'View Services'+(@super_service ? ' in '+@super_service.name : ''), "switch_off_my_services("+@service_id.to_s+")" %>

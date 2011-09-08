@@ -87,6 +87,24 @@ class Service < ActiveRecord::Base
     def services_with_registration_template
       ServiceRegistrationTemplate.all.map{|srt|srt.service_registration_form.service}
     end
+
+    # filter services of certain register type, or contains any service of certain register type from a collection of services
+    def filter_by_register_type(services, register_type)
+      selected_leaf_services = ServiceLeaf.all.select{|sl| sl.register_type==register_type}.map{|sl|sl.service}
+      filtered_services = services.select do |s|
+        selected_leaf_services.include?(s) || begin
+          val = false;
+          selected_leaf_services.each do |es|
+            if es.is_descendant_of?(s)
+              val = true
+              break
+            end
+          end
+          val
+        end
+      end
+      filtered_services
+    end
     
   end
   
@@ -216,7 +234,7 @@ class Service < ActiveRecord::Base
   def default_register_type
     return nil unless is_leaf?
     sample_service_leaves = is_root? ? Service.service_leaves : super_service.service_leaves
-    count_hash = sample_service_leaves.map{|s|s.service_leaf}.inject({}){ |r,sl| r[sl.register_type].nil? ? r[sl.register_type]==0 : r[sl.register_type]+=1; r } # count the number of each type
+    count_hash = sample_service_leaves.map{|s|s.service_leaf}.inject({}){ |r,sl| r[sl.register_type].nil? ? r[sl.register_type]=1 : r[sl.register_type]+=1; r } # count the number of each type
     count_hash.keys.max{ |a,b| count_hash[a]<=>count_hash[b] } || "enrollable" # return the type with max value, if no type is defined return 'enrollable'
   end
 

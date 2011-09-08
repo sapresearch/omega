@@ -1,3 +1,27 @@
+function switch_enrollable(){
+    var val = $("#enrollable").is(":checked") ? "on" : "off";
+    var data = {"enrollable_switch":val}
+
+    $.ajax({
+        url: services_url,
+        type: "GET",
+        data: data,
+        dataType: 'script',
+        cache: false
+    })
+}
+function switch_requestable(){
+    var val = $("#requestable").is(":checked") ? "on" : "off";
+    var data = {"requestable_switch":val}
+
+    $.ajax({
+        url: services_url,
+        type: "GET",
+        data: data,
+        dataType: 'script',
+        cache: false
+    })
+}
 function switch_my_services(){
     var val = $("#my_services").is(":checked") ? "on" : "off";
     var data = {"my_services_switch":val}

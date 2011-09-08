@@ -25,10 +25,12 @@ class ServicesController < Omega::Controller
     @super_service = super_service
     @services = sub_services_of(@super_service)
 
-    # for my services
-    session[:my_services_switch] = params[:my_services_switch] || session[:my_services_switch]
+    # for filters
+    session[:my_services_switch] = params[:my_services_switch] || ( session[:my_services_switch] || "off" )
+    session[:enrollable_switch] = params[:enrollable_switch] || ( session[:enrollable_switch] || "on" )
+    session[:requestable_switch] = params[:requestable_switch] || ( session[:requestable_switch] || "on" )
 
-    @services = my_services(@services) if session[:my_services_switch]=="on"
+    filter_services
     respond_with(@services)
   end
 
@@ -55,8 +57,8 @@ class ServicesController < Omega::Controller
     @service_sections=@service_leaf.service_sections
     @event = @service_section.build_event
 
-    # automatically cancel my services switch when creating a new service in order to view it.
-    session[:my_services_switch]="off"
+    # automatically restore filters to default when creating a new service in order to view it.
+    reset_filter_sessions   
     respond_with(@service)
   end
 
@@ -132,8 +134,8 @@ class ServicesController < Omega::Controller
       @service_sections = @service.service_sections
     end
 
-    # automatically cancel my services switch
-    session[:my_services_switch]="off"
+    # automatically set filters to default
+    reset_filter_sessions    
     respond_with(@service)
   end
 
@@ -253,7 +255,7 @@ class ServicesController < Omega::Controller
     # for js
     @services = @service.sibling_services
 
-    @services = my_services(@services) if session[:my_services_switch]=="on"
+    filter_services
     respond_with(@service, :location=>services_url(:service_id=>@service.id))
   end
 
@@ -263,7 +265,7 @@ class ServicesController < Omega::Controller
     @super_service = super_service
     @services = sub_services_of(@super_service)
 
-    @services = my_services(@services) if session[:my_services_switch]=="on"
+    filter_services
     respond_with(@service)
   end
 

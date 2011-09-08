@@ -32,7 +32,7 @@ class ServiceRegistrationsController < Omega::Controller
     if @from_page == "services#index"
       @super_service = @service.super_service
       @services = @service.sibling_services
-      @services = my_services(@services) if session[:my_services_switch]=="on"      
+      filter_services
     elsif @from_page == "service_registrations#index"
       @service_registrations = @service.service_registrations
     end
@@ -77,7 +77,7 @@ class ServiceRegistrationsController < Omega::Controller
     else
       @super_service = @service.super_service
       @services = @service.sibling_services
-      @services = my_services(@services) if session[:my_services_switch]=="on"
+      filter_services
     end
     
     respond_with(@service_registration)

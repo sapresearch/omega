@@ -9,6 +9,14 @@ module ServiceLib
     ServiceRegistration.filter_services_by_registrant(services,current_contact)
   end
 
+  def include_enrollable(base_services, reference_services)
+    (base_services + Service.filter_by_register_type(reference_services, "enrollable")).uniq{|s|s.id}
+  end
+
+  def include_requestable(base_services, reference_services)
+    (base_services + Service.filter_by_register_type(reference_services, "requestable")).uniq{|s|s.id}
+  end
+
   def registered?(service, user=current_user)
     return false unless service.is_leaf?
     return false if service.service_registrations.empty?
@@ -23,5 +31,19 @@ module ServiceLib
     services = is_admin? ? Service.all : Service.real_public_services
     services.sort!{|s1,s2|s1.name<=>s2.name}
     services.map{|s|{:label=>s.name, :value=>s.name, :id=>s.id}}
+  end
+
+  def filter_services
+    filtered_services = []
+    filtered_services = include_enrollable(filtered_services, @services) if session[:enrollable_switch]=="on"
+    filtered_services = include_requestable(filtered_services, @services) if session[:requestable_switch]=="on"    
+    filtered_services = my_services(filtered_services) if session[:my_services_switch]=="on"
+    @services = filtered_services
+  end
+
+  def reset_filter_sessions
+    session[:my_services_switch]="off"
+    session[:enrollable_switch]="on"
+    session[:requestable_switch]="on"
   end
 end

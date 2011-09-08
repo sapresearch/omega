@@ -1,12 +1,21 @@
       <form>
         <input id="search_text" type="text" maxlength="100" size="50" value="Type here to search..." onfocus="$(this).val('')" onblur="$(this).val('Type here to search...')" />
-        <label for="enrollable" >Enrollable</label>
-        <input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
-        <label for="requestable" >Requestable</label>
-        <input id="requestable" name="requestable" type="checkbox" checked="checked" />
+
+        <span>
+          <label for="enrollable" >Enrollable</label>
+          <input id="enrollable" name="enrollable" type="checkbox" checked="checked" onclick="switch_enrollable()" />
+        </span>
+
+        <span>
+          <label for="requestable" >Requestable</label>
+          <input id="requestable" name="requestable" type="checkbox" checked="checked" onclick="switch_requestable()" />
+        </span>
+
         <% unless current_user.is_anonymous? %>
-          <label for="my_services" >My Services</label>
-          <input id="my_services" name="my_services" type="checkbox" onclick="switch_my_services()" />
+          <span>
+            <label for="my_services" >My Services</label>
+            <input id="my_services" name="my_services" type="checkbox" onclick="switch_my_services()" />
+          </span>
         <% end %>
       </form>
 
@@ -15,6 +24,18 @@
     $("#my_services").attr("checked", "checked")
   <% else %>
     $("#my_services").removeAttr("checked")
+  <% end %>
+
+  <% if session[:enrollable_switch]=='off' %>
+    $("#enrollable").removeAttr("checked")   
+  <% else %>
+    $("#enrollable").attr("checked", "checked")
+  <% end %>
+
+  <% if session[:requestable_switch]=='off' %>
+    $("#requestable").removeAttr("checked")
+  <% else %>
+    $("#requestable").attr("checked", "checked")   
   <% end %>
 
   $( "#search_text" ).autocomplete({
