@@ -21,24 +21,6 @@
 }
 /* end app-spec */
 
-
-input:focus,input:hover,
-textarea:focus,textarea:hover,
-select:focus,select:hover{
-    background-color:lightyellow;
-    -moz-box-shadow: 5px 5px 5px #ccc;
-    -webkit-box-shadow: 5px 5px 5px #ccc;
-    -box-shadow: 5px 5px 5px #ccc;
-}
-
-/* copy from application_evergreen.css due to firefox css length limit */
-.explanation {
-    background: none repeat scroll 0 0 #f3f3f3;
-    border: 1px solid #ddd;
-    color: #333333;
-    margin: 10px 0;
-    padding: 10px;
-}
 .constraint{ 
     display:inline-block;
     vertical-align: top;

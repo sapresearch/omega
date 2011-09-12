@@ -1,0 +1,15 @@
+#new_role_link{margin:0px 20px 10px 0px; float:right;}
+#new_role_link a{color:navy;}
+
+#role_permission{ margin:auto;}
+#role_permission_matrix{margin:auto;}
+#role_permission_matrix td{text-align:center}
+#role_permission_matrix .matrix_row_td{ text-align:left; width:200px; }
+#top_left_td{font-weight:bolder; font-style:italic; color:black;}
+
+.matrix_col_tr{background:#ddd}
+.matrix_col_td{ font-weight:bolder; padding:5px 10px; color:green}
+.matrix_row_td{ font-weight:bolder; padding:0px 10px; color:green; vertical-align:middle;}
+.matrix_cell_td{}
+.matrix_row_td_hover{background:lightblue}
+.matrix_col_td_hover{background:lightblue}

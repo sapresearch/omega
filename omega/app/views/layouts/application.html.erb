@@ -61,6 +61,7 @@
 <%= render :partial => "layouts/footer" %>
 
 <!-- tmp section for debugging -->
+<%= link_to "Test Page", roles_url, :style=>"float:right;" %>
 <% if ENV["RAILS_ENV"]=="development" %>
   <div id="debug">
     <a href="#" onclick="$('#params_debug_info').toggle(); return false">params</a> |
