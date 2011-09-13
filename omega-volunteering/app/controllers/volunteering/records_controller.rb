@@ -254,18 +254,45 @@ class Volunteering::RecordsController < Omega::Controller
 		end
 	end
 
+
 	def create_multiple
 
-
-		params[:records].each do |record_key, attributes|
-			position_id = params[:records][record_key][:position_id]
-			puts "\n\n" + position_id + "\n\n"
-			if (attributes[:status] == "accepted") then
-			puts "\n\n" + params[:records][record_key].inspect + "\n\n"
-				@record = Volunteering::Record.new(params[:records][record_key])
-				#@record = Volunteering::Record.create(params[:records][record_key])
+		position_id = params[:records][:position_id]
+		contact_ids = params[:records][:contact_ids]
+		contact_ids.gsub!(/\[|\]/, "")
+		contact_ids = contact_ids.split(",")
+		contact_ids.each do |contact_id|
+			puts "\n\nCONTACT ID = #{contact_id} \n\n"
+			v = Volunteering::Record.new(:position_id => position_id,
+																	:contact_id => contact_id,
+																	:status => "Accepted"
+																	)
+			if v.save
+				puts "\n\n TEST TEST TEST #{v.inspect} \n\n"
+				p = Volunteering::Position.find(position_id)
+				boolean = p.contacts.select! { |c| c.id == contact_id}
+				result = boolean == nil ? "\n\nIt is nil\n\n" : "\n\n #{boolean.inspect} is the contact fro the recored that was created \n\n"
+				puts result
+			elsif !v.save
+    		redirect_to my_applications_volunteering_records_url
 			end
 		end
+		redirect_to volunteering_positions_url
+	end
+		#params[:records].each do |record_key, attributes|
+			#position_id = params[:records][record_key][:position_id]
+			#puts "\n\n" + position_id + "\n\n"
+			#if (attributes[:status] == "accepted") then
+			#puts "\n\n" + params[:records][record_key].inspect + "\n\n"
+				#@record = Volunteering::Record.create(params[:records][record_key])
+			#end
+		#end
+
+
+
+
+##############################
+# I don't think this does anything anymore
 
 		#@records = params[:records]
 		#@correct_records = params[:records].reject { |k,v| v[:status] != "accepted"}
@@ -284,7 +311,6 @@ class Volunteering::RecordsController < Omega::Controller
 		#	end
 		#	i += 1
 		#end
-    redirect_to my_applications_volunteering_records_url
-	end
+##############################
 
 end

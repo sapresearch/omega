@@ -1,9 +1,19 @@
 <br />
  <form>
-        <input id="search_text" type="text" maxlength="100" size="50" value="Type here to search..." onfocus="$(this).val('')" onblur="$(this).val('Type here to search...')" />
-        <!--<label for="enrollable" >Enrollable</label>
+        <input id="search_voluteers" type="text" maxlength="100" size="50" value="Type here to search..." onfocus="$(this).val('')" onblur="$(this).val('Type here to search...')" />
+				<span class="filter" style="display:inline-block">
+        <label for="enrollable" style="width:50px" >Users</label>
         <input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
-        <label for="requestable" >Requestable</label>
+				</span>
+				<span class="filter" style="display:inline-block">
+        <label for="enrollable"  style="width:50px">Skills</label>
+        <input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
+				</span>
+				<span class="filter" style="display:inline-block">
+        <label for="enrollable"  style="width:50px">Interests</label>
+        <input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
+				</span>
+        <!--<label for="requestable" >Requestable</label>
         <input id="requestable" name="requestable" type="checkbox" checked="checked" />
         <%# unless current_user.is_anonymous? %>
           <label for="my_services" >My Services</label>
@@ -24,7 +34,7 @@ var contact_term = new Array();
 	contact_term['<%=contact_id%>'] = contact_array;
 <% end %>
 
-  $( "#search_text" ).autocomplete({
+  $( "#search_volunteers" ).autocomplete({
     source: <%= raw @records_to_search.to_json %>,
 		select: function(event, ui) {
 			search(ui.item.value);
@@ -50,9 +60,8 @@ search = function(needle){
 			}
 		}
 	});
-	alert("match is " + match);
-	alert("result is " + results);
-	generate_element(results, 'tag', '<%= @position_id %>');
+	//generate_element(results, 'tag', '<%= @position_id %>');
+	display_search_results(results, '<%= @position_id %>');
 }
 
 </script>

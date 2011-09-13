@@ -1,0 +1,23 @@
+<div id="accordion">
+
+	<h3 id="service_head" class="service_head<%= " service_leaf" %>" >
+ 						<a href="#">Skills</a>
+	</h3>
+	<div id="service_body" class="service_body">
+		<%= test_list_contacts_in(@skills, @position_id, "skill") %>
+	</div>
+
+	<h3 id="service_head" class="service_head<%= " service_leaf" %>" >
+ 						<a href="#">Interests</a>
+	</h3>
+	<div id="service_body" class="service_body">
+		<%= test_list_contacts_in(@interests, @position_id, "interest") %>
+	</div>
+
+</div>
+
+<script>
+$(function() {
+	$( "#accordion" ).accordion();
+});
+</script>

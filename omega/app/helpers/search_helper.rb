@@ -1,5 +1,70 @@
 module SearchHelper
 
+	def get_frequency_hash(array)
+		all_terms = array.collect { |e| e.name }
+		unique_terms = all_terms.uniq
+		frequency_hash = Hash.new
+		unique_terms.each do |term|
+			term_count = all_terms.count { |x| x == term }
+			frequency_hash[term] = term_count
+		end
+		frequency_hash
+	end
+
+	def frequency_hash_to_full_hash(skills_or_interests, frequency_hash)
+		all_terms = Hash.new
+		frequency_hash.each do |term, count|
+			term_to_contacts = Hash.new
+			skills_for_one_term = skills_or_interests.select { |e| e.name == term }
+			skills_for_one_term.each do |skill|
+				contacts_for_term = Hash.new
+				if skill.contacts.count > 0 then
+					skill.contacts.each_with_index do |contact, index|
+						c = Hash.new
+						c[:name] = "#{contact.first_name} #{contact.last_name}"
+						c[:id] = contact.id
+						contacts_for_term[index] = c
+					end
+					term_to_contacts[:contacts] = contacts_for_term
+					term_to_contacts[:term_frequency] = count
+					all_terms[term] = term_to_contacts
+				end
+			end
+		end
+		all_terms
+	end
+
+	def test_list_contacts_in(array, position_id, category_name)
+		frequency = frequency_hash_to_full_hash(array, get_frequency_hash(array))
+		unordered_list = ActiveSupport::SafeBuffer.new
+		frequency.each_key do |term|
+			contacts_data = String.new
+			frequency[term][:contacts].each do |key, contact|
+				puts "\nhere is the iteration" + contact.inspect
+				puts "\nhere is the name " + frequency[term][:contacts][key][:name].to_s 
+ 				contacts_data = contacts_data + frequency[term][:contacts][key][:name].to_s +
+											"," +
+											contact[:id].to_s +
+											",,"
+				puts "\nhere is contacts_data" + contacts_data.inspect
+			end
+			inner_html = term.to_s + " " #+
+									 #"#{frequency[term][:term_frequency].inspect}" +
+									 #" volunteer(s)"
+			javascript_function_args = contacts_data + "," + position_id.to_s
+			unordered_list << html_list_item_element(inner_html, javascript_function_args, category_name)
+		end
+		unordered_list
+	end
+
+	def html_list_item_element(inner_html, javascript_function_args, category_name)
+		content_tag(:li, content_tag(:a, inner_html, :name => category_name, :href => "#", :onclick => "display_search_results('#{javascript_function_args}')"))
+	end
+
+	def html_unordered_list_element(list_items)
+		content_tag(:ul, list_items, :style => "margin-left:50px")
+	end
+
 	def list_contacts_in(array, position_id)
 		frequency_hash = TagCloud.frequency_hash(array)
 		frequency_hash = frequency_hash.sort { |a,b| a[0] <=> b[0] }
@@ -54,8 +119,10 @@ module SearchHelper
 		unordered_list = content_tag(:ul, list_items, :id => "tag-cloud" ) #ActiveSupport::SafeBuffer.new
 	end
 
+
+
 	class TagCloud
-	
+
 	def self.name_word_hash(array)
 		word_names_hash = Hash.new
 		array.each do |e|

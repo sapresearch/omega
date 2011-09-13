@@ -1,6 +1,15 @@
-<% require_stylesheet 'service.css' %>
+<% require_stylesheet 'service2.css' %>
 <% require_stylesheet 'omega_volunteering.css' %>
 <% require_javascript 'search_volunteer.js' %>
+
+	<style>
+	h1 { padding: .2em; margin: 0; }
+	#result-header { float:left; width: 500px; margin-right: 2em; }
+	#contacts_to_add { width: 200px; float: left; }
+	/* style the list to maximize the droppable hitarea */
+	#contacts_to_add li { margin: 0; padding: 1em 0 1em 3em; }
+	</style>
+
 
 	<div class="content circle-corners-bottom-left">
 		<div class="heading-main">
@@ -13,69 +22,45 @@
 		<%= render "records_search_box" %>
 	</div>
 
+	<hr>
 	<table>
 		<tr>
-			<td style="width:350px">
-				<div id="accordion">
 
-					<h3 id="service_head" class="service_head<%= " service_leaf" %>" >
- 						<a href="#">Skills and Interests</a>
-					</h3>
-					<div id="service_body" class="service_body">
-						<%= list_contacts_in(@skills + @interests, @position_id) %>
-					</div>
+			<td style="width:350px; max-width:355px">
+				<%= render "skills_and_interests_accordion" %>
+			</td>
 
-					<h3 id="service_head" class="service_head<%= " service_leaf" %>" >
- 						<a href="#">Skills</a>
-					</h3>
-					<div id="service_body" class="service_body">
-						<%= list_contacts_in(@skills, @position_id) %>
-					</div>
-
-					<h3 id="service_head" class="service_head<%= " service_leaf" %>" >
- 						<a href="#">Interests</a>
-					</h3>
-					<div id="service_body" class="service_body">
-						<%= list_contacts_in(@interests, @position_id) %>
-					</div>
-
+			<td style="width:350px; max-width:355px">
+				<div style="margin-left:20px">
+					<h7 class="sub-heading" id="result-header">Search Results:</h7>
+					<ul id="volunteers-list" style="margin-left:15px"></ul>
 				</div>
-
-	      <script type="text/javascript">
- 	       search_accordion();
- 	    	</script>
 			</td>
 
 
 
-		<td style="width:350px">
-				<h7 class="sub-heading" id="result-header"></h7>
-					<ul id="volunteers-list"></ul>
-			</div>
-		</td>
-
-					
-
 <td>
+
 <!--	<div id="right" style="width:100; float:right; height:auto">!-->
-	<h7 class="sub-heading"> Your New Volunteers: </h7>
+	<h7 class="sub-heading"> Selected Volunteers: </h7>
 	<%= form_for @records, :url => create_multiple_volunteering_records_path, :html => { :method => :post } do |f| %>
-		<div id="records_to_add">
-	<ul>
+		<%= hidden_field_tag "records[position_id]", @position_id %>
+		<%= hidden_field_tag "records[contact_ids]" %>
+		<!--<input id="record_position_id" name="record[position_id]" type="hidden"><%@position_id%></input>!-->
+		<ul>
 		<% @records.each_with_index do |record, index| %>
 			<% c_id = record.contact.id %>
 			<%= fields_for "records[#{index}]" do |r| %>
-			<li>
-				<!--<div class="field" >
+			<!--<li>
+				<div class="field" >
 					<p>
-						<%#= hidden_field_tag "records[#{index}][position_id]", @position_id %>
 						<%#= hidden_field_tag "records[#{index}][contact_id]", record.contact.id %>
-            <span data-tooltip="Remove this contact" onclick="alert('hello')">
 						<%#= r.radio_button 'status', 'accepted' %>
 						<%#= record.contact.first_name %></span>
 					</p>
-				</div>!-->
-			</li>
+				</div>
+			</li>!-->
+		<div id="contacts_to_add" class="placeholder" style="min-height:75px">
 
 
 		<% end %>
