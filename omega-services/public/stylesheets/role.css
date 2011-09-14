@@ -1,5 +1,7 @@
-#new_role_link{margin:0px 20px 10px 0px; float:right;}
+#roles_operation_links{}
+#new_role_link{margin:8px 20px 10px 0px; float:right; vertical-align: baseline;}
 #new_role_link a{color:navy;}
+#resotre_role_permission_associations_link{margin:0px 0px 10px 20px}
 
 #role_permission{ margin:auto;}
 #role_permission_matrix{margin:auto;}

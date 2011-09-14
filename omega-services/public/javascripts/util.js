@@ -41,4 +41,3 @@ function array_min(a){
             min=a[i]
     return min
 }
-

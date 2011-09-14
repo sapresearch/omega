@@ -24,6 +24,10 @@ function is_empty_html(html){
     return html.match(/\w+/) ? false :true
 }
 
+function vertical_td(){
+    
+}
+
 function fill_field_values(element_id, field_values){
     JSON.parse(field_values, function(key, val){
         $("#"+element_id+" label").each(function(){
@@ -53,6 +57,7 @@ function field_values_to_json(element_id, is_required_field_included){
     return field_values
 }
 
+//dialogs
 function show_dialog_message(dialog_id){
     var dialog = $("#"+dialog_id)
     dialog.dialog({
@@ -63,6 +68,33 @@ function show_dialog_message(dialog_id){
                 $(this).dialog( "close" );
             }
         },
+        close: function() {
+            dialog.dialog('destroy')
+        }
+    });
+}
+function dialog_confirm(id, title, content_html, url, method, async){  
+    var html = "<div id='"+id+"' class='dialog' title='"+title+"'>"
+    html += content_html;
+    html += "</div>"
+    var dialog = $(html)
+    dialog.dialog({
+        resizable: false,
+        width:"auto",
+        height:"auto",
+        minWidth:150,
+        minHeight:150,
+        maxWidth:500,
+	modal: true,
+	buttons: {
+            OK: function() {
+		$(this).dialog( "close" );
+                $.ajax({ url:url, type:method, async:async, dataType: "script" })
+            },
+            Cancel: function() {
+            	$(this).dialog( "close" );
+            }
+	},
         close: function() {
             dialog.dialog('destroy')
         }

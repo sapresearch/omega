@@ -1,0 +1,52 @@
+  <div id="role_permission_block"></div>
+
+  <script type="text/javascript" >
+    var roles = <%= raw @roles.to_json(:only=>[:id,:name], :include=>{:permissions=>{:only=>:id}}) %>
+    var permissions = <%= raw @permissions.to_json(:only=>[:id,:name], :include=>{:roles=>{:only=>:id}}) %>
+    var role_names = []
+    var permission_names = []
+
+    for(var i=0; i<roles.length; i++)
+      role_names.push(roles[i].role.name)
+    for(var i=0; i<permissions.length; i++)
+      permission_names.push(permissions[i].permission.name)
+
+    $("#role_permission_block").html( matrix("role_permission_matrix", role_names, permission_names, {}) )
+    $("#role_permission_matrix #top_left_td").html("Permissions \\ Roles")
+
+    $("#role_permission_matrix .matrix_cell_td").hover(
+      function(){
+        var strs = $(this).attr("id").split("_")
+        var i = strs[strs.length-2]
+        var j = strs[strs.length-1]
+        $("#role_permission_matrix #matrix_row_td_"+i).addClass("matrix_row_td_hover")
+        $("#role_permission_matrix #matrix_col_td_"+j).addClass("matrix_col_td_hover")
+      },
+      function(){
+        var strs = $(this).attr("id").split("_")
+        var i = strs[strs.length-2]
+        var j = strs[strs.length-1]
+        $("#role_permission_matrix #matrix_row_td_"+i).removeClass("matrix_row_td_hover")
+        $("#role_permission_matrix #matrix_col_td_"+j).removeClass("matrix_col_td_hover")
+      }
+    )
+
+    // load current settings
+    for(var i=0; i<roles.length; i++){
+      var role = roles[i];
+      var permissions_count = role.role.permissions.length
+      for(var j=0; j<permissions_count; j++){
+        for(var k=0; k<permissions.length; k++){
+          if(permissions[k].permission.id == role.role.permissions[j].id)
+            $("#role_permission_matrix_checkbox_"+k+"_"+i).attr("checked","checked")
+        }
+      }
+    }
+
+    $("#role_permission_matrix input[type='checkbox']").each(function(){
+      $(this).checkbox_to_button()
+    })
+    $("#role_permission_matrix input[type='checkbox']").click(function(){
+      $(this).checkbox_to_button()
+    })
+  </script>
