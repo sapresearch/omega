@@ -113,6 +113,19 @@ function dialog_confirm(id, title, content_html, url, method, async, options){
     });
 }
 
+function switch_status(id, url, method, data_hash){
+    var val = $("#"+id).is(":checked") ? "on" : "off";
+    var data = data_hash;
+    data["switch"] = val
+    $.ajax({
+        url: url,
+        type: method,
+        data: data,
+        dataType: 'script',
+        cache: false
+    })
+}
+
 function set_unlimited_non_negative_integer_field(element_id){
     var element = $("#"+element_id)
     element.click(function(){

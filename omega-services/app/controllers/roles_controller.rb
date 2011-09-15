@@ -10,7 +10,7 @@ class RolesController < Omega::Controller
   end
 
   def update
-    
+
   end
 
   def restore_role_permission_associations
@@ -54,6 +54,16 @@ class RolesController < Omega::Controller
     @roles = Role.all
     @permissions = Permission.all
     respond_with(@roles)
+  end
+
+  def update_permission
+    @role = Role.find(params[:id])
+    @permission = Permission.find(params[:permission_id])
+    @permission_switch = params[:switch]
+    @permission_switch == "on" ? @role.permissions << @permission : @role.permissions.delete(@permission)
+    @role.save!
+
+    respond_with(@role)
   end
  
 end

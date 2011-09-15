@@ -2,9 +2,10 @@
 
   <script type="text/javascript" >
     var roles = <%= raw @roles.to_json(:only=>[:id,:name], :include=>{:permissions=>{:only=>:id}}) %>
-    var permissions = <%= raw @permissions.to_json(:only=>[:id,:name], :include=>{:roles=>{:only=>:id}}) %>
+    var permissions = <%= raw @permissions.to_json(:only=>[:id,:name], :include=>{:roles=>{:only=>:id}}) %>    
     var role_names = []
     var permission_names = []
+    var update_permission_role_urls = <%= raw @roles.map{|r| update_permission_role_url(r)} %>
 
     for(var i=0; i<roles.length; i++)
       role_names.push(roles[i].role.name)
@@ -47,6 +48,12 @@
       $(this).checkbox_to_button()
     })
     $("#role_permission_matrix input[type='checkbox']").click(function(){
-      $(this).checkbox_to_button()
+      $(this).checkbox_to_button();
+
+      var strs = $(this).parent("td").attr("id").split("_")
+      var permission_index = strs[strs.length-2]
+      var role_index = strs[strs.length-1]
+      var permission_id = permissions[permission_index].permission.id
+      switch_status($(this).attr("id"), update_permission_role_urls[role_index], "PUT", {"permission_id":permission_id});
     })
   </script>
