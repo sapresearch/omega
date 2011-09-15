@@ -16,6 +16,40 @@
 </head>
 <body>
 
+<!-- debug section -->
+<style type="text/css">
+  #test_pages{float:left; color:white}
+  .test_section{display:inline-block; position:relative}
+  .test_section:hover{background:green}
+  .test_section a{color:white; display:block;}
+  .test_sub_section{display:none; position:absolute; white-space:nowrap;}
+  .test_sub_section:hover{background:green}
+</style>
+<div id="test_pages">
+  <div class="test_section">
+    <%= link_to "Test Role", roles_url %>
+    <div class="test_sub_section">
+      <%= link_to "Permission \\ Role Matrix", roles_url %>
+    </div>
+  </div> |
+  <div class="test_section">
+    <%= link_to "Test Asset", {} %>
+    <div class="test_sub_section">
+      <%= link_to "Asset Management", {} %>
+    </div>
+  </div>
+  <script>
+    $(".test_section a").mouseover(function() {
+        $(this).parent().find("div").delay(200).slideDown('fast');
+    });
+
+    $(".test_section").mouseleave(function() {
+        $(this).find("div").slideUp('fast');
+    });
+  </script>
+</div>
+<!-- end of debuf section -->
+
 <div id="notification-flash-wrapper">
   <div id="notification-flash" class="center-content corners-top corners-bottom">
   </div>
@@ -23,7 +57,6 @@
 
 
 <div id="wrapper">
-
   <%= render :partial => "layouts/head" %>
 
 
@@ -61,7 +94,6 @@
 <%= render :partial => "layouts/footer" %>
 
 <!-- tmp section for debugging -->
-<%= link_to "Test Page", roles_url, :style=>"float:right;" %>
 <% if ENV["RAILS_ENV"]=="development" %>
   <div id="debug">
     <a href="#" onclick="$('#params_debug_info').toggle(); return false">params</a> |
