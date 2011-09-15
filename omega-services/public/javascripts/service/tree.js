@@ -61,13 +61,16 @@ function nested_menu(ul_element_id, options){
     links.css("display","block")
     list_items.css("height",options['height']);
     list_items.css({"position":"relative"});
-    sub_lists.css("position", "absolute")    
+    sub_lists.css("position", "absolute")
+
+/** method 1: pre-set positions
     sub_lists.each(function(){
         var parent_li = $(this).parent();
         var parent_li_width = parent_li.width();
         $(this).css("top", 0);
         $(this).css("left", parent_li_width)
     })
+*/
     
     list_items.each(function(){
         //var timer;
@@ -77,6 +80,13 @@ function nested_menu(ul_element_id, options){
                 //$('>ul',this).show('slide', {direction:"left"}, 200);
                 //clearTimeout(timer);
                 $(this).siblings("li:has(ul)").children("ul").stop(true,true).hide()
+
+                /* method 2: instantly set positions */
+                var parent_li_width = $(this).width();
+                $('>ul', this).css("top", 0);
+                $('>ul', this).css("left", parent_li_width)
+                /* end of method 2 */
+                
                 $('>ul',this).animate({opacity:"show"}, 'normal');
             },
             function(){

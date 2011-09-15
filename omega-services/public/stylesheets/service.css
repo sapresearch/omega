@@ -251,6 +251,7 @@
 .service_form .show_body .value{
     display:inline-block;
     margin-left:10px;
+    max-width: 700px;
 }
 .service_form .item_title{
     font-weight:bolder;

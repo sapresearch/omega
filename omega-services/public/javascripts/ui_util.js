@@ -73,18 +73,30 @@ function show_dialog_message(dialog_id){
         }
     });
 }
-function dialog_confirm(id, title, content_html, url, method, async){  
+function dialog_confirm(id, title, content_html, url, method, async, options){
+    var default_options={
+        "width":"auto",
+        "height":"auto",
+        "minWidth":150,
+        "minHeight":150,
+        "maxWidth":300
+    }
+    for(var key in default_options){
+        if(options[key]==null || options[key]==undefined)
+            options[key]=default_options[key]
+    }
+    
     var html = "<div id='"+id+"' class='dialog' title='"+title+"'>"
     html += content_html;
     html += "</div>"
     var dialog = $(html)
     dialog.dialog({
         resizable: false,
-        width:"auto",
-        height:"auto",
-        minWidth:150,
-        minHeight:150,
-        maxWidth:500,
+        width:options["width"],
+        height:options["height"],
+        minWidth:options["minWidth"],
+        minHeight:options["minHeight"],
+        maxWidth:options["maxWidth"],
 	modal: true,
 	buttons: {
             OK: function() {

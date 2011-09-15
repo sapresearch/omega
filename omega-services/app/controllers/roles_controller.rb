@@ -9,6 +9,10 @@ class RolesController < Omega::Controller
     respond_with(@roles)
   end
 
+  def update
+    
+  end
+
   def restore_role_permission_associations
     Role.transaction do
       Permission.transaction do
@@ -33,6 +37,17 @@ class RolesController < Omega::Controller
           role.permissions << Permission.where('value IN (?)', permissions)
           role.save!
         end
+
+        user = User.find_by_username("admin")
+        if user.nil?
+          user = User.new do |u|
+            u.username = 'admin'
+            u.password_salt = 128.times.inject('') { |salt,| salt << rand(93) + 33 }
+            u.password_hash = Digest::SHA512.hexdigest('admin' + u.password_salt)            
+          end
+        end
+        user.roles << Role.find_by_internal_name('administrator')
+        user.save(:validate=>false)
       end
     end
 

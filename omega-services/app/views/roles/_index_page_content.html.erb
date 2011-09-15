@@ -4,8 +4,8 @@
   <div class="left" id="resotre_role_permission_associations_link">
     <%= link_to_function "Restore Default",
       "dialog_confirm('roles-restore-role-permission-associations-dialog-confirm',
-        'Restore Default Permission Settings', '<p>All current status will be lost. Are you sure?</p>',
-        '#{restore_role_permission_associations_roles_url}', 'PUT', false)",
+        'Restore Default Permission Settings', '<p>All current status will be lost and you will need to re-assign users to roles. Are you sure?</p>',
+        '#{restore_role_permission_associations_roles_url}', 'PUT', false, {'width':380})",
       :class=>"roles_operation_button" %>
   </div>
   <div class="right" id="new_role_link">
