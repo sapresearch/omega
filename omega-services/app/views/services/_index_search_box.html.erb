@@ -44,7 +44,7 @@
     select: function( event, ui ) {
       $.ajax({
         url: '<%= services_url %>',
-        data: ({"service_id": ui.item.id, "my_services_switch":"off"}),
+        data: ({"service_id": ui.item.id, "my_services_switch":"off", "enrollable_switch":"on", "requestable_switch":"on"}),
         dataType: 'script',
         cache: false
       });
