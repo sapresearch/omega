@@ -11,5 +11,9 @@ Omega::Services::Module.routes.draw do
       put :update_permission
     end
   end
+
+  resources :assets do
+    
+  end
 end
 

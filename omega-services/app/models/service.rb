@@ -92,7 +92,7 @@ class Service < ActiveRecord::Base
     def filter_by_register_type(services, register_type)
       selected_leaf_services = ServiceLeaf.all.select{|sl| sl.register_type==register_type}.map{|sl|sl.service}
       filtered_services = services.select do |s|
-        selected_leaf_services.include?(s) || begin
+        (s.is_end? && !s.is_leaf?) || selected_leaf_services.include?(s) || begin
           val = false;
           selected_leaf_services.each do |es|
             if es.is_descendant_of?(s)
