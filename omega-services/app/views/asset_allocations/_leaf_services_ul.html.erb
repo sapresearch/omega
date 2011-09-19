@@ -1,0 +1,10 @@
+    <ul id="leaf_services_list" class="item_list">
+      <% @leaf_services.each do |leaf_service| %>
+        <li id="leaf_service_<%= leaf_service.id.to_s %>">
+          <span class="item_name"><%= leaf_service.name %></span>
+          <span class="item_operation_link">
+            <%= link_to om_button(:plain => true, :icon => 'search'){}, show_assets_for_service_asset_allocations_url(:leaf_service_id=>leaf_service.id), :remote=>true, :'data-tooltip'=>"allocated assets" %>
+          </span>
+        </li>
+      <% end %>
+    </ul>

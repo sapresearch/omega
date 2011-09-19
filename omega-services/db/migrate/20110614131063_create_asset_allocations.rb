@@ -2,7 +2,7 @@ class CreateAssetAllocations < ActiveRecord::Migration
   def self.up
     create_table :asset_allocations do |t|
       t.references :asset
-      t.references :service
+      t.references :service_leaf
 
       t.timestamps
     end

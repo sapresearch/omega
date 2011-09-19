@@ -1,0 +1,76 @@
+.list_block{overflow:auto;}
+.list_fieldset{   
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -border-radius:5px;
+
+    border:none;
+    background: #eee;
+    height:530px;
+}
+.list_fieldset legend{
+    -moz-box-shadow: 3px 3px 3px #ccc;
+    -webkit-box-shadow: 3px 3px 3px #ccc;
+    -box-shadow: 3px 3px 3px #ccc;
+    
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -border-radius:5px;
+
+    width: 224px;
+    text-align:center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    color:white;
+    border:none;
+    background: #B8CE6C;
+    padding:3px 10px;
+}
+
+#assets_list_area{
+  width:275px;
+  height:580px;
+  margin-right:21px;
+  float:left;
+}
+#working_list_area{
+  width:275px;
+  height:580px;
+  float:left;
+}
+#leaf_services_list_area{
+  width:275px;
+  height:580px;
+  margin-left:21px;
+  float:left;
+}
+
+.item_list li{
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -border-radius:5px;
+    margin:1px 0px;
+    padding:5px 10px 5px 15px;
+    height:20px;
+    vertical-align:middle;
+}
+#assets_list li, #working_list_title.asset{background:lightblue; color:#444;}
+#leaf_services_list li, #working_list_title.service{background:green; color:white;}
+
+.item_name{
+    font-weight:bold;
+    font-style:italic;
+    vertical-align:middle;
+}
+#assets_list .item_name{color:#333;}
+#leaf_services_list .item_name{color:white;}
+
+.item_operation_link{
+    float:right;
+}
+
+.item_list li.taken{
+    filter: Blur(Add=0, Direction=225, Strength=5)
+}

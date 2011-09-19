@@ -20,7 +20,6 @@ class Service < ActiveRecord::Base
   has_one :service_leaf, :dependent => :destroy
   has_many :service_registrations, :through => :service_leaf
   has_many :service_sections, :through => :service_leaf
-  has_many :asset_allocations, :dependent => :destroy
 
   accepts_nested_attributes_for :service_leaf
 
@@ -48,8 +47,8 @@ class Service < ActiveRecord::Base
     end
 
     # returns service objects
-    def service_leaves
-      ServiceLeaf.all.map{|sl|sl.service}
+    def service_leaves(order="name")
+      ServiceLeaf.all.map{|sl|sl.service}.sort{|s1,s2|s1.send(order)<=>s2.send(order)}
     end
 
     def real_public_service_leaves
@@ -247,6 +246,11 @@ class Service < ActiveRecord::Base
   def capacity
     return nil unless is_leaf?
     service_leaf.capacity
+  end
+
+  def assets
+    return nil unless is_leaf?
+    service_leaf.assets
   end
   
 end

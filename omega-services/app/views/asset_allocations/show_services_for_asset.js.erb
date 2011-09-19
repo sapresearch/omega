@@ -1,0 +1,4 @@
+$("#working_list_title").html("<%= @asset.name %>");
+$("#working_list_title").removeClass("service");
+$("#working_list_title").addClass("asset");
+$("#working_list_block").html("<%= escape_javascript(render "leaf_services_ul") %>")
