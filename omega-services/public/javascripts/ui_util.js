@@ -73,6 +73,37 @@ function show_dialog_message(dialog_id){
         }
     });
 }
+function dialog_message(id, title, content_html, options){
+    options = $.extend({
+        width:"auto",
+        height:"auto",
+        minWidth:150,
+        minHeight:150,
+        maxWidth:300
+    },options)
+    
+    var html = "<div id='"+id+"' class='dialog' title='"+title+"'>"
+    html += content_html;
+    html += "</div>"
+    var dialog = $(html)
+    dialog.dialog({
+        resizable: false,
+        width:options.width,
+        height:options.height,
+        minWidth:options.minWidth,
+        minHeight:options.minHeight,
+        maxWidth:options.maxWidth,
+	modal: true,
+	buttons: {
+            OK: function() {
+                $(this).dialog( "close" );
+            }
+        },
+        close: function() {
+            dialog.dialog('destroy')
+        }
+    });
+}
 function dialog_confirm(id, title, content_html, url, method, async, options){
     var default_options={
         "width":"auto",

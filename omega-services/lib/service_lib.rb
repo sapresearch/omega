@@ -46,4 +46,15 @@ module ServiceLib
     session[:enrollable_switch]="on"
     session[:requestable_switch]="on"
   end
+
+  private
+
+  def services_exception_handler
+    begin
+      yield
+    rescue
+      redirect_to services_url
+    end
+  end
+  
 end

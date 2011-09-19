@@ -20,6 +20,7 @@ class Service < ActiveRecord::Base
   has_one :service_leaf, :dependent => :destroy
   has_many :service_registrations, :through => :service_leaf
   has_many :service_sections, :through => :service_leaf
+  has_many :asset_allocations, :dependent => :destroy
 
   accepts_nested_attributes_for :service_leaf
 

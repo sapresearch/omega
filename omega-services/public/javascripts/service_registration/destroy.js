@@ -15,21 +15,7 @@ function destroy_service_registration(url, pre_html){
                 $.ajax({
                     url: url,
                     type: "DELETE",
-                    data: data,
-                    success: function(msg){
-                        $( "#service-registration-destroyed-dialog-message" ).dialog({
-                            resizable: false,
-                            modal: true,
-                            buttons: {
-                                Ok: function() {
-                                    $( this ).dialog( "close" );
-                                }
-                            },
-                            close: function() {
-                                $( "#service-registration-destroyed-dialog-message" ).dialog('destroy')
-                            }
-                        });
-                    }
+                    data: data
                 })
             },
             Cancel: function() {

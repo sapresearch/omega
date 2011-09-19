@@ -11,6 +11,8 @@ class ServicesController < Omega::Controller
 
   respond_to :html, :js, :xml, :json
 
+  around_filter :services_exception_handler
+
   def index
     @service_id = params[:service_id]
     @service = Service.find_by_id(@service_id) unless @service_id.nil?   # use find_by_id to return nil in case no record

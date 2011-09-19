@@ -4,6 +4,7 @@ class ServiceRegistrationsController < Omega::Controller
   include ServiceLib
 
   respond_to :html, :js, :xml, :json
+  around_filter :services_exception_handler
 
   def index
     @service_id = params[:service_id]
@@ -65,16 +66,18 @@ class ServiceRegistrationsController < Omega::Controller
   end
   
   def destroy
-    @service_registration = ServiceRegistration.find(params[:id])
+    @service_registration = ServiceRegistration.find(params[:id])     
     @service = @service_registration.service
-    @service_registration.destroy
-
+    
     # for js
     # not redirect to services#index for better performance
     @type=params[:type]
     if @type=="admin"
+         
+      @service_registration.destroy
       @service_registrations = @service.service_registrations
     else
+      @service_registration.destroy unless @service_registration.status == "rejected" 
       @super_service = @service.super_service
       @services = @service.sibling_services
       filter_services
@@ -82,5 +85,6 @@ class ServiceRegistrationsController < Omega::Controller
     
     respond_with(@service_registration)
   end
+  
 end
 
