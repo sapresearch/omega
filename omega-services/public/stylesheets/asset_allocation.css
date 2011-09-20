@@ -55,6 +55,7 @@
     padding:5px 10px 5px 15px;
     height:20px;
     vertical-align:middle;
+    width:220px;
 }
 .assets_list li, #working_list_title.asset{background:lightblue; color:#444;}
 .leaf_services_list li, #working_list_title.service{background:green; color:white;}
@@ -73,4 +74,10 @@
 
 .item_list li.taken{
     opacity:.5
+}
+
+
+/* drag and drop visual effects */
+.drop_hover{
+    background:#ddd;
 }

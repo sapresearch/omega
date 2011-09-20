@@ -8,4 +8,34 @@ $(".taken").removeClass("taken")
   $("#leaf_services_list_block .leaf_service_<%= leaf_service.id.to_s %>").addClass("taken")
 <% end %>
 
+$("#leaf_services_list_block li").draggable({
+  helper:"clone",
+  revert:true,
+  revertDuration:400,
+  start: function(event,ui){
+    
+  }
+});
+
+$("#working_list_block li").draggable({
+  helper:"clone",
+  revert:true,
+  revertDuration:400,
+  start: function(event,ui){}
+});
+
+$("#leaf_services_list_fieldset").droppable({
+  hoverClass: 'drop_hover',
+  accept: '#working_list_block li',
+  greedy: true,
+  drop:function(event, ui){}
+})
+
+$("#working_list_fieldset").droppable({
+  hoverClass: 'drop_hover',
+  accept: '#leaf_services_list_block li',
+  greedy: true,
+  drop:function(event, ui){}
+})
+
 $(".tipsy").remove();
