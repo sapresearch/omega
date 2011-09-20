@@ -7,3 +7,5 @@ $(".taken").removeClass("taken")
 <% @assets.each do |asset| %>
   $("#assets_list_block .asset_<%= asset.id.to_s %>").addClass("taken")
 <% end %>
+
+$(".tipsy").remove();

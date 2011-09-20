@@ -7,3 +7,5 @@ $(".taken").removeClass("taken")
 <% @leaf_services.each do |leaf_service| %>
   $("#leaf_services_list_block .leaf_service_<%= leaf_service.id.to_s %>").addClass("taken")
 <% end %>
+
+$(".tipsy").remove();
