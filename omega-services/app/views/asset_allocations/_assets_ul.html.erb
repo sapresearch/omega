@@ -1,6 +1,6 @@
-    <ul id="assets_list" class="item_list">
+    <ul class="assets_list item_list">
       <% @assets.each do |asset| %>
-        <li id="asset_<%= asset.id.to_s %>">
+        <li class="asset_<%= asset.id.to_s %>">
           <span class="item_name"><%= asset.name %></span>
           <span class="item_operation_link">
             <%= link_to om_button(:plain => true, :icon => 'search'){}, show_services_for_asset_asset_allocations_url(:asset_id=>asset.id), :remote=>true, :'data-tooltip'=>"allocated services" %>

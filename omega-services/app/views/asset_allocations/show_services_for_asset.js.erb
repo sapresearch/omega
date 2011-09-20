@@ -1,4 +1,9 @@
 $("#working_list_title").html("<%= @asset.name %>");
 $("#working_list_title").removeClass("service");
 $("#working_list_title").addClass("asset");
-$("#working_list_block").html("<%= escape_javascript(render "leaf_services_ul") %>")
+$("#working_list_block").html("<%= escape_javascript(render "leaf_services_ul") %>");
+
+//$(".taken")removeClass("taken")
+<% @leaf_services.each do |leaf_service| %>
+  $("#leaf_services_list_block .leaf_service_<%= leaf_service.id.to_s %>").addClass("taken")
+<% end %>

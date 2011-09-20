@@ -56,21 +56,21 @@
     height:20px;
     vertical-align:middle;
 }
-#assets_list li, #working_list_title.asset{background:lightblue; color:#444;}
-#leaf_services_list li, #working_list_title.service{background:green; color:white;}
+.assets_list li, #working_list_title.asset{background:lightblue; color:#444;}
+.leaf_services_list li, #working_list_title.service{background:green; color:white;}
 
 .item_name{
     font-weight:bold;
     font-style:italic;
     vertical-align:middle;
 }
-#assets_list .item_name{color:#333;}
-#leaf_services_list .item_name{color:white;}
+.assets_list .item_name{color:#333;}
+.leaf_services_list .item_name{color:white;}
 
 .item_operation_link{
     float:right;
 }
 
 .item_list li.taken{
-    filter: Blur(Add=0, Direction=225, Strength=5)
+    opacity:.5
 }
