@@ -82,7 +82,9 @@ class Volunteering::Position < Omega::Model
   end
 
   def end_date=(value)
-    self.end = "#{value} #{end_time}"
+    # self.end = "#{value} #{end_time}"
+    # FIXME!!!!!!
+    self.end = "#{start_date} #{end_time}"
   end
 
   def end_time
