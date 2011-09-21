@@ -9,30 +9,34 @@ $(".taken").removeClass("taken")
 <% end %>
 
 $("#leaf_services_list_block li").draggable({
+  connectToSortable: "#working_list_block .leaf_services_list",
   helper:"clone",
-  revert:true,
+  revert:"invalid",
   revertDuration:400,
   start: function(event,ui){
-    
+
   }
 });
 
 $("#working_list_block li").draggable({
+  connectToSortable: "#leaf_services_list_block .leaf_services_list",
   helper:"clone",
-  revert:true,
+  revert:"invalid",
   revertDuration:400,
   start: function(event,ui){}
 });
 
 $("#leaf_services_list_fieldset").droppable({
-  hoverClass: 'drop_hover',
+  hoverClass: 'drop_leaf_service_hover',
   accept: '#working_list_block li',
   greedy: true,
-  drop:function(event, ui){}
+  drop:function(event, ui){
+
+  }
 })
 
 $("#working_list_fieldset").droppable({
-  hoverClass: 'drop_hover',
+  hoverClass: 'drop_leaf_service_hover',
   accept: '#leaf_services_list_block li',
   greedy: true,
   drop:function(event, ui){}

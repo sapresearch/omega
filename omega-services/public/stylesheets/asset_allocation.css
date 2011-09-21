@@ -4,7 +4,7 @@
     -webkit-border-radius:5px;
     -border-radius:5px;
 
-    border:none;
+    border:1px solid transparent;
     background: #eee;
     height:530px;
 }
@@ -17,7 +17,7 @@
     -webkit-border-radius:5px;
     -border-radius:5px;
 
-    width: 224px;
+    width: 220px;
     text-align:center;
     white-space: nowrap;
     overflow: hidden;
@@ -55,7 +55,7 @@
     padding:5px 10px 5px 15px;
     height:20px;
     vertical-align:middle;
-    width:220px;
+    width:216px;
 }
 .assets_list li, #working_list_title.asset{background:lightblue; color:#444;}
 .leaf_services_list li, #working_list_title.service{background:green; color:white;}
@@ -78,6 +78,12 @@
 
 
 /* drag and drop visual effects */
-.drop_hover{
+.drop_leaf_service_hover{
     background:#ddd;
+    border:1px solid green;
 }
+.drop_asset_hover{
+    background:#ddd;
+    border:1px solid lightblue;
+}
+.ui-draggable-dragging{opacity:0.7}
