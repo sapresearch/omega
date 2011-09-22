@@ -60,6 +60,7 @@
     height:20px;
     vertical-align:middle;
     overflow:hidden;
+    border:1px solid transparent;
 }
 .assets_list li, #working_list_title.asset{background:lightblue; color:#444;}
 .leaf_services_list li, #working_list_title.service{background:green; color:white;}
@@ -74,10 +75,13 @@
 
 .item_operation_link{
     float:right;
+    display:none;
 }
-
-.item_list li.taken{
-    opacity:.5
+.item_list li:not(.ui-state-disabled):hover{
+    opacity:0.7
+}
+.item_list li:hover .item_operation_link{
+    display:block;
 }
 
 
