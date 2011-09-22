@@ -1,3 +1,5 @@
+<% asset_id ||= @asset_id %>
+
     <ul class="leaf_services_list item_list">
       <% @leaf_services.each do |leaf_service| %>
         <li class="leaf_service_<%= leaf_service.id.to_s %>">
@@ -10,7 +12,57 @@
     </ul>
 
 <script type="text/javascript">
+  $("#leaf_services_list_block .leaf_services_list li:not(.ui-state-disabled)").each(function(){
+    if($(this).disabled_copy()==null)
+      $(this).clone().addClass("ui-state-disabled").hide().insertAfter(this)
+  })
+
   $(".leaf_services_list").sortable({
-    revert: true
-  });
+    cancel: ".ui-state-disabled",
+    placeholder: "ui-state-highlight",
+    connectWith: ".connectedSortable"
+  }).disableSelection();
+
+  $("#leaf_services_list_block .leaf_services_list")
+  .bind("sortupdate", function(event, ui){
+    if(ui.item.parents("##leaf_services_list_block").length>0)
+      ui.item.disabled_copy().insertAfter(ui.item)
+  })
+  .bind("sortover", function(event, ui){
+    if($(".ui-state-highlight", this)){
+      $("."+ui.helper.first_class_name()+".ui-state-disabled").hide()
+    }
+  })
+  .bind("sortreceive", function(event, ui){
+    var identical_hidden_copy = ui.item.identical_hidden_copy()
+    if(identical_hidden_copy)
+      ui.item.identical_hidden_copy().remove()
+
+    ui.item.disabled_copy().insertAfter(ui.item)
+
+    //alert('<%= asset_id %>')
+  })
+
+  $("#working_list_block .leaf_services_list")
+  .bind("sortover", function(event, ui){
+    if($(".ui-state-highlight", this)){
+      $("."+ui.helper.first_class_name()+".ui-state-disabled").show()
+    }
+  })
+  .bind("sortreceive", function(event, ui){
+    ui.item.clone().hide().insertBefore(ui.item.disabled_copy())
+
+    var url = '<%= asset_allocations_url %>'
+    var data = {}
+    var type = 'POST'
+    data["leaf_service_id"]=ui.item.object_id()
+    data["asset_id"]= <%= asset_id %>
+
+    $.ajax({
+      url:url,
+      data:data,
+      type:type,
+      dataType: 'script'
+    })
+  })
 </script>

@@ -1,13 +1,36 @@
 $("#working_list_title").html("<%= @asset.name %>");
 $("#working_list_title").removeClass("service");
 $("#working_list_title").addClass("asset");
-$("#working_list_block").html("<%= escape_javascript(render "leaf_services_ul") %>");
+$("#working_list_block").html("<%= escape_javascript(render "leaf_services_ul", :asset_id=>@asset.id) %>");
 
-$(".taken").removeClass("taken")
+/* clear previous class names */
+$(".connectedSortable").removeClass("connectedSortable")
+$(".list_fieldset").droppable("distroy")
+
 <% @leaf_services.each do |leaf_service| %>
-  $("#leaf_services_list_block .leaf_service_<%= leaf_service.id.to_s %>").addClass("taken")
+  $("#leaf_services_list_block .leaf_service_<%= leaf_service.id.to_s %>:not(.ui-state-disabled)").hide()
+  $("#leaf_services_list_block .leaf_service_<%= leaf_service.id.to_s %>.ui-state-disabled").show()
 <% end %>
 
+$(".leaf_services_list").addClass("connectedSortable");
+
+$("#leaf_services_list_fieldset").droppable({
+  hoverClass: 'drop_leaf_service_hover',
+  accept: '.connectedSortable li'
+})
+
+$("#working_list_fieldset").droppable({
+  hoverClass: 'drop_leaf_service_hover',
+  accept: '.connectedSortable li'
+})
+
+$(".tipsy").remove();
+
+
+
+
+
+/*  code using draggable
 $("#leaf_services_list_block li").draggable({
   connectToSortable: "#working_list_block .leaf_services_list",
   helper:"clone",
@@ -41,5 +64,5 @@ $("#working_list_fieldset").droppable({
   greedy: true,
   drop:function(event, ui){}
 })
+*/
 
-$(".tipsy").remove();

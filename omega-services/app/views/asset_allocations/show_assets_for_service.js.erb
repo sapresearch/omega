@@ -3,9 +3,14 @@ $("#working_list_title").removeClass("asset");
 $("#working_list_title").addClass("service");
 $("#working_list_block").html("<%= escape_javascript(render "assets_ul") %>");
 
-$(".taken").removeClass("taken")
+/* clear previous class names */
+$(".ui-state-disabled").removeClass("ui-state-disabled")
+$(".connectedSortable").removeClass("connectedSortable")
+$(".list_fieldset").droppable("distroy")
+
+$(".ui-state-disabled").removeClass("ui-state-disabled")
 <% @assets.each do |asset| %>
-  $("#assets_list_block .asset_<%= asset.id.to_s %>").addClass("taken")
+  $("#assets_list_block .asset_<%= asset.id.to_s %>").addClass("ui-state-disabled")
 <% end %>
 
 $(".tipsy").remove();

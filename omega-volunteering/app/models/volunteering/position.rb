@@ -41,6 +41,7 @@ class Volunteering::Position < Omega::Model
 		if !recurrent
 			s = self.start.to_s
 			e = self.end.to_s
+      
 			if s >= e
 				self.errors.add :start, " #{start_time} has to be before end time #{end_time} "
 			end

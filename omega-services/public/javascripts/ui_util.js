@@ -1,3 +1,16 @@
+$.fn.extend({
+    first_class_name: function(){
+        var class_names = $(this).attr("class").split(" ")
+        return class_names.length>0 ? class_names[0] : null
+    },
+    enable: function(){
+        $(this).removeClass("ui-state-disabled")
+    },
+    disable: function(){
+        $(this).addClass("ui-state-disabled")
+    }
+});
+
 //delete an element with visual effect
 function delete_element(element_id)
 {
