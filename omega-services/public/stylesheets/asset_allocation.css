@@ -20,7 +20,7 @@
     -webkit-border-radius:5px;
     -border-radius:5px;
 
-    width: 220px;
+    width: 222px;
     text-align:center;
     white-space: nowrap;
     overflow: hidden;
@@ -61,6 +61,7 @@
     vertical-align:middle;
     overflow:hidden;
     border:1px solid transparent;
+    cursor:pointer;
 }
 .assets_list li, #working_list_title.asset{background:lightblue; color:#444;}
 .leaf_services_list li, #working_list_title.service{background:green; color:white;}
