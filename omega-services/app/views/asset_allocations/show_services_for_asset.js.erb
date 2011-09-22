@@ -13,6 +13,8 @@ $(".list_fieldset").droppable("destroy")
 $(".assets_list").sortable("option","connectWith", false)
 $(".assets_list li.ui-state-disabled").hide()
 $(".assets_list li:not(.ui-state-disabled)").show()
+$(".leaf_services_list li.ui-state-disabled").hide()
+$(".leaf_services_list li:not(.ui-state-disabled)").show()
 
 /* set new environment */
 <% @leaf_services.each do |leaf_service| %>

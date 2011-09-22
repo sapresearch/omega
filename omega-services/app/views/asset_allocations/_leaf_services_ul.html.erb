@@ -15,7 +15,8 @@
   $(".leaf_services_list").sortable({
     cancel: ".ui-state-disabled",
     placeholder: "ui-state-highlight",
-    connectWith: ".connectedSortable"
+    connectWith: ".connectedSortable",
+    cursor: 'move'
   }).disableSelection();
   
   <% if asset_id.nil? %>
