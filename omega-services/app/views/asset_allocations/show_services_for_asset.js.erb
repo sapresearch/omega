@@ -15,6 +15,7 @@ $(".assets_list li.ui-state-disabled").hide()
 $(".assets_list li:not(.ui-state-disabled)").show()
 $(".leaf_services_list li.ui-state-disabled").hide()
 $(".leaf_services_list li:not(.ui-state-disabled)").show()
+$(".exchange").css("visibility","hidden")
 
 /* set new environment */
 <% @leaf_services.each do |leaf_service| %>
@@ -24,6 +25,7 @@ $(".leaf_services_list li:not(.ui-state-disabled)").show()
   
 $(".leaf_services_list").addClass("connectedSortable");
 $(".leaf_services_list").parents("fieldset").addClass("active");
+$("#leaf_services_exchange").css("visibility","visible")
 $(".assets_list .asset_<%= @asset.id.to_s %>").addClass("main_list_item")
 $(".main_list_item").everyTime(10, function(){
   $(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'lightblue'}, 500);

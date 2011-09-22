@@ -35,7 +35,7 @@
 #assets_list_area{
   width:275px;
   height:580px;
-  margin-right:21px;
+  margin-right:0px;
   float:left;
 }
 #working_list_area{
@@ -46,8 +46,15 @@
 #leaf_services_list_area{
   width:275px;
   height:580px;
-  margin-left:21px;
+  margin-left:0px;
   float:left;
+}
+.exchange{
+    float:left;
+    height:580px;
+    width:21px;
+    padding-top:30%;
+    visibility:hidden;
 }
 
 .item_list{min-height:450px;}
