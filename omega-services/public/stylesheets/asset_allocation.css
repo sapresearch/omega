@@ -82,11 +82,11 @@
 
 
 /* drag and drop visual effects NOT USING */
-.drop_leaf_service_hover{
+.list_fieldset.drop_leaf_service_hover{
     background:#ddd;
     border:1px solid green;
 }
-.drop_asset_hover{
+.list_fieldset.drop_asset_hover{
     background:#ddd;
     border:1px solid lightblue;
 }
