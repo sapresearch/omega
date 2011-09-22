@@ -8,6 +8,15 @@ $.fn.extend({
     },
     disable: function(){
         $(this).addClass("ui-state-disabled")
+    },
+    endless_highlight: function(){
+        $(this).animate(
+            {
+                opacity:"toggle"
+            },
+            500,
+            function(){$(this.endless_highlight())}
+        )
     }
 });
 

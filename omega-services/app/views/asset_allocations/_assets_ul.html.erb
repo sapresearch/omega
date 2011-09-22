@@ -1,3 +1,5 @@
+<% leaf_service_id ||= @leaf_service_id %>
+
     <ul class="assets_list item_list">
       <% @assets.each do |asset| %>
         <li class="asset_<%= asset.id.to_s %>">
@@ -11,6 +13,69 @@
 
 <script type="text/javascript">
   $(".assets_list").sortable({
-    revert: true
-  });
+    cancel: ".ui-state-disabled",
+    placeholder: "ui-state-highlight",
+    connectWith: ".connectedSortable"
+  }).disableSelection();
+
+  <% if leaf_service_id.nil? %>
+    $("#assets_list_block .assets_list li:not(.ui-state-disabled)").each(function(){
+      if($(this).disabled_copy()==null)
+        $(this).clone().addClass("ui-state-disabled").hide().insertAfter(this)
+    })
+
+    $("#assets_list_block .assets_list")
+    .bind("sortupdate", function(event, ui){
+      if(ui.item.parents("#assets_list_block").length>0)
+        ui.item.disabled_copy().insertAfter(ui.item)
+    })
+    .bind("sortover", function(event, ui){
+      if($(".ui-state-highlight", this)){
+        $("."+ui.helper.first_class_name()+".ui-state-disabled").hide()
+      }
+    })
+  <% else %>
+    $("#working_list_block .assets_list")
+    .bind("sortover", function(event, ui){
+      if($(".ui-state-highlight", this)){
+        $("."+ui.helper.first_class_name()+".ui-state-disabled").show()
+      }
+    })
+    .bind("sortreceive", function(event, ui){
+      ui.item.clone().hide().insertBefore(ui.item.disabled_copy())
+
+      var url = '<%= asset_allocations_url %>'
+      var data = {}
+      var type = 'POST'
+      data["asset_id"]=ui.item.object_id()
+      data["leaf_service_id"]= <%= leaf_service_id %>
+
+      $.ajax({
+        url:url,
+        data:data,
+        type:type,
+        dataType: 'script'
+      })
+    })
+    .bind("sortremove", function(event, ui){
+      var identical_hidden_copy = ui.item.identical_hidden_copy()
+      if(identical_hidden_copy)
+        ui.item.identical_hidden_copy().remove()
+
+      ui.item.disabled_copy().insertAfter(ui.item)
+
+      var url = '<%= asset_allocation_url(0) %>'
+      var data = {}
+      var type = 'DELETE'
+      data["asset_id"]=ui.item.object_id()
+      data["leaf_service_id"]= <%= leaf_service_id %>
+
+      $.ajax({
+        url:url,
+        data:data,
+        type:type,
+        dataType: 'script'
+      })
+    })
+  <% end %>
 </script>

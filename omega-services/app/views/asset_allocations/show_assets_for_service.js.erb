@@ -1,16 +1,40 @@
 $("#working_list_title").html("<%= @leaf_service.name %>");
 $("#working_list_title").removeClass("asset");
 $("#working_list_title").addClass("service");
-$("#working_list_block").html("<%= escape_javascript(render "assets_ul") %>");
+$("#working_list_block").html("<%= escape_javascript(render "assets_ul", :leaf_service_id=>@leaf_service.id) %>");
 
-/* clear previous class names */
-$(".ui-state-disabled").removeClass("ui-state-disabled")
+/* clear */
 $(".connectedSortable").removeClass("connectedSortable")
-$(".list_fieldset").droppable("distroy")
+$(".active").removeClass("active")
+$(".assets_list .main_list_item").stop(true,true).stopTime().css("background-color","lightblue");
+$(".leaf_services_list .main_list_item").stop(true,true).stopTime().css("background-color","green");
+$(".main_list_item").removeClass("main_list_item")
+$(".list_fieldset").droppable("destroy")
+$(".leaf_services_list").sortable("option","connectWith", false)
+$(".leaf_services_list li.ui-state-disabled").hide()
+$(".leaf_services_list li:not(.ui-state-disabled)").show()
 
-$(".ui-state-disabled").removeClass("ui-state-disabled")
+/* set new environment */
 <% @assets.each do |asset| %>
-  $("#assets_list_block .asset_<%= asset.id.to_s %>").addClass("ui-state-disabled")
+  $("#assets_list_block .asset_<%= asset.id.to_s %>:not(.ui-state-disabled)").hide()
+  $("#assets_list_block .asset_<%= asset.id.to_s %>.ui-state-disabled").show()
 <% end %>
+
+$(".assets_list").addClass("connectedSortable");
+$(".assets_list").parents("fieldset").addClass("active");
+$(".leaf_services_list .leaf_service_<%= @leaf_service.id.to_s %>").addClass("main_list_item")
+$(".main_list_item").everyTime(10, function(){
+  $(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'green'}, 500);
+});
+
+$("#assets_list_fieldset").droppable({
+  hoverClass: 'drop_asset_hover',
+  accept: '.connectedSortable li'
+})
+
+$("#working_list_fieldset").droppable({
+  hoverClass: 'drop_asset_hover',
+  accept: '.connectedSortable li'
+})
 
 $(".tipsy").remove();

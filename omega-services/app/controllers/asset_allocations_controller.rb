@@ -27,7 +27,8 @@ class AssetAllocationsController < Omega::Controller
     @leaf_service_id = params[:leaf_service_id]
     @leaf_service = Service.find(@leaf_service_id)
     @service_leaf = @leaf_service.service_leaf
-    if @asset_allocation = AssetAllocation.find_by_asset_id_and_service_leaf_id(@asset.id, @service_leaf.id)
+
+    if @asset_allocation = AssetAllocation.find_by_asset_id_and_service_leaf_id(@asset_id, @service_leaf.id)
       @asset_allocation.destroy
     end
 
@@ -37,12 +38,14 @@ class AssetAllocationsController < Omega::Controller
   def show_services_for_asset
     @asset_id = params[:asset_id]
     @asset = Asset.find(@asset_id)
+    @asset_allocations = @asset.asset_allocations
     @leaf_services = @asset.services
   end
 
   def show_assets_for_service
     @leaf_service_id = params[:leaf_service_id]
     @leaf_service = Service.find(@leaf_service_id)
+    @asset_allocations = @leaf_service.service_leaf.asset_allocations
     @assets = @leaf_service.assets
   end
 end

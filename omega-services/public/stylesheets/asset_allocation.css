@@ -5,8 +5,11 @@
     -border-radius:5px;
 
     border:1px solid transparent;
-    background: #eee;
+    background: transparent;
     height:530px;
+}
+.list_fieldset.active{
+    background: #eee;
 }
 .list_fieldset legend{
     -moz-box-shadow: 3px 3px 3px #ccc;
