@@ -150,13 +150,6 @@ end
 				!(r[column].send(operator, query)) # Reject if query does NOT match. Reject if false.
 			end
 		end
-
-		#self.each_with_index do |row, i|
-			#valid = false
-			#valid = row[column].send(operator, query) if !row[column].nil?
-			#self.delete_at(i.to_i) if valid == false
-		#end
-		#self
 	end
 
 	def operator_for(column)

@@ -4,7 +4,7 @@
 		<a href="#">Last Name</a>
 	</h3>
 	<div id="service_body" class="service_body">
-		<% @filter.last_name.each do |v| %>
+		<% @all_filters.last_name.each do |v| %>
 			<li id="test" name="last_name" ui-data="<%=v%>" >
 				<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Browse volunteers with this last name"></span>
 			<%=v%> </li>

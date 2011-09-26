@@ -211,45 +211,19 @@ class Volunteering::RecordsController < Omega::Controller
 
 	def enroll_volunteers
 
-		# TESTING
-		@filter = SearchFilter.filter_for(Contact, params)
-		puts @filter.to_s
-		columns = Contact.columns.collect { |c| c.name.to_sym }
-		columns.each { |c| session[c] = params[c] || ( session[c] || "all" ) }
-		session[:search].delete unless session[:search].nil?
-		puts "\nTHIS IS SESSION!!! " + session.inspect + "\n"
-		if session[:user_switch] == "off" || params[:user_switch] == "off"
-			puts "\nuser swith is OFF!\n"
-			@filter = "\n\nim the search matrix!!! And I'm off!\n\n"
-		elsif session[:user_switch] == "on"
-			puts "\nuser swith is ON!\n"
-			@filter = "\n\nim the search matrix!!!\n\n"
-		end
-		#session[:search].each do |column, query|
-			#@search_matrix = Filter.get_only(@search_matrix, query, column)
-		#end
+		@all_filters = SearchFilter.filter_for(Contact, Hash.new) # Use a blank hash so it doesn't filter anything. Use this for the checkbox filters.
+		@filter = SearchFilter.filter_for(Contact, params) # Use this one to display all the contacts.
 		puts "\nThis is the filter that will be sent to the view: " + @filter.inspect + "\n"
-		# TESTING
 
-		@skills = Contact::Skill.all
-		@interests = Contact::Interest.all
-		@contacts = Contact.all
 		@position_id = Volunteering::Position.find(params[:id]).id
 		@records = Array.new
+		@contacts = Contact.find(:all)
 		@contacts.each do |c|
     	record = Volunteering::Record.new
-			record.position_id = @position_id # Volunteering::Position.find(params[:id])
+			record.position_id = @position_id
 			record.contact_id = c.id
 			@records.push(record)
 		end
-
-		@records_to_search = Array.new
-		@contacts.each do |c|
-			@records_to_search.push(c.first_name) 
-			@records_to_search.push(c.last_name)
-		end
-		@interests.each { |i| @records_to_search.push(i.name) }
-		@skills.each { |s| @records_to_search.push(s.name) }
 
 		@contact_term_hash = Hash.new
 		Contact.all.each do |c| 
@@ -265,6 +239,7 @@ class Volunteering::RecordsController < Omega::Controller
 			c.interests.each { |i| interests << "#{i.name}," }
 			contact_hash[:interests] = interests
 		end
+
 		def @contact_term_hash.get_all(*keys)
 			return_array = Array.new
 			keys.each do |key|
