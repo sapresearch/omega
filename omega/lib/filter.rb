@@ -143,7 +143,11 @@ end
 				operator = :>=
 		end
 		column = column.to_sym
-		self.reject! { |row| !(row[column].send operator, query) }
+		self.each do |row|
+			valid = false
+			valid = row[column].send(operator, query) if !row[column].nil?
+			self.delete(row) if valid = false
+		end
 	end
 
 	def operator_for(column)
