@@ -1,7 +1,13 @@
 <% if @type == "admin" %>
-  $(".services_page_content").html("<%= escape_javascript( render "service_registrations/index_page_content" ) %>") 
+  $(".services_page_content").html("<%= escape_javascript( render "service_registrations/index_page_content" ) %>")
+  show_dialog_message("service-registration-destroyed-dialog-message");
 <% else %>
   $(".services_list").html("<%= escape_javascript( render "services/index_list" ) %>")
+  <% if @service_registration.status == "rejected" %>
+    dialog_message("service-registration-destroy-failed-dialog-message", "Request Denied", "<p>You are not allowed to unregister this service, since you have been rejected at the moment.</p>", {width:300})
+  <% else %>        
+    show_dialog_message("service-registration-destroyed-dialog-message");
+  <% end %>
 <% end %>
 
 $(".tipsy").remove();

@@ -33,10 +33,10 @@ module ServiceLib
     services.map{|s|{:label=>s.name, :value=>s.name, :id=>s.id}}
   end
 
-  def filter_services
+  def filter_services(services=@services)
     filtered_services = []
-    filtered_services = include_enrollable(filtered_services, @services) if session[:enrollable_switch]=="on"
-    filtered_services = include_requestable(filtered_services, @services) if session[:requestable_switch]=="on"    
+    filtered_services = include_enrollable(filtered_services, services) if session[:enrollable_switch]=="on"
+    filtered_services = include_requestable(filtered_services, services) if session[:requestable_switch]=="on"    
     filtered_services = my_services(filtered_services) if session[:my_services_switch]=="on"
     @services = filtered_services
   end
@@ -46,4 +46,15 @@ module ServiceLib
     session[:enrollable_switch]="on"
     session[:requestable_switch]="on"
   end
+
+  private
+
+  def services_exception_handler
+    begin
+      yield
+    rescue
+      redirect_to services_url
+    end
+  end
+  
 end

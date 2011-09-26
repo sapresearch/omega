@@ -1,0 +1,111 @@
+.list_block{height:500px; overflow:auto;}
+.list_fieldset{   
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -border-radius:5px;
+
+    border:1px solid transparent;
+    background: transparent;
+    height:530px;
+}
+.list_fieldset.active{
+    background: #eee;
+}
+.list_fieldset legend{
+    -moz-box-shadow: 3px 3px 3px #ccc;
+    -webkit-box-shadow: 3px 3px 3px #ccc;
+    -box-shadow: 3px 3px 3px #ccc;
+    
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -border-radius:5px;
+
+    width: 222px;
+    text-align:center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    color:white;
+    border:none;
+    background: #B8CE6C;
+    padding:3px 10px;
+}
+
+#asset_allocation_info{
+    height:100px;
+}
+#assets_list_area{
+  width:275px;
+  height:580px;
+  margin-right:0px;
+  float:left;
+}
+#working_list_area{
+  width:275px;
+  height:580px;
+  float:left;
+}
+#leaf_services_list_area{
+  width:275px;
+  height:580px;
+  margin-left:0px;
+  float:left;
+}
+.exchange{
+    float:left;
+    height:300px;
+    width:21px;
+    padding-top:30%;
+    visibility:hidden;
+}
+
+.item_list{min-height:450px;}
+.item_list li{
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -border-radius:5px;
+    margin:1px 0px;
+    padding:5px 10px 5px 15px;
+    height:20px;
+    vertical-align:middle;
+    overflow:hidden;
+    border:1px solid transparent;
+    cursor:pointer;
+}
+.assets_list li, #working_list_title.asset{background:lightblue; color:#444;}
+.leaf_services_list li, #working_list_title.service{background:green; color:white;}
+
+.item_name{
+    font-weight:bold;
+    font-style:italic;
+    vertical-align:middle;
+}
+.assets_list .item_name{color:#333;}
+.leaf_services_list .item_name{color:white;}
+
+.item_operation_link{
+    float:right;
+    display:none;
+}
+.item_list li:not(.ui-state-disabled):hover{
+    opacity:0.7
+}
+.item_list li:hover .item_operation_link{
+    display:block;
+}
+
+
+/* drag and drop visual effects NOT USING */
+.list_fieldset.drop_leaf_service_hover{
+    background:#ddd;
+    border:1px solid green;
+}
+.list_fieldset.drop_asset_hover{
+    background:#ddd;
+    border:1px solid lightblue;
+}
+.ui-draggable-dragging{opacity:0.7;}
+
+/* connected sortable style */
+.item_list .ui-state-highlight{background:lightyellow; border:none;}

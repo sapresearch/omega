@@ -1,3 +1,25 @@
+$.fn.extend({
+    first_class_name: function(){
+        var class_names = $(this).attr("class").split(" ")
+        return class_names.length>0 ? class_names[0] : null
+    },
+    enable: function(){
+        $(this).removeClass("ui-state-disabled")
+    },
+    disable: function(){
+        $(this).addClass("ui-state-disabled")
+    },
+    endless_highlight: function(){
+        $(this).animate(
+            {
+                opacity:"toggle"
+            },
+            500,
+            function(){$(this.endless_highlight())}
+        )
+    }
+});
+
 //delete an element with visual effect
 function delete_element(element_id)
 {
@@ -22,6 +44,10 @@ function target_of(label_id){
 
 function is_empty_html(html){
     return html.match(/\w+/) ? false :true
+}
+
+function vertical_td(){
+    
 }
 
 function fill_field_values(element_id, field_values){
@@ -53,6 +79,7 @@ function field_values_to_json(element_id, is_required_field_included){
     return field_values
 }
 
+//dialogs
 function show_dialog_message(dialog_id){
     var dialog = $("#"+dialog_id)
     dialog.dialog({
@@ -67,6 +94,89 @@ function show_dialog_message(dialog_id){
             dialog.dialog('destroy')
         }
     });
+}
+function dialog_message(id, title, content_html, options){
+    options = $.extend({
+        width:"auto",
+        height:"auto",
+        minWidth:150,
+        minHeight:150,
+        maxWidth:300
+    },options)
+    
+    var html = "<div id='"+id+"' class='dialog' title='"+title+"'>"
+    html += content_html;
+    html += "</div>"
+    var dialog = $(html)
+    dialog.dialog({
+        resizable: false,
+        width:options.width,
+        height:options.height,
+        minWidth:options.minWidth,
+        minHeight:options.minHeight,
+        maxWidth:options.maxWidth,
+	modal: true,
+	buttons: {
+            OK: function() {
+                $(this).dialog( "close" );
+            }
+        },
+        close: function() {
+            dialog.dialog('destroy')
+        }
+    });
+}
+function dialog_confirm(id, title, content_html, url, method, async, options){
+    var default_options={
+        "width":"auto",
+        "height":"auto",
+        "minWidth":150,
+        "minHeight":150,
+        "maxWidth":300
+    }
+    for(var key in default_options){
+        if(options[key]==null || options[key]==undefined)
+            options[key]=default_options[key]
+    }
+    
+    var html = "<div id='"+id+"' class='dialog' title='"+title+"'>"
+    html += content_html;
+    html += "</div>"
+    var dialog = $(html)
+    dialog.dialog({
+        resizable: false,
+        width:options["width"],
+        height:options["height"],
+        minWidth:options["minWidth"],
+        minHeight:options["minHeight"],
+        maxWidth:options["maxWidth"],
+	modal: true,
+	buttons: {
+            OK: function() {
+		$(this).dialog( "close" );
+                $.ajax({ url:url, type:method, async:async, dataType: "script" })
+            },
+            Cancel: function() {
+            	$(this).dialog( "close" );
+            }
+	},
+        close: function() {
+            dialog.dialog('destroy')
+        }
+    });
+}
+
+function switch_status(id, url, method, data_hash){
+    var val = $("#"+id).is(":checked") ? "on" : "off";
+    var data = data_hash;
+    data["switch"] = val
+    $.ajax({
+        url: url,
+        type: method,
+        data: data,
+        dataType: 'script',
+        cache: false
+    })
 }
 
 function set_unlimited_non_negative_integer_field(element_id){

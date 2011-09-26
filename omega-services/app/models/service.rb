@@ -47,8 +47,8 @@ class Service < ActiveRecord::Base
     end
 
     # returns service objects
-    def service_leaves
-      ServiceLeaf.all.map{|sl|sl.service}
+    def service_leaves(order="name")
+      ServiceLeaf.all.map{|sl|sl.service}.sort{|s1,s2|s1.send(order)<=>s2.send(order)}
     end
 
     def real_public_service_leaves
@@ -92,7 +92,7 @@ class Service < ActiveRecord::Base
     def filter_by_register_type(services, register_type)
       selected_leaf_services = ServiceLeaf.all.select{|sl| sl.register_type==register_type}.map{|sl|sl.service}
       filtered_services = services.select do |s|
-        selected_leaf_services.include?(s) || begin
+        (s.is_end? && !s.is_leaf?) || selected_leaf_services.include?(s) || begin
           val = false;
           selected_leaf_services.each do |es|
             if es.is_descendant_of?(s)
@@ -246,6 +246,11 @@ class Service < ActiveRecord::Base
   def capacity
     return nil unless is_leaf?
     service_leaf.capacity
+  end
+
+  def assets
+    return nil unless is_leaf?
+    service_leaf.assets
   end
   
 end

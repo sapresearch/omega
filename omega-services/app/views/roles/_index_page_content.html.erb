@@ -1,46 +1,22 @@
 <% require_javascript 'matrix.js'%>
 
-<div class="new_links" id="new_role_link">
-  <%= render "roles/new_link" %>
+<div id="roles_operation_links">
+  <div class="left" id="resotre_role_permission_associations_link">
+    <%= link_to_function "Restore Default",
+      "dialog_confirm('roles-restore-role-permission-associations-dialog-confirm',
+        'Restore Default Permission Settings', '<p>All current status will be lost and you will need to re-assign users to roles. Are you sure?</p>',
+        '#{restore_role_permission_associations_roles_url}', 'PUT', false, {'width':380})",
+      :class=>"roles_operation_button" %>
+  </div>
+  <div class="right" id="new_role_link">
+    <%= render "roles/new_link" %>
+  </div>
+  <script type="text/javascript">
+    $('.roles_operation_button').button({ icons: {primary:'ui-icon-gear'} });
+  </script>
+  <br clear="all"/>
 </div>
-<br clear="all"/>
-<div id="role_permission"></div>
 
-<script type="text/javascript" >
-  var roles = <%= raw @roles.to_json %>
-  var permissions = <%= raw @permissions.to_json %>
-  var role_names = []
-  var permission_names = []
-  for(var i=0; i<roles.length; i++)
-    role_names.push(roles[i].role.name)
-  for(var i=0; i<permissions.length; i++)
-    permission_names.push(permissions[i].permission.name)
-  $("#role_permission").html( matrix("role_permission_matrix", role_names, permission_names, {}) )
-  $("#role_permission_matrix #top_left_td").html("Permissions \\ Roles")
-
-  $("#role_permission_matrix .matrix_cell_td").hover(
-    function(){
-      var strs = $(this).attr("id").split("_")
-      var i = strs[strs.length-2]
-      var j = strs[strs.length-1]
-      $("#role_permission_matrix #matrix_row_td_"+i).addClass("matrix_row_td_hover")
-      $("#role_permission_matrix #matrix_col_td_"+j).addClass("matrix_col_td_hover")
-    },
-    function(){
-      var strs = $(this).attr("id").split("_")
-      var i = strs[strs.length-2]
-      var j = strs[strs.length-1]
-      $("#role_permission_matrix #matrix_row_td_"+i).removeClass("matrix_row_td_hover")
-      $("#role_permission_matrix #matrix_col_td_"+j).removeClass("matrix_col_td_hover")
-    }
-  )
-    
-  $("#role_permission_matrix input[type='checkbox']").each(function(){
-    var label = $(this).is(":checked") ? "on" : "off"
-    $(this).button({label:label});
-  })
-  $("#role_permission_matrix input[type='checkbox']").click(function(){
-    var label = $(this).is(":checked") ? "on" : "off"
-    $(this).button({label:label});
-  })
-</script>
+<div id="role_permission">
+  <%= render "role_permission" %>
+</div>

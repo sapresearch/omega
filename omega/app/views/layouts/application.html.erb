@@ -16,6 +16,42 @@
 </head>
 <body>
 
+<!-- debug section -->
+<style type="text/css">
+  #test_pages{float:left; color:white;}
+  .test_section{float:left; position:relative; z-index:2000;}
+  .delimitor{float:left; margin:0px 5px;}
+  .test_section:hover{background:green}
+  .test_section a{color:white; display:block;}
+  .test_sub_section{display:none; position:absolute; white-space:nowrap; z-index:2000}
+  .test_sub_section:hover{background:green}
+  .test_section_link{display:inline-block;}
+</style>
+<ul id="test_pages">
+  <li class="test_section">
+    <span class="test_section_link"><%= link_to "Test Role", roles_url %></span>
+    <ul class="test_sub_section">
+      <li><%= link_to "Permission \\ Role Matrix", roles_url %></li>
+    </ul>
+  </li>
+  <li class="delimitor"> | </li>
+  <li class="test_section">
+    <span class="test_section_link"><%= link_to "Test Asset", asset_allocations_url %></span>
+    <ul class="test_sub_section">
+      <li><%= link_to "Assets Allocation", asset_allocations_url %></li>
+    </ul>
+  </li>
+  <script>
+    $(".test_section .test_section_link").mouseover(function() {
+        $(this).parent().find("ul").delay(200).slideDown('fast');
+    });
+    $(".test_section").mouseleave(function() {
+        $(this).find("ul").slideUp('fast');
+    });
+  </script>
+</ul>
+<!-- end of debug section -->
+
 <div id="notification-flash-wrapper">
   <div id="notification-flash" class="center-content corners-top corners-bottom">
   </div>
@@ -23,7 +59,6 @@
 
 
 <div id="wrapper">
-
   <%= render :partial => "layouts/head" %>
 
 
@@ -61,7 +96,6 @@
 <%= render :partial => "layouts/footer" %>
 
 <!-- tmp section for debugging -->
-<%= link_to "Test Page", roles_url, :style=>"float:right;" %>
 <% if ENV["RAILS_ENV"]=="development" %>
   <div id="debug">
     <a href="#" onclick="$('#params_debug_info').toggle(); return false">params</a> |
