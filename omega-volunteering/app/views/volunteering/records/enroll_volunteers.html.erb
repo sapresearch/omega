@@ -11,67 +11,24 @@
 	</style>
 
 
-	<div class="content circle-corners-bottom-left">
-		<div class="heading-main">
-				<h1 class="page-content">
-					Add Volunteers to "<%= Volunteering::Position.find(@position_id).name %>"
-		    </h1>
-		</div>
 
-	<div class="records_search_box">
-		<%= render "records_search_box" %>
-	</div>
-
-	<hr>
-	<table>
-		<tr>
-
-			<td style="width:350px; max-width:355px">
-				<%= render "skills_and_interests_accordion" %>
-			</td>
-
-			<td style="width:350px; max-width:355px">
-				<div style="margin-left:20px">
-					<h7 class="sub-heading" id="result-header">Search Results:</h7>
-					<ul id="volunteers-list" style="margin-left:15px"></ul>
-				</div>
-			</td>
-
-
-
-<td>
-
-<!--	<div id="right" style="width:100; float:right; height:auto">!-->
-	<h7 class="sub-heading"> Selected Volunteers: </h7>
-	<%= form_for @records, :url => create_multiple_volunteering_records_path, :html => { :method => :post } do |f| %>
-		<%= hidden_field_tag "records[position_id]", @position_id %>
-		<%= hidden_field_tag "records[contact_ids]" %>
-		<!--<input id="record_position_id" name="record[position_id]" type="hidden"><%@position_id%></input>!-->
-		<ul>
-		<% @records.each_with_index do |record, index| %>
-			<% c_id = record.contact.id %>
-			<%= fields_for "records[#{index}]" do |r| %>
-			<!--<li>
-				<div class="field" >
-					<p>
-						<%#= hidden_field_tag "records[#{index}][contact_id]", record.contact.id %>
-						<%#= r.radio_button 'status', 'accepted' %>
-						<%#= record.contact.first_name %></span>
-					</p>
-				</div>
-			</li>!-->
-		<div id="contacts_to_add" class="placeholder" style="min-height:75px">
-
-
-		<% end %>
-	<% end %>
-	</ul>
-				</div>
-			</div>
-			<p><%= f.submit "Add Volunteers" %></p>
-
-			</td>
-		</tr>
-	</table>
-<% end %>
+<div id="page_content">
+	<%= render 'enroll_volunteers' %>
 </div>
+
+
+
+<script type="text/javascript">
+	var matrix = '<% raw @search_matrix.to_json %>';
+	var js_matrix = new Array;
+	matrix = matrix.split('},');
+	for(var row in matrix){
+		var js_row = new Array;
+		var r = row.split(',');
+		for(var value in r){
+			var v = value.split(':');
+			js_row[v[0]] = v[1];
+		}
+		js_matrix.push(js_row)
+	}
+</script>

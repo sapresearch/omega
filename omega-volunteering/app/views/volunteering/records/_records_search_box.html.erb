@@ -1,17 +1,23 @@
 <br />
+<div id="filter_checkboxes">
  <form>
+	<%# filter_form %>
+		<%#= puts @search_matrix.inspect %>
+		<%# @search_matrix.first.each_key do |c| %>
+			<%# filter_checkbox c %>
+		<%# end %>
         <input id="search_voluteers" type="text" maxlength="100" size="50" value="Type here to search..." onfocus="$(this).val('')" onblur="$(this).val('Type here to search...')" />
 				<span class="filter" style="display:inline-block">
-        <label for="enrollable" style="width:50px" >Users</label>
-        <input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
+        	<label for="enrollable" style="width:50px" >Users</label>
+        	<input id="user_switch" name="test" type="checkbox" checked="checked" onclick="switch_user()" />
 				</span>
 				<span class="filter" style="display:inline-block">
-        <label for="enrollable"  style="width:50px">Skills</label>
-        <input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
+        	<label for="enrollable"  style="width:50px">Skills</label>
+       		<input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
 				</span>
 				<span class="filter" style="display:inline-block">
-        <label for="enrollable"  style="width:50px">Interests</label>
-        <input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
+       		<label for="enrollable"  style="width:50px">Interests</label>
+       		<input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
 				</span>
         <!--<label for="requestable" >Requestable</label>
         <input id="requestable" name="requestable" type="checkbox" checked="checked" />
@@ -20,6 +26,7 @@
           <input id="my_services" name="my_services" type="checkbox" onclick="switch_my_services()" />
         <%# end %>!-->
       </form>
+		<div>
 <br />
 
 <script type="text/javascript">
@@ -60,7 +67,6 @@ search = function(needle){
 			}
 		}
 	});
-	//generate_element(results, 'tag', '<%= @position_id %>');
 	display_search_results(results, '<%= @position_id %>');
 }
 

@@ -1,6 +1,6 @@
 $(function() {
 
-	// Add function to add volunteers.
+	// Function to add volunteers to invite volunteers section.
  	$('#volunteers-list').delegate('li', 'click', function() {
     var self = $(this);
 		var contact_id = self.attr('ui-data');
@@ -14,24 +14,81 @@ $(function() {
 		update_contact_id_values(contact_id);
 	});
 
+
 	// Add function to remove volunteers.
 	$('#contacts_to_add').delegate('li', 'click', function() {
 		$(this).remove();
 		update_contact_id_values();
 	});
 
+
 	// Add data-tooltip to each skill or interest in the accordion.
-	// The name
 	$('#accordion').find('#service_body').each(function() {
 		var service_body = $(this);
-		service_body.find('a').each(function() {
+		service_body.delegate('li', 'click', function() {
 			var self = $(this);
-			var category_name = self.attr('name');
-			self.attr('data-tooltip', "See volunteers with this " + category_name);
+			var category = self.attr('name');
+			var val = self.text().trim();
+  	  var data = {search:{column:{column:category, query:val}}}
+			ajax_filter(data);
 		});
 	});
-
 });
+
+		function ajax_filter(data) {
+
+   	 	$.ajax({
+   	     type: "GET",
+   	     data: data,
+   	     dataType: 'script',
+   	     cache: false
+
+			});
+		}
+
+//			all_contacts = new Array;
+//			for(var row in js_matrix){
+//				for(var hash in row){
+//					if(hash[0] == category_name){
+//						var contact = new Array;
+//						for(var x in row){
+//							if(x[0] == "contact_id"){
+//								contact[0] = (row[contact_id]);
+//							}
+//							if(x[0] == "first_name"){
+//								contact[1] = (row[contact_name]);
+//							}
+//								all_contacts.push(contact);
+//						}
+//					}
+//				}
+//			}
+//
+//			for(var c in all_contacts){
+//				name = c[0];
+//				contact_id = c[1];
+//				$( "#volunteers-list" ).html( '<li ui-data="'
+//																			+ contact_id
+//																			+ '"><span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add this volunteer"></span>'
+//																			+ name
+//																			+ '</li>' );
+//			}
+//		});
+//	});
+
+	// Add ajax function to update @search_matrix.
+	//$('#filter_checkboxes').delegate('input', 'click', function() {
+	//var is_checked = $(this).is(":checked") ? "on" : "off";
+
+	//$.ajax({
+		//type: "GET",
+		//data: ({"filter":is_checked}),
+		//dataType: 'script',
+		//cache: false
+	//})
+//});
+
+
 
 
 
@@ -69,4 +126,30 @@ function update_contact_id_values() {
     serialized_contact_ids += ']';
 
     $('#records_contact_ids').val(serialized_contact_ids);
+}
+
+
+// Temporarity deparacated for testing.
+//function filter(column){
+//	var val = $( '#' + column ).is(":checked") ? "on" : "off";
+//	var data = {column:val}
+//
+//	$.ajax({
+//		type: "GET",
+//		data: data,
+//		dataType: 'script',
+//		cache: false
+//	})
+//}
+
+function switch_user(){
+    var val = $("#filter_checkboxes").find("#user_switch").is(":checked") ? "on" : "off";
+    var data = {"user_switch":val}
+
+    $.ajax({
+        type: "GET",
+        data: data,
+        dataType: 'script',
+        cache: false
+    })
 }

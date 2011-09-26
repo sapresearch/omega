@@ -1,4 +1,91 @@
+require 'filter.rb'
 module SearchHelper
+
+	def accordion_for(name, column_data)
+		list = ActiveSupport::SafeBuffer.new
+		category_name = name.to_s
+		column_data.each do |inner_html|
+			list << "<li name='#{category_name}' > #{inner_html} </li>".html_safe
+		end
+		list
+	end
+
+	def list_all(matrix, values)
+		matrix.each do |row|
+			if values[:display].instance_of?(Array)
+				display = values[:display].inject(String.new) { |display, c| display << (row[c.to_sym].to_s + " ") }
+			else
+				display = row[values[:display]].to_s + " "
+			end
+			hidden = row[values[:hidden]]
+			yield(display, hidden)
+		end
+	end
+
+
+
+
+	def filter_form_for(filter)
+		filters = "<form id='test'>".html_safe
+		filter = Array.new
+		filter.first.each_key { |k| columns.push(k) }
+		columns.each do |c|
+			class_type = filter.inject(String.new) { |type, row| type = row[c].class.to_s.downcase unless row[c].nil? }
+			class_type = "nilclass" if class_type.nil?
+			column_values = filter.inject(Array.new) { |column_values, row| column_values.push(row[c.to_sym]) }
+
+			if column_values.compact.count > 1 then
+				input = filter.checkbox_options_for(class_type, column_values)
+				#puts "this is input: " + input.inspect + "\n\n"
+				if input.empty?
+					return ""
+				elsif !input.empty?
+						#puts "\n\n" + c.to_s + " is type: " + class_type
+						#puts "Checkbox options: " + input.inspect 
+						c = c.to_s
+						label = "<label for='" + c + "' style='width:50px' >" + c + "<\/label>"
+						options = ""
+						options = input.inject(String.new) { |options, o| options += "<input type='checkbox' name='#{c}' value='#{o}' onclick='filter('#{c}');' checked='checked' /> #{o} " }
+						options += "</ br>"
+						filters += (label + options).html_safe
+				end
+			end
+
+		end
+		#puts "\n\n This is filter: " + filters.inspect + "\n"
+		filters += "</form>".html_safe
+	end
+
+	def checkbox_filter_for(filter, options={})
+		column = options[:column]
+		column_values = filter.send column.to_sym
+		name = options[:name].nil? ? options[:column].to_s : options[:name].to_s
+
+		################## Testing ######################
+		puts "\n\n Column values sent from helper to filter.rb " + column_values.inspect
+		switches = Hash.new
+		options.each { |k, v| switches[k] = v }
+		puts "\n switches: " + switches.inspect.to_s
+		f = filter.checkbox_options_for(column_values, switches)
+    puts "\n\nCheckbox options. Sent from filter.rb to search_helper.rb " + f.inspect.to_s
+		puts f.to_s
+		################## Testing ######################
+
+		# Format the HTML.
+		html = String.new
+		label = '<label for="' + column.to_s + '>' + name + '</label>'
+		filter.checkbox_options_for(column_values, switches).each do |option|
+			check_label = '<label for="' + column.to_s + '>' + option + '</label>'
+			check = '<input id="search[' + column.to_s + '][' + option + ']" type="checkbox" onclick="filter("' + column.to_s + '");" checked="checked" />'
+			html += ('<li>' + check_label + check + '</li>')
+		end
+		html = (label + '<ul>' + html + '</ul>').html_safe
+	end
+
+
+
+
+
 
 	def get_frequency_hash(array)
 		all_terms = array.collect { |e| e.name }
@@ -34,19 +121,44 @@ module SearchHelper
 		all_terms
 	end
 
+
+####################################################
+	def test_matrix
+		params = Hash.new
+		s = SearchHelper::Stuff.new
+		search_matrix = SearchFilter.search_matrix_for(Contact, params)
+		s.filter_form_for(search_matrix) { |v| v.checkbox_filter }
+	end
+
+	def test_by_column
+		a = Hash.new
+		b = Hash.new
+		c = Hash.new
+		a[:first_name] = "Joe"
+		b[:first_name] = "Greg"
+		c[:first_name] = "Michelle"
+		a[:last_name] = "Miller"
+		b[:last_name] = "Brown"
+		c[:last_name] = "Sanders"
+		matrix = [a, b, c]
+		by_column(matrix) { |c| p "<div>".html_safe + c + "</div>".html_safe }
+	end
+####################################################
+
+
+
+
+
 	def test_list_contacts_in(array, position_id, category_name)
 		frequency = frequency_hash_to_full_hash(array, get_frequency_hash(array))
 		unordered_list = ActiveSupport::SafeBuffer.new
 		frequency.each_key do |term|
 			contacts_data = String.new
 			frequency[term][:contacts].each do |key, contact|
-				puts "\nhere is the iteration" + contact.inspect
-				puts "\nhere is the name " + frequency[term][:contacts][key][:name].to_s 
  				contacts_data = contacts_data + frequency[term][:contacts][key][:name].to_s +
 											"," +
 											contact[:id].to_s +
 											",,"
-				puts "\nhere is contacts_data" + contacts_data.inspect
 			end
 			inner_html = term.to_s + " " #+
 									 #"#{frequency[term][:term_frequency].inspect}" +

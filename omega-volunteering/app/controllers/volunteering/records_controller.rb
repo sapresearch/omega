@@ -1,3 +1,4 @@
+require 'filter.rb'
 class Volunteering::RecordsController < Omega::Controller
   respond_to :html, :xml, :json, :js
   breadcrumb 'Volunteering' => :volunteering
@@ -209,6 +210,27 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
 	def enroll_volunteers
+
+		# TESTING
+		@filter = SearchFilter.filter_for(Contact, params)
+		puts @filter.to_s
+		columns = Contact.columns.collect { |c| c.name.to_sym }
+		columns.each { |c| session[c] = params[c] || ( session[c] || "all" ) }
+		session[:search].delete unless session[:search].nil?
+		puts "\nTHIS IS SESSION!!! " + session.inspect + "\n"
+		if session[:user_switch] == "off" || params[:user_switch] == "off"
+			puts "\nuser swith is OFF!\n"
+			@filter = "\n\nim the search matrix!!! And I'm off!\n\n"
+		elsif session[:user_switch] == "on"
+			puts "\nuser swith is ON!\n"
+			@filter = "\n\nim the search matrix!!!\n\n"
+		end
+		#session[:search].each do |column, query|
+			#@search_matrix = Filter.get_only(@search_matrix, query, column)
+		#end
+		puts "\nThis is the filter that will be sent to the view: " + @filter.inspect + "\n"
+		# TESTING
+
 		@skills = Contact::Skill.all
 		@interests = Contact::Interest.all
 		@contacts = Contact.all
@@ -252,6 +274,7 @@ class Volunteering::RecordsController < Omega::Controller
 			end
 			return_array.uniq
 		end
+		respond_with(@records_to_search)
 	end
 
 
