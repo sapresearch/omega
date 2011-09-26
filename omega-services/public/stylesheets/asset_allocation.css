@@ -32,6 +32,9 @@
     padding:3px 10px;
 }
 
+#asset_allocation_info{
+    height:100px;
+}
 #assets_list_area{
   width:275px;
   height:580px;

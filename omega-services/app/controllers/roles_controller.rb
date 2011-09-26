@@ -9,10 +9,6 @@ class RolesController < Omega::Controller
     respond_with(@roles)
   end
 
-  def update
-
-  end
-
   def restore_role_permission_associations
     Role.transaction do
       Permission.transaction do

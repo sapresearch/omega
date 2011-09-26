@@ -37,7 +37,7 @@ class ServiceSection < ActiveRecord::Base
   end
 
   def is_recurrent?
-    not event.event_recurrence.nil?
+    event.is_recurrent?
   end
 
   def recurrence_end_at
@@ -46,44 +46,27 @@ class ServiceSection < ActiveRecord::Base
   end
 
   def recurrence_year
-    return nil unless is_recurrent?
-    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
-    return interval_values_hash["year"]
+    event.recurrence_year
   end
 
   def recurrence_month
-    return nil unless is_recurrent?
-    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
-    return interval_values_hash["month"]
+    event.recurrence_month
   end
 
   def recurrence_day
-    return nil unless is_recurrent?
-    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
-    return interval_values_hash["day"]
+    event.recurrence_day
   end
 
   def recurrence_hour
-    return nil unless is_recurrent?
-    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
-    return interval_values_hash["hour"]
+    event.recurrence_hour
   end
 
   def recurrence_minute
-    return nil unless is_recurrent?
-    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
-    return interval_values_hash["minute"]
+    event.recurrence_minute
   end
 
   def recurrence_interval
-    return nil unless is_recurrent?
-    interval_values_hash = ActiveSupport::JSON.decode(event.event_recurrence.interval)
-    result = ""
-    interval_values_hash.each do |key,value|
-      result += value.to_s+" "+key.to_s+" " if value.to_i == 1
-      result += value.to_s+" "+key.to_s.pluralize+" " if value.to_i > 1
-    end
-    result.strip!
+    event.recurrence_interval
   end
 
 end
