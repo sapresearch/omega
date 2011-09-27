@@ -4,10 +4,12 @@
 		<a href="#">Last Name</a>
 	</h3>
 	<div id="service_body" class="service_body">
+		<!--<label for="last_name"> Last Name </label>!-->
 		<% @all_filters.last_name.each do |v| %>
 			<li id="test" name="last_name" ui-data="<%=v%>" >
-				<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Browse volunteers with this last name"></span>
-			<%=v%> </li>
+				<input type="checkbox" value="<%=v%>" ><%=v%></input>
+				<!--<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Browse volunteers with this last name"></span>!-->
+			<%#=v%> </li>
 		<%end%>
 	</div>
 
@@ -16,5 +18,30 @@
 <script>
 $(function() {
 	$( "#accordion" ).accordion();
+
+	// Add data-tooltip to each skill or interest in the accordion.
+	$('#accordion').find('#service_body').each(function() {
+		var service_body = $(this);
+		service_body.delegate('li', 'click', function() {
+			var self = $(this);
+			var category = self.attr('name');
+			var val = self.text().trim();
+  	  var data = {search:{column:{column:category, query:val}}}
+			ajax_filter(data);
+		});
+	});
 });
+
+		function ajax_filter(data) {
+
+   	 	$.ajax({
+				 url: "<%=enroll_volunteers_volunteering_records_url(@position)%>",
+   	     type: "GET",
+   	     data: data,
+   	     dataType: 'script',
+   	     cache: false
+
+			});
+		}
+
 </script>

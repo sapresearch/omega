@@ -22,29 +22,8 @@ $(function() {
 	});
 
 
-	// Add data-tooltip to each skill or interest in the accordion.
-	$('#accordion').find('#service_body').each(function() {
-		var service_body = $(this);
-		service_body.delegate('li', 'click', function() {
-			var self = $(this);
-			var category = self.attr('name');
-			var val = self.text().trim();
-  	  var data = {search:{column:{column:category, query:val}}}
-			ajax_filter(data);
-		});
-	});
 });
 
-		function ajax_filter(data) {
-
-   	 	$.ajax({
-   	     type: "GET",
-   	     data: data,
-   	     dataType: 'script',
-   	     cache: false
-
-			});
-		}
 
 //			all_contacts = new Array;
 //			for(var row in js_matrix){

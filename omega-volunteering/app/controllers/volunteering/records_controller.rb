@@ -216,6 +216,7 @@ class Volunteering::RecordsController < Omega::Controller
 		puts "\nThis is the filter that will be sent to the view: " + @filter.inspect + "\n"
 
 		@position_id = Volunteering::Position.find(params[:id]).id
+		@position = Volunteering::Position.find(params[:id])
 		@records = Array.new
 		@contacts = Contact.find(:all)
 		@contacts.each do |c|
