@@ -5,6 +5,11 @@ class AssetAllocationsController < Omega::Controller
   def index
     @assets = Asset.all(:order=>:name)
     @leaf_services = Service.service_leaves
+
+    @leaf_service_overlaps =  {}
+    @leaf_services.each do |leaf_service|
+      @leaf_service_overlaps[leaf_service.id]=leaf_service.time_overlapping_service_ids_with_periods
+    end
   end
 
   def create

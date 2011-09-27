@@ -253,11 +253,11 @@ class Service < ActiveRecord::Base
     service_leaf.assets
   end
 
-  def conflicting_service_ids_with_periods
+  def time_overlapping_service_ids_with_periods
     return nil unless is_leaf?
     overlapping_hash = {}
     self.service_sections.map{|ss|ss.event}.each do |event_1|
-      Service.service_leaves.delte_if{|s|s==self}.each do |service|
+      Service.service_leaves.delete_if{|s|s==self}.each do |service|
         service.service_sections.map{|ss|ss.event}.each do |event_2|
           periods = event_1.overlapping_periods(event_2)
           overlapping_hash[service.id] = periods if periods.length>0
@@ -267,11 +267,11 @@ class Service < ActiveRecord::Base
     overlapping_hash
   end
 
-  def conflicting_services
+  def time_overlapping_services
     return nil unless is_leaf?
     result_services = []
     self.service_sections.map{|ss|ss.event}.each do |event_1|
-      Service.service_leaves.delte_if{|s|s==self}.each do |service|
+      Service.service_leaves.delete_if{|s|s==self}.each do |service|
         service.service_sections.map{|ss|ss.event}.each do |event_2|
           periods = event_1.overlapping_periods(event_2)
           services << service if periods.length>0
