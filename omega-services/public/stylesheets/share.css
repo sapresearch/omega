@@ -34,6 +34,4 @@ select:focus,select:hover{
     -box-shadow: 3px 3px 3px #ccc;
 }
 
-ol{
-    list-style-type:decimal;
-}
+ol{ list-style-type:decimal;}

@@ -33,7 +33,8 @@
 }
 
 #asset_allocation_info{
-    height:100px;
+    height:110px;
+    overflow-y: auto;
 }
 #assets_list_area{
   width:275px;
