@@ -35,7 +35,7 @@ $(function() {
 		function ajax_filter(data) {
 
    	 	$.ajax({
-				 url: "<%=enroll_volunteers_volunteering_records_url(@position)%>",
+				 url: "<%=enroll_volunteers_volunteering_records_url(:id=>@position)%>",
    	     type: "GET",
    	     data: data,
    	     dataType: 'script',
