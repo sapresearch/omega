@@ -274,7 +274,7 @@ class Service < ActiveRecord::Base
       Service.service_leaves.delete_if{|s|s==self}.each do |service|
         service.service_sections.map{|ss|ss.event}.each do |event_2|
           periods = event_1.overlapping_periods(event_2)
-          services << service if periods.length>0
+          result_services << service if periods.length>0
         end
       end
     end
