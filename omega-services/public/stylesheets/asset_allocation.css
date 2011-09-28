@@ -28,8 +28,12 @@
     font-weight: bold;
     color:white;
     border:none;
-    background: #B8CE6C;
+    background: #B8CE6C;   /* for non ccs-3 browsers */
     padding:3px 10px;
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cccccc', endColorstr='#000000'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#000)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #ccc,  #000); /* for firefox 3.6+ */
 }
 
 #asset_allocation_info{
