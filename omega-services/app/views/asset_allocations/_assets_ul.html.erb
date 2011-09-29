@@ -10,12 +10,13 @@
         </li>
         <script type="text/javascript">
           $(".asset_<%= asset.id.to_s %>").bind("mouseenter", function (){
-            clearTimeout(timer);
+            //clearTimeout(timer);
             $("#asset_allocation_info #instruction").hide()
             $("#asset_allocation_info #view").show()
             $("#asset_allocation_info #view").html('<%= escape_javascript(render "asset_view", :asset=>asset) %>')
           }).bind("mouseleave", function (){
-            timer = setTimeout("reset_instruction()",1000)
+            //timer = setTimeout("reset_instruction()",1000)
+            reset_instruction()
           })
         </script>
       <% end %>
