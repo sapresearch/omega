@@ -4,3 +4,4 @@ class AssetAllocation < ActiveRecord::Base
 end
 
 
+

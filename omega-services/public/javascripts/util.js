@@ -41,3 +41,13 @@ function array_min(a){
             min=a[i]
     return min
 }
+
+// untested
+function find_object_by_id(jsons, id, var_name){
+  if(isNaN(id)) return null;
+  for(var i=0; i<jsons.length; i++){
+    if(jsons[i][var_name].id == id)
+      return jsons[i];
+  }
+  return null;
+}

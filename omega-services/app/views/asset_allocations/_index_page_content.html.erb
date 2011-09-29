@@ -1,3 +1,10 @@
+<div>
+  <%= om_button(:contact => true, :icon=>'apply') do %>
+    <%= link_to_function "Hide Message Box", "hide_message_box()", :id=>"hide_message_box_link" %>
+    <%= link_to_function "Show Message Box", "show_message_box()", :id=>"show_message_box_link" %>
+  <% end %>
+</div>
+
 <div id="asset_allocation_info" class="explanation round shadow">
   <div id="instruction">
     <p>
@@ -5,6 +12,11 @@
         double click an service from the right column to view assets currently assigned to this service.<br/><br/>
         Then drag and drop items between the rest two columns to re-allocate.
     </p>
+  </div>
+
+  <div id="view">
+    <div id="item_name"></div>
+    <div id="item_spec"></div>
   </div>
 </div>
 

@@ -1,3 +1,12 @@
+/* copy from application_evergreen.css due to firefox css length limit */
+.explanation {
+    background: none repeat scroll 0 0 #f3f3f3;
+    border: 1px solid #ddd;
+    color: #333333;
+    margin: 10px 0;
+    padding: 10px;
+}
+
 input:focus,input:hover,
 textarea:focus,textarea:hover,
 select:focus,select:hover{
@@ -7,13 +16,12 @@ select:focus,select:hover{
     -box-shadow: 5px 5px 5px #ccc;
 }
 
-/* copy from application_evergreen.css due to firefox css length limit */
-.explanation {
-    background: none repeat scroll 0 0 #f3f3f3;
-    border: 1px solid #ddd;
-    color: #333333;
-    margin: 10px 0;
-    padding: 10px;
+.disable_selection{
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 .page_content{
@@ -35,3 +43,5 @@ select:focus,select:hover{
 }
 
 ol{ list-style-type:decimal;}
+
+

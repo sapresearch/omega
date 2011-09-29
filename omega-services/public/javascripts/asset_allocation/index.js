@@ -16,10 +16,30 @@ $.fn.extend({
     }
 });
 
+$(function(){
+    $("#asset_allocation_info").resizable({
+        start: function(event, ui) {$("body").addClass("disable_selection")},
+        stop: function(event, ui) {$("body").removeClass("disable_selection")},
+        handles:"s",
+        animate:true,
+        ghost:true,
+        maxHeight:800
+    })    
+})
+var timer;
 
-function view_service_allocation(){
-    
+function hide_message_box(){
+    $("#asset_allocation_info").slideUp()
+    $("#hide_message_box_link").hide()
+    $("#show_message_box_link").show()
 }
-function view_asset_allocation(){
-    
+function show_message_box(){
+    $("#asset_allocation_info").slideDown()
+    $("#hide_message_box_link").show()
+    $("#show_message_box_link").hide()
+}
+
+function reset_instruction(){
+    $("#asset_allocation_info #instruction").show()
+    $("#asset_allocation_info #view").hide()
 }

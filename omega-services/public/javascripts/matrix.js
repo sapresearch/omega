@@ -1,5 +1,7 @@
 function matrix(table_element_id, x_array, y_array, options){
-    var default_options={}
+    options = $.extend({
+        // default options here
+    },options)
 
     var html = "<table id='"+table_element_id+"'>"
     html += "<tr class='matrix_col_tr' ><td id='top_left_td'></td>"

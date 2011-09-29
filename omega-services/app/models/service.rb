@@ -41,15 +41,18 @@ class Service < ActiveRecord::Base
     def service_roots
       Service.where(:super_service_id => nil).order(:name)
     end
+    alias_method :root_services, :service_roots
 
     def service_branches
       Service.all(:order=>:name) - service_leaves
     end
+    alias_method :branch_services, :service_branches
 
     # returns service objects
     def service_leaves(order="name")
       ServiceLeaf.all.map{|sl|sl.service}.sort{|s1,s2|s1.send(order)<=>s2.send(order)}
     end
+    alias_method :leaf_services, :service_leaves
 
     def real_public_service_leaves
       ServiceLeaf.all.inject([]){|r, sl|s=sl.service; r<<s if s.is_real_public?; r}
@@ -267,11 +270,30 @@ class Service < ActiveRecord::Base
     overlapping_hash
   end
 
+  def is_allocated_to?(asset)
+    return nil unless is_leaf?
+    service_leaf.assets.include?(asset)
+  end
+
   def time_overlapping_services
     return nil unless is_leaf?
     result_services = []
     self.service_sections.map{|ss|ss.event}.each do |event_1|
       Service.service_leaves.delete_if{|s|s==self}.each do |service|
+        service.service_sections.map{|ss|ss.event}.each do |event_2|
+          periods = event_1.overlapping_periods(event_2)
+          result_services << service if periods.length>0
+        end
+      end
+    end
+    result_services
+  end
+
+  def time_overlapping_services_by_asset(asset)
+    return nil unless is_allocated_to?(asset)
+    result_services = []
+    self.service_sections.map{|ss|ss.event}.each do |event_1|      
+      asset.service_leaves.map{|sl|sl.service}.delete_if{|s|s==self}.each do |service|
         service.service_sections.map{|ss|ss.event}.each do |event_2|
           periods = event_1.overlapping_periods(event_2)
           result_services << service if periods.length>0

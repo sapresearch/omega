@@ -8,11 +8,23 @@
             <%= link_to om_button(:plain => true, :icon => 'search'){}, show_assets_for_service_asset_allocations_url(:leaf_service_id=>leaf_service.id), :remote=>true, :'data-tooltip'=>"allocated assets" %>
           </span>
         </li>
+        <script type="text/javascript">
+          $(".leaf_service_<%= leaf_service.id.to_s %>").bind("mouseenter", function (){
+            clearTimeout(timer);
+            $("#asset_allocation_info #instruction").hide()
+            $("#asset_allocation_info #view").show()
+            $("#asset_allocation_info #view").html('<%= escape_javascript(render "leaf_service_view", :leaf_service=>leaf_service) %>')
+          }).bind("mouseleave", function (){
+            timer = setTimeout("reset_instruction()",1000)
+          })
+        </script>
       <% end %>
     </ul>
 
 <script type="text/javascript">
   $(".leaf_services_list").sortable({
+    start: function(event, ui) {$("body").addClass("disable_selection")},
+    stop: function(event, ui) {$("body").removeClass("disable_selection")},
     cancel: ".ui-state-disabled",
     placeholder: "ui-state-highlight",
     connectWith: ".connectedSortable",
