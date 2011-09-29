@@ -1,5 +1,27 @@
 <% asset ||= @asset %>
 
-<div><%= asset.name %></div>
-<div>Services Allocated</div>
+<div class="item_name asset round"><%= asset.name %></div>
+
+<div class="item_section round">
+  <div class="item_section_name asset round">Services Allocated:</div>
+
+  <div class="item_section_list asset round">
+    <ul class="level_0">
+      <% asset.services.each do |leaf_service| %>
+        <li>
+          <span class="sub_item_name service"><%= leaf_service.name %></span>
+          <ul class="level_1">
+            <% leaf_service.time_overlapping_services_with_periods(asset).each do |service, periods| %>
+              <li>
+                Sharing with <span class="sub_item_name_inline service"><%= service.name %></span>
+                from <span class="date_time"><%= Time.at(periods[0][0]) %></span>
+                to <span class="date_time"><%= Time.at(periods[0][1]) %></span>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 

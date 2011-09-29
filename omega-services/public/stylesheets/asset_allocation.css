@@ -1,3 +1,36 @@
+/* message box */
+#asset_allocation_info{
+    height:110px;
+    overflow-y: auto;
+}
+#asset_allocation_info #view{display:none;}
+#show_message_box_link{display:none;}
+
+#asset_allocation_info .item_name{padding:5px; text-align:center; margin-bottom: 5px;}
+#asset_allocation_info .item_name.asset{background:lightblue; color:#444;}
+#asset_allocation_info .item_name.service{background:green; color:white;}
+
+#asset_allocation_info .item_section{ padding:5px;}
+#asset_allocation_info .item_section_name{ font-weight: bolder; margin-bottom: 5px;}
+
+#asset_allocation_info .item_section_list ul{ margin-left:25px;}
+#asset_allocation_info .item_section_list ul li{ margin:2px;}
+#asset_allocation_info .item_section_list ul.level_0{ list-style:decimal}
+
+#asset_allocation_info .sub_item_name{
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    -border-radius:3px;
+    font-weight:bold;
+    padding:2px 15px;
+}
+#asset_allocation_info .sub_item_name.asset{ background:lightblue; color:#444;}
+#asset_allocation_info .sub_item_name.service{ background:green; color:white}
+#asset_allocation_info .sub_item_name_inline.service{ color:green; font-weight:bold;}
+.date_time{color:#888;font-weight: bold; text-decoration:underline;}
+
+
+/* lists */
 .list_block{height:500px; overflow:auto;}
 .list_fieldset{   
     -moz-border-radius:5px;
@@ -36,12 +69,6 @@
     background: -moz-linear-gradient(top,  #ccc,  #000); /* for firefox 3.6+ */
 }
 
-#asset_allocation_info{
-    height:110px;
-    overflow-y: auto;
-}
-#asset_allocation_info #view{display:none;}
-#show_message_box_link{display:none;}
 #assets_list_area{
   width:275px;
   height:580px;

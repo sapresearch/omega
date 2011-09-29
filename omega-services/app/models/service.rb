@@ -256,11 +256,47 @@ class Service < ActiveRecord::Base
     service_leaf.assets
   end
 
-  def time_overlapping_service_ids_with_periods
+  def is_allocated_to?(asset)
+    return nil unless is_leaf?
+    service_leaf.assets.include?(asset)
+  end
+
+  def time_overlapping_services(asset=nil)
+    return nil unless is_leaf?
+    result_services = []
+    leaf_services = asset.nil? ? Service.leaf_services : asset.services
+    self.service_sections.map{|ss|ss.event}.each do |event_1|
+      leaf_services.delete_if{|s|s==self}.each do |service|
+        service.service_sections.map{|ss|ss.event}.each do |event_2|
+          periods = event_1.overlapping_periods(event_2)
+          result_services << service if periods.length>0
+        end
+      end
+    end
+    result_services
+  end
+
+  def time_overlapping_services_with_periods(asset=nil)
     return nil unless is_leaf?
     overlapping_hash = {}
+    leaf_services = asset.nil? ? Service.leaf_services : asset.services
     self.service_sections.map{|ss|ss.event}.each do |event_1|
-      Service.service_leaves.delete_if{|s|s==self}.each do |service|
+      leaf_services.delete_if{|s|s==self}.each do |service|
+        service.service_sections.map{|ss|ss.event}.each do |event_2|
+          periods = event_1.overlapping_periods(event_2)
+          overlapping_hash[service] = periods if periods.length>0
+        end
+      end
+    end
+    overlapping_hash
+  end
+
+  def time_overlapping_service_ids_with_periods(asset=nil)
+    return nil unless is_leaf?
+    overlapping_hash = {}
+    leaf_services = asset.nil? ? Service.leaf_services : asset.services
+    self.service_sections.map{|ss|ss.event}.each do |event_1|
+      leaf_services.delete_if{|s|s==self}.each do |service|
         service.service_sections.map{|ss|ss.event}.each do |event_2|
           periods = event_1.overlapping_periods(event_2)
           overlapping_hash[service.id] = periods if periods.length>0
@@ -268,39 +304,8 @@ class Service < ActiveRecord::Base
       end
     end
     overlapping_hash
-  end
+  end  
 
-  def is_allocated_to?(asset)
-    return nil unless is_leaf?
-    service_leaf.assets.include?(asset)
-  end
-
-  def time_overlapping_services
-    return nil unless is_leaf?
-    result_services = []
-    self.service_sections.map{|ss|ss.event}.each do |event_1|
-      Service.service_leaves.delete_if{|s|s==self}.each do |service|
-        service.service_sections.map{|ss|ss.event}.each do |event_2|
-          periods = event_1.overlapping_periods(event_2)
-          result_services << service if periods.length>0
-        end
-      end
-    end
-    result_services
-  end
-
-  def time_overlapping_services_by_asset(asset)
-    return nil unless is_allocated_to?(asset)
-    result_services = []
-    self.service_sections.map{|ss|ss.event}.each do |event_1|      
-      asset.service_leaves.map{|sl|sl.service}.delete_if{|s|s==self}.each do |service|
-        service.service_sections.map{|ss|ss.event}.each do |event_2|
-          periods = event_1.overlapping_periods(event_2)
-          result_services << service if periods.length>0
-        end
-      end
-    end
-    result_services
-  end
+  
 
 end
