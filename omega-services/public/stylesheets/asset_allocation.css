@@ -134,8 +134,8 @@
 }
 
 
-/* connected sortable style */
-.item_list .ui-state-highlight{background:lightyellow; border:none;}
+/* jquery ui style adjustment */
+.item_list .ui-state-highlight{background:lightyellow; border:1px solid transparent;}
 .ui-resizable-e{right:0px;}
 .ui-resizable-w{left:0px;}
 .ui-resizable-s{bottom:0px;}

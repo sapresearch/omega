@@ -1,0 +1,12 @@
+<% item_name ||= @item_name %>
+<% item_title ||= (@item_title||item_name) %>
+<% sub_model_name ||= @sub_model_name %>
+<% active ||= @active %>
+
+<fieldset id="<%= sub_model_name.pluralize %>_list_fieldset" class="list_fieldset <%= "active" if active %>">
+  <legend class=""><%= item_title %></legend>
+  <div id="<%= sub_model_name.pluralize %>_list_block" class="list_block">
+    <%= render "items_ul", :sub_model_name=>sub_model_name %>
+  </div>
+</fieldset>
+
