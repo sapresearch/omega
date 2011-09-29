@@ -13,23 +13,49 @@ se[:column] = s
 params = Hash.new
 params[:search] = se
 f = SearchFilter.filter_for(Contact, params)
+
+
+
+require 'filter.rb'
+params = Hash.new
+f = SearchFilter.filter_for(Contact, params, [ {:class => :skills, :column => :name, :type => :string }, {:class => :interests, :column => :name, :type => :string } ])
+
+
 end
 
 	attr_accessor :column_types
-	def initialize(model)
+	def initialize(model, options={})
 		@column_types = Hash.new
 		model.columns.each { |c| @column_types[c.name.to_sym] = c.type.to_s }
+		if !options.nil?
+			options.each { |h| @column_types[h[:class].to_sym] = h[:type].to_s }
+		end
 	end
 
-	def self.filter_for(model, params)
-		all = model.send :find, :all
-		columns = model.send :columns
-		columns = columns.inject(Array.new) { |columns_array, column| columns_array.push(column.name) }
-		@search_filter = all.inject(SearchFilter.new(model)) do |filter, row|
-			row_hash = Hash.new
-			columns.each { |column| row_hash[(column.to_sym).to_sym] = row[column.to_sym] }
-			filter.push(row_hash)
+	def self.filter_for(model, params, options={})
+			all = model.send :find, :all
+			columns = model.send :columns
+			columns = columns.inject(Array.new) { |columns_array, column| columns_array.push(column.name) }
+			@search_filter = all.inject(SearchFilter.new(model, options)) do |filter, row|
+				row_hash = Hash.new
+				columns.each { |column| row_hash[(column.to_sym).to_sym] = row[column.to_sym] }
+				filter.push(row_hash)
+			end
+
+		# Options.
+		if !options.nil?
+			options.each do |h|
+				included_model = h[:class]
+				col = h[:column]
+				@search_filter.each do |row|
+					other_model = model.find(row[:id]).send included_model.to_sym
+					values = other_model.each.collect { |x| x.send col.to_sym }
+					v = values.join(",")
+					row[included_model.to_sym] = v
+				end
+			end
 		end
+			
 
 		if params[:search].nil?
 			@search_filter
@@ -68,7 +94,7 @@ end
 	end
 
 	def each_column
-		column_names = self.first.collect { |column, value| column }
+		column_names = @column_types.collect { |column, type| column }
 		column_names.each do |name|
 			column_data = self.inject(Array.new) { |column, row| column.push(row[name]) }
 			yield(name, column_data)

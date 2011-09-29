@@ -1,0 +1,8 @@
+<ul id="volunteers_list" style="margin-left:15px">
+<% @filter.each do |row| %>
+	<li id="contact" ui-data="<%= row[:id] %>" >
+		<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add this volunteer"></span>
+		<%= " #{row[:first_name].to_s} #{row[:last_name].to_s}" %>
+	</li>
+<% end %>
+</ul>

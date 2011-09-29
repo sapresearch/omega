@@ -1,8 +1,16 @@
 $(function() {
 
+	// Add function to remove volunteers.
+	$('#contacts_to_add').delegate('li', 'click', function() {
+		$(this).remove();
+		update_contact_id_values();
+	});
+
+
 	// Function to add volunteers to invite volunteers section.
  	$('#volunteers-list').delegate('li', 'click', function() {
     var self = $(this);
+		alert(1);
 		var contact_id = self.attr('ui-data');
 		$('#contacts_to_add').prepend(
 			'<li ui-data="'
@@ -14,15 +22,9 @@ $(function() {
 		update_contact_id_values(contact_id);
 	});
 
-
-	// Add function to remove volunteers.
-	$('#contacts_to_add').delegate('li', 'click', function() {
-		$(this).remove();
-		update_contact_id_values();
-	});
-
-
 });
+
+
 
 
 //			all_contacts = new Array;

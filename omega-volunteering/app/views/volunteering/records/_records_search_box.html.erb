@@ -1,35 +1,15 @@
-<br />
-<div id="filter_checkboxes">
- <form>
-	<%# filter_form %>
-		<%#= puts @search_matrix.inspect %>
-		<%# @search_matrix.first.each_key do |c| %>
-			<%# filter_checkbox c %>
-		<%# end %>
-        <input id="search_voluteers" type="text" maxlength="100" size="50" value="Type here to search..." onfocus="$(this).val('')" onblur="$(this).val('Type here to search...')" />
-				<span class="filter" style="display:inline-block">
-        	<label for="enrollable" style="width:50px" >Users</label>
-        	<input id="user_switch" name="test" type="checkbox" checked="checked" onclick="switch_user()" />
-				</span>
-				<span class="filter" style="display:inline-block">
-        	<label for="enrollable"  style="width:50px">Skills</label>
-       		<input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
-				</span>
-				<span class="filter" style="display:inline-block">
-       		<label for="enrollable"  style="width:50px">Interests</label>
-       		<input id="enrollable" name="enrollable" type="checkbox" checked="checked" />
-				</span>
-        <!--<label for="requestable" >Requestable</label>
-        <input id="requestable" name="requestable" type="checkbox" checked="checked" />
-        <%# unless current_user.is_anonymous? %>
-          <label for="my_services" >My Services</label>
-          <input id="my_services" name="my_services" type="checkbox" onclick="switch_my_services()" />
-        <%# end %>!-->
-      </form>
-		<div>
-<br />
+<br /><div id="filter_checkboxes">
+	<form>
+		<input id="search_voluteers" type="text" maxlength="100" size="50" value="Type here to search..." onfocus="$(this).val('')" onblur="$(this).val('Type here to search...')" />
+	</form>
+<br /><div>
+
 
 <script type="text/javascript">
+
+// To make the search box work, the @filter hash will have to be translated into a JS array.
+// This was done correctly for a prior version, it doesn't work right now.
+// Or you could use ajax to do this server side and avoid the hastle of turning it into JS.
 var contact_term = new Array();
 <% @contact_term_hash.each do |contact_id, contact| %>
 	var contact_array = new Array();
@@ -42,10 +22,9 @@ var contact_term = new Array();
 <% end %>
 
   $( "#search_volunteers" ).autocomplete({
-    source: <%= raw @records_to_search.to_json %>,
+    source: <%= raw @filter.to_json %>,
 		select: function(event, ui) {
 			search(ui.item.value);
-			//alert(ui.item.value + " and " + ui.item.label)
 		}
   });
 

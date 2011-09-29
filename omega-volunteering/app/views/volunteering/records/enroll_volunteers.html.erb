@@ -1,6 +1,6 @@
 <% require_stylesheet 'service2.css' %>
 <% require_stylesheet 'omega_volunteering.css' %>
-<% require_javascript 'search_volunteer.js' %>
+<%# require_javascript 'search_volunteer.js' %>
 
 	<style>
 	h1 { padding: .2em; margin: 0; }
@@ -19,6 +19,9 @@
 
 
 <script type="text/javascript">
+
+
+
 	var matrix = '<% raw @search_matrix.to_json %>';
 	var js_matrix = new Array;
 	matrix = matrix.split('},');

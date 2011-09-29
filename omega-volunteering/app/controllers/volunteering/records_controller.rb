@@ -211,12 +211,12 @@ class Volunteering::RecordsController < Omega::Controller
 
 	def enroll_volunteers
 
-		@all_filters = SearchFilter.filter_for(Contact, Hash.new) # Use a blank hash so it doesn't filter anything. Use this for the checkbox filters.
-		@filter = SearchFilter.filter_for(Contact, params) # Use this one to display all the contacts.
+		@all_filters = SearchFilter.filter_for(Contact, Hash.new, [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ] ) # Use a blank hash so it doesn't filter anything. Use this for the checkbox filters.
+		@filter = SearchFilter.filter_for(Contact, params, [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ] )  # Use this one to display all the contacts.
 		puts "\nThis is the filter that will be sent to the view: " + @filter.inspect + "\n"
 
-		@position_id = Volunteering::Position.find(params[:id]).id
 		@position = Volunteering::Position.find(params[:id])
+		@position_id = @position.id
 		@records = Array.new
 		@contacts = Contact.find(:all)
 		@contacts.each do |c|
@@ -226,33 +226,8 @@ class Volunteering::RecordsController < Omega::Controller
 			@records.push(record)
 		end
 
-		@contact_term_hash = Hash.new
-		Contact.all.each do |c| 
-			contact_hash = Hash.new
-			@contact_term_hash[c.id] = contact_hash
-			contact_hash[:first_name] = c.first_name
-			contact_hash[:last_name] = c.last_name
-			contact_hash[:id] = c.id
-			skills = String.new
-			c.skills.each { |s| skills << "#{s.name}," }
-			contact_hash[:skills] = skills
-			interests = String.new
-			c.interests.each { |i| interests << "#{i.name}," }
-			contact_hash[:interests] = interests
-		end
-
-		def @contact_term_hash.get_all(*keys)
-			return_array = Array.new
-			keys.each do |key|
-				self.each do |contact_id, contact|
-					contact[key].split(",").each { |v| return_array.push(v) }
-				end
-			end
-			return_array.uniq
-		end
 		respond_with(@records_to_search)
 	end
-
 
 	def create_multiple
 
@@ -270,7 +245,7 @@ class Volunteering::RecordsController < Omega::Controller
 				puts "\n\n TEST TEST TEST #{v.inspect} \n\n"
 				p = Volunteering::Position.find(position_id)
 				boolean = p.contacts.select! { |c| c.id == contact_id}
-				result = boolean == nil ? "\n\nIt is nil\n\n" : "\n\n #{boolean.inspect} is the contact fro the recored that was created \n\n"
+				result = boolean == nil ? "\n\nError, records_controller.rb. Line 249: Position does not have that contact id.\n\n" : "\n\n Success! #{boolean.inspect.to_s} is the contact for the record that was created \n\n"
 				puts result
 			elsif !v.save
     		redirect_to my_applications_volunteering_records_url
@@ -278,38 +253,5 @@ class Volunteering::RecordsController < Omega::Controller
 		end
 		redirect_to volunteering_positions_url
 	end
-		#params[:records].each do |record_key, attributes|
-			#position_id = params[:records][record_key][:position_id]
-			#puts "\n\n" + position_id + "\n\n"
-			#if (attributes[:status] == "accepted") then
-			#puts "\n\n" + params[:records][record_key].inspect + "\n\n"
-				#@record = Volunteering::Record.create(params[:records][record_key])
-			#end
-		#end
-
-
-
-
-##############################
-# I don't think this does anything anymore
-
-		#@records = params[:records]
-		#@correct_records = params[:records].reject { |k,v| v[:status] != "accepted"}
-			#puts "\n\n" + @correct_records.inspect + "\n\n"
-		#@correct_records.each do |k,v|
-			#puts "\n\n" + params[:records][k].inspect + "\n\n"
-			#Volunteering::Record.create[@correct_records]
-		#end
-
-
-		#i = 0
-		#params[:records].each do |k, v|
-		#	if (k.to_s == 2) then
-		#		params[:records[k]]) #.reject { |key, value| key == :status and value != "accepted" }
-		#		Volunteering::Record.create(params[:records[k]]) #.reject { |key, value| key == :status and value != "accepted" }
-		#	end
-		#	i += 1
-		#end
-##############################
 
 end

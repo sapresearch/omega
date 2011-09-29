@@ -5,15 +5,10 @@
 		    </h1>
 		</div>
 
-	<div class="records_search_box">
-		<%= render "records_search_box" %>
-	</div>
+	<!--<div class="records_search_box">
+		<%#= render "records_search_box" %>
+	</div>!-->
 
-	<!-- TESTING !-->
-	<div>
-		<p><%#= render 'checkbox_filters' %></p>
-	</div>
-	<!-- TESTING !-->
 
 	<hr>
 	<table>
@@ -27,32 +22,24 @@
 
 
 
-
 			<td style="width:350px; max-width:355px">
 				<div style="margin-left:20px">
 					<h7 class="sub-heading" id="result-header">Volunteers:</h7>
-					<ul id="volunteers-list" style="margin-left:15px">
-					<% @filter.each do |row| %>
-						<li id="contact" ui-data="<%= row[:id] %>">
-							<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add this volunteer"></span>
-							<%= " #{row[:first_name].to_s} #{row[:last_name].to_s}" %>
-						</li>
-					<% end %>
-				</ul>
+						<%= render 'volunteers_list' %>
 				</div>
 			</td>
 
 
 
 <td>
+	<div style="border: 1px, solid, BE8816">
 
 <!--	<div id="right" style="width:100; float:right; height:auto">!-->
-	<h7 class="sub-heading"> Selected Volunteers: </h7>
+	<h7 class="sub-heading"> Invite these volunteers: </h7>
 	<%= form_for @records, :url => create_multiple_volunteering_records_path, :html => { :method => :post } do |f| %>
 		<%= hidden_field_tag "records[position_id]", @position_id %>
 		<%= hidden_field_tag "records[contact_ids]" %>
 		<!--<input id="record_position_id" name="record[position_id]" type="hidden"><%@position_id%></input>!-->
-		<ul>
 		<% @records.each_with_index do |record, index| %>
 			<% c_id = record.contact.id %>
 			<%= fields_for "records[#{index}]" do |r| %>
@@ -65,18 +52,59 @@
 					</p>
 				</div>
 			</li>!-->
-		<div id="contacts_to_add" class="placeholder" style="min-height:75px">
-
-
 		<% end %>
 	<% end %>
-	</ul>
-				</div>
+		<div  class="placeholder" style="min-height:75px">
+
+		<ul id="contacts_to_add">
+		</ul>
+
 			</div>
 			<p><%= f.submit "Add Volunteers" %></p>
 
+				</div>
 			</td>
 		</tr>
 	</table>
 <% end %>
 </div>
+
+<script>
+
+$(function() {
+
+	// Add function to remove volunteers.
+	$('#contacts_to_add').delegate('li', 'click', function() {
+		$(this).remove();
+		update_contact_id_values();
+	});
+
+
+	// Add volunteers to Invite Volunteers section.
+ 	$('#volunteers_list').delegate('li', 'click', function() {
+    var self = $(this);
+		var contact_id = self.attr('ui-data');
+		$('#contacts_to_add').prepend(
+			'<li ui-data="'
+			+ contact_id
+			+ '"><span class="om-icon-only om-blue-icon ui-icon-minus" data-tooltip="Remove this volunteer">'
+			+ '</span><span class="remove-contacts">'
+			+ self.text().trim()
+			+ '</span></li>');
+		update_contact_id_values(contact_id);
+	});
+});
+
+function update_contact_id_values() {
+
+    var serialized_contact_ids = '[', separator = '';
+    $('#contacts_to_add').find('li').each(function() {
+        serialized_contact_ids += separator + $(this).attr('ui-data');
+        separator = ',';
+    });
+    serialized_contact_ids += ']';
+
+    $('#records_contact_ids').val(serialized_contact_ids);
+}
+
+</script>
