@@ -44,13 +44,10 @@
 							cat += separator + category;
 							val += separator + $(this).attr('value');
 							separator = ",";
-							alert( val + " is checked" );
 						}
 						else if( $(this).attr('checked') == null ) {
-							alert(val + " is not checked ");
 						}
 						else {
-							alert($(this).attr('value') + " didnt go into either loop " + $(this).checked);
 						}
 					});
 				});
