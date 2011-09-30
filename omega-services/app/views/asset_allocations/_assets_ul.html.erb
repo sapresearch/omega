@@ -2,24 +2,7 @@
 
     <ul class="assets_list item_list">
       <% @assets.each do |asset| %>
-        <li class="asset_<%= asset.id.to_s %>" onclick="$.ajax({ url:'<%= show_services_for_asset_asset_allocations_url(:asset_id=>asset.id) %>' })" >
-          <span class="item_name"><%= asset.name %></span>
-          <span class="item_operation_link">
-            <%= link_to om_button(:plain => true, :icon => 'search'){}, show_services_for_asset_asset_allocations_url(:asset_id=>asset.id), :remote=>true, :'data-tooltip'=>"allocated services" %>
-          </span>
-        </li>
-        <script type="text/javascript">
-          $(".asset_<%= asset.id.to_s %>").bind("mouseenter", function (){
-            //clearTimeout(timer);
-            $("#asset_allocation_info #instruction").hide()
-            $("#asset_allocation_info #view").show()
-            $("#asset_allocation_info #view").html('<%= escape_javascript(render "asset_view", :asset=>asset) %>')
-          })
-          $(".assets_list").bind("mouseleave", function (){
-            //timer = setTimeout("reset_instruction()",1000)
-            reset_instruction()
-          })
-        </script>
+        <%= render "asset_li", :asset=>asset %>
       <% end %>
     </ul>
 

@@ -1,6 +1,6 @@
 /* message box */
 #asset_allocation_info{
-    height:110px;
+    height:116px;
     overflow-y: auto;
 
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff'); /* for IE */
@@ -138,5 +138,5 @@
 .item_list .ui-state-highlight{background:lightyellow; border:1px solid transparent;}
 .ui-resizable-e{right:0px;}
 .ui-resizable-w{left:0px;}
-.ui-resizable-s{bottom:0px;}
+.ui-resizable-s{bottom:0px; background: white;}
 .ui-resizable-s:hover{background:#ddd}

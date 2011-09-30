@@ -261,14 +261,14 @@ class Service < ActiveRecord::Base
     service_leaf.assets.include?(asset)
   end
 
-  def time_overlapping_services(asset=nil)
+  def time_overlapping_services(asset=nil, begin_at=Time.now, end_at=begin_at+1.year)
     return nil unless is_leaf?
     result_services = []
     leaf_services = asset.nil? ? Service.leaf_services : asset.services
     self.service_sections.map{|ss|ss.event}.each do |event_1|
       leaf_services.delete_if{|s|s==self}.each do |service|
         service.service_sections.map{|ss|ss.event}.each do |event_2|
-          periods = event_1.overlapping_periods(event_2)
+          periods = event_1.overlapping_periods(event_2, begin_at, end_at)
           result_services << service if periods.length>0
         end
       end
@@ -276,14 +276,14 @@ class Service < ActiveRecord::Base
     result_services
   end
 
-  def time_overlapping_services_with_periods(asset=nil)
+  def time_overlapping_services_with_periods(asset=nil, begin_at=Time.now, end_at=begin_at+1.year)
     return nil unless is_leaf?
     overlapping_hash = {}
     leaf_services = asset.nil? ? Service.leaf_services : asset.services
     self.service_sections.map{|ss|ss.event}.each do |event_1|
       leaf_services.delete_if{|s|s==self}.each do |service|
         service.service_sections.map{|ss|ss.event}.each do |event_2|
-          periods = event_1.overlapping_periods(event_2)
+          periods = event_1.overlapping_periods(event_2, begin_at, end_at)
           overlapping_hash[service] = periods if periods.length>0
         end
       end
@@ -291,14 +291,14 @@ class Service < ActiveRecord::Base
     overlapping_hash
   end
 
-  def time_overlapping_service_ids_with_periods(asset=nil)
+  def time_overlapping_service_ids_with_periods(asset=nil, begin_at=Time.now, end_at=begin_at+1.year)
     return nil unless is_leaf?
     overlapping_hash = {}
     leaf_services = asset.nil? ? Service.leaf_services : asset.services
     self.service_sections.map{|ss|ss.event}.each do |event_1|
       leaf_services.delete_if{|s|s==self}.each do |service|
         service.service_sections.map{|ss|ss.event}.each do |event_2|
-          periods = event_1.overlapping_periods(event_2)
+          periods = event_1.overlapping_periods(event_2, begin_at, end_at)
           overlapping_hash[service.id] = periods if periods.length>0
         end
       end

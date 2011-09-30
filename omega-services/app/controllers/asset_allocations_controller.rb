@@ -2,9 +2,12 @@ class AssetAllocationsController < Omega::Controller
   respond_to :html, :xml, :js, :json
   breadcrumb 'Asset Allocations' => :asset_allocations
 
-  before_filter :get_all_assets_and_leaf_services, :only=>[:index]
+  before_filter :get_all_assets_and_leaf_services, :only=>[:index,:show_services_for_asset,:show_assets_for_service]
 
   def index
+    #@asset_id = params[:asset_id]
+    #@leaf_service_id = params[:leaf_service_id]
+    
     @leaf_service_overlaps =  {}
     @leaf_services.each do |leaf_service|
       @leaf_service_overlaps[leaf_service.id]=leaf_service.time_overlapping_service_ids_with_periods
@@ -17,6 +20,7 @@ class AssetAllocationsController < Omega::Controller
     @asset = Asset.find(@asset_id)
     @leaf_service = Service.find(@leaf_service_id)
     @service_leaf = @leaf_service.service_leaf
+    
     if @asset && @service_leaf
       if AssetAllocation.find_by_asset_id_and_service_leaf_id(@asset.id, @service_leaf.id).nil?
         @asset_allocation = AssetAllocation.create(:asset_id=>@asset.id, :service_leaf_id=>@leaf_service.service_leaf.id)
@@ -29,6 +33,7 @@ class AssetAllocationsController < Omega::Controller
   def destroy
     @asset_id = params[:asset_id]
     @leaf_service_id = params[:leaf_service_id]
+    @asset = Asset.find(@asset_id)
     @leaf_service = Service.find(@leaf_service_id)
     @service_leaf = @leaf_service.service_leaf
 
@@ -42,14 +47,12 @@ class AssetAllocationsController < Omega::Controller
   def show_services_for_asset
     @asset_id = params[:asset_id]
     @asset = Asset.find(@asset_id)
-    #@asset_allocations = @asset.asset_allocations
     @leaf_services = @asset.services
   end
 
   def show_assets_for_service
     @leaf_service_id = params[:leaf_service_id]
     @leaf_service = Service.find(@leaf_service_id)
-    #@asset_allocations = @leaf_service.service_leaf.asset_allocations
     @assets = @leaf_service.assets
   end
 
