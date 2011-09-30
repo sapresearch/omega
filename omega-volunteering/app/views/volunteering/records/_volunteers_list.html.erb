@@ -1,4 +1,4 @@
-<ul id="volunteers_list" style="margin-left:15px">
+<ul id="volunteers_list">
 <% @filter.each do |row| %>
 	<% unless row[:first_name].to_s.empty? and row[:last_name].to_s.empty? %>
 		<li id="contact" ui-data="<%= row[:id] %>" >
