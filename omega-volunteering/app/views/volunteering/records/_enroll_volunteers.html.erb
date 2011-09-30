@@ -15,59 +15,39 @@
 		<tr>
 
 
-
 			<td style="width:350px; max-width:355px">
 				<%= render "accordion" %>
 			</td>
 
 
-
 			<td style="width:350px; max-width:355px">
-				<div style="margin-left:20px">
+				<div id="volunteers">
 					<h7 class="sub-heading" id="result-header">Volunteers:</h7>
 						<%= render 'volunteers_list' %>
 				</div>
 			</td>
 
 
-
-<td>
-	<div style="border: 1px, solid, BE8816">
-
-<!--	<div id="right" style="width:100; float:right; height:auto">!-->
-	<h7 class="sub-heading"> Invite these volunteers: </h7>
-	<%= form_for @records, :url => create_multiple_volunteering_records_path, :html => { :method => :post } do |f| %>
-		<%= hidden_field_tag "records[position_id]", @position_id %>
-		<%= hidden_field_tag "records[contact_ids]" %>
-		<!--<input id="record_position_id" name="record[position_id]" type="hidden"><%@position_id%></input>!-->
-		<% @records.each_with_index do |record, index| %>
-			<% c_id = record.contact.id %>
-			<%= fields_for "records[#{index}]" do |r| %>
-			<!--<li>
-				<div class="field" >
-					<p>
-						<%#= hidden_field_tag "records[#{index}][contact_id]", record.contact.id %>
-						<%#= r.radio_button 'status', 'accepted' %>
-						<%#= record.contact.first_name %></span>
-					</p>
-				</div>
-			</li>!-->
-		<% end %>
-	<% end %>
-		<div  class="placeholder" style="min-height:75px">
-
-		<ul id="contacts_to_add">
-		</ul>
-
-			</div>
-			<p><%= f.submit "Add Volunteers" %></p>
-
+			<td> 
+				<div style="border: 1px solid #BE8816">
+					<h7 class="sub-heading"> Invite these volunteers: </h7>
+					<%= form_for @records, :url => create_multiple_volunteering_records_path, :html => { :method => :post } do |f| %>
+						<%= hidden_field_tag "records[position_id]", @position_id %>
+						<%= hidden_field_tag "records[contact_ids]" %>
+						<div class="placeholder" style="min-height:75px">
+							<ul id="contacts_to_add">
+							</ul>
+						</div>
+						<p><%= f.submit "Add Volunteers" %></p>
+					<% end %>
 				</div>
 			</td>
+
+
 		</tr>
 	</table>
-<% end %>
 </div>
+
 
 <script>
 
@@ -76,6 +56,7 @@ $(function() {
 	// Add function to remove volunteers.
 	$('#contacts_to_add').delegate('li', 'click', function() {
 		$(this).remove();
+		$(".tipsy").remove();
 		update_contact_id_values();
 	});
 
@@ -91,6 +72,8 @@ $(function() {
 			+ '</span><span class="remove-contacts">'
 			+ self.text().trim()
 			+ '</span></li>');
+		$(this).remove();
+		$(".tipsy").remove();
 		update_contact_id_values(contact_id);
 	});
 });

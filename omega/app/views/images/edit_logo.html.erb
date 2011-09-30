@@ -1,20 +1,5 @@
-<head>
-	<% require_stylesheet 'settings' %>
-</head>
+<% require_stylesheet 'settings' %>
 
-<script type="text/javascript">
-	function validate_logo_or_banner_present(){
-		x = document.forms#new_image.value
-		if(x == "NULL"){
-			alert("To select an image, you must check the logo or banner button");
-			return false;
-		}
-		else{
-			alert(console.log(x));
-			return false;
-		}
-	}
-</script>
 
 <div class="content circle-corners-bottom-left">
     	
@@ -80,7 +65,7 @@
 
 		<p>
 		    <%= om_button(:icon => 'apply') do %>
-            <%= f.submit 'Update', :onclick => "validate_logo_or_banner_present()" %>
+            <%= f.submit 'Update' %>
      		<% end %>
 		</p>
 	

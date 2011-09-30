@@ -4,22 +4,15 @@ def test
 require 'filter.rb'
 
 s = Hash.new
-s[:column] = "last_name"
-s[:query] = "Smith"
+s[:column] = "skills,skills,interests"
+s[:query] = "Embroidery,cooking,else"
 
 se = Hash.new
 se[:column] = s
 
 params = Hash.new
 params[:search] = se
-f = SearchFilter.filter_for(Contact, params)
-
-
-
-require 'filter.rb'
-params = Hash.new
 f = SearchFilter.filter_for(Contact, params, [ {:class => :skills, :column => :name, :type => :string }, {:class => :interests, :column => :name, :type => :string } ])
-
 
 end
 
@@ -61,10 +54,26 @@ end
 			@search_filter
 		elsif !params[:search].nil?
 			params[:search].each do |key, values|
-				column = values[:column].to_s
-				query = values[:query].to_s
-				operator = @search_filter.operator_for(column)
-				@search_filter.keep_only(operator, query, column)
+				columns = values[:column].to_s.split(',')
+				uniq_columns = columns.uniq
+				queries = values[:query].to_s.split(',')
+				search = Hash.new
+				columns.count.times do |x|
+					search[queries.at(x).to_sym] = columns.at(x)
+				end
+				
+				uniq_columns.each do |col|
+					operator = @search_filter.operator_for(col)
+					needles = Array.new
+					search.each do |q, c|
+						if col == c 
+							#q = q.send(operator == :include? ? :to_s : :to_i) # Depracated for now. When you use more sets with strings and integers use this.
+							needles.push(q.to_s)
+						end
+					end
+					@search_filter.keep_only(operator, needles, col)
+					p @search_filter.inspect.to_s
+				end
 			end
 		end
 		@search_filter
@@ -159,29 +168,35 @@ end
 		#debug = "Class group: " + class_group.to_s + ". Checkbox options: " + checkbox_options.inspect.to_s + ". Options received by filter.rb: " + options.inspect.to_s
 	end
 
-	def keep_only(operator, query, column)
-		type = query.class.to_s
+	def keep_only(operator, queries, column)
+		column = column.to_sym
+		type = self.column_types[column]
 		operator = :==
 		case type
-			when "String"
+			when "string"
 				operator = :include?
 			else
 				operator = :>=
 		end
-		column = column.to_sym
 		self.reject! do |r|
 			if r[column].nil?
 				true
 			elsif !r[column].nil?
-				!(r[column].send(operator, query)) # Reject if query does NOT match. Reject if false.
+				!recursive_or(r[column], operator, queries)
 			end
 		end
 	end
 
+	def recursive_or(haystack, operator, needles)
+		result = false 
+		needles.each do |needle|
+			result = result == true ? true : haystack.send(operator, needle)
+		end
+		result
+	end
+
 	def operator_for(column)
 		column = column.to_sym
-		puts column.to_s
-		puts @column_types.inspect.to_s
 		type = @column_types[column.to_sym].to_s
 		type = type.downcase
 		case type

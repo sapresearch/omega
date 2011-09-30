@@ -6,7 +6,7 @@
 	<div id="service_body" class="service_body">
 		<% @all_filters.skills.reject { |x| x == "" }.join(",").split(",").uniq.each do |v| %>
 			<li id="test" name="skills" ui-data="<%=v%>" >
-				<input type="checkbox" value="<%=v%>" ><%=v%></input>
+				<input name="checkbox" type="checkbox" value="<%=v%>" ><%=v%></input>
 			</li>
 		<%end%>
 	</div>
@@ -18,7 +18,7 @@
 	<div id="service_body" class="service_body">
 		<% @all_filters.interests.reject { |x| x == "" }.join(",").split(",").uniq.each do |v| %>
 			<li id="test" name="interests" ui-data="<%=v%>" >
-				<input type="checkbox" value="<%=v%>" ><%=v%></input>
+				<input name="checkbox" type="checkbox" value="<%=v%>" unchecked ><%=v%></input>
 			</li>
 		<%end%>
 	</div>
@@ -32,10 +32,38 @@
 	$('#accordion').find('#service_body').each(function() {
 		var service_body = $(this);
 		service_body.delegate('li', 'click', function() {
-			var self = $(this);
-			var category = self.attr('name');
-			var val = self.text().trim();
-  	  var data = {search:{column:{column:category, query:val}}}
+			var cat = "";
+			var val = "";
+			var separator = "";
+			$('#accordion').find('#service_body').each(function() {
+				$(this).find('li').each(function() {
+					var self = $(this);
+					var category = self.attr('name');
+					$(this).find('input').each(function() {
+						if( $(this).attr('checked') == 'checked' ) {
+							cat += separator + category;
+							val += separator + $(this).attr('value');
+							separator = ",";
+							alert( val + " is checked" );
+						}
+						else if( $(this).attr('checked') == null ) {
+							alert(val + " is not checked ");
+						}
+						else {
+							alert($(this).attr('value') + " didnt go into either loop " + $(this).checked);
+						}
+					});
+				});
+			});
+
+			if(val == ""){
+				var data = {};
+			}
+			// So that you avoid sending a blank query to the controller.
+			else if (val != ""){
+  	  	var data = {search:{column:{column:cat, query:val}}}
+			}
+
 			ajax_filter(data);
 		});
 	});
