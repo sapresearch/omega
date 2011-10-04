@@ -4,60 +4,60 @@
 <li class="asset_<%= asset.id.to_s %>" >
   <span class="item_name"><%= asset.name %></span>
   <span class="item_operation_link"></span>
+
+  <% if add_event_listeners %>
+    <script type="text/javascript">
+      $(".asset_<%= asset.id.to_s %>")
+      .live("mouseenter", function(){
+        if(!is_dragging){
+          $("#asset_allocation_info #dynamic_view").html('<%= escape_javascript(render "asset_view", :asset=>asset) %>')
+          display_dynamic_view()
+        }
+      })
+      .live("mouseleave", function(){
+        if(!is_dragging){
+          if($("#static_view").is_empty())
+            display_instruction()
+          else
+            display_static_view()
+        }
+      })
+      .live("click", function(){
+        $("#working_list_title").html("<%= asset.name %>");
+        $("#working_list_title").removeClass("service");
+        $("#working_list_title").addClass("asset");
+        $("#working_list_block").html("<%= escape_javascript(render "leaf_services_ul", :asset=>asset) %>");
+
+        clear_visual_effects()
+        $("#asset_allocation_info #static_view").html('<%= escape_javascript(render "asset_view", :asset=>asset) %>')
+        display_static_view()
+
+        /* set new environment */
+        <% asset.services.each do |leaf_service| %>
+          $("#leaf_services_list_block .leaf_service_<%= leaf_service.id.to_s %>:not(.ui-state-disabled)").hide()
+          $("#leaf_services_list_block .leaf_service_<%= leaf_service.id.to_s %>.ui-state-disabled").show()
+        <% end %>
+
+        $(".leaf_services_list").addClass("connectedSortable");
+        $(".leaf_services_list").sortable("option", "connectWith", '.connectedSortable');
+        
+        $(".leaf_services_list").parents("fieldset").addClass("active");
+        $("#leaf_services_exchange").css("visibility","visible")
+        $(".assets_list .asset_<%= asset.id.to_s %>:not(.ui-state-disabled)").addClass("main_list_item")
+        $(".main_list_item").everyTime(10, function(){
+          $(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'lightblue'}, 500);
+        });
+
+        $("#leaf_services_list_fieldset").droppable({
+          hoverClass: 'drop_leaf_service_hover',
+          accept: '.connectedSortable li'
+        })
+
+        $("#working_list_fieldset").droppable({
+          hoverClass: 'drop_leaf_service_hover',
+          accept: '.connectedSortable li'
+        })
+      })
+    </script>
+  <% end %>
 </li>
-
-<% if add_event_listeners %>
-  <script type="text/javascript">
-    $(".asset_<%= asset.id.to_s %>")
-    .live("mouseenter", function(){
-      if(!is_dragging){
-        $("#asset_allocation_info #dynamic_view").html('<%= escape_javascript(render "asset_view", :asset=>asset) %>')
-        display_dynamic_view()
-      }
-    })
-    .live("mouseleave", function(){
-      if(!is_dragging){
-        if($("#static_view").is_empty())
-          display_instruction()
-        else
-          display_static_view()
-      }     
-    })
-    .live("click", function(){
-      $("#working_list_title").html("<%= asset.name %>");
-      $("#working_list_title").removeClass("service");
-      $("#working_list_title").addClass("asset");
-      $("#working_list_block").html("<%= escape_javascript(render "leaf_services_ul", :asset=>asset) %>");
-
-      clear_visual_effects()
-      $("#asset_allocation_info #static_view").html('<%= escape_javascript(render "asset_view", :asset=>asset) %>')
-      display_static_view()
-
-      /* set new environment */
-      <% asset.services.each do |leaf_service| %>
-        $("#leaf_services_list_block .leaf_service_<%= leaf_service.id.to_s %>:not(.ui-state-disabled)").hide()
-        $("#leaf_services_list_block .leaf_service_<%= leaf_service.id.to_s %>.ui-state-disabled").show()
-      <% end %>
-
-      $(".leaf_services_list").addClass("connectedSortable");
-      $(".leaf_services_list").sortable("option", "connectWith", '.connectedSortable' );
-      
-      $(".leaf_services_list").parents("fieldset").addClass("active");
-      $("#leaf_services_exchange").css("visibility","visible")
-      $(".assets_list .asset_<%= asset.id.to_s %>:not(.ui-state-disabled)").addClass("main_list_item")
-      $(".main_list_item").everyTime(10, function(){
-        $(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'lightblue'}, 500);
-      });
-
-      $("#leaf_services_list_fieldset").droppable({
-        hoverClass: 'drop_leaf_service_hover',
-        accept: '.connectedSortable li'
-      })
-
-      $("#working_list_fieldset").droppable({
-        hoverClass: 'drop_leaf_service_hover',
-        accept: '.connectedSortable li'
-      })
-    })
-  </script>
-<% end %>
