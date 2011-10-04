@@ -134,6 +134,16 @@
 }
 
 
+.list_fieldset.drop_leaf_service_hover{
+    background:#ddd;
+    border:1px solid green;
+}
+.list_fieldset.drop_asset_hover{
+    background:#ddd;
+    border:1px solid lightblue;
+}
+.ui-draggable-dragging{opacity:0.7;}
+
 /* jquery ui style adjustment */
 .item_list .ui-state-highlight{background:lightyellow; border:1px solid transparent;}
 .ui-resizable-e{right:0px;}

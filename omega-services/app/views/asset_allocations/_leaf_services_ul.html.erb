@@ -1,7 +1,8 @@
 <% asset_id ||= @asset_id %>
+<% leaf_services ||= @leaf_services %>
 
     <ul class="leaf_services_list item_list">
-      <% @leaf_services.each do |leaf_service| %>
+      <% leaf_services.each do |leaf_service| %>
         <%= render "leaf_service_li", :leaf_service=>leaf_service %>
       <% end %>
     </ul>
