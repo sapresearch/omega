@@ -3,23 +3,25 @@
 
 <li class="asset_<%= asset.id.to_s %>" >
   <span class="item_name"><%= asset.name %></span>
-  <span class="item_operation_link">
-    <%#= link_to om_button(:plain => true, :icon => 'search'){}, show_services_for_asset_asset_allocations_url(:asset_id=>asset.id), :remote=>true, :'data-tooltip'=>"allocated services" %>
-  </span>
+  <span class="item_operation_link"></span>
 </li>
 
 <% if add_event_listeners %>
   <script type="text/javascript">
     $(".asset_<%= asset.id.to_s %>")
-    .live("mouseenter", function (){
-      $("#asset_allocation_info #dynamic_view").html('<%= escape_javascript(render "asset_view", :asset=>asset) %>')
-      display_dynamic_view()
+    .live("mouseenter", function(){
+      if(!is_dragging){
+        $("#asset_allocation_info #dynamic_view").html('<%= escape_javascript(render "asset_view", :asset=>asset) %>')
+        display_dynamic_view()
+      }
     })
-    .live("mouseleave", function (){
-      if($("#static_view").is_empty())
-        display_instruction()
-      else
-        display_static_view()
+    .live("mouseleave", function(){
+      if(!is_dragging){
+        if($("#static_view").is_empty())
+          display_instruction()
+        else
+          display_static_view()
+      }     
     })
     .live("click", function(){
       $("#working_list_title").html("<%= asset.name %>");
@@ -38,6 +40,8 @@
       <% end %>
 
       $(".leaf_services_list").addClass("connectedSortable");
+      $(".leaf_services_list").sortable("option", "connectWith", '.connectedSortable' );
+      
       $(".leaf_services_list").parents("fieldset").addClass("active");
       $("#leaf_services_exchange").css("visibility","visible")
       $(".assets_list .asset_<%= asset.id.to_s %>:not(.ui-state-disabled)").addClass("main_list_item")

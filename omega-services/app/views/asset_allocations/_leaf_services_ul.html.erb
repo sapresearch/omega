@@ -10,8 +10,8 @@
 
 <script type="text/javascript">
   $(".leaf_services_list").sortable({
-    start: function(event, ui) {$("body").addClass("disable_selection")},
-    stop: function(event, ui) {$("body").removeClass("disable_selection")},
+    start: function(event, ui) {$("body").addClass("disable_selection"); is_dragging=true},
+    stop: function(event, ui) {$("body").removeClass("disable_selection"); is_dragging=false},
     cancel: ".ui-state-disabled",
     placeholder: "ui-state-highlight",
     connectWith: ".connectedSortable",
