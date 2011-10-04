@@ -1,11 +1,12 @@
-<% asset_id ||= @asset_id %>
-<% leaf_services ||= @leaf_services %>
+<% asset ||= @asset %>
+<% leaf_services ||= asset ? asset.services : Service.leaf_services %>
+<% add_event_listeners ||= false %>
 
-    <ul class="leaf_services_list item_list">
-      <% leaf_services.each do |leaf_service| %>
-        <%= render "leaf_service_li", :leaf_service=>leaf_service %>
-      <% end %>
-    </ul>
+<ul class="leaf_services_list item_list">
+  <% leaf_services.each do |leaf_service| %>
+    <%= render "leaf_service_li", :leaf_service=>leaf_service, :add_event_listeners=>add_event_listeners %>
+  <% end %>
+</ul>
 
 <script type="text/javascript">
   $(".leaf_services_list").sortable({
@@ -17,7 +18,7 @@
     cursor: 'move'
   }).disableSelection();
   
-  <% if asset_id.nil? %>
+  <% if asset.nil? %>
     $("#leaf_services_list_block .leaf_services_list li:not(.ui-state-disabled)").each(function(){
       if($(this).disabled_copy()==null)
         $(this).clone().addClass("ui-state-disabled").hide().insertAfter(this)
@@ -47,7 +48,7 @@
       var data = {}
       var type = 'POST'
       data["leaf_service_id"]=ui.item.object_id()
-      data["asset_id"]= <%= asset_id %>
+      data["asset_id"]= <%= asset.id %>
 
       $.ajax({
         url:url,
@@ -67,7 +68,7 @@
       var data = {}
       var type = 'DELETE'
       data["leaf_service_id"]=ui.item.object_id()
-      data["asset_id"]= <%= asset_id %>
+      data["asset_id"]= <%= asset.id %>
 
       $.ajax({
         url:url,

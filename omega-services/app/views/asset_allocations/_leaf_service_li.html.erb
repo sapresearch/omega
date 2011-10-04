@@ -1,20 +1,57 @@
 <% leaf_service ||= @leaf_service %>
+<% add_event_listeners ||= false %>
 
-        <li class="leaf_service_<%= leaf_service.id.to_s %>" onclick="$.ajax({ url:'<%= show_assets_for_service_asset_allocations_url(:leaf_service_id=>leaf_service.id) %>' })" >
-          <span class="item_name"><%= leaf_service.name %></span>
-          <span class="item_operation_link">
-            <%= link_to om_button(:plain => true, :icon => 'search'){}, show_assets_for_service_asset_allocations_url(:leaf_service_id=>leaf_service.id), :remote=>true, :'data-tooltip'=>"allocated assets" %>
-          </span>
-        </li>
-        <script type="text/javascript">
-          $(".leaf_service_<%= leaf_service.id.to_s %>").bind("mouseenter", function (){
-            //clearTimeout(timer);
-            $("#asset_allocation_info #instruction").hide()
-            $("#asset_allocation_info #view").show()
-            $("#asset_allocation_info #view").html('<%= escape_javascript(render "leaf_service_view", :leaf_service=>leaf_service) %>')
-          })
-          $(".leaf_services_list").bind("mouseleave", function (){
-            //timer = setTimeout("reset_instruction()",1000)
-            reset_instruction()
-          })
-        </script>
+<li class="leaf_service_<%= leaf_service.id.to_s %>" >
+  <span class="item_name"><%= leaf_service.name %></span>
+  <span class="item_operation_link">
+    <%#= link_to om_button(:plain => true, :icon => 'search'){}, show_assets_for_service_asset_allocations_url(:leaf_service_id=>leaf_service.id), :remote=>true, :'data-tooltip'=>"allocated assets" %>
+  </span>
+</li>
+
+<% if add_event_listeners %>
+  <script type="text/javascript">
+    $(".leaf_service_<%= leaf_service.id.to_s %>")
+    .live("mouseenter", function (){
+    $("#asset_allocation_info #dynamic_view").html('<%= escape_javascript(render "leaf_service_view", :leaf_service=>leaf_service) %>')
+      display_dynamic_view()
+    })
+    .live("mouseleave", function (){
+      display_static_view()
+    })
+    .live("click", function(){
+      $("#working_list_title").html("<%= leaf_service.name %>");
+      $("#working_list_title").removeClass("asset");
+      $("#working_list_title").addClass("service");
+      $("#working_list_block").html("<%= escape_javascript(render "assets_ul", :leaf_service=>leaf_service) %>");
+
+      /* clear */
+      clear_visual_effects()
+      $("#asset_allocation_info #static_view").html('<%= escape_javascript(render "leaf_service_view", :leaf_service=>leaf_service) %>')
+      display_static_view()
+
+      /* set new environment */
+      <% leaf_service.assets.each do |asset| %>
+        $("#assets_list_block .asset_<%= asset.id.to_s %>:not(.ui-state-disabled)").hide()
+        $("#assets_list_block .asset_<%= asset.id.to_s %>.ui-state-disabled").show()
+      <% end %>
+
+      $(".assets_list").addClass("connectedSortable");
+      $(".assets_list").parents("fieldset").addClass("active");
+      $("#assets_exchange").css("visibility","visible")
+      $(".leaf_services_list .leaf_service_<%= leaf_service.id.to_s %>:not(.ui-state-disabled)").addClass("main_list_item")
+      $(".main_list_item").everyTime(10, function(){
+        $(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'green'}, 500);
+      });
+
+      $("#assets_list_fieldset").droppable({
+        hoverClass: 'drop_asset_hover',
+        accept: '.connectedSortable li'
+      })
+
+      $("#working_list_fieldset").droppable({
+        hoverClass: 'drop_asset_hover',
+        accept: '.connectedSortable li'
+      })
+    })
+  </script>
+<% end %>

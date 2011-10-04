@@ -7,29 +7,6 @@
 <% require_javascript 'ui_util.js'%>
 <% require_javascript 'asset_allocation/index.js'%>
 
-<script type="text/javascript">
-  var assets = <%= raw @assets.to_json(:only=>[:id, :name, :description], :include=>{
-    :service_leaves=>{
-      :only=>[:id],
-      :include=>{
-        :service=>{
-          :only=>[:id,:name,:description]
-        }
-      }
-    }
-  }) %>
-  var leaf_services = <%= raw @leaf_services.to_json(:only=>[:id,:name,:description], :include=>{
-    :service_leaf=>{
-      :only=>[:id],
-      :include=>{
-        :assets=>{
-          :only=>[:id,:name,:description]
-        }
-      }
-    }
-  }) %>
-</script>
-
 <div class="content circle-corners-bottom" >
   <div class="heading-main">
     <h1 class="page-content">

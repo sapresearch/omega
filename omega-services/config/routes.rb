@@ -14,8 +14,7 @@ Omega::Services::Module.routes.draw do
 
   resources :asset_allocations do
     collection do
-      get :show_services_for_asset
-      get :show_assets_for_service
+      
     end
   end
 end

@@ -17,6 +17,9 @@ $.fn.extend({
             500,
             function(){$(this.endless_highlight())}
         )
+    },
+    is_empty: function(){
+        return $(this).html().match(/\w+/) ? false :true
     }
 });
 

@@ -1,8 +1,5 @@
-<div>
-  <%= om_button(:contact => true, :icon=>'apply') do %>
-    <%= link_to_function "Hide Message Box", "hide_message_box()", :id=>"hide_message_box_link" %>
-    <%= link_to_function "Show Message Box", "show_message_box()", :id=>"show_message_box_link" %>
-  <% end %>
+<div id="asset_allocation_operation_links">
+  <%= render "index_operation_links" %>
 </div>
 
 <div id="asset_allocation_info" class="explanation round shadow">
@@ -30,3 +27,11 @@
 </div>
 
 <br clear="all"/>
+
+<script type="text/javascript">
+  <% if @asset_id %>
+    $(".asset_<%= @asset_id.to_s %>").click()
+  <% elsif @leaf_service_id %>
+    $(".leaf_service_<%= @leaf_service_id.to_s %>").click()
+  <% end %>
+</script>
