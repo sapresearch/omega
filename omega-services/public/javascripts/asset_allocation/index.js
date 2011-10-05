@@ -58,17 +58,17 @@ function show_message_box(){
 }
 
 function display_static_view(){
-    $("#asset_allocation_info #instruction").hide()
-    $("#asset_allocation_info #dynamic_view").hide()
-    $("#asset_allocation_info #static_view").show()
+    $("#asset_allocation_info #instruction").stop(true,true).hide()
+    $("#asset_allocation_info #dynamic_view").stop(true,true).hide()
+    $("#asset_allocation_info #static_view").animate({opacity:"show"}, 'normal');
 }
 function display_dynamic_view(){
-    $("#asset_allocation_info #instruction").hide()
-    $("#asset_allocation_info #static_view").hide()
-    $("#asset_allocation_info #dynamic_view").show()
+    $("#asset_allocation_info #instruction").stop(true,true).hide()
+    $("#asset_allocation_info #static_view").stop(true,true).hide()
+    $("#asset_allocation_info #dynamic_view").animate({opacity:"show"}, 'normal');
 }
 function display_instruction(){
-    $("#asset_allocation_info #dynamic_view").hide()
-    $("#asset_allocation_info #static_view").hide()
-    $("#asset_allocation_info #instruction").show()
+    $("#asset_allocation_info #dynamic_view").stop(true,true).hide()
+    $("#asset_allocation_info #static_view").stop(true,true).hide()
+    $("#asset_allocation_info #instruction").animate({opacity:"show"}, 'normal');
 }
