@@ -1,6 +1,6 @@
 /* message box */
 #asset_allocation_info{
-    height:132px;
+    height:137px;
     margin: 10px 0px;    
     padding:0px;
     border:0px;
@@ -10,7 +10,7 @@
     background: -moz-linear-gradient(top,  #eee,  #fff); /* for firefox 3.6+ */
 }
 #asset_allocation_info #asset_allocation_info_inner_wrapper{
-    height:105px;
+    height:109px;
     padding:10px;
     overflow-y:auto;
 }
