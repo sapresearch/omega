@@ -1,4 +1,5 @@
 <% leaf_service ||= @leaf_service %>
+<% assets = leaf_service.assets %>
 
 <div class="item_name service round"><%= leaf_service.name %></div>
 
@@ -6,21 +7,25 @@
   <div class="item_section_name service round">Assets Assigned:</div>
 
   <div class="item_section_list service round">
-    <ul class="level_0">
-      <% leaf_service.assets.each do |asset| %>
-        <li>
-          <span class="sub_item_name asset"><%= asset.name %></span>
-          <ul class="level_1">
-            <% leaf_service.time_overlapping_services_with_periods(asset).each do |service, periods| %>
-              <li>
-                Sharing with <span class="sub_item_name_inline service"><%= service.name %></span>
-                from <span class="date_time"><%= Time.at(periods[0][0]) %></span>
-                to <span class="date_time"><%= Time.at(periods[0][1]) %></span>
-              </li>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
-    </ul>
+    <% if assets.length==0 %>
+      <%= blank_sign("(none)") %>
+    <% else %>
+      <ul class="level_0">
+        <% assets.each do |asset| %>
+          <li>
+            <span class="sub_item_name asset"><%= asset.name %></span>
+            <ul class="level_1">
+              <% leaf_service.time_overlapping_services_with_periods(asset).each do |service, periods| %>
+                <li>
+                  Sharing with <span class="sub_item_name_inline service"><%= service.name %></span>
+                  from <span class="date_time"><%= Time.at(periods[0][0]) %></span>
+                  to <span class="date_time"><%= Time.at(periods[0][1]) %></span>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 </div>

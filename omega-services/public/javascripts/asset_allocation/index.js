@@ -24,8 +24,9 @@ $(function(){
         handles:"s",
         animate:true,
         ghost:true,
+        alsoResize:"#asset_allocation_info_inner_wrapper",
         maxHeight:800
-    })    
+    })
 })
 
 function clear_visual_effects(){
@@ -38,6 +39,7 @@ function clear_visual_effects(){
     $(".assets_list").sortable("option","connectWith", false)
     $(".assets_list li.ui-state-disabled").hide()
     $(".assets_list li:not(.ui-state-disabled)").show()
+    $(".leaf_services_list").sortable("option","connectWith", false)
     $(".leaf_services_list li.ui-state-disabled").hide()
     $(".leaf_services_list li:not(.ui-state-disabled)").show()
     $(".exchange").css("visibility","hidden")

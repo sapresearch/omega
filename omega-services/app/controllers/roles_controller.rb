@@ -34,6 +34,12 @@ class RolesController < Omega::Controller
           role.save!
         end
 
+        User.all.each do |u|
+          role = Role.find_by_internal_name("authenticated_user")
+          u.roles << role
+          u.save!
+        end
+        
         user = User.find_by_username("admin")
         if user.nil?
           user = User.new do |u|
@@ -44,6 +50,7 @@ class RolesController < Omega::Controller
         end
         user.roles << Role.find_by_internal_name('administrator')
         user.save(:validate=>false)
+
       end
     end
 
