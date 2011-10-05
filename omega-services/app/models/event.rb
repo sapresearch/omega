@@ -91,7 +91,8 @@ class Event < ActiveRecord::Base
     end
     periods
   end
-  
+
+  # future improvement: DP
   def overlapping_periods(event, begin_at=start_at, until_at = (is_recurrent? ? recurrence_end_at||begin_at+1.year : end_at||begin_at+1.year) )
     periods_1 = self.to_i_periods(begin_at, until_at) || []
     periods_2 = event.to_i_periods(begin_at, until_at) || []

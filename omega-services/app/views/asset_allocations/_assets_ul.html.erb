@@ -48,8 +48,8 @@
       var url = '<%= asset_allocations_url %>'
       var data = {}
       var type = 'POST'
-      data["asset_id"]=ui.item.object_id()
-      data["leaf_service_id"]= <%= leaf_service.id %>
+      data["asset_id"] = ui.item.object_id()
+      data["leaf_service_id"] = <%= leaf_service.id %>
 
       $.ajax({
         url:url,

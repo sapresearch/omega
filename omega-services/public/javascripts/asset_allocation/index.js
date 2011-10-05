@@ -19,8 +19,16 @@ $.fn.extend({
 var is_dragging = false;
 $(function(){
     $("#asset_allocation_info").resizable({
-        start: function(event, ui) {$("body").addClass("disable_selection"); is_dragging=true},
-        stop: function(event, ui) {$("body").removeClass("disable_selection"); is_dragging=false},
+        start: function(event, ui) {
+            $("body").addClass("disable_selection");
+            $(".ui-resizable-s").addClass("transparent")
+            is_dragging=true
+        },
+        stop: function(event, ui) {
+            $("body").removeClass("disable_selection");
+            $(".ui-resizable-s").removeClass("transparent")
+            is_dragging=false
+        },
         handles:"s",
         animate:true,
         ghost:true,

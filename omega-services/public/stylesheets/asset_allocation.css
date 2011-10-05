@@ -33,9 +33,11 @@
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     -border-radius:3px;
+    cursor:pointer;
     font-weight:bold;
     padding:2px 15px;
 }
+#asset_allocation_info .sub_item_name_inline{cursor:pointer;}
 #asset_allocation_info .sub_item_name.asset{ background:lightblue; color:#444;}
 #asset_allocation_info .sub_item_name.service{ background:green; color:white}
 #asset_allocation_info .sub_item_name_inline.service{ color:green; font-weight:bold;}
@@ -158,4 +160,5 @@
 .ui-resizable-w{left:0px;}
 .ui-resizable-s{bottom:0px; background: white; border:0px;}
 .ui-resizable-s:hover{background:#ddd}
+.ui-resizable-s.transparent{background:transparent}
 

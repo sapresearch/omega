@@ -1,1 +1,2 @@
-
+//$(".asset_<%= @asset.id.to_s %>:not(.ui-state-disabled)").replaceWith("<%= escape_javascript(render "asset_li", :asset=>@asset, :add_event_listeners=>false) %>")
+//$(".asset_<%= @asset.id.to_s %>.ui-state-disabled").replaceWith("<%= escape_javascript(render "asset_li", :asset=>@asset, :disabled=>true, :add_event_listeners=>false) %>")

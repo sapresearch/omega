@@ -261,6 +261,7 @@ class Service < ActiveRecord::Base
     service_leaf.assets.include?(asset)
   end
 
+  # future improvement: DP
   def time_overlapping_services(asset=nil, begin_at=Time.now, end_at=begin_at+1.year)
     return nil unless is_leaf?
     result_services = []
@@ -276,6 +277,7 @@ class Service < ActiveRecord::Base
     result_services
   end
 
+  # future improvement: DP
   def time_overlapping_services_with_periods(asset=nil, begin_at=Time.now, end_at=begin_at+1.year)
     return nil unless is_leaf?
     overlapping_hash = {}
@@ -291,6 +293,7 @@ class Service < ActiveRecord::Base
     overlapping_hash
   end
 
+  # future improvement: DP
   def time_overlapping_service_ids_with_periods(asset=nil, begin_at=Time.now, end_at=begin_at+1.year)
     return nil unless is_leaf?
     overlapping_hash = {}

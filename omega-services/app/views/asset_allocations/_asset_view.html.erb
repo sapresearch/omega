@@ -1,5 +1,6 @@
 <% asset ||= @asset %>
 <% leaf_services = asset.services %>
+<%# leaf_service_overlaps ||= @leaf_service_overlaps %>
 
 <div class="item_name asset round"><%= asset.name %></div>
 
@@ -13,11 +14,12 @@
       <ul class="level_0">
         <% asset.services.each do |leaf_service| %>
           <li>
-            <span class="sub_item_name service"><%= leaf_service.name %></span>
+            <span class="sub_item_name service" onclick="$('.leaf_service_<%= leaf_service.id.to_s %>').click()"><%= leaf_service.name %></span>
             <ul class="level_1">
               <% leaf_service.time_overlapping_services_with_periods(asset).each do |service, periods| %>
+              <%# leaf_service_overlaps[leaf_service.id][asset.id].each do |service, periods| %>
                 <li>
-                  Sharing with <span class="sub_item_name_inline service"><%= service.name %></span>
+                  Sharing with <span class="sub_item_name_inline service" onclick="$('.leaf_service_<%= service.id.to_s %>').click()"><%= service.name %></span>
                   from <span class="date_time"><%= Time.at(periods[0][0]) %></span>
                   to <span class="date_time"><%= Time.at(periods[0][1]) %></span>
                 </li>

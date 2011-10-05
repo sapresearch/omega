@@ -1,7 +1,8 @@
 <% asset ||= @asset %>
+<% disabled ||= false %>
 <% add_event_listeners ||= false %>
 
-<li class="asset_<%= asset.id.to_s %>" >
+<li class="asset_<%= asset.id.to_s %><%= " ui-state-disabled" if disabled %>" >
   <span class="item_name"><%= asset.name %></span>
   <span class="item_operation_link"></span>
 

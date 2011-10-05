@@ -1,7 +1,8 @@
 <% leaf_service ||= @leaf_service %>
+<% disabled ||= false %>
 <% add_event_listeners ||= false %>
 
-<li class="leaf_service_<%= leaf_service.id.to_s %>" >
+<li class="leaf_service_<%= leaf_service.id.to_s %><%= " ui-state-disabled" if disabled %>" >
   <span class="item_name"><%= leaf_service.name %></span>
   <span class="item_operation_link"></span>
   
