@@ -1,23 +1,23 @@
-<% require_stylesheet 'omega_volunteering' %>
-<% require_stylesheet 'settings' %>
-<%= require_stylesheet 'omega_users_table' %>
-<%= require_stylesheet 'omega_users' %>
+<% require_stylesheet 'omega_volunteering', 'settings', 'omega_users_table', 'omega_users' %>
 <%= require_javascript 'omega_users' %>
+
+<style type="text/css">
+	div#contact_submit{
+		text-align:center;
+		width:600px;
+		margin:auto;
+	}
+	#row_header{
+		text-align: center;
+	}
+</style>
+
+
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 
-<script type="text/javascript">
-
-function makeURL()
-{
-	text_val = oForm.forms["messageForm"]["message"].value;
-	alert("this is n alert");
-	//document.getElementById("demo").innerHTML=text_val;
-}
-
-</script>
-
 <body>
+
 	<div id="fb">
 	  <div id="fb-root"></div>
 	  <script src="http://connect.facebook.net/en_US/all.js"></script>
@@ -31,17 +31,6 @@ function makeURL()
 
 
 
-
-
-
-
-<!--<div id="right">
-	<h1 class="side-bar corners-top"> My Calendar </h1>
-		<p> <%#= "Your calendar is empty" %></p>
-</div>!-->
-
-
-<!--<div id="left">!-->
  <!--<div id="content-box">!-->
 <div class="content circle-corners-bottom-left">
 
@@ -85,40 +74,66 @@ function makeURL()
 				</tbody>
 			</table>
 
-		<br /><br /><br /><br /><br /><br />
+		<br /><br /><br /><br /><br />
 		<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>
+		<br /><br /><br />
 
 
 
+		<hr />
 		<%= form_for @contact, :url => update_my_page_users_path do |c| %> 
 
-			<%= fields_for @new_skill, :html => { :class => "stuff", :id => "stuff", :name => 'stuff' } do |s| %>
-				<p><%= s.label :New_Skill_Name %></p>
-				<p><%= s.text_field :name %></p>
-			<%end%>
+			<table>
+				<tr>
+					<td id="row_header"> <h1> My Skills </h1>
+					<td id="row_header"> <h1> My Interests </h1>
+				</tr>
 
-			<% @contact.skills.each do |s| %>
-				<%= c.fields_for s do |skill_fields| %>
-					<p><%= skill_fields.label :Name %></p>
-					<p><%= skill_fields.text_field :name %></p>
-					<%= skill_fields.hidden_field :id %>
-				<%end%>
-			<%end%>
+				<tr>
+					<td>
+						<%= fields_for @new_skill, :html => { :class => "stuff", :id => "stuff", :name => 'stuff' } do |s| %>
+							<p>
+								<%= s.label :Add_a_new_skill %>
+								<%= s.text_field :name %>
+							</p>
+						<%end%>
+					</td>
 
-			<%= fields_for @new_interest, :html => { :class => "stuff", :id => "stuff", :name => 'stuff' } do |s| %>
-				<p><%= s.label :New_Interest_Name %></p>
-				<p><%= s.text_field :name %></p>
-			<%end%>
+					<td>
+						<%= fields_for @new_interest, :html => { :class => "stuff", :id => "stuff", :name => 'stuff' } do |s| %>
+							<p>
+								<%= s.label :Add_a_new_interest %>
+								<%= s.text_field :name %>
+							</p>
+						<%end%>
+					</td>
+				</tr>
 
-			<% @contact.interests.each do |i| %>
-				<%= c.fields_for i do |interest_field| %>
-					<p><%= interest_field.label :Name %></p>
-					<p><%= interest_field.text_field :name %></p>
-					<%= interest_field.hidden_field :id %>
-				<%end%>
-			<%end%>
+				<tr>
+					<td>
+						<% @contact.skills.each do |s| %>
+							<%= c.fields_for s do |skill_fields| %>
+								<p><%= skill_fields.text_field :name %></p>
+								<%= skill_fields.hidden_field :id %>
+							<%end%>
+						<%end%>
+					</td>
 
-			<p><%= c.submit :Submit %></p>
+					<td>
+						<% @contact.interests.each do |i| %>
+							<%= c.fields_for i do |interest_field| %>
+								<p><%= interest_field.text_field :name %></p>
+								<%= interest_field.hidden_field :id %>
+							<%end%>
+						<%end%>
+					</td>
+				</tr>
+			</table>
+
+
+			<div id="contact_submit">
+				<p><%= c.submit :Update %></p>
+			</div>
 		<%end%>
 
 		
