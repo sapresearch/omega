@@ -31,6 +31,10 @@ function makeURL()
 
 
 
+
+
+
+
 <!--<div id="right">
 	<h1 class="side-bar corners-top"> My Calendar </h1>
 		<p> <%#= "Your calendar is empty" %></p>
@@ -84,6 +88,40 @@ function makeURL()
 		<br /><br /><br /><br /><br /><br />
 		<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>
 
+
+
+		<%= form_for @contact, :url => update_my_page_users_path do |c| %> 
+
+			<%= fields_for @new_skill, :html => { :class => "stuff", :id => "stuff", :name => 'stuff' } do |s| %>
+				<p><%= s.label :New_Skill_Name %></p>
+				<p><%= s.text_field :name %></p>
+			<%end%>
+
+			<% @contact.skills.each do |s| %>
+				<%= c.fields_for s do |skill_fields| %>
+					<p><%= skill_fields.label :Name %></p>
+					<p><%= skill_fields.text_field :name %></p>
+					<%= skill_fields.hidden_field :id %>
+				<%end%>
+			<%end%>
+
+			<%= fields_for @new_interest, :html => { :class => "stuff", :id => "stuff", :name => 'stuff' } do |s| %>
+				<p><%= s.label :New_Interest_Name %></p>
+				<p><%= s.text_field :name %></p>
+			<%end%>
+
+			<% @contact.interests.each do |i| %>
+				<%= c.fields_for i do |interest_field| %>
+					<p><%= interest_field.label :Name %></p>
+					<p><%= interest_field.text_field :name %></p>
+					<%= interest_field.hidden_field :id %>
+				<%end%>
+			<%end%>
+
+			<p><%= c.submit :Submit %></p>
+		<%end%>
+
+		
   		<!--<h3 class="application-form"> Sharing </h3>
 				<table id="accounts">
 

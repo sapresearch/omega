@@ -78,7 +78,7 @@ class Volunteering::RecordsController < Omega::Controller
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
 
-		@record.build_contact do |c|
+	 @record.build_contact do |c|
       c.addresses.build
       c.phone_numbers.build
     end 
@@ -213,7 +213,6 @@ class Volunteering::RecordsController < Omega::Controller
 
 		@all_filters = SearchFilter.filter_for(Contact, Hash.new, [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ] ) # Use a blank hash so it doesn't filter anything. Use this for the checkbox filters.
 		@filter = SearchFilter.filter_for(Contact, params, [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ] )  # Use this one to display all the contacts.
-		puts "\nThis is the filter that will be sent to the view: " + @filter.inspect + "\n"
 
 		@position = Volunteering::Position.find(params[:id])
 		@position_id = @position.id
@@ -236,19 +235,15 @@ class Volunteering::RecordsController < Omega::Controller
 		contact_ids.gsub!(/\[|\]/, "")
 		contact_ids = contact_ids.split(",")
 		contact_ids.each do |contact_id|
-			puts "\n\nCONTACT ID = #{contact_id} \n\n"
 			v = Volunteering::Record.new(:position_id => position_id,
-																	:contact_id => contact_id,
-																	:status => "Accepted"
-																	)
+												  :contact_id => contact_id,
+												  :status => "Accepted"
+												 )
 			if v.save
-				puts "\n\n TEST TEST TEST #{v.inspect} \n\n"
 				p = Volunteering::Position.find(position_id)
 				boolean = p.contacts.select! { |c| c.id == contact_id}
-				result = boolean == nil ? "\n\nError, records_controller.rb. Line 249: Position does not have that contact id.\n\n" : "\n\n Success! #{boolean.inspect.to_s} is the contact for the record that was created \n\n"
-				puts result
 			elsif !v.save
-    		redirect_to my_applications_volunteering_records_url
+    			redirect_to my_applications_volunteering_records_url
 			end
 		end
 		redirect_to volunteering_positions_url

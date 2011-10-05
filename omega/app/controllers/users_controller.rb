@@ -134,27 +134,40 @@ class UsersController < Omega::Controller
 		#@word_user_hash = Contact.
 	end
 
+
 	def my_page
+		@contact = Contact.for(current_user)
+		@new_skill = Contact::Skill.new
+		@new_interest = Contact::Interest.new
 
-		@positions = Array.new
- 		records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
-		records.each do |record|
-			sub_hash = Hash.new
-			result = Volunteering::Position.where(:id => record.position_id)
-			sub_hash[:position] = result[0]
-			sub_hash[:record] = record
-			@positions.push(sub_hash)
+		volunteering_records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
+ 		@positions = volunteering_records.inject(Array.new) do |positions, record|
+			position = Volunteering::Position.find(record.position_id)
+			positions.push({ :position => position, :record => record }) # @positions has hashes with the position and record as key-value pairs for each position the user is signed up for.
 		end
-
-		@calendar = Calendar.where(:user_id => current_user)
-		@accounts = Array.new
 
 		@sap_profile_id = 100002599482156
 		@sap_profile_id_2 = 253183958028424 
 		@sap_profile_id_secret_2 = "7b4684019a0ea345ce8976f8d3a7d57a"
 
 		@settings = Setting.new
-		
+	end
+
+	def update_my_page
+		contact = Contact.for(current_user)
+
+		{Contact::Skill => 'skill', Contact::Interest => 'interest'}.each do |model, method|
+			Contact::Skill.find(params[:contact]["contact_#{method}".to_sym][:id]).update_attributes(:name => params[:contact]["contact_#{method}".to_sym][:name])
+
+			if !(params["contact_#{method}".to_sym][:name]).to_s.blank? # Only create a new object if the name isn't blank.
+				new_object = model.create(params["contact_#{method}".to_sym])
+				collection = contact.send(method.pluralize.to_sym)
+				# If this skill/interest name already exists, then add the pre-existing (unique) skill/interest to the collection.
+				collection = model.find_by_name(new_object.name).nil? ? collection << new_object : collection << model.find_by_name(new_object.name)
+			end
+		end
+
+		redirect_to(my_page_users_path)
 	end
 
 end
