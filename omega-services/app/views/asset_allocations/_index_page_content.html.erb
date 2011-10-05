@@ -37,38 +37,3 @@
 </script>
 
 
-
-<!-- test
-<style>
-  #test1{
-    height:116px;
-
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff'); /* for IE */
-    background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fff)); /* for webkit browsers */
-    background: -moz-linear-gradient(top,  #eee,  #fff); /* for firefox 3.6+ */
-
-  }
-  #test2{
-    overflow-y: auto;
-    margin:10px;
-    background:blue;
-    height:100px
-  }
-</style>
-<div id="test1">
-  <div id="test2" ></div>
-</div>
-
-<script>
-      $("#test1").resizable({
-          start: function(event, ui) {$("body").addClass("disable_selection"); is_dragging=true},
-          stop: function(event, ui) {$("body").removeClass("disable_selection"); is_dragging=false},
-          handles:"s",
-          animate:true,
-          ghost:true,
-          alsoResize:"#test2",
-          maxHeight:800
-      })
-</script>
-
--->

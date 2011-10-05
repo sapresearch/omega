@@ -1,17 +1,20 @@
 /* message box */
 #asset_allocation_info{
-    height:116px;
-    margin: 10px 0px;
+    height:132px;
+    margin: 10px 0px;    
     padding:0px;
+    border:0px;
 
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff'); /* for IE */
     background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fff)); /* for webkit browsers */
     background: -moz-linear-gradient(top,  #eee,  #fff); /* for firefox 3.6+ */
 }
 #asset_allocation_info #asset_allocation_info_inner_wrapper{
+    height:105px;
     padding:10px;
     overflow-y:auto;
 }
+
 #asset_allocation_info .view{display:none;}
 #show_message_box_link{display:none;}
 
@@ -153,6 +156,6 @@
 .item_list .ui-state-highlight{background:lightyellow; border:1px solid transparent;}
 .ui-resizable-e{right:0px;}
 .ui-resizable-w{left:0px;}
-.ui-resizable-s{bottom:0px; background: white;}
+.ui-resizable-s{bottom:0px; background: white; border:0px;}
 .ui-resizable-s:hover{background:#ddd}
 
