@@ -31,7 +31,6 @@
 
 
 
- <!--<div id="content-box">!-->
 <div class="content circle-corners-bottom-left">
 
 <div class="heading-main">
@@ -53,45 +52,39 @@
 						<th id="accounts">Volunteering<br/>Opportunity</th>
 						<th id="accounts">Date</th>
 						<th id="accounts">Application Status</th>
-						<th id="accounts">Share with Facebook</th>
+						<th id="accounts">Facebook</th>
+						<th id="accounts">Twitter</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<% @positions.each do |element| %>
 						<tr id="accounts">
-	         		<td id="accounts"> <%= element[:position].name %></td>
-	         		<td id="accounts"> <%= element[:position].start_date %></td>
-	         		<td id="accounts"> <%= element[:record].action %></td>
-	         		<td id="accounts"> 
-								<!--<button onsubmit="fb_message()"> Post </button>!-->
+	         			<td id="accounts"> <%= element[:position].name %></td>
+	         			<td id="accounts"> <%= element[:position].start_date %></td>
+	         			<td id="accounts"> <%= element[:record].action %></td>
+	         			<td id="accounts"> 
 								<form onsubmit="fb_message()">
-
-									<!-- This works with Chrome !-->
-									<!--<input type="hidden" id="fb" size="0" maxlength="0"> <input type="submit" value="Post">!-->
-									<!-- This works with Chrome !-->
-
-									<!-- This works with Firefox and Internet Explorer !-->
-									<!-- <input type="submit" value="Post"> !-->
-									<!-- This works with Firefox and Internet Explorer !-->
-
-									<!-- This works in Chrome and Firefox in Windows and Ubuntu !-->
 									<input type="submit" id="fb" size="0" maxlength="0" value="Post" /> 
-									<!-- This works in Chrome and Firefox in Windows and Ubuntu !-->
 								</form>
+							</td>
+	         			<td id="accounts"> 
+								<% position_url = url_for(element[:position]) %>
+								<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%=position_url%>" data-text="Check this out" data-count="none">Tweet</a>
+								<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
 							</td>
 						</tr>
 					<% end %>
 				</tbody>
 			</table>
 
-		<!-- Unneccessary, since we don't need offline access anymore. !-->
+	<!-- Unneccessary, since we don't need offline access anymore. !-->
 		<!--<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>!-->
-		<!-- Unneccessary, since we don't need offline access anymore. !-->
+	<!-- Unneccessary, since we don't need offline access anymore. !-->
 
 
-
-		<hr />
+	<br /><br />
+  	<h3 class="content-heading"> My Skills and Interests </h3>
 		<%= form_for @contact, :url => update_my_page_users_path do |c| %> 
 
 			<table>
@@ -147,58 +140,6 @@
 			</div>
 		<%end%>
 
-		
-  		<!--<h3 class="application-form"> Sharing </h3>
-				<table id="accounts">
 
-					<tbody>
-						<tr id="accounts">
-							<td id="accounts"> Facebook: </td>
-							<td id="accounts">
-								<form name="messageForm" onsubmit="publish_stuff();">
-									<input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="Post Message"><br />
-								</form>
-							</td>
-						</tr>
-
-						<tr id="accounts">
-							<td id="accounts"> Twitter: </td>
-							<td id="accounts">
-								<form name="messageForm" onsubmit="publish_stuff();">
-									<input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="Post Message"><br />
-								</form>
-							</td>
-						</tr>
-
-					</tbody>
-				</table>!-->
-					
-
-
-						<!--
-				<p id="demo"></p>
-				<br />
-				<form name="messageForm" onsubmit="publish_stuff();">
-					Your message: <input type="text" name="message" size="30" maxlength="70"> <input type="submit" value="Submit"><br />
-				</form>
-
-
-
-
-	<p>For Testing Only</p>
-	<p><a href="#" onclick="loadFB();">Load Facebook</a></p>
-	<p><a href="#" onclick="checkIfLoaded();">Check if it loaded</a></p>
-	<p><a href="#" onclick="publish_wall_post();">Publish</a></p>
-
-
-
-
-
-								<p id="response"> No rsponse yet</p>
-								<button type="button" onclick="facebookFunc()"> Facebook Login </button> 
-								<p id="demo"></p>   !-->
-
-
- </div>
- <!--</div>!-->
+	</div>
 </body>
