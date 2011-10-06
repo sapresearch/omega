@@ -19,6 +19,7 @@ class AssetAllocationsController < Omega::Controller
   end
 
   def create
+    @type = params[:type]
     @asset_id = params[:asset_id]
     @leaf_service_id = params[:leaf_service_id]
     @asset = Asset.find(@asset_id)
@@ -38,6 +39,7 @@ class AssetAllocationsController < Omega::Controller
   end
 
   def destroy
+    @type = params[:type]
     @asset_id = params[:asset_id]
     @leaf_service_id = params[:leaf_service_id]
     @asset = Asset.find(@asset_id)

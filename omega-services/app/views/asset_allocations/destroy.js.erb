@@ -20,4 +20,15 @@ $(".asset_<%= @asset.id.to_s %>").each(function(){
   })
 <% end %>
   
-$(".main_list_item").click()
+
+<% if @type=="leaf_service" %>
+  $(".main_list_item").everyTime(10, function(){
+    $(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'lightblue'}, 500);
+  });
+  $("#asset_allocation_info #static_view").html('<%= escape_javascript(render "asset_view", :asset=>@asset) %>')
+<% elsif @type=="asset" %>
+  $(".main_list_item").everyTime(10, function(){
+    $(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'green'}, 500);
+  });
+  $("#asset_allocation_info #static_view").html('<%= escape_javascript(render "leaf_service_view", :leaf_service=>@leaf_service) %>')
+<% end %>

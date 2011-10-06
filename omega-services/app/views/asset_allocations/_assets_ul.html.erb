@@ -50,6 +50,7 @@
       var type = 'POST'
       data["asset_id"] = ui.item.object_id()
       data["leaf_service_id"] = <%= leaf_service.id %>
+      data["type"] = "asset"
 
       $.ajax({
         url:url,
@@ -70,6 +71,7 @@
       var type = 'DELETE'
       data["asset_id"]=ui.item.object_id()
       data["leaf_service_id"]= <%= leaf_service.id %>
+      data["type"] = "asset"
 
       $.ajax({
         url:url,
