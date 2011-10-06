@@ -9,7 +9,7 @@
 <div class="content circle-corners-bottom-left">
 
 <div id="home_content">
-	<h2 class="title">Welcome to the Happyville Community Center</h2> 
+	<h2 class="title"><a href="#">Welcome to the Happyville Community Center </a></h2> 
 	<p ></p>
 	<p><img src="images/community.jpg" width="550" height="361" alt="" /></p>
 		

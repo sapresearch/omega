@@ -1,0 +1,922 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #dfdfdf;
+}
+
+h1, h2, h3 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+h2 {
+	font-size: 2.8em;
+}
+
+h3 {
+	font-size: 1.6em;
+}
+
+p, ul, ol {
+	margin-top: 0;
+	line-height: 180%;
+}
+
+ul, ol {
+}
+
+a {
+	text-decoration: none;
+	color: #339CCB;
+}
+
+a:hover {
+}
+
+/* Login */
+
+#ctlrBar, #user_custom_bar {
+    background: #DFDFDF;
+    color: #FFF;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
+    text-transform: capitalize;
+    position:right;
+}
+
+#ctlrBar a, #user_custom_bar a {
+    color: #FFF;
+}
+
+/* Header */
+#banner_wrapper {
+	width: 950px;
+	height: 200px;
+	margin: 0 auto;
+	background: url(../images/header_background.png) repeat left top;
+}
+
+/* Logo */
+#logo {
+	margin: 0;
+	padding: 40px 40px 0px 75px;
+	color: #FFFFFF;
+}
+
+#logo h1, #logo p {
+	margin: 0px;
+	text-transform: uppercase;
+}
+
+#logo h1 {
+	font-family: Impact, Arial, Helvetica, sans-serif;
+	font-size: 40px;
+}
+
+#logo p {
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+} 
+
+#logo img {
+  float: left;
+  padding: 0px 30px 0px 0px;
+} 
+
+/* Menu */
+
+#navigation {
+	width: 950px;
+	height: 40px;
+	margin: 0 auto;
+	padding: 40px 0px 0px 0px;
+}
+.dropmenu {
+	background: #999;
+	float: left;
+	margin: 0px; 
+	padding: 0px;
+	border: none
+	border-right: none;
+}
+
+.dropmenu li a, .dropmenu li{
+	float: left;
+}
+
+.dropmenu li{
+	list-style: none;
+	position: relative;	
+}
+
+.dropmenu li span{
+	background-color:#666666;
+	display:block;
+	height:5px;
+	position:absolute;
+	right:10px;
+	top:11px;
+	width:5px;
+}
+
+.dropmenu li a:hover span{
+	background-color:#0099FF;
+}
+
+.dropmenu li a, .dropmenu li div{
+	
+	height 35px;
+	padding: 15px 25px 16px 15px;
+	text-decoration: none;
+	background-color:#F1F1F1;
+	border: none;
+	color:#666666;
+  font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+.dropmenu li a:hover{
+  background: #D6D6D6; 
+}
+
+/* Submenu */
+.dropmenu li ul, .dropmenu li > div {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	padding: 0px;
+	margin: 0px;
+	border-bottom:1px solid #CCCCCC;
+	z-index:600; 
+}
+
+.dropmenu.css-only li:hover > ul, .dropmenu.css-only li:hover > div{
+	display: block;
+}
+
+.dropmenu li ul li, .dropmenu li ul li a{
+	float: none;	
+}
+
+.dropmenu li ul li{
+	_display: inline; /* for IE6 */	
+}
+
+.dropmenu li > div{
+	width: 200px;
+	border-top:1px solid #CCCCCC;
+	border-left:1px solid #CCCCCC;
+	padding: 15px;
+}
+
+/* Sub submenu */
+
+.dropmenu li ul li a{
+	width: 175px;
+	display: block;	
+	border-top:1px solid #CCCCCC;
+	border-left:1px solid #CCCCCC;
+}
+.dropmenu li ul li a:hover{
+	background-color: #FFF;
+	font-weight: bold;
+}
+
+.dropmenu li ul li ul, .dropmenu li ul li > div{
+	top: 0px;
+	left: 100%;
+}
+
+/****** Page Contents *****/
+
+#content_box{
+    width: 950px;
+    background:#DFDFDF;
+    padding: 30px;
+	min-height: 650px;
+  	margin: auto 15px;
+}
+
+#left {
+    position: relative;
+	float: left;
+	margin-left: 0px;
+    width: 688px;
+}
+
+#right {
+    width: 250px;
+	float:right;
+	height: auto;
+
+}
+
+/**************************** FOOTER *****************************/
+/* must be same height as the footer */
+
+#footer_wrapper {
+	min-width: 1200px;
+	width: 100%;
+	margin-top: 100px;
+}
+
+#footer {
+    width: 100%;
+	height: 100px;
+    /*margin: 0 auto;*/
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+
+}
+
+#footer table {
+    width: 100%;
+    text-align: center;
+}
+
+#footer h1 {
+    color: #4096ee;
+}
+
+#footer table td {
+
+    vertical-align: top;
+    color: #666;
+}
+
+#footer div.footer-content {
+    padding: 1em;
+    text-align: left;
+}
+
+#footer span.date {
+    padding: 0 10px 0 0;
+    color: #C7CCCD;
+}
+
+
+#footer-evergreen {
+	height: 100px;
+	width: 950px;
+    margin: 0 auto 2px;
+
+}
+
+#footer-evergreen table {
+    width: 950px;
+    text-align: center;
+
+}
+
+#footer-evergreen h1 {
+    color: #C5C891;
+}
+
+#footer-evergreen table td {
+    vertical-align: top;
+    color: #333;
+}
+
+#footer-evergreen div.footer-content {
+    padding: 1em;
+    text-align: left;
+}
+
+#footer-evergreen span.date {
+    padding: 0 10px 0 0;
+    color: #FF8A18;
+}
+
+#events {
+    height: 175px;
+    overflow: hidden;
+}
+
+/**************************** Rails specific style rules ***********/
+#errorExplanation {
+    margin: 1em 0;
+    padding: 1em;
+    border: 1px solid #ed513b;
+    -moz-border-radius: 4px;
+}
+
+/* Errors and validation */
+.fieldWithErrors input, .inputInvalid {
+    padding: 8px;
+    background: #F09183;
+    color: #fff;
+    border: 1px solid #ed513b;
+}
+
+.fieldWithErrors label {
+    color: #ed513b;
+}
+
+span.error, .red {
+    color: #ed513b;
+}
+
+.green {
+    color: #61bd68;
+}
+
+#errorExplanation h2 {
+
+    padding: 0.5em;
+    color: #ed513b;
+
+}
+
+#errorExplanation ul {
+    padding: 1em;
+}
+
+#errorExplanation li {
+    margin: 4px 0;
+    padding: 0;
+    text-indent: 1em;
+    border-left: 4px solid #ed513b;
+    font-style: italic;
+}
+
+#warning {
+    padding: 1em;
+    font-size: 1.4em;
+    background-color: #E1F7FA;
+    color: #fff;
+    z-index: 1000;
+    width: 100%;
+    position: absolute;
+}
+
+.inputValid {
+    border: 1px solid #61bd68;
+
+}
+form span.error {
+
+    padding: 0 0 0 4px;
+    color: #ED513B;
+    font-size: 1em;
+}
+
+.cmd_success {
+    border: 4px solid #056136;
+    padding: 1em;
+    font-weight: bold;
+    background: #3EB17B;
+    color: #fff;
+}
+/**************************** END Rails Specific *****************************/
+
+/**************************** ICONS *****************************/
+/* OM-COLORED-ICON-BUTTONS */
+.om-button a, .om-button input, .om-button button, .om-icon-button input, .om-icon-button button {
+    position: relative;
+    text-transform: capitalize;
+    line-height: 10px;
+	font-family:"Trebuchet MS";
+    height: 30px;
+    color: #1F1603;
+    background: none;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: visible;
+    cursor: pointer;
+    padding-left: 35px;
+	padding-bottom: 3px;
+    outline: none;
+    border: none;
+    vertical-align: bottom;
+
+}
+
+.om-button input, .om-icon-button input {
+	margin-left: 5px;
+}
+
+.om-icon-button a {
+    color: #1F1603;
+    font-weight: bold;
+    padding-left: 35px;
+	font-size: 14px;
+}
+
+.om-button button {
+    width: auto;
+    overflow: visible;
+}
+
+span.om-button,
+span.om-icon-button {
+    position: relative;
+    -moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
+    display: inline-block;
+    height: 30px;
+    background: url("../images/om_button_bg_evergreen.png") repeat-x bottom transparent;
+    border-width: 1px;
+    border-style: solid;
+    border-color:  #777 #555 #555;
+    margin-left: 135px;
+	margin-top: 40px;
+	margin-bottom: 5px;
+	width: 200px;
+}
+
+
+
+span.om-plain-button, span.om-plain-icon-button {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    height: 16px;
+    margin: 0 0 0 22px;
+}
+
+span.om-plain-button a, span.om-plain-icon-button a {
+    color: #1F1603;
+	font-weight: bold;	
+}
+
+span.om-plain-button span.om-icon,
+span.om-plain-icon-button span.om-icon,
+.om-footer-symbol {
+    background-image: url("../images/icons/iconSprite.png");
+    background-repeat: no-repeat;
+}
+
+
+span.om-button span.om-icon,
+span.om-icon-button span.om-icon,
+span.om-contact-button span.om-icon,
+span.om-contact-icon-button span.om-icon,
+span.om-small-button span.om-icon,
+span.om-small-icon-button span.om-icon,
+span.om-plain-button span.om-icon,
+span.om-plain-icon-button span.om-icon {
+    position: absolute;
+    top: 2px;
+    margin: 0 0 0 -20px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    display: inline;
+    zoom: 1;
+
+}
+
+span.om-sidebar-button span.om-icon,
+span.om-sidebar-icon-button span.om-icon  {
+    position: absolute;
+    top: 2px;
+    margin: 0 0 0 15px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    display: inline;
+    zoom: 1;
+
+}
+
+span.om-contact-button, span.om-contact-icon-button {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    height: 16px;
+	margin-left: 30px;
+}
+
+span.om-contact-button a, span.om-contact-icon-button a {
+    color: #1F1603;
+	font-weight: bold;	
+}
+
+span.om-contact-button span.om-icon, 
+span.om-contact-icon-button span.om-icon,
+ .om-footer-symbol
+{
+    background-image: url(../images/icons/iconSprite.png);
+    background-repeat: no-repeat;
+}
+
+
+span.om-small-button, span.om-small-icon-button {
+    
+	cursor: pointer;
+    position: relative;
+    display: inline-block;
+	-moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
+    background: url("../images/om_button_bg_evergreen.png") repeat-x bottom transparent;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #777 #555 #555;
+	width: 100px;
+    height: 25px;
+    margin: 0 0 0 20px;
+}
+
+span.om-small-button a, span.om-small-icon-button a {
+    color: #1F1603;
+	font-weight: bold;
+	margin-left: 35px;
+	padding-top: 15px;
+	line-height: 25px;
+    height: 25px;
+	
+}
+
+span.om-small-button span.om-icon, span.om-small-icon-button span.om-icon, .om-footer-symbol
+{
+    background-image: url(../images/icons/iconSprite.png);
+    background-repeat: no-repeat;
+}
+
+
+span.om-sidebar-button, span.om-sidebar-icon-button {    
+	cursor: pointer;
+    position: relative;
+    display: inline-block;
+	-moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
+    background: url("../images/om_button_bg_evergreen.png") repeat-x bottom transparent;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #777 #555 #555;
+	width: 150px;
+    height: 25px;
+    margin: 0 0 0 20px;
+}
+
+span.om-sidebar-button a, span.om-sidebar-icon-button a {
+    color: #1F1603;
+	font-weight: bold;
+	margin-left: 40px;
+	padding-top: 15px;
+	line-height: 25px;
+    height: 25px;
+	
+}
+
+span.om-sidebar-button span.om-icon, span.om-sidebar-icon-button span.om-icon, .om-footer-symbol
+{
+    background-image: url(../images/icons/iconSprite.png);
+    background-repeat: no-repeat;
+}
+
+
+.om-footer-symbol {
+    display: inline-block;
+    width: 64px;
+    height: 48px;
+}
+
+.om-footer-twitter {
+    background-position: 0 -464px;
+}
+
+.om-footer-rss {
+    background-position: 0 -512px;
+}
+
+.om-footer-facebook {
+    background-position: 0 -1153px;
+}
+
+.om-footer-evergreen {
+    background-position: 0 -1214px;
+}
+
+.om-footer-calendar {
+    background-position: 0 -560px;
+}
+
+.om-icon-only {
+    margin: 0 2px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+span.om-button-active {
+    background: url("../images/om_button_bg_active.png") repeat-x bottom transparent;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc #bbb #a0a0a0;
+    color: #0063dc;
+}
+
+
+span.first-letter-bold {
+	color: #342B21;
+	font-size: 1.7em;
+    font-weight: bold
+}
+
+.om-white-icon, .om-blue-icon {
+    height: 14px;
+    width: 14px;
+}
+
+.om-green-icon {
+	height: 35px;
+    width: 35px;
+    background: url("../images/ui-icons-green-large.png");
+
+}
+
+.ui-icon-previous-week {
+     background-position: -159px -35px;
+
+}
+
+.ui-icon-next-week {
+     background-position: -95px -35px;
+
+}
+    
+span.om-icon-button span.om-icon {
+    margin-left: 13px;
+	margin-top: 5px;
+}
+
+span.om-small-icon-button span.om-icon {
+    margin-left: 13px;
+	margin-top: 5px;
+}
+.om-icon-date {
+    background-position: 0 -16px;
+}
+
+.om-icon-add {
+    background-position: 0 -32px;
+}
+
+.om-icon-edit {
+    background-position: 0 -48px;
+}
+
+.om-icon-delete-icon {
+    background-position: 0 -64px;
+
+}
+
+.om-icon-delete-small, .om-icon-cancel {
+    background-position: 0 -80px;
+
+}
+
+.om-icon-search {
+    background-position: 0 -96px;
+}
+
+.om-icon-user {
+    background-position: 0 -112px;
+}
+
+.om-icon-group {
+    background-position: 0 -128px;
+}
+
+.om-icon-mail {
+    background-position: 0 -144px;
+}
+
+.om-icon-sort-az {
+    background-position: 0 -160px;
+}
+
+.om-icon-sort-za {
+    background-position: 0 -176px;
+}
+
+.om-icon-favorite-add {
+    background-position: 0 -192px;
+}
+
+.om-icon-favorite-remove {
+    background-position: 0 -208px;
+}
+
+span.om-icon-back {
+    background-position: 0 -224px;
+}
+
+.om-icon-mail-sent {
+    background-position: 0 -240px;
+}
+
+.om-icon-mail-open {
+    background-position: 0 -256px;
+}
+
+.om-icon-mail-new {
+    background-position: 0 -272px;
+}
+
+.om-icon-user-add {
+    background-position: 0 -288px;
+}
+
+.om-icon-household-add {
+    background-position: 0 -304px;
+}
+
+.om-icon-user-remove {
+    background-position: 0 -320px;
+}
+
+.om-icon-user-edit {
+    background-position: 0 -336px;
+}
+
+.om-icon-mail-reply {
+    background-position: 0 -352px;
+}
+
+.om-icon-save {
+    background-position: 0 -368px;
+}
+
+.om-icon-delete {
+    background-position: 0 -384px;
+}
+
+.om-icon-apply {
+    background-position: 0 -400px;
+}
+
+.om-icon-clock {
+    background-position: 0 -416px;
+}
+
+.om-icon-favorite {
+    background-position: 0 -432px;
+}
+
+.om-icon-arrow-move {
+    background-position: 0 -448px;
+}
+
+.om-icon-magnifier-m {
+    background-position: 0 -720px;
+}
+
+.om-icon-calendar-next {
+    background-position: 0 -736px;
+}
+
+.om-icon-calendar-prev {
+    background-position: 0 -752px;
+}
+
+.om-icon-next {
+    background-position: 0 -768px;
+}
+
+.om-icon-folder-stamped {
+    background-position: 0 -784px;
+}
+
+.om-icon-folder-stack {
+    background-position: 0 -800px;
+}
+
+.om-icon-folder-open {
+    background-position: 0 -816px;
+}
+
+.om-icon-folder-edit {
+    background-position: 0 -832px;
+}
+
+.om-icon-counter {
+    background-position: 0 -848px;
+}
+
+.om-icon-tick-small {
+    background-position: 0 -864px;
+}
+
+.om-icon-clipboard-list {
+    background-position: 0 -880px;
+}
+
+.om-icon-ui-textfield {
+    background-position: 0 -896px;
+}
+
+.om-icon-ui-textarea {
+    background-position: 0 -912px;
+}
+
+.om-icon-ui-label {
+    background-position: 0 -928px;
+}
+
+.om-icon-ui-selectbox {
+    background-position: 0 -944px;
+}
+
+.om-icon-doc-share {
+    background-position: 0 -960px;
+}
+
+.om-icon-megaphone {
+    background-position: 0 -976px;
+}
+
+.om-icon-doc-image {
+    background-position: 0 -992px;
+}
+
+.om-icon-doc-pdf {
+    background-position: 0 -1008px;
+}
+
+.om-icon-doc-excel {
+    background-position: 0 -1024px;
+}
+
+.om-icon-doc-blue {
+    background-position: 0 -1040px;
+}
+
+.om-icon-doc-word {
+    background-position: 0 -1056px;
+}
+
+.om-icon-doc-powerpoint {
+    background-position: 0 -1072px;
+}
+
+.om-icon-doc-add {
+    background-position: 0 -1088px;
+}
+
+.om-icon-login {
+    background-position: 0 -1104px;
+}
+
+.om-icon-clipboard-plus {
+    background-position: 0 -1120px;
+}
+
+.om-icon-home {
+    background-position: 0 -1136px;
+}
+
+/**************************** END Icons *****************************/
+
+/* Styling for the Home Page Content */
+
+#home_content {
+	float: left;
+	width: 590px;
+	
+}
+
+.title {
+	text-transform: uppercase;
+	font-family: Impact, Arial, Helvetica, sans-serif;
+	font-size: 1.8em; 
+	font-weight: normal;
+	color: #606060;
+}
+
+.title a {
+	border: none;
+	color: #606060;
+}
+.mission {
+	padding: 20px 25px;
+	border: 1px solid #000000;
+	text-align: justify;
+}
+
+.mission p {
+	padding-left: 2px;
+	text-align: left;
+	text-transform: uppercase;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+}

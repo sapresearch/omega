@@ -1,37 +1,17 @@
-<div id="ctlrBar" class="corners-bottom right">
-      <% if current_user.is_anonymous? -%>
-          <span id="trigger"><a class="btnLoginCtrl" rel="test" href="#"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
-          | <%= link_to content_tag(:span, t(:sign_up)), register_users_url %>
-      <% else -%>
-          <span class="om-icon-only om-white-icon ui-icon-power"></span>
-          <%= link_to content_tag(:span, "logout"), sessions_url, :method => :delete, :confirm => 'Are you sure?' %>
-           |
-          <span class="om-icon-only om-white-icon ui-icon-person"></span>
-           <%= link_to 'My Profile', edit_user_url(current_user) %>
-      <% end -%>
- </div>
-
- <div id="loginWrapper">
-      <%= render :partial => "layouts/partials/login_main" %>
- </div>
-
-
-
-
 <div id="banner_wrapper" >
     <div id="logo" >
-    	<img src="../images/helping_hands_logo.png" width="100" height="100" />
+    	<img src="images/helping_hands_logo.png" width="100" height="100" />
  	    <h1> Omega Non-Profit Portal </h1>
 	    <p> Helping Non-Profits Serve Their Communities</a> </p>
 	  </div> <!-- end logo -->
 
     <div id="navigation">
 			<ul id="nav-one" class="dropmenu css-only" >
-				<li class="first current_page_item"> <%= link_to "home", root_url, :class =>'root_em' %></li>
+				<li class="first current_page_item"><a href="#">Home</a></li>
 				<li><a href="#">Participate</a>
 				  <ul>
-				  	<li><%= link_to "Volunteering", volunteering_positions_url %></li>
-				  	<li><%= link_to "Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
+				  	<li><a href="#">Volunteer Positions</a>
+				  	<li><a href="#">Services</a>
 				  	<li><a href="#">MyOmega</a>
 				  </ul>			
 				</li>	

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<!--  <title><%#= "#{params[:controller] } #{controller.action_name}" %> </title> -->
+
+  <title><%= content_for?(:title) ? content_for(:title) : "Omega" %></title>
+
+  <% require_stylesheet 'application_evergreen', 'thirdParty/jquery-ui-1.8.4.custom' %>
+  <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.tipsy', "rails", 'application', 'thirdParty/jquery.dataTables.min.js' %>
+  <%= csrf_meta_tag %>
+  <%= flash_session_meta_tag %>
+  <!--[if IE]>
+
+            <%= stylesheet_link_tag "ie" %>
+        <![endif]-->
+</head>
+<body>
+
+<!-- debug section -->
+<style type="text/css">
+  #test_pages{float:left; color:white;}
+  .test_section{float:left; position:relative; z-index:2000;}
+  .delimitor{float:left; margin:0px 5px;}
+  .test_section:hover{background:green}
+  .test_section a{color:white; display:block;}
+  .test_sub_section{display:none; position:absolute; white-space:nowrap; z-index:2000}
+  .test_sub_section:hover{background:green}
+  .test_section_link{display:inline-block;}
+</style>
+<ul id="test_pages">
+  <li class="test_section">
+    <span class="test_section_link"><%= link_to "Test Role", roles_url %></span>
+    <ul class="test_sub_section">
+      <li><%= link_to "Permission \\ Role Matrix", roles_url %></li>
+    </ul>
+  </li>
+  <li class="delimitor"> | </li>
+  <li class="test_section">
+    <span class="test_section_link"><%= link_to "Test Asset", asset_allocations_url %></span>
+    <ul class="test_sub_section">
+      <li><%= link_to "Assets Allocation", asset_allocations_url %></li>
+    </ul>
+  </li>
+  <script>
+    $(".test_section .test_section_link").mouseover(function() {
+        $(this).parent().find("ul").delay(200).slideDown('fast');
+    });
+    $(".test_section").mouseleave(function() {
+        $(this).find("ul").slideUp('fast');
+    });
+  </script>
+</ul>
+<!-- end of debug section -->
+
+<div id="notification-flash-wrapper">
+  <div id="notification-flash" class="center-content corners-top corners-bottom">
+  </div>
+</div>
+
+
+<div id="wrapper">
+  <%= render :partial => "layouts/head" %>
+
+
+  <div id="sap-logo">
+  </div>
+
+
+
+
+   <div id="content_box">
+
+    <%= render(:layout => "layouts/columns") do
+        render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
+            yield
+        end
+    end %>
+
+
+   </div>
+</div>
+
+
+<%= render :partial => "layouts/footer" %>
+
+<!-- tmp section for debugging -->
+<% if ENV["RAILS_ENV"]=="development" %>
+  <div id="debug">
+    <a href="#" onclick="$('#params_debug_info').toggle(); return false">params</a> |
+    <a href="#" onclick="$('#session_debug_info').toggle(); return false">session</a> |
+    <a href="#" onclick="$('#env_debug_info').toggle(); return false">env</a> |
+    <a href="#" onclick="$('#request_debug_info').toggle(); return false">request</a>
+    <fieldset id="params_debug_info" class="debug_info" style="display:none">
+      <legend>params</legend>
+      <%= debug(params)%>
+    </fieldset>
+    <fieldset id="session_debug_info" class="debug_info" style="display:none">
+      <legend>session</legend>
+      <%= debug(session)%>
+    </fieldset>
+    <fieldset id="env_debug_info" class="debug_info" style="display:none">
+      <legend>env</legend>
+      <%= debug(request.env)%>
+    </fieldset>
+    <fieldset id="request_debug_info" class="debug_info" style="display:none">
+      <legend>request</legend>
+      <%= debug(request)%>
+    </fieldset>
+  </div>
+<% end %>
+<!-- end of debugging section -->
+
+</body>
+
+</html>

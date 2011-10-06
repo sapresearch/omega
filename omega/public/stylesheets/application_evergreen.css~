@@ -19,8 +19,6 @@ body {
 	background: url("../images/om_sprite_evergreen.png") repeat-x #FFFFFF;
 }
 
-/*
-
 body > #wrapper {
 	width: 950px;
 	margin: 0 auto;
@@ -34,8 +32,6 @@ html, body, #wrapper {
 body > #wrapper {
     height: auto;
 }
-
-*/
 
 label {
     display:block;
@@ -689,6 +685,14 @@ tr.odd {
     text-align: left;
     margin: 0 auto 2px;
 
+}
+
+#banner_wrapper {
+	position: absolute;
+	top: 29px;
+	left: 0;
+	width: 100%;
+	height: 180px;
 }
 
 #logo {
