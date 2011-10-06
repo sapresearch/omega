@@ -66,8 +66,18 @@
 	         		<td id="accounts"> 
 								<!--<button onsubmit="fb_message()"> Post </button>!-->
 								<form onsubmit="fb_message()">
-									<!-- <input type="hidden" id="fb" size="0" maxlength="0"> <input type="submit" value="Post"> !-->
-									<input type="submit" value="Post">
+
+									<!-- This works with Chrome !-->
+									<!--<input type="hidden" id="fb" size="0" maxlength="0"> <input type="submit" value="Post">!-->
+									<!-- This works with Chrome !-->
+
+									<!-- This works with Firefox and Internet Explorer !-->
+									<!-- <input type="submit" value="Post"> !-->
+									<!-- This works with Firefox and Internet Explorer !-->
+
+									<!-- This works in Chrome and Firefox in Windows and Ubuntu !-->
+									<input type="submit" id="fb" size="0" maxlength="0" value="Post" /> 
+									<!-- This works in Chrome and Firefox in Windows and Ubuntu !-->
 								</form>
 							</td>
 						</tr>
@@ -75,9 +85,9 @@
 				</tbody>
 			</table>
 
-		<br /><br /><br /><br /><br />
-		<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>
-		<br /><br /><br />
+		<!-- Unneccessary, since we don't need offline access anymore. !-->
+		<!--<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>!-->
+		<!-- Unneccessary, since we don't need offline access anymore. !-->
 
 
 
