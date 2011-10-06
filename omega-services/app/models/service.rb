@@ -251,9 +251,9 @@ class Service < ActiveRecord::Base
     service_leaf.capacity
   end
 
-  def assets
+  def assets(refresh=false)
     return nil unless is_leaf?
-    service_leaf.assets
+    service_leaf.assets(refresh)
   end
 
   def is_allocated_to?(asset)

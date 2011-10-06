@@ -26,10 +26,13 @@ class AssetAllocationsController < Omega::Controller
     @service_leaf = @leaf_service.service_leaf
     
     if @asset && @service_leaf
-      if AssetAllocation.find_by_asset_id_and_service_leaf_id(@asset.id, @service_leaf.id).nil?
-        @asset_allocation = AssetAllocation.create(:asset_id=>@asset.id, :service_leaf_id=>@leaf_service.service_leaf.id)
+      if AssetAllocation.find_by_asset_id_and_service_leaf_id(@asset_id, @service_leaf_id).nil?
+        @asset_allocation = AssetAllocation.create(:asset_id=>@asset_id, :service_leaf_id=>@leaf_service.service_leaf.id)
       end
-    end  
+    end
+
+    #refresh cached objects
+    @leaf_services = @asset.services(true)
     
     respond_with(@asset_allocation)
   end
@@ -44,6 +47,10 @@ class AssetAllocationsController < Omega::Controller
     if @asset_allocation = AssetAllocation.find_by_asset_id_and_service_leaf_id(@asset_id, @service_leaf.id)
       @asset_allocation.destroy
     end
+
+    #refresh cached objects
+    @leaf_service = Service.find(@leaf_service_id)
+    @leaf_services = @asset.services(true) << @leaf_service
 
     respond_with(@asset_allocation)
   end

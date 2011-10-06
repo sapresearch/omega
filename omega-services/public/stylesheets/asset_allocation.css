@@ -132,6 +132,10 @@
 .assets_list .item_name{color:#333;}
 .leaf_services_list .item_name{color:white;}
 
+.item_status_sign{
+    float:right;
+    display:none;
+}
 .item_operation_link{
     float:right;
     display:none;

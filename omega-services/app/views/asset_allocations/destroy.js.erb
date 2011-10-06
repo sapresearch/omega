@@ -1,0 +1,23 @@
+$(".asset_<%= @asset.id.to_s %>").each(function(){
+  var class_name = $(this).attr("class")
+  var visible = $(this).is(":visible")
+  var new_element = $("<%= escape_javascript(render "asset_li", :asset=>@asset, :add_event_listeners=>true) %>")
+  $(this).replaceWith(new_element)
+  new_element.attr("class", class_name)
+  if(!visible)
+    new_element.hide()
+})
+
+<% @leaf_services.each do |leaf_service| %>
+  $(".leaf_service_<%= leaf_service.id.to_s %>").each(function(){
+    var class_name = $(this).attr("class")
+    var visible = $(this).is(":visible")
+    var new_element = $("<%= escape_javascript(render "leaf_service_li", :leaf_service=>leaf_service, :add_event_listeners=>true) %>")
+    $(this).replaceWith(new_element)
+    new_element.attr("class", class_name)
+    if(!visible)
+      new_element.hide()
+  })
+<% end %>
+  
+$(".main_list_item").click()
