@@ -86,7 +86,7 @@ class Event < ActiveRecord::Base
       end_at_i = until_at_i if end_at_i>until_at_i
       periods << [start_at_i, end_at_i] if start_at_i >= begin_at_i
       periods << [begin_at_i, end_at_i] if begin_at_i > start_at_i && begin_at_i <= end_at_i
-      start_at_i = end_at_i+interval_i
+      start_at_i = start_at_i+interval_i
       end_at_i = start_at_i+duration_i
     end
     periods
