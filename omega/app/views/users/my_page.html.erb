@@ -10,6 +10,14 @@
 	#row_header{
 		text-align: center;
 	}
+
+	h3.content-heading{
+		background-color: green;
+	}
+	div#twitter{
+		vertical-align:center;
+	}
+
 </style>
 
 
@@ -45,38 +53,35 @@
 
 
 
-  	<h3 class="content-heading"> My Volunteering </h3>
-			<table class="accounts">
-				<thead>
-					<tr id="accounts">
-						<th id="accounts">Volunteering<br/>Opportunity</th>
-						<th id="accounts">Date</th>
-						<th id="accounts">Application Status</th>
-						<th id="accounts">Facebook</th>
-						<th id="accounts">Twitter</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<% @positions.each do |element| %>
-						<tr id="accounts">
-	         			<td id="accounts"> <%= element[:position].name %></td>
-	         			<td id="accounts"> <%= element[:position].start_date %></td>
-	         			<td id="accounts"> <%= element[:record].action %></td>
-	         			<td id="accounts"> 
-								<form onsubmit="fb_message()">
-									<input type="submit" id="fb" size="0" maxlength="0" value="Post" /> 
-								</form>
-							</td>
-	         			<td id="accounts"> 
-								<% position_url = url_for(element[:position]) %>
+<h3 class="content-heading"> My Volunteering Events</h3>
+	<table class="accounts">
+		<tbody>
+			<% @positions.each do |element| %>
+				<% position = element[:position] %>
+				<tr class="accounts" >
+         			<td class="accounts"> <%= link_to(position.name, volunteering_position_path(position)) %></td>
+         			<td class="accounts"> <%= link_to(position.start_date, volunteering_position_path(position)) %></td>
+         			<td class="accounts"> Status: <i><%= element[:record].action %></i></td>
+         			<td class="accounts"> 
+							<form onsubmit="fb_message()">
+								<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
+							</form>
+						</td>
+         			<td class="accounts"> 
+							<% full = url_for(:only_path => false).to_s %>
+							<% unneccessary = url_for().to_s %>
+							<% host = full.gsub(unneccessary, "") %>
+							<% position_url = host + (url_for(volunteering_position_path(position))).to_s %>
+							
+							<div id="twitter" style='vertical-align:center;'>
 								<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%=position_url%>" data-text="Check this out" data-count="none">Tweet</a>
 								<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-							</td>
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
+							</div>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
 
 	<!-- Unneccessary, since we don't need offline access anymore. !-->
 		<!--<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>!-->

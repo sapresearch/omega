@@ -3,36 +3,56 @@ table.accounts
 	margin: 60px auto 0 auto;
 }
 
-#accounts th
+td.accounts
 {
-	font-size: 18px;
+	color: black;
+	padding: 9px 20px 9px 20px;
+	font-size: 14px;
 	font-weight: bold;
-	color: #555;
-	padding: 10px 20px;
-	border-bottom: 2px solid #555;
 }
 
-#accounts td
+td.accounts
 {
-	color: #555;
-	padding: 9px 20px 0px 20px;
-	font-size: 16px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
-#fb input 
+td.accounts:first-child
 {
-	margin: 0 0 0 50px;
-	font-size: 16px;
-	color: #555;
+	border-radius: 8px 5px 5px 8px; 
+	-moz-border-radius: 8px 5px 5px 8px; 
+	-webkit-border-radius: 8px 5px 5px 8px; 
 }
 
-#accounts tbody tr:hover td
+td.accounts:last-child
 {
-	color: #555;
-	font-size: 16px;
+	border-radius: 5px 8px 8px 5px; 
+	-moz-border-radius: 5px 8px 8px 5px; 
+	-webkit-border-radius: 5px 8px 8px 5px; 
 }
 
-#accounts td
+tr.accounts{
+	/*background-color: #4F9BFF;*/
+	background-color: lightBlue;
+}
+
+td.accounts a{
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+}
+	
+
+input#fb
 {
-	height: 40px;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+	color: white;
+	background-color: #3B5998;
+	border-radius: 4px; 
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px; 
+	border: 1px solid black;
 }
