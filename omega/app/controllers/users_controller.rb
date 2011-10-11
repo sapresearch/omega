@@ -172,11 +172,11 @@ class UsersController < Omega::Controller
 
 		skills = params[:contact][:skill_ids].gsub(/[\[\]]/, "").split(',').uniq # Use gsub and split to format the ids as an array, rather than a string.
 		contact.update_attributes(:skill_ids => skills)
-		contact.skills << Contact::Skill.create(params[:contact_skill])
+		contact.skills << Contact::Skill.create(params[:contact_skill]) unless params[:contact_skill][:name].blank?
 
 		interests = params[:contact][:interest_ids].gsub(/[\[\]]/, "").split(',').uniq
 		contact.update_attributes(:interest_ids => interests)
-		contact.interests << Contact::Interest.create(params[:contact_interest])
+		contact.interests << Contact::Interest.create(params[:contact_interest]) unless params[:contact_interest][:name].blank?
 
 		redirect_to(my_page_users_path)
 	end

@@ -30,16 +30,14 @@
 				<tr>
 					<td>
 						<div class="droppable_skills">
-						<!-- testing !-->
 						<%= tag_table_for(@contact.skills) { |i| "<td><div class='draggable' ui-data='#{i.id}'>" + i.name + "</div></td>" } %>
 						<%= c.hidden_field :skill_ids %>
-						<!-- testing !-->
 						</div> 
-						<% @contact.skills.each do |s| %>
-							<%= c.fields_for s do |skill_fields| %>
+						<%# @contact.skills.each do |s| %>
+							<%#= c.fields_for s do |skill_fields| %>
 								<!--<p><%#= skill_fields.text_field :name %></p>!-->
-							<%end%>
-						<%end%>
+							<%#end%>
+						<%#end%>
 					</td>
 
 					<td>
@@ -49,12 +47,12 @@
 						</div>
 						<%= c.hidden_field :interest_ids %>
 						<!-- testing !-->
-						<% @contact.interests.each do |i| %>
-							<%= c.fields_for i do |interest_field| %>
+						<%# @contact.interests.each do |i| %>
+							<%#= c.fields_for i do |interest_field| %>
 								<!--<p><%#= interest_field.text_field :name %></p>
 								<%#= interest_field.hidden_field :id %>!-->
-							<%end%>
-						<%end%>
+							<%#end%>
+						<%#end%>
 					</td>
 				</tr>
 
