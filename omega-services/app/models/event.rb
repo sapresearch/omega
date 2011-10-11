@@ -24,7 +24,7 @@ class Event < ActiveRecord::Base
       period
     end
 
-    # linear O(n)
+    # linear O(n) algorithm
     def periods_union(periods_1, periods_2)
       periods = []
       i=0;j=0
@@ -53,7 +53,21 @@ class Event < ActiveRecord::Base
           end
         elsif p1[0]<=p2[1] && p1[1]>=p2[0]
           tmp_period = [[p1[0],p2[0]].min, [p1[1],p2[1]].max]
-          if tmp_period[1]==p1[1]
+          if p1[1]==p2[1] # this situation is rare, but process separately can slightly increase efficiency
+            periods << tmp_period
+            i+=1
+            j+=1
+            if i<length_1 && j<length_2
+              p1=periods_1[i]
+              p2=periods_2[j]
+            elsif i>=length_1
+              (j...length_2).each{|k|periods << periods_2[k]}
+              break;
+            elsif j>=length_2
+              (i...length_1).each{|k|periods << periods_1[k]}
+              break;
+            end
+          elsif tmp_period[1]==p1[1]
             j+=1
             p1 = tmp_period
             if j<length_2
@@ -79,15 +93,56 @@ class Event < ActiveRecord::Base
       periods
     end
 
+    # linear O(n) algorithm
     def periods_intersection(periods_1,periods_2)
       periods = []
-      periods_1.each do |p1|
-        periods_2.each do |p2|
-          next if p2[1]<=p1[0]
-          break if p1[1]<=p2[0]
-          start_at = [p1[0], p2[0]].max
-          end_at = [p1[1],p2[1]].min
-          periods << [start_at, end_at]
+      i=0;j=0
+      p1 = periods_1[i]
+      p2 = periods_2[j]
+      length_1 = periods_1.length
+      length_2 = periods_2.length
+      while true
+        if p1[1]<p2[0]
+          i+=1
+          if i<length_1
+            p1 = periods_1[i]
+          else
+            break;
+          end
+        elsif p2[0]<p1[1]
+          j+=1
+          if j<length_2
+            p2 = periods_2[j]
+          else
+            break;
+          end
+        elsif p1[0]<=p2[1] && p1[1]>=p2[0]
+          tmp_period = [[p1[0],p2[0]].max, [p1[1],p2[1]].min]
+          periods << tmp_period
+          if p1[1]==p2[1] # this situation is rare, but process separately can slightly increase efficiency            
+            i+=1
+            j+=1
+            if i<length_1 && j<length_2
+              p1=periods_1[i]
+              p2=periods_2[j]
+            else
+              break;
+            end
+          elsif tmp_period[1]==p1[1]
+            i+=1
+            if i<length_1
+              p1 = periods_1[i]
+            else
+              break;
+            end
+          elsif tmp_period[1]==p2[1]
+            j+=1
+            if j<length_2
+              p2 = periods_2[j]
+            else
+              break;
+            end
+          end
         end
       end
       periods

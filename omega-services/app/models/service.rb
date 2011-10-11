@@ -57,6 +57,7 @@ class Service < ActiveRecord::Base
     def real_public_service_leaves
       ServiceLeaf.all.inject([]){|r, sl|s=sl.service; r<<s if s.is_real_public?; r}
     end
+    alias_method :real_public_leaf_services, :real_public_service_leaves
 
     #avoid direct iteration for performance
     def real_public_services(service=nil)
@@ -67,12 +68,12 @@ class Service < ActiveRecord::Base
       services
     end
 
-    def public_services
-      Service.where(:status=>"public").order(:name)
+    def public_services(order_by=:name)
+      Service.where(:status=>"public").order(order_by)
     end
 
-    def private_services
-      Service.where(:status=>"private").order(:name)
+    def private_services(order_by=:name)
+      Service.where(:status=>"private").order(order_by)
     end
 
     def services_with_detail_form
