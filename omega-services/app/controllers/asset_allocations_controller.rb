@@ -7,11 +7,19 @@ class AssetAllocationsController < Omega::Controller
     @leaf_service_id = params[:leaf_service_id]
     @assets = Asset.all(:order=>:name)
     @leaf_services = Service.service_leaves
+
 =begin
     @leaf_service_overlaps =  {}
     @leaf_services.each do |leaf_service|
+      leaf_service.assets.each do |asset|
+        
+      end
+    end
+
+    @leaf_service_overlaps =  {}
+    @leaf_services.each do |leaf_service|
       @leaf_service_overlaps[leaf_service.id]={}
-      leaf_service.assets.each do |asset|        
+      leaf_service.assets.each do |asset|
         @leaf_service_overlaps[leaf_service.id][asset.id]=leaf_service.time_overlapping_services_with_periods(asset)
       end
     end
