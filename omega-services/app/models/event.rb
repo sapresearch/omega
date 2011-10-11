@@ -39,7 +39,7 @@ class Event < ActiveRecord::Base
           if i<length_1
             p1 = periods_1[i]
           else
-            (j...length_2-1).each{|k|periods << periods_2[k]}
+            (j...length_2).each{|k|periods << periods_2[k]}
             break;
           end
         elsif p2[0]<p1[1]
@@ -48,7 +48,7 @@ class Event < ActiveRecord::Base
           if j<length_2
             p2 = periods_2[j]
           else
-            (i...length_1-1).each{|k|periods << periods_1[k]}
+            (i...length_1).each{|k|periods << periods_1[k]}
             break;
           end
         elsif p1[0]<=p2[1] && p1[1]>=p2[0]
