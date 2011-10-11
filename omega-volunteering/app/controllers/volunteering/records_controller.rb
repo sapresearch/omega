@@ -225,7 +225,7 @@ class Volunteering::RecordsController < Omega::Controller
 			@records.push(record)
 		end
 
-		respond_with(@records_to_search)
+		respond_with(@skills_and_interests)
 	end
 
 	def create_multiple

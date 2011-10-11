@@ -139,33 +139,44 @@ class UsersController < Omega::Controller
 		@contact = Contact.for(current_user)
 		@new_skill = Contact::Skill.new
 		@new_interest = Contact::Interest.new
-
-		volunteering_records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
- 		@positions = volunteering_records.inject(Array.new) do |positions, record|
-			position = Volunteering::Position.find(record.position_id)
-			positions.push({ :position => position, :record => record }) # @positions has hashes with the position and record as key-value pairs for each position the user is signed up for.
+		@other_skills = Contact::Skill.find(:all).reject do |s|
+			@contact.skills.inject(false) { |result, contacts_skills| result = result == true ? result : s.name == contacts_skills.name } 
 		end
+		@other_interests = Contact::Interest.find(:all).reject do |s|
+			@contact.interests.inject(false) { |result, contacts_interests| result = result == true ? result : s.name == contacts_interests.name } 
+		end
+
+		if !current_user.is_admin?
+			volunteering_records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
+ 			@positions = volunteering_records.inject(Array.new) do |positions, record|
+				position = Volunteering::Position.find(record.position_id)
+				positions.push({ :position => position, :record => record.action }) # @positions has hashes with the position and record as key-value pairs for each position the user is signed up for.
+			end
+		elsif current_user.is_admin?
+ 			@positions = Volunteering::Position.find(:all).inject(Array.new) do |positions, p|
+				positions.push({ :position => p, :record => 'Administrator' }) # @positions has hashes with the position and record as key-value pairs for each position the user is signed up for.
+			end
+		end
+			
 
 		@sap_profile_id = 100002599482156
 		@sap_profile_id_2 = 253183958028424 
 		@sap_profile_id_secret_2 = "7b4684019a0ea345ce8976f8d3a7d57a"
 
 		@settings = Setting.new
+		respond_with(@other_skills, @other_interests)
 	end
 
 	def update_my_page
 		contact = Contact.for(current_user)
 
-		{Contact::Skill => 'skill', Contact::Interest => 'interest'}.each do |model, method|
-			Contact::Skill.find(params[:contact]["contact_#{method}".to_sym][:id]).update_attributes(:name => params[:contact]["contact_#{method}".to_sym][:name])
+		skills = params[:contact][:skill_ids].gsub(/[\[\]]/, "").split(',').uniq # Use gsub and split to format the ids as an array, rather than a string.
+		contact.update_attributes(:skill_ids => skills)
+		contact.skills << Contact::Skill.create(params[:contact_skill])
 
-			if !(params["contact_#{method}".to_sym][:name]).to_s.blank? # Only create a new object if the name isn't blank.
-				new_object = model.create(params["contact_#{method}".to_sym])
-				collection = contact.send(method.pluralize.to_sym)
-				# If this skill/interest name already exists, then add the pre-existing (unique) skill/interest to the collection.
-				collection = model.find_by_name(new_object.name).nil? ? collection << new_object : collection << model.find_by_name(new_object.name)
-			end
-		end
+		interests = params[:contact][:interest_ids].gsub(/[\[\]]/, "").split(',').uniq
+		contact.update_attributes(:interest_ids => interests)
+		contact.interests << Contact::Interest.create(params[:contact_interest])
 
 		redirect_to(my_page_users_path)
 	end

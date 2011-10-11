@@ -89,7 +89,7 @@ class User < Omega::Model
   end
 
 	def is_admin?
-		self.roles.at(0).internal_name == "administrator"
+		self.roles.inject(false) { |admin, role| admin = admin == true ? true : role.internal_name == "administrator" }
 	end
 
   def is_logged_in?

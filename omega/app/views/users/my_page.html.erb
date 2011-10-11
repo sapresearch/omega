@@ -1,24 +1,36 @@
 <% require_stylesheet 'omega_volunteering', 'settings', 'omega_users_table', 'omega_users' %>
 <%= require_javascript 'omega_users' %>
 
-<style type="text/css">
-	div#contact_submit{
-		text-align:center;
-		width:600px;
-		margin:auto;
-	}
-	#row_header{
-		text-align: center;
-	}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".draggable").draggable();
+		$(".droppable_skills").droppable({
+			drop: function(event, ui) {
+				if("other" == ui.draggable.attr('id')) {
+					add_tag($( this ), ui.draggable, "#contact_skill_ids");
+				}
+			}
+		});
+		$(".droppable_interests").droppable({
+			drop: function(event, ui) {
+				if("other" == ui.draggable.attr('id')) {
+					add_tag($( this ), ui.draggable, "#contact_interest_ids");
+				}
+			}
+		});
+	});
 
-	h3.content-heading{
-		background-color: green;
+	add_tag = function(self, dragged, input_id){
+		dragged.css('background-color', 'lightBlue');
+		dragged.css('color', 'black');
+		var data = document.createElement('td');
+		self.find('tr:last').append(data);
+		self.find('tr:last').find('td:last').append(dragged);
+		var tag_id = dragged.attr('ui-data');
+		var old_val = $(input_id).attr( 'value' ).replace(']', '');
+		$(input_id).val(old_val + ", " + tag_id + "]");
 	}
-	div#twitter{
-		vertical-align:center;
-	}
-
-</style>
+</script>
 
 
 
@@ -29,6 +41,9 @@
 	<div id="fb">
 	  <div id="fb-root"></div>
 	  <script src="http://connect.facebook.net/en_US/all.js"></script>
+	  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	  <script>
 	    FB.init({ appId: '117866098303408', cookie:true, status:true, xfbml:true });
 			function fb_message(){
@@ -61,7 +76,7 @@
 				<tr class="accounts" >
          			<td class="accounts"> <%= link_to(position.name, volunteering_position_path(position)) %></td>
          			<td class="accounts"> <%= link_to(position.start_date, volunteering_position_path(position)) %></td>
-         			<td class="accounts"> Status: <i><%= element[:record].action %></i></td>
+         			<td class="accounts"> Status: <i><%= element[:record] %></i></td>
          			<td class="accounts"> 
 							<form onsubmit="fb_message()">
 								<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
@@ -73,7 +88,7 @@
 							<% host = full.gsub(unneccessary, "") %>
 							<% position_url = host + (url_for(volunteering_position_path(position))).to_s %>
 							
-							<div id="twitter" style='vertical-align:center;'>
+							<div id="twitter">
 								<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%=position_url%>" data-text="Check this out" data-count="none">Tweet</a>
 								<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
 							</div>
@@ -89,62 +104,10 @@
 
 
 	<br /><br />
-  	<h3 class="content-heading"> My Skills and Interests </h3>
-		<%= form_for @contact, :url => update_my_page_users_path do |c| %> 
 
-			<table>
-				<tr>
-					<td id="row_header"> <h1> My Skills </h1>
-					<td id="row_header"> <h1> My Interests </h1>
-				</tr>
-
-				<tr>
-					<td>
-						<%= fields_for @new_skill, :html => { :class => "stuff", :id => "stuff", :name => 'stuff' } do |s| %>
-							<p>
-								<%= s.label :Add_a_new_skill %>
-								<%= s.text_field :name %>
-							</p>
-						<%end%>
-					</td>
-
-					<td>
-						<%= fields_for @new_interest, :html => { :class => "stuff", :id => "stuff", :name => 'stuff' } do |s| %>
-							<p>
-								<%= s.label :Add_a_new_interest %>
-								<%= s.text_field :name %>
-							</p>
-						<%end%>
-					</td>
-				</tr>
-
-				<tr>
-					<td>
-						<% @contact.skills.each do |s| %>
-							<%= c.fields_for s do |skill_fields| %>
-								<p><%= skill_fields.text_field :name %></p>
-								<%= skill_fields.hidden_field :id %>
-							<%end%>
-						<%end%>
-					</td>
-
-					<td>
-						<% @contact.interests.each do |i| %>
-							<%= c.fields_for i do |interest_field| %>
-								<p><%= interest_field.text_field :name %></p>
-								<%= interest_field.hidden_field :id %>
-							<%end%>
-						<%end%>
-					</td>
-				</tr>
-			</table>
-
-
-			<div id="contact_submit">
-				<p><%= c.submit :Update %></p>
-			</div>
-		<%end%>
-
+		<div id="skills_and_interests">
+			<%= render 'skills_and_interests' %>
+		</div>
 
 	</div>
 </body>

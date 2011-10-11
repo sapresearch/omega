@@ -43,3 +43,47 @@
 #skills ul {
 	left-margin:50px;
 }
+	div#contact_submit{
+		text-align:center;
+		width:600px;
+		margin:auto;
+	}
+	#row_header{
+		text-align: center;
+	}
+
+	h3.content-heading{
+		background-color: green;
+	}
+
+div.draggable {
+	width: 85px;
+	height: 15px;
+	font-weight: bold;
+	border-radius: 50px;
+	-mos-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	padding: 10px;
+	background-color: lightBlue;
+}
+
+div#other {
+	background-color: blue;
+	color: white;
+}
+
+div.droppable_skills, .droppable_interests {
+	left: 250px;
+	top: 0;
+	background: gray;
+	border-radius: 5px;
+	-moz-border-raduius: 5px;
+	-webkit-border-radius: 5px;
+	color: white;
+	padding: 10px;
+	min-height: 125px;
+}
+
+table, tbody, tfoot, thead, tr, th, td{
+    vertical-align: top;
+}
