@@ -28,7 +28,8 @@ class AssetAllocationsController < Omega::Controller
 
     #refresh cached objects
     @leaf_services = @asset.services(true)
-    @leaf_service_conflicts = Service.time_conflicting_services_with_periods(@asset)
+    @assets = @leaf_services.inject([]){|r,ls|ls.assets.reject{|asset|asset==@asset}.each{|asset| r<<asset unless r.include?(asset)}; r} <<@asset
+    @leaf_service_conflicts = Service.time_conflicting_services_with_periods(@assets)
     
     respond_with(@asset_allocation)
   end
@@ -48,7 +49,8 @@ class AssetAllocationsController < Omega::Controller
     #refresh cached objects
     @leaf_service = Service.find(@leaf_service_id)
     @leaf_services = @asset.services(true) << @leaf_service
-    @leaf_service_conflicts = Service.time_conflicting_services_with_periods(@asset)
+    @assets = @leaf_services.inject([]){|r,ls|ls.assets.reject{|asset|asset==@asset}.each{|asset| r<<asset unless r.include?(asset)}; r} <<@asset
+    @leaf_service_conflicts = Service.time_conflicting_services_with_periods(@assets)
 
     respond_with(@asset_allocation)
   end

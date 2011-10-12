@@ -113,22 +113,21 @@ class Service < ActiveRecord::Base
     end
 
     # all service pairs that conflict on any asset
-    def time_conflicting_services_with_periods(asset=nil, begin_at=Time.now, until_at=begin_at+1.year)
+    def time_conflicting_services_with_periods(assets=Asset.all, begin_at=Time.now, until_at=begin_at+1.year)
       leaf_service_conflicts = {}
       leaf_service_periods_unions = {}
-      leaf_services = asset.nil? ? Service.leaf_services : asset.services
-      assets = asset.nil? ? Asset.all : [asset]
+      leaf_services = assets.inject([]){|r, asset|asset.services.each{|s|r<<s unless r.include?(s)}; r}
       leaf_services.inject(leaf_service_periods_unions){|r, ls|r[ls]=ls.periods_union(begin_at, until_at); r} #pre-calculate all periods
 
-      remaining_leaf_service_combinations=leaf_services.to_combinations if asset.nil?
+      remaining_leaf_service_combinations=leaf_services.to_combinations
       assets.each do |a|
         a.services.to_combinations.each do |sc|
-          return leaf_service_conflicts if asset.nil? && remaining_leaf_service_combinations.empty?
+          return leaf_service_conflicts if remaining_leaf_service_combinations.empty?
           if leaf_service_conflicts[sc].nil?
             sc_a = sc.to_a
             periods_intersection = Event.periods_intersection([leaf_service_periods_unions[sc_a[0]], leaf_service_periods_unions[sc_a[1]]])
             leaf_service_conflicts[sc]=periods_intersection unless periods_intersection.empty?
-            remaining_leaf_service_combinations.delete(sc) if asset.nil?
+            remaining_leaf_service_combinations.delete(sc)
           end
         end
       end
