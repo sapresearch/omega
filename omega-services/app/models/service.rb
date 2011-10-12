@@ -1,4 +1,6 @@
 class Service < ActiveRecord::Base
+  require 'util.rb'
+  
   # app-spec
   PERM_ADMIN       = 'service_admin'
   PERM_APPLY       = 'service_apply'
@@ -108,6 +110,29 @@ class Service < ActiveRecord::Base
         end
       end
       filtered_services
+    end
+
+    # all service pairs that conflict on any asset
+    def time_conflicting_services_with_periods(asset=nil, begin_at=Time.now, until_at=begin_at+1.year)
+      leaf_service_conflicts = {}
+      leaf_service_periods_unions = {}
+      leaf_services = asset.nil? ? Service.leaf_services : asset.services
+      assets = asset.nil? ? Asset.all : [asset]
+      leaf_services.inject(leaf_service_periods_unions){|r, ls|r[ls]=ls.periods_union(begin_at, until_at); r} #pre-calculate all periods
+
+      remaining_leaf_service_combinations=leaf_services.to_combinations if asset.nil?
+      assets.each do |a|
+        a.services.to_combinations.each do |sc|
+          return leaf_service_conflicts if asset.nil? && remaining_leaf_service_combinations.empty?
+          if leaf_service_conflicts[sc].nil?
+            sc_a = sc.to_a
+            periods_intersection = Event.periods_intersection([leaf_service_periods_unions[sc_a[0]], leaf_service_periods_unions[sc_a[1]]])
+            leaf_service_conflicts[sc]=periods_intersection unless periods_intersection.empty?
+            remaining_leaf_service_combinations.delete(sc) if asset.nil?
+          end
+        end
+      end
+      leaf_service_conflicts
     end
     
   end
@@ -267,6 +292,7 @@ class Service < ActiveRecord::Base
     service_leaf.periods_union(begin_at, until_at)
   end
 
+  # not efficient for more than 2 services in a loop, repetitively calling periods_union
   def time_overlapping_periods_with(leaf_service, begin_at=Time.now, until_at=begin_at+1.year)
     return nil unless is_leaf?
     return service_leaf.time_overlapping_periods_with(leaf_service.service_leaf, begin_at, until_at)
@@ -275,11 +301,11 @@ class Service < ActiveRecord::Base
   def time_overlapping_services(asset=nil, begin_at=Time.now, until_at=begin_at+1.year)
     return nil unless is_leaf?
     result_services = []
-    periods_union_1 = self.periods_union(begin_at, until_at)
+    periods_union_1 = self.periods_union(begin_at, until_at) # this line only needs to run one time
     leaf_services = asset.nil? ? Service.leaf_services : asset.services
     leaf_services.delete_if{|s|s==self}.each do |service|
       periods_union_2 = service.periods_union(begin_at, until_at)
-      periods_intersection = Event.periods_intersection(periods_union_1,periods_union_2)
+      periods_intersection = Event.periods_intersection([periods_union_1,periods_union_2])
       result_services << service unless periods_intersection.empty?
     end
     result_services
@@ -288,11 +314,11 @@ class Service < ActiveRecord::Base
   def time_overlapping_services_with_periods(asset=nil, begin_at=Time.now, until_at=begin_at+1.year)
     return nil unless is_leaf?
     overlapping_hash = {}
-    periods_union_1 = self.periods_union(begin_at, until_at)
+    periods_union_1 = self.periods_union(begin_at, until_at) # this line only needs to run one time
     leaf_services = asset.nil? ? Service.leaf_services : asset.services
     leaf_services.delete_if{|s|s==self}.each do |service|
       periods_union_2 = service.periods_union(begin_at, until_at)
-      periods_intersection = Event.periods_intersection(periods_union_1,periods_union_2)
+      periods_intersection = Event.periods_intersection([periods_union_1,periods_union_2])
       overlapping_hash[service] = periods_intersection unless periods_intersection.empty?
     end
     overlapping_hash
@@ -301,14 +327,14 @@ class Service < ActiveRecord::Base
   def time_overlapping_service_ids_with_periods(asset=nil, begin_at=Time.now, until_at=begin_at+1.year)
     return nil unless is_leaf?
     overlapping_hash = {}
-    periods_union_1 = self.periods_union(begin_at, until_at)
+    periods_union_1 = self.periods_union(begin_at, until_at) # this line only needs to run one time
     leaf_services = asset.nil? ? Service.leaf_services : asset.services
     leaf_services.delete_if{|s|s==self}.each do |service|
       periods_union_2 = service.periods_union(begin_at, until_at)
-      periods_intersection = Event.periods_intersection(periods_union_1,periods_union_2)
+      periods_intersection = Event.periods_intersection([periods_union_1,periods_union_2])
       overlapping_hash[service.id] = periods_intersection unless periods_intersection.empty?
     end
     overlapping_hash
-  end  
+  end
 
 end

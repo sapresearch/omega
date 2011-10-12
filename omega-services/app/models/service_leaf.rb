@@ -25,13 +25,15 @@ class ServiceLeaf < ActiveRecord::Base
   end
 
   def periods_union(begin_at=Time.now, until_at=begin_at+1.year)
-    service_sections.inject([]){|r, ss| Event.periods_union(r,ss.event.to_i_periods(begin_at, until_at).to_a)}
+    Event.periods_union(service_sections.map{|ss|ss.event.to_i_periods(begin_at, until_at).to_a})
+    #service_sections.inject([]){|r, ss| Event.periods_union([r,ss.event.to_i_periods(begin_at, until_at).to_a])}
   end
 
+  # not efficient for more than 2 services in a loop, repetitively calling periods_union
   def time_overlapping_periods_with(service_leaf, begin_at=Time.now, until_at=begin_at+1.year)
     periods_union_1 = self.periods_union(begin_at, until_at)
     periods_union_2 = service_leaf.periods_union(begin_at, until_at)
-    return Event.periods_intersection(periods_union_1,periods_union_2)
+    return Event.periods_intersection([periods_union_1,periods_union_2])
   end
 
 end

@@ -2,12 +2,12 @@ require 'set'
 
 class Array
 
-  # based on induction and DP
+  # recursive induction
   def to_combinations(n=2)
-    return Set.new(self.to_set) if n==self.length
-    return nil if n<1 || n>self.length
-    
+    return Set.new << self.to_set if n==self.length
     result = Set.new
+    return result if n<1 || n>self.length   
+    
     if n==1
       self.each{|e| result << [e].to_set}
     elsif n==2

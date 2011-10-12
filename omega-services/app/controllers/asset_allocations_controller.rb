@@ -9,28 +9,7 @@ class AssetAllocationsController < Omega::Controller
     @leaf_service_id = params[:leaf_service_id]
     @assets = Asset.all(:order=>:name)
     @leaf_services = Service.service_leaves
-
-    @leaf_service_overlaps = {}
-    Service.leaf_services.to_combinations.inject(@leaf_service_overlaps) do |r,c|
-      a = c.to_a
-      r[c]=a[0].time_overlapping_periods_with(a[1])
-    end
-=begin
-    @leaf_service_overlaps =  {}
-    @leaf_services.each do |leaf_service|
-      leaf_service.assets.each do |asset|
-        
-      end
-    end
-
-    @leaf_service_overlaps =  {}
-    @leaf_services.each do |leaf_service|
-      @leaf_service_overlaps[leaf_service.id]={}
-      leaf_service.assets.each do |asset|
-        @leaf_service_overlaps[leaf_service.id][asset.id]=leaf_service.time_overlapping_services_with_periods(asset)
-      end
-    end
-=end
+    @leaf_service_conflicts = Service.time_conflicting_services_with_periods
   end
 
   def create
@@ -49,6 +28,7 @@ class AssetAllocationsController < Omega::Controller
 
     #refresh cached objects
     @leaf_services = @asset.services(true)
+    @leaf_service_conflicts = Service.time_conflicting_services_with_periods(@asset)
     
     respond_with(@asset_allocation)
   end
@@ -68,6 +48,7 @@ class AssetAllocationsController < Omega::Controller
     #refresh cached objects
     @leaf_service = Service.find(@leaf_service_id)
     @leaf_services = @asset.services(true) << @leaf_service
+    @leaf_service_conflicts = Service.time_conflicting_services_with_periods(@asset)
 
     respond_with(@asset_allocation)
   end

@@ -25,14 +25,18 @@ class Event < ActiveRecord::Base
     end
 
     # linear algorithm
-    def periods_union(periods_1, periods_2)
+    def periods_union(periods_a)
       # sanitize parameters
+      return nil unless periods_a.instance_of?(Array)
+      return periods_a.inject([]){|r, periods| Event.periods_union([r,periods])} if periods_a.length>2
+      periods_1 = periods_a[0]
+      periods_2 = periods_a[1]
       flag_1 = periods_1.nil? || periods_1.empty?
       flag_2 = periods_2.nil? || periods_2.empty?
       return [] if flag_1 && flag_2
       return periods_1 if flag_2
       return periods_2 if flag_1
-
+      
       periods = []
       i=0;j=0
       p1 = periods_1[i]
@@ -98,8 +102,12 @@ class Event < ActiveRecord::Base
     end
 
     # linear algorithm
-    def periods_intersection(periods_1,periods_2)
+    def periods_intersection(periods_a)
       # sanitize parameters
+      return nil unless periods_a.instance_of?(Array)
+      return periods_a.inject([]){|r, periods| Event.periods_intersection([r,periods])} if periods_a.length>2
+      periods_1 = periods_a[0]
+      periods_2 = periods_a[1]
       flag_1 = periods_1.nil? || periods_1.empty?
       flag_2 = periods_2.nil? || periods_2.empty?
       return [] if flag_1 && flag_2
@@ -246,13 +254,13 @@ class Event < ActiveRecord::Base
   def union_periods(event, begin_at=start_at, until_at = (is_recurrent? ? recurrence_end_at||begin_at+1.year : end_at||begin_at+1.year) )
     periods_1 = self.to_i_periods(begin_at, until_at).to_a
     periods_2 = event.to_i_periods(begin_at, until_at).to_a
-    Event.periods_union(periods_1,periods_2)
+    Event.periods_union([periods_1,periods_2])
   end
 
   def intersection_periods(event, begin_at=start_at, until_at = (is_recurrent? ? recurrence_end_at||begin_at+1.year : end_at||begin_at+1.year) )
     periods_1 = self.to_i_periods(begin_at, until_at).to_a
     periods_2 = event.to_i_periods(begin_at, until_at).to_a
-    Event.periods_intersection(periods_1,periods_2)
+    Event.periods_intersection([periods_1,periods_2])
   end
 
 end
