@@ -2,6 +2,8 @@ class Event < ActiveRecord::Base
   has_one :service_section, :dependent=>:destroy
   has_one :event_recurrence, :dependent=>:destroy
 
+  MAX_RECURRENCE_COUNT = 1000
+
   class <<self
 
     # not used in periods_union for efficiency reason
@@ -221,8 +223,15 @@ class Event < ActiveRecord::Base
     until_at_i = until_at.to_i
     return nil if begin_at_i>until_at_i || start_at_i>end_at_i
 
+    if is_recurrent?
+      duration_i = end_at_i - start_at_i
+      interval_i = recurrence_year.year.to_i + recurrence_month.month.to_i + recurrence_day.day.to_i + recurrence_hour.hour.to_i + recurrence_minute.minute.to_i
+      distance_i = interval_i - duration_i
+      periods = []
+    end
+
     # single event
-    if !is_recurrent?
+    if interval_i.to_i==0
       real_start_at_i = [begin_at_i, start_at_i].max
       real_end_at_i = [until_at_i, end_at_i].min
       return [] if real_start_at_i > real_end_at_i
@@ -230,11 +239,6 @@ class Event < ActiveRecord::Base
     end
 
     # recurrence events
-    duration_i = end_at_i - start_at_i    
-    interval_i = recurrence_year.year.to_i + recurrence_month.month.to_i + recurrence_day.day.to_i + recurrence_hour.hour.to_i + recurrence_minute.minute.to_i
-    distance_i = interval_i - duration_i
-    periods = []
-
     real_begin_at_i = [start_at_i, begin_at_i].max
     real_until_at_i = recurrence_end_at.nil? ? until_at_i : [until_at_i, recurrence_end_at.to_i].min
     return [] if real_begin_at_i > real_until_at_i
@@ -243,10 +247,12 @@ class Event < ActiveRecord::Base
     real_start_at_i = remainder <= duration_i ? real_begin_at_i : real_begin_at_i + interval_i - remainder
     start_at_i = real_start_at_i
 
-    while start_at_i < real_until_at_i
+    count = 0
+    while start_at_i < real_until_at_i || count < Event::MAX_RECURRENCE_COUNT
       end_at_i = [start_at_i+duration_i, real_until_at_i].min
       periods << [start_at_i, end_at_i]
       start_at_i = end_at_i+distance_i
+      count += 1
     end
     periods
   end
