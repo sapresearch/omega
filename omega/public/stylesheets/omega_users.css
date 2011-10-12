@@ -72,7 +72,7 @@ div#other {
 	color: white;
 }
 
-div.droppable_skills, .droppable_interests {
+div#droppable_skills, #droppable_interests, #other_interests, #other_skills{
 	left: 250px;
 	top: 0;
 	background: gray;
@@ -82,8 +82,21 @@ div.droppable_skills, .droppable_interests {
 	color: white;
 	padding: 10px;
 	min-height: 125px;
+	max-width: 360px;
+}
+
+div#other_skills, #other_interests{
+	margin-top: 20px;
+}
+
+table#skills, #interests {
+	margin-left: 13%;
 }
 
 table, tbody, tfoot, thead, tr, th, td{
     vertical-align: top;
+}
+
+table:nth-child(2) tr p{
+	margin-left:20%;
 }
