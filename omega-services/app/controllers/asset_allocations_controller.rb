@@ -1,4 +1,6 @@
 class AssetAllocationsController < Omega::Controller
+  require "util.rb"
+
   respond_to :html, :xml, :js, :json
   breadcrumb 'Asset Allocations' => :asset_allocations
 
@@ -8,6 +10,11 @@ class AssetAllocationsController < Omega::Controller
     @assets = Asset.all(:order=>:name)
     @leaf_services = Service.service_leaves
 
+    @leaf_service_overlaps = {}
+    Service.leaf_services.to_combinations.inject(@leaf_service_overlaps) do |r,c|
+      a = c.to_a
+      r[c]=a[0].time_overlapping_periods_with(a[1])
+    end
 =begin
     @leaf_service_overlaps =  {}
     @leaf_services.each do |leaf_service|

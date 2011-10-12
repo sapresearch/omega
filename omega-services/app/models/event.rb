@@ -24,8 +24,15 @@ class Event < ActiveRecord::Base
       period
     end
 
-    # linear O(n) algorithm
+    # linear algorithm
     def periods_union(periods_1, periods_2)
+      # sanitize parameters
+      flag_1 = periods_1.nil? || periods_1.empty?
+      flag_2 = periods_2.nil? || periods_2.empty?
+      return [] if flag_1 && flag_2
+      return periods_1 if flag_2
+      return periods_2 if flag_1
+
       periods = []
       i=0;j=0
       p1 = periods_1[i]
@@ -51,50 +58,54 @@ class Event < ActiveRecord::Base
             (i...length_1).each{|k|periods << periods_1[k]}
             break;
           end
-        elsif p1[0]<=p2[1] && p1[1]>=p2[0]
-          tmp_period = [[p1[0],p2[0]].min, [p1[1],p2[1]].max]
-          if p1[1]==p2[1] # this situation is rare, but process separately can slightly increase efficiency
-            periods << tmp_period
-            i+=1
-            j+=1
-            if i<length_1 && j<length_2
-              p1=periods_1[i]
-              p2=periods_2[j]
-            elsif i>=length_1
-              (j...length_2).each{|k|periods << periods_2[k]}
-              break;
-            elsif j>=length_2
-              (i...length_1).each{|k|periods << periods_1[k]}
-              break;
-            end
-          elsif tmp_period[1]==p1[1]
-            j+=1
-            p1 = tmp_period
-            if j<length_2
-              p2 = periods_2[j]
-            else
-              periods << p1
-              ((i+1)...length_1).each{|k|periods << periods_1[k]}
-              break;
-            end
-          elsif tmp_period[1]==p2[1]
-            i+=1
-            p2 = tmp_period
-            if i<length_1
-              p1 = periods_1[i]
-            else
-              periods << p2
-              ((j+1)...length_2).each{|k|periods << periods_2[k]}
-              break;
-            end
+        elsif p1[1]==p2[1] # this situation is rare, but process separately can slightly increase efficiency
+          periods << [[p1[0],p2[0]].min, p1[1]]
+          i+=1
+          j+=1
+          if i<length_1 && j<length_2
+            p1=periods_1[i]
+            p2=periods_2[j]
+          elsif i>=length_1
+            (j...length_2).each{|k|periods << periods_2[k]}
+            break;
+          elsif j>=length_2
+            (i...length_1).each{|k|periods << periods_1[k]}
+            break;
+          end
+        elsif p1[1]>p2[1]
+          j+=1
+          p1 = [[p1[0],p2[0]].min, p1[1]]
+          if j<length_2
+            p2 = periods_2[j]
+          else
+            periods << p1
+            ((i+1)...length_1).each{|k|periods << periods_1[k]}
+            break;
+          end
+        elsif p1[1]<p2[1]
+          i+=1
+          p2 = [[p1[0],p2[0]].min, p2[1]]
+          if i<length_1
+            p1 = periods_1[i]
+          else
+            periods << p2
+            ((j+1)...length_2).each{|k|periods << periods_2[k]}
+            break;
           end
         end
       end
       periods
     end
 
-    # linear O(n) algorithm
+    # linear algorithm
     def periods_intersection(periods_1,periods_2)
+      # sanitize parameters
+      flag_1 = periods_1.nil? || periods_1.empty?
+      flag_2 = periods_2.nil? || periods_2.empty?
+      return [] if flag_1 && flag_2
+      return periods_1 if flag_2
+      return periods_2 if flag_1
+      
       periods = []
       i=0;j=0
       p1 = periods_1[i]
@@ -104,45 +115,29 @@ class Event < ActiveRecord::Base
       while true
         if p1[1]<p2[0]
           i+=1
-          if i<length_1
-            p1 = periods_1[i]
-          else
-            break;
-          end
+          break if i>=length_1
+          p1 = periods_1[i]
         elsif p2[0]<p1[1]
           j+=1
-          if j<length_2
-            p2 = periods_2[j]
-          else
-            break;
-          end
-        elsif p1[0]<=p2[1] && p1[1]>=p2[0]
-          tmp_period = [[p1[0],p2[0]].max, [p1[1],p2[1]].min]
-          periods << tmp_period
-          if p1[1]==p2[1] # this situation is rare, but process separately can slightly increase efficiency            
-            i+=1
-            j+=1
-            if i<length_1 && j<length_2
-              p1=periods_1[i]
-              p2=periods_2[j]
-            else
-              break;
-            end
-          elsif tmp_period[1]==p1[1]
-            i+=1
-            if i<length_1
-              p1 = periods_1[i]
-            else
-              break;
-            end
-          elsif tmp_period[1]==p2[1]
-            j+=1
-            if j<length_2
-              p2 = periods_2[j]
-            else
-              break;
-            end
-          end
+          break if j>=length_2
+          p2 = periods_2[j]
+        elsif p1[1]==p2[1] # this situation is rare, but process separately can slightly increase efficiency
+          periods << [[p1[0],p2[0]].max, p1[1]]
+          i+=1
+          j+=1
+          break unless i<length_1 && j<length_2
+          p1=periods_1[i]
+          p2=periods_2[j]
+        elsif p1[1]<p2[1]
+          periods << [[p1[0],p2[0]].max, p1[1]]
+          i+=1
+          break unless i<length_1
+          p1 = periods_1[i]
+        elsif p1[1]>p2[1]
+          periods << [[p1[0],p2[0]].max, p2[1]]
+          j+=1
+          break unless j<length_2
+          p2 = periods_2[j]
         end
       end
       periods
@@ -248,11 +243,17 @@ class Event < ActiveRecord::Base
     periods
   end
 
-  def overlapping_periods(event, begin_at=start_at, until_at = (is_recurrent? ? recurrence_end_at||begin_at+1.year : end_at||begin_at+1.year) )
+  def union_periods(event, begin_at=start_at, until_at = (is_recurrent? ? recurrence_end_at||begin_at+1.year : end_at||begin_at+1.year) )
+    periods_1 = self.to_i_periods(begin_at, until_at).to_a
+    periods_2 = event.to_i_periods(begin_at, until_at).to_a
+    Event.periods_union(periods_1,periods_2)
+  end
+
+  def intersection_periods(event, begin_at=start_at, until_at = (is_recurrent? ? recurrence_end_at||begin_at+1.year : end_at||begin_at+1.year) )
     periods_1 = self.to_i_periods(begin_at, until_at).to_a
     periods_2 = event.to_i_periods(begin_at, until_at).to_a
     Event.periods_intersection(periods_1,periods_2)
   end
-  
+
 end
 
