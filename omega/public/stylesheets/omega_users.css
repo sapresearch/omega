@@ -60,22 +60,36 @@ div.draggable {
 	width: 85px;
 	height: 15px;
 	font-weight: bold;
-	border-radius: 50px;
-	-mos-border-radius: 50px;
-	-webkit-border-radius: 50px;
+	border-radius: 10px;
+	-mos-border-radius: 10px;
+	-webkit-border-radius: 10px;
 	padding: 10px;
 	background-color: lightBlue;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	border-style: solid;
+	border-width: 1px;
+	//*background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.82, #687DD1),
+		color-stop(0.65, #4B67E3)
+	);*//
 }
 
 div#other {
-	background-color: blue;
+	background-color: green;
 	color: white;
 }
 
 div#droppable_skills, #droppable_interests, #other_interests, #other_skills{
 	left: 250px;
 	top: 0;
-	background: gray;
+	background: #ded7c6;
+	border: 1px solid #F0D8A8;
 	border-radius: 5px;
 	-moz-border-raduius: 5px;
 	-webkit-border-radius: 5px;
@@ -99,4 +113,9 @@ table, tbody, tfoot, thead, tr, th, td{
 
 table:nth-child(2) tr p{
 	margin-left:20%;
+}
+
+div#positions{
+	background-color: #EEE;
+	margin: 0 70px 0 70px;
 }

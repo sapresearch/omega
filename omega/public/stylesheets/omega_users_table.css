@@ -1,6 +1,7 @@
 table.accounts
 {
-	margin: 60px auto 0 auto;
+	margin: 20px auto 0 auto;
+	border: 1px solid transparent;
 }
 
 td.accounts
