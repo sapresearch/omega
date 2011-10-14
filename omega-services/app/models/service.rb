@@ -168,8 +168,8 @@ class Service < ActiveRecord::Base
       min_next_time=nil
       Service.leaf_services.each do |leaf_service|
         next_time = nil
-        periods_union = leaf_service.periods_union
-        periods_union.each do |period|
+        periods = leaf_service.periods_union
+        periods.each do |period|
           next if period[0]<=time.to_i
           next_time = period[0]
           break
