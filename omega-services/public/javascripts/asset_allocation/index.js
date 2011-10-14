@@ -17,6 +17,7 @@ $.fn.extend({
 });
 
 var is_dragging = false;
+var is_showing_message_box=true;
 $(function(){
     $("#asset_allocation_info").resizable({
         start: function(event, ui) {
@@ -58,11 +59,13 @@ function hide_message_box(){
     $("#asset_allocation_info").slideUp()
     $("#hide_message_box_link").hide()
     $("#show_message_box_link").show()
+    is_showing_message_box=false
 }
 function show_message_box(){
     $("#asset_allocation_info").slideDown()
     $("#hide_message_box_link").show()
     $("#show_message_box_link").hide()
+    is_showing_message_box=true
 }
 
 function display_static_view(){

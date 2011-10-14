@@ -12,16 +12,20 @@
       $(".asset_<%= asset.id.to_s %>")
       .live("mouseenter", function(){
         if(!is_dragging){
-          $("#asset_allocation_info #dynamic_view").html('<%= escape_javascript(render "asset_view", :asset=>asset) %>')
-          display_dynamic_view()
+          if(is_showing_message_box){
+            $("#asset_allocation_info #dynamic_view").html('<%= escape_javascript(render "asset_view", :asset=>asset) %>')
+            display_dynamic_view()
+          }
         }
       })
       .live("mouseleave", function(){
         if(!is_dragging){
-          if($("#static_view").is_empty())
-            display_instruction()
-          else
-            display_static_view()
+          if(is_showing_message_box){
+            if($("#static_view").is_empty())
+              display_instruction()
+            else
+              display_static_view()
+          }
         }
       })
       .live("click", function(){

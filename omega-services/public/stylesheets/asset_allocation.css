@@ -40,7 +40,8 @@
 #asset_allocation_info .sub_item_name_inline{cursor:pointer;}
 #asset_allocation_info .sub_item_name.asset{ background:lightblue; color:#444;}
 #asset_allocation_info .sub_item_name.service{ background:green; color:white}
-#asset_allocation_info .sub_item_name_inline.service{ color:green; font-weight:bold;}
+.sub_item_name_inline.service{ color:green; font-weight:bold;}
+.sub_item_name_inline.asset{ color:blue; font-weight:bold;}
 .date_time{color:#888;font-weight: bold; text-decoration:underline;}
 
 
@@ -156,13 +157,17 @@
     background:#ddd;
     border:1px solid lightblue;
 }
-.ui-draggable-dragging{opacity:0.7;}
+
+#service-conflict-dialog-message .foreword{font-weight:bold; margin-bottom:10px;}
+#service-conflict-dialog-message ul{list-style:disc; margin-left:20px;}
+
 
 /* jquery ui style adjustment */
 .item_list .ui-state-highlight{background:lightyellow; border:1px solid transparent;}
 .ui-resizable-e{right:0px;}
 .ui-resizable-w{left:0px;}
-.ui-resizable-s{bottom:0px; background: white; border:0px;}
+.ui-resizable-s{bottom:0px; background: white; border:0px; z-index:100}
 .ui-resizable-s:hover{background:#ddd}
 .ui-resizable-s.transparent{background:transparent}
+.ui-draggable-dragging{opacity:0.7;}
 

@@ -4,7 +4,11 @@
 
 <ul class="assets_list item_list">
   <% assets.each do |asset| %>
-    <%= render "asset_li", :asset=>asset, :add_event_listeners=>add_event_listeners %>
+    <% if leaf_service %>
+      <%= render "asset_li", :asset=>asset, :add_event_listeners=>add_event_listeners, :leaf_service=>leaf_service %>
+    <% else %>
+      <%= render "asset_li", :asset=>asset, :add_event_listeners=>add_event_listeners %>
+    <% end %>
   <% end %>
 </ul>
 

@@ -19,7 +19,7 @@ $(".asset_<%= @asset.id.to_s %>").each(function(){
       new_element.hide()
   })
 <% end %>
-
+  
 
 <% if @type=="leaf_service" %>
   $(".main_list_item").everyTime(10, function(){
@@ -31,4 +31,9 @@ $(".asset_<%= @asset.id.to_s %>").each(function(){
     $(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'green'}, 500);
   });
   $("#asset_allocation_info #static_view").html('<%= escape_javascript(render "leaf_service_view", :leaf_service=>@leaf_service) %>')
+<% end %>
+
+
+<% unless @new_conflicting_leaf_services.empty? %>
+  dialog_message("service-conflict-dialog-message", "Time Overlaps Detected", "<%= escape_javascript(render "dialog_content_service_conflict_message") %>", {})
 <% end %>

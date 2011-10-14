@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   has_one :service_section, :dependent=>:destroy
   has_one :event_recurrence, :dependent=>:destroy
 
-  MAX_RECURRENCE_COUNT = 1000
+  MAX_RECURRENCE_COUNT = 500
 
   class <<self
 
@@ -248,7 +248,7 @@ class Event < ActiveRecord::Base
     start_at_i = real_start_at_i
 
     count = 0
-    while start_at_i < real_until_at_i || count < Event::MAX_RECURRENCE_COUNT
+    while start_at_i < real_until_at_i && count < Event::MAX_RECURRENCE_COUNT
       end_at_i = [start_at_i+duration_i, real_until_at_i].min
       periods << [start_at_i, end_at_i]
       start_at_i = end_at_i+distance_i

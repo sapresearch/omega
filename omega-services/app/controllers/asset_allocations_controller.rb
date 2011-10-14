@@ -30,6 +30,7 @@ class AssetAllocationsController < Omega::Controller
     @leaf_services = @asset.services(true)
     @assets = @leaf_services.inject([]){|r,ls|ls.assets.reject{|asset|asset==@asset}.each{|asset| r<<asset unless r.include?(asset)}; r} <<@asset
     @leaf_service_conflicts = Service.time_conflicting_services_with_periods(@assets)
+    @new_conflicting_leaf_services = @leaf_services.reject{|ls|ls==@leaf_service}.select{|ls| not @leaf_service_conflicts[[@leaf_service, ls].to_set].nil?}
     
     respond_with(@asset_allocation)
   end
