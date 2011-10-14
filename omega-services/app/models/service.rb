@@ -162,6 +162,25 @@ class Service < ActiveRecord::Base
       end
       leaf_service_conflicts
     end
+
+    def next_service(time = Time.now)
+      result_service=nil
+      min_next_time=nil
+      Service.leaf_services.each do |leaf_service|
+        next_time = nil
+        periods_union = leaf_service.periods_union
+        periods_union.each do |period|
+          next if period[0]<=time.to_i
+          next_time = period[0]
+          break
+        end
+        if (min_next_time.nil? && !next_time.nil?) || (!min_next_time.nil? && !next_time.nil? && min_next_time > next_time)
+          min_next_time = next_time
+          result_service = leaf_service
+        end
+      end
+      result_service
+    end
     
   end
   

@@ -5,8 +5,12 @@ module ServicesHelper
 
   def is_admin?(user=current_user)
     # app-spec
-    user.has_permission?(Service::PERM_ADMIN)
+    user.roles.inject(false) { |admin, role| admin = admin == true ? true : role.internal_name == "administrator" }
     # end app-spec
+  end
+
+  def has_permission?(permission, user=current_user)
+    user.has_permission?(permission)
   end
 
   def bread_crumb(service)
