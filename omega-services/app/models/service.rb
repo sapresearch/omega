@@ -185,7 +185,8 @@ class Service < ActiveRecord::Base
   end
   
   def next_event
-    self.service_sections.inject { |soonest_event, section| soonest_event = soonest_event < section.event.start_at ? soonest_event : section.event.start_at }.at(0).event
+	 service_sections = self.service_sections.select { |ss| ss.start_at > Time.now }
+    service_sections.inject { |soonest_event, section| soonest_event = soonest_event < section.event.start_at ? soonest_event : section.event.start_at }
   end
 
   def is_root?
