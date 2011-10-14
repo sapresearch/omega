@@ -16,6 +16,7 @@ module ApplicationHelper
   	}
   end
   
+	# Returns the url for the banner or logo. The url is used in the background-image, defined in an inline style definition in omega/app/views/layouts/application.html.erb
 	def image_in_use_url(banner_or_logo)
 		image = Image.all.select{ |i| i.image_in_use and i.banner_or_logo == banner_or_logo }.at(0)
 		url = image.image.url if image.respond_to? 'image'

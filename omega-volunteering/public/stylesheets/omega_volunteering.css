@@ -29,6 +29,10 @@
 
 
 
+ul#positions-list{
+	margin-top: 60px;
+}
+
 #positions-list li {
     height: 178px;
     position: relative;
@@ -96,12 +100,12 @@ div #search_volunteer {
 	
 }
 div.position-wrapper {
-    padding: 0.8em;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    /*border: 1px solid #e3e3e3;*/
-	border: 1px solid #BE8816;
-	background: #fff;
+	/*border: 1px solid #BE8816;
+	background: #fff; This was how Anne had it. New change. */
+	border: 1px solid #CCC;
+	background: #F7F7F7
 	min-height: 149px;
     /*background: url("../images/position_bg.png") repeat-x bottom #F2F1E1;*/
 }
@@ -258,7 +262,7 @@ a.skill_tag-active span {
 
 /************ calendar list ********************/
 .pos-date {
-    margin: 20px 10px 0 0;
+    margin: 0 10px 0 0;
     background: url("../images/cal-bg.png") no-repeat;
     text-align: center;
     font-size: 1.3em;
@@ -270,7 +274,7 @@ a.skill_tag-active span {
 }
 
 .pos-recurrent {
-    margin: 20px 10px 0 0;
+    margin: 0 10px 0 0;
     background: url("../images/recurrent_bg.png") no-repeat;
     float: left;
     width: 45px;
@@ -298,4 +302,44 @@ margin-left:15px;
 
 div.records_search_box {
 	margin-left:4px;
+}
+
+div#position_toolbar{
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	background: #EBEBDE;
+}
+
+div#position_skills{
+	margin: -35px 0 40px 55px;
+}
+
+div#sort_positions{
+	float: right;
+}
+
+div#position_top_bar{
+	background: green;
+	min-height: 42px;
+	border-radius: 4px 4px 0px 0px; 
+	-moz-border-radius: 4px 4px 0px 0px; 
+	-webkit-border-radius: 4px 4px 0px 0px;
+}
+
+p.label{
+	font-weight: bold;
+}
+ul#positions-list p{
+	font-weight: bold;
+}
+
+h2 a.position-name{
+	color: white;
+}
+
+div.position_body{
+	/*background: #F7F7F7; */
+	/*margin: -14px 0 -40px 0;  THis moves this div up to the bottom of the top bar and to the top of the toolbar */
+	margin-left: 25px;
 }

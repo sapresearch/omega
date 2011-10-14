@@ -53,15 +53,22 @@
 							</form>
 						</td>
          			<td class="accounts"> 
-							<% full = url_for(:only_path => false).to_s %>
-							<% unneccessary = url_for().to_s %>
-							<% host = full.gsub(unneccessary, "") %>
-							<% position_url = host + (url_for(volunteering_position_path(position))).to_s %>
-							
-							<div id="twitter">
-								<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%=position_url%>" data-text="Check this out" data-count="none">Tweet</a>
-								<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-							</div>
+							<%= render 'twitter', :position => position %>
+						</td>
+					</tr>
+				<% end %>
+				<% @service_events.each do |s| %>
+					<tr>
+						<td class="accounts"> <%= s[:service].name %></td>
+						<td class="accounts"> <%= s[:event].start_at %></td>
+						<td class="accounts"> <%= s[:status] %></td>
+         			<td class="accounts"> 
+							<form onsubmit="fb_message()">
+								<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
+							</form>
+						</td>
+         			<td class="accounts"> 
+							<%= render 'twitter', :position => position %>
 						</td>
 					</tr>
 				<% end %>

@@ -139,20 +139,29 @@ class UsersController < Omega::Controller
 		@contact = Contact.for(current_user)
 		@new_skill = Contact::Skill.new
 		@new_interest = Contact::Interest.new
-		@other_skills = Contact::Skill.find(:all).reject do |s|
-			@contact.skills.inject(false) { |result, contacts_skills| result = result == true ? result : s.name == contacts_skills.name } 
-		end
-		@other_interests = Contact::Interest.find(:all).reject do |s|
-			@contact.interests.inject(false) { |result, contacts_interests| result = result == true ? result : s.name == contacts_interests.name } 
+		if !@contact.nil?
+			@other_skills = Contact::Skill.find(:all).reject do |s|
+				@contact.skills.inject(false) { |result, contacts_skills| result = result == true ? result : s.name == contacts_skills.name }
+			end
+			@other_interests = Contact::Interest.find(:all).reject do |s|
+				@contact.interests.inject(false) { |result, contacts_interests| result = result == true ? result : s.name == contacts_interests.name } 
+			end
 		end
 
 		if !current_user.is_admin?
+			registered_services = ServiceRegistration.filter_services_by_registrant(Service.all, @contact)
+			@service_events = registered_services.inject(Array.new) do |service_events, service|
+				status = service.service_registrations.select { |sr| sr.contact == @contact }.at(0).status
+				service_events << { :service => service, :next_event => service.next_event, :status => status }
+			end 
+
 			volunteering_records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
  			@positions = volunteering_records.inject(Array.new) do |positions, record|
 				position = Volunteering::Position.find(record.position_id)
 				positions.push({ :position => position, :record => record.action }) # @positions has hashes with the position and record as key-value pairs for each position the user is signed up for.
 			end
 		elsif current_user.is_admin?
+			@service_events = Service.find(:all).inject(Array.new) { |service_events, service| service_events << {:service => service, :next_event => service.next_event, :status => "Administrator"} }
  			@positions = Volunteering::Position.find(:all).inject(Array.new) do |positions, p|
 				positions.push({ :position => p, :record => 'Administrator' }) # @positions has hashes with the position and record as key-value pairs for each position the user is signed up for.
 			end

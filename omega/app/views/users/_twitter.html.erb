@@ -1,0 +1,9 @@
+<% full = url_for(:only_path => false).to_s %>
+<% unneccessary = url_for().to_s %>
+<% host = full.gsub(unneccessary, "") %>
+<% position_url = host + (url_for(volunteering_position_path(position))).to_s %>
+
+<div id="twitter">
+	<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%=position_url%>" data-text="Check this out" data-count="none">Tweet</a>
+	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+</div>

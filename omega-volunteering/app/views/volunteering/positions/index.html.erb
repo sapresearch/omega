@@ -1,29 +1,29 @@
 <% require_stylesheet 'omega_volunteering' %>
-<% require_javascript 'omega_volunteering' %>
+<%# require_javascript 'omega_volunteering' %>
 
     <div class="content circle-corners-bottom-left">
-    	
+
 		<div class="heading-main-columns">
-	
-				<h1 class="page-content">
-      				Current Volunteering Opportunities
-		    	</h1>
-	
+			<h1 class="page-content">
+      		Current Volunteering Opportunities
+		  	</h1>
 		</div>
 
 
-      <div class="right">
-      	<br/>
-        <%= om_button(:icon=>'sort-az', :small => true) do %>
-            <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
-        <% end %>
-        <%= om_button(:icon=>'sort-za', :small => true) do %>
-            <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
-        <% end %>
-
+		<div id="sort_positions">
+			<br/>
+			<%= om_button(:icon=>'sort-az', :small => true) do %>
+				<%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
+			<% end %>
+			<%= om_button(:icon=>'sort-za', :small => true) do %>
+				<%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+			<% end %>
       </div>
 
-      <div class="clear"></div>
+		<% content_for :sidebar do %>
+			<%= render :partial => "layouts/sidebar_positions_skills" %>
+			<%= render :partial => "layouts/sidebar_positions_interests" %>
+		<% end %>
 
       <%# if tags = @skills_tags or tags = @interests_tags %>
           <p>
@@ -37,63 +37,67 @@
       
       <ul id="positions-list">
         <% @positions.each do |position| %>
-            <li id="position-<%= position.id %>">
-              <div class="position-slider">
-                <%= render 'volunteering/positions/partials/position_actions', :position => position %>
-              </div>
-              <div class="position">
-                <div class="position-wrapper">
+          <li id="position-<%= position.id %>">
+              <!--<div class="position-slider">
+                <%#= render 'volunteering/positions/partials/position_actions', :position => position %>
+              </div>!-->
+                <div class="position position-wrapper">
 
-                  <% if position.start? %>
-                      <div class="pos-date">
-                        <div class="pos-cal-month">
-                          <%= position.start.strftime("%b") %></div>
-                        <div class="pos-cal-day"> <%= position.start.day %></div>
-                      </div>
-                  <% else %>
-                      <div class="pos-recurrent">
-                        <div class="posCalMonth">
+						<div id="position_top_bar">
+	                  <% if position.start? %>
+	                     <div class="pos-date">
+	                        <div class="pos-cal-month"><%= position.start.strftime("%b") %></div>
+	                        <div class="pos-cal-day"> <%= position.start.day %></div>
+	                     </div>
+	                  <% else %>
+	                     <div class="pos-recurrent">
+	                        <div class="posCalMonth"></div>
+	                        <div class="posCalDay"></div>
+	                     </div>
+	                  <% end %>
 
-                        </div>
-
-                        <div class="posCalDay"></div>
-                      </div>
-                  <% end %>
                   <h2>
                     <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position), :class => 'position-name'  %>
                   </h2>
+						</div>
 
+					<div class="position_body"><br /><br />
                   <p>
                     <%= truncate(position.description, :length=> 140) %> <%= link_to '( read more ... )', volunteering_position_path(position) %>
                   </p>
 
                   <p>
-                    Priority: <%= position.priority %> <%= "Normal" if position.priority.nil? %>
+                    Priority: <i><%= position.priority %><%= "Normal" if position.priority.nil? %></i>
                   </p>
 
-              <span>
-                <% position.skills.each do |skill| %>
+						<p>
+							Volunteers: <%= position.records.count%>/<%=position.volunteers_required %>
+						</p>
+							
+						<p> Skills:
+							<div id='position_skills'>
+								<span>
+									<% position.skills.each do |skill| %>
+										<%= link_to volunteering_skills_path(:skills => [params[:skills], skill.name].compact.join('+')), :class => 'skill-tag' do %>
+											<span class="skill-tag"> <%= skill.name %> </span>
+										<% end %>
+									<% end %>
+									<div class="clear"></div>
+								</span>
+							</div>
+						</p><br />
+					</div>
 
+					<div id='position_toolbar'>
+						<%= render 'volunteering/positions/partials/position_toolbar', :position => position %>
+					</div>
 
-                     <%= link_to volunteering_skills_path(:skills => [params[:skills], skill.name].compact.join('+')), :class => 'skill-tag' do %>
-                           <span class="skill-tag"> <%= skill.name %>  </span>
-                        <% end %>
+				</div>
+			<div class="clear"></div>
+		</li>
+	<% end %>
+	</ul>
 
-
-                <% end %>
-                <div class="clear"></div>
-              </span>
-                </div>
-              </div>
-              <div class="clear"></div>
-            </li>
-        <% end %>
-      </ul>
-      <%= will_paginate @positions %>
-      <div class="clear"></div>
-    </div>
-
-<% content_for :sidebar do %>
-    <%= render :partial => "layouts/sidebar_positions_skills" %>
-    <%= render :partial => "layouts/sidebar_positions_interests" %>
-<% end %>
+	<%= will_paginate @positions %>
+	<div class="clear"></div>
+</div>
