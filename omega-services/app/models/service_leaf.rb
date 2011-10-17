@@ -48,12 +48,12 @@ class ServiceLeaf < ActiveRecord::Base
     service_sections.each do |service_section|
       next_time = nil
       event = service_section.event
-      next if event.start_at.nil? || event.end_at.nil?
-      next if !event.is_recurrence_endless? && event.recurrence_end_at.to_i < time_i
+      next if event.start_at.nil? || event.end_at.nil?     
       start_at_i = event.start_at.to_i
       if start_at_i >= time_i
         next_time = start_at_i
       elsif event.is_recurrent?
+        next if !event.is_recurrence_endless? && event.recurrence_end_at.to_i < time_i
         until_at_i = event.event_recurrence.end_at.to_i
         interval_i = recurrence_interval
         remainder = (time_i-start_at_i)%interval_i
