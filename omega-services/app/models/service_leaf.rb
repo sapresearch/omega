@@ -55,7 +55,7 @@ class ServiceLeaf < ActiveRecord::Base
       elsif event.is_recurrent?
         next if !event.is_recurrence_endless? && event.recurrence_end_at.to_i < time_i
         until_at_i = event.event_recurrence.end_at.to_i
-        interval_i = recurrence_interval
+        interval_i = event.recurrence_interval
         remainder = (time_i-start_at_i)%interval_i
         start_at_i = time_i + interval_i - remainder
         next if start_at_i >= until_at_i
