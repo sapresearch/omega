@@ -162,7 +162,13 @@ class UsersController < Omega::Controller
 				positions.push({ :position => position, :record => record.action }) # @positions has hashes with the position and record as key-value pairs for each position the user is signed up for.
 			end
 		elsif current_user.is_admin?
-			@service_events = Service.find(:all).inject(Array.new) { |service_events, service| service_events << {:service => service, :next_event => service.next_event.start_at.to_s.gsub(/:00 .*/, ""), :status => "Administrator"} }
+			@service_events = Service.find(:all).inject(Array.new) do |service_events, service|
+				service_events_hash = {:service => service, :status => "Administrator"}
+				if !service.next_event.nil?
+					service_events_hash[:next_event] = service.next_event.start_at.to_s.gsub(/:00 .*/, "") 
+				end
+				service_events << service_events_hash
+			end
  			@positions = Volunteering::Position.find(:all).inject(Array.new) do |positions, p|
 				positions.push({ :position => p, :record => 'Administrator' }) # @positions has hashes with the position and record as key-value pairs for each position the user is signed up for.
 			end
