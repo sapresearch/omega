@@ -19,7 +19,8 @@
       <%unless Contact.for(current_user).nil?%>
 	   	<% @application = Volunteering::Record.find_by_position_id_and_contact_id(position.id,Contact.for(current_user))%>
 			<% if @application.nil?%>
-		  		<%= om_button(:contact => true, :icon => 'apply') do %>
+		  		<%#= om_button(:contact => true, :icon => 'apply') do %>
+		  		<%= om_button(:contact => true, :icon => 'user-add') do %>
 					<%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
 		  		<%end%>
 			<% elsif !@application.nil? %>

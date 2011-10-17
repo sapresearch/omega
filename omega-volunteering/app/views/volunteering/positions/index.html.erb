@@ -74,12 +74,21 @@
 							Volunteers: <%= position.records.count%>/<%=position.volunteers_required %>
 						</p>
 							
-						<p> Skills:
+						<p>
+							Countdown: <%= ((position.start - Time.now) / 86400).round %> Days Left
+						</p>
+
+						<p> Skills/Interests:
 							<div id='position_skills'>
 								<span>
 									<% position.skills.each do |skill| %>
 										<%= link_to volunteering_skills_path(:skills => [params[:skills], skill.name].compact.join('+')), :class => 'skill-tag' do %>
 											<span class="skill-tag"> <%= skill.name %> </span>
+										<% end %>
+									<% end %>
+									<% position.interests.each do |interest| %>
+										<%= link_to volunteering_interests_path(:interests => [params[:interests], interest.name].compact.join('+')), :class => 'skill-tag' do %>
+											<span class="skill-tag"> <%= interest.name %> </span>
 										<% end %>
 									<% end %>
 									<div class="clear"></div>
