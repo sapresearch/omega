@@ -388,12 +388,15 @@ class Service < ActiveRecord::Base
 
   # return the next happening service section from the time on
   def next_section(time = Time.now)
-    return nil unless is_leaf?
+    return nil if time.nil?
+    return nil unless is_leaf?    
     service_leaf.next_section(time)
   end
   alias_method :next_service_section, :next_section
 
   def next_event(time=Time.now)
+    return nil if time.nil?
+    return nil unless is_leaf?
     next_section(time).event
   end
   

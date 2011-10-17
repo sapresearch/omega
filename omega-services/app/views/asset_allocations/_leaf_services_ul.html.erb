@@ -4,11 +4,7 @@
 
 <ul class="leaf_services_list item_list">
   <% leaf_services.each do |leaf_service| %>
-    <% if asset %>
-      <%= render "leaf_service_li", :leaf_service=>leaf_service, :add_event_listeners=>add_event_listeners, :asset=>asset %>
-    <% else %>
-      <%= render "leaf_service_li", :leaf_service=>leaf_service, :add_event_listeners=>add_event_listeners %>
-    <% end %>
+    <%= render "leaf_service_li", :leaf_service=>leaf_service, :add_event_listeners=>add_event_listeners %>
   <% end %>
 </ul>
 
@@ -22,7 +18,7 @@
     items:"li",
     cursor: 'move'
   }).disableSelection();
-  
+
   <% if asset.nil? %>
     $("#leaf_services_list_block .leaf_services_list li:not(.ui-state-disabled)").each(function(){
       if($(this).disabled_copy()==null)
