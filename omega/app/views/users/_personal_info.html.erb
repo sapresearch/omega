@@ -1,0 +1,41 @@
+<h3 class="content-heading"> Personal Information </h3>
+	<p>	
+		<%= c.label :first_name %>
+		<%= c.text_field(:first_name, :'data-tooltip' => 'Your first name')%> 
+	</p>
+		
+	<p>
+		<%= c.label :last_name %>
+		<%= c.text_field(:last_name, :'data-tooltip' => 'Your last name')%>
+	</p>
+	
+	<%=  c.fields_for :addresses do |a|%>
+		<p>
+			<%= a.label :city %>
+			<%= a.text_field(:city, :'data-tooltip' => 'Your current City') %>
+		</p>
+			
+		<p>
+			<%= a.label :postal_code %>
+			<%= a.text_field(:zip_code, :'data-tooltip' => 'Your current Postal Code') %>
+		</p>
+	<%end%>
+			
+	<%= c.fields_for :phone_numbers do |p|%>
+		<p>
+			<%= p.label :phone %>
+			<%= p.text_field :number, :'data-tooltip' => 'Phone number where you could be contacted'%>
+		</p>
+	<%end%>
+		
+<h3 class="content-heading">LOG IN INFORMATION </h3> 
+
+	<p>
+		<%= c.label :email %>
+		<%= c.text_field(:email, :'data-tooltip' => 'Email where you could be contacted') %>
+	</p>
+	  
+	<p>
+		<%= c.label :confirm_email %>
+		<%= c.text_field(:email_confirmation, :'data-tooltip' => 'Please confirm your email') %>
+	</p>

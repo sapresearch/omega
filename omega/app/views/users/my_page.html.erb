@@ -36,7 +36,6 @@
 </div>
 
 
-
 <h3 class="content-heading"> My Volunteering Events</h3>
 	<div id="positions">
 	<table class="accounts"><br />
@@ -53,22 +52,22 @@
 							</form>
 						</td>
          			<td class="accounts"> 
-							<%= render 'twitter', :position => position %>
+							<%= render 'twitter', :position => position, :service => false %>
 						</td>
 					</tr>
 				<% end %>
 				<% @service_events.each do |s| %>
-					<tr>
-						<td class="accounts"> <%= s[:service].name %></td>
-						<td class="accounts"> <%= s[:event].inspect.to_s %></td>
-						<td class="accounts"> <%= s[:status] %></td>
+					<tr class="accounts" >
+						<td class="accounts"> <%= link_to(s[:service].name, services_url(:service_id=>s[:service].id)) %></td>
+						<td class="accounts"> <%= s[:next_event].to_s %></td>
+						<td class="accounts"> Status: <i><%= s[:status] %></i></td>
          			<td class="accounts"> 
 							<form onsubmit="fb_message()">
 								<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
 							</form>
 						</td>
          			<td class="accounts"> 
-							<%#= render 'twitter', :position => position %>
+							<%= render 'twitter', :position => s[:service], :service => true %>
 						</td>
 					</tr>
 				<% end %>
@@ -83,9 +82,19 @@
 	<br /><br />
 	</div>
 
+
+	<%= form_for @contact, :url => update_my_page_users_path do |c| %> 
 		<div id="skills_and_interests">
-			<%= render 'skills_and_interests' %>
+			<%= render 'skills_and_interests', :c => c %>
+		</div><br />
+
+		<%= render 'personal_info', :c => c %>
+
+		<div id="contact_submit">
+			<p><%= c.submit :Update %></p>
 		</div>
+	<% end %>
+
 
 	</div>
 </body>

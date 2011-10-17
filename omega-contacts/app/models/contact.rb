@@ -15,6 +15,8 @@ class Contact < Omega::Model
 
   TITLES = %w{ Mr Miss Ms Mrs}
 
+  attr_accessible :first_name, :last_name
+
   scope :status, where('status IS NULL')
 
   class << self
