@@ -60,7 +60,7 @@
 				<% @service_events.each do |s| %>
 					<tr>
 						<td class="accounts"> <%= s[:service].name %></td>
-						<td class="accounts"> <%= s[:event] %></td>
+						<td class="accounts"> <%= s[:event].inspect.to_s %></td>
 						<td class="accounts"> <%= s[:status] %></td>
          			<td class="accounts"> 
 							<form onsubmit="fb_message()">
@@ -68,7 +68,7 @@
 							</form>
 						</td>
          			<td class="accounts"> 
-							<%= render 'twitter', :position => position %>
+							<%#= render 'twitter', :position => position %>
 						</td>
 					</tr>
 				<% end %>
