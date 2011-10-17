@@ -85,7 +85,7 @@
         <% [['none', 'no contact'], ['existing', 'existing contact'], ['new', 'new contact']].each do |value, text| %>
             <%= radio_button_tag 'contact_assignment', value, value == @contact_assignment %><%= text %>
         <% end %>
-     <div id="position_exisiting_contact" class="hide">
+     <div id="position_existing_contact" class="hide">
         <h2 class="application-form-content-heading">Assign Exisiting Contact</h2>
         <table>
           <tr>
@@ -94,7 +94,7 @@
               
               <span id="add-contacts">
                <span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add contact"></span>
-                Add an exisitng contact
+                Add an existing contact
                   </span>
 
               <ul id="assigned_contacts" style="margin-left:-120%">
