@@ -50,9 +50,10 @@
         $(".leaf_services_list").parents("fieldset").addClass("active");
         $("#leaf_services_exchange").css("visibility","visible")
         $(".assets_list .asset_<%= asset.id.to_s %>:not(.ui-state-disabled)").addClass("main_list_item")
-        $(".main_list_item").everyTime(10, function(){
-          $(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'lightblue'}, 500);
-        });
+        //$(".main_list_item").everyTime(10, function(){
+          //$(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'lightblue'}, 500);
+        //});
+        interval = setInterval("$('.main_list_item').animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'lightblue'}, 500);",10);
 
         $("#leaf_services_list_fieldset").droppable({
           hoverClass: 'drop_leaf_service_hover',

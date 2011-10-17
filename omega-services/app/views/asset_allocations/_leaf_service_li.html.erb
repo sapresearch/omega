@@ -51,9 +51,10 @@
         $(".assets_list").parents("fieldset").addClass("active");
         $("#assets_exchange").css("visibility","visible")
         $(".leaf_services_list .leaf_service_<%= leaf_service.id.to_s %>:not(.ui-state-disabled)").addClass("main_list_item")
-        $(".main_list_item").everyTime(10, function(){
-          $(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'green'}, 500);
-        });
+        //$(".main_list_item").everyTime(10, function(){
+          //$(this).animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'green'}, 500);
+        //});
+        interval = setInterval("$('.main_list_item').animate({backgroundColor:'lightyellow'}, 500).animate({backgroundColor:'green'}, 500);",10);
 
         $("#assets_list_fieldset").droppable({
           hoverClass: 'drop_asset_hover',

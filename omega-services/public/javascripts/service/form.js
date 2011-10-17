@@ -77,7 +77,7 @@ function edit_service_section(){
   check_service_sections_count();
   $('#service_section_info').switchClass("show_part", "edit_part",0)
 }
-function recurrence_interval(element)
+function recurrence_interval_s(element)
 {
   var str = ""
   var year = $(".year",element).val()
@@ -124,7 +124,7 @@ function preview_service_section(){
     {
       html += '<div class="field">\
                 <span class="label"><strong>Reoccur:</strong></span>\
-                <span class="value">Every '+recurrence_interval(this)+'</span>\
+                <span class="value">Every '+recurrence_interval_s(this)+'</span>\
               </div>'
       html += '<div class="field">\
               <span class="label"><strong>Until:</strong></span>\

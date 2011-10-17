@@ -155,8 +155,12 @@ class Event < ActiveRecord::Base
 
   end
 
+  def is_undetermined?
+    start_at.nil?
+  end
+
   def is_recurrent?
-    not event_recurrence.nil?
+    event_recurrence.nil? ? false : (recurrence_interval==0 ? false : true)
   end
 
   def is_endless?
@@ -203,6 +207,27 @@ class Event < ActiveRecord::Base
   end
 
   def recurrence_interval
+    return nil if event_recurrence.nil?
+    interval_values_hash = ActiveSupport::JSON.decode(event_recurrence.interval)
+    result = 0
+    interval_values_hash.each do |key,value|
+      case key
+        when "year"
+          result += value.to_i.year.to_i
+        when "month"
+          result += value.to_i.month.to_i
+        when "day"
+          result += value.to_i.day.to_i
+        when "hour"
+          result += value.to_i.hour.to_i
+        when "minute"
+          result += value.to_i.minute.to_i
+      end
+    end
+    result
+  end
+
+  def recurrence_interval_s
     return nil unless is_recurrent?
     interval_values_hash = ActiveSupport::JSON.decode(event_recurrence.interval)
     result = ""
@@ -225,7 +250,7 @@ class Event < ActiveRecord::Base
 
     if is_recurrent?
       duration_i = end_at_i - start_at_i
-      interval_i = recurrence_year.year.to_i + recurrence_month.month.to_i + recurrence_day.day.to_i + recurrence_hour.hour.to_i + recurrence_minute.minute.to_i
+      interval_i = recurrence_interval
       distance_i = interval_i - duration_i
       periods = []
     end

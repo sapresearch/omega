@@ -18,6 +18,7 @@ $.fn.extend({
 
 var is_dragging = false;
 var is_showing_message_box=true;
+var interval;
 $(function(){
     $("#asset_allocation_info").resizable({
         start: function(event, ui) {
@@ -41,6 +42,7 @@ $(function(){
 function clear_visual_effects(){
     $(".connectedSortable").removeClass("connectedSortable")
     $(".active").removeClass("active")
+    clearInterval(interval)
     $(".assets_list .main_list_item").stop(true,true).stopTime().css("background-color","lightblue");
     $(".leaf_services_list .main_list_item").stop(true,true).stopTime().css("background-color","green");
     $(".main_list_item").removeClass("main_list_item")

@@ -163,6 +163,9 @@ class Service < ActiveRecord::Base
       leaf_service_conflicts
     end
 
+    # not in use
+    # performance improvable
+    # return the next happening service from the time on
     def next_service(time = Time.now)
       result_service=nil
       min_next_time=nil
@@ -388,4 +391,15 @@ class Service < ActiveRecord::Base
     overlapping_hash
   end
 
+  # return the next happening service section from the time on
+  def next_section(time = Time.now)
+    return nil unless is_leaf?
+    service_leaf.next_section(time)
+  end
+  alias_method :next_service_section, :next_section
+
+  def next_event(time=Time.now)
+    next_section(time).event
+  end
+  
 end

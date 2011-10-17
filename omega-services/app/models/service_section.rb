@@ -69,4 +69,8 @@ class ServiceSection < ActiveRecord::Base
     event.recurrence_interval
   end
 
+  def recurrence_interval_s
+    event.recurrence_interval_s
+  end
+
 end
