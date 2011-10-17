@@ -334,6 +334,13 @@ ul#positions-list p{
 	font-weight: bold;
 }
 
+ul#positions-list li{
+	margin-top: 175px;
+}
+ul#positions-list li:first-child{
+	margin-top: 0;
+}
+
 h2 a.position-name{
 	color: white;
 }
