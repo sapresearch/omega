@@ -54,11 +54,17 @@ class Contact < Omega::Model
     first_name.to_s + ", " + last_name.to_s
   end
 
+	 def update_subclass_attributes(params)
+		self.update_attributes(params)
+		Contact::PhoneNumber.update_phone_numbers(params)
+		Contact::Address.update_addresses(params)
+	 end
 
   accepts_nested_attributes_for :uploads
 
   accepts_flattened_values_for :interests, :skills, :languages, :value => :name
 
+  accepts_flattened_values_for :phone_numbers, :value => :phone_numbers_attributes, :value => :number
   accepts_nested_attributes_for :addresses, :phone_numbers,
                                 :reject_if => NestedHelper::REJECT_TEMPLATE, :allow_destroy => true
 

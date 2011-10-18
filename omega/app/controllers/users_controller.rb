@@ -54,9 +54,9 @@ class UsersController < Omega::Controller
   end
 
   def update
-    @user.update_attributes(params[:user])
-    
-    render "summary"
+		@user.update_attributes(params[:user])
+		Contact.for(@user).update_subclass_attributes(params[:user][:contact_attributes])
+		render "summary"
   end
 
   def destroy
@@ -135,7 +135,6 @@ class UsersController < Omega::Controller
 
 
 	def my_page
-		@user = current_user
 		@contact = Contact.for(current_user)
 		@new_skill = Contact::Skill.new
 		@new_interest = Contact::Interest.new
@@ -153,34 +152,31 @@ class UsersController < Omega::Controller
 			@service_events = registered_services.inject(Array.new) do |service_events, service|
 				registrations = service.service_registrations.select { |sr| sr.registrant == @contact }
 				status = registrations.at(0).nil? ? nil : registrations.at(0).status
-				service_events << { :service => service, :next_event => service.next_event, :status => status }
+				next_event = service.next_event.nil? ? "TBD" : service.next_event.start_at.to_s.gsub(/:00 .*/, "")
+				service_events << { :service => service, :next_event => next_event, :status => status }
 			end 
 
 			volunteering_records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
  			@positions = volunteering_records.inject(Array.new) do |positions, record|
 				position = Volunteering::Position.find(record.position_id)
-				positions.push({ :position => position, :record => record.action }) # @positions has hashes with the position and record as key-value pairs for each position the user is signed up for.
+				positions.push({ :position => position, :record => record.action })#@positions has hashes with the position and record as key-value pairs for each position the user is signed up
 			end
 		elsif current_user.is_admin?
 			@service_events = Service.find(:all).inject(Array.new) do |service_events, service|
 				service_events_hash = {:service => service, :status => "Administrator"}
-				if !service.next_event.nil?
-					service_events_hash[:next_event] = service.next_event.start_at.to_s.gsub(/:00 .*/, "") 
-				end
+				service_events_hash[:next_event] = service.next_event.nil? ? "TBD" : service.next_event.start_at.to_s.gsub(/:00 .*/, "") 
 				service_events << service_events_hash
 			end
  			@positions = Volunteering::Position.find(:all).inject(Array.new) do |positions, p|
-				positions.push({ :position => p, :record => 'Administrator' }) # @positions has hashes with the position and record as key-value pairs for each position the user is signed up for.
+				positions.push({ :position => p, :record => 'Administrator' }) #@positions has hashes with the position and record as key-value pairs for each position the user is signed up
 			end
 		end
-			
 
 		@sap_profile_id = 100002599482156
 		@sap_profile_id_2 = 253183958028424 
 		@sap_profile_id_secret_2 = "7b4684019a0ea345ce8976f8d3a7d57a"
 
 		@settings = Setting.new
-		respond_with(@other_skills, @other_interests)
 	end
 
 	def update_my_page

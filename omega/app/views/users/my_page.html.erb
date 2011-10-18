@@ -43,7 +43,7 @@
 			<% @positions.each do |element| %>
 				<% position = element[:position] %>
 				<tr class="accounts" >
-         			<td class="accounts"> <%= link_to(position.name, volunteering_position_path(position)) %></td>
+         			<td class="accounts"> <%= link_to(position.name, volunteering_position_path(position), :'data-tooltip' => 'Click to see this service')%></td>
          			<td class="accounts"> <%= link_to(position.start_date, volunteering_position_path(position)) %></td>
          			<td class="accounts"> Status: <i><%= element[:record] %></i></td>
          			<td class="accounts"> 
@@ -58,7 +58,7 @@
 				<% end %>
 				<% @service_events.each do |s| %>
 					<tr class="accounts" >
-						<td class="accounts"> <%= link_to(s[:service].name, services_url(:service_id=>s[:service].id)) %></td>
+						<td class="accounts"> <%= link_to(s[:service].name, services_url(:service_id=>s[:service].id), :'data-tooltip' => 'Click to see this service') %></td>
 						<td class="accounts"> <%= s[:next_event].to_s %></td>
 						<td class="accounts"> Status: <i><%= s[:status] %></i></td>
          			<td class="accounts"> 

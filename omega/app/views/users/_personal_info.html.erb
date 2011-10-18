@@ -8,11 +8,21 @@
 		<%= c.label :last_name %>
 		<%= c.text_field(:last_name, :'data-tooltip' => 'Your last name')%>
 	</p>
+		
+	<p>
+		<%= c.label :email %>
+		<%= c.text_field(:email, :'data-tooltip' => 'Email where you could be contacted') %>
+	</p>
 	
 	<%=  c.fields_for :addresses do |a|%>
 		<p>
 			<%= a.label :city %>
 			<%= a.text_field(:city, :'data-tooltip' => 'Your current City') %>
+		</p>
+			
+		<p>
+			<%= a.label :street %>
+			<%= a.text_field(:street, :'data-tooltip' => 'Your street address') %>
 		</p>
 			
 		<p>
@@ -27,15 +37,3 @@
 			<%= p.text_field :number, :'data-tooltip' => 'Phone number where you could be contacted'%>
 		</p>
 	<%end%>
-		
-<h3 class="content-heading">LOG IN INFORMATION </h3> 
-
-	<p>
-		<%= c.label :email %>
-		<%= c.text_field(:email, :'data-tooltip' => 'Email where you could be contacted') %>
-	</p>
-	  
-	<p>
-		<%= c.label :confirm_email %>
-		<%= c.text_field(:email_confirmation, :'data-tooltip' => 'Please confirm your email') %>
-	</p>

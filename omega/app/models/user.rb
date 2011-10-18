@@ -43,7 +43,7 @@ class User < Omega::Model
   has_and_belongs_to_many :roles
   
   has_one :contact
-
+  has_many :phone_numbers, :through => :contact
   has_many :messages,      :foreign_key => :to_id,   :class_name => '::Message', :inverse_of => :to,
                            :conditions => ['deleted_by_to_at IS NULL']
   has_many :sent_messages, :foreign_key => :from_id, :class_name => '::Message', :inverse_of => :from,
@@ -53,12 +53,13 @@ class User < Omega::Model
                                       :join_table => 'contact_skills_users'
   has_many :favorites
   has_many :favorite_items, :through => :favorites, :source => :item
-	has_one :setting
+  has_one :setting
   
   accepts_nested_attributes_for :contact
   accepts_flattened_values_for :skills, :value => :name
 
   attr_accessor :password, :password_confirmation
+  attr_accessible :username, :email
 
   validates :username,   :presence => true,
                          :uniqueness => true,
