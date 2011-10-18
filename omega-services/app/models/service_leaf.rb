@@ -38,7 +38,8 @@ class ServiceLeaf < ActiveRecord::Base
 
   def next_event(time = Time.now)
     return nil if time.nil?
-    next_section(time).event
+    service_section = next_section(time)
+    service_section.nil? ? nil : service_section.event
   end
 
   def next_section(time = Time.now)
