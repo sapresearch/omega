@@ -397,6 +397,7 @@ class Service < ActiveRecord::Base
   def next_event(time=Time.now)
     return nil if time.nil?
     return nil unless is_leaf?
+	 return nil if next_section(time).nil?
     next_section(time).event
   end
   
