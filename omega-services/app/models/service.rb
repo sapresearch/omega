@@ -394,7 +394,7 @@ class Service < ActiveRecord::Base
   end
   alias_method :next_service_section, :next_section
 
-  def next_event(time=Time.now)
+  def next_event(time = Time.now)
     return nil if time.nil?
     return nil unless is_leaf?
 	 return nil if next_section(time).nil?

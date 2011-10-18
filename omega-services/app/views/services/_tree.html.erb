@@ -8,7 +8,7 @@
       </li>
     <% end %>
 
-    <%unless services.empty? || services.nil? %>
+    <% unless services.empty? || services.nil? %>
       <% services.each do |service| %>
         <% if(is_admin? || service.is_public?) %>
           <li id="<%= id.to_s %>_li_<%= service.id.to_s %>">            

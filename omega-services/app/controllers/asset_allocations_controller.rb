@@ -7,6 +7,17 @@ class AssetAllocationsController < Omega::Controller
   def index
     @asset_id = params[:asset_id]
     @leaf_service_id = params[:leaf_service_id]
+
+    if @asset_id
+      asset = Asset.find(@asset_id)
+      @back_name = asset.name
+      #@back_url = assets_url(:asset_id=>@asset_id)
+    elsif @leaf_service_id
+      leaf_service = Service.find(@leaf_service_id)
+      @back_name = leaf_service.name
+      @back_url = services_url(:service_id=>@leaf_service_id)
+    end
+    
     @assets = Asset.all(:order=>:name)
     @leaf_services = Service.service_leaves
     @leaf_service_conflicts = Service.time_conflicting_services_with_periods

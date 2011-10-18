@@ -158,6 +158,7 @@
     border:1px solid lightblue;
 }
 
+.asset_allocation_bottom_links{ margin-top:15px; }
 #service-conflict-dialog-message .foreword{font-weight:bold; margin-bottom:10px;}
 #service-conflict-dialog-message ul{list-style:disc; margin-left:20px;}
 

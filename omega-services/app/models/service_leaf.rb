@@ -36,7 +36,7 @@ class ServiceLeaf < ActiveRecord::Base
     return Event.periods_intersection([periods_union_1,periods_union_2])
   end
 
-  def next_event(time=Time.now)
+  def next_event(time = Time.now)
     return nil if time.nil?
     next_section(time).event
   end
@@ -44,8 +44,8 @@ class ServiceLeaf < ActiveRecord::Base
   def next_section(time = Time.now)
     return nil if time.nil?
     time_i = time.to_i
-    result_section=nil
-    min_next_time=nil
+    result_section = nil
+    min_next_time = nil
     service_sections.each do |service_section|
       next_time = nil
       event = service_section.event
@@ -57,7 +57,7 @@ class ServiceLeaf < ActiveRecord::Base
         next if !event.is_recurrence_endless? && event.recurrence_end_at.to_i < time_i
         until_at_i = event.event_recurrence.end_at.to_i
         interval_i = event.recurrence_interval
-        remainder = (time_i-start_at_i)%interval_i
+        remainder = (time_i - start_at_i)%interval_i
         start_at_i = time_i + interval_i - remainder
         next if start_at_i >= until_at_i
         next_time = start_at_i

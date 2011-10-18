@@ -34,6 +34,8 @@ select:focus,select:hover{
 
 .left{float:left}
 .right{float:right}
+.left_links{float:right;}
+.right_links{float:right;}
 
 .round{
     -moz-border-radius:5px;

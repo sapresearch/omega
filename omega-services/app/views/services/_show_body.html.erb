@@ -57,6 +57,9 @@
                   <% if is_admin? %>
                   
                     <% if service.is_leaf? %>
+                      <%= om_button(:contact => true, :icon=>'household-add') do %>
+                        <%= link_to "Assets", asset_allocations_url(:leaf_service_id=>service.id), "data-tooltip"=>"Allocate Assets" %>
+                      <% end %>
                       <%= om_button(:contact => true, :icon=>'group') do %>
                         <%= link_to "Registrations", service_registrations_url(:service_id=>service.id), "data-tooltip"=>"Manage registrations" %>
                       <% end %>
