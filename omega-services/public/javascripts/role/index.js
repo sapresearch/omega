@@ -84,10 +84,27 @@ function update_role(){
     $(".edit_role").submit()
 }
 
-function destroy_role(url, page){
-    $.ajax({
-        url:url,
-        type:"DELETE",
-        data:{page:page}
-    })
+function destroy_role(dialog_html, url,page){
+    $(dialog_html).dialog({
+        resizable: false,
+        width:'auto',
+	height:170,
+	modal: true,
+	buttons: {
+            "Delete": function() {
+		$( this ).dialog( "close" );
+                $.ajax({
+                    url:url,
+                    type:"DELETE",
+                    data:{page:page}
+                })
+            },
+            Cancel: function() {
+            	$( this ).dialog( "close" );
+            }
+	},
+        close: function() {
+            $(this).dialog('destroy')
+        }
+    });
 }

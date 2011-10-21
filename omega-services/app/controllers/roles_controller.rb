@@ -33,7 +33,17 @@ class RolesController < Omega::Controller
   end
 
   def update
-    
+    @id = params[:role][:id]
+    @name = params[:role][:name]
+    @description = params[:role][:description]
+    @internal_name = @name.downcase.gsub(" ","_")
+    @role = Role.find(@id)
+    @role.update_attributes(:name=>@name,:description=>@description, :internal_name=>@internal_name)
+    @page = params[:page]
+
+    respond_with(@role) do |format|
+      format.js {redirect_to roles_url(:page=>@page)}
+    end
   end
 
   def destroy

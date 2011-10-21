@@ -1,7 +1,7 @@
 function matrix(table_element_id, x_array, y_array, options){
     options = $.extend({
-        ellipsis:true
         // default options here
+        ellipsis:true
     },options)
 
     var html = "<table id='"+table_element_id+"'>"

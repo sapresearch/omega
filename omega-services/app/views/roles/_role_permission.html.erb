@@ -1,74 +1,32 @@
-  <div id="role_permission_block"></div>
-
-  <script type="text/javascript" >
-    var roles = <%= raw @roles.to_json(:only=>[:id,:name, :locked], :include=>{:permissions=>{:only=>:id}}) %>
-    var permissions = <%= raw @permissions.to_json(:only=>[:id,:name], :include=>{:roles=>{:only=>:id}}) %>    
-    var role_names = []
-    var permission_names = []
-    var update_permission_role_urls = <%= raw @roles.map{|r| update_permission_role_url(r)} %>
-    var role_urls = <%= raw @roles.map{|r| role_url(r) } %>
-    //var edit_role_dialog_contents = <%= raw @roles.map{|role| escape_javascript(render "dialog_edit_form_content", :role=>role)} %>
-    
-    for(var i=0; i<roles.length; i++)
-      role_names.push(roles[i].role.name)
-    for(var i=0; i<permissions.length; i++)
-      permission_names.push(permissions[i].permission.name)
-
-    $("#role_permission_block").html( matrix("role_permission_matrix", role_names, permission_names, {}) )
-    $("#role_permission_matrix #top_left_td").html("Permissions \\ Roles")
-
-    $("#role_permission_matrix .matrix_col_td").each(function(){
-      $(this).attr("title",$(this).text())
-      var strs = $(this).attr("id").split("_")
-      var role_index = strs[strs.length-1]
-      if(roles[role_index].role.locked==0){
-        $(this).append('<div class="role_operation_links round shadow">\
-                          <a href="#" onclick="edit_role(); return false;"><span class="om-plain-icon-button"><span class="om-icon om-icon-edit"></span></span></a>\
-                          <a href="#" onclick="destroy_role(\''+role_urls[role_index]+'\', <%= @page %>); return false;"><span class="om-plain-icon-button"><span class="om-icon om-icon-delete"></span></span></a>\
-                        </div>')
-      }
-    })
-
-    $("#role_permission_matrix .matrix_cell_td").hover(
-      function(){
-        var strs = $(this).attr("id").split("_")
-        var i = strs[strs.length-2]
-        var j = strs[strs.length-1]
-        $("#role_permission_matrix #matrix_row_td_"+i).addClass("matrix_row_td_hover")
-        $("#role_permission_matrix #matrix_col_td_"+j).addClass("matrix_col_td_hover")
-      },
-      function(){
-        var strs = $(this).attr("id").split("_")
-        var i = strs[strs.length-2]
-        var j = strs[strs.length-1]
-        $("#role_permission_matrix #matrix_row_td_"+i).removeClass("matrix_row_td_hover")
-        $("#role_permission_matrix #matrix_col_td_"+j).removeClass("matrix_col_td_hover")
-      }
-    )
-
-    // load current settings
-    for(var i=0; i<roles.length; i++){
-      var role = roles[i];
-      var permissions_count = role.role.permissions.length
-      for(var j=0; j<permissions_count; j++){
-        for(var k=0; k<permissions.length; k++){
-          if(permissions[k].permission.id == role.role.permissions[j].id)
-            $("#role_permission_matrix_checkbox_"+k+"_"+i).attr("checked","checked")
-        }
-      }
-    }
-
-    $("#role_permission_matrix input[type='checkbox']").each(function(){
-      $(this).checkbox_to_button()
-      $(".ui-button-text", $(this).parent("td")).attr("title", $(this).column_name()+": "+$(this).row_name())
-    })
-    $("#role_permission_matrix input[type='checkbox']").click(function(){
-      $(this).checkbox_to_button();
-
-      var strs = $(this).parent("td").attr("id").split("_")
-      var permission_index = strs[strs.length-2]
-      var role_index = strs[strs.length-1]
-      var permission_id = permissions[permission_index].permission.id
-      switch_status($(this).attr("id"), update_permission_role_urls[role_index], "PUT", {"permission_id":permission_id});
-    })
-  </script>
+<div id="role_permission_block">
+  <table id="role_permission_matrix">
+    <tbody>
+      <tr class="matrix_col_tr">
+        <td id="top_left_td">Permissions \ Roles</td>
+        <% @roles.each do |role| %>
+          <td id="matrix_col_td_<%= role.id.to_s %>" class="matrix_col_td ellipsis" title="<%= role.name %>">
+            <%= role.name %>
+            <% unless role.locked %>
+              <div class="role_operation_links round shadow">
+                <%= link_to_function om_button(:plain => true, :icon => 'edit'){}, "edit_role('#{escape_javascript(render "dialog_edit_form_content", :role=>role, :page=>@page)}')" %>
+                <%= link_to_function om_button(:plain => true, :icon => 'delete'){}, "destroy_role('#{escape_javascript(render "dialog_destroy_confirm", :role=>role)}', '#{role_url(role)}', #{@page.to_s})" %>
+              </div>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+      
+      <% @permissions.each_with_index do |permission, index| %>
+        <% parity = index%2==0 ? "even" : "odd" %>
+        <tr id="matrix_row_tr_<%= permission.id.to_s %>" class="<%= parity %>">
+          <td id="matrix_row_td_<%= permission.id.to_s %>" class="matrix_row_td ellipsis"><%= permission.name %></td>
+          <% @roles.each do |role| %>
+            <td id="matrix_cell_td_<%= permission.id.to_s %>_<%= role.id.to_s %>" class="matrix_cell_td" title="<%= role.name %>: <%= permission.name %>">
+              <%= render "role_permission_cell", :permission=>permission, :role=>role %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

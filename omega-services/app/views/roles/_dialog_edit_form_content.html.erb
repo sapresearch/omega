@@ -8,5 +8,7 @@
         <%= form.label :description %>
         <%= form.text_area :description, :cols=>30, :rows=>3 %>
       </div>
+      <%= form.hidden_field :id %>
+      <input type="hidden" name="page" value="<%= page %>"/>
     <% end %>
   </p>
