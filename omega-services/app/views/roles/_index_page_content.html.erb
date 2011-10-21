@@ -8,6 +8,7 @@
         '#{restore_role_permission_associations_roles_url}', 'PUT', false, {'width':380})",
       :class=>"roles_operation_button" %>
   </div>
+  
   <div class="right" id="new_role_link">
     <%= render "roles/new_link" %>
   </div>
@@ -20,3 +21,8 @@
 <div id="role_permission">
   <%= render "role_permission" %>
 </div>
+
+<%= will_paginate @roles %>
+
+
+

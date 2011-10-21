@@ -1,0 +1,14 @@
+<div id="role-new-dialog-form" class="dialog" title="New Role">
+  <p>
+    <%= form_for(@role, :remote=>true) do |form| %>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, :maxlength=>Role::MAX_LENGTH, :size=>30 %>
+      </div>
+      <div class="field">
+        <%= form.label :description %>
+        <%= form.text_area :description, :cols=>30, :rows=>3 %>
+      </div>
+    <% end %>
+  </p>
+</div>

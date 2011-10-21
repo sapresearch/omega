@@ -24,6 +24,13 @@ select:focus,select:hover{
     user-select: none;
 }
 
+.ellipsis{
+    text-overflow:ellipsis; 
+    white-space:nowrap;
+    overflow:hidden
+}
+
+.dialog{display:none;}
 .dialog_content{
     padding:20px;
 }

@@ -6,6 +6,7 @@
     var role_names = []
     var permission_names = []
     var update_permission_role_urls = <%= raw @roles.map{|r| update_permission_role_url(r)} %>
+    var role_urls = <%= raw @roles.map{|r| role_url(r) } %>
 
     for(var i=0; i<roles.length; i++)
       role_names.push(roles[i].role.name)
@@ -14,6 +15,16 @@
 
     $("#role_permission_block").html( matrix("role_permission_matrix", role_names, permission_names, {}) )
     $("#role_permission_matrix #top_left_td").html("Permissions \\ Roles")
+
+    $("#role_permission_matrix .matrix_col_td").each(function(){
+      $(this).attr("title",$(this).text())
+      var strs = $(this).attr("id").split("_")
+      var role_index = strs[strs.length-1]
+      $(this).append('<div class="role_operation_links round shadow">\
+                        <a href="#" onclick="edit_role('+role_urls[role_index]+'); return false;"><span class="om-plain-icon-button"><span class="om-icon om-icon-edit"></span></span></a>\
+                        <a href="#" onclick="delete_role('+role_urls[role_index]+'); return false;"><span class="om-plain-icon-button"><span class="om-icon om-icon-delete"></span></span></a>\
+                      </div>')
+    })
 
     $("#role_permission_matrix .matrix_cell_td").hover(
       function(){
@@ -46,6 +57,7 @@
 
     $("#role_permission_matrix input[type='checkbox']").each(function(){
       $(this).checkbox_to_button()
+      $(".ui-button-text", $(this).parent("td")).attr("title", $(this).column_name()+": "+$(this).row_name())
     })
     $("#role_permission_matrix input[type='checkbox']").click(function(){
       $(this).checkbox_to_button();

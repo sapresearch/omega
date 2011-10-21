@@ -3,14 +3,19 @@
 #new_role_link a{color:navy;}
 #resotre_role_permission_associations_link{margin:0px 0px 10px 20px}
 
+/*
 #role_permission{ margin:auto;}
 #role_permission_matrix{margin:auto;}
+*/
+#role_permission_matrix{margin-left:15px;}
 #role_permission_matrix td{text-align:center}
 #role_permission_matrix .matrix_row_td{ text-align:left; width:200px; }
 #top_left_td{font-weight:bolder; font-style:italic; color:black;}
 
 .matrix_col_tr{background:#ddd}
-.matrix_col_td{ font-weight:bolder; padding:5px 10px; color:green}
+.matrix_col_td{position:relative; font-weight:bolder; padding:5px 10px; color:green; max-width:100px;}
+.role_operation_links{ display:none; position:absolute; right:4px; top:4px; background:lightyellow; opacity:0.6}
+.matrix_col_td:hover .role_operation_links{display:block}
 .matrix_row_td{ font-weight:bolder; padding:0px 10px; color:green; vertical-align:middle;}
 .matrix_cell_td.on label span{ font-weight:bolder }
 .matrix_row_td_hover{
@@ -19,3 +24,9 @@
 .matrix_col_td_hover{
     background:lightblue;
 }
+
+
+/* dialog style */
+.dialog .field{margin:5px 0px;}
+.dialog label{display: inline-block; margin-left:20px; width: 100px; text-align: right;}
+

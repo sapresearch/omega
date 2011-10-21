@@ -3,10 +3,27 @@ class RolesController < Omega::Controller
   breadcrumb 'Roles' => :roles
   
   def index
-    @roles = Role.all
+    #@roles = Role.all
     @permissions = Permission.all
+    @page = params[:page]||1
+    @roles = Role.paginate(:page => @page, :per_page => 4)
+    @role = Role.new
 
     respond_with(@roles)
+  end
+
+  def create
+    #@role = Role.create(params[:role])
+    @name = params[:role][:name]
+    @description = params[:role][:description]
+    @internal_name = @name.downcase.gsub(" ","_")
+    @role = Role.create(:name=>@name,:description=>@description, :internal_name=>@internal_name)
+    
+    @page = (Role.all.count / 4.0).ceil
+
+    respond_with(@role) do |format|
+      format.js {redirect_to roles_url(:page=>@page)}
+    end
   end
 
   def restore_role_permission_associations

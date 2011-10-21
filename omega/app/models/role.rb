@@ -7,6 +7,7 @@ class Role < Omega::Model
   EDITOR             = 'editor'
   ADMINISTRATOR      = 'administrator'
 
+  MAX_LENGTH = 100
   DEFAULT_ROLES = {
     'anonymous' => {
       :name        => 'Anonymous',
