@@ -8,14 +8,15 @@ class CreateContactValues < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :contact_contacts_values, :id => false do |t|
-      t.references :contact, :null => false
-      t.references :values, :null => false
-    end
-    add_index :contact_contacts_values, [:contact_id, :contact_id], :unique => true
+    #create_table :contact_contacts_values, :id => false do |t|
+    #  t.references :contact, :null => false
+    #  t.references :values, :null => false
+    #end
+    #add_index :contact_contacts_values, [:contact_id, :contact_id], :unique => true
   end
 
   def self.down
-    drop_table :contact_contacts_values
+    #drop_table :contact_contacts_values
+    drop_table :contact_values
   end
 end
