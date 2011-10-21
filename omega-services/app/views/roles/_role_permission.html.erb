@@ -5,13 +5,15 @@
         <td id="top_left_td">Permissions \ Roles</td>
         <% @roles.each do |role| %>
           <td id="matrix_col_td_<%= role.id.to_s %>" class="matrix_col_td ellipsis" title="<%= role.name %>">
-            <%= role.name %>
-            <% unless role.locked %>
-              <div class="role_operation_links round shadow">
-                <%= link_to_function om_button(:plain => true, :icon => 'edit'){}, "edit_role('#{escape_javascript(render "dialog_edit_form_content", :role=>role, :page=>@page)}')" %>
-                <%= link_to_function om_button(:plain => true, :icon => 'delete'){}, "destroy_role('#{escape_javascript(render "dialog_destroy_confirm", :role=>role)}', '#{role_url(role)}', #{@page.to_s})" %>
-              </div>
-            <% end %>
+            <div class="matrix_col_td_content">
+              <%= role.name %>
+              <% unless role.locked %>
+                <div class="role_operation_links round shadow">
+                  <%= link_to_function om_button(:plain => true, :icon => 'edit'){}, "edit_role('#{escape_javascript(render "dialog_edit_form_content", :role=>role, :page=>@page)}')" %>
+                  <%= link_to_function om_button(:plain => true, :icon => 'delete'){}, "destroy_role('#{escape_javascript(render "dialog_destroy_confirm", :role=>role)}', '#{role_url(role)}', #{@page.to_s})" %>
+                </div>
+              <% end %>
+            </div>
           </td>
         <% end %>
       </tr>

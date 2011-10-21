@@ -87,8 +87,8 @@ function update_role(){
 function destroy_role(dialog_html, url,page){
     $(dialog_html).dialog({
         resizable: false,
-        width:'auto',
-	height:170,
+        minWidth:420,
+	height:190,
 	modal: true,
 	buttons: {
             "Delete": function() {

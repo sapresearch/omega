@@ -13,7 +13,8 @@
 #top_left_td{font-weight:bolder; font-style:italic; color:black;}
 
 .matrix_col_tr{background:#ddd}
-.matrix_col_td{position:relative; font-weight:bolder; padding:5px 10px; color:green; max-width:100px;}
+.matrix_col_td{font-weight:bolder; color:green; max-width:100px;}
+.matrix_col_td_content{position:relative; font-weight:bolder; padding:5px 10px; color:green;}
 .role_operation_links{display:none; right:4px; top:4px; position:absolute; background:lightyellow; opacity:0.6}
 .matrix_col_td:hover .role_operation_links{display:block}
 .matrix_row_td{ font-weight:bolder; padding:0px 10px; color:green; vertical-align:middle;}
