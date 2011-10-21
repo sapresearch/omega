@@ -59,8 +59,6 @@ class ContactsController < Omega::Controller
 
   def create
     respond_with(@contact = Contact.create(params[:contact]))
-         
-
   end
 
   def autocomplete
@@ -111,7 +109,6 @@ class ContactsController < Omega::Controller
     @contact.destroy
     respond_with(@contact)
   end
-
 
   private
     def get_contact_volunteering_records

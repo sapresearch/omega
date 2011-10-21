@@ -144,3 +144,19 @@ height:570px;
     height:300px;
     overflow-y:scroll;
 }
+
+form#new_contact_field {
+	margin-top: 40px;
+}
+
+form#new_contact_field p {
+	margin-left:80px;
+}
+
+input#contact_field_submit{
+	margin-top: 20px;
+}
+
+div#custom_fields p{
+	margin-left: 95px;
+}

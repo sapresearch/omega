@@ -55,7 +55,7 @@ class UsersController < Omega::Controller
 
   def update
 		@user.update_attributes(params[:user])
-		Contact.for(@user).update_subclass_attributes(params[:user][:contact_attributes])
+		Contact.for(@user).update_contact_attributes(params[:user][:contact_attributes])
 		render "summary"
   end
 
@@ -151,9 +151,11 @@ class UsersController < Omega::Controller
 			registered_services = ServiceRegistration.filter_services_by_registrant(Service.all, @contact)
 			@service_events = registered_services.inject(Array.new) do |service_events, service|
 				registrations = service.service_registrations.select { |sr| sr.registrant == @contact }
-				status = registrations.at(0).nil? ? nil : registrations.at(0).status
-				next_event = service.next_event.nil? ? "TBD" : service.next_event.start_at.to_s.gsub(/:00 .*/, "")
-				service_events << { :service => service, :next_event => next_event, :status => status }
+				if !registrations.at(0).nil?
+					status = registrations.at(0).status
+					next_event = service.next_event.nil? ? "TBD" : service.next_event.start_at.to_s.gsub(/:00 .*/, "")
+					service_events << { :service => service, :next_event => next_event, :status => status }
+				end
 			end 
 
 			volunteering_records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
@@ -180,7 +182,7 @@ class UsersController < Omega::Controller
 	end
 
 	def update_my_page
-		puts "\n\nThis is params first received: " + params.inspect.to_s
+		puts "\n\nUsersController. This is params first received: " + params.inspect.to_s
 		contact = Contact.for(current_user)
 
 		skills = params[:contact][:skill_ids].gsub(/[\[\]]/, "").split(',').uniq # Use gsub and split to format the ids as an array, rather than a string.
@@ -194,7 +196,7 @@ class UsersController < Omega::Controller
 		params[:contact].delete(:skill_ids)
 		params[:contact].delete(:interest_ids)
 		puts "\n\nThis is params about to be updated: " + params.inspect.to_s
-		contact.update_attributes(params[:contact])
+		contact.update_contact_attributes(params[:contact])
 		contact.save
 
 		redirect_to(my_page_users_path)

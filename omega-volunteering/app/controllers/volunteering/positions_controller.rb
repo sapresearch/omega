@@ -41,12 +41,17 @@ class Volunteering::PositionsController < Omega::Controller
 
   def new
     @position = Volunteering::Position.new
+	 @new_field = Contact::Field.new
     fix_model_to_view
     respond_with(@position)
   end
 
   def create
-		fix_view_to_model
+	 fix_view_to_model
+
+    field = params[:volunteering_position][:contact_field]
+    params[:volunteering_position].delete(:contact_field) 
+	 @new_field = Contact::Field.create(field)
     @position = Volunteering::Position.new(params[:volunteering_position])
     if @position.save
     	respond_with(@position)

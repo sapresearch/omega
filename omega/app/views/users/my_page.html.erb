@@ -2,7 +2,6 @@
 <%= require_javascript 'omega_users', 'omega_my_page' %>
 
 
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 
 <body>
@@ -38,48 +37,48 @@
 
 <h3 class="content-heading"> My Volunteering Events</h3>
 	<div id="positions">
-	<table class="accounts"><br />
-		<tbody>
-			<% @positions.each do |element| %>
-				<% position = element[:position] %>
-				<tr class="accounts" >
-         			<td class="accounts"> <%= link_to(position.name, volunteering_position_path(position), :'data-tooltip' => 'Click to see this service')%></td>
-         			<td class="accounts"> <%= link_to(position.start_date, volunteering_position_path(position)) %></td>
-         			<td class="accounts"> Status: <i><%= element[:record] %></i></td>
-         			<td class="accounts"> 
-							<form onsubmit="fb_message()">
-								<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
-							</form>
-						</td>
-         			<td class="accounts"> 
-							<%= render 'twitter', :position => position, :service => false %>
-						</td>
-					</tr>
-				<% end %>
-				<% @service_events.each do |s| %>
+		<table class="accounts"><br />
+			<tbody>
+				<% @positions.each do |element| %>
+					<% position = element[:position] %>
 					<tr class="accounts" >
-						<td class="accounts"> <%= link_to(s[:service].name, services_url(:service_id=>s[:service].id), :'data-tooltip' => 'Click to see this service') %></td>
-						<td class="accounts"> <%= s[:next_event].to_s %></td>
-						<td class="accounts"> Status: <i><%= s[:status] %></i></td>
-         			<td class="accounts"> 
-							<form onsubmit="fb_message()">
-								<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
-							</form>
-						</td>
-         			<td class="accounts"> 
-							<%= render 'twitter', :position => s[:service], :service => true %>
-						</td>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
-
-	<!-- Unneccessary, since we don't need offline access anymore. !-->
-		<!--<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>!-->
-	<!-- Unneccessary, since we don't need offline access anymore. !-->
-
-
-	<br /><br />
+	         			<td class="accounts"> <%= link_to(position.name, volunteering_position_path(position), :'data-tooltip' => 'Click to see this volunteering event')%></td>
+	         			<td class="accounts"> <%= link_to(position.start_date, volunteering_position_path(position)) %></td>
+	         			<td class="accounts"> Status: <i><%= element[:record] %></i></td>
+	         			<td class="accounts"> 
+								<form onsubmit="fb_message()">
+									<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
+								</form>
+							</td>
+	         			<td class="accounts"> 
+								<%= render 'twitter', :position => position, :service => false %>
+							</td>
+						</tr>
+					<% end %>
+					<% @service_events.each do |s| %>
+						<tr class="accounts" >
+							<td class="accounts"> <%= link_to(s[:service].name, services_url(:service_id=>s[:service].id), :'data-tooltip' => 'Click to see this service') %></td>
+							<td class="accounts"> <%= s[:next_event].to_s %></td>
+							<td class="accounts"> Status: <i><%= s[:status] %></i></td>
+	         			<td class="accounts"> 
+								<form onsubmit="fb_message()">
+									<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
+								</form>
+							</td>
+	         			<td class="accounts"> 
+								<%= render 'twitter', :position => s[:service], :service => true %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+	
+		<!-- Unneccessary, since we don't need offline access anymore. !-->
+			<!--<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>!-->
+		<!-- Unneccessary, since we don't need offline access anymore. !-->
+	
+	
+		<br /><br />
 	</div>
 
 

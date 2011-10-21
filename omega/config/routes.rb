@@ -16,8 +16,8 @@ Omega::Module.routes.draw do
   
   resources :images do
     collection do
-   get :edit_logo
-   put :update_logo
+   	get :edit_logo
+   	put :update_logo
    end
   end
 

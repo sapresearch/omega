@@ -13,6 +13,7 @@
         <%= f.label :name %>
         <%= f.text_field :name, :'data-tooltip '=> 'descriptive name for position', :class => 'broad-text' %>
       </p>
+
       <p>
         <%= f.label :description %>
         <%= f.text_area :description, :rows => 6, :'data-tooltip '=> 'describe what work the volunteer will be doing in this position', :class => 'broad-text' %>
@@ -25,12 +26,12 @@
         <span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>
       </p>
 
-			<p>
-				<%= f.label :priority%>
-				<% ['Normal','High', 'Urgent!'].each do |p|%>	
-					<%= f.radio_button :priority, p%> <%=p%>
-				<%end%>
-			</p>
+		<p>
+			<%= f.label :priority%>
+			<% ['Normal','High', 'Urgent!'].each do |p|%>	
+				<%= f.radio_button :priority, p%> <%=p%>
+			<%end%>
+		</p>
       <br/>
 
       <p>
@@ -50,14 +51,14 @@
         <p>
           <%= f.label :date %>
           <%= f.text_field :start_date, :class=>'datepickr', :autocomplete => 'off' %>
-
         </p>
+
         <p>
           <%= f.label :start_time %>
           <%= f.text_field :start_time, :class=>'tpickr', :autocomplete => 'off' %>
-				</p>
+		  </p>
 		
-				<p>
+		  <p>
           <%= f.label :end_time %>
           <%= f.text_field :end_time, :class=>'tpickr',  :autocomplete => 'off' %>
         </p>
@@ -69,22 +70,20 @@
   	 <h3 class="application-form">Calendar Synchronization</h3> 
 
     <div class="helptext">
-    	
       By checking the selectbox below and choosing a calendar you can make this volunteering position to appear in the selected calendar
-   
     </div>
 
-      <%= f.fields_for :event_source do |es| %>
-      <%= es.label :'synchronize?' %> <%= es.check_box :synchronize %><br/><br/>
-          <%= es.label :'Calendar' %> <%= es.select :calendar_id, options_from_collection_for_select(Calendar.scoped, :id, :calendar_name, es.object.calendar_id) %>
-      <% end %>
+	 <%= f.fields_for :event_source do |es| %>
+   	<%= es.label :'synchronize?' %> <%= es.check_box :synchronize %><br/><br/>
+		<%= es.label :'Calendar' %> <%= es.select :calendar_id, options_from_collection_for_select(Calendar.scoped, :id, :calendar_name, es.object.calendar_id) %>
+    <% end %>
 
     <div id="vp_contact">
-         	 <h3 class="application-form">Contact for this position</h3> 
-
+       <h3 class="application-form">Contact for this position</h3> 
         <% [['none', 'no contact'], ['existing', 'existing contact'], ['new', 'new contact']].each do |value, text| %>
             <%= radio_button_tag 'contact_assignment', value, value == @contact_assignment %><%= text %>
         <% end %>
+
      <div id="position_existing_contact" class="hide">
         <h2 class="application-form-content-heading">Assign Exisiting Contact</h2>
         <table>
@@ -109,65 +108,73 @@
             </td>
           </tr>
         </table>
-
-
-        <%#= text_field_tag 'ac-contacts', nil %>
-
         <%= f.hidden_field :contact_ids %>
-
-
-
-
-      
-
-
-    </div>
+    	</div>
 	
-	<div id="position_new_contact" class="hide">
-        <h2 class="application-form-content-heading">Create a new contact</h2>
-        <%= f.fields_for :contacts do |ff| %>
-            <%= render 'contact_form', :f => ff %>
-        <% end %>
+
+
+		<div id="position_new_contact" class="hide">
+      	<h2 class="application-form-content-heading">Create a new contact</h2>
+      	<%= f.fields_for :contacts do |ff| %>
+         	<%= render 'contact_form', :f => ff %>
+      	<% end %>
       </div>
+
+
+
+      <h3 class="application-form">Custom Field</h3>
+			<%= f.fields_for :contact_field, @new_field do |n| %>
+				<p>
+					<%= n.label :New_Field_Name %>
+					<%= n.text_field :name %>
+				</p>
+	
+				<p>
+					<%= n.label :Description %>
+					<%= n.text_field :description %>
+				</p>
+	
+				<p>
+					<%= n.label :Data_Type %>
+					<p>
+						<% { 'Text' => 'string', 'Number' => 'integer', 'True or False' => 'boolean' }.each do |display, value|%>
+							<%= n.radio_button :data_type, value %> <%= display %>
+						<%end%>
+					</p>
+				</p>
+			<%end%>
+
+
+
       <h3 class="application-form">Skills and Interests</h3>
       <p>
         <%= f.label :skills %>
-        <%#= f.text_field :skills_values, :'data-tokeninput' => volunteering_skills_path(:json),
-                         #:'data-tokeninput-prepopulate' => @position.skills.map { |s| { :id => s.name, :name => s.name } }.to_json %>
-                         
         <%= f.text_field :skills_values%>
       </p>
 
       <p>
         <%= f.label :interests %>
-        <%#= f.text_field :interests_values, :'data-tokeninput' => volunteering_interests_path(:json),
-                        # :'data-tokeninput-prepopulate' => @position.interests.map { |s| { :id => s.name, :name => s.name } }.to_json %>
         <%= f.text_field :interests_values%>
-	</p>
-	
-
-	
-	<p>
-		<%= f.label :disclaimer_agreement%>
-		<% ['Required','Not Required'].each do |c|%>	
-			<%= f.radio_button :disclaimer_agreement, c%> <%=c%><br/>
-		<%end%>
-	</p>
-	
-	<div id="agreement">
-		<p>
-		<%= f.label :agreement_detail%>
-		<%= f.text_area :agreement%>
 		</p>
-	</div>
 	
-	
-    <p>
-      <%= om_button(:icon=>'save') do %>
-          <%= f.submit %>
-      <% end %>
-
-    </p>
-
+		<p>
+			<%= f.label :disclaimer_agreement%>
+			<% ['Required','Not Required'].each do |c|%>	
+				<%= f.radio_button :disclaimer_agreement, c%> <%=c%><br/>
+			<%end%>
+		</p>
+		
+		<div id="agreement">
+			<p>
+				<%= f.label :agreement_detail%>
+				<%= f.text_area :agreement%>
+			</p>
+		</div>
+		
+	   <p>
+	      <%= om_button(:icon=>'save') do %>
+	   	   <%= f.submit %>
+	      <% end %>
+		</p>
 
 <% end %>

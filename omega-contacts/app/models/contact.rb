@@ -29,7 +29,7 @@ class Contact < Omega::Model
   
   has_and_belongs_to_many :interests, :join_table => 'contact_contacts_interests'
   has_and_belongs_to_many :skills,    :join_table => 'contact_contacts_skills'
-  has_and_belongs_to_many :languages,    :join_table => 'contact_contacts_languages'
+  has_and_belongs_to_many :languages, :join_table => 'contact_contacts_languages'
 
 
   has_many :group_positions, :dependent => :destroy
@@ -41,6 +41,7 @@ class Contact < Omega::Model
   has_upload :photo
 
   has_many :uploads, :as => 'binding'
+  has_many :values
 
   #services associations
   has_many :service_registrations, :dependent=>:destroy, :foreign_key=>"registrant_id"
@@ -54,8 +55,34 @@ class Contact < Omega::Model
     first_name.to_s + ", " + last_name.to_s
   end
 
-	 def update_subclass_attributes(params)
+	def update_contact_attributes(params)
+		puts "\n\n In update \n\n"
+		puts "Contact. params hash: " + params.inspect.to_s
+		custom_fields.each do |f|
+			f_id = f.id
+			c_id = self.id
+			name = f.name.gsub(/\?/, '')
+			value = params[name]
+			if !value.nil?
+				puts "Value for " + name.to_s + ": " + value.to_s
+				eav_row = Contact::Value.find_by_field_id_and_contact_id(f_id, c_id)
+				if eav_row.nil?
+					puts "eav is nil NILLLLLLLLLLLLLLLLLLL"
+					Contact::Value.create(:field_id => f_id, :contact_id => c_id, :value => value)
+				elsif !eav_row.nil?
+					puts "this is the custom field: " + f.inspect.to_s
+					puts "This is eav row: " + eav_row.inspect.to_s
+					puts 'will be updated with value: ' + value
+					eav_row.update_attributes(:value => value)
+				end
+			else puts 'no value found for: ' + name
+			end
+		end
+		update_subclass_attributes(params)
 		self.update_attributes(params)
+	end
+
+	def update_subclass_attributes(params)
 		Contact::PhoneNumber.update_phone_numbers(params)
 		Contact::Address.update_addresses(params)
 	 end
@@ -78,7 +105,7 @@ class Contact < Omega::Model
   #validates :title,      :presence  => true,
                         # :inclusion => { :in => TITLES }
   validates :email,      :presence  => true,
-  						 :confirmation => true,
+  								 :confirmation => true,
                          :length    => 6..80,
                          :email     => true
                          
@@ -112,8 +139,71 @@ class Contact < Omega::Model
    end
   end
 
+	def self.method_missing(method, *args, &block)
+		if method.to_s.include? 'find_by'
+		end
+	end
+
+	def method_missing(method, *args, &block)
+
+		fields = Contact::Field.find(:all).collect { |cf| cf.name }
+		method_as_string = method.to_s.gsub(/=/, '')
+		if not fields.index(method_as_string).nil?
+			field_id = Contact::Field.find_by_name(method_as_string).id
+			eav_row = Contact::Value.find_by_field_id(field_id)
+			if not method.to_s.include? '=' # getter
+				return eav_row.nil? ? nil : eav_row.value
+			elsif method.to_s.include? '=' # setter
+				setter(method, args, field_id, eav_row)
+			end
+		else super
+		end
+	end
+
+	def setter(method, args, field_id, eav_row)
+		data_type = Contact::Field.find(field_id).data_type
+		value = args.at(0)
+		value = convert(field_id, value).class.to_s 
+		if eav_row.nil?
+			Contact::Value.create(:field_id => field_id, :contact_id => self.id, :value => value)
+		elsif !eav_row.nil?
+			eav_row.update_attributes(:value => value)
+		end
+	end
+
+	def convert(field_id, value)
+		type = Contact::Field.find(field_id).data_type
+		unless type.is_a?(String) and value.is_a?(String)
+			case type
+				when "True or False"
+					value = value == true # Converts to boolean
+				when "Integer"
+					value = value.to_i
+			end
+		end
+		value
+	end
+
+	def custom_fields
+		Contact::Field.find(:all)
+	end
+
   private
     def has_user?
       !user.nil?
     end
 end
+
+
+#class Hello
+#	def say
+#		puts 'hello world'
+#	end
+#old_say = self.instance_method(:say)
+#define_method(:say) do
+#	old_say.bind(self).call
+#	puts 'success'
+#end
+#end
+#
+#h = Hello.new

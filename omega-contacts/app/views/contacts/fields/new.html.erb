@@ -1,0 +1,52 @@
+<% require_stylesheet 'omega_users', 'settings', 'omega_contacts' %>
+<%# with_permission(Contact::PERM_ADMIN) do %>
+
+<div class="content circle-corners-bottom-left">
+<div class="heading-main">
+	<h1 class="page-content">
+		Customize Volunteer Data
+	</h1>
+</div>
+
+
+	<p>
+		Add a new data field to the applications that volunteers fill out when they apply to a new volunteering position.
+	</p>
+
+		<%= form_for @new_field do |n| %>
+			<p>
+				<%= n.label :New_Field_Name %>
+				<%= n.text_field :name %>
+			</p>
+
+			<p>
+				<%= n.label :Description %>
+				<%= n.text_field :description %>
+			</p>
+
+			<p>
+				<%= n.label :Data_Type %>
+				<p>
+					<% { 'Text' => 'string', 'Number' => 'integer', 'True or False' => 'boolean' }.each do |display, value|%>
+						<%= n.radio_button :data_type, value %> <%= display %>
+					<%end%>
+				</p>
+			</p>
+
+			<div id='contact_submit'>
+					<%= n.submit %>
+			</div>
+		<% end %>
+
+<h3 class="content-heading"> Existing Custom Fields </h3>
+	<%= '<p style="margin-left:60px"> No custom fields added yet. </p>'.html_safe if @fields.empty? %>
+	<div id='custom_fields'>
+		<% @fields.each do |f| %>
+			<p>
+				Field: <%= f.name %>
+				Description: <%= f.description %>
+				Data Type: <%= f.data_type_to_human %>
+			</p>
+		<% end %>
+	</div>
+</div>

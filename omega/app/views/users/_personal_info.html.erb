@@ -37,3 +37,19 @@
 			<%= p.text_field :number, :'data-tooltip' => 'Phone number where you could be contacted'%>
 		</p>
 	<%end%>
+
+	<% @contact.custom_fields.each do |cf| %>
+		<p>
+			<% if cf.data_type.to_s == 'boolean' %>
+				<%= c.label (cf.name.to_sym) %>
+				<%= c.send(cf.input_field, cf.name_as_sym, "Yes") %> Yes
+				<%= c.send(cf.input_field, cf.name_as_sym, "No") %> No
+			<% else %>
+				<%= c.label (cf.name.to_sym) %>
+				<%= c.send(cf.input_field, cf.name_as_sym) %>
+			<% end %>
+		</p>
+		<p class='custom_description'>
+			<%= cf.description %>
+		</p>
+	<% end %>

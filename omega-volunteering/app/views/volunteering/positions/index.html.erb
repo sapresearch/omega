@@ -75,7 +75,9 @@
 						</p>
 							
 						<p>
+							<% if not position.start.nil? %>
 							Countdown: <%= ((position.start - Time.now) / 86400).round %> Days Left
+							<% end %>
 						</p>
 
 						<p> Skills/Interests:

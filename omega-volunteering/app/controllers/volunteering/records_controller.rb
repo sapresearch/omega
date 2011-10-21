@@ -74,7 +74,6 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def new
-  	
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
 
@@ -89,7 +88,6 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
   def new_volunteer
-   
     @record = Volunteering::Record.new
     @record.position = Volunteering::Position.find(params[:id])
 
@@ -111,11 +109,9 @@ class Volunteering::RecordsController < Omega::Controller
     respond_with(@record)
   end
 
-  
-  
   def create
-   
    contact = params[:volunteering_record][:contact]
+	puts "Volunteering::RecordsController. Contact hash: " + contact.inspect.to_s
    params[:volunteering_record].delete(:contact) 
    @record = Volunteering::Record.create(params[:volunteering_record])
    @record.action = 'To Be Taken'
@@ -126,7 +122,7 @@ class Volunteering::RecordsController < Omega::Controller
    	@record.action = "accepted"
    else
    	@contact = Contact.find(@record.contact_id)	   
-    @contact.update_attributes(contact)
+   	@contact.update_contact_attributes(contact)
    end
    
    @record.save
@@ -136,7 +132,6 @@ class Volunteering::RecordsController < Omega::Controller
    UserMailer.parental_approval(@user).deliver
    end
    respond_with(@record)
-    
   end
   
   def create_volunteer

@@ -8,6 +8,7 @@ Omega::Contacts::Module.routes.draw do
         get :suggest
       end
     end
+	 resources :fields
     resources :interests
 
     resources :imports do
@@ -33,7 +34,6 @@ Omega::Contacts::Module.routes.draw do
       get :all
       get :search
       get :list
-
       get :autocomplete
       match :letter, :path => ':letter', :constraints => { :letter => /[a-z]/i }
     end

@@ -119,3 +119,7 @@ div#positions{
 	background-color: #EEE;
 	margin: 0 70px 0 70px;
 }
+
+p.custom_description{
+	margin-left: 95px;
+}
