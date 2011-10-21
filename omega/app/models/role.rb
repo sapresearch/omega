@@ -8,6 +8,7 @@ class Role < Omega::Model
   ADMINISTRATOR      = 'administrator'
 
   MAX_LENGTH = 100
+  PAGE_SIZE = 4.0
   DEFAULT_ROLES = {
     'anonymous' => {
       :name        => 'Anonymous',

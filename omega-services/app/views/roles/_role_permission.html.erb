@@ -1,13 +1,14 @@
   <div id="role_permission_block"></div>
 
   <script type="text/javascript" >
-    var roles = <%= raw @roles.to_json(:only=>[:id,:name], :include=>{:permissions=>{:only=>:id}}) %>
+    var roles = <%= raw @roles.to_json(:only=>[:id,:name, :locked], :include=>{:permissions=>{:only=>:id}}) %>
     var permissions = <%= raw @permissions.to_json(:only=>[:id,:name], :include=>{:roles=>{:only=>:id}}) %>    
     var role_names = []
     var permission_names = []
     var update_permission_role_urls = <%= raw @roles.map{|r| update_permission_role_url(r)} %>
     var role_urls = <%= raw @roles.map{|r| role_url(r) } %>
-
+    //var edit_role_dialog_contents = <%= raw @roles.map{|role| escape_javascript(render "dialog_edit_form_content", :role=>role)} %>
+    
     for(var i=0; i<roles.length; i++)
       role_names.push(roles[i].role.name)
     for(var i=0; i<permissions.length; i++)
@@ -20,10 +21,12 @@
       $(this).attr("title",$(this).text())
       var strs = $(this).attr("id").split("_")
       var role_index = strs[strs.length-1]
-      $(this).append('<div class="role_operation_links round shadow">\
-                        <a href="#" onclick="edit_role('+role_urls[role_index]+'); return false;"><span class="om-plain-icon-button"><span class="om-icon om-icon-edit"></span></span></a>\
-                        <a href="#" onclick="delete_role('+role_urls[role_index]+'); return false;"><span class="om-plain-icon-button"><span class="om-icon om-icon-delete"></span></span></a>\
-                      </div>')
+      if(roles[role_index].role.locked==0){
+        $(this).append('<div class="role_operation_links round shadow">\
+                          <a href="#" onclick="edit_role(); return false;"><span class="om-plain-icon-button"><span class="om-icon om-icon-edit"></span></span></a>\
+                          <a href="#" onclick="destroy_role(\''+role_urls[role_index]+'\', <%= @page %>); return false;"><span class="om-plain-icon-button"><span class="om-icon om-icon-delete"></span></span></a>\
+                        </div>')
+      }
     })
 
     $("#role_permission_matrix .matrix_cell_td").hover(

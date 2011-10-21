@@ -59,3 +59,35 @@ function new_role(){
 function create_role(){
     $("#new_role").submit()
 }
+
+function edit_role(dialog_content){
+    $( "#role-edit-dialog-form" ).html(dialog_content)
+    $( "#role-edit-dialog-form" ).dialog({
+        width: 500,
+        modal: true,
+        resizable: false,
+        buttons: {
+            "Update": function() {
+                update_role()
+                $(this).dialog( "close" );
+            },
+            Cancel: function() {
+                $(this).dialog( "close" );
+            }
+        },
+        close: function() {
+            $(this).dialog('destroy')
+        }
+    });
+}
+function update_role(){
+    $(".edit_role").submit()
+}
+
+function destroy_role(url, page){
+    $.ajax({
+        url:url,
+        type:"DELETE",
+        data:{page:page}
+    })
+}

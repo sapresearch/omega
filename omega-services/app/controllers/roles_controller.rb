@@ -5,8 +5,14 @@ class RolesController < Omega::Controller
   def index
     #@roles = Role.all
     @permissions = Permission.all
-    @page = params[:page]||1
-    @roles = Role.paginate(:page => @page, :per_page => 4)
+    @page = (params[:page]||1).to_i
+    max_page = (Role.all.count / Role::PAGE_SIZE).ceil
+    if @page > max_page
+      redirect_to roles_url(:page=>1)
+      return 
+    end
+    
+    @roles = Role.paginate(:page => @page, :per_page => Role::PAGE_SIZE)
     @role = Role.new
 
     respond_with(@roles)
@@ -19,11 +25,25 @@ class RolesController < Omega::Controller
     @internal_name = @name.downcase.gsub(" ","_")
     @role = Role.create(:name=>@name,:description=>@description, :internal_name=>@internal_name)
     
-    @page = (Role.all.count / 4.0).ceil
+    @page = (Role.all.count / Role::PAGE_SIZE).ceil
 
     respond_with(@role) do |format|
       format.js {redirect_to roles_url(:page=>@page)}
     end
+  end
+
+  def update
+    
+  end
+
+  def destroy
+    role = Role.find(params[:id])
+    role.destroy unless role.locked
+    @permissions = Permission.all
+    page = params[:page].to_i
+    @page = (Role.all.count / Role::PAGE_SIZE).ceil < page ? page-1 : page
+    @roles = Role.paginate(:page => @page, :per_page => Role::PAGE_SIZE)
+    @role = Role.new
   end
 
   def restore_role_permission_associations

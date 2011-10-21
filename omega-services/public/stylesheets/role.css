@@ -14,7 +14,7 @@
 
 .matrix_col_tr{background:#ddd}
 .matrix_col_td{position:relative; font-weight:bolder; padding:5px 10px; color:green; max-width:100px;}
-.role_operation_links{ display:none; position:absolute; right:4px; top:4px; background:lightyellow; opacity:0.6}
+.role_operation_links{display:none; right:4px; top:4px; position:absolute; background:lightyellow; opacity:0.6}
 .matrix_col_td:hover .role_operation_links{display:block}
 .matrix_row_td{ font-weight:bolder; padding:0px 10px; color:green; vertical-align:middle;}
 .matrix_cell_td.on label span{ font-weight:bolder }
