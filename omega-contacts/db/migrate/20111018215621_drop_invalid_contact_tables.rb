@@ -1,6 +1,9 @@
 class DropInvalidContactTables < ActiveRecord::Migration
 
-  TABLES = %w{contact_contacts_values}
+  TABLES = %w{contact_contacts_values
+  					contact_values
+					contact_fields
+				}
               
   def self.up
     TABLES.each do |table|
