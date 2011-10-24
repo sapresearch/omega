@@ -149,7 +149,7 @@ class UsersController < Omega::Controller
 
 		if !current_user.is_admin?
 			registered_services = ServiceRegistration.filter_services_by_registrant(Service.all, @contact)
-			unless registered_services.nil?
+			unless registered_services.empty?
 				@service_events = registered_services.inject(Array.new) do |service_events, service|
 					registrations = service.service_registrations.select { |sr| sr.registrant == @contact }
 					if !registrations.at(0).nil?

@@ -55,20 +55,22 @@
 							</td>
 						</tr>
 					<% end %>
-					<% @service_events.each do |s| %>
-						<tr class="accounts" >
-							<td class="accounts"> <%= link_to(s[:service].name, services_url(:service_id=>s[:service].id), :'data-tooltip' => 'Click to see this service') %></td>
-							<td class="accounts"> <%= s[:next_event].to_s %></td>
-							<td class="accounts"> Status: <i><%= s[:status] %></i></td>
-	         			<td class="accounts"> 
-								<form onsubmit="fb_message()">
-									<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
-								</form>
-							</td>
-	         			<td class="accounts"> 
-								<%= render 'twitter', :position => s[:service], :service => true %>
-							</td>
-						</tr>
+					<% unless @service_events.nil? %>
+						<% @service_events.each do |s| %>
+							<tr class="accounts" >
+								<td class="accounts"> <%= link_to(s[:service].name, services_url(:service_id=>s[:service].id), :'data-tooltip' => 'Click to see this service') %></td>
+								<td class="accounts"> <%= s[:next_event].to_s %></td>
+								<td class="accounts"> Status: <i><%= s[:status] %></i></td>
+		         			<td class="accounts"> 
+									<form onsubmit="fb_message()">
+										<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
+									</form>
+								</td>
+		         			<td class="accounts"> 
+									<%= render 'twitter', :position => s[:service], :service => true %>
+								</td>
+							</tr>
+						<% end %>
 					<% end %>
 				</tbody>
 			</table>
