@@ -9,6 +9,7 @@ class ServiceRegistration < ActiveRecord::Base
     
     # select services that is registered by a contact, or contains any service registered by a contact from a collection of services
     def filter_services_by_registrant(services, contact)
+		#return nil if contact.nil?
       registered_services = contact.registered_services
 
       filtered_services = services.select do |s|

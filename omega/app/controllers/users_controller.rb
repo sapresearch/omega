@@ -149,13 +149,15 @@ class UsersController < Omega::Controller
 
 		if !current_user.is_admin?
 			registered_services = ServiceRegistration.filter_services_by_registrant(Service.all, @contact)
-			@service_events = registered_services.inject(Array.new) do |service_events, service|
-				registrations = service.service_registrations.select { |sr| sr.registrant == @contact }
-				if !registrations.at(0).nil?
-					status = registrations.at(0).status
-					next_event = service.next_event.nil? ? "TBD" : service.next_event.start_at.to_s.gsub(/:00 .*/, "")
-					service_events << { :service => service, :next_event => next_event, :status => status }
-				end
+			unless registered_services.nil?
+				@service_events = registered_services.inject(Array.new) do |service_events, service|
+					registrations = service.service_registrations.select { |sr| sr.registrant == @contact }
+					if !registrations.at(0).nil?
+						status = registrations.at(0).status
+						next_event = service.next_event.nil? ? "TBD" : service.next_event.start_at.to_s.gsub(/:00 .*/, "")
+						service_events << { :service => service, :next_event => next_event, :status => status }
+					end
+				end 
 			end 
 
 			volunteering_records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
