@@ -2,6 +2,8 @@ module ServicesHelper
 
   require "service_lib.rb"
   include ServiceLib
+  require "ui_util.rb"
+  include UIUtil
 
   def is_admin?(user=current_user)
     # app-spec
@@ -22,14 +24,6 @@ module ServicesHelper
     html = "<div class='bread_crumb'>".html_safe + "Location: " + html
     html += "</div>".html_safe
   end    
-
-  def nl2br(string)
-    string.gsub("\n", "<br>").html_safe
-  end
-
-  def blank_sign(text="(blank)")
-    content_tag("span", text, :class=>"blank_sign")
-  end
   
 end
 

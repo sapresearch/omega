@@ -1,0 +1,22 @@
+<p><%= nl2br asset.description %></p>
+
+<div class="asset_operation_links" >
+
+  <div class="left_links">
+    <p>
+    </p>
+  </div>
+
+  <div class="right_links">
+    <p>
+      <%= om_button(:contact => true, :icon=>'edit') do %>
+        <%= link_to "Edit", edit_asset_url(asset), "data-tooltip"=>"Edit this asset" %>
+      <% end %>
+
+      <%= om_button(:contact => true, :icon=>'delete-icon') do %>
+        <%= link_to_function "Delete", "destroy_asset('#{asset_url(asset)}')", "data-tooltip"=>"Delete this asset" %>
+      <% end %>
+    </p>
+  </div>
+
+</div>

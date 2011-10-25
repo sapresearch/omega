@@ -12,9 +12,10 @@ Omega::Services::Module.routes.draw do
     end
   end
 
+  resources :assets
+
   resources :asset_allocations do
-    collection do
-      
+    collection do      
     end
   end
 end
