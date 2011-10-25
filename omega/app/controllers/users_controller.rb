@@ -156,7 +156,6 @@ class UsersController < Omega::Controller
 					if !registrations.at(0).nil?
 						status = registrations.at(0).status
 						next_event = service.next_event.nil? ? "TBD" : service.next_event.start_at.to_s.gsub(/:00 .*/, "")
-						@is_nil = @is_nil == false ? @is_nil : @service_events.nil?
 						@service_events << { :service => service, :next_event => next_event, :status => status }
 					end
 				end 
