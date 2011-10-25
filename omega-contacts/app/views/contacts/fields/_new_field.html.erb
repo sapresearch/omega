@@ -1,0 +1,23 @@
+	<p>
+		<%= n.label :New_Field_Name %>
+		<%= n.text_field :name %>
+	</p>
+	
+	<p>
+		<%= n.label :Description %>
+		<%= n.text_field :description %>
+	</p>
+	
+	<p>
+		<%= n.label :Data_Type %>
+		<p>
+			<% { 'Text' => 'string', 'Number' => 'integer', 'True or False' => 'boolean' }.each do |display, value|%>
+				<%= n.radio_button :data_type, value %> <%= display %>
+			<%end%>
+		</p>
+	</p>
+
+	<p>
+		<%= n.label :Position %>
+		<%= collection_select(:volunteering_position, :contact_field_volunteering_position_id, @positions, :id, :name) %>
+	</p>

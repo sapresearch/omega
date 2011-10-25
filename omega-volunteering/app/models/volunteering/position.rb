@@ -4,6 +4,11 @@ class Volunteering::Position < Omega::Model
   MAX_POSITIONS_PER_PAGE = 5
 
   has_many :contact_positions
+  has_and_belongs_to_many :contact_fields, :class_name => '::Contact::Field',
+  														 :join_table => 'contact_fields_volunteering_positions',
+														 :foreign_key => :volunteering_position_id,
+														 :association_foreign_key => :contact_field_id
+
   has_many :contacts, :through => :contact_positions
   
 #  belongs_to :contact
@@ -115,4 +120,28 @@ class Volunteering::Position < Omega::Model
     self.end = "#{end_date} #{value}"
   end
 
+end
+
+class Volunteering::Position::CollectionWithAll
+	def name
+		"All Positions"
+	end
+
+	def id
+		Volunteering::Position.find(:all).collect { |vp| vp.id }.join(',')
+	end
+end
+
+class Volunteering::Position::CollectionWithCurrentPosition
+	def initialize(position)
+		@position = position
+	end
+
+	def name
+		"This Position Only"
+	end
+
+	def id
+		@position.id
+	end
 end

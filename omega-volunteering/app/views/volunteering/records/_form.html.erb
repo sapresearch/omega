@@ -132,20 +132,20 @@
 
 		
 		   <h3 class="application-form">CUSTOM INFORMATION </h3> 
-				<% @contact.custom_fields.each do |cf| %>
+				<% @contact.custom_fields(@record.position).each do |cf| %>
 					<p>
+						<%= c.label (cf.name.to_sym) %>
 						<% if cf.data_type.to_s == 'boolean' %>
-							<%= c.label (cf.name.to_sym) %>
 							<%= c.send(cf.input_field, cf.name_as_sym, "Yes") %> Yes
 							<%= c.send(cf.input_field, cf.name_as_sym, "No") %> No
 						<% else %>
-							<%= c.label (cf.name.to_sym) %>
 							<%= c.send(cf.input_field, cf.name_as_sym) %>
 						<% end %>
+						<p class='custom_description'>
+							<%= cf.description %>
+						</p>
 					</p>
-					<p class='custom_description'>
-						<%= cf.description %>
-					</p>
+					<br />
 				<% end %>
 
 		

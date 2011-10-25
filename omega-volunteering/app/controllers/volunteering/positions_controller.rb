@@ -41,6 +41,7 @@ class Volunteering::PositionsController < Omega::Controller
 
   def new
     @position = Volunteering::Position.new
+	 @positions = Volunteering::Position.find(:all).unshift(Volunteering::Position::CollectionWithAll.new, Volunteering::Position::CollectionWithCurrentPosition.new(@position))
 	 @new_field = Contact::Field.new
     fix_model_to_view
     respond_with(@position)
@@ -49,9 +50,13 @@ class Volunteering::PositionsController < Omega::Controller
   def create
 	 fix_view_to_model
 
-    field = params[:volunteering_position][:contact_field]
-    params[:volunteering_position].delete(:contact_field) 
-	 @new_field = Contact::Field.create(field)
+    #field = params[:volunteering_position][:contact_field]
+    field = params[:volunteering_position].delete(:contact_field) 
+	 @field = Contact::Field.create(field)
+	 field_positions = params[:volunteering_position].delete(:contact_field_volunteering_position_id)
+	 puts "\n\nField position ids sent to field.rb: " + field_positions.inspect.to_s
+	 @field.update_positions(field_positions)
+
     @position = Volunteering::Position.new(params[:volunteering_position])
     if @position.save
     	respond_with(@position)

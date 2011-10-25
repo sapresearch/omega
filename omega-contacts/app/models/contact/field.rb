@@ -1,5 +1,9 @@
 class Contact::Field < Omega::Model
 	has_many :values
+	has_and_belongs_to_many :volunteering_positions, :class_name => '::Volunteering::Position',
+  														 			 :join_table => 'contact_fields_volunteering_positions',
+																	 :foreign_key => :contact_field_id,
+																	 :association_foreign_key => :volunteering_position_id
 	validates :name, :uniqueness => true,
 						  :format => { :with => /\A\S*\z/, :message => "Only one word allowed in name" }
 
@@ -35,5 +39,13 @@ class Contact::Field < Omega::Model
 		end
 	end
 
+	def update_positions(positions)
+		if positions.include?(',')
+			positions.split(',').each { |vp| self.volunteering_positions << Volunteering::Position.find(vp.to_i) } 
+		elsif !(positions.include?(','))
+			self.volunteering_positions << Volunteering::Position.find(positions.to_i)
+		end
+		puts "\n\n Positions: " + self.volunteering_positions.inspect.to_s
+	end
 
 end

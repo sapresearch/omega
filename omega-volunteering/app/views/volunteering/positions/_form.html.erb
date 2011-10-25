@@ -124,24 +124,7 @@
 
       <h3 class="application-form">Custom Field</h3>
 			<%= f.fields_for :contact_field, @new_field do |n| %>
-				<p>
-					<%= n.label :New_Field_Name %>
-					<%= n.text_field :name %>
-				</p>
-	
-				<p>
-					<%= n.label :Description %>
-					<%= n.text_field :description %>
-				</p>
-	
-				<p>
-					<%= n.label :Data_Type %>
-					<p>
-						<% { 'Text' => 'string', 'Number' => 'integer', 'True or False' => 'boolean' }.each do |display, value|%>
-							<%= n.radio_button :data_type, value %> <%= display %>
-						<%end%>
-					</p>
-				</p>
+				<%= render 'contacts/fields/new_field', :n => n %>
 			<%end%>
 
 

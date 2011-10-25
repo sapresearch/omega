@@ -184,8 +184,10 @@ class Contact < Omega::Model
 		value
 	end
 
-	def custom_fields
-		Contact::Field.find(:all)
+	def custom_fields(*position)
+		fields = Contact::Field.find(:all)
+		fields.select! { |f| f.volunteering_positions.include? position.at(0) } unless position.empty?
+		fields
 	end
 
   private
@@ -193,17 +195,3 @@ class Contact < Omega::Model
       !user.nil?
     end
 end
-
-
-#class Hello
-#	def say
-#		puts 'hello world'
-#	end
-#old_say = self.instance_method(:say)
-#define_method(:say) do
-#	old_say.bind(self).call
-#	puts 'success'
-#end
-#end
-#
-#h = Hello.new
