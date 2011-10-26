@@ -1,0 +1,11 @@
+$("#asset_head_<%= @asset.id %>").hide('slow', function(){ $(this).remove(); })
+$("#asset_body_<%= @asset.id %>").hide('slow', function(){
+  $(this).remove();
+  <% if @assets.empty? %>
+   $(".assets_list").html("<%= escape_javascript( render "index_no_asset_message") %>")
+  <% end %>
+})
+
+$(".tipsy").remove();
+
+

@@ -1,0 +1,12 @@
+  <p>
+    <%= form_for(asset, :remote=>true) do |form| %>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, :maxlength=>Asset::NAME_MAX_LENGTH, :size=>30 %>
+      </div>
+      <div class="field">
+        <%= form.label :description %>
+        <%= form.text_area :description, :cols=>30, :rows=>3 %>
+      </div>
+    <% end %>
+  </p>
