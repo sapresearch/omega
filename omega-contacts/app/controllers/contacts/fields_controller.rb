@@ -12,15 +12,23 @@ class Contacts::FieldsController < Omega::Controller
 		redirect_to(new_contact_field_path)
 	end
 
-	# Create an object with appropriate methods to include in the @positions collection for use in the collection_select helper in the fields/new view.
-	class All
-		def name
-			"All Positions"
-		end
-
-		def id
-			Volunteering::Position.find(:all).collect { |vp| vp.id }.join(',')
-		end
+	def edit
+		@field = Contact::Field.find(params[:id])
+		@positions = Volunteering::Position.find(:all).unshift(Volunteering::Position::CollectionWithAll.new)
 	end
 
+	def update
+		@field = Contact::Field.find(params[:id])
+		@field.update_attributes(params[:contact_field])
+		@field.update_positions(params[:volunteering_position][:contact_field_volunteering_position_id])
+		redirect_to(new_contact_field_path)
+	end
+	
+	def destroy
+		puts "\n\nIn fields#destory"
+		@field = Contact::Field.find(params[:id])
+		@field.destroy
+		redirect_to(new_contact_field_path)
+	end
+		
 end

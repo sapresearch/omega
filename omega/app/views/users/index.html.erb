@@ -3,11 +3,9 @@
  <div class="content circle-corners-bottom-left">
     	
 		<div class="heading-main-columns">
-	
-				<h1 class="page-content">
-      				Users
-		    	</h1>
-	
+			<h1 class="page-content">
+      		Users
+		  	</h1>
 		</div>
 
 
@@ -19,7 +17,6 @@
         <%= om_button(:icon=>'sort-za', :small => true) do %>
             <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
         <% end %>
-
       </div>
 
       <div class="clear"></div>
@@ -49,10 +46,9 @@
 
 <div class="clear"></div>
 </div>
-	  </div>
+</div>
 
 <% content_for :sidebar do %>
-        <%= render :partial => "partials/sidebar_search" %>
-        <%= render :partial => "layouts/sidebar_users" %>
-
+	<%= render :partial => "partials/sidebar_search" %>
+	<%= render :partial => "layouts/sidebar_users" %>
 <% end %>

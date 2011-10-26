@@ -8,7 +8,11 @@ Omega::Contacts::Module.routes.draw do
         get :suggest
       end
     end
-	 resources :fields
+	 resources :fields do
+    	member do
+			get :edit
+		end
+	 end
     resources :interests
 
     resources :imports do

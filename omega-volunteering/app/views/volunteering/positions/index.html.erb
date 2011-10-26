@@ -1,4 +1,4 @@
-<% require_stylesheet 'omega_volunteering' %>
+<% require_stylesheet 'omega_volunteering', 'omega_volunteering_left' %>
 <%# require_javascript 'omega_volunteering' %>
 
     <div class="content circle-corners-bottom-left" style="min-height:<%= @positions.count * 400 %>;">
@@ -67,7 +67,8 @@
                   </p>
 
                   <p>
-                    Priority: <i><%= position.priority %><%= "Normal" if position.priority.nil? %></i>
+							<% p = position.priority.nil? ? "Normal" : position.priority %>
+							Priority: <i><%= p %></i>
                   </p>
 
 						<p>

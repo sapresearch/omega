@@ -1,0 +1,6 @@
+/* For Use in volunteering/positions/index ONLY! 
+This keeps the div#left tall enough to allow the content-box to be large enough to fit all the positions. */
+
+div#left{
+	min-height: 440px;
+}

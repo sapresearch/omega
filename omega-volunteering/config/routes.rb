@@ -12,7 +12,6 @@ Omega::Volunteering::Module.routes.draw do
 
         resources :skills, :only => [:index, :edit, :update, :destroy]
         resources :interests, :only => [:index, :edit, :update, :destroy]
-
       end
 
       member do
