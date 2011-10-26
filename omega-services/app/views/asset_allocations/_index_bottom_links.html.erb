@@ -1,3 +1,5 @@
-<% if @back_name && @back_url %>
-  <%= render "shared/back_link", :back_name=>@back_name, :back_url=>@back_url  %>
-<% end %>
+<div class="<%= @asset_id ? "left_links" : "right_links" %>">
+  <% if @back_name && @back_url %>
+    <%= render "shared/back_link", :back_name=>@back_name, :back_url=>@back_url %>
+  <% end %>
+</div>

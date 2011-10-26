@@ -13,7 +13,7 @@ class RolesController < Omega::Controller
     end
     
     @roles = Role.paginate(:page => @page, :per_page => Role::PAGE_SIZE)
-    @role = Role.new
+    @role = Role.new(:name=>"New Role")
 
     respond_with(@roles)
   end
@@ -33,7 +33,7 @@ class RolesController < Omega::Controller
   end
 
   def update
-    @id = params[:role][:id]
+    @id = params[:id]
     @name = params[:role][:name]
     @description = params[:role][:description]
     @internal_name = @name.downcase.gsub(" ","_")

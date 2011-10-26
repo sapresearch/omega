@@ -41,7 +41,7 @@ select:focus,select:hover{
 
 .left{float:left}
 .right{float:right}
-.left_links{float:right;}
+.left_links{float:left;}
 .right_links{float:right;}
 
 .round{

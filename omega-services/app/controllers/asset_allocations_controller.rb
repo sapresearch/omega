@@ -11,7 +11,7 @@ class AssetAllocationsController < Omega::Controller
     if @asset_id
       asset = Asset.find(@asset_id)
       @back_name = asset.name
-      #@back_url = assets_url(:asset_id=>@asset_id)
+      @back_url = assets_url(:asset_id=>@asset_id)
     elsif @leaf_service_id
       leaf_service = Service.find(@leaf_service_id)
       @back_name = leaf_service.name

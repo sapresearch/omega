@@ -10,7 +10,7 @@
         <%= render "assets/show_head", :asset=>asset %>
       </h3>
 
-      <div id="service_body_<%= asset.id %>" class="asset_body" >
+      <div id="asset_body_<%= asset.id %>" class="asset_body" >
         <%= render "assets/show_body", :asset=>asset %>
       </div>
     <% end %>
@@ -19,7 +19,7 @@
   <script type="text/javascript">
     var index = false;
     <% if asset %>
-      index = <% assets.index(asset) %>
+      index = <%= assets.index(asset) %>
     <% end %>
 
     $( "#assets_accordion" ).accordion({
@@ -29,15 +29,5 @@
          navigation: false,
          collapsible: true
     });
-
-    $(".asset_head").hover(
-        function(){
-            if(!$(this).hasClass("ui-state-active"))
-                $(this).removeClass("asset_head")
-        },
-        function(){
-            $(this).addClass("asset_head")
-        }
-    )
   </script>
 <% end %>
