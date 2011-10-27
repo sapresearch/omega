@@ -6,14 +6,20 @@
 <% else %>
   <div id="assets_accordion">
     <% assets.each do |asset| %>
-      <h3 id="asset_head_<%= asset.id %>" class="asset_head">
-        <%= render "assets/show_head", :asset=>asset %>
-      </h3>
+      <div id="asset_unit_<%= asset.id %>" class="asset_unit">
+        <h3 id="asset_head_<%= asset.id %>" class="asset_head">
+          <%= render "assets/show_head", :asset=>asset %>
+        </h3>
 
-      <div id="asset_body_<%= asset.id %>" class="asset_body" >
-        <%= render "assets/show_body", :asset=>asset %>
+        <div id="asset_body_<%= asset.id %>" class="asset_body" >
+          <%= render "assets/show_body", :asset=>asset %>
+        </div>
       </div>
     <% end %>
+  </div>
+
+  <div class="no_match explanation round shadow hide">
+    No match is found
   </div>
 
   <script type="text/javascript">
@@ -24,6 +30,7 @@
 
     $( "#assets_accordion" ).accordion({
          active: index,
+         header: ">div>h3",
          autoHeight: false,
          clearStyle: true,
          navigation: false,

@@ -55,6 +55,8 @@ select:focus,select:hover{
     -box-shadow: 3px 3px 3px #ccc;
 }
 
+.hide{display:none;}
+
 ol{ list-style-type:decimal;}
 
 .blank_sign{ color:#aaa }
