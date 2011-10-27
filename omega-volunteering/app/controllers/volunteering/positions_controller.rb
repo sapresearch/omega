@@ -52,11 +52,11 @@ class Volunteering::PositionsController < Omega::Controller
 	 field_positions = params[:volunteering_position].delete(:contact_field_volunteering_position_id)
 
     @position = Volunteering::Position.new(params[:volunteering_position])
-	 # Do this after position so that it is assigned an ID.
-	 field = @position.id if field.nil?
-	 @field = Contact::Field.create(field)
-	 @field.update_positions(field_positions)
     if @position.save
+		# Do this after position so that it is assigned an ID.
+		field_positions = @position.id.to_s if field_positions.to_i == 0
+		@field = Contact::Field.create(field)
+		@field.update_positions(field_positions)
     	respond_with(@position)
 	 else
 		reset_view_if_error
