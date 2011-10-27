@@ -45,7 +45,6 @@ class Contact::Field < Omega::Model
 		elsif !(positions.include?(','))
 			self.volunteering_positions << Volunteering::Position.find(positions.to_i)
 		end
-		puts "\n\n Positions: " + self.volunteering_positions.inspect.to_s
 	end
 
 end

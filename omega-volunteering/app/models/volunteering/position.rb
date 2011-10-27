@@ -133,15 +133,11 @@ class Volunteering::Position::CollectionWithAll
 end
 
 class Volunteering::Position::CollectionWithCurrentPosition
-	def initialize(position)
-		@position = position
-	end
-
 	def name
 		"This Position Only"
 	end
 
 	def id
-		@position.id
+		0
 	end
 end

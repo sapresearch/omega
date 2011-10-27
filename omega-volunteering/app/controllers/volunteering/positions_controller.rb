@@ -41,8 +41,6 @@ class Volunteering::PositionsController < Omega::Controller
 
   def new
     @position = Volunteering::Position.new
-	 @positions = Volunteering::Position.find(:all).unshift(Volunteering::Position::CollectionWithAll.new, Volunteering::Position::CollectionWithCurrentPosition.new(@position))
-	 @new_field = Contact::Field.new
     fix_model_to_view
     respond_with(@position)
   end
@@ -50,25 +48,32 @@ class Volunteering::PositionsController < Omega::Controller
   def create
 	 fix_view_to_model
 
-    #field = params[:volunteering_position][:contact_field]
     field = params[:volunteering_position].delete(:contact_field) 
-	 @field = Contact::Field.create(field)
 	 field_positions = params[:volunteering_position].delete(:contact_field_volunteering_position_id)
-	 puts "\n\nField position ids sent to field.rb: " + field_positions.inspect.to_s
-	 @field.update_positions(field_positions)
 
     @position = Volunteering::Position.new(params[:volunteering_position])
+	 # Do this after position so that it is assigned an ID.
+	 field = @position.id if field.nil?
+	 @field = Contact::Field.create(field)
+	 @field.update_positions(field_positions)
     if @position.save
     	respond_with(@position)
-		else
-			reset_view_if_error
+	 else
+		reset_view_if_error
     	respond_with(@position)
-		end
+	 end
   end
 
   def update
     fix_view_to_model
     @position = Volunteering::Position.find(params[:id])
+
+    field = params[:volunteering_position].delete(:contact_field) 
+	 field_positions = params[:volunteering_position].delete(:contact_field_volunteering_position_id)
+	 field_positions = @position.id.to_s if field_positions.to_i == 0
+	 @field = Contact::Field.create(field)
+	 @field.update_positions(field_positions)
+
     @position.update_attributes(params[:volunteering_position])
     fix_model_to_view
     respond_with(@position)
@@ -186,7 +191,6 @@ class Volunteering::PositionsController < Omega::Controller
 
   def sort
     @positions = Volunteering::Position.scoped
-
     params.each do |attr, direction|
       next unless SORT_KEYS.include?(attr) and SORT_DIRECTIONS.include?(direction)
       @positions = @positions.order("#{attr} #{direction}")
@@ -228,6 +232,9 @@ class Volunteering::PositionsController < Omega::Controller
   end
 
   def fix_model_to_view
+	 @positions = Volunteering::Position.find(:all).unshift(Volunteering::Position::CollectionWithAll.new, Volunteering::Position::CollectionWithCurrentPosition.new)
+	 @new_field = Contact::Field.new
+
     @position.build_event_source unless @position.event_source
 
     @position.contacts.build do |c|
@@ -250,6 +257,7 @@ class Volunteering::PositionsController < Omega::Controller
   end
 
   def reset_view_if_error
+	 @positions = Volunteering::Position.find(:all).unshift(Volunteering::Position::CollectionWithAll.new, Volunteering::Position::CollectionWithCurrentPosition.new)
     @position.build_event_source unless @position.event_source
   end
 
