@@ -116,8 +116,8 @@ class Service < ActiveRecord::Base
     def time_conflicting_services_with_periods(assets=Asset.all, begin_at=Time.now, until_at=begin_at+1.year)
       leaf_service_conflicts = {}
       leaf_service_periods_unions = {}
-      #leaf_services = assets.inject([]){|r, asset|asset.services.each{|s|r<<s unless r.include?(s)}; r}
-#=begin
+      leaf_services = assets.inject([]){|r, asset|asset.services.each{|s|r<<s unless r.include?(s)}; r}
+=begin
       leaf_services = []
       assets.each do |asset|
         unless asset.services.empty?
@@ -125,14 +125,14 @@ class Service < ActiveRecord::Base
           break;
         end
       end
-#=end
+=end
       return {} if leaf_services.length<2
 
       leaf_services.each{|ls|leaf_service_periods_unions[ls]=ls.periods_union(begin_at, until_at)} #pre-calculate all periods 
       remaining_leaf_service_combinations=leaf_services.to_combinations  # collection of possible combinations uncounted
       
       assets.each do |asset|        
-=begin
+#=begin
         asset.services.to_combinations.each do |sc|         
           if leaf_service_conflicts[sc].nil?
             sc_a = sc.to_a
@@ -142,8 +142,8 @@ class Service < ActiveRecord::Base
             return leaf_service_conflicts if remaining_leaf_service_combinations.empty?
           end          
         end
-=end
-#=begin
+#=end
+=begin
         accounted_services = []
         asset.services.each do |leaf_service_1|
           accounted_services << leaf_service_1
@@ -158,7 +158,7 @@ class Service < ActiveRecord::Base
             end
           end
         end
-#=end
+=end
       end
       leaf_service_conflicts
     end

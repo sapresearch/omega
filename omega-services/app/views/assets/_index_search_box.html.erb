@@ -11,25 +11,12 @@
 </form>
 
 <script type="text/javascript">
-  /*
-  $( "#search_text" ).autocomplete({
-    //  minLength: 2,
-    source: <%= raw services_to_search.to_json %>,
-    select: function( event, ui ) {
-      $.ajax({
-        url: '<%= services_url %>',
-        data: ({"service_id": ui.item.id, "my_services_switch":"off", "enrollable_switch":"on", "requestable_switch":"on"}),
-        dataType: 'script',
-        cache: false
-      });
-    }
-  });
-  */
   var asset_names = <%= raw @assets.map(&:name) %>
   var asset_ids = <%= raw @assets.map(&:id) %>
   $("#search_text").keyup(function(){
     var input = $("#search_text").val()
     var regex = new RegExp( '^.*'+input+'.*$','i' );
+
     for(var i in asset_names)
     {
       if(asset_names[i].match(regex)){
