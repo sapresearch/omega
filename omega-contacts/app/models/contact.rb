@@ -18,6 +18,7 @@ class Contact < Omega::Model
   attr_accessible :first_name, :last_name
 
   scope :status, where('status IS NULL')
+  before_destroy { |contact| Contact::Value.destroy_all "contact_id = #{contact.id}" }
 
   class << self
     def for(user) where('user_id = ?', user).first end
@@ -31,7 +32,6 @@ class Contact < Omega::Model
   has_and_belongs_to_many :skills,    :join_table => 'contact_contacts_skills'
   has_and_belongs_to_many :languages, :join_table => 'contact_contacts_languages'
 
-
   has_many :group_positions, :dependent => :destroy
   has_many :groups, :through => :group_positions
 
@@ -42,11 +42,13 @@ class Contact < Omega::Model
 
   has_many :uploads, :as => 'binding'
   has_many :values
+  accepts_nested_attributes_for :values
 
   #services associations
   has_many :service_registrations, :dependent=>:destroy, :foreign_key=>"registrant_id"
   has_many :service_leaves, :through=>:service_registrations
   has_many :service_sections
+
   def registered_services
     service_leaves.map{|sl|sl.service}
   end
@@ -140,12 +142,14 @@ class Contact < Omega::Model
   end
 
 	def self.method_missing(method, *args, &block)
-		if method.to_s.include? 'find_by'
-		end
+	  super unless method =~ /^find_by_(.*)$/
+	  name = $1
+	  fields = Contact::Field.all.collect { |cf| cf.name }
+	  super unless fields.include?(name)
+	  Contact::Field.find_by_name(name).values.select { |v| v.value == args.at(0) }
 	end
 
 	def method_missing(method, *args, &block)
-
 		fields = Contact::Field.find(:all).collect { |cf| cf.name }
 		method_as_string = method.to_s.gsub(/=/, '')
 		if not fields.index(method_as_string).nil?

@@ -39,7 +39,6 @@ class Volunteering::Position < Omega::Model
 	validates_numericality_of :volunteers_required, :only_integer => true, :greater_than => 0
 	validates_uniqueness_of :name
 	validates_presence_of :start, :end, :unless => :recurrent?
-	validates_presence_of :agreement, :if => :disclaimer_agreement
 
 	def valid_dates
 		self.errors.clear

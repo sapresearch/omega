@@ -106,7 +106,7 @@
     <% end %>
         
     <%= with_permission(User::PERM_VIEW) do %>
-        <li> <%= link_to "MyOmega", my_page_users_url %></li>
+        <li> <%= link_to "MyOmega", my_page_user_path(current_user) %></li>
     <% end %>
         
     <%= with_permission(Setting::PERM_VIEW) do %>

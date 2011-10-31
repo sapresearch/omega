@@ -354,3 +354,79 @@ div.position_body{
 p.custom_description{
 	margin-left: 95px;
 }
+
+div#placeholder{
+	min-height: 225px;
+}
+
+div#invitation{
+	background: #EEE;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+div#invitation p{
+	text-align: center;
+}
+
+div#invitation-heading{
+	text-align: center;
+	background: green;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	-webkit-border-radius: 4px 4px 0 0;
+}
+
+div#invitation-heading h7{
+	color: white;
+}
+
+div#service_body{
+	background: #EEE;
+}
+
+h1{
+	padding: .2em;
+	margin: 0;
+}
+
+#result-header{
+	width: 500px;
+	margin-right: 2em;
+}
+
+#contacts_to_add {
+	width: 200px;
+	float: left;
+}
+
+/* style the list to maximize the droppable hitarea */
+#contacts_to_add li {
+	margin: 0;
+	padding: 1em 0 1em 3em;
+}
+
+#volunteers-heading h7{
+	color: black;
+}
+
+#volunteers-heading {
+	width: 102px;
+	background: lightBlue;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	height: 30px;
+	line-height: 30px;
+}
+
+#volunteers {
+	margin-left: 30%;
+}
+
+#volunteers ul{
+	margin-top: 15px;
+}

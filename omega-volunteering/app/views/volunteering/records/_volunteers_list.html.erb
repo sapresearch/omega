@@ -3,7 +3,7 @@
 	<% unless row[:first_name].to_s.empty? and row[:last_name].to_s.empty? %>
 		<li id="contact" ui-data="<%= row[:id] %>" >
 			<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add this volunteer"></span>
-				<%= " #{row[:first_name].to_s} #{row[:last_name].to_s}" %>
+			<%= link_to " #{row[:first_name].to_s} #{row[:last_name].to_s}", my_page_user_path(Contact.find(row[:id]).user) %>
 		</li>
 	<% end %>
 <% end %>

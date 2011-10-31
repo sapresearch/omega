@@ -135,7 +135,8 @@ class UsersController < Omega::Controller
 
 
 	def my_page
-		@contact = Contact.for(current_user)
+		@user = User.find(params[:id])
+		@contact = Contact.for(@user)
 		@new_skill = Contact::Skill.new
 		@new_interest = Contact::Interest.new
 		if !@contact.nil?
@@ -147,7 +148,7 @@ class UsersController < Omega::Controller
 			end
 		end
 
-		if !current_user.is_admin?
+		if !@user.is_admin?
 			registered_services = ServiceRegistration.filter_services_by_registrant(Service.all, @contact)
 			if not registered_services.empty?
 				@service_events = Array.new
@@ -161,12 +162,12 @@ class UsersController < Omega::Controller
 				end 
 			end 
 
-			volunteering_records = Volunteering::Record.where(:contact_id => Contact.for(current_user))
+			volunteering_records = Volunteering::Record.where(:contact_id => Contact.for(@user))
  			@positions = volunteering_records.inject(Array.new) do |positions, record|
 				position = Volunteering::Position.find(record.position_id)
 				positions.push({ :position => position, :record => record.action })#@positions has hashes with the position and record as key-value pairs for each position the user is signed up
 			end
-		elsif current_user.is_admin?
+		elsif @user.is_admin?
 			@service_events = Service.find(:all).inject(Array.new) do |service_events, service|
 				service_events_hash = {:service => service, :status => "Administrator"}
 				service_events_hash[:next_event] = service.next_event.nil? ? "TBD" : service.next_event.start_at.to_s.gsub(/:00 .*/, "") 
@@ -186,7 +187,7 @@ class UsersController < Omega::Controller
 
 	def update_my_page
 		puts "\n\nUsersController. This is params first received: " + params.inspect.to_s
-		contact = Contact.for(current_user)
+		contact = Contact.for(params[:id])
 
 		skills = params[:contact][:skill_ids].gsub(/[\[\]]/, "").split(',').uniq # Use gsub and split to format the ids as an array, rather than a string.
 		contact.update_attributes(:skill_ids => skills)
@@ -202,7 +203,7 @@ class UsersController < Omega::Controller
 		contact.update_contact_attributes(params[:contact])
 		contact.save
 
-		redirect_to(my_page_users_path)
+		redirect_to(my_page_user_path(@user))
 	end
 
 end

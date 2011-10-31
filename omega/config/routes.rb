@@ -42,14 +42,16 @@ Omega::Module.routes.draw do
 	end
 
   resources :users do
+	 member do
+		get :my_page
+		put :update_my_page
+	 end
     collection do
       get :register
       post :join, :path => 'register'
       get :autocomplete
       get :role_assignment
       match :letter, :path => ':letter', :constraints => { :letter => /[a-z]/i }
-		get :my_page
-		put :update_my_page
     end
   end
 

@@ -1,15 +1,6 @@
 <% require_stylesheet 'service2.css' %>
 <% require_stylesheet 'omega_volunteering.css' %>
 
-	<style>
-	h1 { padding: .2em; margin: 0; }
-	#result-header { width: 500px; margin-right: 2em; }
-	#contacts_to_add { width: 200px; float: left; }
-	/* style the list to maximize the droppable hitarea */
-	#contacts_to_add li { margin: 0; padding: 1em 0 1em 3em; }
-	#volunteers { margin-left: 30%; }
-	</style>
-
 
 
 <div id="page_content">
@@ -19,9 +10,6 @@
 
 
 <script type="text/javascript">
-
-
-
 	var matrix = '<% raw @search_matrix.to_json %>';
 	var js_matrix = new Array;
 	matrix = matrix.split('},');

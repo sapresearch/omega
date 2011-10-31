@@ -22,19 +22,23 @@
 
 			<td style="width:350px; max-width:355px">
 				<div id="volunteers">
-					<h7 class="sub-heading" id="result-header">Volunteers:</h7>
-						<%= render 'volunteers_list' %>
+					<div id="volunteers-heading">
+						<h7 class="sub-heading" id="result-header">Volunteers:</h7>
+					</div>
+					<%= render 'volunteers_list' %>
 				</div>
 			</td>
 
 
-			<td> 
-				<div style="border: 1px solid #BE8816">
-					<h7 class="sub-heading"> Invite these volunteers: </h7>
+			<td style="width:250px"> 
+				<div id="invitation">
+					<div id="invitation-heading">
+						<h7 class="sub-heading"> Invite these volunteers: </h7>
+					</div>
 					<%= form_for @records, :url => create_multiple_volunteering_records_path, :html => { :method => :post } do |f| %>
 						<%= hidden_field_tag "records[position_id]", @position_id %>
 						<%= hidden_field_tag "records[contact_ids]" %>
-						<div class="placeholder" style="min-height:75px">
+						<div id="placeholder">
 							<ul id="contacts_to_add">
 							</ul>
 						</div>

@@ -83,7 +83,7 @@
 	</div>
 
 
-	<%= form_for @contact, :url => update_my_page_users_path do |c| %> 
+	<%= form_for @contact, :url => update_my_page_user_path(@user) do |c| %> 
 		<div id="skills_and_interests">
 			<%= render 'skills_and_interests', :c => c %>
 		</div><br />
