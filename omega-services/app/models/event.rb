@@ -112,9 +112,7 @@ class Event < ActiveRecord::Base
       periods_2 = periods_a[1]
       flag_1 = periods_1.nil? || periods_1.empty?
       flag_2 = periods_2.nil? || periods_2.empty?
-      return [] if flag_1 && flag_2
-      return periods_1 if flag_2
-      return periods_2 if flag_1
+      return [] if flag_1 || flag_2
       
       periods = []
       i=0;j=0
