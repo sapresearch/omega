@@ -55,7 +55,7 @@ class Event < ActiveRecord::Base
             (j...length_2).each{|k|periods << periods_2[k]}
             break;
           end
-        elsif p2[0]<p1[1]
+        elsif p2[1]<p1[0]
           periods << p2
           j+=1
           if j<length_2
@@ -120,12 +120,13 @@ class Event < ActiveRecord::Base
       p2 = periods_2[j]
       length_1 = periods_1.length
       length_2 = periods_2.length
+
       while true
         if p1[1]<p2[0]
           i+=1
           break if i>=length_1
           p1 = periods_1[i]
-        elsif p2[0]<p1[1]
+        elsif p2[1]<p1[0]
           j+=1
           break if j>=length_2
           p2 = periods_2[j]
