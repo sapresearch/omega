@@ -370,11 +370,15 @@ div#invitation p{
 	text-align: center;
 }
 
+div#invitation p input{
+	margin-bottom: 15px;
+}
+
 div#invitation-heading{
 	text-align: center;
 	background: green;
-	height: 30px;
-	line-height: 30px;
+	height: 36px;
+	line-height: 36px;
 	border-radius: 4px 4px 0 0;
 	-moz-border-radius: 4px 4px 0 0;
 	-webkit-border-radius: 4px 4px 0 0;
@@ -383,6 +387,7 @@ div#invitation-heading{
 div#invitation-heading h7{
 	color: white;
 }
+
 
 div#service_body{
 	background: #EEE;
@@ -411,22 +416,30 @@ h1{
 
 #volunteers-heading h7{
 	color: black;
+	margin-left: 30px;
 }
 
 #volunteers-heading {
-	width: 102px;
+	width: 142px;
 	background: lightBlue;
 	border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
-	height: 30px;
-	line-height: 30px;
+	height: 36px;
+	line-height: 36px;
+	margin-left: -10px;
 }
 
 #volunteers {
 	margin-left: 30%;
 }
 
-#volunteers ul{
-	margin-top: 15px;
+div#service_body li{
+	font-weight: bold;
+}
+
+h3#service_head a{
+	font-size: 14px;
+	font-weight: bold;
+	font-family: arial;
 }

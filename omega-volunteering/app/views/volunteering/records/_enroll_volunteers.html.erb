@@ -76,7 +76,7 @@ $(function() {
 			+ '</span><span class="remove-contacts">'
 			+ self.text().trim()
 			+ '</span></li>');
-		$(this).remove();
+		$(this).parent().remove();
 		$(".tipsy").remove();
 		update_contact_id_values(contact_id);
 	});
