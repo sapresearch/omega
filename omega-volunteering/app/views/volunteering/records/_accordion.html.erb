@@ -22,6 +22,21 @@
 			</li>
 		<%end%>
 	</div>
+
+	<% Contact::Field.all.collect { |cf| cf.name.to_sym }.each do |f| %>
+		<h3 id="service_head" class="service_head<%= " service_leaf" %>" >
+			<a href="#"><%=f.to_s%></a>
+		</h3>
+		<div id="service_body" class="service_body">
+			<% values = @all_filters.inject(Array.new) { |array, r| array << r[f] } %>
+			<% values.reject { |x| x == "" }.join(",").split(",").uniq.each do |v| %>
+				<li id="test" name="interests" ui-data="<%=v%>" >
+					<input name="checkbox" type="checkbox" value="<%=v%>" unchecked ><%=v%></input>
+				</li>
+			<%end%>
+		</div>
+	<%end%>
+
 </div>
 
 <script>

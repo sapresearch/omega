@@ -1,20 +1,17 @@
 class SearchFilter < Array
 
-def test
-require 'filter.rb'
+	def test
+		require 'filter.rb'
 
-s = Hash.new
-s[:column] = "skills,skills,interests"
-s[:query] = "Embroidery,cooking,else"
+		params = Hash.new
+		params[:search] = { :column => { :column => "skills,skills,interests", :query => "Embroidery,cooking,else" }}
 
-se = Hash.new
-se[:column] = s
-
-params = Hash.new
-params[:search] = se
-f = SearchFilter.filter_for(Contact, params, [ {:class => :skills, :column => :name, :type => :string }, {:class => :interests, :column => :name, :type => :string } ])
-
-end
+		options = [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ]
+		Contact::Field.all.each do |cf|
+			options << { :class => :self, :column => cf.name.to_sym, :type => cf.data_type.to_sym }
+		end
+		@filter = SearchFilter.filter_for(Contact, params, options)
+	end
 
 	attr_accessor :column_types
 	def initialize(model, options={})
@@ -41,18 +38,25 @@ end
 				included_model = h[:class]
 				col = h[:column]
 				@search_filter.each do |row|
-					other_model = model.find(row[:id]).send included_model.to_sym
-					values = other_model.each.collect { |x| x.send col.to_sym }
-					v = values.join(",")
-					row[included_model.to_sym] = v
+					if included_model == :self
+						value = model.find(row[:id]).send col
+						row[col] = value
+					else
+						other_model = model.find(row[:id]).send included_model.to_sym
+						values = other_model.each.collect { |x| x.send col.to_sym }
+						row[included_model.to_sym] = values.join(",")
+					end
 				end
 			end
 		end
+				#puts "this is search filter" + @search_filter.inspect.to_s
 			
 
 		if params[:search].nil?
+			puts "\n in search nil"
 			@search_filter
 		elsif !params[:search].nil?
+			puts "\n not in search nil"
 			params[:search].each do |key, values|
 				columns = values[:column].to_s.split(',')
 				uniq_columns = columns.uniq
@@ -72,7 +76,7 @@ end
 						end
 					end
 					@search_filter.keep_only(operator, needles, col)
-					p @search_filter.inspect.to_s
+					#p @search_filter.inspect.to_s
 				end
 			end
 		end
@@ -103,7 +107,8 @@ end
 	end
 
 	def each_column
-		column_names = @column_types.collect { |column, type| column }
+		column_names = self.at(0).collect { |k, v| k.to_sym } #@column_types.collect { |column, type| column }
+		puts "\n" + column_names.inspect.to_s
 		column_names.each do |name|
 			column_data = self.inject(Array.new) { |column, row| column.push(row[name]) }
 			yield(name, column_data)

@@ -205,11 +205,17 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
 	def enroll_volunteers
-		@all_filters = SearchFilter.filter_for(Contact, Hash.new, [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ] )
+		#@all_filters = SearchFilter.filter_for(Contact, Hash.new, [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ] )
 		# Use a blank hash so it doesn't filter anything. Use this for the checkbox filters.
 
-		@filter = SearchFilter.filter_for(Contact, params, [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ] )
+		options = [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ]
+		Contact::Field.all.each do |cf|
+			options << { :class => :self, :column => cf.name.to_sym, :type => cf.data_type.to_sym }
+		end
+		@all_filters = SearchFilter.filter_for(Contact, Hash.new, options)
+		@filter = SearchFilter.filter_for(Contact, params, options)
 		# Use this one to display all the contacts.
+		p "\n\nThis is search filter: " + @filter.inspect.to_s
 
 		@position = Volunteering::Position.find(params[:id])
 		@position_id = @position.id
