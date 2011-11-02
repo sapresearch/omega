@@ -4,7 +4,8 @@ class SearchFilter < Array
 		require 'filter.rb'
 
 		params = Hash.new
-		params[:search] = { :column => { :column => "skills,skills,interests", :query => "Embroidery,cooking,else" }}
+		#params[:search] = { :column => { :column => "skills,skills,interests", :query => "Embroidery,cooking,else" }}
+		params[:search] = { :column => { :column => "Cycle?", :query => "No" }}
 
 		options = [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ]
 		Contact::Field.all.each do |cf|
@@ -49,25 +50,23 @@ class SearchFilter < Array
 				end
 			end
 		end
-				#puts "this is search filter" + @search_filter.inspect.to_s
 			
 
 		if params[:search].nil?
-			puts "\n in search nil"
 			@search_filter
 		elsif !params[:search].nil?
-			puts "\n not in search nil"
 			params[:search].each do |key, values|
 				columns = values[:column].to_s.split(',')
-				uniq_columns = columns.uniq
+				columns.uniq!
 				queries = values[:query].to_s.split(',')
 				search = Hash.new
 				columns.count.times do |x|
 					search[queries.at(x).to_sym] = columns.at(x)
 				end
 				
-				uniq_columns.each do |col|
+				columns.each do |col|
 					operator = @search_filter.operator_for(col)
+					puts "\n This is operator: " + operator.to_s
 					needles = Array.new
 					search.each do |q, c|
 						if col == c 
@@ -75,8 +74,8 @@ class SearchFilter < Array
 							needles.push(q.to_s)
 						end
 					end
+					puts "\nThis is needles: " + needles.inspect.to_s
 					@search_filter.keep_only(operator, needles, col)
-					#p @search_filter.inspect.to_s
 				end
 			end
 		end
@@ -108,7 +107,6 @@ class SearchFilter < Array
 
 	def each_column
 		column_names = self.at(0).collect { |k, v| k.to_sym } #@column_types.collect { |column, type| column }
-		puts "\n" + column_names.inspect.to_s
 		column_names.each do |name|
 			column_data = self.inject(Array.new) { |column, row| column.push(row[name]) }
 			yield(name, column_data)
@@ -175,14 +173,6 @@ class SearchFilter < Array
 
 	def keep_only(operator, queries, column)
 		column = column.to_sym
-		type = self.column_types[column]
-		operator = :==
-		case type
-			when "string"
-				operator = :include?
-			else
-				operator = :>=
-		end
 		self.reject! do |r|
 			if r[column].nil?
 				true
@@ -196,16 +186,18 @@ class SearchFilter < Array
 		result = false 
 		needles.each do |needle|
 			result = result == true ? true : haystack.send(operator, needle)
+			puts result.to_s + " is the result for " + haystack.to_s + " " + operator.to_s + " " + needle.to_s
 		end
 		result
 	end
 
 	def operator_for(column)
 		column = column.to_sym
-		type = @column_types[column.to_sym].to_s
-		type = type.downcase
+		type = @column_types[column.to_sym].to_s.downcase
+		type = Contact::Field.find_by_name(column).data_type if type.blank?
+		puts "\n THis is type: " + type.to_s + "\n"
 		case type
-			when "string" || "text"
+			when "string", "text", "boolean"
 				return "include?"
 			when "integer"
 				return ">="
