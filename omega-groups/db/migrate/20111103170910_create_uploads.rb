@@ -6,7 +6,8 @@ class CreateUploads < ActiveRecord::Migration
       t.string :file_name
       t.integer :file_size
       t.string :file_type
-      
+
+      t.references :binding, :polymorphic => true      
       t.references :uploader
       t.timestamps
     end
