@@ -1,0 +1,78 @@
+#letter-list li {
+    float: left;
+
+}
+
+#letter-list li span {
+    -moz-border-radius: 2px 2px 2px 2px;
+    background: url("../images/om_button_bg.png") repeat-x scroll center bottom transparent;
+    border: 1px solid #BBBBBB;
+    color: #002A5C !important;
+    margin-right: 2px;
+    padding: 2px 6px 1px;
+    text-decoration: none !important;
+    text-shadow: 0 1px 0 #FFFFFF;
+    text-align: center;
+    display: block;
+}
+
+#letter-list  a {
+    color: #002A5C;
+}
+
+#member-list {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+#sidebar-search {
+    background: url("../images/search_blue.png");
+    display: block;
+    width: 218px;
+    height: 45px;
+    margin: 0 0 20px;
+}
+
+#sidebar-search input {
+    border: medium none;
+    color: #4196EE;
+    height: 13px;
+    margin: 17px 0 0 25px;
+}
+
+#user-list, #member-list {
+    margin: 10px;
+    height: 400px;
+
+}
+
+#sidebar-member-list {
+    height: 200px;
+}
+
+.filter-wrapper {
+    background: url("../images/filterBg.png") repeat scroll 0 0 transparent;
+    float: left;
+    height: 24px;
+    width: 148px;
+}
+
+.filter-wrapper input {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    float: left;
+    left: 4px;
+    padding: 0;
+    position: relative;
+    top: 4px;
+    width: 90px;
+}
+
+.filter-ctrl {
+    float: right;
+    position: relative;
+    right: 4px;
+    top: 4px;
+    width: 40px;
+}
+

@@ -1,0 +1,12 @@
+<%= side_bar_box(:Menu) do %>
+
+    <ul>
+      <li>
+        <%= om_button(:icon=>'clipboard-plus') do %>
+            <%= link_to 'Post a new topic', new_group_thread_path(@thread) , :remote=> true%>
+        <% end %>
+      </li>
+
+
+    </ul>
+<% end %>

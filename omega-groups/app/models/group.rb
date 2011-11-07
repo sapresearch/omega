@@ -1,26 +1,19 @@
 class Group < Omega::Model
-  require_dependency 'group/thread'
-
   PERM_ADMIN = 'groups_admin'
   PERM_VIEW  = 'groups_view'
-
-  MAX_GROUPS_PER_PAGE = 20
   
-  class << self
-    def for(user)
+  has_many :groups_members, :dependent=>:destroy
+  has_many :members, :class_name=>"Contact", :through => :groups_members
+  has_many :groups_roles, :dependent=>:destroy
+  has_many :roles, :through=>:groups_roles
+  has_many :groups_threads, :dependent=>:destroy
+  has_many :threads, :through=>:groups_threads
+  has_many :groups_uploads, :dependent=>:destroy
+  has_many :uploads, :through=>:groups_uploads
 
-    end
-  end
-
-  has_many :group_memberships
-  has_many :users, :through => :group_memberships
-  scope :named, lambda { |name| where('name like ? ', "%#{name}%") }
-
-  has_many :threads
-  has_many :posts, :through => :threads
-
-  has_many :group_uploads, :class_name => '::GroupUpload'
-#  has_many :uploads, :through => :group_uploads, :source => :upload
-
-  accepts_nested_attributes_for :group_uploads
+  scope :named, lambda { |name| where(:name=>name) }
+  scope :named_like, lambda { |name| where('name like ? ', "%#{name}%") }
 end
+
+
+

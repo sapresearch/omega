@@ -1,0 +1,8 @@
+        if( !$('#post-form').length > 0){
+             $('#posts-list').after().append('<%= escape_javascript(render(:partial => 'form.html')) %>');
+        }
+
+
+        $('#cancel-post').click(function(){
+           $('#post-form').remove();
+        });

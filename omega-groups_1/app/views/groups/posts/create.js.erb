@@ -1,0 +1,2 @@
+$('#post-form').remove();
+$('#threads-list').append('<%= escape_javascript(render :partial => 'post-record', :locals => { :p => @post }) %>').find('li:last').delay('1000').effect();

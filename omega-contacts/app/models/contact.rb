@@ -42,15 +42,20 @@ class Contact < Omega::Model
   has_and_belongs_to_many :skills,    :join_table => 'contact_contacts_skills'
   has_and_belongs_to_many :languages, :join_table => 'contact_contacts_languages'
 
-  has_many :group_positions, :dependent => :destroy
-  has_many :groups, :through => :group_positions
+  #has_many :group_positions, :dependent => :destroy  
+  #has_many :groups, :through => :group_positions
+  #has_many :uploads, :as => 'binding'
+  has_many :groups_members, :dependent=>:destroy
+  has_many :groups, :through=>:groups_members
+  has_many :uploads
+  has_many :threads
+  has_many :posts
 
   has_many :addresses,     :as => :contact, :dependent => :destroy
   has_many :phone_numbers, :as => :contact, :dependent => :destroy
 
   has_upload :photo
 
-  has_many :uploads, :as => 'binding'
   has_many :values
   accepts_nested_attributes_for :values
 

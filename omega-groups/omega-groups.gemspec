@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.description = 'Description.'
 
   s.author   = 'SAP AG'
-  s.email    = 'samuel.kadolph@sap.com'
+  s.email    = 'kexia.tang@sap.com'
   s.homepage = 'http://omegaportal.org'
 
   s.files        = Dir['CHANGELOG', 'README', 'LICENSE', '*/**/*']
