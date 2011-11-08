@@ -1,121 +1,74 @@
-
-
 <div id="navigation">
 
   <ul id="topnav">
-  	
-
     <li><%= link_to "home", root_url, :class =>'root_em' %></li>
-    <li>
-      <%= link_to "Volunteering", volunteering_positions_url %>
+    <li><%= link_to "Participate", root_url, :class =>'root_em' %>
       <div>
-        <%= link_to "All Volunteering Assignments", volunteering_positions_url %>
-        <%= with_permission(Volunteering::PERM_ADMIN) do %>
-            <%= link_to "Create an Assignment", new_volunteering_position_path %>
-        <% end %>
-        
-        <% unless Contact.for(current_user).nil? %>
-
-            <%= link_to "My Assignments", mine_volunteering_positions_path %>
-            <%#= link_to "Time Sheets", my_time_sheets_volunteering_positions_path %>
-
-        <%end%>
-        
-            <%= with_permission(Volunteering::PERM_ADMIN) do %>
-                <%= link_to "Manage Applications", volunteering_records_path %>
-            <%end%>
-			            
-		 <% unless Contact.for(current_user).nil? %>	            
-			<%= with_permission(Volunteering::PERM_APPLY) do %>
-
-            	<%= link_to "My Applications", my_applications_volunteering_records_path %>
-            <% end %>
-         <%end%>
-
-      </div>
-
+        <%= link_to "Our Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
+        <%= link_to "Volunteer", volunteering_positions_url %>
+        <%= link_to "Report My Time", my_time_sheets_volunteering_positions_path %>
+        <%= link_to "My Messages", messages_url %>       
+        <%= link_to "MyOmega", my_page_user_path(current_user) %>
+      </div> 
     </li>
-    
-    <!-- original
-    <li>
-      <%= link_to "Services", services_url %>
-      <div>       
-        <%#= link_to "All Offered Services", services_url %>      
-        <% if (!current_user.is_anonymous?) %>
-        <%= with_permission(Service::PERM_ADMIN) do %>
-            <%#= link_to "My Draft Services", show_drafts_services_url %>     
-            <%#= link_to "All Service Types", service_types_url %>
-            <%#= link_to "Create a Service ", coming_soon_services_url %>
-            <%#= link_to "Create a Service Type", service_wizard_service_types_url(:step => 'introduction')  %>
-        <% end %>
-        <%= with_permission(Service::PERM_APPLY) do %>
-            <% unless Contact.for(current_user).nil?%>
-            <%#= link_to "My Service Registrations", my_registrations_service_registrations_url %>
-            <%end%>
-        <% end %>
-        <%end%>
-      </div>
-    </li>
-    -->
-
-    <li>
-      <%= link_to "Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
-      <%= render "services/nested_menu" %>
-    </li>
-
-    <li><%= link_to "Favorites", favorites_path %></li>
-
-    <%= with_permission(Message::PERM_VIEW) do %>
-        <li>
-          <%= link_to "Messages", messages_url %>
-
-          <div>
-            <%= link_to 'inbox', messages_path %>
-            <%= link_to 'new', new_message_path %>
-            <%= link_to 'Sent', sent_messages_path %>
-          </div>
-        </li>
-    <% end %>
-
-		 <%= with_permission(User::PERM_ADMIN) do %>
-
-        <li> <%= link_to "Contacts", contacts_url %>
-          <div>
-            <%= link_to 'import contacts', csv_import_wizard_contact_imports_url(:step=> '1') %>
-            <%= link_to 'list of imports', contact_imports_url() %>
-
-          </div>
-        </li>
-		<%end%>
-		
 
     <li> <%= link_to "Calendar", calendars_url %></li>
-    <%= with_permission(User::PERM_ADMIN) do %>
-        <li> <%= link_to "Users", users_url %></li>
-    <% end %>
-	
-		 <%= with_permission(User::PERM_ADMIN) do %>
-          <li> <%= link_to "Edit Logo", edit_logo_images_url  %></li>
-        <!-- original
-        <li> <%#= link_to "Edit Logo", {} %></li>
-        -->
-    <% end %>
+    
+      <%#= Manage Volunteers appears if you have permission %>
+     
+     <%= with_permission(Volunteering::PERM_ADMIN) do %>
+     <li>
+        <%= link_to "Manage Volunteers", volunteering_positions_url %>
+        <div>
+          <%= link_to "Volunteering Status", volunteering_positions_url %>
+          <%= with_permission(Volunteering::PERM_ADMIN) do %>
+            <%= link_to "Create an Assignment", new_volunteering_position_path %>
+          <% end %>
+          <%= with_permission(Volunteering::PERM_ADMIN) do %>
+             <%= link_to "Manage Applicants", volunteering_records_path %>
+          <%end%> 
+          <%= link_to "Enter Volunteer Time", my_time_sheets_volunteering_positions_path %>
+         </div>
+       </li>
+       <% end %> 
+       <%#= End Manage Volunteers %>
+    
+     <%#= Services Menu is Rendered in the Service Module %>
+       <%= with_permission(Volunteering::PERM_ADMIN) do %>
+       <li>  
+         <%= link_to "Manage Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
+         <%= render "services/nested_menu" %>
+       </li>
+       <% end %> 
+     <%#= End Manage Services %>
 
-    <%= with_permission(User::PERM_ADMIN) do %>
-        <li> <%= link_to "Reports", reports_url %></li>
-    <% end %>
-        
-    <%= with_permission(User::PERM_VIEW) do %>
-        <li> <%= link_to "MyOmega", my_page_user_path(current_user) %></li>
-    <% end %>
-        
-    <%= with_permission(Setting::PERM_VIEW) do %>
-        <li> <%= link_to "Settings", settings_url %></li>
-    <% end %>
-        
-    <%#= with_permission(Group::PERM_VIEW) do %>
-        <li> <%#= link_to "Groups", groups_url %></li>
-    <%# end %>
+     <%#= People / Asset Management Menu Item %>
+     <%= with_permission(Volunteering::PERM_ADMIN) do %>
+      <li>
+        <%= link_to "Administer Team", contacts_url %>
+        <div>
+           <%= link_to "Assets Allocation", assets_url %>
+           <%= link_to "Groups", groups_url %>
+           <%= link_to "Reports", reports_url %>
+           <%= link_to "Contacts", contacts_url %>
+           <%= link_to "Import Contacts", csv_import_wizard_contact_imports_url(:step=> '1') %>
+           <%= link_to "List of imports", contact_imports_url() %>
+         </div>
+       </li>
+      <% end %>      
+      <%#= End People/Asset Management %>
+      
+	     
+      <%#= Administer the Site %>
+      <%= with_permission(Volunteering::PERM_ADMIN) do %>
+      <li> <%= link_to "Administer Site", settings_url %> 
+         <div>
+           <%= link_to "Permission \\ Role Matrix", roles_url %>
+           <%= link_to "Users", users_url %>
+           <%= link_to "Edit Logo", edit_logo_images_url  %>
+         </div>
+      </li>
+      <% end %>
     
   </ul>
 
