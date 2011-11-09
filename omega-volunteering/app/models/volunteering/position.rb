@@ -43,11 +43,11 @@ class Volunteering::Position < Omega::Model
 	def valid_dates
 		self.errors.clear
 		if !recurrent
-			s = self.start.to_s
-			e = self.end.to_s
+			s = self.start_time
+			e = self.end_time
       
 			if s >= e
-				self.errors.add :start, " #{start_time} has to be before end time #{end_time} "
+				self.errors.add :start_time, " The start time, #{start_time}, has to be before end time, #{end_time} "
 			end
 		elsif recurrent
 			if recurrence_start_time >= recurrence_end_time
@@ -118,6 +118,16 @@ class Volunteering::Position < Omega::Model
   def end_time=(value)
     self.end = "#{end_date} #{value}"
   end
+
+  def correct_end_date
+  	s = self.start
+  	e = self.end
+	s_mins = (s.hour * 60) + s.min
+	e_mins = (e.hour * 60) + e.min
+	difference_in_seconds = 60 * (e_mins - s_mins)
+	s + difference_in_seconds
+  end
+
 
 end
 

@@ -7,6 +7,7 @@ class Contact < Omega::Model
   require_dependency 'contact/phone_number'
   require_dependency 'contact/skill'
   require_dependency 'contact/user_observer'
+  require 'zipcodr'
 
   PERM_ADMIN     = 'contacts_admin'
   PERM_EDIT_SELF = 'contacts_edit_self'
@@ -15,13 +16,22 @@ class Contact < Omega::Model
 
   TITLES = %w{ Mr Miss Ms Mrs}
 
-  attr_accessible :first_name, :last_name
+  attr_accessible :first_name, :last_name, :email
 
   scope :status, where('status IS NULL')
   before_destroy { |contact| Contact::Value.destroy_all "contact_id = #{contact.id}" }
 
   class << self
-    def for(user) where('user_id = ?', user).first end
+    def for(user)
+	 	contact = where('user_id = ?', user).first
+ 		if contact.nil?
+			contact = Contact.new(:first_name => user.first_name, :last_name => user.last_name)
+			contact.email = user.email
+			user.contact = contact if contact.save
+			contact = user.contact
+		end
+		contact
+	 end
   end
 
   self.include_root_in_json = false
@@ -192,6 +202,16 @@ class Contact < Omega::Model
 		fields = Contact::Field.find(:all)
 		fields.select! { |f| f.volunteering_positions.include? position.at(0) } unless position.empty?
 		fields
+	end
+
+	def latitude
+		zip = self.zip_code
+		Zipcodr::find(zip).lat
+	end
+
+	def longitude
+		zip = self.zip_code
+		Zipcodr::find(zip).long
 	end
 
   private

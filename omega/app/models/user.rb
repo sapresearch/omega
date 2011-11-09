@@ -29,6 +29,7 @@ class User < Omega::Model
       end
     end
 
+	 # I don't think that this is being used anymore
     def register(attributes = nil, &block)
     #  if attributes
        # not_allowed = attributes.keys.reject { |key| REGISTRATION_FIELDS.include?(key.to_sym) }
@@ -38,6 +39,11 @@ class User < Omega::Model
       #end
       create(attributes, &block)
     end
+
+    def all_users_with_zip
+      self.all.select { |u| !u.zip.nil? }
+    end
+  
   end
 
   has_and_belongs_to_many :roles
@@ -58,7 +64,7 @@ class User < Omega::Model
   accepts_nested_attributes_for :contact
   accepts_flattened_values_for :skills, :value => :name
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password, :password_confirmation # Who put this here?
   attr_accessible :username, :email
 
   validates :username,   :presence => true,
@@ -104,7 +110,12 @@ class User < Omega::Model
   def permissions
     roles.collect(&:permissions).flatten.uniq
   end
-  
+
+  def zip
+	 zips = self.contact.nil? ? [] : self.contact.addresses.collect { |a| a.zip_code } # If no contact, return an empty array. Otherwise, return all zips.
+	 zips.empty? ? nil : zips.at(0) # Only return the first zip code found.
+  end
+
   private
     def create_salt
       self.password_salt = 128.times.inject('') { |salt,| salt << rand(93) + 33 }

@@ -12,7 +12,6 @@ class UsersController < Omega::Controller
   end
 
   def show
-    
     respond_with(@user)
   end
 
@@ -22,12 +21,9 @@ class UsersController < Omega::Controller
 
   def register
     @user = User.new
-    
     contact = @user.build_contact
-    
     contact.addresses.build
     contact.phone_numbers.build
-
     respond_with(@user)
   end
   
@@ -37,7 +33,28 @@ class UsersController < Omega::Controller
   end
 
   def join
-    @user = User.register(params[:user])
+    #@user = User.register(params[:user])
+	 a = params[:user][:contact_attributes].delete(:addresses_attributes)
+	 p = params[:user][:contact_attributes].delete(:phone_numbers_attributes)
+	 c = params[:user].delete(:contact_attributes)
+	 password = params[:user].delete(:password)
+	 confirm = params[:user].delete(:password_confirmation)
+	 @user = User.new(params[:user])
+	 @user.password = password
+	 @user.password_confirmation = confirm
+
+	 puts "\n\n This is user.contact: " + @user.contact.inspect.to_s
+	 @contact = @user.build_contact(c)
+	 @user.save
+	 puts "\n\n This is user.contact: " + @user.contact.inspect.to_s
+
+	 puts "\n\n This is contact.addresses: " + @contact.addresses.inspect.to_s
+	 @contact.addresses.build(a)
+	 @contact.phone_numbers.build(p)
+	 @contact.save
+	 puts "\n\n This is contact.addresses: " + @contact.addresses.inspect.to_s
+	 @user.save
+	 puts "\n\n This is contact.addresses: " + @contact.addresses.inspect.to_s
     respond_with(@user)
   end
 

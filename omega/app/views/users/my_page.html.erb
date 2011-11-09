@@ -83,16 +83,18 @@
 	</div>
 
 
-	<%= form_for @contact, :url => update_my_page_user_path(@user) do |c| %> 
-		<div id="skills_and_interests">
-			<%= render 'skills_and_interests', :c => c %>
-		</div><br />
-
-		<%= render 'personal_info', :c => c %>
-
-		<div id="contact_submit">
-			<p><%= c.submit :Update %></p>
-		</div>
+	<% if not @contact.nil? %>
+		<%= form_for @contact, :url => update_my_page_user_path(@user) do |c| %> 
+			<div id="skills_and_interests">
+				<%= render 'skills_and_interests', :c => c %>
+			</div><br />
+	
+			<%= render 'personal_info', :c => c %>
+	
+			<div id="contact_submit">
+				<p><%= c.submit :Update %></p>
+			</div>
+		<% end %>
 	<% end %>
 
 

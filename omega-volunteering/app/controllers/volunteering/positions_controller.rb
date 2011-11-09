@@ -1,5 +1,6 @@
 class Volunteering::PositionsController < Omega::Controller
   respond_to :html, :xml, :json, :js
+  require 'zipcodr'
 
   require_permission Volunteering::PERM_VIEW
   require_permission Volunteering::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
@@ -16,6 +17,14 @@ class Volunteering::PositionsController < Omega::Controller
 
   def index
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
+		@zips = []
+		@zips << Zipcodr::find('08648').zip
+		@zips << Zipcodr::find('08648').city
+		@zips << Zipcodr::find('08648').state
+		@zips << Zipcodr::find('08648').county
+		@zips << Zipcodr::find('08648').long
+		@zips << Zipcodr::find('08648').lat
+
     respond_with(@positions)
   end
   
@@ -53,6 +62,10 @@ class Volunteering::PositionsController < Omega::Controller
 
     @position = Volunteering::Position.new(params[:volunteering_position])
     if @position.save
+		puts "\n\n Correct end date: " + @position.correct_end_date.to_s
+		puts @position.end
+		@position.update_attributes(:end => @position.correct_end_date) if !@position.recurrent
+		puts @position.end
 		# Do this after position so that it is assigned an ID.
 		field_positions = @position.id.to_s if field_positions.to_i == 0
 		@field = Contact::Field.create(field)

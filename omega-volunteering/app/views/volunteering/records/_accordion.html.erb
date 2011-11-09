@@ -4,10 +4,12 @@
 		<a href="#">Skills</a>
 	</h3>
 	<div id="service_body" class="service_body">
-		<% @all_filters.skills.reject { |x| x == "" }.join(",").split(",").uniq.each do |v| %>
-			<li id="test" name="skills" ui-data="<%=v%>" >
-				<input name="checkbox" type="checkbox" value="<%=v%>" ><%=v%></input>
-			</li>
+		<% if @all_filters.respond_to? :skills %>
+			<% @all_filters.skills.reject { |x| x == "" }.join(",").split(",").uniq.each do |v| %>
+				<li id="test" name="skills" ui-data="<%=v%>" >
+					<input name="checkbox" type="checkbox" value="<%=v%>" ><%=v%></input>
+				</li>
+			<%end%>
 		<%end%>
 	</div>
 
@@ -15,11 +17,22 @@
 		<a href="#">Interests</a>
 	</h3>
 	<div id="service_body" class="service_body">
-		<% @all_filters.interests.reject { |x| x == "" }.join(",").split(",").uniq.each do |v| %>
-			<li id="test" name="interests" ui-data="<%=v%>" >
-				<input name="checkbox" type="checkbox" value="<%=v%>" unchecked ><%=v%></input>
-			</li>
+		<% if @all_filters.respond_to? :interests %>
+			<% @all_filters.interests.reject { |x| x == "" }.join(",").split(",").uniq.each do |v| %>
+				<li id="test" name="interests" ui-data="<%=v%>" >
+					<input name="checkbox" type="checkbox" value="<%=v%>" unchecked ><%=v%></input>
+				</li>
+			<%end%>
 		<%end%>
+	</div>
+
+	<h3 id="service_head" class="service_head<%= " service_leaf" %>" >
+		<a href="#">Location</a>
+	</h3>
+	<div id="service_body" class="service_body">
+		<%= label_tag 'Zip code' %>
+		<%= text_field_tag :zip %>
+		<a href='#', onClick='zip_search()'>Search</a>
 	</div>
 
 	<% Contact::Field.all.collect { |cf| cf.name.to_sym }.each do |f| %>
@@ -75,12 +88,19 @@
 			}
 			// So that you avoid sending a blank query to the controller.
 			else if (val != ""){
-  	  	var data = {search:{column:{column:cat, query:val}}}
+  	  			var data = {search:{column:{column:cat, query:val}}}
 			}
 
 			ajax_filter(data);
 		});
 	});
+
+		function zip_search(){
+			var zip = $( 'input#zip' ).attr( 'value' );
+			var data = {zip:zip}
+			alert(data);
+			ajax_filter(data);
+		}
 
 		function ajax_filter(data) {
 

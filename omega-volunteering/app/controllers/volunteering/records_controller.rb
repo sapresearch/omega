@@ -1,6 +1,10 @@
 require 'filter.rb'
 class Volunteering::RecordsController < Omega::Controller
   respond_to :html, :xml, :json, :js
+  require 'zipcodr'
+  require 'faster_haversine'
+  require 'gmapper'
+  require 'kamel'
   breadcrumb 'Volunteering' => :volunteering
   breadcrumb 'Volunteering Applications' => :volunteering_records
 
@@ -223,11 +227,31 @@ class Volunteering::RecordsController < Omega::Controller
 		@records = Array.new
 		@contacts = Contact.find(:all)
 		@contacts.each do |c|
-    	record = Volunteering::Record.new
+    		record = Volunteering::Record.new
 			record.position_id = @position_id
 			record.contact_id = c.id
 			@records.push(record)
 		end
+		@records << Volunteering::Record.new if @records.empty?
+
+		@zips = []
+		@zips << Zipcodr::find('08648').zip
+		@zips << Zipcodr::find('08648').city
+		@zips << Zipcodr::find('08648').state
+		@zips << Zipcodr::find('08648').county
+
+		@zip1 = []
+		@zip1 << Zipcodr::find('02138').lat
+		@zip1 << Zipcodr::find('02138').long
+
+		@zip2 = []
+		@zip2 << Zipcodr::find('02139').lat
+		@zip2 << Zipcodr::find('02139').long
+
+		@distance = FasterHaversine.distance(@zip1[1], @zip1[0], @zip2[1], @zip2[0])
+		@map = Google::Maps::Static::Map.new :center => [@zip1[0], @zip1[1]]
+		@map << Google::Maps::Static::Markers.new([@zip1[0], @zip1[1]], :color => :blue, :label => 'Admin')
+		@map << Google::Maps::Static::Markers.new([@zip2[0], @zip2[1]], :color => :green, :label => 'User')
 
 		respond_with(@skills_and_interests)
 	end
@@ -250,6 +274,32 @@ class Volunteering::RecordsController < Omega::Controller
 			end
 		end
 		redirect_to volunteering_positions_url
+	end
+
+	def zip_search
+		@zip1 = []
+		@zip1 << Zipcodr::find('08648').lat
+		@zip1 << Zipcodr::find('08648').long
+
+		@zip2 = []
+		@zip2 << Zipcodr::find('26506').lat
+		@zip2 << Zipcodr::find('26506').long
+
+		@map = Google::Maps::Static::Map.new :center => [@zip1[0], @zip1[1]]
+		Contact::Address.all.each do |a|
+			zip = a.zip_code
+			lat = Zipcodr::find(zip).lat
+			long = Zipcodr::find(zip).long
+			@map << Google::Maps::Static::Markers.new([lat, long], :color => :blue)
+		end
+
+		# For prototyping only.
+		@map << Google::Maps::Static::Markers.new([@zip1[0], @zip1[1]], :color => :blue, :label => 'Admin')
+		@map << Google::Maps::Static::Markers.new([@zip2[0], @zip2[1]], :color => :green, :label => 'User')
+
+		@zips = ['08648', '26506', '68521', '02139' ]
+		
+		@users = User.all_users_with_zip
 	end
 
 end
