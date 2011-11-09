@@ -8,7 +8,9 @@
         <%= link_to "Volunteer", volunteering_positions_url %>
         <%= link_to "Report My Time", my_time_sheets_volunteering_positions_path %>
         <%= link_to "My Messages", messages_url %>       
-        <%= link_to "MyOmega", my_page_user_path(current_user) %>
+        <% unless current_user.is_anonymous? %>
+		   	<%= link_to "MyOmega", my_page_user_path(current_user) %>
+		  <% end %>
       </div> 
     </li>
 
