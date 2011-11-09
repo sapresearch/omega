@@ -65,7 +65,7 @@ class User < Omega::Model
   accepts_flattened_values_for :skills, :value => :name
 
   attr_accessor :password, :password_confirmation # Who put this here?
-  attr_accessible :username, :email
+  attr_accessible :username, :email, :contact_attributes
 
   validates :username,   :presence => true,
                          :uniqueness => true,

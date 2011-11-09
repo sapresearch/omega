@@ -16,7 +16,7 @@ class Contact < Omega::Model
 
   TITLES = %w{ Mr Miss Ms Mrs}
 
-  attr_accessible :first_name, :last_name, :email
+  attr_accessible :first_name, :last_name, :email, :phone_numbers_attributes, :addresses_attributes
 
   scope :status, where('status IS NULL')
   before_destroy { |contact| Contact::Value.destroy_all "contact_id = #{contact.id}" }
