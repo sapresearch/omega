@@ -4,7 +4,6 @@ class Volunteering::RecordsController < Omega::Controller
   require 'zipcodr'
   require 'faster_haversine'
   require 'gmapper'
-  require 'kamel'
   breadcrumb 'Volunteering' => :volunteering
   breadcrumb 'Volunteering Applications' => :volunteering_records
 
