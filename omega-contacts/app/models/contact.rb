@@ -97,7 +97,7 @@ class Contact < Omega::Model
 	def update_subclass_attributes(params)
 		Contact::PhoneNumber.update_phone_numbers(params)
 		Contact::Address.update_addresses(params)
-	 end
+	end
 
   accepts_nested_attributes_for :uploads
 

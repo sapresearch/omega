@@ -210,7 +210,7 @@ class Volunteering::RecordsController < Omega::Controller
 	def enroll_volunteers
 		#@all_filters = SearchFilter.filter_for(Contact, Hash.new, [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ] )
 
-		options = [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ]
+		options = [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string }, { :class => :addresses, :column => :zip_code, :type => :integer } ]
 		Contact::Field.all.each do |cf|
 			column = cf.name.nil? ? "" : cf.name.to_sym
 			type = cf.data_type.nil? ? "" : cf.data_type.to_sym
@@ -218,8 +218,13 @@ class Volunteering::RecordsController < Omega::Controller
 		end
 		@all_filters = SearchFilter.filter_for(Contact, Hash.new, options) # Use a blank hash so it doesn't filter anything. Use this for the checkbox filters.
 		@filter = SearchFilter.filter_for(Contact, params, options) # Use this one to display all the contacts.
-		puts "\n\n These are the params " + params.inspect.to_s
-		puts "\n\n This is filter: " + @filter.inspect.to_s
+
+		@zip_filter = []
+		#params[:search][:column].each do |k, v|
+			#if v == "zip"
+			#end
+		#end
+			
 
 		@position = Volunteering::Position.find(params[:id])
 		@position_id = @position.id
@@ -251,7 +256,7 @@ class Volunteering::RecordsController < Omega::Controller
 		@map = Google::Maps::Static::Map.new :center => [@zip1[0], @zip1[1]]
 		@map << Google::Maps::Static::Markers.new([@zip1[0], @zip1[1]], :color => :blue, :label => 'Admin')
 		@map << Google::Maps::Static::Markers.new([@zip2[0], @zip2[1]], :color => :green, :label => 'User')
-
+		@params = params
 		respond_with(@skills_and_interests)
 	end
 

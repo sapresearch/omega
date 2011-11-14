@@ -5,11 +5,12 @@ class SearchFilter < Array
 
 		params = Hash.new
 		#params[:search] = { :column => { :column => "skills,skills,interests", :query => "Embroidery,cooking,else" }}
-		params[:search] = { :column => { :column => "Cycle?", :query => "No" }}
+		params[:search] = { :column => { :column => "addresses", :query => "26506" }}
 
-		options = [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ]
+		options = [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string }, { :class => :addresses, :column => :zip_code, :type => :integer } ]
 		Contact::Field.all.each do |cf|
-			options << { :class => :self, :column => cf.name.to_sym, :type => cf.data_type.to_sym }
+			type = cf.data_type.to_sym unless cf.data_type.nil?
+			options << { :class => :self, :column => cf.name.to_sym, :type => type }
 		end
 		@filter = SearchFilter.filter_for(Contact, params, options)
 	end
@@ -66,7 +67,7 @@ class SearchFilter < Array
 				
 				columns.each do |col|
 					operator = @search_filter.operator_for(col)
-					puts "\n This is operator: " + operator.to_s
+					puts "\nThis is operator: " + operator.to_s
 					needles = Array.new
 					search.each do |q, c|
 						if col == c 
@@ -75,7 +76,10 @@ class SearchFilter < Array
 						end
 					end
 					puts "\nThis is needles: " + needles.inspect.to_s
-					@search_filter.keep_only(operator, needles, col)
+					@search_filter.keep_only(operator, needles, col) unless operator == 'distance' # Because this is a zip.
+					if operator == 'distance'
+						@search_filter.keep_only_zip(needles)
+					end
 				end
 			end
 		end
@@ -173,6 +177,7 @@ class SearchFilter < Array
 
 	def keep_only(operator, queries, column)
 		column = column.to_sym
+		puts "\nIn keep_only method"
 		self.reject! do |r|
 			if r[column].nil?
 				true
@@ -182,6 +187,21 @@ class SearchFilter < Array
 		end
 	end
 
+	def keep_only_zip(zip_query)
+		zip_query = zip_query.at(0) if zip_query.is_a?(Array)
+		puts "\nIn only zip method"
+		self.reject! do |r|
+			if r[:addresses].nil? or r[:addresses] == ""
+				puts "addresses is nil"
+				true
+			elsif !r[:addresses].nil? and r[:addresses] != ""
+				puts "\n This should NOT be nil: " + r[:addresses].inspect.to_s
+				puts "\n Distance: " + Zip.distance(r[:addresses], zip_query).to_s
+				Zip.distance(r[:addresses], zip_query) < 100 ? false : true
+			end
+		end
+	end
+		
 	def recursive_or(haystack, operator, needles)
 		result = false 
 		needles.each do |needle|
@@ -194,16 +214,38 @@ class SearchFilter < Array
 	def operator_for(column)
 		column = column.to_sym
 		type = @column_types[column.to_sym].to_s.downcase
-		type = Contact::Field.find_by_name(column).data_type if type.blank?
-		puts "\n THis is type: " + type.to_s + "\n"
+		type = "addresses" if column.to_s == "addresses"
+		puts "\n\nThis is the column: " + column.to_s
+		if type.blank?
+			custom_field = Contact::Field.find_by_name(column)
+			type = custom_field.nil? ? 'unknown' : custom_field_type.data_type
+		end
+		puts "\n This is type: " + type.to_s + "\n"
 		case type
 			when "string", "text", "boolean"
 				return "include?"
 			when "integer"
 				return ">="
+			when "addresses"
+				return "distance"
 			else
 				return "unknown"
 		end
 	end
 
+end
+
+class Zip
+	require 'zipcodr'
+	require 'faster_haversine'
+
+	def self.distance(zip, query)
+		puts "Zip: " + zip.to_s
+		puts "query: " + query.to_s
+		lat1 = Zipcodr::find(zip).lat
+		long1 = Zipcodr::find(zip).long
+		lat2 = Zipcodr::find(query).lat
+		long2 = Zipcodr::find(query).long
+		FasterHaversine.distance(lat1, long1, lat2, long2)
+	end
 end

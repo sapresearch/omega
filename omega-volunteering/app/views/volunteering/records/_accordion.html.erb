@@ -30,9 +30,18 @@
 		<a href="#">Location</a>
 	</h3>
 	<div id="service_body" class="service_body">
-		<%= label_tag 'Zip code' %>
-		<%= text_field_tag :zip %>
-		<a href='#', onClick='zip_search()'>Search</a>
+		<div id="zip_search">
+			<%= label_tag 'Zip code' %>
+			<%= text_field_tag :zip %>
+			<a href="#" onClick='zip_search();' >Search</a>
+		</div>
+		<%# zips = User.all.collect { |u| u.zip }.compact.uniq %>
+		<%# zips.each do |z| %>
+			<!--<li id="test" name="addresses" ui-data="<%#= z %>" >
+				<input name="checkbox" type="checkbox" value="<%#= z %>"><%#= z %></input>
+			</li>
+		<%# end %>!-->
+		<!--<a href='#', onClick='zip_search()'>Search</a>!-->
 	</div>
 
 	<% Contact::Field.all.collect { |cf| cf.name.to_sym }.each do |f| %>
@@ -97,8 +106,7 @@
 
 		function zip_search(){
 			var zip = $( 'input#zip' ).attr( 'value' );
-			var data = {zip:zip}
-			alert(data);
+			var data = {search:{column:{column:"addresses", query:zip}}}
 			ajax_filter(data);
 		}
 

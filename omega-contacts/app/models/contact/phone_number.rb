@@ -9,7 +9,10 @@ class Contact::PhoneNumber < Omega::Model
 	def self.update_phone_numbers(params)
 		if not params[:phone_numbers_attributes].nil?
 			params[:phone_numbers_attributes].each_value do |phone|
-				self.find(phone[:id]).update_attributes(phone)
+				puts "\n\nThis is phone id: " + phone[:id].inspect.to_s
+				if not phone[:id].nil?
+					self.find(phone[:id]).update_attributes(phone)
+				end
 			end
 		end
 	end

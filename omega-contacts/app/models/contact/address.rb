@@ -11,7 +11,9 @@ class Contact::Address < Omega::Model
 	def self.update_addresses(params)
 		if not params[:addresses_attributes].nil?
 			params[:addresses_attributes].each_value do |address|
-				self.find(address[:id]).update_attributes(address)
+				if not address[:id].nil?
+					self.find(address[:id]).update_attributes(address)
+				end
 			end
 		end
 	end
