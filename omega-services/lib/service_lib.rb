@@ -1,10 +1,4 @@
 module ServiceLib
-  def current_contact
-    # app-spec
-    Contact.for(current_user)
-    # end app-spec
-  end
-  
   def my_services(services)
     ServiceRegistration.filter_services_by_registrant(services,current_contact)
   end

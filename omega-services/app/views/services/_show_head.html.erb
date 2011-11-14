@@ -3,7 +3,7 @@
               <% if service.is_leaf? && current_contact %>
 
                 <%# if service.capacity %>
-                  <span id="service_capacity_<%= service.id %>" class="service_capacity" >
+                  <span id="service_capacity_<%= service.id %>" class="capacity" >
                     <%= om_button(:plain => true, :icon => 'user') do %>
                       <%= service.accepted_registrants.count.to_s %><%= " / "+service.capacity.to_s if service.capacity%>
                     <% end %>
@@ -12,7 +12,7 @@
                 
                 <% service_registration = ServiceRegistration.find_by_registrant_id_and_service_leaf_id(current_contact.id, service.service_leaf.id) %>
                 <% if service_registration %>
-                  <span id="service_registration_status_<%= service.id %>" class="service_registration_status" ><%= service_registration.status %></span>
+                  <span id="service_registration_status_<%= service.id %>" class="request_status" ><%= service_registration.status %></span>
                 <% end %>
 
               <% end %>

@@ -50,14 +50,6 @@
 
 .services_page_content span.om-contact-icon-button a{ color:navy; } /* app-spec */
 
-.services_search_box{
-    width:100%;
-    height: 30px;
-    padding: 0px 0px 10px 0px;
-}
-#search_text{
-    font-size:12px;
-}
 .filter{
     display: inline-block;
     margin-left:5px;
@@ -72,19 +64,6 @@
 }
 .filter label{margin:0px 0px 0px 5px;}
 
-.services_bread_crumb{
-    padding-top:10px;
-}
-.services_list{
-    padding-bottom:10px;
-    /* max-height:470px;
-    overflow: auto; */    /* page length limit */
-}
-
-.service_head .service_registration_status{float:right; margin:0px 10px 0px 0px; font-weight:bold; font-style:italic;}
-.service_head .service_capacity{float:right; margin:0px 10px 0px 0px;}
-.service_head .service_capacity span{font-weight:bold; font-style:italic;}
-.service_body{ border:1px solid #ccc; }
 .service_body .label{display:inline-block; min-width:100px;}
 .service_body .item{ margin:15px; padding:5px; background-color:#eee; }
 .service_body .item_title{ font-style:italic; color:#555; }
@@ -99,11 +78,11 @@
     padding:10px 10px;
     margin-bottom:5px;
 }
+
 .services_operation_links a{
     font-size: 15px;
 }
 
-.bread_crumb a{ font-style:italic; color:navy }
 .service_registration_status{ float:left; }
 #service-registration-new-dialog-form .select_registrant{margin-left:50px}
 

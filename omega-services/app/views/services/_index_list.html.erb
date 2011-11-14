@@ -15,7 +15,7 @@
         <% services.each do |s| %>
           <% if(is_admin? || s.is_public?) %>
 
-            <h3 id="service_head_<%= s.id %>" class="service_head<%= s.is_leaf? ? " service_leaf" : " service_branch" %>"
+            <h3 id="service_head_<%= s.id %>" class="accordion_head service_head<%= s.is_leaf? ? " service_leaf" : " service_branch" %>"
                 ondblclick="if($(this).hasClass('service_branch')) 
                               $.ajax({
                                   url: '<%= services_url(:super_service_id=>s.id) %>'
@@ -23,7 +23,7 @@
               <%= render "services/show_head", :service=>s %>
             </h3>
 
-            <div id="service_body_<%= s.id %>" class="service_body" >
+            <div id="service_body_<%= s.id %>" class="accordion_body service_body" >
               <%= render "services/show_body", :service=>s %>
             </div>
         

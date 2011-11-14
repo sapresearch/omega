@@ -3,7 +3,9 @@ class CreateGroups < ActiveRecord::Migration
     create_table :groups do |t|     
       t.string     :name
       t.text       :description
-      t.string     :group_type
+      t.string     :status,     :default=>"private"
+      t.integer    :capacity
+      t.boolean    :is_blocked, :default=>false
 
       t.references :super_group
       t.timestamps

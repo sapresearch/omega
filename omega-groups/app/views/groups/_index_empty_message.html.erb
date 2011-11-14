@@ -1,0 +1,9 @@
+<p class="explanation">
+  No group is found<%= " in "+@super_group.name if @super_group %> at the moment based on the filter settings.
+  <% if is_admin? %>
+    <br/><br/>
+    <%= om_button(:contact => true, :icon => 'clock') do %>
+      <%= link_to 'Create a New Group'+(@super_group ? ' in '+@super_group.name : ''), new_group_url %>
+    <% end %>
+  <% end %>
+</p>

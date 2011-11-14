@@ -60,6 +60,10 @@ class User < Omega::Model
   has_many :favorites
   has_many :favorite_items, :through => :favorites, :source => :item
   has_one :setting
+
+  # association with groups
+  has_many :groups_requesters, :dependent=>:destroy, :foreign_key=>"requester_id"
+  has_many :requested_groups, :through=>:groups_requesters, :class_name=>"Group"
   
   accepts_nested_attributes_for :contact
   accepts_flattened_values_for :skills, :value => :name

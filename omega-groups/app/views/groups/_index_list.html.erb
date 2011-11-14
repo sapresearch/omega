@@ -1,0 +1,42 @@
+<% group ||= @group %>
+<% groups ||= (@groups || []) %>
+
+<% if groups.empty? || (!Group.open? && !is_admin?) %>
+  <%= render "groups/index_empty_message" %>
+<% else %>
+  <div id="groups_accordion">
+    <% groups.each do |group| %>
+      <% if(is_admin? || g.is_public?) %>
+        <div id="group_unit_<%= group.id %>" class="group_unit">
+          <h3 id="group_head_<%= group.id %>" class="accordion_head group_head<%= group.is_end? ? " group_end" : " group_branch" %>"
+              ondblclick="if($(this).hasClass('group_branch'))
+                          $.ajax({
+                              url: '<%= groups_url(:super_group_id=>group.id) %>'
+                          })" >
+            <%= render "groups/show_head", :group=>group %>
+          </h3>
+
+          <div id="group_body_<%= group.id %>" class="accordion_body group_body" >
+            <%= render "groups/show_body", :group=>group %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <script type="text/javascript">
+    var index = false;
+    <% if group %>
+      index = <%= groups.index(group) %>
+    <% end %>
+
+    $( "#groups_accordion" ).accordion({
+         active: index,
+         header: ">div>h3",
+         autoHeight: false,
+         clearStyle: true,
+         navigation: false,
+         collapsible: true
+    });
+  </script>
+<% end %>
