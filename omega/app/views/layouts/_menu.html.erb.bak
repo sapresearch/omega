@@ -8,9 +8,7 @@
         <%= link_to "Volunteer", volunteering_positions_url %>
         <%= link_to "Report My Time", my_time_sheets_volunteering_positions_path %>
         <%= link_to "My Messages", messages_url %>       
-        <% unless current_user.is_anonymous? %>
-		   	<%= link_to "MyOmega", my_page_user_path(current_user) %>
-		  <% end %>
+        <%#= link_to "MyOmega", my_page_user_path(current_user) %>
       </div> 
     </li>
 
@@ -38,13 +36,9 @@
      <%#= Services Menu is Rendered in the Service Module %>
        <%= with_permission(Volunteering::PERM_ADMIN) do %>
        <li>  
- 	        <%= link_to "Manage Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
-            <%= render "services/nested_menu" %>
+         <%= link_to "Manage Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
+         <%= render "services/nested_menu" %>
        </li>
-	   
-	   <li>
-
-	   </li>
        <% end %> 
      <%#= End Manage Services %>
 
@@ -53,6 +47,7 @@
       <li>
         <%= link_to "Administer Team", contacts_url %>
         <div>
+           <%= link_to "Assets Allocation", assets_url %>
            <%= link_to "Groups", groups_url %>
            <%= link_to "Reports", reports_url %>
            <%= link_to "Contacts", contacts_url %>
