@@ -443,3 +443,46 @@ h3#service_head a{
 	font-weight: bold;
 	font-family: arial;
 }
+
+div.contact_phone_number label{
+	margin-left: 15px;
+}
+
+div.contact_phone_number #volunteering_record_contact_email{
+	margin-left: 65px;
+}
+
+div#or {
+	background: #B8CE6C;
+	color: white;
+	text-shadow: 1px 1px 1px #666;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	width: 45px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+
+}
+
+td#or {
+	vertical-align: middle;
+}
+
+p#new_volunteering_record_email {
+	margin-left: 70px;
+}
+
+td#new_volunteering_record_phone {
+	min-width: 400px;
+}
+
+h3#new_volunteering_record_contact {
+	width: 200px;
+	margin:auto;
+}
+
+div.contact_phone_number select {
+	width: 280px;
+}
