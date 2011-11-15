@@ -44,12 +44,14 @@ class Volunteering::PositionsController < Omega::Controller
 
   def edit
     @position = Volunteering::Position.find(params[:id])
+	 @fields = Contact::Field.all
     fix_model_to_view
     respond_with(@position)
   end
 
   def new
     @position = Volunteering::Position.new
+	 @fields = Contact::Field.all
     fix_model_to_view
     respond_with(@position)
   end
@@ -62,10 +64,7 @@ class Volunteering::PositionsController < Omega::Controller
 
     @position = Volunteering::Position.new(params[:volunteering_position])
     if @position.save
-		puts "\n\n Correct end date: " + @position.correct_end_date.to_s
-		puts @position.end
 		@position.update_attributes(:end => @position.correct_end_date) if !@position.recurrent
-		puts @position.end
 		# Do this after position so that it is assigned an ID.
 		field_positions = @position.id.to_s if field_positions.to_i == 0
 		@field = Contact::Field.create(field)
@@ -86,6 +85,14 @@ class Volunteering::PositionsController < Omega::Controller
 	 field_positions = @position.id.to_s if field_positions.to_i == 0
 	 @field = Contact::Field.create(field)
 	 @field.update_positions(field_positions)
+
+	 # Replace contact_fields with the updated fields or a blank array if no fields were checked.
+	 field_ids = params[:volunteering_position].delete(:contact_fields)
+	 fields = Array.new
+	 if not field_ids.nil?
+	 	field_ids.each { |key, id| fields << Contact::Field.find(id) }
+	 end
+	 @position.contact_fields = fields
 
     @position.update_attributes(params[:volunteering_position])
     fix_model_to_view

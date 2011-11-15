@@ -123,9 +123,12 @@
 
 
       <h3 class="application-form">Custom Field</h3>
-			<%= f.fields_for :contact_field, @new_field do |n| %>
-				<%= render 'contacts/fields/new_field', :n => n %>
-			<%end%>
+			<%= f.fields_for :contact_fields, @fields do |cf| %>
+				<% @fields.each_with_index do |cc, index| %>
+					<p><%= check_box_tag "volunteering_position[contact_fields[#{index}]]", cc.id, @position.contact_fields.include?(cc) %> <%= cc.name.to_s %></p>
+				<% end %>
+			<% end %>
+				
 
 
 
