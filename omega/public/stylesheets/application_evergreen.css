@@ -102,6 +102,19 @@ h1.page-content {
 	line-height: 25px
 }  
 
+h2.page-content {
+ 	font-family:"Trebuchet MS", Arial Black ,Geneva, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #36361B;
+	font-size: 24px;
+	height: 24px;
+	padding: 30px 40px 20px 30px;
+}  
+
+img.page-content {
+	padding-left:30; 
+}
+
 
 h1.service_wizard {
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
