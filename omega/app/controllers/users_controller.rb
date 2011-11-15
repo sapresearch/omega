@@ -145,7 +145,7 @@ class UsersController < Omega::Controller
 				@contact.skills.inject(false) { |result, contacts_skills| result = result == true ? result : s.name == contacts_skills.name }
 			end
 			@other_interests = Contact::Interest.find(:all).reject do |s|
-				@contact.interests.inject(false) { |result, contacts_interests| result = result == true ? result : s.name == contacts_interests.name } 
+				@contact.interests.inject(false) { |result, contacts_interests| result = result == true ? result : s.name == contacts_interests.name }
 			end
 		end
 
@@ -187,7 +187,6 @@ class UsersController < Omega::Controller
 	end
 
 	def update_my_page
-		puts "\n\nUsersController. This is params first received: " + params.inspect.to_s
 		contact = Contact.for(params[:id])
 
 		skills = params[:contact][:skill_ids].gsub(/[\[\]]/, "").split(',').uniq # Use gsub and split to format the ids as an array, rather than a string.
@@ -200,7 +199,6 @@ class UsersController < Omega::Controller
 
 		params[:contact].delete(:skill_ids)
 		params[:contact].delete(:interest_ids)
-		puts "\n\nThis is params about to be updated: " + params.inspect.to_s
 		contact.update_contact_attributes(params[:contact])
 		contact.save
 
