@@ -43,8 +43,12 @@
 					<tr class="accounts" >
 	         			<td class="accounts"> <%= link_to(position.name, volunteering_position_path(position), :'data-tooltip' => 'Click to see this volunteering event')%></td>
 	         			<td class="accounts"> <%= link_to(position.start_date, volunteering_position_path(position)) %></td>
-	         			<td class="accounts"> Status: <i><%= element[:record] %></i></td>
-	         			<td class="accounts"> <%= link_to('Record Hours', all_timesheets_volunteering_time_entries_url(:id => position, :'data-tooltip' => 'Log hours for this position')) %></td>
+	         			<td class="accounts">
+								Status: <i><%= element[:record] %></i>
+								<% if element[:record] == "Accepted" %>
+	         					<br /><%= link_to('Record Hours', all_timesheets_volunteering_time_entries_url(:id => position, :'data-tooltip' => 'Log hours for this position')) %>
+								<% end %>
+							</td>
 	         			<td class="accounts"> 
 								<form onsubmit="fb_message()">
 									<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
