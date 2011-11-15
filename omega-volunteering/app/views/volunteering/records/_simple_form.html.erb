@@ -56,21 +56,24 @@
 
 
 
-		   <h3 class="application-form">CUSTOM INFORMATION </h3> 
-				<% @contact.custom_fields(@record.position).each do |cf| %>
-					<p>
-						<%= c.label (cf.name.to_sym) %>
-						<% if cf.data_type.to_s == 'boolean' %>
-							<%= c.send(cf.input_field, cf.name_as_sym, "Yes") %> Yes
-							<%= c.send(cf.input_field, cf.name_as_sym, "No") %> No
-						<% else %>
-							<%= c.send(cf.input_field, cf.name_as_sym) %>
-						<% end %>
-						<p class='custom_description'>
-							<%= cf.description %>
+			<% custom_fields = @contact.custom_fields(@record.position) %>
+			<% unless custom_fields.empty? %>
+			   <h3 class="application-form">CUSTOM INFORMATION </h3> 
+					<% custom_fields.each do |cf| %>
+						<p>
+							<%= c.label (cf.name.to_sym) %>
+							<% if cf.data_type.to_s == 'boolean' %>
+								<%= c.send(cf.input_field, cf.name_as_sym, "Yes") %> Yes
+								<%= c.send(cf.input_field, cf.name_as_sym, "No") %> No
+							<% else %>
+								<%= c.send(cf.input_field, cf.name_as_sym) %>
+							<% end %>
+							<p class='custom_description'>
+								<%= cf.description %>
+							</p>
 						</p>
-					</p>
-					<br />
+						<br />
+					<% end %>
 				<% end %>
 
 
