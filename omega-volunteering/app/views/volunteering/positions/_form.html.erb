@@ -92,12 +92,11 @@
             <td>
               
               <span id="add-contacts">
-               <span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add contact"></span>
+                <span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add contact"></span>
                 Add an existing contact
-                  </span>
+              </span>
 
               <ul id="assigned_contacts" style="margin-left:-120%">
-
                 <% @position.contacts.each do |c| %>
                     <li ui-data="<%= c.id %>">
                       <span class="om-icon-only om-blue-icon ui-icon-minus" data-tooltip="Remove this contact"></span>
@@ -105,6 +104,7 @@
                     </li>
                 <% end unless @position.contacts.empty? %>
               </ul>
+
             </td>
           </tr>
         </table>
