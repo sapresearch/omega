@@ -1,0 +1,10 @@
+$("#group_unit_<%= @group.id %>").hide('slow', function(){
+  $(this).remove();
+  <% if @groups.empty? %>
+   $(".groups_list").html("<%= escape_javascript( render "index_empty_message") %>")
+  <% end %>
+})
+
+$(".tipsy").remove();
+
+

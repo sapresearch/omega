@@ -1,4 +1,4 @@
-<% @contact.groups.each do |g| %>
+<% @contact.joined_groups.each do |g| %>
     <li>
       <%= link_to remove_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true do %>
           <span data-tooltip="remove <%= "#{@contact.first_name} #{@contact.last_name}"  %>  from: <%= g.group_name.truncate(40) %>">

@@ -9,18 +9,17 @@
         <% group_request = GroupsRequester.find_by_group_id_and_requester_id(group.id, current_user.id) %>
         <% unless group_request.nil? %>
 
-          <% unless group_request.status=="rejected" %>
-            <%= om_button(:contact => true, :icon=>'user-remove') do %>
-              <%= link_to_function "Quit", "", "data-tooltip"=>"Quit this group" %>
-            <% end %>
+        <% unless group_request.status=="rejected" %>
+          <%= om_button(:contact => true, :icon=>'user-remove') do %>
+            <%= link_to_function "Quit", "", "data-tooltip"=>"Quit this group" %>
           <% end %>
-          <span class="group_request_status" ><strong>status:</strong> <%= group_request.status %></span>
+        <% end %>
 
         <% else %>
           <% if !group.is_blocked? %>
             <%= om_button(:contact => true, :icon=>'user-add') do %>
               <%= link_to_function "Join",
-                "",
+                "new_group_request('#{escape_javascript(render "groups_requesters/dialog_new_confirm", :group=>group)}')",
                 "data-tooltip"=>"Join this group" %>
             <% end %>
           <% end %>
@@ -28,7 +27,7 @@
       <% end %>
 
       <%= om_button(:contact => true, :icon=>'search') do %>
-        <%= link_to "View Sub-Groups", groups_url(:super_group_id=>group.id), :remote=>true, "data-tooltip"=>"View sub-groups in this group" %>
+        <%= link_to "Sub-Groups", groups_url(:super_group_id=>group.id), :remote=>true, "data-tooltip"=>"View sub-groups in this group" %>
       <% end %>
     </p>
   </div>
@@ -62,11 +61,11 @@
         <% end %>
 
         <%= om_button(:contact => true, :icon=>'edit') do %>
-          <%= link_to "Edit", edit_group_url(group), "data-tooltip"=>"Edit this group" %>
+          <%= link_to_function "Edit", "edit_group('#{escape_javascript(render "groups/dialog_edit_form", :group=>group)}')", "data-tooltip"=>"Edit this group" %>
         <% end %>
 
         <%= om_button(:contact => true, :icon=>'delete-icon') do %>
-          <%= link_to_function "Delete", "destroy_group('#{group_url(group)}')", "data-tooltip"=>"Delete this group" %>
+          <%= link_to_function "Delete", "destroy_group('#{escape_javascript(render "groups/dialog_destroy_confirm", :group=>group)}','#{group_url(group)}')", "data-tooltip"=>"Delete this group" %>
         <% end %>
 
       <% end %>

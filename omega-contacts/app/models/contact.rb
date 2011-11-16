@@ -46,7 +46,7 @@ class Contact < Omega::Model
   #has_many :groups, :through => :group_positions
   #has_many :uploads, :as => 'binding'
   has_many :groups_members, :dependent=>:destroy, :foreign_key=>"member_id"
-  has_many :joined_groups, :through=>:groups_members, :class_name=>"Group"
+  has_many :joined_groups, :through=>:groups_members, :source=>:group
   has_many :uploads, :foreign_key=>"uploader_id"
   has_many :threads
   has_many :posts

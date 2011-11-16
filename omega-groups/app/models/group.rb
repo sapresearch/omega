@@ -3,13 +3,14 @@ class Group < Omega::Model
   PERM_VIEW  = 'groups_view'
 
   ROOT_SUPER_GROUP_ID = "root"
+  NAME_MAX_LENGTH = 100
 
   belongs_to :super_group, :class_name => "Group"
   has_many :sub_groups, :class_name => "Group", :foreign_key => "super_group_id", :dependent => :destroy, :order => "name"
   has_many :groups_members, :dependent=>:destroy
-  has_many :members, :class_name=>"Contact", :through => :groups_members
+  has_many :members, :through => :groups_members
   has_many :groups_requesters, :dependent=>:destroy
-  has_many :requesters, :class_name=>"User", :through => :groups_requesters
+  has_many :requesters, :through => :groups_requesters
   has_many :groups_roles, :dependent=>:destroy
   has_many :roles, :through=>:groups_roles
   has_many :groups_threads, :dependent=>:destroy
@@ -112,6 +113,12 @@ class Group < Omega::Model
 
   def unblock
     update_attribute(:is_blocked, false)
+  end
+
+  def eligible_for_requester(requester)
+    return true if is_root?
+    super_group_member = GroupsMember.find_by_group_id_and_member_id(super_group.id, requester.contact.id)
+    not super_group_member.nil?
   end
 
 end

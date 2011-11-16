@@ -3,6 +3,10 @@
 <% require_javascript 'util.js' %>
 <% require_javascript 'ui_util.js'%>
 <% require_javascript 'group/index.js'%>
+<% require_javascript 'group/new.js'%>
+<% require_javascript 'group/edit.js'%>
+<% require_javascript 'group/destroy.js'%>
+<% require_javascript 'groups_requester/new.js'%>
 
 <div class="content circle-corners-bottom" >
   <div class="heading-main">
@@ -15,4 +19,9 @@
     <%= render "index_page_content" %>
   </div>
 </div>
+
+
+<%= render "groups_requesters/dialog_create_blocked_message" %>
+<%= render "groups_requesters/dialog_create_failed_message" %>
+<%= render "groups_requesters/dialog_created_message" %>
 

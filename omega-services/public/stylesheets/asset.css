@@ -4,8 +4,3 @@
 .assets_list .asset_head.ui-state-hover{background:#4096EE;}
 .assets_list .asset_head.ui-state-focus{background:#4096EE; border:1px solid transparent;}
 .assets_list .asset_head.ui-state-active{background:#4096EE; border:1px solid transparent;}
-
-
-/* dialog style */
-.dialog .field{margin:5px 0px;}
-.dialog label{display: inline-block; margin-left:20px; width: 100px; text-align: right;}

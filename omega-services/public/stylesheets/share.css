@@ -36,6 +36,22 @@
 
 .accordion_body{ border:1px solid #ccc; }
 .accordion_body .operation_links a{ color:navy; }
+.accordion_body .request_status{float:left;}
+
+
+/* dialog style */
+.ui-dialog{}
+.dialog .field{margin:5px 0px;}
+.dialog label{
+    display: inline-block;
+    margin-left:20px;
+    width: 150px;
+    text-align: right;
+    font-size:13px;
+}
+.dialog select{
+    height:25px;
+}
 /** end of app-spec */
 
 input:focus,input:hover,

@@ -6,13 +6,13 @@
 <% else %>
   <div id="groups_accordion">
     <% groups.each do |group| %>
-      <% if(is_admin? || g.is_public?) %>
+      <% if(is_admin? || group.is_public?) %>
         <div id="group_unit_<%= group.id %>" class="group_unit">
           <h3 id="group_head_<%= group.id %>" class="accordion_head group_head<%= group.is_end? ? " group_end" : " group_branch" %>"
-              ondblclick="if($(this).hasClass('group_branch'))
-                          $.ajax({
-                              url: '<%= groups_url(:super_group_id=>group.id) %>'
-                          })" >
+              ondblclick="$.ajax({
+                              url: '<%= groups_url(:super_group_id=>group.id) %>',
+                              dataType:'script'
+                            })" >
             <%= render "groups/show_head", :group=>group %>
           </h3>
 
