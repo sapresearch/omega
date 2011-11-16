@@ -16,7 +16,7 @@ table, tbody, tfoot, thead, tr, th, td {
 
 
 body {
-	background: url("../images/om_sprite_evergreen.png") repeat-x #FFFFFF;
+	background: url("../images/new_header_sprite.jpg") repeat-x #FFFFFF;
 }
 
 body > #wrapper {
@@ -87,9 +87,21 @@ h1, .h1 {
     font-family: "Century Gothic";
 }
 
+div#banner-right h1{  /* The right side of the header */
+    font-family: Benton, Arial;
+	font-weight: normal;
+	float:right;
+	font-size:32px;
+	color: #FFFFFF;
+	padding-right: 90px;
+	padding-top: 30;
+	text-shadow: 2px 2px 2px #000;
+
+}
+
 h1.page-content {
    /* background: url("../images/bg_light.png") repeat-x bottom #F7F3F7;*/
-   /* background: url("../images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #F3F1E9;*/
+   /* background: url("../images/h1_page_content_bg_evergreen_1.png") repeat-x bottom #F3F1E9; */
 	font-family:"Trebuchet MS", Arial Black ,Geneva, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	color: #36361B;
@@ -729,7 +741,6 @@ tr.odd {
 
 #banner-right {
 	position: relative;
-	background: url("../images/top-banner-right.png") no-repeat right;
 	width: 100%;
 	height: 180px;
 	top:-180px;
@@ -1053,8 +1064,7 @@ div.sidebar-menu {
 }
 
 h1.side-bar {
-      margin: 20px 15px 0 15px;
-	/*background: url("../images/h1_sidebar_bg_evergreen.png") repeat-x bottom #D6D7C6;*/
+    margin: 20px 15px 0 15px;
     background: #E1DFCB;
     text-shadow: #E3E3D7 1px 1px 1px;
 	line-height: 20px;
@@ -1233,8 +1243,8 @@ li.list-item {
     list-style: none;
     position: relative;
     font-size: 1em;
-    /*background: url("../images/bg_menu .png") repeat-x;*/
-    background: url("../images/bg_menu_evergreen.png") repeat-x;  /* Evergreen */
+    /* background: url("../images/bg_menu .png") repeat-x;*/
+    background: url("../images/bg_menu_evergreen.png") repeat-x;  /* This controls the nav bar background color */
    
 }
 
@@ -1284,7 +1294,7 @@ li.list-item {
 /*--Since we declared a link style on the parent list link, we will correct it back to its original state--*/
 #topnav li div a:hover {
     /*background: url("../images/bg_menu .png") repeat-x;*/
-	background: url("../images/bg_menu_evergreen.png") repeat-x;  /* Evergreen */
+	/* background: url("../images/bg_menu_evergreen.png") repeat-x; Evergreen */
 	color: #222;
     text-decoration: none;
 }
