@@ -34,11 +34,11 @@ $(function() {
     });
     $('#create_new_contact').change(function() {
         if ($(this).is(':checked')) {
-            $('#position_exisiting_contact').hide();
+            $('#position_existing_contact').hide();
             $('#new_contact').show();
         } else {
             $('#new_contact').hide();
-            $('#position_exisiting_contact').show();
+            $('#position_existing_contact').show();
         }
 
     });
@@ -58,7 +58,7 @@ $(function() {
     var v = $scheduler.find('input:radio:checked').val();
 
     if ($('#contact_assignment_existing').is(':checked')) {
-        $('#position_exisiting_contact').show();
+        $('#position_existing_contact').show();
 
 
     } else if ($('#contact_assignment_new').is(':checked')) {
@@ -82,7 +82,7 @@ $(function() {
         if (v == "new") {
             $vp_contact.find('#position_new_contact').show();
         } else if (v == "existing") {
-            $vp_contact.find('#position_exisiting_contact').show();
+            $vp_contact.find('#position_existing_contact').show();
         }
 
     });
