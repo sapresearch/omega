@@ -1,7 +1,6 @@
 <% require_stylesheet 'omega_volunteering', 'omega_volunteering_left' %>
 <%# require_javascript 'omega_volunteering' %>
-
-    <div class="content circle-corners-bottom-left" style="min-height:<%= @positions.count * 400 %>;">
+    <div class="content circle-corners-bottom-left" style="min-height:<%= (@positions.count % Volunteering::Position::MAX_POSITIONS_PER_PAGE) * 395 %>;">
 
 		<div class="heading-main-columns">
 			<h1 class="page-content">
@@ -110,6 +109,9 @@
 	<% end %>
 	</ul>
 
-	<%= will_paginate @positions %>
+	<!--<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />-->
+	<div id="volunteering_positions_pagination">
+		<%= will_paginate @positions %>
+	</div>
 	<div class="clear"></div>
 </div>

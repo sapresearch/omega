@@ -486,3 +486,6 @@ h3#new_volunteering_record_contact {
 div.contact_phone_number select {
 	width: 280px;
 }
+div#volunteering_positions_pagination {
+	margin-top: 200px;
+}

@@ -33,8 +33,8 @@
 						<tr>
 							<td>
 								<div id='droppable_skills'>
-								<%= tag_table_for(@contact.skills) { |i| "<td><div class='draggable' id='own' ui-data='#{i.id}'>" + i.name + "</div></td>" } %>
-								<%= c.hidden_field :skill_ids %>
+									<%= tag_table_for(@contact.skills) { |i| "<td><div class='draggable' id='own' ui-data='#{i.id}'>" + i.name + "</div></td>" } %>
+									<%= c.hidden_field :skill_ids %>
 								</div> 
 							</td>
 						</tr>
