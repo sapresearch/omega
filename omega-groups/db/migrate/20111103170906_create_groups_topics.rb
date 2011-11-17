@@ -8,6 +8,6 @@ class CreateGroupsTopics < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :groups_topics
+    drop_table :groups_topics if table_exists?(:groups_topics)
   end
 end
