@@ -7,5 +7,5 @@ class Topic < Omega::Model
   validates_length_of :title, :maximum =>40, :message => "The title can only be 40 characters long"
   validates_presence_of :caption,:title
 
-  accepts_nested_attributes_for :posts
+  #accepts_nested_attributes_for :posts
 end
