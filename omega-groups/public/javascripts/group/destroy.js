@@ -1,7 +1,7 @@
 function destroy_group(dialog_html, url){
     $(dialog_html).dialog({
         resizable: false,
-	height:180,
+	height:200,
         width:350,
 	modal: true,
 	buttons: {
