@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration
       t.text :content
       
       t.references :author
-      t.references :thread
+      t.references :super_post
       t.timestamps
     end
   end

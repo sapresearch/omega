@@ -64,7 +64,12 @@ class User < Omega::Model
   # association with groups
   has_many :groups_requesters, :dependent=>:destroy, :foreign_key=>"requester_id"
   has_many :requested_groups, :through=>:groups_requesters, :source=>:group
-  
+  has_many :uploads, :foreign_key=>"uploader_id"
+  has_many :posts
+  has_many :topics, :through=>:posts
+  has_upload :photo # moved from contact model
+  accepts_nested_attributes_for :uploads   # moved from contact model
+
   accepts_nested_attributes_for :contact
   accepts_flattened_values_for :skills, :value => :name
 

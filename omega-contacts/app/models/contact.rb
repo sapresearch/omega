@@ -47,14 +47,9 @@ class Contact < Omega::Model
   #has_many :uploads, :as => 'binding'
   has_many :groups_members, :dependent=>:destroy, :foreign_key=>"member_id"
   has_many :joined_groups, :through=>:groups_members, :source=>:group
-  has_many :uploads, :foreign_key=>"uploader_id"
-  has_many :threads
-  has_many :posts
 
   has_many :addresses,     :as => :contact, :dependent => :destroy
   has_many :phone_numbers, :as => :contact, :dependent => :destroy
-
-  has_upload :photo
 
   has_many :values
   accepts_nested_attributes_for :values
@@ -103,8 +98,6 @@ class Contact < Omega::Model
 		Contact::PhoneNumber.update_phone_numbers(params)
 		Contact::Address.update_addresses(params)
 	end
-
-  accepts_nested_attributes_for :uploads
 
   accepts_flattened_values_for :interests, :skills, :languages, :value => :name
 

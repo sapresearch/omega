@@ -1,8 +1,7 @@
-class Thread < Omega::Model
-  belongs_to :author, :class_name => 'Contact'
+class Topic < Omega::Model
+  belongs_to :post
 
-  has_many :posts, :dependent=>:destroy
-  has_many :groups_threads, :dependent=>:destroy
+  has_many :groups_topics, :dependent=>:destroy
   has_many :groups, :through=>:groups_threads
 
   validates_length_of :title, :maximum =>40, :message => "The title can only be 40 characters long"

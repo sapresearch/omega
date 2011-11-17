@@ -13,8 +13,8 @@ class Group < Omega::Model
   has_many :requesters, :through => :groups_requesters
   has_many :groups_roles, :dependent=>:destroy
   has_many :roles, :through=>:groups_roles
-  has_many :groups_threads, :dependent=>:destroy
-  has_many :threads, :through=>:groups_threads
+  has_many :groups_topics, :dependent=>:destroy
+  has_many :topics, :through=>:groups_topics
   has_many :groups_uploads, :dependent=>:destroy
   has_many :uploads, :through=>:groups_uploads
 

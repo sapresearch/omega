@@ -19,9 +19,7 @@ class GroupsController < Omega::Controller
     end
 
     session[:super_group_id] = @group.nil? ? (params[:super_group_id] || session[:super_group_id]) : @group.super_group_id
-    @super_group = super_group
-    @groups = sub_groups_of(@super_group)
-    initialize_new_group_objects
+    initialize_group_objects
 
     respond_with(@groups)
   end
@@ -48,8 +46,8 @@ class GroupsController < Omega::Controller
 
   def destroy
     @group = Group.destroy(params[:id])
-    @groups = @group.sibling_groups
-    initialize_new_group_objects
+    session[:super_group_id] = @group.super_group_id
+    initialize_group_objects
   end
 
   private
@@ -66,7 +64,9 @@ class GroupsController < Omega::Controller
     super_group ? super_group.sub_groups.build : Group.new({:super_group_id=>nil})
   end
 
-  def initialize_new_group_objects
+  def initialize_group_objects    
+    @super_group = super_group
+    @groups = sub_groups_of(@super_group)
     @new_group = Group.new(:super_group_id=>(@super_group ? @super_group.id : nil), :name=>"New Group")
     @new_group_request = GroupsRequester.new(:status=>:pending)
   end
