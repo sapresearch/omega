@@ -1,7 +1,9 @@
 class ServicesController < Omega::Controller
 
-  require "service_app_adapter.rb"
-  require "service_lib.rb"
+  require_dependency "application_lib.rb"
+  require_dependency "service_app_adapter.rb"
+  require_dependency "service_lib.rb"
+  include ApplicationLib
   include ServiceAppAdapter
   include ServiceLib
 
@@ -11,7 +13,7 @@ class ServicesController < Omega::Controller
 
   respond_to :html, :js, :xml, :json
 
-  around_filter :services_exception_handler
+  #around_filter :services_exception_handler
 
   def index
     @service_id = params[:service_id]

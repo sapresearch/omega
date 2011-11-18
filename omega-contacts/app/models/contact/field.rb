@@ -4,7 +4,8 @@ class Contact::Field < Omega::Model
   														 			 :join_table => 'contact_fields_volunteering_positions',
 																	 :foreign_key => :contact_field_id,
 																	 :association_foreign_key => :volunteering_position_id
-	validates :name, :uniqueness => true,
+	validates :name, :presence => true,
+						  :uniqueness => true,
 						  :format => { :with => /\A\S*\z/, :message => "Only one word allowed in name" }
 
 	def name_as_sym

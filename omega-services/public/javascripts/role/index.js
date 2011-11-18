@@ -38,7 +38,7 @@ function find_permission_by_id(permissions, id){
 
 function new_role(){
     $( "#role-new-dialog-form" ).dialog({
-        width: 500,
+        width: 620,
         modal: true,
         resizable: false,
         buttons: {
@@ -63,7 +63,7 @@ function create_role(){
 function edit_role(dialog_content){
     $( "#role-edit-dialog-form" ).html(dialog_content)
     $( "#role-edit-dialog-form" ).dialog({
-        width: 500,
+        width: 620,
         modal: true,
         resizable: false,
         buttons: {

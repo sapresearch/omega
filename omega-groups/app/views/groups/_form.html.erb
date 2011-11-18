@@ -1,17 +1,25 @@
-<%= form_for  @group do |f| %>
-    <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-      </p>
-    <p>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-      </p>
-    <%= om_button(:icon=>'save') do %>
-        <%= f.submit %>
-    <% end %>
+<%= form_for group, :remote=>true do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, :maxlength=>Group::NAME_MAX_LENGTH, :size=>30 %>
+  </div>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, :cols=>30, :rows=>3 %>
+  </div>
 
-     <%= om_button(:icon=>'delete') do %>
-        <%= link_to 'Cancel', groups_url  %>
-    <% end %>
+  <div class="field">
+    <% options = [["None",nil]].concat(Group.all.map{|g|[g.name, g.id]}) %>
+    <% options.delete [group.name, group.id] %>
+    <% default_option_value = (super_group ? super_group.id : group.super_group_id) %>
+
+    <%= form.label :super_group_id, "Belongs To" %>
+    <%= form.select :super_group_id, options_for_select(options, default_option_value) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :capacity %>
+    <%= form.text_field :capacity, :maxlength=>6, :size=>6, :value=> group.capacity || "unlimited" %>   
+  </div>
 <% end %>
+

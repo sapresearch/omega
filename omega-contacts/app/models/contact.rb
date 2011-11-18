@@ -42,15 +42,15 @@ class Contact < Omega::Model
   has_and_belongs_to_many :skills,    :join_table => 'contact_contacts_skills'
   has_and_belongs_to_many :languages, :join_table => 'contact_contacts_languages'
 
-  has_many :group_positions, :dependent => :destroy
-  has_many :groups, :through => :group_positions
+  #has_many :group_positions, :dependent => :destroy  
+  #has_many :groups, :through => :group_positions
+  #has_many :uploads, :as => 'binding'
+  has_many :groups_members, :dependent=>:destroy, :foreign_key=>"member_id"
+  has_many :joined_groups, :through=>:groups_members, :source=>:group
 
   has_many :addresses,     :as => :contact, :dependent => :destroy
   has_many :phone_numbers, :as => :contact, :dependent => :destroy
 
-  has_upload :photo
-
-  has_many :uploads, :as => 'binding'
   has_many :values
   accepts_nested_attributes_for :values
 
@@ -98,8 +98,6 @@ class Contact < Omega::Model
 		Contact::PhoneNumber.update_phone_numbers(params)
 		Contact::Address.update_addresses(params)
 	end
-
-  accepts_nested_attributes_for :uploads
 
   accepts_flattened_values_for :interests, :skills, :languages, :value => :name
 

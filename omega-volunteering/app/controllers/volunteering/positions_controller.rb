@@ -17,17 +17,8 @@ class Volunteering::PositionsController < Omega::Controller
 
   def index
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
-		@zips = []
-		@zips << Zipcodr::find('08648').zip
-		@zips << Zipcodr::find('08648').city
-		@zips << Zipcodr::find('08648').state
-		@zips << Zipcodr::find('08648').county
-		@zips << Zipcodr::find('08648').long
-		@zips << Zipcodr::find('08648').lat
-
     respond_with(@positions)
   end
-  
 
   def upcoming
     @positions = @positions.where('start is not null').order('start ASC')
@@ -44,49 +35,46 @@ class Volunteering::PositionsController < Omega::Controller
 
   def edit
     @position = Volunteering::Position.find(params[:id])
-	 @fields = Contact::Field.all
     fix_model_to_view
+	 @contact_assignment = @position.contacts.count > 0 ? 'existing' : 'none'
     respond_with(@position)
   end
 
   def new
     @position = Volunteering::Position.new
-	 @fields = Contact::Field.all
     fix_model_to_view
+	 @contact_assignment = 'new'
     respond_with(@position)
   end
 
   def create
+	 @contact_assignment = params[:contact_assignment] # Do this in case the validation fails and @position is reloaded.
 	 fix_view_to_model
-
-    field = params[:volunteering_position].delete(:contact_field) 
-	 field_positions = params[:volunteering_position].delete(:contact_field_volunteering_position_id)
-
-    @position = Volunteering::Position.new(params[:volunteering_position])
-    if @position.save
+	 #field_positions = params[:volunteering_position].delete(:contact_field_volunteering_position_id)
+	 field_ids = params[:volunteering_position].delete(:contact_fields)
+	 @position = Volunteering::Position.new(params[:volunteering_position])
+	
+ 	 #@field.update_positions(field_positions)
+ 	 fields = Array.new
+	 field_ids.each { |key, id| fields << Contact::Field.find(id) } if !field_ids.nil?
+	 @position.contact_fields = fields
+	
+	 if @position.save
 		@position.update_attributes(:end => @position.correct_end_date) if !@position.recurrent
 		# Do this after position so that it is assigned an ID.
-		field_positions = @position.id.to_s if field_positions.to_i == 0
-		@field = Contact::Field.create(field)
-		@field.update_positions(field_positions)
-    	respond_with(@position)
+		#field_positions = @position.id.to_s if field_positions.to_i == 0
+	  	respond_with(@position)
 	 else
 		reset_view_if_error
-    	respond_with(@position)
+	   respond_with(@position)
 	 end
   end
 
   def update
     fix_view_to_model
     @position = Volunteering::Position.find(params[:id])
+	 @contact_assignment = params[:contact_assignment] # Do this in case the validation fails and @position is reloaded.
 
-    field = params[:volunteering_position].delete(:contact_field) 
-	 field_positions = params[:volunteering_position].delete(:contact_field_volunteering_position_id)
-	 field_positions = @position.id.to_s if field_positions.to_i == 0
-	 @field = Contact::Field.create(field)
-	 @field.update_positions(field_positions)
-
-	 # Replace contact_fields with the updated fields or a blank array if no fields were checked.
 	 field_ids = params[:volunteering_position].delete(:contact_fields)
 	 fields = Array.new
 	 if not field_ids.nil?
@@ -265,14 +253,6 @@ class Volunteering::PositionsController < Omega::Controller
 
     ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].each do |day|
       @position.schedule.days.build(:day => day) unless @position.schedule.days.any? { |d| d.day == day }
-    end
-
-    if @position.new_record?
-      @contact_assignment = 'new'
-    elsif @position.contacts.any?
-      @contact_assignment = 'existing'
-    else
-      @contact_assignment = 'none'
     end
   end
 

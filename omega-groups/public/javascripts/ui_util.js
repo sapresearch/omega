@@ -9,17 +9,8 @@ $.fn.extend({
     disable: function(){
         $(this).addClass("ui-state-disabled")
     },
-    endless_highlight: function(){
-        $(this).animate(
-            {
-                opacity:"toggle"
-            },
-            500,
-            function(){$(this.endless_highlight())}
-        )
-    },
     is_empty: function(){
-        return $(this).html().match(/\w+/) ? false :true
+        return $(this).html().match(/^\w+$/) ? false :true
     }
 });
 
@@ -95,6 +86,22 @@ function show_dialog_message(dialog_id){
         },
         close: function() {
             dialog.dialog('destroy')
+            dialog.remove();
+        }
+    });
+}
+function load_dialog_message(dialog_html){
+    $(dialog_html).dialog({
+        resizable: false,
+        modal: true,
+        buttons: {
+            Ok: function() {
+                $(this).dialog( "close" );
+            }
+        },
+        close: function() {
+            $(this).dialog('destroy')
+            $(this).remove();
         }
     });
 }
@@ -126,10 +133,11 @@ function dialog_message(id, title, content_html, options){
         },
         close: function() {
             dialog.dialog('destroy')
+            dialog.remove();
         }
     });
 }
-function dialog_confirm(id, title, content_html, url, method, async, options){
+function dialog_confirm(id, title, content_html, url, method, async, data, options){
     var default_options={
         "width":"auto",
         "height":"auto",
@@ -157,7 +165,7 @@ function dialog_confirm(id, title, content_html, url, method, async, options){
 	buttons: {
             OK: function() {
 		$(this).dialog( "close" );
-                $.ajax({ url:url, type:method, async:async, dataType: "script" })
+                $.ajax({ url:url, type:method, async:async, data:data, dataType: "script" })
             },
             Cancel: function() {
             	$(this).dialog( "close" );
@@ -165,6 +173,7 @@ function dialog_confirm(id, title, content_html, url, method, async, options){
 	},
         close: function() {
             dialog.dialog('destroy')
+            dialog.remove();
         }
     });
 }

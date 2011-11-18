@@ -1,10 +1,12 @@
 class ServiceRegistrationsController < Omega::Controller
 
+  require "application_lib.rb"
+  include ApplicationLib
   require "service_lib.rb"
   include ServiceLib
 
   respond_to :html, :js, :xml, :json
-  around_filter :services_exception_handler
+  #around_filter :services_exception_handler
 
   def index
     @service_id = params[:service_id]

@@ -1,6 +1,6 @@
 function new_asset(){
     $( "#asset-new-dialog-form" ).dialog({
-        width: 500,
+        width: 620,
         modal: true,
         resizable: false,
         buttons: {
@@ -25,7 +25,7 @@ function create_asset(){
 function edit_asset(dialog_content){
     $( "#asset-edit-dialog-form" ).html(dialog_content)
     $( "#asset-edit-dialog-form" ).dialog({
-        width: 500,
+        width: 620,
         modal: true,
         resizable: false,
         buttons: {

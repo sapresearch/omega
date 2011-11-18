@@ -1,7 +1,8 @@
 class Post < Omega::Model
-  self.table_name = 'group_posts'
-  MAX_POSTS_PER_PAGE = 10
-  belongs_to :thread, :class_name => '::Group::Thread'
-  belongs_to :author, :class_name => '::User'
+  has_one :topic, :dependent=>:destroy 
+  has_many :sub_posts, :class_name=>"Post", :dependent=>:destroy
+  belongs_to :super_post, :class_name=>"Post"
+  belongs_to :author, :class_name => 'User'
+  
   default_scope order('created_at asc')
 end

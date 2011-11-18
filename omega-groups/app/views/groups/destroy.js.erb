@@ -1,5 +1,12 @@
+$("#group_head_<%= @group.id %>").hide('slow', function(){ $(this).remove(); } )
+$("#group_body_<%= @group.id %>").hide('slow', function(){
+  $(this).remove();
+  <% if @groups.empty? %>
+   $(".groups_list").html("<%= escape_javascript( render "index_empty_message") %>")
+  <% end %>
+})
+
+$(".tipsy").remove();
 
 
- $('#group-<%= @group.id %>').effect('puff',500,function(){
-    $(this).remove();
- });
+

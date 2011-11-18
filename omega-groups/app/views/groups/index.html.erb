@@ -1,34 +1,28 @@
-<%= require_javascript 'thirdParty/jquery.jscrollpane.min.js', 'omega_groups' %>
-<%= require_stylesheet 'omega_groups' %>
-    
-  <%- title "Omega - Groups" %>
-  
-    
-    <h1 class="page-content-evergreen corners-top">
-      Group Overview
+<% require_stylesheet 'share.css' %>
+<% require_stylesheet 'group.css' %>
+<% require_javascript 'util.js' %>
+<% require_javascript 'ui_util.js'%>
+<% require_javascript 'group/index.js'%>
+<% require_javascript 'group/new.js'%>
+<% require_javascript 'group/edit.js'%>
+<% require_javascript 'group/destroy.js'%>
+<% require_javascript 'groups_requester/new.js'%>
+<% require_javascript 'groups_requester/destroy.js'%>
+
+<div class="content circle-corners-bottom" >
+  <div class="heading-main">
+    <h1 class="page-content page_title">
+      <%= render "index_page_title" %>
     </h1>
-    <div class="page-content-evergreen corners-bottom">
-      <ul id="groups-list">
-        <% @groups.each do |group| %>
-            <li id="group-<%= group.id %>" class="list-item relative">
-              <div class="item-list-actions-wrapper corners">
-                <div class="item-list-actions">
-                  <%= om_button(:plain=> true, :icon=>'delete') do %>
-                      <%= link_to 'Delete', group_path(group), :method=> :delete, :remote=> true %>
-                  <% end %>
-                </div>
-              </div>
-              <div>
-                <%= link_to group.name, group_path(group) %>
-              </div>
-            </li>
-        <% end %>
-      </ul>
-      <%= will_paginate @groups %>
-      <div class="clear"></div>
-    </div>
-<% end %>
-<% content_for :sidebar do %>
-    <%= render :partial => "partials/sidebar_search" %>
-    <%= render :partial => "partials/sidebar_groups" %>
-    <%= render :partial => "partials/sidebar_groups_search" %>
+  </div>
+
+  <div class="page_content">
+    <%= render "index_page_content" %>
+  </div>
+</div>
+
+
+<%= render "groups_requesters/dialog_create_blocked_message" %>
+<%= render "groups_requesters/dialog_create_duplicate_message" %>
+<%= render "groups_requesters/dialog_created_message" %>
+
