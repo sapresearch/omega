@@ -27,11 +27,11 @@ class GroupsController < Omega::Controller
   def create
     params_group = params[:group]
     params_group.merge!({:capacity=>nil}) if params[:group][:capacity]=="unlimited"
-    @creator = Contact.find(params[:creator_id])||current_contact
+    @creator = params[:creator_id] ? Contact.find(params[:creator_id]) : current_contact
 
     Group.transaction do
       @group = Group.create(params_group)
-      GroupsMembers.create(:group_id=>@group.id, :member_id=>@creator.id, :position=>"founder")
+      GroupsMember.create(:group_id=>@group.id, :member_id=>@creator.id, :position=>"founder")
     end
     
     respond_with(@group) do |format|

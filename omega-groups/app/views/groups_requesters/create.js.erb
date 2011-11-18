@@ -1,6 +1,6 @@
 <% if @group_request %>
   $(".groups_list").html("<%= escape_javascript( render "groups/index_list" ) %>")
-  show_dialog_message("group-request-created-dialog-message")
+  load_dialog_message("<%= escape_javascript(render "groups_requesters/dialog_created_message", :group=>@group) %>")
 <% elsif @group.is_blocked? %>
   show_dialog_message("group-request-create-blocked-dialog-message")
 <% elsif not @eligible %>

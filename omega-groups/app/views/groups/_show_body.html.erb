@@ -8,8 +8,10 @@
       <% unless current_user.is_anonymous? %>
         <% group_member = GroupsMember.find_by_group_id_and_member_id(group.id, current_contact.id) %>
         <% if group_member %>
-          <%= om_button(:contact => true, :icon=>'user-remove') do %>
-            <%= link_to_function "Quit", "destroy_group_member('#{escape_javascript(render "groups_members/dialog_destroy_confirm")}', '#{groups_member_url(group_member)}')", "data-tooltip"=>"Quit this group" %>
+          <% unless group_member.is_head? %>
+            <%= om_button(:contact => true, :icon=>'user-remove') do %>
+              <%= link_to_function "Quit", "destroy_group_member('#{escape_javascript(render "groups_members/dialog_destroy_confirm", :group=>group)}', '#{groups_member_url(group_member)}')", "data-tooltip"=>"Quit this group" %>
+            <% end %>
           <% end %>
         <% else %>
           <% group_request = GroupsRequester.find_by_group_id_and_requester_id(group.id, current_user.id) %>
@@ -17,7 +19,7 @@
 
             <% unless group_request.status=="rejected" %>
               <%= om_button(:contact => true, :icon=>'user-remove') do %>
-                <%= link_to_function "Cancel", "destroy_group_request('#{escape_javascript(render "groups_requesters/dialog_destroy_confirm")}', '#{groups_requester_url(group_request)}')", "data-tooltip"=>"Cancel request" %>
+                <%= link_to_function "Withdraw", "destroy_group_request('#{escape_javascript(render "groups_requesters/dialog_destroy_confirm", :group=>group)}', '#{groups_requester_url(group_request)}')", "data-tooltip"=>"Cancel request" %>
               <% end %>
             <% end %>
 

@@ -1,4 +1,4 @@
-class GroupsRequestersController < Omega::Controller
+class GroupsMembersController < Omega::Controller
 
   require_dependency "application_lib.rb"
   include ApplicationLib
@@ -13,9 +13,9 @@ class GroupsRequestersController < Omega::Controller
   end
 
   def destroy
-    @group_member = GroupsRequester.find(params[:id])
+    @group_member = GroupsMember.find(params[:id])
     @group_member.destroy
-    @group = @group_request.group
+    @group = @group_member.group
     initialize_group_objects
   end
 

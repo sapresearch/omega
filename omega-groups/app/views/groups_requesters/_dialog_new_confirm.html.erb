@@ -1,5 +1,5 @@
 <div id="group-request-new-dialog-confirm" class="dialog" title="Request to join <%= group.name %>">
-  <p class="confirm_question">Are you sure to join <%=group.name%>?</p>
+  <p class="confirm_question">Are you sure to join <strong class="italic"><%=group.name%>?</strong></p>
   <%= form_for @new_group_request, :remote=>true do |form| %>
     <%= form.hidden_field :status %>
     <%= form.hidden_field :group_id, :value=> group.id %>
