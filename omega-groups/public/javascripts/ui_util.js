@@ -90,6 +90,21 @@ function show_dialog_message(dialog_id){
         }
     });
 }
+function load_dialog_message(dialog_html){
+    $(dialog_html).dialog({
+        resizable: false,
+        modal: true,
+        buttons: {
+            Ok: function() {
+                $(this).dialog( "close" );
+            }
+        },
+        close: function() {
+            $(this).dialog('destroy')
+            $(this).remove();
+        }
+    });
+}
 function dialog_message(id, title, content_html, options){
     options = $.extend({
         width:"auto",

@@ -53,6 +53,12 @@
     height:25px;
 }
 /** end of app-spec */
+input{
+    transition: -box-shadow 2s;
+    -moz-transition: -moz-box-shadow 2s; /* Firefox 4 */
+    -webkit-transition: -webkit-box-shadow 2s; /* Safari and Chrome */
+    -o-transition: -o-box-shadow 2s; /* Opera */
+}
 
 input:focus,input:hover,
 textarea:focus,textarea:hover,
@@ -60,6 +66,7 @@ select:focus,select:hover{
     background-color:lightyellow;
     -moz-box-shadow: 5px 5px 5px #ccc;
     -webkit-box-shadow: 5px 5px 5px #ccc;
+    -o-box-shadow: 5px 5px 5px #ccc;
     -box-shadow: 5px 5px 5px #ccc;
 }
 

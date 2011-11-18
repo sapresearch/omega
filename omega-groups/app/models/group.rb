@@ -115,7 +115,7 @@ class Group < Omega::Model
     update_attribute(:is_blocked, false)
   end
 
-  def eligible_for_requester(requester)
+  def eligible_for_requester?(requester)
     return true if is_root?
     super_group_member = GroupsMember.find_by_group_id_and_member_id(super_group.id, requester.contact.id)
     not super_group_member.nil?
