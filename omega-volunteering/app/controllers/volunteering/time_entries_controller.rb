@@ -8,7 +8,6 @@ class Volunteering::TimeEntriesController < Omega::Controller
   breadcrumb 'Time Entries' => :my_time_sheets_volunteering_positions
   
     def show
-
       @entry = Volunteering::TimeEntry.find(params[:id])
       @entry_days = Volunteering::TimeEntry::Day.all
 
@@ -20,71 +19,60 @@ class Volunteering::TimeEntriesController < Omega::Controller
     def new
       @entry = Volunteering::TimeEntry.new
       @entry.record = Volunteering::Record.find(params[:id])
-      
-      
       ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |day|
         @entry.days.build(:day => day)
       end
+		@entries = Volunteering::TimeEntry.find_by_contact(Contact.for(current_user).id)
       
       respond_with(@entry)
-
     end
     
     def new_timesheets
-       	       	              
        @entries = Volunteering::TimeEntry.where('week = ?', params[:week])
        @records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',params[:position])
        @start = params[:week]
        session[:week] = params[:week]
 
        if @entries.empty?
-       
-       		@entries = Array.new
-
-       		@records.each do |r|
-        		
+       	@entries = Array.new
+       	@records.each do |r|
         		@entry = Volunteering::TimeEntry.new 
         		@entry.record_id = r.id
-              
-#        		if Volunteering::TimeEntry.find_by_record_id(r.id).nil?      
-       			['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |d|
-       				@entry.days.build
-      		    end 
-      		    
-      		    @entries << @entry
-      		end
+	#       	if Volunteering::TimeEntry.find_by_record_id(r.id).nil?      
+       		['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |d|
+       			@entry.days.build
+          	end 
+    	   	@entries << @entry
+     		end
        end
-       
-                    
-         	
     end
 
     def create
-  #    @entry = Volunteering::TimeEntry.create(params[:volunteering_time_entry])
-  #    respond_with(@entry)
-  		@timesheets = params[:entries].values.collect{ |entry| 
-  			                                                    if Volunteering::TimeEntry.find_by_week_and_record_id(entry["week"],entry["record_id"]).nil?
-  			                                                    	@entry = Volunteering::TimeEntry.new(entry) 
-  			                                                    	@entry.save! 
-  			                                                    else
-  													                @entry = Volunteering::TimeEntry.find_by_week_and_record_id(entry["week"],entry["record_id"]) 
-  													                @entry.update_attributes(:week => entry["week"], :days_attributes => entry["days_attributes"])
-  														        end 
-  														        
-  														        session[:week] = entry["week"]
-  														        
-  														 }
-   	    redirect_to summary_volunteering_time_entries_url(:id => session[:position])
-
+		position_id = params[:volunteering_time_entry].delete(:position_id)
+      @entry = Volunteering::TimeEntry.create(params[:volunteering_time_entry])
+		monday_of_the_week = @entry.week - (@entry.week.cwday - 1) # Find the Monday for the week that the user selected.
+		@entry.update_attributes(:week => monday_of_the_week)
+# THIS IS ANNE'S LATENT CODE. I HAVEN'T DELETED IT YET, IN THE OFF-CHANCE IT'S ACTUALLY USEFUL FOR SOMETHING.
+#  		@timesheets = params[:entries].values.collect do |entry| 
+#			if Volunteering::TimeEntry.find_by_week_and_record_id(entry["week"],entry["record_id"]).nil?
+#				@entry = Volunteering::TimeEntry.new(entry) 
+#				@entry.save! 
+#			else
+#				@entry = Volunteering::TimeEntry.find_by_week_and_record_id(entry["week"],entry["record_id"]) 
+#				@entry.update_attributes(:week => entry["week"], :days_attributes => entry["days_attributes"])
+#			end 
+#			session[:week] = entry["week"]
+#		end
+		#redirect_to summary_volunteering_time_entries_url(:id => position_id)
+		redirect_to new_volunteering_time_entry_url(:id => position_id)
     end
     
     def summary
-    	
     	@position = Volunteering::Position.find(params[:id])
-    	@records = Volunteering::Record.where('action = ? and position_id = ?','Accepted',params[:id])
-
-        @entries = Volunteering::TimeEntry.where('week =? ', session[:week])
-    	
+    	@records = Volunteering::Record.where('action = ? and position_id = ?', 'Accepted', params[:id])
+		# I canged this to show all timesheets.
+      #@entries = Volunteering::TimeEntry.where('week = ?', session[:week])
+      @entries = Volunteering::TimeEntry.all
     end
     
     def all_timesheets 

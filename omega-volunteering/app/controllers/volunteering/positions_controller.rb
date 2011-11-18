@@ -117,20 +117,16 @@ class Volunteering::PositionsController < Omega::Controller
     @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
 
     breadcrumb 'My Positions' => :mine_volunteering_positions
-    
   end
 
   def my_time_sheets
-  	
     @entry_days = Volunteering::TimeEntry::Day.all
     @timesheets = Array.new
     @records = Volunteering::Record.find_all_by_contact_id(Contact.for(current_user))
-    
     @records.each do |r|
       @timesheets << Volunteering::TimeEntry.find_all_by_record_id(r.id)
     end
-
-     breadcrumb 'My Time Sheets' => :my_time_sheets_volunteering_positions
+    breadcrumb 'My Time Sheets' => :my_time_sheets_volunteering_positions
   end
 
   def history

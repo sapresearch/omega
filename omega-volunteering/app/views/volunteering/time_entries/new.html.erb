@@ -1,8 +1,10 @@
-<h1 class="page-content corners-top">
-  Record Hours
-</h1>
+<% require_javascript 'omega_volunteering_records' %>
+<% require_stylesheet 'omega_volunteering', 'thirdParty/jquery.dataTables.jui.css' %>
+
+<h1 class="page-content corners-top"> Record Hours </h1>
+
 <div class="page-content corners-bottom">
-
-<%= render 'form' %>
-
+	<%= render 'form' %>
+	<br /><br /><br />
+	<%= render 'timesheets_table' %>
 </div>

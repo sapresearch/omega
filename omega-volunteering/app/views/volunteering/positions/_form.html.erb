@@ -9,7 +9,7 @@
 	  <h3 class="application-form">Assignment Detail</h3> 
  
 	  
-	  <p>
+	   <p>
         <%= f.label :name %>
         <%= f.text_field :name, :'data-tooltip '=> 'descriptive name for position', :class => 'broad-text' %>
       </p>
@@ -127,13 +127,18 @@
 			<p> You can customize the application form that volunteers fill out when they apply to this position.  Just select the questions below that you want volunteers to answer when they apply to this position.  You can always add or remove these questions later by clicking the Edit Position button. </p>
 			<% fields = Contact::Field.all %>
 			<%= f.fields_for :contact_fields, fields do |cf| %>
-				<% fields.each_with_index do |cc, index| %>
-					<p><%= check_box_tag "volunteering_position[contact_fields[#{index}]]", cc.id, @position.contact_fields.include?(cc) %> <%= cc.name.to_s %></p>
-					<p><%= cc.description %></p>
-				<% end %>
+				<table id="custom_field_checkboxes">
+					<% fields.each_with_index do |cc, index| %>
+						<%= "<tr>".html_safe if (index % 5) == 0 %>
+							<td>
+								<p><%= check_box_tag "volunteering_position[contact_fields[#{index}]]", cc.id, @position.contact_fields.include?(cc) %> <%= cc.name.to_s %></p>
+								<p><%= cc.description %></p>
+							</td>
+						<%= "</tr>".html_safe if (index % 5) == 4 %>
+					<% end %>
+				</table>
 			<% end %>
 				
-
 
 
       <h3 class="application-form">Skills and Interests</h3>

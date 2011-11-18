@@ -129,10 +129,14 @@
     .ui-widget-header {
         /*border: 1px solid #4196ee;
         background: url("../../images/bg_dark.png") repeat-x scroll center bottom #80BDFB;*/
-		border: 1px solid #45521B;
-        background: url("../../images/bg_dark_evergreen.png") repeat-x scroll center bottom #C9DA8F;
+			border: 1px solid #45521B;
+        /* Changing this for time_entries/summary.html.erb.  Not sure where else this is used.
+		  background: url("../../images/bg_dark_evergreen.png") repeat-x scroll center bottom #C9DA8F;
+		  color: #45521B;*/
+		  background-color: green;
+		  color: white;
+		  /* This ^^^ is what I'm using instead */
         font-family: "Trebuchet MS";
-		color: #45521B;
         font-weight: bold;
     }
 

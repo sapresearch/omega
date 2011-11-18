@@ -444,10 +444,6 @@ h3#service_head a{
 	font-family: arial;
 }
 
-div.contact_phone_number label{
-	margin-left: 15px;
-}
-
 div.contact_phone_number #volunteering_record_contact_email{
 	margin-left: 65px;
 }
@@ -488,4 +484,9 @@ div.contact_phone_number select {
 }
 div#volunteering_positions_pagination {
 	margin-top: 200px;
+}
+
+table#custom_field_checkboxes {
+	width: 100%;
+	table-layout: fixed;
 }
