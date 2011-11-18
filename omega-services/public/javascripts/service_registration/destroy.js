@@ -23,7 +23,7 @@ function destroy_service_registration(url, pre_html){
             }
         },
         close: function() {
-            $( "#service-registration-destroy-dialog-confirm" ).dialog('destroy')
+            $(this).dialog('destroy')
             $( "#service-registration-destroy-dialog-confirm .pre_html" ).empty();
         }
     });

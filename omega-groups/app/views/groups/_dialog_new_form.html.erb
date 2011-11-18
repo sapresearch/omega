@@ -1,5 +1,6 @@
+<% super_group ||= group.super_group %>
 <div id="group-new-dialog-form" class="dialog" title="Creating New Group">
   <p>
-    <%= render "groups/form", :group=>group  %>
+    <%= render "groups/form", :group=>group, :super_group=>super_group %>
   </p>
 </div>

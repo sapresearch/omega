@@ -27,7 +27,13 @@ class GroupsController < Omega::Controller
   def create
     params_group = params[:group]
     params_group.merge!({:capacity=>nil}) if params[:group][:capacity]=="unlimited"
-    @group = Group.create(params_group)
+    @creator = Contact.find(params[:creator_id])||current_contact
+
+    Group.transaction do
+      @group = Group.create(params_group)
+      GroupsMembers.create(:group_id=>@group.id, :member_id=>@creator.id, :position=>"founder")
+    end
+    
     respond_with(@group) do |format|
       format.js {redirect_to groups_url(:group_id=>@group.id)}
     end
@@ -48,27 +54,6 @@ class GroupsController < Omega::Controller
     @group = Group.destroy(params[:id])
     session[:super_group_id] = @group.super_group_id
     initialize_group_objects
-  end
-
-  private
-
-  def super_group
-    (session[:super_group_id] && session[:super_group_id]!=Group::ROOT_SUPER_GROUP_ID ) ? Group.find(session[:super_group_id]) : nil
-  end
-
-  def sub_groups_of(super_group)
-    super_group ? super_group.sub_groups : Group.root_groups
-  end
-
-  def new_sub_group_of(super_group)
-    super_group ? super_group.sub_groups.build : Group.new({:super_group_id=>nil})
-  end
-
-  def initialize_group_objects    
-    @super_group = super_group
-    @groups = sub_groups_of(@super_group)
-    @new_group = Group.new(:super_group_id=>(@super_group ? @super_group.id : nil), :name=>"New Group")
-    @new_group_request = GroupsRequester.new(:status=>:pending)
   end
 
 end

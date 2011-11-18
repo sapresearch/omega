@@ -28,4 +28,11 @@ class GroupsRequestersController < Omega::Controller
     respond_with(@group_request)
   end
 
+  def destroy
+    @group_request = GroupsRequester.find(params[:id])
+    @group_request.destroy unless @group_request.status == "rejected"
+    @group = @group_request.group
+    initialize_group_objects
+  end
+
 end

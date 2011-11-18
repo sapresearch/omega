@@ -6,35 +6,44 @@
   <div class="left_links">
     <p>
       <% unless current_user.is_anonymous? %>
-        <% group_request = GroupsRequester.find_by_group_id_and_requester_id(group.id, current_user.id) %>
-        <% unless group_request.nil? %>
-
-        <% unless group_request.status=="rejected" %>
+        <% group_member = GroupsMember.find_by_group_id_and_member_id(group.id, current_contact.id) %>
+        <% if group_member %>
           <%= om_button(:contact => true, :icon=>'user-remove') do %>
-            <%= link_to_function "Quit", "", "data-tooltip"=>"Quit this group" %>
+            <%= link_to_function "Quit", "destroy_group_member('#{escape_javascript(render "groups_members/dialog_destroy_confirm")}', '#{groups_member_url(group_member)}')", "data-tooltip"=>"Quit this group" %>
           <% end %>
-        <% end %>
-
         <% else %>
-          <% if !group.is_blocked? %>
-            <%= om_button(:contact => true, :icon=>'user-add') do %>
-              <%= link_to_function "Join",
-                "new_group_request('#{escape_javascript(render "groups_requesters/dialog_new_confirm", :group=>group)}')",
-                "data-tooltip"=>"Join this group" %>
+          <% group_request = GroupsRequester.find_by_group_id_and_requester_id(group.id, current_user.id) %>
+          <% unless group_request.nil? %>
+
+            <% unless group_request.status=="rejected" %>
+              <%= om_button(:contact => true, :icon=>'user-remove') do %>
+                <%= link_to_function "Cancel", "destroy_group_request('#{escape_javascript(render "groups_requesters/dialog_destroy_confirm")}', '#{groups_requester_url(group_request)}')", "data-tooltip"=>"Cancel request" %>
+              <% end %>
+            <% end %>
+
+          <% else %>
+            <% if !group.is_blocked? %>
+              <%= om_button(:contact => true, :icon=>'user-add') do %>
+                <%= link_to_function "Join",
+                  "new_group_request('#{escape_javascript(render "groups_requesters/dialog_new_confirm", :group=>group)}')",
+                  "data-tooltip"=>"Join this group" %>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
+        <% end %>   
       <% end %>
 
       <%= om_button(:contact => true, :icon=>'search') do %>
-        <%= link_to "Sub-Groups", groups_url(:super_group_id=>group.id), :remote=>true, "data-tooltip"=>"View sub-groups in this group" %>
+        <%= link_to "Sub-Groups(#{group.sub_groups.count})", groups_url(:super_group_id=>group.id), :remote=>true, "data-tooltip"=>"View sub-groups in this group" %>
       <% end %>
+      
     </p>
   </div>
 
   <div class="right_links">
     <p>
       <% if is_admin? %>
+
         <%= om_button(:contact => true, :icon=>'mail-new') do %>
           <%= link_to "Requests", groups_requesters_url(:group_id=>group.id), "data-tooltip"=>"Manage requests" %>
         <% end %>

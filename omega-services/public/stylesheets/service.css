@@ -153,8 +153,13 @@
 /* for adjusting jquery UI component*/
 #service_form_builder_nav{ height:32px; }
 #service_form_builder_nav a{cursor:pointer;}
-.service_leaf{ background:none; background-color:green}
 .anytime-pkr .anytime-cur-btn{background: none;}
+
+.service_leaf{ background:none; background-color:green}
+/*.services_list .service_head.ui-state-default{background:gray; border:1px solid transparent;}
+.services_list .service_head.ui-state-hover{background:#4096EE;}
+.services_list .service_head.ui-state-focus{background:#4096EE; border:1px solid transparent;}
+.services_list .service_head.ui-state-active{background:#4096EE; border:1px solid transparent;}*/
 
 /* app-spec */
 .item-list-actions-wrapper{ right:42px; }

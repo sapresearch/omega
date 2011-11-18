@@ -11,7 +11,7 @@
   <div class="field">
     <% options = [["None",nil]].concat(Group.all.map{|g|[g.name, g.id]}) %>
     <% options.delete [group.name, group.id] %>
-    <% default_option_value = group.super_group_id %>
+    <% default_option_value = (super_group ? super_group.id : group.super_group_id) %>
 
     <%= form.label :super_group_id, "Belongs To" %>
     <%= form.select :super_group_id, options_for_select(options, default_option_value) %>
