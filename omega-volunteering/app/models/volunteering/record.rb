@@ -18,6 +18,13 @@ class Volunteering::Record < Omega::Model
       self.status = "Applied"
   end
 
+	def self.for(user)
+		Volunteering::Record.all.select { |vr| vr.contact.user == user and vr.status != "Rejected" }
+	end
+
+	def position_name
+		self.position.name
+	end
 
   #validates :status, :presence => true,
                      #:inclusion => { :in => [:applied, :declined, :accepted] }

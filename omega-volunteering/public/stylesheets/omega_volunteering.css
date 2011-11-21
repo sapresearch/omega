@@ -490,3 +490,19 @@ table#custom_field_checkboxes {
 	width: 100%;
 	table-layout: fixed;
 }
+
+table#record_hours_options td {
+	padding: 20px;
+}
+	
+input#volunteering_time_entry_submit {
+	margin-left: 0px;
+	padding-left: 0px;
+}
+
+div#record_hours_submit {
+	text-align: center;
+}
+div#record_hours_submit span.om-icon-button {
+	margin-left: 0px;
+}

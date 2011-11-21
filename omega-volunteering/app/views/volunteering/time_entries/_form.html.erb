@@ -3,39 +3,46 @@
 
 <%= form_for @entry do |f| %>
 
-    <% hours_errors = [] %>
-    <%= errors_for_form @entry %>
+   <% hours_errors = [] %>
+   <%= errors_for_form @entry %>
+   <%= f.hidden_field :record_id %>
 
-	 <%= f.hidden_field :position_id, :value => @entry.record.position.id.to_s %>
-    <%= f.hidden_field :record_id %>
-
-    <p>
+	<p>
 		Select week: <%= f.text_field :week, :class => 'datepickr' %>
-    </p>
+	</p>
 
-    <table  class="width-100">
-      <thead>
-      <th class="ui-state-default">Day</th>
-      <th class="ui-state-default">Hours</th>
-      </thead>
-      <% @entry.days.each_with_index do |ed| %>
-          <%= f.fields_for "days", ed do |d| %>
-              <tr class="<%= cycle("even", "odd") -%>">
-                <% day = d.object %>
-                <% hours_errors << day.errors unless day.errors.empty? %>
+	<table id="record_hours_options">
+		<tr>
+			<td>
+				<% if current_user.has_permission? Volunteering::PERM_ADMIN %>
+					User: <%= collection_select :contact, :id, Contact.all, :id, :full_name %>
+				<% elsif !current_user.has_permission? Volunteering::PERM_ADMIN %>
+					User: <%= current_user.first_name %>
+				<% end %>
+			</td>
 
-                <td> <%= d.hidden_field :day %>         <%= ed.day %>
-                </td>
-                <td>
-                  <!--<span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>-->
-                  <%= d.text_field :hours, :class => 'inputSmall'%>
-                  <!--<span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>-->
-                  <%= hours_errors.size unless day.errors.empty? %>
-                </td>
-              </tr>
-          <% end %>
-      <% end %>
-    </table>
+			<td id='select_position_options'>
+				<%= render 'select_position_options' %>
+			</td>
+		</tr>
+	</table>
+
+
+   <table class="width-100">
+		<tr>
+	     	<% @entry.days.each_with_index do |ed| %>
+	        	<%= f.fields_for "days", ed do |d| %>
+	           	<% day = d.object %>
+	            <% hours_errors << day.errors unless day.errors.empty? %>
+	            <td> <%= d.hidden_field :day %> <%= ed.day %> </td>
+	            <td>
+						<%= d.text_field :hours, :class => 'inputSmall'%>
+						<%= hours_errors.size unless day.errors.empty? %>
+	            </td>
+	         <% end %>
+	      <% end %>
+	   </tr>
+	</table>
 
     <% unless hours_errors.empty? %>
         <% hours_errors.each_with_index do |hour_errors, i| %>
@@ -43,10 +50,24 @@
         <% end %>
     <% end %>
 
-    <p>
+	 <div id='record_hours_submit'>
 		<%= om_button(:icon=>'save') do %>
         <%= f.submit "Save" %>
 		<% end %>
-    </p>
+	 </div>
 
 <% end %>
+
+<script type="text/javascript">
+	$( '#record_hours_options' ).delegate( 'select#contact_id', 'change', function(){
+		var self = $(this);
+		var val = self.attr( 'value' );
+		$.ajax({
+			url: "<%=new_volunteering_time_entry_url(:id=>@record)%>",
+			type: "GET",
+			data: {contact_id:val},
+			dataType: 'script',
+			cache: false
+		});
+	});
+</script>

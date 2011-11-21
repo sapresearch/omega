@@ -68,26 +68,18 @@ class Contact < Omega::Model
   end
 
 	def update_contact_attributes(params)
-		puts "\n\n In update \n\n"
-		puts "Contact. params hash: " + params.inspect.to_s
 		custom_fields.each do |f|
 			f_id = f.id
 			c_id = self.id
 			name = f.name.gsub(/\?/, '')
 			value = params[name]
 			if !value.nil?
-				puts "Value for " + name.to_s + ": " + value.to_s
 				eav_row = Contact::Value.find_by_field_id_and_contact_id(f_id, c_id)
 				if eav_row.nil?
-					puts "eav is nil NILLLLLLLLLLLLLLLLLLL"
 					Contact::Value.create(:field_id => f_id, :contact_id => c_id, :value => value)
 				elsif !eav_row.nil?
-					puts "this is the custom field: " + f.inspect.to_s
-					puts "This is eav row: " + eav_row.inspect.to_s
-					puts 'will be updated with value: ' + value
 					eav_row.update_attributes(:value => value)
 				end
-			else puts 'no value found for: ' + name
 			end
 		end
 		update_subclass_attributes(params)
@@ -210,6 +202,10 @@ class Contact < Omega::Model
 	def longitude
 		zip = self.zip_code
 		Zipcodr::find(zip).long
+	end
+
+	def full_name
+		self.first_name + " " + self.last_name
 	end
 
   private
