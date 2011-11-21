@@ -205,7 +205,11 @@ class Contact < Omega::Model
 	end
 
 	def full_name
-		self.first_name + " " + self.last_name
+		if !self.first_name.nil? and !self.last_name.nil?
+			self.first_name + " " + self.last_name
+		else
+			self.user.username
+		end
 	end
 
   private
