@@ -53,7 +53,9 @@
     height:25px;
 }
 /** end of app-spec */
-input{
+input,
+textarea,
+select{
     transition: -box-shadow 2s;
     -moz-transition: -moz-box-shadow 2s; /* Firefox 4 */
     -webkit-transition: -webkit-box-shadow 2s; /* Safari and Chrome */

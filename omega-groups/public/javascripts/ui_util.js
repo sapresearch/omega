@@ -10,7 +10,7 @@ $.fn.extend({
         $(this).addClass("ui-state-disabled")
     },
     is_empty: function(){
-        return $(this).html().match(/^\w+$/) ? false :true
+        return $(this).html().match(/\w+/) ? false :true
     }
 });
 
