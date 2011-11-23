@@ -6,11 +6,17 @@
         <%= group.members.count.to_s %><%= " / "+group.capacity.to_s if group.capacity%>
       <% end %>
     </span>
-
-    <% group_request = GroupsRequester.find_by_group_id_and_requester_id(group.id, current_user.id) %>
-    <% if group_request %>
-      <span id="group_request_status_<%= group_request.id %>" class="request_status" ><%= group_request.status %></span>
+   
+    <% group_member = GroupsMember.find_by_group_id_and_member_id(group.id, current_contact.id) %>
+    <% if group_member %>
+      <span id="group_member_position_<%= group_member.id %>" class="member_position" ><%= group_member.position %></span>
+    <% else %>
+      <% group_request = GroupsRequester.find_by_group_id_and_requester_id(group.id, current_user.id) %>
+      <% if group_request %>
+        <span id="group_request_status_<%= group_request.id %>" class="request_status" ><%= group_request.status %></span>
+      <% end %>
     <% end %>
+    
 
   <% end %>
 </a>

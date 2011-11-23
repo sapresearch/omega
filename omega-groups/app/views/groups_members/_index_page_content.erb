@@ -1,0 +1,40 @@
+<!-- originally copied from volunteering/positions/histroy.html -->
+<!-- app-spec:  class names for css; om-button -->
+
+<% sorted_column = @sorted_column || 1 %>
+<% sorting_method = @sorting_method || 'desc' %>
+<script type="text/javascript">
+  $(function() {
+    $('#groups_requesters_table').dataTable({
+        "bJQueryUI": true,   
+        "aaSorting": [[ <%= sorted_column %>, "<%= sorting_method %>" ], [0,'asc']],
+        "iDisplayLength": 50
+    });
+  });
+</script>
+
+<div class="group_member_count data_table_count">
+  <%= om_button(:plain => true, :icon => 'counter') do %>
+    Number of Group Members: <span class="green"><%= @group.members.count %><%= " / "+@group.capacity.to_s if @group.capacity %></span>
+  <% end %>
+</div>
+
+<table class="width-100 clear data_table" id="groups_requesters_table">
+  <thead>
+    <tr>
+      <th id="member">Member</th>
+      <th id="member_created_at">Joining Time</th>
+      <th id="member_position">Position</th>
+      <th id="delete_member"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @groups_members.each do |groups_member| %>
+      <%= render 'groups_members/index_table_row', :groups_member=>groups_member %>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="index_bottom_links">
+  <%= render "index_bottom_links" %>
+</div> 

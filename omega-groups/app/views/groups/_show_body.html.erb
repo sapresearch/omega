@@ -8,7 +8,7 @@
       <% unless current_user.is_anonymous? %>
         <% group_member = GroupsMember.find_by_group_id_and_member_id(group.id, current_contact.id) %>
         <% if group_member %>
-          <% unless group_member.is_head? %>
+          <% unless group_member.is_leader? %>
             <%= om_button(:contact => true, :icon=>'user-remove') do %>
               <%= link_to_function "Quit", "destroy_group_member('#{escape_javascript(render "groups_members/dialog_destroy_confirm", :group=>group)}', '#{groups_member_url(group_member)}')", "data-tooltip"=>"Quit this group" %>
             <% end %>
@@ -58,15 +58,15 @@
             <% if group.is_end? %>
               <%= link_to "Publish", group_url(group, :type=>"publish"), :remote=>true, :method=>:put, "data-tooltip"=>"Publish this group" %>
             <% else %>
-              <%= link_to_function "Publish", "", "data-tooltip"=>"Publish this group" %>
+              <%= link_to_function "Publish", "update_group_status('#{escape_javascript(render "groups/dialog_update_status_confirm")}', '#{group_url(group, :type=>"publish")}')", "data-tooltip"=>"Publish this group" %>
             <% end %>
           <% end %>
         <% elsif group.is_public? %>
           <%= om_button(:contact => true, :icon=>'mail') do %>
-            <% if group.is_leaf? %>
+            <% if group.is_end? %>
               <%= link_to "Unpublish", group_url(group, :type=>"unpublish"), :remote=>true, :method=>:put, "data-tooltip"=>"Unpublish this group" %>
             <% else %>
-              <%= link_to_function "Unpublish", "", "data-tooltip"=>"Unpublish this group" %>
+              <%= link_to_function "Unpublish", "update_group_status('#{escape_javascript(render "groups/dialog_update_status_confirm")}', '#{group_url(group, :type=>"unpublish")}')", "data-tooltip"=>"Unpublish this group" %>
             <% end %>
           <% end %>
         <% end %>

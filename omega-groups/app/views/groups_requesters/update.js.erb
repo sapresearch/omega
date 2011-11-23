@@ -1,0 +1,8 @@
+<% if @groups_requester.nil? %>
+  load_dialog_message("<%= escape_javascript( render "groups_requesters/dialog_not_found_message") %>")
+<% elsif @capacity_full %>
+  load_dialog_message("<%= escape_javascript( render "groups_requesters/dialog_capacity_full_message") %>")
+<% end %>
+  
+$(".page_content").html("<%= escape_javascript( render "groups_requesters/index_page_content" ) %>")
+$(".tipsy").remove();

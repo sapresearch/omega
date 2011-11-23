@@ -1,0 +1,36 @@
+<!-- app-spec: om_button -->
+
+<tr id="groups_requester_<%= groups_requester.id.to_s %>_tr">
+  <td>
+    <%= om_button(:plain => true, :icon => 'user') do %>
+      <%= link_to groups_requester.requester.name, contact_path(groups_requester.requester.contact), :class => 'blue', :'data-tooltip'=>"View Contact" %>
+    <% end %>
+  </td>
+  <td>
+    <%= om_button(:plain => true, :icon => 'clock') do %>
+      <span><%= groups_requester.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
+    <% end %>
+  </td>
+  <td>
+    <% if groups_requester.updated_at > groups_requester.created_at %>
+      <%= om_button(:plain => true, :icon => 'clock') do %>
+        <span><%= groups_requester.updated_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
+      <% end %>
+    <% end %>
+  </td>
+  <td>
+    <% icon = 'mail' if groups_requester.status == 'pending' %>
+    <% icon = 'mail-reply' if groups_requester.status == 'rejected' %>
+    <%= om_button(:plain => true, :icon => icon) do %>
+      <%= link_to_function groups_requester.status.capitalize,
+        "load_dialog_form('#{escape_javascript(render "groups_requesters/dialog_edit_status_form", :groups_requester=>groups_requester)}', {width:350})",
+        :'data-tooltip'=>"Update Status" %>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to_function om_button(:plain => true, :icon => 'delete'){},
+        "destroy_group_request('#{escape_javascript(render "groups_requesters/dialog_destroy_confirm", :group=>groups_requester.group, :requester=>groups_requester.requester)}', '#{groups_requester_url(groups_requester, :type=>:admin)}')",
+        :'data-tooltip'=>"Delete this Record" %>
+  </td>
+</tr>
+

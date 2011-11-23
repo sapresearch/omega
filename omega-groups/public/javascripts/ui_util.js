@@ -105,26 +105,18 @@ function load_dialog_message(dialog_html){
         }
     });
 }
-function dialog_message(id, title, content_html, options){
-    options = $.extend({
-        width:"auto",
-        height:"auto",
-        minWidth:150,
-        minHeight:150,
-        maxWidth:300
-    },options)
-    
+function dialog_message(id, title, content_html, options){    
     var html = "<div id='"+id+"' class='dialog' title='"+title+"'>"
     html += content_html;
     html += "</div>"
     var dialog = $(html)
-    dialog.dialog({
+    dialog.dialog($.extend({
         resizable: false,
-        width:options.width,
-        height:options.height,
-        minWidth:options.minWidth,
-        minHeight:options.minHeight,
-        maxWidth:options.maxWidth,
+        width:"auto",
+        height:"auto",
+        minWidth:150,
+        minHeight:150,
+        maxWidth:300,
 	modal: true,
 	buttons: {
             OK: function() {
@@ -135,7 +127,31 @@ function dialog_message(id, title, content_html, options){
             dialog.dialog('destroy')
             dialog.remove();
         }
-    });
+    },options));
+}
+function load_dialog_confirm(dialog_html, url, method, async, data, options){
+    $(dialog_html).dialog($.extend({
+        resizable: false,
+        modal: true,
+        width:"auto",
+        height:"auto",
+        minWidth:150,
+        minHeight:150,
+        maxWidth:300,
+        buttons: {
+            OK: function() {
+		$(this).dialog( "close" );
+                $.ajax({ url:url, type:method, async:async, data:data, dataType: "script" })
+            },
+            Cancel: function() {
+            	$(this).dialog( "close" );
+            }
+	},
+        close: function() {
+            $(this).dialog('destroy')
+            $(this).remove();
+        }
+    },options));
 }
 function dialog_confirm(id, title, content_html, url, method, async, data, options){
     var default_options={
@@ -176,6 +192,30 @@ function dialog_confirm(id, title, content_html, url, method, async, data, optio
             dialog.remove();
         }
     });
+}
+function load_dialog_form(dialog_html, options){    
+    $(dialog_html).dialog($.extend({
+        resizable: false,
+        modal: true,
+        width:"auto",
+        height:"auto",
+        minWidth:150,
+        minHeight:150,
+        maxWidth:300,
+        buttons: {
+            Submit: function() {
+                $("form",this).submit();
+                $(this).dialog( "close" );
+            },
+            Cancel: function() {
+                $(this).dialog( "close" );
+            }
+        },
+        close: function() {
+            $(this).dialog('destroy')
+            $(this).remove();
+        }
+    },options));
 }
 
 function switch_status(id, url, method, data_hash){

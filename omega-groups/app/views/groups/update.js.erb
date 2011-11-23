@@ -1,0 +1,5 @@
+<% unless @type == "block" || @type == "unblock" %>
+  $(".index_list").html("<%= escape_javascript( render "groups/index_list" ) %>")
+<% end %>
+
+$(".tipsy").remove();

@@ -1,4 +1,10 @@
-$(".index_list").html("<%= escape_javascript( render "groups/index_list" ) %>")    
-load_dialog_message("<%= escape_javascript(render "groups_members/dialog_destroyed_message") %>");
+<% if @type == "admin" %>
+  $(".page_content").html("<%= escape_javascript( render "groups_members/index_page_content" ) %>")
+  load_dialog_message("<%= escape_javascript(render "groups_members/dialog_destroyed_message") %>")
+<% else %>
+  $(".index_list").html("<%= escape_javascript( render "groups/index_list" ) %>")
+  load_dialog_message("<%= escape_javascript(render "groups_members/dialog_destroyed_message") %>");
+<% end %>
 
 $(".tipsy").remove();
+

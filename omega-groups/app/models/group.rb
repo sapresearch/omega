@@ -121,6 +121,17 @@ class Group < Omega::Model
     not super_group_member.nil?
   end
 
+  def accepted_requesters
+    groups_requesters.select{|gr|gr.status=="accepted"}.map(&:requester)
+  end
+
+  def has_member?(member)
+    not GroupsMember.find_by_group_id_and_member_id(self.id, member.id).nil?
+  end
+
+  def has_requester?(requester)
+    not GroupsRequester.find_by_group_id_and_requester_id(self.id, requester.id).nil?
+  end
 end
 
 

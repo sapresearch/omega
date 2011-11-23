@@ -19,18 +19,18 @@
   });
 </script>
 
-<div class="accepted_registrant_count">
+<div class="accepted_registrant_count data_table_count">
   <%= om_button(:plain => true, :icon => 'counter') do %>
     Number of Accepted Registrants: <span class="green"><%= @service.accepted_registrants.count %><%= " / "+@service.capacity.to_s if @service.capacity %></span>
   <% end %>
 </div>
 
-<div class="block_registration">
+<div class="block_registration right">
   <label for="block_registration_checkbox" >Block Future Request</label>
   <input id="block_registration_checkbox" type="checkbox" onclick="switch_block_service_registration('<%= service_url(@service) %>')" />
 </div>
 
-<table class="width-100 clear" id="service_registrations_table">
+<table class="width-100 clear data_table" id="service_registrations_table">
   <thead>
     <tr>
       <th id="registration_detail"></th>

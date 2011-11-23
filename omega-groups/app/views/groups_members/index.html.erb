@@ -1,0 +1,24 @@
+<!-- app-spec: class names for css -->
+
+<% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
+<% require_javascript 'thirdParty/jquery.dataTables.min.js' %>
+
+<% require_stylesheet 'share.css' %>
+<% require_stylesheet 'groups_member.css' %>
+<% require_javascript 'util.js' %>
+<% require_javascript 'ui_util.js'%>
+<%# require_javascript 'groups_member/index.js'%>
+<% require_javascript 'groups_member/destroy.js'%>
+
+<div class="content circle-corners-bottom" >
+  <div class="heading-main">
+    <h1 class="page-content page_title">
+      <%= render "index_page_title" %>
+    </h1>
+  </div>
+
+  <div class="page_content">
+    <%= render "index_page_content" %>
+  </div>
+</div>
+
