@@ -44,7 +44,7 @@
 
   <div class="right_links">
     <p>
-      <% if is_admin? %>
+      <% if is_admin? || group.has_leader?(current_contact) %>
 
         <%= om_button(:contact => true, :icon=>'mail-new') do %>
           <%= link_to "Requests", groups_requesters_url(:group_id=>group.id), "data-tooltip"=>"Manage requests" %>

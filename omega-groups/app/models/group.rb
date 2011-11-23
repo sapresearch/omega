@@ -125,6 +125,11 @@ class Group < Omega::Model
     groups_requesters.select{|gr|gr.status=="accepted"}.map(&:requester)
   end
 
+  def has_leader?(member)
+    groups_member = GroupsMember.find_by_group_id_and_member_id(self.id, member.id)
+    groups_member && groups_member.is_leader?
+  end
+
   def has_member?(member)
     not GroupsMember.find_by_group_id_and_member_id(self.id, member.id).nil?
   end
