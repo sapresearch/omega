@@ -14,10 +14,6 @@ class GroupsMembersController < Omega::Controller
     @groups_members = @group.groups_members
   end
 
-  def create
-
-  end
-
   def update
     GroupsMember.transaction do
       @groups_member = GroupsMember.find(params[:id])
@@ -39,6 +35,59 @@ class GroupsMembersController < Omega::Controller
     else
       @groups_member.destroy
       initialize_group_objects
+    end
+  end
+
+  #developing
+  def add
+    group_id = params[:group_id]
+    member_id = params[:member_id]    
+    GroupsMember.transaction do
+      begin
+        @member = Contact.find(member_id)
+        @group = Group.find(group_id)
+        requester = @member.user
+        groups_requester = GroupsRequester.find_by_group_id_and_requester_id(group_id,requester.id) if requester
+        groups_requester.destroy if groups_requester # cancel pending request, if there is any
+        @has_member = @group.has_member?(@member)
+        unless @has_member
+          GroupsMember.create(:group_id=>group_id, :member_id=>member_id, :position=>"member") unless @group.has_member?(@member)
+          @group.members(:order=>:first_name).each do|member|
+            if member.name>@member.name
+              @before_member=member
+              break;
+            end
+          end
+        end
+      rescue
+        @error = true
+      end
+    end
+  end
+
+  #developing
+  def remove
+    group_id = params[:group_id]
+    member_id = params[:member_id]
+    GroupsMember.transaction do
+      begin
+        @group = Group.find(group_id)
+        @member = Contact.find(member_id)
+        @sub_groups=[]
+        @group.sub_groups.each{ |sub_group| @sub_groups<<sub_group if sub_group.has_member?(@member)}
+        if @sub_groups.empty?
+          groups_member = GroupsMember.find_by_group_id_and_member_id(group_id, member_id)
+          groups_member.destroy
+          (Contact.all-@group.members(:order=>:first_name)).each do|member|
+            if member.name>@member.name
+              @before_member=member
+              break;
+            end
+          end
+        end
+      rescue
+        @error = true
+      end
     end
   end
 

@@ -1,7 +1,7 @@
 class CreateGroupsMembers < ActiveRecord::Migration
   def self.up
     create_table :groups_members do |t|
-      t.string :position
+      t.string :position, :default=>"member"
       t.references :group
       t.references :member
       t.timestamps

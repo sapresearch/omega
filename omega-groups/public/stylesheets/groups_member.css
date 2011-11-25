@@ -2,3 +2,24 @@
 #member_created_at{width:30%}
 #member_position{width:28%}
 #delete_member{width:2%}
+
+
+#contacts_to_group_assignment{padding:15px; width:650px; height:370px;}
+.contacts_area{
+    width:300px;
+    height:380px;
+}
+.contacts_title{
+    font-size:15px;
+    margin:5px;
+}
+.contacts_list{
+    border:1px solid #ccc;
+    width:300px;
+    height:350px;
+    overflow-y:auto;
+}
+#contacts_exchange{
+    float:left;
+    margin:170px 12px 0px 12px;
+}

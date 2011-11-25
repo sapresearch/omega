@@ -63,6 +63,31 @@
 .data_table td{vertical-align:bottom;}
 .data_table_count{ margin-bottom:10px; float:left;}
 
+
+
+/* entity assignment */
+#one_to_many_assignment{padding:15px; width:650px; height:370px;}
+.entity_area{
+    width:300px;
+    height:380px;
+}
+.entity_title{
+    font-size:15px;
+    margin:5px;
+}
+.entity_list{
+    border:1px solid #ccc;
+    width:300px;
+    height:350px;
+}
+#entity_exchange{
+    float:left;
+    margin:170px 12px 0px 12px;
+}
+.assignment_object:hover{ background: lightgray; }
+.assignment_object a:hover{ color:green; }
+
+
 /** end of app-spec */
 input,
 textarea,

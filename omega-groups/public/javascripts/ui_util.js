@@ -90,9 +90,11 @@ function show_dialog_message(dialog_id){
         }
     });
 }
-function load_dialog_message(dialog_html){
-    $(dialog_html).dialog({
+function load_dialog_message(dialog_html, options, url){
+    $(dialog_html).dialog($.extend({
         resizable: false,
+        width:"auto",
+        height:"auto",
         modal: true,
         buttons: {
             Ok: function() {
@@ -102,8 +104,10 @@ function load_dialog_message(dialog_html){
         close: function() {
             $(this).dialog('destroy')
             $(this).remove();
+            if(url)
+               $.ajax({ url:url});
         }
-    });
+    },options));
 }
 function dialog_message(id, title, content_html, options){    
     var html = "<div id='"+id+"' class='dialog' title='"+title+"'>"

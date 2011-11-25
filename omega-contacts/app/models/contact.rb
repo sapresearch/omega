@@ -97,7 +97,7 @@ class Contact < Omega::Model
   accepts_nested_attributes_for :addresses, :phone_numbers,
                                 :reject_if => NestedHelper::REJECT_TEMPLATE, :allow_destroy => true
 
-  default_scope order('last_name, first_name')
+  default_scope order('first_name, last_name')
   scope :ordered, order('last_name, first_name')
 
   scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
