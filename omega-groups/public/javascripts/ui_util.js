@@ -105,7 +105,7 @@ function load_dialog_message(dialog_html, options, url){
             $(this).dialog('destroy')
             $(this).remove();
             if(url)
-               $.ajax({ url:url});
+               $.ajax({ url:url, dataType:"script"});
         }
     },options));
 }

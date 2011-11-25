@@ -12,6 +12,7 @@ class GroupsMembersController < Omega::Controller
     @group_id = params[:group_id]
     @group = Group.find(@group_id)
     @groups_members = @group.groups_members
+    respond_with(@groups_members)
   end
 
   def update
