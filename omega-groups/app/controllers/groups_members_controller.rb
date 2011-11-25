@@ -26,17 +26,22 @@ class GroupsMembersController < Omega::Controller
   end
 
   def destroy
-    @groups_member = GroupsMember.find(params[:id])
-    @group = @groups_member.group
+    GroupsMember.transaction do
+      @groups_member = GroupsMember.find(params[:id])
+      @group = @groups_member.group
+      @member = @groups_member.member
+      @sub_groups=[]
+      @group.sub_groups.each{ |sub_group| @sub_groups<<sub_group if sub_group.has_member?(@member)}
+      @groups_member.destroy if @sub_groups.empty?
+    end
 
     @type=params[:type]
     if @type=="admin"
-      @groups_member.destroy
       @groups_members = @group.groups_members
     else
-      @groups_member.destroy
       initialize_group_objects
     end
+
   end
 
   #developing
