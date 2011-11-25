@@ -9,7 +9,7 @@
     <% end %>
     $("#assigned_contacts_list #object_to_remove_<%= @member.id.to_s %>").remove()
   <% else %>
-    load_dialog_confirm("<%= escape_javascript( render "shared/dialog_destroy_failed_member_in_subgroup_message", :sub_groups=>@sub_groups, :member=>@member ) %>")
+    load_dialog_message("<%= escape_javascript( render "groups_members/dialog_destroy_failed_member_in_subgroup_message", :sub_groups=>@sub_groups, :member=>@member ) %>", {width:450})
   <% end %>  
 <% end %>
 
