@@ -131,6 +131,7 @@ select:focus,select:hover{
     padding:20px 20px;
 }
 
+.full_width{width:100%}
 .left{float:left}
 .right{float:right}
 .left_links{float:left;}
