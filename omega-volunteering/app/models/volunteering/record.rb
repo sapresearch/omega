@@ -18,9 +18,23 @@ class Volunteering::Record < Omega::Model
       self.status = "Applied"
   end
 
-	def self.for(user)
-		Volunteering::Record.all.select { |vr| vr.contact.user == user and vr.status != "Rejected" }
+	class << self
+		def for(user)
+			Volunteering::Record.all.select { |vr| vr.contact.user == user and vr.status != "Rejected" }
+		end
+
+		def sort_by_selected_position(array_of_records, position_id)
+			return array_of_records if position_id.nil?
+			array_of_records.each do |r|
+				if r.position.id == position_id.to_i
+					array_of_records.delete(r)
+					array_of_records.unshift(r)
+				end
+			end
+			array_of_records
+		end
 	end
+
 
 	def position_name
 		self.position.name

@@ -17,26 +17,20 @@ class Volunteering::TimeEntriesController < Omega::Controller
     end
 
     def new
-      @entry = Volunteering::TimeEntry.new
-      #@entry.record = Volunteering::Record.find(params[:id]) # commented out so i can test w/ 
-      ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each do |day|
-        @entry.days.build(:day => day)
-      end
-		@entries = Volunteering::TimeEntry.find_by_contact(Contact.for(current_user).id)
-		@record = params[:id]
-
-		# AJAX call.
+		# AJAX call. When an admin selects a specific contact this selects only the records for positions that the contact is actually enrolled in.
 		if not params[:contact_id].nil? 
-			puts "\n\nin not nil loop"
 			selected_user = Contact.find(params[:contact_id]).user
-			puts "\n\n selected contact: " + selected_user.inspect.to_s
 			@records = Volunteering::Record.for(selected_user)
-			puts "\n\n Records: " + @records.inspect.to_s
 		elsif params[:contact_id].nil? 
-			puts "\n\nin the nil loop"
 			@records = Volunteering::Record.for(current_user)
 		end
-      
+
+		# Not for AJAX call.
+      @entry = Volunteering::TimeEntry.new
+      ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each { |day| @entry.days.build(:day => day) }
+		@entries = Volunteering::TimeEntry.find_by_contact(Contact.for(current_user).id)
+		@record = params[:id]
+		@records = Volunteering::Record.sort_by_selected_position(@records, params[:position_id]) unless @records.nil? # Correctly set the first position that shows up.
       respond_with(@entry)
     end
     
