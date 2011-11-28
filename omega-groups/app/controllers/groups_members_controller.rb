@@ -84,7 +84,9 @@ class GroupsMembersController < Omega::Controller
         if @sub_groups.empty?
           groups_member = GroupsMember.find_by_group_id_and_member_id(group_id, member_id)
           groups_member.destroy
-          (Contact.all-@group.members(:order=>:first_name)).each do|member|
+          assigned_members = @group.members(:order=>:first_name)
+          available_contacts = @group.is_root? ? Contact.all-assigned_members : @group.super_group.members-assigned_members
+          available_contacts.each do|member|
             if member.name>@member.name
               @before_member=member
               break;

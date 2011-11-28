@@ -5,7 +5,7 @@
 </div>
 <div class="right_links">
   <% unless @super_group.nil? %>
-    <%= link_to "Back to "+(@super_group.is_root? ? "All Services" : @super_group.super_group.name),
+    <%= link_to "Back to "+(@super_group.is_root? ? "All Groups" : @super_group.super_group.name),
       groups_url(:group_id=>@super_group.id), :class=>"operation_button", :remote=>true %>
   <% end %>
 </div>
