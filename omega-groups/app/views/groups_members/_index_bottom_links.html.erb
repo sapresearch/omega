@@ -1,5 +1,5 @@
 <div class="left_links">
-  <%= link_to_function "Member Assignment", 
+  <%= link_to_function "Membership Assignment",
     "load_dialog_message('#{escape_javascript(render "groups_members/dialog_assignment_message", :group=>@group)}', {}, '#{groups_members_url(:group_id=>@group.id)}')",
     :class=>"operation_button" %>
 </div>

@@ -6,7 +6,7 @@
 <% else %>
   <div id="groups_accordion">
     <% groups.each do |group| %>
-      <% if(is_admin? || group.is_public?) %>
+      <% if(is_admin? || group.has_leader?(current_contact) || group.is_public?) %>
         <div id="group_unit_<%= group.id %>" class="group_unit">
           <h3 id="group_head_<%= group.id %>" class="accordion_head group_head<%= group.is_end? ? " group_end" : " group_branch" %>"
               ondblclick="$.ajax({
