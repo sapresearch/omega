@@ -46,7 +46,7 @@
 	         			<td class="accounts">
 								Status: <i><%= element[:record] %></i>
 								<% if element[:record] == "Accepted" %>
-	         					<br /><%= link_to('Record Hours', all_timesheets_volunteering_time_entries_url(:id => position, :'data-tooltip' => 'Log hours for this position')) %>
+	         					<br /><%= link_to('Record Hours', new_volunteering_time_entry_url(:position_id => position.id, :'data-tooltip' => 'Log hours for this position')) %>
 								<% end %>
 							</td>
 	         			<td class="accounts"> 

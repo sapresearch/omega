@@ -32,6 +32,16 @@ class Contact < Omega::Model
 		end
 		contact
 	 end
+
+	 def sorted_list(contact_id)
+	 	all = self.all
+		all.each do |c|
+			if c.id == contact_id.to_i
+				all.delete(c)
+				all.unshift(c)
+			end
+		end
+	end
   end
 
   self.include_root_in_json = false

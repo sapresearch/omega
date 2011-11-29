@@ -506,3 +506,7 @@ div#record_hours_submit {
 div#record_hours_submit span.om-icon-button {
 	margin-left: 0px;
 }
+
+.time_entries {
+	margin-left: 20px;
+}

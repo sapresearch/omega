@@ -25,9 +25,21 @@ class Volunteering::TimeEntriesController < Omega::Controller
 			@records = Volunteering::Record.for(current_user)
 		end
 
+		# AJAX call. Populate the correct time entry.
+		if !params[:week].nil? and !params[:record_id].blank?
+      	@entry = Volunteering::TimeEntry.find_by_week_and_record(params[:week], Volunteering::Record.find(params[:record_id])) 
+			if @entry.nil?
+				@entry = Volunteering::TimeEntry.new
+      		['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each { |day| @entry.days.build(:day => day) }
+			end
+		else
+			@entry = Volunteering::TimeEntry.new
+      	['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each { |day| @entry.days.build(:day => day) }
+		end
+
+		@contacts = params[:contact_id].nil? ? Contact.all : Contact.sorted_list(params[:contact_id])
+
 		# Not for AJAX call.
-      @entry = Volunteering::TimeEntry.new
-      ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each { |day| @entry.days.build(:day => day) }
 		@entries = Volunteering::TimeEntry.find_by_contact(Contact.for(current_user).id)
 		@record = params[:id]
 		@records = Volunteering::Record.sort_by_selected_position(@records, params[:position_id]) unless @records.nil? # Correctly set the first position that shows up.

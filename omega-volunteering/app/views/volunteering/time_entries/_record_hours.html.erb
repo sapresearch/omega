@@ -1,0 +1,52 @@
+<%= form_for @entry do |f| %>
+
+   <% hours_errors = [] %>
+   <%= errors_for_form @entry %>
+   <%= f.hidden_field :record_id %>
+
+	<table id="record_hours_options">
+		<tr>
+			<td>
+				<% if current_user.has_permission? Volunteering::PERM_ADMIN %>
+					User: <%= collection_select :contact, :id, @contacts, :id, :full_name %>
+				<% elsif !current_user.has_permission? Volunteering::PERM_ADMIN %>
+					User: <strong> <%= current_user.first_name %> </strong>
+				<% end %>
+			</td>
+	
+			<td id='select_position_options'>
+				Position: <%= collection_select :volunteering_time_entry, :record_id, @records, :id, :position_name %> 
+			</td>
+		</tr>
+	</table>
+	
+	
+	<table class="width-100 time_entries">
+		<tr>
+	     	<% @entry.days.each_with_index do |ed| %>
+	        	<%= f.fields_for "days", ed do |d| %>
+	           	<% day = d.object %>
+	            <% hours_errors << day.errors unless day.errors.empty? %>
+	            <td> <%= d.hidden_field :day %> <%= ed.day %> </td>
+	            <td>
+						<%= d.text_field :hours, :class => 'inputSmall'%>
+						<%= hours_errors.size unless day.errors.empty? %>
+	            </td>
+	         <% end %>
+	      <% end %>
+	   </tr>
+	</table>
+
+    <% unless hours_errors.empty? %>
+        <% hours_errors.each_with_index do |hour_errors, i| %>
+            <%= debug hour_errors.full_messages %><%= i + 1 %>
+        <% end %>
+    <% end %>
+
+	 <div id='record_hours_submit'>
+		<%= om_button(:icon=>'save') do %>
+        <%= f.submit "Save" %>
+		<% end %>
+	 </div>
+
+<% end %>

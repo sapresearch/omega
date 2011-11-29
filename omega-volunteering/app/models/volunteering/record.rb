@@ -33,6 +33,11 @@ class Volunteering::Record < Omega::Model
 			end
 			array_of_records
 		end
+		def find_by_contact_and_position(contact, position)
+			records = Volunteering::Record.all
+			records.select! { |r| r.contact.id == contact.id and r.position.id == position.id }
+			records.empty? ? nil : records.at(0)
+		end
 	end
 
 
