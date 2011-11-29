@@ -9,30 +9,13 @@
 	<%= render 'record_hours' %>
 </div>
 
-
-
 <script type="text/javascript">
 
 	$(function(){
-		$( '#record_hours_options' ).delegate( 'select#contact_id', 'change', function(){
-			var self = $(this);
-			var val = self.attr( 'value' );
-			alert('changed contact');
-			$.ajax({
-				url: "<%= new_volunteering_time_entry_url(:id => @record)%>",
-				type: "GET",
-				data: {contact_id:val},
-				dataType: 'script',
-				cache: false
-			});
-		});
-
 		$( '#volunteering_time_entry_week' ).change(function(){
-			var self = $( this );
-			var week = self.attr( 'value' );
+			var week = $( '#volunteering_time_entry_week' ).attr( 'value' );
 			var contact_id = $( 'select#contact_id' ).attr( 'value' );
 			var record_id = $( 'select#volunteering_time_entry_record_id' ).attr( 'value' );
-			alert('changed week');
 			$.ajax({
 				url: "<%= new_volunteering_time_entry_url(:id => @record)%>",
 				type: "GET",
@@ -42,4 +25,5 @@
 			});
 		});
 	});
+
 </script>

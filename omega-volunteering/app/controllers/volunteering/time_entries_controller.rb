@@ -25,6 +25,13 @@ class Volunteering::TimeEntriesController < Omega::Controller
 			@records = Volunteering::Record.for(current_user)
 		end
 
+ 		# Correctly set the first position that shows up.
+		if not params[:record_id].nil? # If there is an ajax call to select a particular position.
+			@records = Volunteering::Record.sort_by_selected_position(@records, params[:record_id])
+		elsif params[:record_id].nil?
+			@records = Volunteering::Record.sort_by_selected_position(@records, params[:position_id])
+		end
+
 		# AJAX call. Populate the correct time entry.
 		if !params[:week].nil? and !params[:record_id].blank?
       	@entry = Volunteering::TimeEntry.find_by_week_and_record(params[:week], Volunteering::Record.find(params[:record_id])) 
@@ -42,7 +49,6 @@ class Volunteering::TimeEntriesController < Omega::Controller
 		# Not for AJAX call.
 		@entries = Volunteering::TimeEntry.find_by_contact(Contact.for(current_user).id)
 		@record = params[:id]
-		@records = Volunteering::Record.sort_by_selected_position(@records, params[:position_id]) unless @records.nil? # Correctly set the first position that shows up.
       respond_with(@entry)
     end
     
@@ -66,18 +72,26 @@ class Volunteering::TimeEntriesController < Omega::Controller
        end
     end
 
+	 def update
+		if params.has_key?(:id) # For the update action.
+			@entry = Volunteering::TimeEntry.find(params[:id])
+			params[:volunteering_time_entry][:days_attributes].each_value do |v|
+				day = Volunteering::TimeEntry::Day.find(v[:id])
+				day.update_attributes(:hours => v[:hours])
+			end
+		end
+		redirect_to new_volunteering_time_entry_url(:id => params[:volunteering_time_entry][:record_id])
+	 end
+
     def create
 		record_id = params[:volunteering_time_entry][:record_id]
 		contact_id = params[:contact][:id]
 
-		if params.has_key?(:volunteering_time_entry)
-      	@entry = Volunteering::TimeEntry.create(params[:volunteering_time_entry])
-			monday_of_the_week = @entry.week - (@entry.week.cwday - 1) # Find the Monday for the week that the user selected.
-			@entry.update_attributes(:week => monday_of_the_week)
-		elsif !params.has_key?(:volunteering_time_entry)
-      	@entry = Volunteering::TimeEntry.create(params)
-		end
-# THIS IS ANNE'S LATENT CODE. I HAVEN'T DELETED IT YET, IN THE OFF-CHANCE IT'S ACTUALLY USEFUL FOR SOMETHING.
+      @entry = Volunteering::TimeEntry.create(params[:volunteering_time_entry])
+		monday_of_the_week = @entry.week - (@entry.week.cwday - 1) # Find the Monday for the week that the user selected.
+		@entry.update_attributes(:week => monday_of_the_week)
+
+# THIS IS ANNE'S LEFTOVER CODE. I HAVEN'T DELETED IT YET, IN THE OFF-CHANCE IT'S ACTUALLY USEFUL FOR SOMETHING.
 #  		@timesheets = params[:entries].values.collect do |entry| 
 #			if Volunteering::TimeEntry.find_by_week_and_record_id(entry["week"],entry["record_id"]).nil?
 #				@entry = Volunteering::TimeEntry.new(entry) 
