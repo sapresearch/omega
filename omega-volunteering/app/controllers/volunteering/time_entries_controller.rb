@@ -39,6 +39,8 @@ class Volunteering::TimeEntriesController < Omega::Controller
 				@entry = Volunteering::TimeEntry.new
       		['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each { |day| @entry.days.build(:day => day) }
 			end
+		elsif !params[:time_entry_id].nil?
+			@entry = Volunteering::TimeEntry.find(params[:time_entry_id])
 		else
 			@entry = Volunteering::TimeEntry.new
       	['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each { |day| @entry.days.build(:day => day) }

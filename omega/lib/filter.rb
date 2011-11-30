@@ -218,7 +218,7 @@ class SearchFilter < Array
 		puts "\n\nThis is the column: " + column.to_s
 		if type.blank?
 			custom_field = Contact::Field.find_by_name(column)
-			type = custom_field.nil? ? 'unknown' : custom_field_type.data_type
+			type = custom_field.nil? ? 'unknown' : custom_field.data_type
 		end
 		puts "\n This is type: " + type.to_s + "\n"
 		case type

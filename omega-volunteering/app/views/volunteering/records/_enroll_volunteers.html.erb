@@ -24,7 +24,7 @@
 			<td style="width:350px; max-width:355px">
 				<div id="volunteers">
 					<div id="volunteers-heading">
-						<h7 class="sub-heading" id="result-header">Volunteers:</h7>
+						<h7 class="sub-heading" id="result-header">Results:</h7>
 					</div>
 					<%= render 'volunteers_list' %>
 				</div>
@@ -34,17 +34,13 @@
 			<td style="width:250px"> 
 				<div id="invitation">
 					<div id="invitation-heading">
-						<h7 class="sub-heading"> Invite these volunteers: </h7>
+						<h7 class="sub-heading"> Volunteers for "<%= Volunteering::Position.find(@position_id).name %>" </h7>
 					</div>
-					<%= form_for @records, :url => create_multiple_volunteering_records_path, :html => { :method => :post } do |f| %>
-						<%= hidden_field_tag "records[position_id]", @position_id %>
-						<%= hidden_field_tag "records[contact_ids]" %>
-						<div id="placeholder">
-							<ul id="contacts_to_add">
-							</ul>
-						</div>
-						<p><%= f.submit "Add Volunteers" %></p>
-					<% end %>
+					<div id="placeholder">
+						<ul id="contacts_to_add">
+							<%= render "existing_records" %>
+						</ul>
+					</div>
 				</div>
 			</td>
 
@@ -58,41 +54,36 @@
 
 $(function() {
 
-	// Add function to remove volunteers.
-	$('#contacts_to_add').delegate('li', 'click', function() {
-		$(this).remove();
+	// Remove volunteers. It updates the status of the record to "Rejected".
+	$('#contacts_to_add').delegate('li', 'change', function() {
+		var record_id = $(this).attr('ui-data');
+		var position_id = "<%= @position.id %>";
 		$(".tipsy").remove();
-		update_contact_id_values();
+		var self = $(this);
+		var val = self.find( 'select' ).attr( 'value' );
+		$.ajax({
+			url: "<%= update_status_volunteering_records_url %>",
+			type: "PUT",
+			dataType: 'script',
+			data: {record_id:record_id, position_id:position_id, value:val },
+			cache: false
+		});
 	});
 
-
-	// Add volunteers to Invite Volunteers section.
- 	$('#volunteers_list').delegate('li', 'click', function() {
-    var self = $(this);
+	// Add volunteers. It creates a new record for that contact.
+	$('#volunteers_list').delegate('li', 'click', function() {
+		var self = $(this);
 		var contact_id = self.attr('ui-data');
-		$('#contacts_to_add').prepend(
-			'<li ui-data="'
-			+ contact_id
-			+ '"><span class="om-icon-only om-blue-icon ui-icon-minus" data-tooltip="Remove this volunteer">'
-			+ '</span><span class="remove-contacts">'
-			+ self.text().trim()
-			+ '</span></li>');
-		$(this).parent().remove();
-		$(".tipsy").remove();
-		update_contact_id_values(contact_id);
+		var position_id = "<%= @position.id %>";
+		$.ajax({
+			url: "<%= create_single_volunteering_records_url %>",
+			type: 'POST',
+			data: {contact_id:contact_id, position_id:position_id},
+			dataType: 'script',
+			cache: false
+		});
 	});
+
 });
-
-function update_contact_id_values() {
-
-    var serialized_contact_ids = '[', separator = '';
-    $('#contacts_to_add').find('li').each(function() {
-        serialized_contact_ids += separator + $(this).attr('ui-data');
-        separator = ',';
-    });
-    serialized_contact_ids += ']';
-
-    $('#records_contact_ids').val(serialized_contact_ids);
-}
 
 </script>
