@@ -114,7 +114,6 @@ class Volunteering::RecordsController < Omega::Controller
 
   def create
    contact = params[:volunteering_record][:contact]
-	puts "Volunteering::RecordsController. Contact hash: " + contact.inspect.to_s
    params[:volunteering_record].delete(:contact) 
    @record = Volunteering::Record.create(params[:volunteering_record])
    @record.action = 'To Be Taken'
@@ -208,7 +207,6 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
 	def enroll_volunteers
-		puts "\n\n In enroll_volunteers"
 
 		# Handles AJAX search.
 		options = [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string }, { :class => :addresses, :column => :zip_code, :type => :integer } ]
@@ -222,7 +220,6 @@ class Volunteering::RecordsController < Omega::Controller
 		@filter = SearchFilter.filter_for(Contact, params, options) # Use this one to display all the contacts.
 
 		@position = Volunteering::Position.find(params[:id])
-		#@existing_records = @position.records.where('status = ?', "Accepted")
 		@existing_records = @position.records
 		@position_id = @position.id
 		@records = Array.new
@@ -249,26 +246,6 @@ class Volunteering::RecordsController < Omega::Controller
 		Volunteering::Record.find(params[:record_id]).update_attributes(:status => params[:value])
 		position = Volunteering::Position.find(params[:position_id])
 		@existing_records = position.records
-	end
-
-	def create_multiple
-		position_id = params[:records][:position_id]
-		contact_ids = params[:records][:contact_ids]
-		contact_ids.gsub!(/\[|\]/, "")
-		contact_ids = contact_ids.split(",")
-		contact_ids.each do |contact_id|
-			v = Volunteering::Record.new(:position_id => position_id,
-												  :contact_id => contact_id,
-												  :status => "Accepted"
-												 )
-			if v.save
-				p = Volunteering::Position.find(position_id)
-				boolean = p.contacts.select! { |c| c.id == contact_id}
-			elsif !v.save
-    			redirect_to my_applications_volunteering_records_url
-			end
-		end
-		redirect_to volunteering_positions_url
 	end
 
 	def zip_search

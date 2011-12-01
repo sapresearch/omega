@@ -60,6 +60,7 @@ class Contact < Omega::Model
 
   has_many :addresses,     :as => :contact, :dependent => :destroy
   has_many :phone_numbers, :as => :contact, :dependent => :destroy
+  has_many :records
 
   has_many :values
   accepts_nested_attributes_for :values

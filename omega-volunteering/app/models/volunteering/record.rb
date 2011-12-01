@@ -5,18 +5,28 @@ class Volunteering::Record < Omega::Model
   belongs_to  :position, :inverse_of => :records
   belongs_to  :contact
   has_many    :time_entries, :dependent => :destroy
-          
   
   before_validation( :on => :create) do
-      self.status = "Applied"
+	 self.status = "Applied"
   end
 
   default_scope order('created_at desc')
 
+  validate :contact_has_only_one_record_per_position
+  #validates :status, :presence => true,
+                     #:inclusion => { :in => [:applied, :declined, :accepted] }
+	def contact_has_only_one_record_per_position
+		self.errors.clear
+		if self.new_record?
+			contact_records = Volunteering::Record.where('contact_id = ?', self.contact_id)
+			contact_records.each { |r| contact_records.delete(r) if r.id == self.id }
+			records_for_this_position = contact_records.select { |r| r.position_id == self.position_id }
+			if records_for_this_position.count > 0
+				self.errors.add :contact_id, 'This user already has a record for this position.'
+			end
+		end
+	end
 
-  before_validation(:on => :create) do
-      self.status = "Applied"
-  end
 
 	class << self
 		def for(user)
@@ -45,9 +55,4 @@ class Volunteering::Record < Omega::Model
 		self.position.name
 	end
 
-  #validates :status, :presence => true,
-                     #:inclusion => { :in => [:applied, :declined, :accepted] }
-                     
-  #accepts_nested_attributes_for :contact
-  
 end
