@@ -1,0 +1,15 @@
+<% if @error %>
+  load_dialog_confirm("<%= escape_javascript( render "shared/dialog_error_message" ) %>", "<%= groups_members_url(:group_id=>@group.id) %>", "get", false, {}, {})
+<% else %>
+  <% if @sub_groups.empty? %>
+    <% if @before_member %>
+      $("#available_contacts_list #object_to_add_<%= @before_member.id.to_s %>").before("<%= escape_javascript(render "shared/object_to_add", :obj=>@member, :url=>add_groups_members_url(:member_id=>@member.id, :group_id=>@group.id)) %>")
+    <% else %>
+      $("#available_contacts_list").append("<%= escape_javascript(render "shared/object_to_add", :obj=>@member, :url=>add_groups_members_url(:member_id=>@member.id, :group_id=>@group.id)) %>")
+    <% end %>
+    $("#assigned_contacts_list #object_to_remove_<%= @member.id.to_s %>").remove()
+  <% else %>
+    load_dialog_message("<%= escape_javascript( render "groups_members/dialog_destroy_failed_member_in_subgroup_message", :sub_groups=>@sub_groups, :member=>@member ) %>", {width:450})
+  <% end %>  
+<% end %>
+

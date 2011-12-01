@@ -1,13 +1,9 @@
 <% require_stylesheet 'service2.css' %>
 <% require_stylesheet 'omega_volunteering.css' %>
 
-<%= "Here is params: " + debug(@params) %>
-
 <div id="page_content">
 	<%= render 'enroll_volunteers' %>
 </div>
-
-
 
 <script type="text/javascript">
 	var matrix = '<% raw @search_matrix.to_json %>';

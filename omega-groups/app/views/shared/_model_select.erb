@@ -1,0 +1,8 @@
+<% label ||= model.name.titleize %>
+<% options ||= model.all.map{|m|[m.name,m.id]} %>
+<% default_option_value ||= model.first.id %>
+
+<%= label model, :id, label %>
+<%= select model, :id, options_for_select(options, default_option_value) %>
+
+

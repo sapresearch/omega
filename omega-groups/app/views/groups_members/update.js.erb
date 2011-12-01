@@ -1,0 +1,6 @@
+<% if @groups_member.nil? %>
+  load_dialog_message("<%= escape_javascript( render "groups_members/dialog_not_found_message") %>")
+<% end %>
+  
+$(".page_content").html("<%= escape_javascript( render "groups_members/index_page_content" ) %>")
+$(".tipsy").remove();

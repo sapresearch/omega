@@ -8,7 +8,7 @@ class Group < Omega::Model
   belongs_to :super_group, :class_name => "Group"
   has_many :sub_groups, :class_name => "Group", :foreign_key => "super_group_id", :dependent => :destroy, :order => "name"
   has_many :groups_members, :dependent=>:destroy
-  has_many :members, :through => :groups_members
+  has_many :members, :through => :groups_members, :after_add=>:dispose_request
   has_many :groups_requesters, :dependent=>:destroy
   has_many :requesters, :through => :groups_requesters
   has_many :groups_roles, :dependent=>:destroy
@@ -121,6 +121,30 @@ class Group < Omega::Model
     not super_group_member.nil?
   end
 
+  def accepted_requesters
+    groups_requesters.select{|gr|gr.status=="accepted"}.map(&:requester)
+  end
+
+  def has_leader?(member)
+    groups_member = GroupsMember.find_by_group_id_and_member_id(self.id, member.id)
+    groups_member && groups_member.is_leader?
+  end
+
+  def has_member?(member)
+    not GroupsMember.find_by_group_id_and_member_id(self.id, member.id).nil?
+  end
+
+  def has_requester?(requester)
+    not GroupsRequester.find_by_group_id_and_requester_id(self.id, requester.id).nil?
+  end
+
+  #untested
+  def dispose_request(member)
+    requester = member.user
+    return if requester.nil?
+    groups_requester = GroupsRequester.find_by_group_id_and_requester_id(self.id, requester.id)
+    groups_requester.destroy if groups_requester
+  end
 end
 
 

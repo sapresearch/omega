@@ -19,3 +19,37 @@ function edit_group(dialog_html){
     })
     set_unlimited_non_negative_integer_field("group_capacity");
 }
+
+
+function update_group_status(dialog_html, url){
+    $(dialog_html).dialog({
+        width: 'auto',
+        modal: true,
+        resizable: false,
+        buttons: {
+            "Yes": function() {
+                $(this).dialog( "close" );
+                $.ajax({
+                    url: url,
+                    type: "PUT",
+                    data: ({recursive:true})
+                })
+            },
+            "No": function() {
+                $(this).dialog( "close" );
+                $.ajax({
+                    url: url,
+                    type: "PUT",
+                    data: ({recursive:false})
+                })
+            },
+            Cancel: function() {
+                $(this).dialog( "close" );
+            }
+        },
+        close: function() {
+            $(this).dialog('destroy')
+            $(this).remove()
+        }
+    });
+}

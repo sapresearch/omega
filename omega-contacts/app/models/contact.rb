@@ -32,6 +32,16 @@ class Contact < Omega::Model
 		end
 		contact
 	 end
+
+	 def sorted_list(contact_id)
+	 	all = self.all
+		all.each do |c|
+			if c.id == contact_id.to_i
+				all.delete(c)
+				all.unshift(c)
+			end
+		end
+	end
   end
 
   self.include_root_in_json = false
@@ -50,6 +60,7 @@ class Contact < Omega::Model
 
   has_many :addresses,     :as => :contact, :dependent => :destroy
   has_many :phone_numbers, :as => :contact, :dependent => :destroy
+  has_many :records
 
   has_many :values
   accepts_nested_attributes_for :values
@@ -68,26 +79,18 @@ class Contact < Omega::Model
   end
 
 	def update_contact_attributes(params)
-		puts "\n\n In update \n\n"
-		puts "Contact. params hash: " + params.inspect.to_s
 		custom_fields.each do |f|
 			f_id = f.id
 			c_id = self.id
 			name = f.name.gsub(/\?/, '')
 			value = params[name]
 			if !value.nil?
-				puts "Value for " + name.to_s + ": " + value.to_s
 				eav_row = Contact::Value.find_by_field_id_and_contact_id(f_id, c_id)
 				if eav_row.nil?
-					puts "eav is nil NILLLLLLLLLLLLLLLLLLL"
 					Contact::Value.create(:field_id => f_id, :contact_id => c_id, :value => value)
 				elsif !eav_row.nil?
-					puts "this is the custom field: " + f.inspect.to_s
-					puts "This is eav row: " + eav_row.inspect.to_s
-					puts 'will be updated with value: ' + value
 					eav_row.update_attributes(:value => value)
 				end
-			else puts 'no value found for: ' + name
 			end
 		end
 		update_subclass_attributes(params)
@@ -105,7 +108,7 @@ class Contact < Omega::Model
   accepts_nested_attributes_for :addresses, :phone_numbers,
                                 :reject_if => NestedHelper::REJECT_TEMPLATE, :allow_destroy => true
 
-  default_scope order('last_name, first_name')
+  default_scope order('first_name, last_name')
   scope :ordered, order('last_name, first_name')
 
   scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
@@ -210,6 +213,14 @@ class Contact < Omega::Model
 	def longitude
 		zip = self.zip_code
 		Zipcodr::find(zip).long
+	end
+
+	def full_name
+		if !self.first_name.nil? and !self.last_name.nil?
+			self.first_name + " " + self.last_name
+		else
+			self.user.username
+		end
 	end
 
   private

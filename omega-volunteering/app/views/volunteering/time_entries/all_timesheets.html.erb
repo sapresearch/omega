@@ -5,96 +5,63 @@
 
 <div class="content circle-corners-bottom corners-top">
     	
-		<div class="heading-main">
-	
-				<h1 class="page-content">
-  					Time Sheets
-		    	</h1>
-	
-        </div>
-		
-	
+	<div class="heading-main">
+		<h1 class="page-content">
+			Time Sheets for "<%= @position.name %>"
+  		</h1>
+   </div>
 
-
-
+	<%= debug(@records) %>
+	<%= debug(@entries) %>
+	
    <div id="main-box">
-	
-   <%= form_tag :action=> 'create' do %>
+   	<%= form_tag :action=> 'create' do %>
+    		<% if @records.empty? %>
+      		<p>
+    				<span class="text-style1">No Volunteers have been assigned yet!</span>
+        		</p>   
+    		<% else %>
+    			<p>
+    				<br/>
+    				<strong>Choose a week:</strong>
+    				<br/>
+			    	<br/>
+    				<span data-tooltip="Previous Week" class="om-icon-only om-green-icon ui-icon-previous-week decrease"></span>
+        			<%= text_field_tag 'week', @start, :class => "datepickr", :'data-tooltip '=> 'Choose the Start of the Week' %>
+        			<span data-tooltip="Next Week" class="om-icon-only om-green-icon ui-icon-next-week increase"></span>
+    				<%= hidden_field_tag 'position', @position.id %>
+    			</p>
 
-    	
-    	<% if @records.empty? %>
-        <p>
+	    		<div id="box">
+		  			<table class="width-100 clear" id="records-table">
+		    			<thead>
+		    				<tr>
+		      				<th>Volunteer</th>
+		      				<th>Mon</th>
+		      				<th>Tue</th>
+		      				<th>Wed</th>
+		      				<th>Thurs</th>
+		      				<th>Fri</th>
+		      				<th>Sat</th>
+		     					<th>Sun</th>
+		    				</tr>
+		    			</thead>
+		
+			     		<% @entries.each_with_index do |entry, index| %>
+			    			<%= fields_for "entries[#{index}]", entry do |f| %>
+			    		   	<%= render 'record_row', :entry => entry, :f => f, :start => @start %>
+			    			<%end%>
+			     		<% end %>   
+		 			</table>   
+		  
+			  		<p>
+			  			<%= om_button(:icon=>'save') do %>
+			      		<%= submit_tag "Save" %>
+			  			<% end %>
+			  		</p>  		
+				</div>
 
-    	<span class="text-style1">No Volunteers have been assigned yet!</span>
-        </p>   
-	
-    	<%else%>
-    	
-    	<p>
-    		
-    	<br/>
-    		
-        	
-    	<strong>Choose a week:</strong>
-    	<br/>
-    	<br/>
-    	<span data-tooltip="Previous Week" class="om-icon-only om-green-icon ui-icon-previous-week decrease"></span>
-         <%= text_field_tag 'weekDate', @start, :class => "datepickr", :'data-tooltip '=> 'Choose the Start of the Week' %>
-        <span data-tooltip="Next Week" class="om-icon-only om-green-icon ui-icon-next-week increase"></span>
-    	
-    	<%= hidden_field_tag 'position',@position.id %>
-    	</p>
-
-
-    	  <div id="box">
-
-  			<table class="width-100 clear" id="records-table">
-    			<thead>
-    				<tr>
-      					<th>Volunteer</th>
-      					<th>Mon</th>
-      					<th>Tue</th>
-      					<th>Wed</th>
-      					<th>Thurs</th>
-      					<th>Fri</th>
-      					<th>Sat</th>
-     					<th>Sun</th>
-
-    				</tr>
-    			</thead>
-   
-
-     		<% @entries.each_with_index do |entry, index| %>
-
-    			<%= fields_for "entries[#{index}]", entry do |f| %>
-         			
-    		    <%= render 'record_row', :entry => entry, :f => f, :start => @start %>
-    			<%end%>
-     		<% end %>   
-     		
-
- 			</table>   
-
-       
-  
-  		<p>
-    	
-  		<%= om_button(:icon=>'save') do %>
-      		<%= submit_tag "Save" %>
-  		<% end %>
-
-                 		                    
-        </div>
-
-
-  		</p>  		
-
-  		<% end %>
-
-    <%end%>
-
-
-</div>
-
-
+  			<% end %> <!-- End of the if...else loop -->
+   	<%end%>
+	</div>
 </div>

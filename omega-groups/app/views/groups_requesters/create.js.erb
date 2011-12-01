@@ -5,7 +5,9 @@
   show_dialog_message("group-request-create-blocked-dialog-message")
 <% elsif not @eligible %>
   load_dialog_message("<%= escape_javascript(render "groups_requesters/dialog_create_not_eligible_message", :group=>@group) %>")
-<% elsif %>
+<% elsif @is_member %>
+  load_dialog_message("<%= escape_javascript(render "groups_requesters/dialog_is_member_message", :group=>@group) %>")
+<% else %>
   show_dialog_message("group-request-create-duplicate-dialog-message")
 <% end %>
 

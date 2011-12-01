@@ -1,4 +1,4 @@
-	   <table class="width-100 clear" id="records-table">
+	   <table class="time_entries clear width-100" id="records-table">
     		<thead>
     			<tr>
      				<th>Volunteer</th>
@@ -13,17 +13,32 @@
      				<th>Sun</th>
     			</tr>
     		</thead>
-   
-     		<% @entries.each do |entry| %>
-    	      <tr id="record-<%= entry.record.id %>">
+
+     		<% entries.each do |entry| %>
+    	      <tr id="record-<%= entry.record.id %>" ui-data="<%=entry.id%>" data-tooltip="View" >
                 <td> <%= Contact.find(Volunteering::Record.find(entry.record_id).contact_id).first_name %> </td>
 					 <td> <%= Volunteering::Position.find(entry.record.position.id).name %> </td>
 					 <td> <%= entry.week %> </td>
                 <%entry.days.each do |d|%>
                  	<td>
-                 		<%=d.hours%>
+                 		<%= d.hours %>
                 	</td>
             	<%end%>
             </tr>
      		<% end %>   
  		</table>  
+
+<script type="text/javascript">
+	$(function(){
+		$( "table.time_entries" ).delegate( 'tr', 'click', function(){
+			var time_entry_id = $( this ).attr( 'ui-data' );
+			$.ajax({
+				url: "<%= new_volunteering_time_entry_url(:id => @record)%>",
+				type: "GET",
+				data: {time_entry_id:time_entry_id},
+				dataType: 'script',
+				cache: false
+			});
+		});
+	});
+</script>

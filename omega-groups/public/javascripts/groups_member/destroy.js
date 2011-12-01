@@ -4,7 +4,7 @@ function destroy_group_member(dialog_html, url){
         modal: true,
         resizable: false,
         buttons: {
-            "Withdraw": function() {
+            "Quit": function() {
                 $( this ).dialog( "close" );
                 $.ajax({
                     url: url,

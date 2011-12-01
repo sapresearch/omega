@@ -1,52 +1,29 @@
 <%# require_javascript 'new_time_entry' %>
 <% require_javascript 'thirdParty/jquery.timepicker', 'time_entry' %>
 
-<%= form_for @entry do |f| %>
+<p class="time_entries">
+	Select week: <%= text_field_tag 'volunteering_time_entry_week', nil, :class => 'datepickr', :name => 'volunteering_time_entry[week]' %>
+</p>
 
-    <% hours_errors = [] %>
-    <%= errors_for_form @entry %>
+<div id='record_hours'>
+	<%= render 'record_hours' %>
+</div>
 
-	 <%= f.hidden_field :position_id, :value => @entry.record.position.id.to_s %>
-    <%= f.hidden_field :record_id %>
+<script type="text/javascript">
 
-    <p>
-		Select week: <%= f.text_field :week, :class => 'datepickr' %>
-    </p>
+	$(function(){
+		$( '#volunteering_time_entry_week' ).change(function(){
+			var week = $( '#volunteering_time_entry_week' ).attr( 'value' );
+			var contact_id = $( 'select#contact_id' ).attr( 'value' );
+			var record_id = $( 'select#volunteering_time_entry_record_id' ).attr( 'value' );
+			$.ajax({
+				url: "<%= new_volunteering_time_entry_url(:id => @record)%>",
+				type: "GET",
+				data: {contact_id:contact_id, record_id:record_id, week:week},
+				dataType: 'script',
+				cache: false
+			});
+		});
+	});
 
-    <table  class="width-100">
-      <thead>
-      <th class="ui-state-default">Day</th>
-      <th class="ui-state-default">Hours</th>
-      </thead>
-      <% @entry.days.each_with_index do |ed| %>
-          <%= f.fields_for "days", ed do |d| %>
-              <tr class="<%= cycle("even", "odd") -%>">
-                <% day = d.object %>
-                <% hours_errors << day.errors unless day.errors.empty? %>
-
-                <td> <%= d.hidden_field :day %>         <%= ed.day %>
-                </td>
-                <td>
-                  <!--<span data-tooltip="Increase" class="om-icon-only om-blue-icon ui-icon-plusthick increase"></span>-->
-                  <%= d.text_field :hours, :class => 'inputSmall'%>
-                  <!--<span data-tooltip="Decrease" class="om-icon-only om-blue-icon ui-icon-minusthick decrease"></span>-->
-                  <%= hours_errors.size unless day.errors.empty? %>
-                </td>
-              </tr>
-          <% end %>
-      <% end %>
-    </table>
-
-    <% unless hours_errors.empty? %>
-        <% hours_errors.each_with_index do |hour_errors, i| %>
-            <%= debug hour_errors.full_messages %><%= i + 1 %>
-        <% end %>
-    <% end %>
-
-    <p>
-		<%= om_button(:icon=>'save') do %>
-        <%= f.submit "Save" %>
-		<% end %>
-    </p>
-
-<% end %>
+</script>

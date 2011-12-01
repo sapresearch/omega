@@ -125,6 +125,10 @@ class User < Omega::Model
 	 zips.empty? ? nil : zips.at(0) # Only return the first zip code found.
   end
 
+  def name
+    contact.name
+  end
+
   private
     def create_salt
       self.password_salt = 128.times.inject('') { |salt,| salt << rand(93) + 33 }

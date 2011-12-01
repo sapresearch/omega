@@ -1,0 +1,11 @@
+<% if @error %>
+  load_dialog_confirm("<%= escape_javascript( render "shared/dialog_error_message" ) %>", "<%= groups_members_url(:group_id=>@group.id) %>", "get", false, {}, {})
+<% elsif @has_member %>
+<% else %>
+  <% if @before_member %>
+    $("#assigned_contacts_list #object_to_remove_<%= @before_member.id.to_s %>").before("<%= escape_javascript(render "shared/object_to_remove", :obj=>@member, :url=>remove_groups_members_url(:member_id=>@member.id, :group_id=>@group.id)) %>")
+  <% else %>
+    $("#assigned_contacts_list").append("<%= escape_javascript(render "shared/object_to_remove", :obj=>@member, :url=>remove_groups_members_url(:member_id=>@member.id, :group_id=>@group.id)) %>")
+  <% end %>
+  $("#available_contacts_list #object_to_add_<%= @member.id.to_s %>").remove()
+<% end %>

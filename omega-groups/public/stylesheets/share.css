@@ -23,7 +23,7 @@
     /* max-height:470px;
     overflow: auto; */    /* page length limit */
 }
-.index_bottom_links{
+.index_bottom_links, page_bottom_links{
     padding:10px 10px;
     margin-bottom:5px;
 }
@@ -52,6 +52,42 @@
 .dialog select{
     height:25px;
 }
+
+
+/* data table */
+.css_right{float:right;}
+.dataTables_length{margin:5px;}
+.dataTables_filter input{font-size:12px; margin:5px 5px 5px 0px}
+.dataTables_wrapper{min-height: 0px;}
+.data_table tr{height:20px;}
+.data_table td{vertical-align:bottom;}
+.data_table_count{ margin-bottom:10px; float:left;}
+
+
+
+/* entity assignment */
+#one_to_many_assignment{padding:15px; width:650px; height:370px;}
+.entity_area{
+    width:300px;
+    height:380px;
+}
+.entity_title{
+    font-size:15px;
+    margin:5px;
+}
+.entity_list{
+    border:1px solid #ccc;
+    width:300px;
+    height:350px;
+}
+#entity_exchange{
+    float:left;
+    margin:170px 12px 0px 12px;
+}
+.assignment_object:hover{ background: lightgray; }
+.assignment_object a:hover{ color:green; }
+
+
 /** end of app-spec */
 input,
 textarea,
@@ -95,6 +131,7 @@ select:focus,select:hover{
     padding:20px 20px;
 }
 
+.full_width{width:100%}
 .left{float:left}
 .right{float:right}
 .left_links{float:left;}

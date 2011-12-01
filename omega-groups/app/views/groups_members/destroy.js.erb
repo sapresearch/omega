@@ -1,4 +1,13 @@
-$(".index_list").html("<%= escape_javascript( render "groups/index_list" ) %>")    
-load_dialog_message("<%= escape_javascript(render "groups_members/dialog_destroyed_message") %>");
+<% if @sub_groups.empty? %>
+  <% if @type == "admin" %>
+    $(".page_content").html("<%= escape_javascript( render "groups_members/index_page_content" ) %>")
+  <% else %>
+    $(".index_list").html("<%= escape_javascript( render "groups/index_list" ) %>")
+  <% end %>
+  load_dialog_message("<%= escape_javascript(render "groups_members/dialog_destroyed_message") %>")
+<% else %>
+  load_dialog_message("<%= escape_javascript( render "groups_members/dialog_destroy_failed_member_in_subgroup_message", :sub_groups=>@sub_groups, :member=>@member ) %>", {width:450})
+<% end %>
 
 $(".tipsy").remove();
+

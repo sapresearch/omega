@@ -31,7 +31,7 @@ class GroupsController < Omega::Controller
 
     Group.transaction do
       @group = Group.create(params_group)
-      GroupsMember.create(:group_id=>@group.id, :member_id=>@creator.id, :position=>"founder")
+      GroupsMember.create(:group_id=>@group.id, :member_id=>@creator.id, :position=>"leader")
     end
     
     respond_with(@group) do |format|
@@ -40,13 +40,29 @@ class GroupsController < Omega::Controller
   end
 
   def update
-    params_group = params[:group]
-    params_group.merge!({:capacity=>nil}) if params[:group][:capacity]=="unlimited"
     @group = Group.find(params[:id])
-    @group.update_attributes(params_group)
+    @type = params[:type]
+    case @type
+      when "publish"
+        @recursive = (params[:recursive]=="true"||params[:recursive]==true) ? true :false
+        @group.publish(@recursive)
+        initialize_group_objects
+      when "unpublish"
+        @recursive = (params[:recursive]=="true"||params[:recursive]==true) ? true :false
+        @group.unpublish(@recursive)
+        initialize_group_objects
+      when "block"
+        @group.block
+      when "unblock"
+        @group.unblock
+      else
+        params_group = params[:group]
+        params_group.merge!({:capacity=>nil}) if params[:group][:capacity]=="unlimited"
+        @group.update_attributes(params_group)
 
-    respond_with(@group) do |format|
-      format.js {redirect_to groups_url(:group_id=>@group.id)}
+        respond_with(@group) do |format|
+          format.js {redirect_to groups_url(:group_id=>@group.id)}
+        end
     end
   end
 

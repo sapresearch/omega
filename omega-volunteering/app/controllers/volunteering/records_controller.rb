@@ -114,7 +114,6 @@ class Volunteering::RecordsController < Omega::Controller
 
   def create
    contact = params[:volunteering_record][:contact]
-	puts "Volunteering::RecordsController. Contact hash: " + contact.inspect.to_s
    params[:volunteering_record].delete(:contact) 
    @record = Volunteering::Record.create(params[:volunteering_record])
    @record.action = 'To Be Taken'
@@ -208,28 +207,23 @@ class Volunteering::RecordsController < Omega::Controller
   end
 
 	def enroll_volunteers
-		#@all_filters = SearchFilter.filter_for(Contact, Hash.new, [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string } ] )
 
+		# Handles AJAX search.
 		options = [ {:class => :skills, :column => :name, :type => :string}, { :class => :interests, :column => :name, :type => :string }, { :class => :addresses, :column => :zip_code, :type => :integer } ]
 		Contact::Field.all.each do |cf|
 			column = cf.name.nil? ? "" : cf.name.to_sym
 			type = cf.data_type.nil? ? "" : cf.data_type.to_sym
 			options << { :class => :self, :column => column, :type => type }
 		end
+
 		@all_filters = SearchFilter.filter_for(Contact, Hash.new, options) # Use a blank hash so it doesn't filter anything. Use this for the checkbox filters.
 		@filter = SearchFilter.filter_for(Contact, params, options) # Use this one to display all the contacts.
 
-		@zip_filter = []
-		#params[:search][:column].each do |k, v|
-			#if v == "zip"
-			#end
-		#end
-			
-
 		@position = Volunteering::Position.find(params[:id])
+		@existing_records = @position.records
 		@position_id = @position.id
 		@records = Array.new
-		@contacts = Contact.find(:all)
+		@contacts = Contact.all
 		@contacts.each do |c|
     		record = Volunteering::Record.new
 			record.position_id = @position_id
@@ -238,46 +232,20 @@ class Volunteering::RecordsController < Omega::Controller
 		end
 		@records << Volunteering::Record.new if @records.empty?
 
-		@zips = []
-		@zips << Zipcodr::find('08648').zip
-		@zips << Zipcodr::find('08648').city
-		@zips << Zipcodr::find('08648').state
-		@zips << Zipcodr::find('08648').county
-
-		@zip1 = []
-		@zip1 << Zipcodr::find('02138').lat
-		@zip1 << Zipcodr::find('02138').long
-
-		@zip2 = []
-		@zip2 << Zipcodr::find('02139').lat
-		@zip2 << Zipcodr::find('02139').long
-
-		@distance = FasterHaversine.distance(@zip1[1], @zip1[0], @zip2[1], @zip2[0])
-		@map = Google::Maps::Static::Map.new :center => [@zip1[0], @zip1[1]]
-		@map << Google::Maps::Static::Markers.new([@zip1[0], @zip1[1]], :color => :blue, :label => 'Admin')
-		@map << Google::Maps::Static::Markers.new([@zip2[0], @zip2[1]], :color => :green, :label => 'User')
 		@params = params
 		respond_with(@skills_and_interests)
 	end
 
-	def create_multiple
-		position_id = params[:records][:position_id]
-		contact_ids = params[:records][:contact_ids]
-		contact_ids.gsub!(/\[|\]/, "")
-		contact_ids = contact_ids.split(",")
-		contact_ids.each do |contact_id|
-			v = Volunteering::Record.new(:position_id => position_id,
-												  :contact_id => contact_id,
-												  :status => "Accepted"
-												 )
-			if v.save
-				p = Volunteering::Position.find(position_id)
-				boolean = p.contacts.select! { |c| c.id == contact_id}
-			elsif !v.save
-    			redirect_to my_applications_volunteering_records_url
-			end
-		end
-		redirect_to volunteering_positions_url
+	def create_single
+		position = Volunteering::Position.find(params[:position_id])
+		Volunteering::Record.create(:position_id => position.id, :contact_id => params[:contact_id], :status => "Accepted")
+		@existing_records = position.records
+	end
+
+	def update_status
+		Volunteering::Record.find(params[:record_id]).update_attributes(:status => params[:value])
+		position = Volunteering::Position.find(params[:position_id])
+		@existing_records = position.records
 	end
 
 	def zip_search
