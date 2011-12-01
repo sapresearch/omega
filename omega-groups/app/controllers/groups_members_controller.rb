@@ -44,7 +44,6 @@ class GroupsMembersController < Omega::Controller
 
   end
 
-  #developing
   def add
     group_id = params[:group_id]
     member_id = params[:member_id]    
@@ -71,7 +70,6 @@ class GroupsMembersController < Omega::Controller
     end
   end
 
-  #developing
   def remove
     group_id = params[:group_id]
     member_id = params[:member_id]

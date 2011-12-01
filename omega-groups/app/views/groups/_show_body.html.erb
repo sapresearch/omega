@@ -12,10 +12,7 @@
             <%= om_button(:contact => true, :icon=>'user-remove') do %>
               <%= link_to_function "Quit", "destroy_group_member('#{escape_javascript(render "groups_members/dialog_destroy_confirm", :group=>group)}', '#{groups_member_url(group_member)}')", "data-tooltip"=>"Quit this group" %>
             <% end %>
-          <% end %>
-          <%= om_button(:contact => true, :icon=>'back') do %>
-            <%= link_to "Space", {}, "data-tooltip"=>"Posts and Uploads" %>
-          <% end %>
+          <% end %>          
         <% else %>
           <% group_request = GroupsRequester.find_by_group_id_and_requester_id(group.id, current_user.id) %>
           <% unless group_request.nil? %>
@@ -36,6 +33,12 @@
             <% end %>
           <% end %>
         <% end %>   
+      <% end %>
+
+      <% if group_member || is_admin? %>
+        <%= om_button(:contact => true, :icon=>'back') do %>
+          <%= link_to "Space", {}, "data-tooltip"=>"Posts and Uploads" %>
+        <% end %>
       <% end %>
 
       <%= om_button(:contact => true, :icon=>'search') do %>
