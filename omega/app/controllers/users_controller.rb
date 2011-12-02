@@ -29,7 +29,6 @@ class UsersController < Omega::Controller
   
   def role_assignment
    @user = User.find(params[:id])
-
   end
 
   def join
@@ -125,15 +124,7 @@ class UsersController < Omega::Controller
 	def search
 		@skills = Contact::Skill.all
 		@interests = Contact::Interest.all
-		#Contact::Skill.all.each do |s|
-			#if s.contact.respond_to? 'user' then
-				#hash{word => s.contact.user}
-			#end
-		#end
-
-		#@word_user_hash = Contact.
 	end
-
 
 	def my_page
 		@user = User.find(params[:id])

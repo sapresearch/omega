@@ -73,7 +73,7 @@ class User < Omega::Model
   accepts_nested_attributes_for :contact
   accepts_flattened_values_for :skills, :value => :name
 
-  attr_accessor :password, :password_confirmation # Who put this here?
+  attr_accessor :password, :password_confirmation
   attr_accessible :username, :email, :contact_attributes
 
   validates :username,   :presence => true,
@@ -104,13 +104,13 @@ class User < Omega::Model
     id.nil?
   end
 
-	def is_admin?
-		self.roles.inject(false) { |admin, role| admin = admin == true ? true : role.internal_name == "administrator" }
-	end
-
   def is_logged_in?
     !is_anonymous?
   end
+
+	def is_admin?
+		self.roles.inject(false) { |admin, role| admin = admin == true ? true : role.internal_name == "administrator" }
+	end
 
   def password_changed?
     password && !password.empty?

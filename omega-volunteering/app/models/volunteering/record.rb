@@ -3,7 +3,7 @@ class Volunteering::Record < Omega::Model
   MAX_RECORDS_PER_PAGE = 100
 
   belongs_to  :position, :inverse_of => :records
-  belongs_to  :contact
+  has_one  :contact
   has_many    :time_entries, :dependent => :destroy
   
   before_validation( :on => :create) do

@@ -130,8 +130,8 @@ class Volunteering::RecordsController < Omega::Controller
    @record.save
    
    unless @record.contact_id.nil?
-   @user = Contact.find(@record.contact_id)
-   UserMailer.parental_approval(@user).deliver
+   	@user = Contact.find(@record.contact_id)
+   	UserMailer.parental_approval(@user).deliver
    end
    respond_with(@record)
   end
