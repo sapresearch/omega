@@ -258,7 +258,7 @@ class Volunteering::RecordsController < Omega::Controller
       @message.to      = user_to
       @message.from    = current_user
       @message.save
- 	  	UserMailer.send_message(user_to).deliver
+ 	  	UserMailer.email(@message).deliver
 		@existing_records = position.records
 	end
 
