@@ -22,7 +22,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def email(message)
-    mail :to => message.to.user.email 
+    mail :to => message.to.email
 	 mail :body => message.body
 	 mail :subject => message.subject
   end
