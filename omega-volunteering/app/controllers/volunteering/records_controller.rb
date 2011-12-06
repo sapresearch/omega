@@ -86,7 +86,6 @@ class Volunteering::RecordsController < Omega::Controller
     end 
     
     @contact = Contact.for(current_user)
-    
     respond_with(@record)
   end
 
@@ -259,6 +258,7 @@ class Volunteering::RecordsController < Omega::Controller
       @message.to      = user_to
       @message.from    = current_user
       @message.save
+ 	  	UserMailer.send_message(user_to).deliver
 		@existing_records = position.records
 	end
 

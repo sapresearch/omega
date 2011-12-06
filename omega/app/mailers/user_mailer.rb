@@ -20,5 +20,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail :to => @user.email
   end
+
+  def send_message(user)
+    mail :to => user.email 
+  end
   
 end
