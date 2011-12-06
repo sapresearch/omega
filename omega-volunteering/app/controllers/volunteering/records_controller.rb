@@ -248,6 +248,20 @@ class Volunteering::RecordsController < Omega::Controller
 		@existing_records = position.records
 	end
 
+	def message_volunteer
+		position = Volunteering::Position.find(params[:position_id])
+		msg = params[:message].to_s
+		user_to = Contact.find(params[:message_to]).user
+		subject = "Message about " + position.name.to_s
+      @message         = Message.new()
+      @message.subject = subject
+      @message.body    = msg
+      @message.to      = user_to
+      @message.from    = current_user
+      @message.save
+		@existing_records = position.records
+	end
+
 	def zip_search
 		@zip1 = []
 		@zip1 << Zipcodr::find('08648').lat

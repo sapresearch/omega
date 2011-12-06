@@ -35,6 +35,7 @@ Omega::Volunteering::Module.routes.draw do
 		  post :create_single
 		  put :update_status
         post :create_multiple
+		  post :message_volunteer
         get :summary
         get :user_history, :path => 'user_history/:contact_id'
 		  get :zip_search

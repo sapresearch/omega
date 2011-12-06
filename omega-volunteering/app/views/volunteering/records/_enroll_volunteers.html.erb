@@ -82,6 +82,22 @@ $(function() {
 			dataType: 'script',
 			cache: false
 		});
+		self.remove();
+	});
+
+	// Send a message to the volunteers.
+	$( '#contacts_to_add').delegate( 'input#message_submit', 'click', function() {
+		var self = $( this ).parent();
+		var message_to = self.find( 'input.message' ).attr( 'id' );
+		var message = self.find( "input.message" ).val();
+		var position_id = "<%= @position.id %>";
+		$.ajax({
+			url: "<%= message_volunteer_volunteering_records_url %>",
+			type: 'POST',
+			data: {message_to:message_to, message:message, position_id:position_id},
+			dataType: 'script',
+			cache: false
+		});
 	});
 
 });
