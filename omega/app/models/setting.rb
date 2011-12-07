@@ -1,6 +1,6 @@
 class Setting < Omega::Model
 	belongs_to :user
-	attr_accessible :facebook_token, :twitter, :user_id
+	attr_accessible :facebook_token, :twitter, :user_id, :email
 
   PERM_ADMIN = 'myomega_admin'
   PERM_VIEW  = 'myomega_view'

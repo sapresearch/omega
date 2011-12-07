@@ -1,5 +1,26 @@
-<%= render 'layouts/settings' %>
+<%#= render 'layouts/settings' %> <!-- This was for the social media stuff -->
+
+<%= render 'update_email' %>
+
+<p>
+	<input type="submit" id="setting_submit">
+</p>
 
 <% Image.all.each do |i| %>
 	<%= i.url if i.respond_to? 'url' %>
 <% end %>
+
+<script type="text/javascript">
+
+	$( "#setting_submit" ).click(function(){
+		var email = $( "#setting_email" ).attr( 'value' );
+		$.ajax({
+			url: "<%= update_email_settings_url %>",
+			type: 'PUT',
+			data: {email:email},
+			dataType: 'script',
+			cache: false
+		});
+	});
+
+</script>

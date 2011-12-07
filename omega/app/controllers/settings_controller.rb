@@ -1,21 +1,5 @@
 class SettingsController < Omega::Controller
 
-	def index
-		@fb_enabled = Setting.fb_enabled?(current_user)
-		@settings = Setting.find_by_user_id(current_user.id)
-		#@settings.nil? ? @either_edit_or_new = "new" : @either_edit_or_new = "/edit"
-		@either_edit_or_new = "/edit"
-		if @settings.nil? then
-			@settings = Setting.create(:user_id => current_user.id)
-		end
-			
-		@image = Image.new
-		respond_to do |format|
-			format.html # index.html.erb
-			format.xml  { render :xml => @settings }
-		end
-  end
-
 	def new
 		@fb_enabled = Setting.fb_enabled?(current_user)
 		@setting = Setting.new
@@ -36,21 +20,18 @@ class SettingsController < Omega::Controller
 	end
 
 	def edit
-		@fb_enabled = Setting.fb_enabled?(current_user)
-		@setting = Setting.find(params[:id])
+		@setting = Setting.all.count <= 1 ? Setting.first : "Error: more than one setting exists"
+		@setting = Setting.create if Setting.all.count == 0
 		@image = Image.new
-		respond_to do |format|
-			format.html # index.html.erb
-			format.xml  { render :xml => @settings }
-		end
 	end
 
-	def show
-		@setting = Setting.all
-		@setting = Setting.find(params[:id])
+	def update_email
+		Setting.first.update_attributes(:email => params[:email])
+		@setting = Setting.first
 	end
 
-	def error
+	def update
+		redirect_to(edit_settings_url)
 	end
 
 end
