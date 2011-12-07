@@ -20,6 +20,7 @@ class Group < Omega::Model
 
   scope :named, lambda { |name| where(:name=>name) }
   scope :named_like, lambda { |name| where('name like ? ', "%#{name}%") }
+  scope :without_contact, lambda { |contact| where('id not in (?)', contact.joined_group_ids) unless contact.joined_groups.empty? }
 
   class << self
     def open?
@@ -48,8 +49,10 @@ class Group < Omega::Model
     def private_groups(order_by=:name)
       Group.where(:status=>"private").order(order_by)
     end
+
   end
 
+  ## instance methods
   def is_root?
     super_group.nil?
   end
@@ -116,8 +119,12 @@ class Group < Omega::Model
   end
 
   def eligible_for_requester?(requester)
+    eligible_for_member?(requester.contact)
+  end
+
+  def eligible_for_member?(member)
     return true if is_root?
-    super_group_member = GroupsMember.find_by_group_id_and_member_id(super_group.id, requester.contact.id)
+    super_group_member = GroupsMember.find_by_group_id_and_member_id(super_group.id, member.id)
     not super_group_member.nil?
   end
 
@@ -138,13 +145,18 @@ class Group < Omega::Model
     not GroupsRequester.find_by_group_id_and_requester_id(self.id, requester.id).nil?
   end
 
-  #untested
   def dispose_request(member)
     requester = member.user
     return if requester.nil?
     groups_requester = GroupsRequester.find_by_group_id_and_requester_id(self.id, requester.id)
-    groups_requester.destroy if groups_requester
+    groups_requester.destroy if groups_requester # cancel pending request, if there is any
   end
+
+  def available_contacts
+    assigned_members = self.members(:order=>:first_name)
+    self.is_root? ? Contact.all-assigned_members : self.super_group.members-assigned_members
+  end
+  
 end
 
 

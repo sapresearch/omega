@@ -67,7 +67,7 @@ class User < Omega::Model
   has_many :uploads, :foreign_key=>"uploader_id"
   has_many :posts
   has_many :topics, :through=>:posts
-  has_upload :photo # moved from contact model
+  # has_upload :photo # moved from contact model
   accepts_nested_attributes_for :uploads   # moved from contact model
 
   accepts_nested_attributes_for :contact

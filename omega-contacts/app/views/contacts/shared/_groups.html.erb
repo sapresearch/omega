@@ -12,21 +12,39 @@
       </li>
     </ul>
   </div>
-  <% @contact_groups.group_by(&:group_type).each do |group_type, groups| %>
+
+  <h3>
+    <a>
+      Groups
+    </a>
+  </h3>
+  <div>
+    <table class="width-100">
+      <% @contact_groups.each do |group| %>
+          <tr data-id=<%= group.id %>>
+            <td> <%= link_to truncate(group.name, :length => 30), group, :remote=> true %></td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <!-- old database
+  <%# @contact_groups.group_by(&:group_type).each do |group_type, groups| %>
       <h3>
         <a>
-          <%= group_type.try(:pluralize) %>
+          <%#= group_type.try(:pluralize) %>
         </a>
       </h3>
 
       <div>
         <table class="width-100">
-          <% groups.each do |group| %>
-              <tr data-id=<%= group.id %>>
-                <td> <%= link_to truncate(group.name, :length => 30), group, :remote=> true %></td>
+          <%# groups.each do |group| %>
+              <tr data-id=<%#= group.id %>>
+                <td> <%#= link_to truncate(group.name, :length => 30), group, :remote=> true %></td>
               </tr>
-          <% end %>
+          <%# end %>
         </table>
       </div>
-  <% end %>
+  <%# end %>
+  -->
 </div>

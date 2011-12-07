@@ -16,7 +16,8 @@ class ContactsController < Omega::Controller
   breadcrumb 'Contacts' => :contacts
 
   def index
-    @contact_groups = Contact::Group.scoped
+    #@contact_groups = Contact::Group.scoped  # old database
+    @contact_groups = Group.scoped
     respond_with(@contacts) do |format|
       format.any(:html, :js) { render 'all' }
     end
@@ -32,7 +33,8 @@ class ContactsController < Omega::Controller
   end
   
   def show
-    @contact_groups = Contact::Group.scoped
+    #@contact_groups = Contact::Group.scoped # old database
+    @contact_groups = Group.scoped
     respond_with(@contact)
   end
 

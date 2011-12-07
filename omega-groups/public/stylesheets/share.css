@@ -1,5 +1,5 @@
 /** app-specific */
-/* copy from application_evergreen.css due to firefox css length limit */
+/* partially copied from application_evergreen.css */
 .explanation {
     background: none repeat scroll 0 0 #f3f3f3;
     border: 1px solid #ddd;
@@ -66,7 +66,7 @@
 
 
 /* entity assignment */
-#one_to_many_assignment{padding:15px; width:650px; height:370px;}
+.one_to_many_assignment{padding:15px; width:650px; height:370px;}
 .entity_area{
     width:300px;
     height:380px;
@@ -79,8 +79,9 @@
     border:1px solid #ccc;
     width:300px;
     height:350px;
+    overflow-y:auto;
 }
-#entity_exchange{
+.entity_exchange{
     float:left;
     margin:170px 12px 0px 12px;
 }

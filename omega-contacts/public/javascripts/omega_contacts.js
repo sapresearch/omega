@@ -48,6 +48,7 @@ $(function() {
     /**
      * show the panel to add or remove a contact from a group
      */
+    /*
     $('#contact-assignment').dialog({ autoOpen: false,
         title: 'Assign Contacts',
         modal: true,
@@ -55,10 +56,10 @@ $(function() {
         width:600
     });
 
-
     $('#assign-trigger').click(function() {
         $('#contact-assignment').dialog('open');
     });
+    */
      $("#contact_accordion").accordion();
 
     /**
@@ -71,9 +72,16 @@ $(function() {
             $(this).effect('pulsate');
             var group_id = this.getAttribute('data-id');
             var contact_id = ui.draggable.attr('data-id');
-            var from_group_id = ui.draggable.attr('data-group-id');
+            //var from_group_id = ui.draggable.attr('data-group-id');
+            $.ajax({
+                url : '/groups_members/add/',
+                data: {group_id:group_id, member_id:contact_id,type:"contacts_to_group"},
+                type: 'POST',
+                dataType : 'script'
+            })
+            /*
             if (from_group_id == undefined) {
-                
+
                 $.ajax({
                     url :  '/contacts/' + contact_id + '/groups/' + group_id + '/assign/',
                     type: 'PUT',
@@ -89,6 +97,7 @@ $(function() {
                     }
                 })
             }
+            */
         }
     });
 });
@@ -106,7 +115,7 @@ function update_contacts(contacts, group_id, group_name) {
     var $contacts = $('#contacts');
     $contacts.empty();
     var list = '<table>';
-    if (group_id !== undefined && typeof group_id == "number") {
+    /*if (group_id !== undefined && typeof group_id == "number") {
         $(contacts).each(function(i) {
             list += '<tr data-id="' + contacts[i].id + '" data-group-id="' + group_id + '"><td><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
                     + contacts[i].first_name + '</a>'
@@ -119,10 +128,14 @@ function update_contacts(contacts, group_id, group_name) {
                     + '</td></tr>';
 
         });
-    } else {
+    */
+    //} else {
         $(contacts).each(function(i) {
-
-            list += '<tr data-id="' + contacts[i].id + '"><td><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
+            if (group_id !== undefined && typeof group_id == "number")
+                list += '<tr data-id="' + contacts[i].id + '" data-group-id="' + group_id + '">';
+            else
+                list += '<tr data-id="' + contacts[i].id + '">'
+            list += '<td><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
                     + contacts[i].first_name + '</a>'
                     + '<td class="text-right" width="40px"><span class="mgm-contact hide">'
                     + '<span data-tooltip="Add me to another group me by dragging into a group on the left" class="om-icon-only om-blue-icon ui-icon-arrow-4-diag"></span>'
@@ -132,7 +145,8 @@ function update_contacts(contacts, group_id, group_name) {
                     + '</td></tr>';
 
         });
-    }
+    //}
+
     list += '</table>';
     $contacts.append(list);
     $contacts.find('tr').draggable({
@@ -142,7 +156,7 @@ function update_contacts(contacts, group_id, group_name) {
                 $("div.tipsy").remove();
             }
         }).find('.mgm-contact').toggleClass('hide');
-   
+
     $contacts.find('a.remove-contact').bind("ajax:success", function() {
         $(this).closest('tr').remove();
     });

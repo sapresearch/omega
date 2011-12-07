@@ -1,6 +1,6 @@
 class Contact < Omega::Model
   require_dependency 'contact/address'
-  require_dependency 'contact/group'
+  #require_dependency 'contact/group'
   require_dependency 'contact/group_position'
   require_dependency 'contact/import'
   require_dependency 'contact/interest'

@@ -24,6 +24,13 @@ class GroupsController < Omega::Controller
     respond_with(@groups)
   end
 
+  # app-spec for contact module
+  def show
+    group_id = params[:id]
+    @group = Group.find(group_id)
+    @members = @group.members(:order=>:first_name)    
+  end
+
   def create
     params_group = params[:group]
     params_group.merge!({:capacity=>nil}) if params[:group][:capacity]=="unlimited"

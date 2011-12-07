@@ -1,15 +1,31 @@
 <% if @error %>
-  load_dialog_confirm("<%= escape_javascript( render "shared/dialog_error_message" ) %>", "<%= groups_members_url(:group_id=>@group.id) %>", "get", false, {}, {})
+  load_dialog_confirm("<%= escape_javascript( render "shared/dialog_error_message" ) %>", "<%= @return_url %>", "get", false, {}, {})
+<% elsif not @sub_groups.empty?  %>
+  load_dialog_message("<%= escape_javascript( render "groups_members/dialog_destroy_failed_member_in_subgroup_message", :sub_groups=>@sub_groups, :member=>@member ) %>", {width:450})
 <% else %>
-  <% if @sub_groups.empty? %>
+  <% if @type=="contacts_to_group" %>
     <% if @before_member %>
-      $("#available_contacts_list #object_to_add_<%= @before_member.id.to_s %>").before("<%= escape_javascript(render "shared/object_to_add", :obj=>@member, :url=>add_groups_members_url(:member_id=>@member.id, :group_id=>@group.id)) %>")
+      $("#available_contacts_list #object_to_add_<%= @before_member.id.to_s %>").before("<%= escape_javascript(render "shared/object_to_add", :obj=>@member, :url=>add_groups_members_url(:member_id=>@member.id, :group_id=>@group.id, :type=>"contacts_to_group")) %>")
     <% else %>
-      $("#available_contacts_list").append("<%= escape_javascript(render "shared/object_to_add", :obj=>@member, :url=>add_groups_members_url(:member_id=>@member.id, :group_id=>@group.id)) %>")
+      $("#available_contacts_list").append("<%= escape_javascript(render "shared/object_to_add", :obj=>@member, :url=>add_groups_members_url(:member_id=>@member.id, :group_id=>@group.id, :type=>"contacts_to_group")) %>")
     <% end %>
     $("#assigned_contacts_list #object_to_remove_<%= @member.id.to_s %>").remove()
-  <% else %>
-    load_dialog_message("<%= escape_javascript( render "groups_members/dialog_destroy_failed_member_in_subgroup_message", :sub_groups=>@sub_groups, :member=>@member ) %>", {width:450})
-  <% end %>  
+  <% elsif @type=="groups_to_contact" %>
+    <% if @before_group %>
+      $("#available_groups_list #object_to_add_<%= @before_group.id.to_s %>").before("<%= escape_javascript(render "shared/object_to_add", :obj=>@group, :url=>add_groups_members_url(:member_id=>@member.id, :group_id=>@group.id, :type=>"groups_to_contact")) %>")
+    <% else %>
+      $("#available_groups_list").append("<%= escape_javascript(render "shared/object_to_add", :obj=>@group, :url=>add_groups_members_url(:member_id=>@member.id, :group_id=>@group.id, :type=>"groups_to_contact")) %>")
+    <% end %>
+    $("#assigned_groups_list #object_to_remove_<%= @group.id.to_s %>").remove()
+    
+    //app-spec
+    //remove the contact from assigned contacts
+    if($('tr[data-id=<%= @contact.id %>]').attr('data-group-id'))
+      $('tr[data-id=<%= @contact.id %>]').remove();
+    $('.assigned-groups').empty().append('<%= escape_javascript(render :partial => 'contacts/partials/assigned_groups') %>');
+    $('.tipsy').remove();
+
+  <% end %>
 <% end %>
 
+$(".tipsy").remove()

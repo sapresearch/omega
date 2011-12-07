@@ -1,4 +1,4 @@
-<% if  @contact.uploads.any? %>
+<% if  @contact.user.uploads.any? %>
             <table class="width-100">
           <thead>
           <tr>
@@ -8,7 +8,7 @@
             <th>Delete</th>
           </tr>
           </thead>
-    <% @contact.uploads.each do |file| %>
+    <% @contact.user.uploads.each do |file| %>
         <%
            icon = case file.upload_content_type
                       when /^image/ then

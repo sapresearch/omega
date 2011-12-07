@@ -4,14 +4,16 @@
   <%= @contact.first_name %>  <%= @contact.last_name %>
 
 </h2>
+
+<!-- old database -->
 <div class="user_image">
-  <% if @contact.photo %>
-      <% photo = @contact.photo.upload
+  <%# if @contact.photo %>
+      <%# photo = @contact.photo.upload
          size = Paperclip::Geometry.from_file(photo.to_file(:original)) %>
-      <%= image_tag(photo.url, (size.width > size.height ? :width : :height) => '130') %>
-  <% else %>
+      <%#= image_tag(photo.url, (size.width > size.height ? :width : :height) => '130') %>
+  <%# else %>
       <%= image_tag("profile.jpg", :width => '130') %>
-  <% end %>
+  <%# end %>
 
 </div>
 <div class="clear"></div>
@@ -57,8 +59,10 @@ Email: <%= @contact.email %><br>
 
       <%= link_to "Upload", upload_contact_path(@contact), :remote => true %>
 </span>
-
-    <%= render :partial => "/contacts/uploads/upload_records" %>
+    
+    <% if @contact.user %>
+      <%= render :partial => "/contacts/uploads/upload_records" %>
+    <% end %>
 
 
   </div>
@@ -70,13 +74,14 @@ Email: <%= @contact.email %><br>
     <ul class="assigned-groups">
       <%= render :partial => 'contacts/partials/assigned_groups' %>
     </ul>
+    
     <a href="#" id="assign-trigger">
           <span data-tooltip="Assign this contact to groups">
           <span class="om-icon-only om-blue-icon ui-icon-plus"></span>
           Assign to desired groups
           </span>
     </a>
-
+    
   </div>
 
   <% if @contact.skills.any? or @contact.interests.any? %>
@@ -95,18 +100,18 @@ Email: <%= @contact.email %><br>
             <% if address.city %>
                 City:
                 <%= address.city.capitalize %>
-                <br>
+                <br/>
             <% end %>
             <% if address.street? %>
                 Street:
                 <%= address.street %>
-                <br>
+                <br/>
             <% end %>
             <% if address.zip_code? %>
                 Postal Code:
                 <%= address.zip_code %>
-                <br>
-                <br>
+                <br/>
+                <br/>
             <% end %>
         <% end %>
       </div>
@@ -121,8 +126,8 @@ Email: <%= @contact.email %><br>
 
             Number (<%= phone.number_type %>):
             <%= phone.number %>
-            <br>
-            <br>
+            <br/>
+            <br/>
 
         <% end %>
       </div>
@@ -132,6 +137,10 @@ Email: <%= @contact.email %><br>
 
 
 </div>
+
+<%= render "groups_members/dialog_assign_groups_message", :contact=>@contact %>
+
+<!-- old database
 <div id="contact-assignment">
   <table class="width-100" >
     <tr>
@@ -145,21 +154,22 @@ Email: <%= @contact.email %><br>
     <tr>
       <td>
         <ul class="group-list">
-          <% Contact::Group.without_contact(@contact).each do |g| %>
+          <%# Contact::Group.without_contact(@contact).each do |g| %>
               <li>
-                <span data-tooltip="Add  <%= "#{@contact.first_name} #{@contact.last_name} to: #{g.name} by clicking. The assignment gets applied right away".html_safe %>">
-                <%= link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus"></span> #{g.name.truncate(40)} }.html_safe, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
+                <span data-tooltip="Add  <%#= "#{@contact.first_name} #{@contact.last_name} to: #{g.name} by clicking. The assignment gets applied right away".html_safe %>">
+                <%#= link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus"></span> #{g.name.truncate(40)} }.html_safe, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
               </span>
               </li>
-          <% end %>
+          <%# end %>
         </ul>
       </td>
       <td>
         <ul class="assigned-groups group-list">
-          <%= render :partial => 'contacts/partials/assigned_groups' %>
+          <%#= render :partial => 'contacts/partials/assigned_groups' %>
         </ul>
       </td>
     </tr>
   </table> 
  
 </div>
+-->
