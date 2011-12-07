@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => ( Setting.email.blank? ? "samuel.kadolph@sap.com" : Setting.email )
+  default :from => ( Setting.first.email.blank? ? "samuel.kadolph@sap.com" : Setting.first.email )
   default_url_options = { :host => "omega.com" }
 
   def lost_username(email, users)
