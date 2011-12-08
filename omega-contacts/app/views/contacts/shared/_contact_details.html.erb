@@ -68,7 +68,7 @@ Email: <%= @contact.email %><br/>
   <h3><a href="#">Group Assignments</a></h3>
 
   <div>
-    <ul class="assigned-groups">
+    <ul class="assigned-groups" id="assigned-groups-<%= @contact.id.to_s %>">
       <%= render :partial => 'contacts/partials/assigned_groups' %>
     </ul>
     

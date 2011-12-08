@@ -19,7 +19,7 @@
     $("#available_groups_list #object_to_add_<%= @group.id.to_s %>").remove()    
   <% end %>
   // app-spec code for contact module
-  $('.assigned-groups').empty().append('<%= escape_javascript(render :partial => 'contacts/partials/assigned_groups') %>');
+  $('#assigned-groups-<%= @member.id.to_s %>').empty().append('<%= escape_javascript(render :partial => 'contacts/partials/assigned_groups') %>');
 <% end %>
 
 $(".tipsy").remove()
