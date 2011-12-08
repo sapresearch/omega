@@ -1,4 +1,4 @@
-class Contact::Group < Omega::Model
+class Contact::Group_ < Omega::Model
   GROUP_TYPES = %w{Household Organization}
 
   has_many :group_positions, :dependent => :destroy
