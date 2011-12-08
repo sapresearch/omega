@@ -1,13 +1,14 @@
 <%#= render 'layouts/settings' %> <!-- This was for the social media stuff -->
-
-<%= render 'update_email' %>
-
-<p>
-	<input type="submit" id="setting_submit">
-</p>
-
-<% Image.all.each do |i| %>
-	<%= i.url if i.respond_to? 'url' %>
+<% with_permission(User::PERM_ADMIN) do %>
+	<%= render 'update_email' %>
+	
+	<p>
+		<input type="submit" id="setting_submit">
+	</p>
+	
+	<% Image.all.each do |i| %>
+		<%= i.url if i.respond_to? 'url' %>
+	<% end %>
 <% end %>
 
 <script type="text/javascript">

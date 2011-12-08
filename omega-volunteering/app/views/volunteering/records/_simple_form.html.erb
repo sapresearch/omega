@@ -78,22 +78,24 @@
 
 
 		
-			<h3 class="application-form">PARENTAL APPROVAL</h3>
-			
-				<p>
-					<span class="form-text">Youth aged 18 and under require parental consent to volunteer with Evergreen. Youth aged 14 and under must be accompanied by a parent or guardian. I am the parent and/or legal guardian of who is under 19 years of age. I hereby verify that I give consent for my child to volunteer with Evergreen.</span>
-				</p>
+			<% if @contact.birthday.nil? or !(@contact.over_18?) %>
+				<h3 class="application-form">PARENTAL APPROVAL</h3>
 				
-				<p>
-				  <%= c.label "parent's name", :class => "mandatory-field"%>
-		        <%= c.text_field :parent_name, :'data-tooltip' => "For parental approval type in your parent's full name" %>	
-			 	</p>
-				
-				<p>
-				  <%= c.label "parent's email" , :class => "mandatory-field"%>
-		        <%= c.text_field :parent_email, :'data-tooltip' => "Please include your parent's email where they could be contacted" %>	
-			 	</p>
-	
+					<p>
+						<span class="form-text">Youth aged 18 and under require parental consent to volunteer with Evergreen. Youth aged 14 and under must be accompanied by a parent or guardian. I am the parent and/or legal guardian of who is under 19 years of age. I hereby verify that I give consent for my child to volunteer with Evergreen.</span>
+					</p>
+					
+					<p>
+					  <%= c.label "parent's name", :class => "mandatory-field"%>
+			        <%= c.text_field :parent_name, :'data-tooltip' => "For parental approval type in your parent's full name" %>	
+				 	</p>
+					
+					<p>
+					  <%= c.label "parent's email" , :class => "mandatory-field"%>
+			        <%= c.text_field :parent_email, :'data-tooltip' => "Please include your parent's email where they could be contacted" %>	
+				 	</p>
+		
+		    	<% end %>
 	    	<% end %>
 		<!-- End of contact fields !-->
 

@@ -20,6 +20,7 @@ class UsersController < Omega::Controller
   end
 
   def register
+	 puts "\n\nIN REGISTER"
     @user = User.new
     contact = @user.build_contact
     contact.addresses.build
@@ -28,12 +29,15 @@ class UsersController < Omega::Controller
   end
   
   def role_assignment
-   @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def join
+	 puts "\n\nIN JOIN"
 	 password = params[:user].delete(:password)
 	 confirm = params[:user].delete(:password_confirmation)
+	 params[:user][:contact_attributes][:birthday] = Date.strptime(params[:user][:contact_attributes][:birthday], '%m/%d/%Y')
+	 puts "\n\n" + params[:user][:contact_attributes][:birthday].to_s
 	 @user = User.new(params[:user])
 	 @user.password = password
 	 @user.password_confirmation = confirm

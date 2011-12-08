@@ -16,7 +16,7 @@ class Contact < Omega::Model
 
   TITLES = %w{ Mr Miss Ms Mrs}
 
-  attr_accessible :first_name, :last_name, :email, :phone_numbers_attributes, :addresses_attributes
+  attr_accessible :first_name, :last_name, :email, :phone_numbers_attributes, :addresses_attributes, :birthday
 
   scope :status, where('status IS NULL')
   before_destroy { |contact| Contact::Value.destroy_all "contact_id = #{contact.id}" }
@@ -118,18 +118,17 @@ class Contact < Omega::Model
   
   attr_accessor :email_confirmation
 
-  #validates :title,      :presence  => true,
-                        # :inclusion => { :in => TITLES }
   validates :email,      :presence  => true,
   								 :confirmation => true,
                          :length    => 6..80,
                          :email     => true
-                         
+
   validates :first_name, :length    => 0..80,
                          :unless    => :has_user?
   validates :last_name,  :presence  => true,
                          :length    => 1..80,
                          :unless    => :has_user?
+  validates :birthday,	 :presence  => true
 
   after_save :sync_to_user, :unless => :synced?
 
@@ -159,8 +158,11 @@ class Contact < Omega::Model
 	  super unless method =~ /^find_by_(.*)$/
 	  name = $1
 	  fields = Contact::Field.all.collect { |cf| cf.name }
-	  super unless fields.include?(name)
-	  Contact::Field.find_by_name(name).values.select { |v| v.value == args.at(0) }
+	  if fields.include?(name)
+	  	 field_id = Contact::Field.find_by_name(name).id
+	  	 values = Contact::Value.find_by_value_and_field_id(args.at(0), field_id)
+	  else super
+	  end
 	end
 
 	def method_missing(method, *args, &block)
@@ -225,6 +227,30 @@ class Contact < Omega::Model
 			self.user.username
 		end
 	end
+
+	def over_18?
+		bday = self.birthday
+		today = Date.today
+		result = false
+		if (today.year - bday.year) > 18
+			result = true
+		elsif (today.year - bday.year) < 18 
+			result = false
+		else # it equals 18
+			if (today.month - bday.month) > 0
+				result = true
+			elsif (today.month - bday.month) < 0
+				result = false
+			elsif (today.month - bday.month) == 0
+				if (today.day - bday.day) >= 0
+					result = true
+				else
+					result = false
+				end
+			end
+		end
+	end
+			
 
   private
     def has_user?
