@@ -7,13 +7,13 @@
 
 <!-- old database -->
 <div class="user_image">
-  <% if @contact.photo %>
-      <% photo = @contact.photo.upload
+  <%# if @contact.photo %>
+      <%# photo = @contact.photo.upload
          size = Paperclip::Geometry.from_file(photo.to_file(:original)) %>
-      <%= image_tag(photo.url, (size.width > size.height ? :width : :height) => '130') %>
-  <% else %>
+      <%#= image_tag(photo.url, (size.width > size.height ? :width : :height) => '130') %>
+  <%# else %>
       <%= image_tag("profile.jpg", :width => '130') %>
-  <% end %>
+  <%# end %>
 
 </div>
 <div class="clear"></div>
@@ -60,10 +60,7 @@ Email: <%= @contact.email %><br/>
       <%= link_to "Upload", upload_contact_path(@contact), :remote => true %>
 </span>
     
-    <% if @contact.user %>
       <%= render :partial => "/contacts/uploads/upload_records" %>
-    <% end %>
-
 
   </div>
 

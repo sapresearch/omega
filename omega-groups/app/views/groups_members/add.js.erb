@@ -16,10 +16,10 @@
     <% else %>
       $("#assigned_groups_list").append("<%= escape_javascript(render "shared/object_to_remove", :obj=>@group, :url=>remove_groups_members_url(:member_id=>@member.id, :group_id=>@group.id, :type=>"groups_to_contact")) %>")
     <% end %>
-    $("#available_groups_list #object_to_add_<%= @group.id.to_s %>").remove()
-    // app-spec code for contact module
-    $('.assigned-groups').empty().append('<%= escape_javascript(render :partial => 'contacts/partials/assigned_groups') %>');
+    $("#available_groups_list #object_to_add_<%= @group.id.to_s %>").remove()    
   <% end %>
+  // app-spec code for contact module
+  $('.assigned-groups').empty().append('<%= escape_javascript(render :partial => 'contacts/partials/assigned_groups') %>');
 <% end %>
 
 $(".tipsy").remove()

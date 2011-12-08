@@ -20,7 +20,7 @@
     
     //app-spec
     //remove the contact from assigned contacts
-    if($('tr[data-id=<%= @contact.id %>]').attr('data-group-id'))
+    if($('tr[data-id=<%= @contact.id %>]').attr('data-group-id') == '<%= @group.id %>')
       $('tr[data-id=<%= @contact.id %>]').remove();
     $('.assigned-groups').empty().append('<%= escape_javascript(render :partial => 'contacts/partials/assigned_groups') %>');
     $('.tipsy').remove();

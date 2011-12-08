@@ -104,7 +104,9 @@ class ContactsController < Omega::Controller
     end
 
     @contact.update_attributes(params[:contact])
-    respond_with(@contact)
+    respond_with(@contact) do |format|
+      format.js {redirect_to contact_url(@contact)}
+    end
   end
 
   def destroy

@@ -1,4 +1,4 @@
-<% if  @contact.user.uploads.any? %>
+<% if  @contact.uploads.any? %>
             <table class="width-100">
           <thead>
           <tr>
@@ -8,7 +8,7 @@
             <th>Delete</th>
           </tr>
           </thead>
-    <% @contact.user.uploads.each do |file| %>
+    <% @contact.uploads.each do |file| %>
         <%
            icon = case file.upload_content_type
                       when /^image/ then
@@ -42,7 +42,7 @@
               <span data-tooltip="Delete document">
       <span class="om-icon-only om-blue-icon ui-icon-close"></span>
 
-      <%= link_to "Delete", upload_contact_path(file), :method =>:delete,:remote => true %>
+      <%= link_to "Delete", upload_url(file), :method =>:delete,:remote => true %>
 </span>
 
             </td>

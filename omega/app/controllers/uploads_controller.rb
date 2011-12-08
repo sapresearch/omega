@@ -86,6 +86,7 @@ class UploadsController < Omega::Controller
     respond_to do |format|
       format.html { redirect_to(uploads_url) }
       format.xml  { head :ok }
+      format.js
     end
   end
   
