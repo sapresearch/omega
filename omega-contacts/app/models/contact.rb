@@ -46,7 +46,7 @@ class Contact < Omega::Model
 
   self.include_root_in_json = false
 
-  belongs_to :user
+  belongs_to :user, :dependent=>:destroy
   
   has_and_belongs_to_many :interests, :join_table => 'contact_contacts_interests'
   has_and_belongs_to_many :skills,    :join_table => 'contact_contacts_skills'
@@ -54,7 +54,10 @@ class Contact < Omega::Model
 
   #has_many :group_positions, :dependent => :destroy  
   #has_many :groups, :through => :group_positions
-  #has_many :uploads, :as => 'binding'
+  has_many :uploads, :as => 'binding'  # relies on polymorphic association
+  has_upload :photo # relies on polymorphic association
+  accepts_nested_attributes_for :uploads
+  
   has_many :groups_members, :dependent=>:destroy, :foreign_key=>"member_id"
   has_many :joined_groups, :through=>:groups_members, :source=>:group
 

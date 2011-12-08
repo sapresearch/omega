@@ -1,4 +1,4 @@
-$('#contact-assignment').dialog('destroy').andSelf().remove();
+$('#group-member-assign-groups-dialog-message').dialog('destroy').andSelf().remove();
 $('#contacts_contact_pane').empty().append('<%= escape_javascript(render(:partial => 'contacts/shared/contact_details')) %>');
         $("#contact_accordion").accordion();
         $('#contact-assignment').dialog({ autoOpen: false,
@@ -32,3 +32,4 @@ $('#assign-trigger').click(function() {
         }
     });
 });
+
