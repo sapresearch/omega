@@ -41,9 +41,12 @@
 }
 
 #services_nested_menu_ul_root li a:hover{
+    /*
     background: url("../images/bg_menu_evergreen.png") repeat-x;
     color: #222;
     text-decoration: none;
+    */
+    color:#222;
 }
 
 #services_nested_menu_ul_root li a .original_list_link{
@@ -55,6 +58,7 @@
     /*background:#8A7F4D;*/
 }
 #services_nested_menu_ul_root .nested_menu_link:hover{
-    color:green;
+    /*color:green;*/
+    color:#222;
 }
 

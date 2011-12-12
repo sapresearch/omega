@@ -88,7 +88,6 @@ class Contacts::ImportsController < Omega::Controller
     @import = Contact::Import.create(params[:contact_import])
 
     if params[:upload]
-
       if @import.valid?
         process_csv(@import)
         redirect_to csv_import_wizard_contact_imports_url(:step => 3)
@@ -179,22 +178,22 @@ class Contacts::ImportsController < Omega::Controller
       @rows.each do |row|
 
         @contact = Contact.new
-        @group = Contact::Group.new
+        #@group = Contact::Group.new
 
         @contact.phone_numbers.build
         @contact.addresses.build
 
-        @group.phone_numbers.build
-        @group.addresses.build
+        #@group.phone_numbers.build
+        #@group.addresses.build
 
         fields_index.each do |k,v|
 
           @contact[k] = row[v.to_i]                
-          @group[k] = row[v.to_i]
+          #@group[k] = row[v.to_i]
 
-          if k == 'group_name'
-            @group['group_type'] = 'Household'
-          end
+          #if k == 'group_name'
+            #@group['group_type'] = 'Household'
+          #end
           
           @cols = Contact::PhoneNumber.columns.collect { |c| [c.name] }
 
@@ -215,15 +214,15 @@ class Contacts::ImportsController < Omega::Controller
         end
 
         @contact.save(:validate => false)
-        @group.save(:validate => false)
+        #@group.save(:validate => false)
 
-        @contact_group = Contact::GroupPosition.create(:contact_id => @contact.id, :group_id => @group.id)
+        #@contact_group = Contact::GroupPosition.create(:contact_id => @contact.id, :group_id => @group.id)
         @contacts << @contact.id
 
       end
 
       @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
-
+=begin original code
       @rows[0].each do |c|
 
         if c.include?("Do Not Import")
@@ -232,6 +231,12 @@ class Contacts::ImportsController < Omega::Controller
             r.delete_at(index.to_i)
           end
         end
+      end
+=end
+      drop_indices = []
+      @rows[0].each_with_index {|c, i| drop_indices << i if c.include?("Do Not Import")}
+      @rows.each do |r|
+         r.delete_if{|c| drop_indices.include?(r.index(c))}
       end
 
       @imported_rows = Contact::DataImport.find(session[:rows_id])
@@ -277,8 +282,10 @@ class Contacts::ImportsController < Omega::Controller
 
     @import.contact_ids.each do |c|
       contact = Contact.find_by_id(c)
-      contact.status = 'deleted'
-      contact.save(:validate => false)
+      if contact
+        contact.status = 'deleted'
+        contact.save(:validate => false)
+      end
     end
 
     redirect_to contact_imports_url()
@@ -309,8 +316,10 @@ class Contacts::ImportsController < Omega::Controller
 
     @import.contact_ids.each do |c|
       contact = Contact.find(c)
-      contact.status = nil
-      contact.save(:validate => false)
+      if contact
+        contact.status = nil
+        contact.save(:validate => false)
+      end
     end
 
     redirect_to contact_imports_url()
@@ -324,8 +333,9 @@ class Contacts::ImportsController < Omega::Controller
     unless @import.contact_ids.nil?
       @import.contact_ids.each do |c|
         contact = Contact.find_by_id(c)
-        contact.status = 'deleted'
-        contact.save(:validate => false)
+        #contact.status = 'deleted'
+        #contact.save(:validate => false)
+        contact.destroy if contact
       end
     end
 
@@ -392,10 +402,10 @@ class Contacts::ImportsController < Omega::Controller
 
     @phones = Contact::PhoneNumber.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "contact_id" || c.name == "created_at" || c.name == "updated_at" }
     @address = Contact::Address.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "created_at" || c.name == "updated_at"}
-    @group = Contact::Group.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "created_at" || c.name == "updated_at"}
+    #@group = Contact::Group.columns.collect { |c| [c.name.humanize, c.name] unless c.name == "id" || c.name == "created_at" || c.name == "updated_at"}
 
 
-    @contacts | @phones | @address | @group
+    @contacts | @phones | @address #| @group
 
   end
 
