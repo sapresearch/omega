@@ -60,7 +60,21 @@ $(function() {
         $('#contact-assignment').dialog('open');
     });
     */
-     $("#contact_accordion").accordion();
+
+    $('#assign-trigger').click(function() {
+        $('#group-member-assign-groups-dialog-message').dialog({
+            modal: true,
+            width:"auto",
+            height:"auto",
+            buttons: {
+                OK: function() {
+                    $(this).dialog( "close" );
+                }
+            }
+        });
+    });
+    
+    $("#contact_accordion").accordion();
 
     /**
      * contact group assignment by draging and dropping
