@@ -198,6 +198,29 @@ function preview_validations(){
     })
 }
 
+function validate_service_form(){
+    var valid = true;
+    valid = valid && validate_service_basic_info();
+    valid = valid && validate_service_section();
+    valid = valid && validate_service_customization_info();
+    return valid;
+}
+function validate_service_basic_info(){
+    var price = $("#service_price").val();
+    if(null==price.match(/^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$/)){
+        dialog_message("invalid-service-price", "Invalid Service Price", "<p>The price is invalid in serivce basic information</p>", {})
+        return false;
+    }
+    return true;
+}
+function validate_service_section(){
+    return true;
+}
+function validate_service_customization_info(){
+    return true;
+}
+
+
 
 function init_text_editor(text_area_id){
     $("body").addClass("yui-skin-sam")

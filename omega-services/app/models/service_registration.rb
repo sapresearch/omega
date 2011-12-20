@@ -4,6 +4,7 @@ class ServiceRegistration < ActiveRecord::Base
   # end app-spec
   belongs_to :service_leaf
   has_one :service_registration_form_value
+  has_one :payment, :as=>:payable
   
   class << self
     

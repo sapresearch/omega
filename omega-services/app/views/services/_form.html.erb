@@ -104,6 +104,11 @@
           <span class="label"><strong>Capacity:</strong></span>
           <span id="service_capacity_preview" class="value"><%= @service.service_leaf.capacity || "unlimited" %></span>
         </div>
+
+        <div class="field service_leaf_specific">
+          <span class="label"><strong>Price:</strong></span>
+          <span id="service_price_preview" class="value"><%= @service.service_leaf.price || 0 %></span>
+        </div>
       <% end %>
     </div>
 
@@ -145,7 +150,12 @@
         </div>
         <script type="text/javascript">
           set_unlimited_non_negative_integer_field("service_capacity")
-        </script>   
+        </script>
+
+        <div class="field service_leaf_specific">
+          <label for="service_price">Price</label>
+          <input id="service_price" class="price" maxlength="20" name="service_price" size="5" type="text" value="<%= @service.service_leaf.price || 0 %>" data-tooltip="Registration Fee" />
+        </div>
       <% end %>
     </div>
     

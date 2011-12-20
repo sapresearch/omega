@@ -2,6 +2,10 @@
               <%= service.name %>
               <% if service.is_leaf? && current_contact %>
 
+                <% if service.service_leaf.price>0 %>
+                  <span id="service_price_<%= service.id %>" class="bold italic price" >$<%= service.service_leaf.price %></span>
+                <% end %>
+
                 <%# if service.capacity %>
                   <span id="service_capacity_<%= service.id %>" class="capacity" >
                     <%= om_button(:plain => true, :icon => 'user') do %>
@@ -15,5 +19,5 @@
                   <span id="service_registration_status_<%= service.id %>" class="request_status" ><%= service_registration.status %></span>
                 <% end %>
 
-              <% end %>
+              <% end %>             
             </a>

@@ -1,0 +1,98 @@
+<!-- PayPal Logo -->
+<table border="0" cellpadding="10" cellspacing="0" align="center">
+  <tr><td align="center"></td></tr>
+  <tr><td align="center">
+      <a href="#" _mce_href="#" onclick="javascript:window.open('https://www.paypal.com/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');">
+         <img src="https://www.paypal.com/en_US/i/bnr/bnr_nowAccepting_150x60.gif" _mce_src="https://www.paypal.com/en_US/i/bnr/bnr_nowAccepting_150x60.gif" border="0" alt="Additional Options">
+      </a>
+    </td>
+  </tr>
+</table>
+<!-- PayPal Logo -->
+
+<% payment_service_for @service_leaf.id, PAYPAL_ACCOUNT,
+        :amount => @service_leaf.price, :currency => 'USD',
+        :service => :paypal do |service|
+
+    service.customer :first_name => current_contact.first_name,
+        :last_name => current_contact.last_name,
+        #:phone => current_contact.phone_numbers.empty? ? nil : current_contact.phone_numbers.first.number,
+        :email => "kexia.tang@gmail.com" #current_contact.email
+
+    #service.billing_address :city => current_contact.addresses.empty? ? nil : current_contact.addresses.first.city,
+       # :address1 => current_contact.addresses.empty? ? nil : current_contact.addresses.first.street,
+       # :state => current_contact.addresses.empty? ? nil : current_contact.addresses.first.state,
+       # :country => 'USA',
+       # :zip => current_contact.addresses.empty? ? nil : current_contact.addresses.first.zip_code
+      
+    service.item_name "#{@service.name}"
+    #service.invoice @service_leaf.id
+    #service.tax '0.00'
+
+    service.notify_url @notify_url
+    service.return_url @return_url
+    service.cancel_return_url @cancel_return_url
+%>
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
+    <!-- display payment summary here -->
+    <%#= submit_tag 'Make Payment' %>
+<% end %>
+
+
+
+<form method="post" action="https://www.paypal.com/cgi-bin/webscr">
+<input type="hidden" value="_s-xclick" name="cmd">
+<input type="hidden" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+" name="encrypted">
+<input type="image" border="0" alt="PayPal - The safer, easier way to pay online!" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif">
+<img width="1" height="1" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" alt="">
+</form>
+    
+
+<%# payment_service_for @order.id, PAYPAL_ACCOUNT,
+        :amount => @order.price, :currency => 'EUR',
+        :service => :paypal do |service|
+
+    service.customer :first_name => current_user.name,
+        :last_name => current_user.surname,
+        :email => current_user.email
+
+    service.item_name @order.items_summary
+
+    # PayPal will POST a callback here when the payment is done
+    service.notify_url notifications_url(@order)
+    # PayPal will take your user here with a POST after he pays
+    service.return_url paypal_return_notifications_url(@order)
+    # PayPal will redirect your user here if he cancels the payment
+    service.cancel_return_url paypal_cancel_notifications_url(@order) %>
+
+    <%#= submit_tag 'Pay this order' %>
+<%# end %>
+
+
+
+<%# payment_service_for @service_leaf.id, PAYPAL_ACCOUNT,
+        :amount => @service_leaf.price, :currency => 'USD',
+        :service => :paypal do |service|
+
+    service.customer :first_name => current_contact.first_name,
+        :last_name => current_contact.last_name,
+        #:phone => current_contact.phone_numbers.empty? ? nil : current_contact.phone_numbers.first.number,
+        :email => "kexia.tang@gmail.com" #current_contact.email
+
+    #service.billing_address :city => current_contact.addresses.empty? ? nil : current_contact.addresses.first.city,
+       # :address1 => current_contact.addresses.empty? ? nil : current_contact.addresses.first.street,
+       # :state => current_contact.addresses.empty? ? nil : current_contact.addresses.first.state,
+       # :country => 'USA',
+       # :zip => current_contact.addresses.empty? ? nil : current_contact.addresses.first.zip_code
+
+    service.item_name "#{@service.name}"
+    #service.invoice @enrollment.invoice.id
+    #service.tax '0.00'
+
+    service.notify_url ipn_handler_payments_url(:payer_id=>current_user.id) #url_for(:only_path => false, :action => 'notify')
+    service.return_url services_url(:service_id=>@service.id) #(:only_path => false, :controller => 'account', :action => 'show')
+    service.cancel_return_url services_url(:service_id=>@service.id) #url_for(:only_path => false, :controller => 'account', :action => 'show') %>
+    <!-- display payment summary here -->
+    <%#= submit_tag 'Make Payment' %>
+<%# end %>
