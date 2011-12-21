@@ -1,7 +1,12 @@
 Omega::Services::Module.routes.draw do
   resources :services   
   resources :service_sections
-  resources :service_registrations
+  resources :service_registrations do
+    collection do
+      post :paypal_return
+      post :paypal_cancel_return
+    end
+  end
   
   resources :roles do
     collection do
@@ -21,7 +26,7 @@ Omega::Services::Module.routes.draw do
 
   resources :payments do
     collection do
-      get :ipn_handler
+      post :ipn_handler
     end
   end
 end

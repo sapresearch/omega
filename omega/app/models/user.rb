@@ -66,8 +66,7 @@ class User < Omega::Model
   has_many :requested_groups, :through=>:groups_requesters, :source=>:group
   has_many :uploads, :foreign_key=>"uploader_id"
   has_many :posts
-  has_many :topics, :through=>:posts  
-  has_many :payments, :foreign_key=>"payer_id"
+  has_many :topics, :through=>:posts   
   
   accepts_nested_attributes_for :contact
   accepts_flattened_values_for :skills, :value => :name

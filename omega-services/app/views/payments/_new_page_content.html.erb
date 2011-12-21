@@ -1,0 +1,68 @@
+<div class="field">
+  <span class="label"><strong>Name</strong></span>
+  <span class="value"><%= @payable.name %></span>
+</div>
+<div class="field">
+  <span class="label"><strong>Description</strong></span>
+  <span class="value"><%= @payable.description %></span>
+</div>
+<div class="field">
+  <span class="label"><strong>Price</strong></span>
+  <span class="value">CAD $<%= @payable.price %></span>
+</div>
+
+<div class="paypal_buy_button">
+
+  <% payment_service_for @payable.id, PAYPAL_ACCOUNT,
+          :amount => @payable.price, :currency => 'CAD',         
+          :service => :paypal do |service|
+
+      service.customer :first_name => current_contact.first_name,
+          :last_name => current_contact.last_name,
+          #:phone => current_contact.phone_numbers.empty? ? nil : current_contact.phone_numbers.first.number,
+          :email => "kexia_1324417179_per@gmail.com" #current_contact.email
+
+      #service.billing_address :city => current_contact.addresses.empty? ? nil : current_contact.addresses.first.city,
+         # :address1 => current_contact.addresses.empty? ? nil : current_contact.addresses.first.street,
+         # :state => current_contact.addresses.empty? ? nil : current_contact.addresses.first.state,
+         # :country => 'USA',
+         # :zip => current_contact.addresses.empty? ? nil : current_contact.addresses.first.zip_code
+
+      service.item_name "#{@payable.name}"
+      #service.invoice @service_leaf.id
+      #service.tax '0.00'
+
+      service.notify_url @notify_url
+      service.return_url @return_url
+      service.cancel_return_url @cancel_return_url
+  %>
+  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
+  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+  <!--
+      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
+  -->
+      <!-- display payment summary here -->
+  <% end %>
+</div>
+<br clear="all"/>
+
+
+<%# payment_service_for @order.id, PAYPAL_ACCOUNT,
+        :amount => @order.price, :currency => 'EUR',
+        :service => :paypal do |service|
+
+    service.customer :first_name => current_user.name,
+        :last_name => current_user.surname,
+        :email => current_user.email
+
+    service.item_name @order.items_summary
+
+    # PayPal will POST a callback here when the payment is done
+    service.notify_url notifications_url(@order)
+    # PayPal will take your user here with a POST after he pays
+    service.return_url paypal_return_notifications_url(@order)
+    # PayPal will redirect your user here if he cancels the payment
+    service.cancel_return_url paypal_cancel_notifications_url(@order) %>
+
+    <%#= submit_tag 'Pay this order' %>
+<%# end %>

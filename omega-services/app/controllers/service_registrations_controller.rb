@@ -16,6 +16,7 @@ class ServiceRegistrationsController < Omega::Controller
   
   def create
     @registrant = params[:registrant_id] ? Contact.find(params[:registrant_id]) : current_contact
+    @from_page = params[:from_page]
     
     @service = Service.find(params[:service_id])     
     @service_leaf_id = @service.service_leaf.id
@@ -25,13 +26,23 @@ class ServiceRegistrationsController < Omega::Controller
         @status = params[:status]
         @field_values = params[:field_values]
 
+        if @service.service_leaf.price > 0
+          render :js => "window.location = '#{new_payment_url(
+            :payable_type=>"ServiceLeaf",
+            :payable_id=>@service_leaf_id,
+            :return_url=>paypal_return_service_registrations_url(:service_leaf_id=>@service_leaf_id, :registrant_id=>@registrant.id, :status=>@status), :return_method=>:post,
+            :cancel_return_url=>paypal_cancel_return_service_registrations_url,
+            :payer_id=>@registrant.id
+          )}'"
+          return
+        end
+
         @service_registration = ServiceRegistration.create(:service_leaf_id=>@service_leaf_id, :status=>@status, :registrant_id=>@registrant.id)
         @service_registration.create_service_registration_form_value(:field_values => @field_values) unless @field_values.nil?
       end
     end
 
     # for js
-    @from_page = params[:from_page]
     if @from_page == "services#index"
       @super_service = @service.super_service
       @services = @service.sibling_services
@@ -86,6 +97,20 @@ class ServiceRegistrationsController < Omega::Controller
     end
     
     respond_with(@service_registration)
+  end
+
+  def paypal_return
+    @service_leaf_id = params[:service_leaf_id]
+    @registrant_id = params[:registrant_id]
+    @status = params[:status]
+    @field_values = params[:field_values]
+
+    @service_registration = ServiceRegistration.create(:service_leaf_id=>@service_leaf_id, :status=>@status, :registrant_id=>@registrant_id)
+    @service_registration.create_service_registration_form_value(:field_values => @field_values) unless @field_values.nil?
+  end
+
+  def paypal_cancel_return
+    
   end
   
 end

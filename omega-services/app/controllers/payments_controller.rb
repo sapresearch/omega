@@ -13,16 +13,28 @@ class PaymentsController < Omega::Controller
   #around_filter :services_exception_handler
 
   def new
-    # dummy data
+    @payable_type = params[:payable_type]
+    @payable_id = params[:payable_id]
+    @payer_id = params[:payer_id]
+    @return_url = params[:return_url]
+    @return_method = params[:return_method]
+    @cancel_return_url = params[:cancel_return_url]
+    @notify_url =  ipn_handler_payments_url(:payer_id=>@payer_id, :payable_type=>@payable_type, :payable_id=>@payable_id)
+
+    @payable = @payable_type.constantize.find(@payable_id)
+    
+=begin
     @service_leaf = ServiceLeaf.first
     @service = @service_leaf.service
-    
-    @notify_url =  ipn_handler_payments_url(:payer_id=>current_user.id, :payable_type=>@payable_type, :payable_id=>@payable_id)
+     
     @return_url = services_url(:service_id=>@service.id)
-    @cancel_return_url = services_url(:service_id=>@service.id)   
+    @cancel_return_url = services_url(:service_id=>@service.id)
+=end
   end
 
   def ipn_handler
+    puts 1111
+    puts 1111
     # Create a notify object we must
     notify = Paypal::Notification.new(request.raw_post)
 
@@ -35,10 +47,11 @@ class PaymentsController < Omega::Controller
     @payer_id = params[:payer_id]
     @payable_id = params[:payable_id]
     @payable_type = params[:payable_type]
+    @payable = @payable_type.constantize.find(@payable_id)
 
     if notify.acknowledge
       @payment = Payment.find_by_paypal_transaction_id(notify.transaction_id) ||
-        Payment.create(
+        Payment.new(
           :payer_id=>@payer_id,
           :payable_id=>@payable_id,
           :payable_type=>@payable_type,
@@ -50,13 +63,13 @@ class PaymentsController < Omega::Controller
           :is_test => notify.test?
         )
       begin
-        if notify.complete? and @service_leaf.price == BigDecimal.new( params[:mc_gross] ) #transaction complete.. add your business logic here
+        if notify.complete? and @payable.price == BigDecimal.new( params[:mc_gross] ) #transaction complete.. add your business logic here
           @payment.status = notify.status
         else #Reason to be suspicious
           logger.error("Failed to verify Paypal's notification, please investigate")
         end
       rescue => e # we have a bug
-        @payment.status = 'Error'
+        @payment.status = 'failed'
         raise
       ensure #make sure we logged everything we must
         @payment.save
