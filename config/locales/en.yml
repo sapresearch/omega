@@ -1,0 +1,73 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  calendar:
+    recurrence:
+      daily: Daily
+      weekly: Weekly
+      monthly: Monthly
+      yearly: Yearly
+
+      day: Day
+      ordinal: Ordinal
+
+      ordinals:
+        first: First
+        second: Second
+        third: Third
+        fourth: Fourth
+        last: Last
+
+      days_of_the_week: &days_of_the_week
+        '7': Sunday
+        '1': Monday
+        '2': Tuesday
+        '3': Wednesday
+        '4': Thursday
+        '5': Friday
+        '6': Saturday
+
+      days:
+        day: Day
+        weekday: Weekday
+        weekend_day: Weekend day
+        <<: *days_of_the_week
+
+      months:
+        '1': January
+        '2': February
+        '3': March
+        '4': April
+        '5': May
+        '6': June
+        '7': July
+        '8': August
+        '9': September
+        '10': October
+        '11': November
+        '12': December
+
+  sign_up: 'Sign up'
+
+  helpers:
+    submit:
+      session:
+        create: "Login"
+      user:
+        create: "Register"
+      volunteering:
+          position:
+              create: "Create"
+
+  sign_up: 'Sign up'
+
+  helpers:
+    submit:
+         create: "Create"
+
+  user_mailer:
+    lost_username:
+      subject: Omega - Your username
+    lost_password:
+      subject: Omega - Reset your lost password

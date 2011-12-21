@@ -1,6 +1,6 @@
-pkg
-
-development
-omega-services_1
-.idea
-.project
+.bundle/
+log/*.log
+pkg/
+test/dummy/db/*.sqlite3
+test/dummy/log/*.log
+test/dummy/tmp/
