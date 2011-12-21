@@ -3,8 +3,8 @@ Omega::Services::Module.routes.draw do
   resources :service_sections
   resources :service_registrations do
     collection do
-      post :paypal_return
-      post :paypal_cancel_return
+      get :paypal_return
+      get :paypal_cancel_return
     end
   end
   
