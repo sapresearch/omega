@@ -30,7 +30,7 @@ class ServiceRegistrationsController < Omega::Controller
           render :js => "window.location = '#{new_payment_url(
             :payable_type=>"ServiceLeaf",
             :payable_id=>@service_leaf_id,
-            :return_url=>paypal_return_service_registrations_url(:service_leaf_id=>@service_leaf_id, :registrant_id=>@registrant.id, :status=>@status), :return_method=>:post,
+            :return_url=>paypal_return_service_registrations_url(:service_leaf_id=>@service_leaf_id, :registrant_id=>@registrant.id, :status=>@status, :field_values=>@field_values), :return_method=>:post,
             :cancel_return_url=>paypal_cancel_return_service_registrations_url(:service_leaf_id=>@service_leaf_id),
             :payer_id=>@registrant.id
           )}'"
