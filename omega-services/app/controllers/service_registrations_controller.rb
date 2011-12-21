@@ -31,7 +31,7 @@ class ServiceRegistrationsController < Omega::Controller
             :payable_type=>"ServiceLeaf",
             :payable_id=>@service_leaf_id,
             :return_url=>paypal_return_service_registrations_url(:service_leaf_id=>@service_leaf_id, :registrant_id=>@registrant.id, :status=>@status), :return_method=>:post,
-            :cancel_return_url=>paypal_cancel_return_service_registrations_url,
+            :cancel_return_url=>paypal_cancel_return_service_registrations_url(:service_leaf_id=>@service_leaf_id),
             :payer_id=>@registrant.id
           )}'"
           return
@@ -101,6 +101,7 @@ class ServiceRegistrationsController < Omega::Controller
 
   def paypal_return
     @service_leaf_id = params[:service_leaf_id]
+    @service_leaf = ServiceLeaf.find(@service_leaf_id)
     @registrant_id = params[:registrant_id]
     @status = params[:status]
     @field_values = params[:field_values]
@@ -110,7 +111,8 @@ class ServiceRegistrationsController < Omega::Controller
   end
 
   def paypal_cancel_return
-    
+    @service_leaf_id = params[:service_leaf_id]
+    @service_leaf = ServiceLeaf.find(@service_leaf_id)
   end
   
 end
