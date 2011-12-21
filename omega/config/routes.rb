@@ -33,9 +33,8 @@ Omega::Module.routes.draw do
 
 	resources :settings do
 		collection do
-			post :new
+			put :update
 			get :edit
-			put :update_email
 		end
 	end
 

@@ -1,6 +1,13 @@
+<% require_stylesheet 'omega_users' %>
 <%= form_for @setting do |s| %>
 	<p>
 		<%= s.label :default_email %>
 		<%= s.text_field :email %>
 	</p>
+
+	<div id="contact_submit">
+		<p>
+			<%= s.submit 'Update' %>
+		</p>
+	</div>
 <% end %>

@@ -1,5 +1,10 @@
 class SettingsController < Omega::Controller
 
+
+	def index
+		@setting = Setting.first.nil? ? Setting.create : Setting.first
+	end
+
 	def new
 		@fb_enabled = Setting.fb_enabled?(current_user)
 		@setting = Setting.new
@@ -19,19 +24,9 @@ class SettingsController < Omega::Controller
 		end
 	end
 
-	def edit
-		@setting = Setting.all.count <= 1 ? Setting.first : "Error: more than one setting exists"
-		@setting = Setting.create if Setting.all.count == 0
-		@image = Image.new
-	end
-
-	def update_email
-		Setting.first.update_attributes(:email => params[:email])
-		@setting = Setting.first
-	end
-
 	def update
-		redirect_to(edit_settings_url)
+		Setting.first.update_attributes(:email => params[:setting][:email])
+		redirect_to(settings_url)
 	end
 
 end

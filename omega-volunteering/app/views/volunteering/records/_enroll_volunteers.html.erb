@@ -24,7 +24,7 @@
 			<td style="width:350px; max-width:355px">
 				<div id="volunteers">
 					<div id="volunteers-heading">
-						<h7 class="sub-heading" id="result-header">Results:</h7>
+						<h7 class="sub-heading" id="result-header"> Potential Volunteers: </h7>
 					</div>
 					<%= render 'volunteers_list' %>
 				</div>
@@ -71,7 +71,7 @@ $(function() {
 	});
 
 	// Add volunteers. It creates a new record for that contact.
-	$('#volunteers_list').delegate('li', 'click', function() {
+	$('#volunteers_list').delegate('span.add_volunteer', 'click', function() {
 		var self = $(this);
 		var contact_id = self.attr('ui-data');
 		var position_id = "<%= @position.id %>";
@@ -82,7 +82,8 @@ $(function() {
 			dataType: 'script',
 			cache: false
 		});
-		self.remove();
+		self.parent().parent().remove();
+		$(".tipsy").remove();
 	});
 
 	// Send a message to the volunteers.

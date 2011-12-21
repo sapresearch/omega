@@ -14,7 +14,7 @@
  
 	<h3 class="content-heading"> Site-Wide Settings </h3>
 		</br><p class="image"> Current Logo: </p>
- 	 		<div id="settings-logo" style="background:url(<%=image_in_use_url("Logo")%>) no-repeat left" ></div>
+ 	 	<div id="settings-logo" style="background:url(<%=image_in_use_url("Logo")%>) no-repeat left" ></div>
 
 		<nav class="link">
 			<ul>
@@ -24,34 +24,9 @@
 			</ul>
 		</nav>
 
+		<p> 
+			<%= render 'update_email' %>
+		</p>
 
-
-	<h3 class="content-heading"> Your Accounts </h3>
-		<% unless @settings.nil? then %>
-			<p>
-				<%= "No Accounts Added Yet" if (@settings.twitter.nil? and @settings.facebook_token.nil?) %>
-			</p>
-			<p>
-				<%= "Facebook" unless @settings.twitter.nil? %>
-			</p>
-			<p>
-				<%= "Twitter" unless @settings.facebook_token.nil? %>
-			</p>
-		<% end %>
-
-
-
-		<nav class="link">
-			<ul>
-				<li>
-					<% #if (Setting.find_by_user_id(current_user.id).nil?) then %>
-						<%#= button_to 'Edit Your Settings', :controller => "settings", :action => "new" %>
-					<% #else %>
-						<%#= button_to 'Edit Your Settings', :method => "get", :controller => "settings", :action => "edit", :id => @settings.id %>
-						<%= link_to 'Edit Your Settings', :controller => "settings", :action => "edit", :id => @settings.id %>
-					<%# end %>
-				</li>
-			</ul>
-		</nav>
 
 </body>

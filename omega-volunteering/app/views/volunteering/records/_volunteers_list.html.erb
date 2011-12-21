@@ -3,16 +3,17 @@
 	<% user = Contact.find(row[:id]).user %>
 	<% if not user.nil? %>
 		<% unless row[:first_name].to_s.empty? and row[:last_name].to_s.empty? %>
-			<br /><br />
 			<div class="volunteers_list_item">
+				<br /><br />
 				<li id="contact" ui-data="<%= row[:id] %>" >
-					<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add this volunteer"></span>
+					<span class="add_volunteer" ui-data="<%= row[:id] %>" >
+						<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add this volunteer"></span>
+					</span>
+					<span class="om-contact-icon-button">
+						<%= link_to ("<span class='om-icon om-icon-user-add'></span>".html_safe), my_page_user_path(Contact.find(row[:id]).user), :'data-tooltip' => "See this user's homepage" %>
+					</span>
 					<%= " #{row[:first_name].to_s} #{row[:last_name].to_s}" %>
-					<%#= link_to " #{row[:first_name].to_s} #{row[:last_name].to_s}", my_page_user_path(Contact.find(row[:id]).user) %>
 				</li>
-		  		<%= om_button(:contact => true, :icon => 'user-add') do %>
-					<%= link_to "#{row[:first_name]}'s MyOmega", my_page_user_path(Contact.find(row[:id]).user), :'data-tooltip' => "See this user's homepage" %>
-		  		<%end%>
 			</div>
 		<% end %>
 	<% end %>
