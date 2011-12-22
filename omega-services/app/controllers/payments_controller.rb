@@ -39,7 +39,7 @@ class PaymentsController < Omega::Controller
     @payable = @payable_type.constantize.find(@payable_id)
 
     if notify.acknowledge
-      @payment = Payment.find_by_paypal_transaction_id(notify.transaction_id) ||
+      @payment = Payment.find_by_transaction_id(notify.transaction_id) ||
         Payment.new(
           :payer_id=>@payer_id,
           :payable_id=>@payable_id,
