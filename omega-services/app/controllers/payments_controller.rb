@@ -46,7 +46,7 @@ class PaymentsController < Omega::Controller
           :payable_type=>@payable_type,
           :amount => notify.amount,
           :payment_method => 'paypal',
-          :transacion_id => notify.transaction_id,
+          :transaction_id => notify.transaction_id,
           :description => notify.params['item_name'],
           :status => notify.status,
           :is_test => notify.test?
