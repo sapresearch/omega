@@ -9,10 +9,29 @@ class PaymentsController < Omega::Controller
   ActionView::Base.send(:include, ActiveMerchant::Billing::Integrations::ActionViewHelper)
   include ActiveMerchant::Billing::Integrations
 
+  require 'httparty'
+  include HTTParty
+
   respond_to :html, :js, :xml, :json
   #around_filter :services_exception_handler
 
   def new
+=begin
+    paypal_url = "https://api-3t.sandbox.paypal.com/nvp"
+    query = {
+      :PWD=>"",
+      :USER=>"",
+      :SIGNATURE=>"",
+      :METHOD=>"BMCreateButton",
+      :VERSION=>"72.0",
+      :BUTTONCODE=>"ENCRYPTED",
+      :BUTTONTYPE=>"BUYNOW",
+      :BUTTONSUBTYPE=>"SERVICES"
+    }
+    self.class.http_proxy('proxy', 8083)
+    self.class.post(paypal_url, :query=>query).inspect
+=end
+
     @payable_type = params[:payable_type]
     @payable_id = params[:payable_id]
     @payer_id = params[:payer_id]

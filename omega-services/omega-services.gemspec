@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency('omega', version)
   s.add_dependency('activemerchant')
+  s.add_dependency('httparty')
 end
