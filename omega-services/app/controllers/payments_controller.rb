@@ -35,6 +35,7 @@ class PaymentsController < Omega::Controller
     @payable_type = params[:payable_type]
     @payable_id = params[:payable_id]
     @payer_id = params[:payer_id]
+    @payer = Contact.find(@payer_id)
     @return_url = params[:return_url]
     @return_method = params[:return_method]
     @cancel_return_url = params[:cancel_return_url]
