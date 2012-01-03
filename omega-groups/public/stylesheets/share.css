@@ -23,7 +23,7 @@
     /* max-height:470px;
     overflow: auto; */    /* page length limit */
 }
-.index_bottom_links, page_bottom_links{
+.index_bottom_links, .page_bottom_links{
     padding:10px 10px;
     margin-bottom:5px;
 }

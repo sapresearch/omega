@@ -18,16 +18,13 @@ Omega::Services::Module.routes.draw do
   end
 
   resources :assets
-
-  resources :asset_allocations do
-    collection do      
-    end
-  end
+  resources :asset_allocations
 
   resources :payments do
     collection do
       post :ipn_handler
     end
   end
+
 end
 

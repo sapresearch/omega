@@ -73,6 +73,13 @@ function field_values_to_json(element_id, is_required_field_included){
     return field_values
 }
 
+
+function refresh_page(title_partial, content_partial){
+    $(".page_title").html(title_partial);
+    $(".page_content").html(content_partial);
+    $(".tipsy").remove();
+}
+
 //dialogs
 function show_dialog_message(dialog_id){
     var dialog = $("#"+dialog_id)

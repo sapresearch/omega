@@ -1,0 +1,45 @@
+.table{border:1px solid #ddd;}
+.thead{ background: #eee;}
+.announcement{ background: lightyellow;}
+.th, .tr{}
+.tbody .tr{border-top:1px solid #ddd;}
+
+
+.td{
+    display:inline-block;
+    padding:5px;
+    min-height:25px;
+    vertical-align: bottom;
+}
+.thead .td{
+    font-size:13px;
+    font-weight:bold;
+    color:#333;
+}
+.tbody .td{
+    font-size:12px;
+    color:#222;
+}
+.topic_type{ width:5%;}
+.topic_title{ width:55%; font-weight:bold; }
+.topic_popularity{width:10%;}
+.topic_last_post{width:20%;}
+
+.tbody .topic_title{border-right:1px solid #ddd;}
+/*.tbody .topic_popularity{border-right:1px solid #ddd;}*/
+
+.author_block{font-style:italic}
+.author_block .author_link a{font-style:italic; font-size:11px;}
+
+/* topic show */
+.topic_body{
+    border:1px solid #ddd;   
+}
+.topic_content{
+    padding: 15px;
+    min-height:50px;
+}
+.topic_created_at{
+    font-style:italic;
+    margin:5px 10px;
+}

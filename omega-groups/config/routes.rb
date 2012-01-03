@@ -1,5 +1,12 @@
 Omega::Groups::Module.routes.draw do
-  resources :groups
+  resources :groups do
+    #resources :topics
+    member do
+      get :space
+    end    
+  end
+  resources :posts
+  resources :topics
   resources :groups_requesters
   resources :groups_members do
     collection do
@@ -7,4 +14,5 @@ Omega::Groups::Module.routes.draw do
       delete :remove
     end
   end
+  
 end

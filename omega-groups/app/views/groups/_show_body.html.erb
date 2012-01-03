@@ -37,7 +37,7 @@
 
       <% if group_member || is_admin? %>
         <%= om_button(:contact => true, :icon=>'back') do %>
-          <%= link_to "Space", {}, "data-tooltip"=>"Posts and Uploads" %>
+          <%= link_to "Space", space_group_url(group), "data-tooltip"=>"Posts and Uploads" %>
         <% end %>
       <% end %>
 

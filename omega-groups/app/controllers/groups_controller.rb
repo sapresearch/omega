@@ -79,4 +79,13 @@ class GroupsController < Omega::Controller
     initialize_group_objects
   end
 
+  def space
+    @group = Group.find(params[:id])
+    @announcements = @group.announcements
+    @regular_topics = @group.regular_topics
+    @topics = @announcements + @regular_topics
+    @new_post = Post.new(:title=>"New Post")
+    @new_post.build_topic
+  end
+
 end
