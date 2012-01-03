@@ -23,10 +23,16 @@ module Omega
       def refresh(*mods)
         options = mods.extract_options!
         mods = _normalize_modules(mods)
-
+		
+		# I'm not sure why this is here. This was Sam's code. mods.paths returns an instance of Rails::Paths::Root, which doesn't have the method #public.
         mods.each do |mod|
-          next unless File.exists?(path = mod.paths.public.first)
-
+          if mod.paths.respond_to? :public
+			path = mod.paths.public.first
+		  else path = ""
+		  end
+		  
+		  next unless File.exists?(path)
+		  
           block = options[:force] ? nil :
                                     lambda { |s, d| not File.exists?(d) or File.mtime(s) > File.mtime(d) }
 

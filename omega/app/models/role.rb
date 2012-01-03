@@ -57,7 +57,10 @@ class Role < Omega::Model
     }
 
   class << self
-    def for_anonymous; where('internal_name = ?', ANONYMOUS).first end
+    def for_anonymous
+		find_by_internal_name("ANONYMOUS") #where('internal_name = ?', ANONYMOUS).first
+	end
+	
     def for_authenticated_user; where('internal_name = ?', AUTHENTICATED_USER).first end
   end
 
