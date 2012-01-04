@@ -28,4 +28,8 @@ class Post < Omega::Model
   def root_topic
     super_post ? super_post.root_topic : topic
   end
+
+  def is_root?
+    super_post.nil?
+  end
 end

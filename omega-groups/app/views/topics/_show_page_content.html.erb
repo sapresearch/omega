@@ -11,7 +11,7 @@
         <p>
           <% unless current_user.is_anonymous? %>
             <%= om_button(:contact => true, :icon=>'mail-new') do %>
-              <%= link_to_function "Reply", "", "data-tooltip"=>"Reply this post" %>
+              <%= link_to_function "Reply", "load_dialog_form('#{escape_javascript(render "posts/dialog_new_form", :post=>Post.new(:super_post_id=>@topic.post.id), :is_topic=>false)}', {width:620})", "data-tooltip"=>"Reply this post" %>
             <% end %>
           <% end %>
         </p>
@@ -39,7 +39,7 @@
 </div>
 
 <% @topic.post.sub_posts.each do |post| %>
-  <%= render "posts/show" %>
+  <%= render "posts/show", :post=>post %>
 <% end %>
 
 

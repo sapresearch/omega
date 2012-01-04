@@ -14,7 +14,9 @@ class PostsController < Omega::Controller
       @topic.save
     end
     respond_with(@post) do |format|
-      format.js {redirect_to space_group_url(@group)}
+      format.js do       
+        redirect_to space_group_url(@group) if @topic
+      end
     end
   end
 

@@ -1,5 +1,10 @@
 <div id="post-new-dialog-form" class="dialog" title="Creating New Post">
   <p>
+    <% if post.super_post %>
+      Reply to: <%= post.super_post.author.name %>
+      <span class="italic">"<%= post.super_post.title.truncate(20) %>"</span>
+      <hr/>
+    <% end %>
     <%= render "posts/form", :post=>post, :is_topic=>is_topic %>
   </p>
 </div>

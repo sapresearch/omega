@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.executables        = ['omega']
   s.default_executable = 'omega'
 
-  s.add_dependency('rails', '~>3.1')
+  s.add_dependency('rails', '>=3.0.0')
   
   s.add_dependency('accepts-flattened-values', '~>0.1.3')
   s.add_dependency('paperclip', '~>2.3')
