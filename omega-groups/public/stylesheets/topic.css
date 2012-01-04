@@ -32,6 +32,9 @@
 .author_block .author_link a{font-style:italic; font-size:11px;}
 
 /* topic show */
+.topic_block{
+    margin-bottom:20px;
+}
 .topic_body{
     border:1px solid #ddd;   
 }
@@ -46,17 +49,17 @@
 
 /* post show */
 .post_block{
-    margin-top:20px;
+    margin-bottom:20px;
 }
 .post_body{
     border:1px solid #ddd;
 }
 .post_title{
-    padding: 3px 15px;
+    padding: 5px 15px 0px 15px;
     min-height:10px;
 }
 .post_content{
-    padding: 15px;
+    padding: 5px 15px 15px 15px;
     min-height:30px;
 }
 .post_created_at{

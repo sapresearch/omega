@@ -4,12 +4,12 @@
   </div>
   <div class="post_body round shadow">
     <% if post.title.strip.length>0 %>
-      <div class="post_title">
-        <%= post.title %>
+      <div class="post_title bold">
+        <%= post.title.html_safe %>
       </div>
     <% end %>
     <div class="post_content">
-      <%= post.content.strip.length==0 ? blank_sign : post.content %>
+      <%= post.content.strip.length==0 ? blank_sign : post.content.html_safe %>
     </div>
     <div class="post_operation_links operation_links" >
       <div class="left_links">
@@ -31,7 +31,7 @@
             <% end %>
 
             <%= om_button(:contact => true, :icon=>'delete-icon') do %>
-              <%= link_to_function "Delete", "destroy_post('#{escape_javascript(render "posts/dialog_destroy_confirm", :post=>post)}','#{topic_url(post.root_topic, :group_id=>@group.id)}')", "data-tooltip"=>"Delete this post" %>
+              <%= link_to_function "Delete", "destroy_post('#{escape_javascript(render "posts/dialog_destroy_confirm", :post=>post)}','#{post_url(post, :group_id=>@group.id)}')", "data-tooltip"=>"Delete this post" %>
             <% end %>
 
           <% end %>
@@ -43,6 +43,6 @@
 
 </div>
 
-<% post.sub_posts.each do |post| %>
-  <%= render "posts/show" %>
+<% post.sub_posts.each do |sub_post| %>
+  <%= render "posts/show", :post=>sub_post %>
 <% end %>

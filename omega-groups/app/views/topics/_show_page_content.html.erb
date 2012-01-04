@@ -4,7 +4,7 @@
   </div>
   <div class="topic_body round shadow <%= "announcement" if @topic.is_announcement? %>">
     <div class="topic_content">
-      <%= @topic.content.strip.length==0 ? blank_sign : @topic.content %>
+      <%= @topic.content.strip.length==0 ? blank_sign : @topic.content.html_safe %>
     </div>
     <div class="topic_operation_links operation_links" >
       <div class="left_links">

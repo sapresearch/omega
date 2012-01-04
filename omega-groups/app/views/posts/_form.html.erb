@@ -19,9 +19,10 @@
           <%= topic_form.label :topic_type, "Type" %>
           <%= topic_form.select :topic_type, options_for_select(options, default_option_value) %>
         </div>
-      <% end %>
-      <%= hidden_field_tag :group_id, @group.id %>
+      <% end %>     
     <% end %>
   <% end %>
+
+  <%= hidden_field_tag :group_id, @group.id %>
 <% end %>
 

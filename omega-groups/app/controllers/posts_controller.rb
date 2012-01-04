@@ -14,8 +14,12 @@ class PostsController < Omega::Controller
       @topic.save
     end
     respond_with(@post) do |format|
-      format.js do       
-        redirect_to space_group_url(@group) if @topic
+      format.js do
+        if @topic
+          redirect_to space_group_url(@group)
+        else
+          redirect_to topic_url(@post.root_topic, :group_id=>@group.id)
+        end
       end
     end
   end
@@ -26,6 +30,13 @@ class PostsController < Omega::Controller
     @group = Group.find(params[:group_id])
     @topic = @post.root_topic
     respond_with(@post)
+  end
+
+  def destroy
+    @group = Group.find(params[:group_id])
+    @post = Post.find(params[:id])
+    @topic = @post.root_topic
+    @post.destroy
   end
 
 end

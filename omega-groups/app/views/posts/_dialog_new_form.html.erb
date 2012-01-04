@@ -2,7 +2,9 @@
   <p>
     <% if post.super_post %>
       Reply to: <%= post.super_post.author.name %>
-      <span class="italic">"<%= post.super_post.title.truncate(20) %>"</span>
+      <% if post.super_post.title.strip.length>0 %>
+        <span class="italic">"<%= post.super_post.title.truncate(20) %>"</span>
+      <% end %>
       <hr/>
     <% end %>
     <%= render "posts/form", :post=>post, :is_topic=>is_topic %>
