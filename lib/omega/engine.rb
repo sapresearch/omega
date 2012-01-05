@@ -1,7 +1,7 @@
-require 'accepts_flattened_values'
-require 'paperclip'
-require 'mime/types'
-require 'will_paginate'
+#require 'accepts_flattened_values'
+#require 'paperclip'
+#require 'mime/types'
+#require 'will_paginate'
 
 module Omega
   class Engine < Rails::Engine
@@ -9,11 +9,11 @@ module Omega
 
     config.omega = ActiveSupport::OrderedOptions.new
 
-    initializer :'omega.include_mixins' do
-      ActiveSupport.on_load(:action_view) do
-        ActionView::Helpers::FormBuilder.send(:include, Mixins::ActionView::FormBuilderSuggestedField)
-      end
-    end
+    #initializer :'omega.include_mixins' do
+     # ActiveSupport.on_load(:action_view) do
+      #  ActionView::Helpers::FormBuilder.send(:include, Mixins::ActionView::FormBuilderSuggestedField)
+      #end
+    #end
 
     initializer :'omega.add_mime_types' do
       Mime::Type.register_alias('text/plain', :psv)
@@ -34,13 +34,13 @@ module Omega
     config.omega.assets = ActiveSupport::OrderedOptions.new
     config.omega.assets.use_dependencies = true
 
-    initializer :'omega.assets.middleware' do |app|
-      if Rails.env.development?
-        app.config.middleware.insert(0, Assets::Refresher, config.omega.assets)
-      else
-        Assets.refresh
-      end
-    end
+    #initializer :'omega.assets.middleware' do |app|
+      #if Rails.env.development?
+        #app.config.middleware.insert(0, Assets::Refresher, config.omega.assets)
+      #else
+        #Assets.refresh
+      #end
+    #end
 
   end
 end

@@ -18,4 +18,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.1.1"
   s.add_dependency "jquery-rails"
+  s.add_dependency('zipcodr', '0.0.2')
+  s.add_dependency('faster_haversine', '0.1.3')
+  s.add_dependency('gmapper', '0.2.1')
+  s.add_dependency('accepts-flattened-values', '~>0.1.3')
 end

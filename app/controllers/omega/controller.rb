@@ -2,16 +2,16 @@ module Omega
   class Controller < ActionController::Base
 #    include Omega::Errors::Handler
 
-    include Omega::Assets::Dependencies
+ #   include Omega::Assets::Dependencies
 
-    include Omega::Breadcrumbs
-    include Omega::CurrentUser
-    include Omega::CurrentUserTimeZone
+ ##   include Omega::Breadcrumbs
+  ##  include Omega::CurrentUser
+  ##  include Omega::CurrentUserTimeZone
 #    include Omega::Crud
-    include Omega::Permissions
-    include Omega::SubLayouts
+ ##   include Omega::Permissions
+ ##   include Omega::SubLayouts
 
-    include Omega::Mixins::Controllers::Crud
+ #   include Omega::Mixins::Controllers::Crud
 
   #  self.responder = Omega::ControllerResponder
 
@@ -19,6 +19,6 @@ module Omega
 
     layout 'application'
 
-    breadcrumb 'Omega' => :root
+ ##   breadcrumb 'Omega' => :root
   end
 end
