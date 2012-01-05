@@ -1,2 +1,2 @@
-class MenuItem < ActiveRecord::Base
+class MenuItem < Omega::Model
 end

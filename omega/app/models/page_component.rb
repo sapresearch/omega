@@ -1,4 +1,4 @@
-class PageComponent < ActiveRecord::Base
+class PageComponent < Omega::Model
   belongs_to :page
   belongs_to :component
 end

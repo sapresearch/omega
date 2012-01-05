@@ -1,4 +1,4 @@
-class Asset < ActiveRecord::Base
+class Asset < Omega::Model
   require 'util.rb'
   
   has_many :asset_allocations, :dependent=>:destroy

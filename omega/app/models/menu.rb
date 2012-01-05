@@ -1,2 +1,2 @@
-class Menu < ActiveRecord::Base
+class Menu < Omega::Model
 end
