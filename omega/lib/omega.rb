@@ -25,6 +25,10 @@ module Omega
   autoload_under 'middleware' do
     autoload :FlashUploads
   end
+
+  # Must be required so that when Omega-Meta loads the Omega module, the route file in Omega-Meta has access to Omega::Engine.
+  require "omega/engine"
+
 end
 
 require 'patches/fix_5243'

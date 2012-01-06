@@ -1,6 +1,6 @@
 require 'digest/md5'
 
-class UserToken < ActiveRecord::Base
+class UserToken < Omega::Model
   TOKEN_TYPES = %w{login lost_password}
 
   belongs_to :user

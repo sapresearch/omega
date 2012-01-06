@@ -1,4 +1,4 @@
-class Service < ActiveRecord::Base
+class Service < Omega::Model
   require 'util.rb'
   
   # app-spec

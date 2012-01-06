@@ -1,4 +1,4 @@
-class Page < ActiveRecord::Base
+class Page < Omega::Model
   has_many :page_blocks
   has_many :blocks, :through => :page_blocks
   has_many :page_components

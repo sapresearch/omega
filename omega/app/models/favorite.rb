@@ -1,4 +1,4 @@
-class Favorite < ActiveRecord::Base
+class Favorite < Omega::Model
   belongs_to :user
   belongs_to :item, :polymorphic => true
 

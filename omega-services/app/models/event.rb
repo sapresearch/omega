@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < Omega::Model
   has_one :service_section, :dependent=>:destroy
   has_one :event_recurrence, :dependent=>:destroy
 

@@ -1,4 +1,4 @@
-class PageBlock < ActiveRecord::Base
+class PageBlock < Omega::Model
   belongs_to :page
   belongs_to :block
 end
