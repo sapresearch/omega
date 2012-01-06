@@ -1,5 +1,5 @@
 module Omega
-	class ServiceRegistrationFormValue < ActiveRecord::Base
+	class ServiceRegistrationFormValue < Omega::Model
 	  belongs_to :service_registration
 	end
 	

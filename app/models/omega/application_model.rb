@@ -1,6 +1,6 @@
 module Omega
 	module Omega
-	  class ApplicationModel < ActiveRecord::Base
+	  class ApplicationModel < Omega::Model
 	    self.abstract_class = true
 	  end
 	end

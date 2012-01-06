@@ -1,5 +1,5 @@
 module Omega
-	class Block < ActiveRecord::Base
+	class Block < Omega::Model
 	end
 	
 	class HtmlBlock < Block

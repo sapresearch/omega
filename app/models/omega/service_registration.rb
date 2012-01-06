@@ -1,5 +1,5 @@
 module Omega
-	class ServiceRegistration < ActiveRecord::Base
+	class ServiceRegistration < Omega::Model
 	  # app-spec
 	  belongs_to :registrant, :class_name=>"Contact"
 	  # end app-spec

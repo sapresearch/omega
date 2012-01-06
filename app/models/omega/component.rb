@@ -1,5 +1,5 @@
 module Omega
-	class Component < ActiveRecord::Base
+	class Component < Omega::Model
 	end
 	
 	class HtmlComponent < Component

@@ -1,4 +1,4 @@
 module Omega
-	class MenuItem < ActiveRecord::Base
+	class MenuItem < Omega::Model
 	end
 end
