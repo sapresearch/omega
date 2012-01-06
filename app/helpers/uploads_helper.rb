@@ -1,4 +1,0 @@
-module UploadsHelper
-
-
-end
