@@ -5,6 +5,7 @@ module ApplicationLib
   
   def current_contact
     # app-spec
+    return nil if current_user.is_anonymous?
     Contact.for(current_user)
     # end app-spec
   end

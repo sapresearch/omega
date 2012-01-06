@@ -66,3 +66,5 @@
     font-style:italic;
     margin:5px 10px;
 }
+
+.post_title, .post_content, .topic_content{font-size:13px;}

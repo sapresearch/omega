@@ -1,6 +1,17 @@
 <p><%= nl2br group.description %></p>
 <br clear="all" />
 
+<div class="announcement_block">
+  <% group.announcements.each do |t| %>
+    <div class="announcement">
+      <div class="topic_type"><%= announcement_sign %></div>
+      <div class="topic_title">
+        <%= link_to t.post.title.html_safe, topic_url(t, :group_id=>group.id) %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 <div class="group_operation_links operation_links" >
 
   <div class="left_links">

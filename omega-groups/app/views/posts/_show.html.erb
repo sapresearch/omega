@@ -1,4 +1,4 @@
-<div class="post_block">
+<div class="post_block" id="post_block_<%= post.id.to_s %>">
   <div class="post_created_at">
     <%= post.created_at %> created by <%= link_to post.author.name, contact_url(post.author) %>
   </div>
