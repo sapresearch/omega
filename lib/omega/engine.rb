@@ -1,7 +1,7 @@
-#require 'accepts_flattened_values'
-#require 'paperclip'
-#require 'mime/types'
-#require 'will_paginate'
+require 'accepts_flattened_values'
+require 'paperclip'
+require 'mime/types'
+require 'will_paginate'
 
 module Omega
   class Engine < Rails::Engine
