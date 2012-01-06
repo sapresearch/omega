@@ -22,4 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency('faster_haversine', '0.1.3')
   s.add_dependency('gmapper', '0.2.1')
   s.add_dependency('accepts-flattened-values', '~>0.1.3')
+  s.add_dependency('paperclip', '~>2.3')
+  s.add_dependency('mime-types', '=1.16')
+  s.add_dependency('will_paginate', '~>3.0.pre2')
 end
