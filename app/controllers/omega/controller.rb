@@ -1,14 +1,17 @@
+require 'omega/permissions'
+require 'omega/breadcrumbs'
+require 'omega/current_user'
 module Omega
   class Controller < ActionController::Base
 #    include Omega::Errors::Handler
 
  #   include Omega::Assets::Dependencies
 
- ##   include Omega::Breadcrumbs
-  ##  include Omega::CurrentUser
+    include Omega::Breadcrumbs
+    include Omega::CurrentUser
   ##  include Omega::CurrentUserTimeZone
 #    include Omega::Crud
- ##   include Omega::Permissions
+    include Omega::Permissions
  ##   include Omega::SubLayouts
 
  #   include Omega::Mixins::Controllers::Crud
