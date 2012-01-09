@@ -5,7 +5,8 @@ module Omega
 	  def index
 	    @positions =  Volunteering::Position.limit(5)
 	    # @services = Service.limit(5) # original
-		 @services = Service.real_public_service_leaves.reverse.take(5)
+		 # just for testing meta.
+		 #@services = Service.real_public_service_leaves.reverse.take(5)
 	    @events = Calendar::Event.limit(6)
 	
 	   # if @page = Page.find_by_path!('home')
