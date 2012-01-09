@@ -6,4 +6,5 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require 'omega/application'
 //= require_tree .
