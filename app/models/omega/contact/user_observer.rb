@@ -1,7 +1,7 @@
 module Omega
 	class Contact
 	  class UserObserver < ActiveRecord::Observer
-	    observe :user
+	    observe 'Omega::User'
 	
 	    def after_save(user)
 	      return unless Contact.table_exists?
