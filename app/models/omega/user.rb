@@ -2,6 +2,9 @@ module Omega
 	require 'digest/sha2'
 	
 	class User < Omega::Model
+	
+	  set_table_name "users"
+	
 	  PERM_ADMIN               = 'users_admin'
 	  PERM_ASSIGN_TO_ROLE      = 'users_assign_to_role'
 	  PERM_CHANGE_OWN_USERNAME = 'users_change_own_username'
@@ -20,7 +23,7 @@ module Omega
 	    def anonymous
 	      @anonymous ||= User.new do |anon|
 	        anon.username = "Anonymous"
-	        anon.roles << Role.for_anonymous
+	        anon.roles << Omega::Role.for_anonymous
 	      end
 	    end
 	    
@@ -70,7 +73,7 @@ module Omega
 	  has_many :topics, :through=>:posts  
 	
 	  accepts_nested_attributes_for :contact
-	  accepts_flattened_values_for :skills, :value => :name
+	  #accepts_flattened_values_for :skills, :value => :name
 	
 	  attr_accessor :password, :password_confirmation
 	  attr_accessible :username, :email, :contact_attributes
