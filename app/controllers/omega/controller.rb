@@ -1,5 +1,5 @@
 module Omega
-  class Controller < ActionController::Base
+  class Controller < ApplicationController
   
  #    include Omega::Errors::Handler
 
@@ -18,7 +18,7 @@ module Omega
 
     protect_from_forgery
 
-    layout 'application'
+    layout 'omega/application'
 
     ##breadcrumb 'Omega' => :root
   end

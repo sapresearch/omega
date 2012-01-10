@@ -1,4 +1,4 @@
 module Omega
-  class ApplicationController < Omega::Controller
+  class ApplicationController < ActionController::Base
   end
 end
