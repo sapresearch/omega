@@ -1,6 +1,6 @@
-<% require_stylesheet 'omega_volunteering', 'omega_volunteering_left' %>
+<%# require_stylesheet 'omega_volunteering', 'omega_volunteering_left' %>
 <%# require_javascript 'omega_volunteering' %>
-    <div class="content circle-corners-bottom-left" style="min-height:<%= (@positions.count % Volunteering::Position::MAX_POSITIONS_PER_PAGE) * 395 %>;">
+    <div class="content circle-corners-bottom-left" style="min-height:<%= (@positions.count % Omega::Volunteering::Position::MAX_POSITIONS_PER_PAGE) * 395 %>;">
 
 		<div class="heading-main-columns">
 			<h1 class="page-content">
@@ -20,8 +20,8 @@
       </div>
 
 		<% content_for :sidebar do %>
-			<%= render :partial => "layouts/sidebar_positions_skills" %>
-			<%= render :partial => "layouts/sidebar_positions_interests" %>
+			<%= render :partial => "layouts/omega/sidebar_positions_skills" %>
+			<%= render :partial => "layouts/omega/sidebar_positions_interests" %>
 		<% end %>
 
       <%# if tags = @skills_tags or tags = @interests_tags %>
@@ -100,7 +100,7 @@
 					</div>
 
 					<div id='position_toolbar'>
-						<%= render 'volunteering/positions/partials/position_toolbar', :position => position %>
+						<%= render 'omega/volunteering/positions/partials/position_toolbar', :position => position %>
 					</div>
 
 				</div>

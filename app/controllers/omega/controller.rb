@@ -1,9 +1,7 @@
-require 'omega/permissions'
-require 'omega/breadcrumbs'
-require 'omega/current_user'
 module Omega
   class Controller < ActionController::Base
-#    include Omega::Errors::Handler
+  
+ #    include Omega::Errors::Handler
 
  #   include Omega::Assets::Dependencies
 
@@ -22,6 +20,6 @@ module Omega
 
     layout 'application'
 
- ##   breadcrumb 'Omega' => :root
+    ##breadcrumb 'Omega' => :root
   end
 end
