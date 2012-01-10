@@ -1,8 +1,8 @@
-<% require_stylesheet 'omega_home'%>
-<% require_javascript 'omega_home/omega_home','thirdParty/jquery.timepicker' %>
+<% stylesheet_link_tag 'omega_home'%>
+<% javascript_include_tag 'omega_home/omega_home','thirdParty/jquery.timepicker' %>
 
-<% require_stylesheet 'omega_home'%>
-<% require_javascript 'omega_home/omega_home','thirdParty/jquery.timepicker' %>
+<% stylesheet_link_tag 'omega_home'%>
+<% javascript_include_tag 'omega_home/omega_home','thirdParty/jquery.timepicker' %>
 
 <%- title "Omega Home" %>
 

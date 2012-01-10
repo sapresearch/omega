@@ -1,5 +1,5 @@
-<% require_stylesheet 'omega_volunteering' %>
-<% require_javascript 'thirdParty/jquery.timepicker', 'new_volunteering_position', 'jquery.tokeninput' %>
+<% stylesheet_link_tag 'omega_volunteering' %>
+<% javascript_include_tag 'thirdParty/jquery.timepicker', 'new_volunteering_position', 'jquery.tokeninput' %>
 
 
 <%=  form_for @record, :html => {:action => "create_volunteer"} do |f| %>

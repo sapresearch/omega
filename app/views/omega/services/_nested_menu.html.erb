@@ -1,5 +1,5 @@
-<% require_javascript 'tree.js' %>
-<% require_stylesheet 'services_nested_menu' # seperate css to solve firefox css length limit problem %>
+<% javascript_include_tag 'tree.js' %>
+<% stylesheet_link_tag 'services_nested_menu' # seperate css to solve firefox css length limit problem %>
 
 <% services_nested_menu_id ||= "services_nested_menu" %>
 <% super_service_id ||= Service::ROOT_SUPER_SERVICE_ID %>

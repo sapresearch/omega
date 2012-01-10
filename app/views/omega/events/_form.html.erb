@@ -1,4 +1,4 @@
-<%= require_javascript 'thirdParty/jquery.timepicker' %>
+<%= javascript_include_tag 'thirdParty/jquery.timepicker' %>
 
 <%= form_for(@event, :url => @event.persisted? ? calendar_event_path(@calendar, @event) : calendar_events_path(@calendar), :remote => true) do |f| %>
     <%= f.hidden_field :recurrent %>
