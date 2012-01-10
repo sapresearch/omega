@@ -2,8 +2,8 @@
   <div class="center-content">
        <div id="user_custom_bar" class="corners-bottom left">
          <%= with_permission(Omega::User::PERM_VIEW) do %>
-      <%= render('layouts/partials/messages') %>
-      | <%= render('layouts/partials/favorites') %>
+      <%= render('layouts/omega/partials/messages') %>
+      | <%= render('layouts/omega/partials/favorites') %>
         <% end %>
         <%= with_permission('cms_admin') do %>
          | <%= link_to 'Edit Page', current_page_path %>
@@ -27,7 +27,7 @@
       <!--<input id="search_input">-->
     <!--</div>-->
     <div id="loginWrapper">
-      <%= render :partial => "layouts/partials/login_main" %>
+      <%= render :partial => "layouts/omega/partials/login_main" %>
     </div>
   </div>
 </div>
@@ -37,10 +37,11 @@
 <div id="head">
 
 
-  <%= render :partial => "layouts/menu" %>
+  <%= render :partial => "layouts/omega/menu" %>
 
   <div id="breadcrumb">
-    <%= breadcrumbs %>
+    <!-- commented out for testing only. uncomment later -->
+    <%#= breadcrumbs %>
   </div>
 
 

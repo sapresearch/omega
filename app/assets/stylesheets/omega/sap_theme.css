@@ -16,7 +16,7 @@ table, tbody, tfoot, thead, tr, th, td {
 
 body {
 
-    background: url("../images/omega/om_body_bg.png") repeat-x #f2f2f2;
+    background: url("../omega/om_body_bg.png") repeat-x #f2f2f2;
 }
 
 html, body, #wrapper {

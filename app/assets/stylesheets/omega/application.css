@@ -658,7 +658,7 @@ tr.odd {
 	position: relative;
 	top: 40px;
 	left: 320px;
-    background: url("../images/application/logo.png") no-repeat left;
+    background: url("../omega/application/logo.png") no-repeat left;
     width: 180px;
 	height: 180px;
 	z-index: 1;
@@ -668,7 +668,7 @@ tr.odd {
 	position: relative;
 	top: -73px;
 	left: 850px;
-    background: url("../images/sap_logo.png") no-repeat left;
+    background: url("../images/omega/sap_logo.png") no-repeat left;
     width: 76px;
 	height: 40px;
 	z-index: 9999;

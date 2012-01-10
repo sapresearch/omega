@@ -4,7 +4,8 @@
     <li><%= link_to "home", root_url, :class =>'root_em' %></li>
     <li><%= link_to "Participate", root_url, :class =>'root_em' %>
       <div>
-        <%= link_to "Our Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
+	    <!-- commented out for testing only. remember to uncomment later -->
+        <%#= link_to "Our Services", services_url(:super_service_id=>Omega::Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
         <%= link_to "Volunteer", volunteering_positions_url %>
         <%= link_to "Report My Time", new_volunteering_time_entry_url %>
         <%= link_to "My Messages", messages_url %>       

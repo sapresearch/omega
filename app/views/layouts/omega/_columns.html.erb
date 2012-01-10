@@ -14,7 +14,7 @@
         <%= with_permission('cms_admin') do %>
           <%= link_to 'Edit', [:edit, @page, component] %>
         <% end %>
-        <%== component.content %>
+        <%= component.content %>
       </div>
     <% end if @components %>
   </div>
@@ -22,7 +22,7 @@
     <%= yield(:sidebar) if content_for?(:sidebar) %>
     <% @blocks.each do |block| %>
       <%= side_bar_box(block.title) do %>
-        <%== block.content %>
+        <%= block.content %>
       <% end %>
     <% end if blocks? %>
   </div>
