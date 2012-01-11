@@ -40,9 +40,9 @@ module HtmlHelper
   end
 
   # override view's render to strip partials inside the view
-  def render(*args)
-    partial_strip(super(*args))
-  end
+  #def render(*args)
+    #partial_strip(super(*args))
+  #end
 
   def cancel_button(options = {})
     name = options.delete(:name) || 'Cancel'
