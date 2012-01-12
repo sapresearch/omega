@@ -18,7 +18,7 @@
         <![endif]-->
 </head>
 <body>
-
+<div id='test_image'></div>
 <div id="notification-flash-wrapper">
   <div id="notification-flash" class="center-content corners-top corners-bottom">
   </div>
@@ -38,6 +38,11 @@
     <!-- commented out for testing. uncomment later -->
     <%#= render(:layout => "layouts/omega/columns") do
         render(:layout => "layouts/omega/sub_layout", :locals => {:sub_layout => sub_layout}) do
+            yield
+        end
+    end %>
+	    <%= render(:layout => "layouts/omega/columns") do
+        render(:layout => "layouts/omega/sub_layout") do
             yield
         end
     end %>
