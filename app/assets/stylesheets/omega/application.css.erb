@@ -1,3 +1,11 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, code, em, font, img,
@@ -87,6 +95,16 @@ h1, .h1 {
     font-family: "Century Gothic";
 }
 
+#banner-right {
+	position: relative;
+	width: 100%;
+	height: 180px;
+	top:-180px;
+	right: 0;
+	/*background: url(<%#= asset_data_uri 'omega/pixel_shim.png' %>) no-repeat right;*/
+	z-index: 1;
+}
+
 div#banner-right h1{  /* The right side of the header */
     font-family: Benton, Arial;
 	font-weight: normal;
@@ -95,7 +113,7 @@ div#banner-right h1{  /* The right side of the header */
 	color: #FFFFFF;
 	padding-right: 90px;
 	padding-top: 30px;
-
+	margin-top: 90px;
 }
 
 h1.page-content {
@@ -718,34 +736,21 @@ tr.odd {
 	height: 180px;
 }
 
-#logo {
-	left:330px;
-     background: url(<%= asset_data_uri 'omega/logo.png' %>) no-repeat left;
-    width: 180px;
-	height: 180px;
+img#logo {
+    background: no-repeat left scroll transparent;
+	margin-top: 20px;
 	z-index: 1;
 }
 
 #sap-logo {
 	position: relative;
-	top: -73px;
+	top: -54px;
 	left: 850px;
     background: url(<%= asset_data_uri 'omega/sap_logo.png' %>) no-repeat left;
     width: 76px;
 	height: 40px;
 	z-index: 9999;
 }
-
-
-#banner-right {
-	position: relative;
-	width: 100%;
-	height: 180px;
-	top:-180px;
-	right: 0;
-	z-index: 1;
-}
-
 
 #loginWrapper {
     display: none;
@@ -788,9 +793,7 @@ tr.odd {
     width: 950px;
     background:#EBEBDE;
 	min-height: 650px;
-  	margin: -29px auto 2px;
-
-	
+  	margin: -10px auto 2px;
 }
 
 #content_box_bottom {
