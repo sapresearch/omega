@@ -75,6 +75,7 @@ module Omega
 	  has_many :service_registrations, :dependent=>:destroy, :foreign_key=>"registrant_id"
 	  has_many :service_leaves, :through=>:service_registrations
 	  has_many :service_sections
+	  has_many :payments, :foreign_key=>"payer_id"
 	
 	  def registered_services
 	    service_leaves.map{|sl|sl.service}

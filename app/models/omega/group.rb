@@ -158,6 +158,14 @@ module Omega
 	    self.is_root? ? Contact.all-assigned_members : self.super_group.members-assigned_members
 	  end
 	  
+	  def announcements
+	    topics.where(:topic_type=>"announcement").order("updated_at DESC")
+	  end
+	  
+	  def regular_topics
+	    topics.where(:topic_type=>"regular").order("updated_at DESC")
+	  end
+	  
 	end
 	
 	
