@@ -1,9 +1,9 @@
 <!-- om_button is app-spec -->
 
 <!-- anytime jquery plugin -->
-<% stylesheet_link_tag 'anytime.css' %>
-<% javascript_include_tag 'anytime.js' %>
-<% javascript_include_tag 'anytimetz.js' %>
+<% require_stylesheet 'anytime.css' %>
+<% require_javascript 'anytime.js' %>
+<% require_javascript 'anytimetz.js' %>
 
 <!-- Skin CSS file -->
 <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/skin.css" />
@@ -104,6 +104,11 @@
           <span class="label"><strong>Capacity:</strong></span>
           <span id="service_capacity_preview" class="value"><%= @service.service_leaf.capacity || "unlimited" %></span>
         </div>
+
+        <div class="field service_leaf_specific">
+          <span class="label"><strong>Price:</strong></span>
+          <span id="service_price_preview" class="value"><%= @service.service_leaf.price || 0 %></span>
+        </div>
       <% end %>
     </div>
 
@@ -145,7 +150,12 @@
         </div>
         <script type="text/javascript">
           set_unlimited_non_negative_integer_field("service_capacity")
-        </script>   
+        </script>
+
+        <div class="field service_leaf_specific">
+          <label for="service_price">Price</label>
+          <input id="service_price" class="price" maxlength="20" name="service_price" size="5" type="text" value="<%= @service.service_leaf.price || 0 %>" data-tooltip="Registration Fee" />
+        </div>
       <% end %>
     </div>
     

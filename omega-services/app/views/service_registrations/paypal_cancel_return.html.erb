@@ -1,0 +1,34 @@
+<% require_stylesheet 'share.css' %>
+<% require_stylesheet 'payment.css' %>
+<% require_javascript 'util.js' %>
+<% require_javascript 'ui_util.js'%>
+
+
+<div class="content circle-corners-bottom" >
+
+  <div class="heading-main">
+    <h1 class="page-content services_page_title">
+      Payment Canceled
+    </h1>
+  </div>
+
+  <div class="page_content round">
+    <div class="explanation round shadow">
+      Payment has been canceled.
+    </div>
+    <br/>
+    <div class="field">
+      <span class="label"><strong>Name</strong></span>
+      <span class="value"><%= @service_leaf.name %></span>
+    </div>
+    <div class="field">
+      <span class="label"><strong>Description</strong></span>
+      <span class="value"><%= @service_leaf.description %></span>
+    </div>
+    <div class="field">
+      <span class="label"><strong>Price</strong></span>
+      <span class="value">CAD $<%= @service_leaf.price %></span>
+    </div>
+  </div>
+
+</div>
