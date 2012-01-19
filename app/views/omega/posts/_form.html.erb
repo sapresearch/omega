@@ -1,0 +1,28 @@
+<%= form_for post, :remote=>true do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, :maxlength=>Post::TITLE_MAX_LENGTH, :size=>30 %>
+  </div>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, :cols=>30, :rows=>5 %>
+  </div>
+  <%= form.hidden_field :super_post_id %>
+  <%= form.hidden_field :author_id, :value=>current_user.id %>
+
+  <% if is_topic %>
+    <%= form.fields_for :topic do |topic_form| %>
+      <% if is_admin? || group.has_leader?(current_contact) %>
+        <div class="field">
+          <% options = Topic::TOPIC_TYPES.map{|t| [t.capitalize,t] } %>
+          <% default_option_value = post.topic.topic_type %>
+          <%= topic_form.label :topic_type, "Type" %>
+          <%= topic_form.select :topic_type, options_for_select(options, default_option_value) %>
+        </div>
+      <% end %>     
+    <% end %>
+  <% end %>
+
+  <%= hidden_field_tag :group_id, @group.id %>
+<% end %>
+
