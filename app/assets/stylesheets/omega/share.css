@@ -23,16 +23,19 @@
     /* max-height:470px;
     overflow: auto; */    /* page length limit */
 }
-.index_bottom_links, page_bottom_links{
+.index_bottom_links, .page_bottom_links{
     padding:10px 10px;
     margin-bottom:5px;
 }
 
 .bread_crumb a{ font-style:italic; color:navy }
 
+.accordion_head .left{float:left; margin:0px 0px 0px 10px;}
+.accordion_head .right{float:right; margin:0px 10px 0px 0px;}
 .accordion_head .request_status{float:right; margin:0px 10px 0px 0px; font-weight:bold; font-style:italic;}
 .accordion_head .capacity{float:right; margin:0px 10px 0px 0px;}
 .accordion_head .capacity span{font-weight:bold; font-style:italic;}
+.accordion_head .price{margin:0px 0px 0px 10px; color:yellow}
 
 .accordion_body{ border:1px solid #ccc; }
 .accordion_body .operation_links a{ color:navy; }
