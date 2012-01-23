@@ -25,4 +25,6 @@ Gem::Specification.new do |s|
   s.add_dependency('paperclip', '~>2.3')
   s.add_dependency('mime-types', '=1.16')
   s.add_dependency('will_paginate', '~>3.0.pre2')
+  s.add_dependency('activemerchant')
+  s.add_dependency('httparty')
 end
