@@ -48,6 +48,7 @@ function set_branch_service_env(){
 
     $("#service_name").select();
     $("#service_level").val(service_branch_level);
+	$("#service_price").val("0.0");
 
     $('.service_leaf_specific').hide();
     $('.service_branch_specific').show();
