@@ -87,13 +87,7 @@ Omega::Engine.routes.draw do
 
   match 'contacts/:action' => 'contacts#search'
 
-  resources :groups do
-		member do
-			get :space
-		end
-	end
-	resources :posts
-	resources :topics
+  resources :groups
   resources :groups_requesters
   resources :groups_members do
     collection do
@@ -167,34 +161,6 @@ Omega::Engine.routes.draw do
     root :to => 'volunteering#index', :as => ''
   end
 
-  resources :services   
-  resources :service_sections
-  resources :service_registrations do
-    collection do
-      post :paypal_return
-      get :paypal_cancel_return
-    end
-  end
-  
-  resources :roles do
-    collection do
-      put :restore_role_permission_associations
-    end
-    member do
-      put :update_permission
-    end
-  end
-
-  resources :assets
-  resources :asset_allocations
-
-  resources :payments do
-    collection do
-      post :ipn_handler
-    end
-  end
-  
-  
   resources :favorites, :only => [:index, :show] do
     collection do
       match :add,    :path => 'add/*klass/:id',    :as => 'add_to'
