@@ -1,5 +1,7 @@
 module Omega
 	class Upload < Omega::Model
+		set_table_name :uploads
+
 	  belongs_to :binding, :polymorphic => true  # works for Contact has_upload :photo. check Omega::Model.has_upload
 	  has_attached_file :upload # from old Upload model (Paperclip::Attachment object)
 	  
