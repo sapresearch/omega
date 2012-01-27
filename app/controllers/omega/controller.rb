@@ -1,5 +1,6 @@
 module Omega
   class Controller < ApplicationController
+	puts "\n In Omega::Controller in Omega\n"
   
  #    include Omega::Errors::Handler
 

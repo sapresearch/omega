@@ -1,8 +1,10 @@
 module Omega
 	class HomeController < Omega::Controller
 	  respond_to :html
+		puts "\n In Omega::HomeController in Omega\n"
 	
 	  def index
+			puts "\n In Omega::HomeController#index in Omega\n"
 	    @positions =  Volunteering::Position.limit(5)
 	    # @services = Service.limit(5) # original
 		 # just for testing meta.
