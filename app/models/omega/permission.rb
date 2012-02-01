@@ -4,6 +4,7 @@ module Omega
 	  PERM_ASSIGN_TO_ROLE = 'permissions_assign_to_role'
 	  PERM_VIEW           = 'permissions_view'
 	
+		# Omega::Hosting::Accounts#new uses DEAULT_PERMISSIONS hash to create the correct permissions for each new account.
 	  DEFAULT_PERMISSIONS = {
 	    "permissions_assign_to_role"=>{},
 	    "permissions_view"=>{},
@@ -45,7 +46,7 @@ module Omega
 	  has_and_belongs_to_many :roles
 	
 	  validates :name,  :presence => true
-	  validates :value, :presence => true,
-	                    :uniqueness => true
+	  validates :value, :presence => true#,
+	                    #:uniqueness => true
 	end
 end

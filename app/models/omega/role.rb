@@ -11,27 +11,35 @@ module Omega
 	
 	  MAX_LENGTH = 100
 	  PAGE_SIZE = 4.0
+
+		# Omega::Hosting::Accounts#new uses DEAULT_ROLES hash to create the correct role for each new account.
 	  DEFAULT_ROLES = {
 	    'anonymous' => {
-	      :name        => 'Anonymous',
-	      :description => '',
-	      :locked      => true
+	      :name          => 'Anonymous',
+	      :internal_name => 'anonymous',
+	      :description   => '',
+	      :locked        => true
 	    },
 	    'authenticated_user' => {
-	      :name         => 'Authenticated User',
-	      :description  => '',
-	      :default_role => true,
-	      :locked       => true
+	      :name          => 'Authenticated User',
+	      :internal_name => 'authenticated_user',
+	      :description   => '',
+	      :default_role  => true,
+	      :locked        => true
 	    },
 	    'editor' => {
-	      :name        => 'Editor',
-	      :description => ''
+	      :name          => 'Editor',
+	      :internal_name => 'editor',
+	      :description   => ''
 	    },
 	    'administrator' => {
-	      :name        => 'Administrator',
-	      :description => ''
+	      :name          => 'Administrator',
+	      :internal_name => 'administrator',
+	      :description   => ''
 	    }
 	  }
+
+		# Omega::Hosting::Accounts#new uses DEAULT_ASSIGNMENTS hash to create the correct role-permission assignments for each new account.
 	  DEFAULT_ASSIGNMENTS = {
 	    "anonymous" => ["users_register", "service_view", "volunteering_view", "groups_view"],
 	    "authenticated_user" => ["users_change_own_username", "users_register", "users_view",
@@ -68,11 +76,11 @@ module Omega
 	  has_many :groups_roles, :dependent=>:destroy
 	  has_many :groups, :through=>:groups_roles
 	
-	  validates :name,          :presence => true,
-	                            :uniqueness => true
-	  validates :internal_name, :presence => true,
-	                            :uniqueness => true,
-	                            :if => :locked?
+	  validates :name,          :presence => true#,
+	                            #:uniqueness => true
+	  validates :internal_name, :presence => true#,
+	                            #:uniqueness => true,
+	                            #:if => :locked?
 	end
 	
 	
