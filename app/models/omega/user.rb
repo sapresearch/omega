@@ -74,7 +74,7 @@ module Omega
 	  #accepts_flattened_values_for :skills, :value => :name
 	
 	  attr_accessor :password, :password_confirmation
-	  attr_accessible :username, :email, :contact_attributes
+	  attr_accessible :username, :email, :contact_attributes, :account_id
 	
 	  validates :username,   :presence => true,
 	                         :uniqueness => true,
