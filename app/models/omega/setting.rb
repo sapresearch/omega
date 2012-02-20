@@ -2,6 +2,7 @@ module Omega
 	class Setting < Omega::Model
 		belongs_to :user
 		attr_accessible :facebook_token, :twitter, :user_id, :email
+		self.table_name = 'settings'
 	
 	  PERM_ADMIN = 'myomega_admin'
 	  PERM_VIEW  = 'myomega_view'
@@ -24,6 +25,15 @@ module Omega
 			end
 			return fb_enabled
 		end
+		
+	def self.default_email
+		if not Omega::Setting.first.nil?
+			if not Omega::Setting.first.email.blank?
+				return Omega::Setting.first.email
+			end
+		end
+		return "paul.miller01@sap.com"
+	end
 	
 	end
 end
