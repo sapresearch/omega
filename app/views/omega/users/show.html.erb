@@ -2,29 +2,24 @@
 
 <div class="content circle-corners-bottom-left">
 	
-	
-	
-<h2 class="summary">
+	<h2 class="summary">
 		Hello <%= @user.first_name %>!
 	</h2>
-	
-		<p class="summary"> <span class="text-style1"> Your registration was successful!
+
+	<p class="summary">
+		<span class="text-style1"> Your registration was successful!
+			<br/>
+			 A confirmation email has been sent to <%= @user.email %>
+		 </span>
+	</p>
+
+	<p class="summary">
+		<br/><br/>
+		<span class="text-style-large"> Sign In and Start Volunteering Now!</span>
 		<br/>
-		 A confirmation email has been sent to <%= @user.email %>
-		 </span></p>
+	</p>
 
-<p class="summary">
-	
-	<br/>
-	<br/>
-	<span class="text-style-large"> Sign In and Start Volunteering Now!</span> <br/>
-	
-	
-
-</p>
-
-	    <%= render :partial => "layouts/partials/login" %>
-
+	<%= render :partial => "layouts/omega/partials/login" %>
 
 </div>
 	  
