@@ -11,21 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120124110000) do
+ActiveRecord::Schema.define(:version => 20120126091111) do
 
   create_table "asset_allocations", :force => true do |t|
     t.integer  "asset_id"
     t.integer  "service_leaf_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "asset_allocations", ["account_id"], :name => "index_asset_allocations_on_account_id"
 
   create_table "assets", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "assets", ["account_id"], :name => "index_assets_on_account_id"
 
   create_table "blocks", :force => true do |t|
     t.string   "type",                           :null => false
@@ -37,8 +43,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "settings"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "blocks", ["account_id"], :name => "index_blocks_on_account_id"
   add_index "blocks", ["name"], :name => "index_blocks_on_name", :unique => true
 
   create_table "calendar_event_sources", :force => true do |t|
@@ -50,7 +58,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "mapping"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "calendar_event_sources", ["account_id"], :name => "index_calendar_event_sources_on_account_id"
 
   create_table "calendar_events", :force => true do |t|
     t.integer  "calendar_id"
@@ -77,7 +88,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.string   "recurrence_end_on"
     t.date     "recurrence_end_at"
     t.integer  "recurrence_end_after"
+    t.integer  "account_id"
   end
+
+  add_index "calendar_events", ["account_id"], :name => "index_calendar_events_on_account_id"
 
   create_table "calendar_shares", :force => true do |t|
     t.integer  "calendar_id"
@@ -86,14 +100,20 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.boolean  "writable"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "calendar_shares", ["account_id"], :name => "index_calendar_shares_on_account_id"
 
   create_table "calendars", :force => true do |t|
     t.string   "calendar_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "account_id"
   end
+
+  add_index "calendars", ["account_id"], :name => "index_calendars_on_account_id"
 
   create_table "components", :force => true do |t|
     t.string   "type",                           :null => false
@@ -105,8 +125,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "settings"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "components", ["account_id"], :name => "index_components_on_account_id"
   add_index "components", ["name"], :name => "index_components_on_name", :unique => true
 
   create_table "contact_addresses", :force => true do |t|
@@ -122,27 +144,36 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "contact_addresses", ["account_id"], :name => "index_contact_addresses_on_account_id"
 
   create_table "contact_contacts_interests", :id => false, :force => true do |t|
     t.integer "contact_id",  :null => false
     t.integer "interest_id", :null => false
+    t.integer "account_id"
   end
 
+  add_index "contact_contacts_interests", ["account_id"], :name => "index_contact_contacts_interests_on_account_id"
   add_index "contact_contacts_interests", ["contact_id", "interest_id"], :name => "index_contact_contacts_interests_on_contact_id_and_interest_id", :unique => true
 
   create_table "contact_contacts_languages", :id => false, :force => true do |t|
     t.integer "contact_id",  :null => false
     t.integer "language_id", :null => false
+    t.integer "account_id"
   end
 
+  add_index "contact_contacts_languages", ["account_id"], :name => "index_contact_contacts_languages_on_account_id"
   add_index "contact_contacts_languages", ["contact_id", "language_id"], :name => "index_contact_contacts_languages_on_contact_id_and_language_id", :unique => true
 
   create_table "contact_contacts_skills", :id => false, :force => true do |t|
     t.integer "contact_id", :null => false
     t.integer "skill_id",   :null => false
+    t.integer "account_id"
   end
 
+  add_index "contact_contacts_skills", ["account_id"], :name => "index_contact_contacts_skills_on_account_id"
   add_index "contact_contacts_skills", ["contact_id", "skill_id"], :name => "index_contact_contacts_skills_on_contact_id_and_skill_id", :unique => true
 
   create_table "contact_data_imports", :force => true do |t|
@@ -154,7 +185,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "contact_ids",   :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "contact_data_imports", ["account_id"], :name => "index_contact_data_imports_on_account_id"
 
   create_table "contact_fields", :force => true do |t|
     t.string   "name"
@@ -162,19 +196,27 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
+    t.integer  "account_id"
   end
+
+  add_index "contact_fields", ["account_id"], :name => "index_contact_fields_on_account_id"
 
   create_table "contact_fields_volunteering_positions", :id => false, :force => true do |t|
     t.integer "contact_field_id",         :null => false
     t.integer "volunteering_position_id", :null => false
+    t.integer "account_id"
   end
+
+  add_index "contact_fields_volunteering_positions", ["account_id"], :name => "index_contact_fields_volunteering_positions_on_account_id"
 
   create_table "contact_group_positions", :force => true do |t|
     t.integer "contact_id", :null => false
     t.integer "group_id",   :null => false
     t.string  "position"
+    t.integer "account_id"
   end
 
+  add_index "contact_group_positions", ["account_id"], :name => "index_contact_group_positions_on_account_id"
   add_index "contact_group_positions", ["contact_id", "group_id"], :name => "index_contact_group_positions_on_contact_id_and_group_id"
 
   create_table "contact_groups", :force => true do |t|
@@ -183,7 +225,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "contact_groups", ["account_id"], :name => "index_contact_groups_on_account_id"
 
   create_table "contact_imports", :force => true do |t|
     t.string   "datatype"
@@ -193,26 +238,37 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "csv_file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "contact_imports", ["account_id"], :name => "index_contact_imports_on_account_id"
 
   create_table "contact_interests", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "contact_interests", ["account_id"], :name => "index_contact_interests_on_account_id"
 
   create_table "contact_interests_volunteering_positions", :id => false, :force => true do |t|
     t.integer "interest_id", :null => false
     t.integer "position_id", :null => false
+    t.integer "account_id"
   end
 
+  add_index "contact_interests_volunteering_positions", ["account_id"], :name => "index_contact_interests_volunteering_positions_on_account_id"
   add_index "contact_interests_volunteering_positions", ["interest_id", "position_id"], :name => "contact_interests_volunteering_positions_ids", :unique => true
 
   create_table "contact_languages", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "contact_languages", ["account_id"], :name => "index_contact_languages_on_account_id"
 
   create_table "contact_phone_numbers", :force => true do |t|
     t.integer  "contact_id",     :null => false
@@ -224,26 +280,36 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "contact_phone_numbers", ["account_id"], :name => "index_contact_phone_numbers_on_account_id"
 
   create_table "contact_skills", :force => true do |t|
     t.string   "name",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "contact_skills", ["account_id"], :name => "index_contact_skills_on_account_id"
 
   create_table "contact_skills_users", :id => false, :force => true do |t|
-    t.integer "skill_id", :null => false
-    t.integer "user_id",  :null => false
+    t.integer "skill_id",   :null => false
+    t.integer "user_id",    :null => false
+    t.integer "account_id"
   end
 
+  add_index "contact_skills_users", ["account_id"], :name => "index_contact_skills_users_on_account_id"
   add_index "contact_skills_users", ["skill_id", "user_id"], :name => "contact_skills_users_ids", :unique => true
 
   create_table "contact_skills_volunteering_positions", :id => false, :force => true do |t|
     t.integer "skill_id",    :null => false
     t.integer "position_id", :null => false
+    t.integer "account_id"
   end
 
+  add_index "contact_skills_volunteering_positions", ["account_id"], :name => "index_contact_skills_volunteering_positions_on_account_id"
   add_index "contact_skills_volunteering_positions", ["skill_id", "position_id"], :name => "contact_skills_volunteering_positions_ids", :unique => true
 
   create_table "contact_values", :force => true do |t|
@@ -252,7 +318,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "contact_values", ["account_id"], :name => "index_contact_values_on_account_id"
 
   create_table "contacts", :force => true do |t|
     t.integer  "user_id"
@@ -285,14 +354,20 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "birthday"
+    t.integer  "account_id"
   end
 
+  add_index "contacts", ["account_id"], :name => "index_contacts_on_account_id"
+
   create_table "deliveries", :force => true do |t|
-    t.string "message_id"
-    t.string "recipient"
-    t.text   "content"
-    t.string "status"
+    t.string  "message_id"
+    t.string  "recipient"
+    t.text    "content"
+    t.string  "status"
+    t.integer "account_id"
   end
+
+  add_index "deliveries", ["account_id"], :name => "index_deliveries_on_account_id"
 
   create_table "event_recurrences", :force => true do |t|
     t.string   "interval"
@@ -300,7 +375,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "end_at"
+    t.integer  "account_id"
   end
+
+  add_index "event_recurrences", ["account_id"], :name => "index_event_recurrences_on_account_id"
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -310,7 +388,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "events", ["account_id"], :name => "index_events_on_account_id"
 
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
@@ -318,8 +399,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.string   "item_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "favorites", ["account_id"], :name => "index_favorites_on_account_id"
   add_index "favorites", ["user_id", "item_id", "item_type"], :name => "index_favorites_on_user_id_and_item_id_and_item_type", :unique => true
 
   create_table "groups", :force => true do |t|
@@ -331,7 +414,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "super_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "groups", ["account_id"], :name => "index_groups_on_account_id"
 
   create_table "groups_members", :force => true do |t|
     t.string   "position",   :default => "member"
@@ -339,7 +425,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "groups_members", ["account_id"], :name => "index_groups_members_on_account_id"
 
   create_table "groups_requesters", :force => true do |t|
     t.integer  "group_id"
@@ -347,28 +436,40 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "groups_requesters", ["account_id"], :name => "index_groups_requesters_on_account_id"
 
   create_table "groups_roles", :force => true do |t|
     t.integer  "group_id"
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "groups_roles", ["account_id"], :name => "index_groups_roles_on_account_id"
 
   create_table "groups_topics", :force => true do |t|
     t.integer  "group_id"
     t.integer  "topic_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "groups_topics", ["account_id"], :name => "index_groups_topics_on_account_id"
 
   create_table "groups_uploads", :force => true do |t|
     t.integer  "group_id"
     t.integer  "upload_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "groups_uploads", ["account_id"], :name => "index_groups_uploads_on_account_id"
 
   create_table "images", :force => true do |t|
     t.string   "datatype"
@@ -379,7 +480,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.datetime "updated_at"
     t.boolean  "image_in_use"
     t.string   "banner_or_logo"
+    t.integer  "account_id"
   end
+
+  add_index "images", ["account_id"], :name => "index_images_on_account_id"
 
   create_table "menu_items", :force => true do |t|
     t.integer  "parent_id",                     :null => false
@@ -392,8 +496,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "weight",      :default => 10,   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "menu_items", ["account_id"], :name => "index_menu_items_on_account_id"
   add_index "menu_items", ["name"], :name => "index_menu_items_on_name", :unique => true
   add_index "menu_items", ["parent_id", "parent_type"], :name => "index_menu_items_on_parent_id_and_parent_type"
   add_index "menu_items", ["path"], :name => "index_menu_items_on_path", :unique => true
@@ -404,8 +510,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "menus", ["account_id"], :name => "index_menus_on_account_id"
   add_index "menus", ["name"], :name => "index_menus_on_name", :unique => true
 
   create_table "messages", :force => true do |t|
@@ -418,7 +526,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.datetime "deleted_by_from_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "messages", ["account_id"], :name => "index_messages_on_account_id"
 
   create_table "omega_hosting_accounts", :force => true do |t|
     t.integer  "user_id"
@@ -438,8 +549,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "settings"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "page_blocks", ["account_id"], :name => "index_page_blocks_on_account_id"
   add_index "page_blocks", ["page_id", "block_id"], :name => "index_page_blocks_on_page_id_and_block_id"
 
   create_table "page_components", :force => true do |t|
@@ -451,8 +564,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "settings"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "page_components", ["account_id"], :name => "index_page_components_on_account_id"
   add_index "page_components", ["page_id", "component_id"], :name => "index_page_components_on_page_id_and_component_id"
 
   create_table "pages", :force => true do |t|
@@ -464,8 +579,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.boolean  "is_home",     :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "pages", ["account_id"], :name => "index_pages_on_account_id"
   add_index "pages", ["name"], :name => "index_pages_on_name", :unique => true
   add_index "pages", ["path"], :name => "index_pages_on_path", :unique => true
 
@@ -481,23 +598,30 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.boolean  "is_test"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "payments", ["account_id"], :name => "index_payments_on_account_id"
 
   create_table "permissions", :force => true do |t|
-    t.string "name",        :null => false
-    t.string "group"
-    t.string "value",       :null => false
-    t.text   "description"
+    t.string  "name",        :null => false
+    t.string  "group"
+    t.string  "value",       :null => false
+    t.text    "description"
+    t.integer "account_id"
   end
 
+  add_index "permissions", ["account_id"], :name => "index_permissions_on_account_id"
   add_index "permissions", ["name"], :name => "index_permissions_on_name"
   add_index "permissions", ["value"], :name => "index_permissions_on_value"
 
   create_table "permissions_roles", :id => false, :force => true do |t|
     t.integer "permission_id", :null => false
     t.integer "role_id",       :null => false
+    t.integer "account_id"
   end
 
+  add_index "permissions_roles", ["account_id"], :name => "index_permissions_roles_on_account_id"
   add_index "permissions_roles", ["permission_id", "role_id"], :name => "index_permissions_roles_on_permission_id_and_role_id", :unique => true
 
   create_table "posts", :force => true do |t|
@@ -507,7 +631,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "super_post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "posts", ["account_id"], :name => "index_posts_on_account_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name",                             :null => false
@@ -517,15 +644,19 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "roles", ["account_id"], :name => "index_roles_on_account_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
   create_table "roles_users", :id => false, :force => true do |t|
-    t.integer "role_id", :null => false
-    t.integer "user_id", :null => false
+    t.integer "role_id",    :null => false
+    t.integer "user_id",    :null => false
+    t.integer "account_id"
   end
 
+  add_index "roles_users", ["account_id"], :name => "index_roles_users_on_account_id"
   add_index "roles_users", ["role_id", "user_id"], :name => "index_roles_users_on_role_id_and_user_id", :unique => true
 
   create_table "service_detail_forms", :force => true do |t|
@@ -534,13 +665,19 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "service_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "service_detail_forms", ["account_id"], :name => "index_service_detail_forms_on_account_id"
 
   create_table "service_detail_templates", :force => true do |t|
     t.integer  "service_detail_form_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "service_detail_templates", ["account_id"], :name => "index_service_detail_templates_on_account_id"
 
   create_table "service_leaves", :force => true do |t|
     t.integer  "service_id"
@@ -550,27 +687,39 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.boolean  "is_blocked",                                  :default => false
     t.string   "register_type"
     t.decimal  "price",         :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "account_id"
   end
+
+  add_index "service_leaves", ["account_id"], :name => "index_service_leaves_on_account_id"
 
   create_table "service_registration_form_values", :force => true do |t|
     t.integer  "service_registration_id"
     t.text     "field_values"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "service_registration_form_values", ["account_id"], :name => "index_service_registration_form_values_on_account_id"
 
   create_table "service_registration_forms", :force => true do |t|
     t.text     "html"
     t.integer  "service_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "service_registration_forms", ["account_id"], :name => "index_service_registration_forms_on_account_id"
 
   create_table "service_registration_templates", :force => true do |t|
     t.integer  "service_registration_form_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "service_registration_templates", ["account_id"], :name => "index_service_registration_templates_on_account_id"
 
   create_table "service_registrations", :force => true do |t|
     t.integer  "service_leaf_id"
@@ -578,7 +727,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",          :default => "pending"
+    t.integer  "account_id"
   end
+
+  add_index "service_registrations", ["account_id"], :name => "index_service_registrations_on_account_id"
 
   create_table "service_sections", :force => true do |t|
     t.integer  "contact_id"
@@ -586,7 +738,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "service_sections", ["account_id"], :name => "index_service_sections_on_account_id"
 
   create_table "services", :force => true do |t|
     t.string   "name"
@@ -595,7 +750,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "super_service_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "services", ["account_id"], :name => "index_services_on_account_id"
 
   create_table "settings", :force => true do |t|
     t.string   "facebook_token"
@@ -606,8 +764,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "image_id"
     t.string   "fb_secret"
     t.string   "email"
+    t.integer  "account_id"
   end
 
+  add_index "settings", ["account_id"], :name => "index_settings_on_account_id"
   add_index "settings", ["user_id"], :name => "index_settings_on_user_id"
 
   create_table "topics", :force => true do |t|
@@ -616,7 +776,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "topic_type", :default => "regular"
+    t.integer  "account_id"
   end
+
+  add_index "topics", ["account_id"], :name => "index_topics_on_account_id"
 
   create_table "uploads", :force => true do |t|
     t.string   "name"
@@ -629,7 +792,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "uploader_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "uploads", ["account_id"], :name => "index_uploads_on_account_id"
 
   create_table "user_sessions", :force => true do |t|
     t.integer  "user_id",                            :null => false
@@ -637,8 +803,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.datetime "signed_in_at"
     t.string   "last_activity"
     t.datetime "last_activity_at"
+    t.integer  "account_id"
   end
 
+  add_index "user_sessions", ["account_id"], :name => "index_user_sessions_on_account_id"
   add_index "user_sessions", ["user_id"], :name => "index_user_sessions_on_user_id"
 
   create_table "user_tokens", :force => true do |t|
@@ -648,7 +816,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.datetime "consumed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "user_tokens", ["account_id"], :name => "index_user_tokens_on_account_id"
 
   create_table "users", :force => true do |t|
     t.string   "username",                     :null => false
@@ -660,16 +831,20 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.string   "time_zone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "users", ["account_id"], :name => "index_users_on_account_id"
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "volunteering_contact_positions", :force => true do |t|
     t.integer "contact_id",  :null => false
     t.integer "position_id", :null => false
+    t.integer "account_id"
   end
 
+  add_index "volunteering_contact_positions", ["account_id"], :name => "index_volunteering_contact_positions_on_account_id"
   add_index "volunteering_contact_positions", ["contact_id", "position_id"], :name => "by_contact_indeces", :unique => true
 
   create_table "volunteering_days", :force => true do |t|
@@ -681,7 +856,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "volunteers"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "volunteering_days", ["account_id"], :name => "index_volunteering_days_on_account_id"
 
   create_table "volunteering_positions", :force => true do |t|
     t.string   "name",                  :null => false
@@ -711,7 +889,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "recurrence_end_after"
     t.text     "agreement"
     t.string   "priority"
+    t.integer  "account_id"
   end
+
+  add_index "volunteering_positions", ["account_id"], :name => "index_volunteering_positions_on_account_id"
 
   create_table "volunteering_records", :force => true do |t|
     t.integer  "position_id",                                      :null => false
@@ -739,7 +920,10 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.integer  "agreement",                         :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "volunteering_records", ["account_id"], :name => "index_volunteering_records_on_account_id"
 
   create_table "volunteering_schedules", :force => true do |t|
     t.integer  "position_id",   :null => false
@@ -751,12 +935,18 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.time     "end_time",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
 
+  add_index "volunteering_schedules", ["account_id"], :name => "index_volunteering_schedules_on_account_id"
+
   create_table "volunteering_time_entries", :force => true do |t|
-    t.integer "record_id", :null => false
-    t.date    "week",      :null => false
+    t.integer "record_id",  :null => false
+    t.date    "week",       :null => false
+    t.integer "account_id"
   end
+
+  add_index "volunteering_time_entries", ["account_id"], :name => "index_volunteering_time_entries_on_account_id"
 
   create_table "volunteering_time_entry_days", :force => true do |t|
     t.integer  "time_entry_id",                               :null => false
@@ -764,6 +954,9 @@ ActiveRecord::Schema.define(:version => 20120124110000) do
     t.decimal  "hours",         :precision => 4, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
   end
+
+  add_index "volunteering_time_entry_days", ["account_id"], :name => "index_volunteering_time_entry_days_on_account_id"
 
 end
