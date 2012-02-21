@@ -13,7 +13,7 @@ module Omega
 	  end
 	
 	  def show
-			@user = User.find(params[:id])
+		@user = User.find(params[:id])
 	    respond_with(@user)
 	  end
 	
@@ -35,11 +35,11 @@ module Omega
 	  end
 	
 	  def join
-		 puts "\n\nIN JOIN"
 		 password = params[:user].delete(:password)
 		 confirm = params[:user].delete(:password_confirmation)
-		 params[:user][:contact_attributes][:birthday] = Date.strptime(params[:user][:contact_attributes][:birthday], '%m/%d/%Y')
-		 puts "\n\n" + params[:user][:contact_attributes][:birthday].to_s
+		 unless params[:user][:contact_attributes][:birthday].nil?
+			params[:user][:contact_attributes][:birthday] = Date.strptime(params[:user][:contact_attributes][:birthday], '%m/%d/%Y')
+		 end
 		 @user = User.new(params[:user])
 		 @user.password = password
 		 @user.password_confirmation = confirm
