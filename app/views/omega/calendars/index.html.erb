@@ -22,7 +22,7 @@
 	 <span class="calendar-top-right">
 
 
-	  				<%= select( nil, "calendars", Calendar.all.collect {|p| [ p.calendar_name, p.id ] })  %>
+	  				<%= select( nil, "calendars", Omega::Calendar.all.collect {|p| [ p.calendar_name, p.id ] })  %>
 </span>
 
 <span class="calendar-top-left">
