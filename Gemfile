@@ -2,7 +2,12 @@ source "http://rubygems.org"
 
 gemspec
 
-gem "activerecord-jdbcsqlite3-adapter", :platform => :jruby
+platforms :jruby do
+	gem 'activerecord-jdbcmysql-adapter'
+	gem 'activerecord-jdbc-adapter'
+	gem 'jruby-openssl'
+end
+
 gem "sqlite3", :platform => :ruby
 gem 'mysql2', '0.3.7'
 gem "jquery-rails"

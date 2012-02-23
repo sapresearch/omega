@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.1.1"
+  s.add_dependency "rails", "~> 3.1.0"
   s.add_dependency "jquery-rails"
   s.add_dependency('zipcodr', '0.0.2')
   s.add_dependency('faster_haversine', '0.1.3')
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency('accepts-flattened-values', '~>0.1.3')
   s.add_dependency('paperclip', '~>2.3')
   s.add_dependency('mime-types', '=1.16')
-  s.add_dependency('will_paginate', '~>3.0.pre2')
+  s.add_dependency('will_paginate', '>= 3.0.pre2', '<= 3.0.2')
   s.add_dependency('activemerchant')
   s.add_dependency('httparty')
 end
