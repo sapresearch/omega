@@ -196,8 +196,8 @@ class SearchFilter < Array
 				true
 			elsif !r[:addresses].nil? and r[:addresses] != ""
 				puts "\n This should NOT be nil: " + r[:addresses].inspect.to_s
-				puts "\n Distance: " + Zip.distance(r[:addresses], zip_query).to_s
-				Zip.distance(r[:addresses], zip_query) < 100 ? false : true
+				puts "\n Distance: " + Zipp.distance(r[:addresses], zip_query).to_s
+				Zipp.distance(r[:addresses], zip_query) < 100 ? false : true
 			end
 		end
 	end
@@ -235,7 +235,7 @@ class SearchFilter < Array
 
 end
 
-class Zip
+class Zipp
 	require 'zipcodr'
 	require 'faster_haversine'
 
