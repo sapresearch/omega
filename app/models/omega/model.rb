@@ -1,6 +1,7 @@
 module Omega
   class Model < ActiveRecord::Base
     self.abstract_class = true
+		include ::TableNameSpace
 
     class << self
       private

@@ -10,6 +10,7 @@ module Omega
 
   autoload :Observers
   autoload :UndecoratedName
+	require 'table_name_space'
 
   autoload_under 'middleware' do
     autoload :FlashUploads
