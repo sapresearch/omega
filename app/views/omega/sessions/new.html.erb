@@ -5,7 +5,7 @@
 </h1>
 
 <div class="page-content corners-bottom">
-	<%= form_for @session do |f| %>
+	<%= form_for @session, :url => "/#{params[:account_name]}" do |f| %>
 
 		<p>
 			<%= f.label :username %><%= f.text_field :username %> <%= link_to 'Lost your username?', lost_username_path %>
