@@ -1,6 +1,6 @@
 module Omega
 	class Contact < Omega::Model
-	  set_table_name 'contacts'
+	  self.table_name = 'contacts'
 	  
 	  require_dependency 'omega/contact/address'
 	  #require_dependency 'omega/contact/group'

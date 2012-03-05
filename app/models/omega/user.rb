@@ -3,7 +3,7 @@ module Omega
 	
 	class User < Omega::Model
 	
-	  set_table_name "users"
+	  self.table_name = "users"
 	
 	  PERM_ADMIN               = 'users_admin'
 	  PERM_ASSIGN_TO_ROLE      = 'users_assign_to_role'
