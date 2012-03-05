@@ -63,7 +63,7 @@
 <%= render :partial => "layouts/omega/footer" %>
 
 <!-- tmp section for debugging -->
-<% if ENV["RAILS_ENV"]=="development" %>
+<!--<%# if ENV["RAILS_ENV"]=="development" %>
   <div id="debug">
     <a href="#" onclick="$('#params_debug_info').toggle(); return false">params</a> |
     <a href="#" onclick="$('#session_debug_info').toggle(); return false">session</a> |
@@ -71,22 +71,22 @@
     <a href="#" onclick="$('#request_debug_info').toggle(); return false">request</a>
     <fieldset id="params_debug_info" class="debug_info" style="display:none">
       <legend>params</legend>
-      <%= debug(params)%>
+      <%#= debug(params)%>
     </fieldset>
     <fieldset id="session_debug_info" class="debug_info" style="display:none">
       <legend>session</legend>
-      <%= debug(session)%>
+      <%#= debug(session)%>
     </fieldset>
     <fieldset id="env_debug_info" class="debug_info" style="display:none">
       <legend>env</legend>
-      <%= debug(request.env)%>
+      <%#= debug(request.env)%>
     </fieldset>
     <fieldset id="request_debug_info" class="debug_info" style="display:none">
       <legend>request</legend>
-      <%= debug(request)%>
+      <%#= debug(request)%>
     </fieldset>
   </div>
-<% end %>
+<%# end %>-->
 <!-- end of debugging section -->
 
 
