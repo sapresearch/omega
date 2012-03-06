@@ -1,8 +1,5 @@
 module Omega
   class Controller < ApplicationController
-	puts "\n In Omega::Controller in Omega\n"
-	puts "\n In Omega::Controller in Omega. Defined: #{defined?(Omega::Volunteering::Position)}"
-	puts "\n In Omega::Controller in Omega. Defined volunteering: #{defined?(Omega::Volunteering)}"
  #    include Omega::Errors::Handler
 
  #   include Omega::Assets::Dependencies
