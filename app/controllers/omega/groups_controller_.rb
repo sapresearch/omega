@@ -1,7 +1,7 @@
 module Omega
 	class Contacts::GroupsController < Omega::Controller
 	  respond_to :html, :xml, :js, :json
-	  sub_layout :determine_sub_layout
+	  #sub_layout :determine_sub_layout
 	
 	  before_filter :get_all_contact_groups, :except => [:index]
 	

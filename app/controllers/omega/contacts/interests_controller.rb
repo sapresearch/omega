@@ -1,7 +1,7 @@
 module Omega
 	class Contacts::InterestsController < Omega::Controller
 	  respond_to :html, :xml, :json
-	  crud_helper Contact::Interest
+	  #crud_helper Contact::Interest
 	  require_permission Contact::PERM_VIEW
 	  require_permission Contact::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 	

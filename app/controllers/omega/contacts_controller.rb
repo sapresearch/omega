@@ -1,8 +1,8 @@
 module Omega
 	class ContactsController < Omega::Controller
 	  respond_to :html, :xml, :js, :json
-	  sub_layout :determine_sub_layout
-	  crud_helper Contact, :all => [:all, :list]
+	  #sub_layout :determine_sub_layout
+	  #crud_helper Contact, :all => [:all, :list]
 	
 	  contact_is_self = lambda { @contact.user == current_user }
 	#  require_permission Contact::PERM_VIEW, :except => [:show, :edit]

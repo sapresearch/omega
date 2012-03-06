@@ -223,7 +223,7 @@ module Omega
 	      end
 	
 	      @rows = Contact::DataImport.find(session[:rows_id]).mapped_rows
-	=begin original code
+	#begin original code
 	      @rows[0].each do |c|
 	
 	        if c.include?("Do Not Import")
@@ -233,7 +233,7 @@ module Omega
 	          end
 	        end
 	      end
-	=end
+	#end
 	      drop_indices = []
 	      @rows[0].each_with_index {|c, i| drop_indices << i if c.include?("Do Not Import")}
 	      @rows.each do |r|
