@@ -5,7 +5,7 @@ module Omega
 	
 	  before_filter :get_all_contact_groups, :except => [:index]
 	
-	  crud_helper Contact::Group, :find => [:assign, :remove]
+	  #crud_helper Contact::Group, :find => [:assign, :remove]
 	#  require_permission Contact::PERM_VIEW
 	#  require_permission Contact::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 	
