@@ -1,5 +1,5 @@
 module Omega
-	class GroupsMember < Omega::Model
+	class GroupsMember < Model
 	  belongs_to :group
 	  belongs_to :member, :class_name=>"Contact"
 	

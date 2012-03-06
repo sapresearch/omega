@@ -1,5 +1,5 @@
 module Omega
-	class Contact::GroupPosition < Omega::Model
+	class Contact::GroupPosition < Model
 	  belongs_to :contact
 	  belongs_to :group
 	

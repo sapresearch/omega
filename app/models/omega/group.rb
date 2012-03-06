@@ -1,5 +1,5 @@
 module Omega
-	class Group < Omega::Model
+	class Group < Model
 	  PERM_ADMIN = 'groups_admin'
 	  PERM_VIEW  = 'groups_view'
 	

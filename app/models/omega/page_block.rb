@@ -1,5 +1,5 @@
 module Omega
-	class PageBlock < Omega::Model
+	class PageBlock < Model
 	  belongs_to :page
 	  belongs_to :block
 	end

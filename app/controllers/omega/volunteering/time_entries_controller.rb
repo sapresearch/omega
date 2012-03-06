@@ -1,5 +1,5 @@
 module Omega
-	class Volunteering::TimeEntriesController < Omega::Controller
+	class Volunteering::TimeEntriesController < Controller
 	
 	  respond_to :html, :xml, :json, :js
 	

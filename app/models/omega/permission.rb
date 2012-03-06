@@ -1,5 +1,5 @@
 module Omega
-	class Permission < Omega::Model
+	class Permission < Model
 	  self.table_name = 'permissions'
 	  PERM_ASSIGN_TO_ROLE = 'permissions_assign_to_role'
 	  PERM_VIEW           = 'permissions_view'

@@ -1,5 +1,5 @@
 module Omega
-	class ServiceSectionsController < Omega::Controller
+	class ServiceSectionsController < Controller
 	
 	  def new
 	    @service_section = ServiceSection.new_with_dependency

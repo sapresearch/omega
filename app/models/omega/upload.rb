@@ -1,5 +1,5 @@
 module Omega
-	class Upload < Omega::Model
+	class Upload < Model
 		self.table_name = :uploads
 
 	  belongs_to :binding, :polymorphic => true  # works for Contact has_upload :photo. check Omega::Model.has_upload

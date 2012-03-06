@@ -1,5 +1,5 @@
 module Omega
-	class MessagesController < Omega::Controller
+	class MessagesController < Controller
 	  respond_to :html, :js
 	
 	#  sub_layout 'messages'

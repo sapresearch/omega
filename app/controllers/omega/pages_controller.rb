@@ -1,5 +1,5 @@
 module Omega
-	class PagesController < Omega::Controller
+	class PagesController < Controller
 	  respond_to :html
 	  before_filter :get_page, :only => [:show, :edit, :update, :destroy]
 	

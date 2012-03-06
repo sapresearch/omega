@@ -1,5 +1,5 @@
 module Omega
-	class Calendar::Share < Omega::Model
+	class Calendar::Share < Model
 	  belongs_to :calendar
 	  belongs_to :shared_to, :class_name => "User"
 	

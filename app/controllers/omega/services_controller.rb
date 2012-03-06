@@ -1,5 +1,5 @@
 module Omega
-	class ServicesController < Omega::Controller
+	class ServicesController < Controller
 	
 	  require_dependency "application_lib.rb"
 	  require_dependency "service_app_adapter.rb"

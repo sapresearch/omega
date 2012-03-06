@@ -1,5 +1,5 @@
 module Omega
-	class Calendar < Omega::Model
+	class Calendar < Model
 	  require_dependency 'omega/calendar/event'
 	  require_dependency 'omega/calendar/event_source'
 	  require_dependency 'omega/calendar/model_observer'

@@ -1,5 +1,5 @@
 module Omega
-	class UploadsController < Omega::Controller
+	class UploadsController < Controller
 	  respond_to :html, :json
 	  
 	#  protect_from_forgery :except => [:create]

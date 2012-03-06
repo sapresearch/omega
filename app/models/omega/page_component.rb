@@ -1,5 +1,5 @@
 module Omega
-	class PageComponent < Omega::Model
+	class PageComponent < Model
 	  belongs_to :page
 	  belongs_to :component
 	end

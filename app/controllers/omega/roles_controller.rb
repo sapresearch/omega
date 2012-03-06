@@ -1,5 +1,5 @@
 module Omega
-	class RolesController < Omega::Controller
+	class RolesController < Controller
 	  respond_to :html, :xml, :js, :json
 	  breadcrumb 'Roles' => :roles
 	  

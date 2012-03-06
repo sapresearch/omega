@@ -1,6 +1,6 @@
 module Omega
 	module Omega
-	class MenusController < Omega::Controller
+	class MenusController < Controller
 	  # GET /menus
 	  # GET /menus.xml
 	  def index

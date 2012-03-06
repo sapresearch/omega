@@ -1,5 +1,5 @@
 module Omega
-	class Contact::Address < Omega::Model
+	class Contact::Address < Model
 	  ADDRESS_TYPES = %w{Home Work}
 	
 	  belongs_to :contact, :polymorphic => true

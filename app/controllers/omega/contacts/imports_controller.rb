@@ -2,7 +2,7 @@ module Omega
 	require 'csv'
 	require 'iconv'
 	
-	class Contacts::ImportsController < Omega::Controller
+	class Contacts::ImportsController < Controller
 	
 	  respond_to :html, :js, :json, :xml
 	

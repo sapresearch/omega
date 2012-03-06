@@ -1,5 +1,5 @@
 module Omega
-	class Volunteering::Schedule < Omega::Model
+	class Volunteering::Schedule < Model
 	
 	  belongs_to :position
 	  has_many :days, :dependent => :destroy

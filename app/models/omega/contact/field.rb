@@ -1,5 +1,5 @@
 module Omega
-	class Contact::Field < Omega::Model
+	class Contact::Field < Model
 		has_many :values
 		has_and_belongs_to_many :volunteering_positions, :class_name => '::Volunteering::Position',
 	  														 			 :join_table => 'contact_fields_volunteering_positions',

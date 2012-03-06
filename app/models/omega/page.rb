@@ -1,5 +1,5 @@
 module Omega
-	class Page < Omega::Model
+	class Page < Model
 	  has_many :page_blocks
 	  has_many :blocks, :through => :page_blocks
 	  has_many :page_components

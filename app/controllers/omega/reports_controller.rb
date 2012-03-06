@@ -1,5 +1,5 @@
 module Omega
-	class ReportsController < Omega::Controller
+	class ReportsController < Controller
 	  #require_permission Volunteering::PERM_ADMIN
 	
 	  require "report_app_adapter.rb"

@@ -1,5 +1,5 @@
 module Omega
-	class PaymentsController < Omega::Controller
+	class PaymentsController < Controller
 	
 	  require "application_lib.rb"
 	  include ApplicationLib

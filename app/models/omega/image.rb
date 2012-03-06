@@ -1,5 +1,5 @@
 module Omega
-	class Image < Omega::Model
+	class Image < Model
 		self.table_name = 'images'
 		attr_accessible :banner_or_logo
 		attr_accessible :image_in_use

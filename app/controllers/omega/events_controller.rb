@@ -1,5 +1,5 @@
 module Omega
-	class EventsController < Omega::Controller
+	class EventsController < Controller
 	
 	  respond_to :html, :xml, :js, :json
 	

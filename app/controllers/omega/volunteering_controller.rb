@@ -1,5 +1,5 @@
 module Omega
-	class VolunteeringController < Omega::Controller
+	class VolunteeringController < Controller
 	  require_permission Volunteering::PERM_VIEW
 	
 	  def index

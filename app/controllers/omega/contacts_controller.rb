@@ -1,5 +1,5 @@
 module Omega
-	class ContactsController < Omega::Controller
+	class ContactsController < Controller
 	  respond_to :html, :xml, :js, :json
 	  #sub_layout :determine_sub_layout
 	  #crud_helper Contact, :all => [:all, :list]

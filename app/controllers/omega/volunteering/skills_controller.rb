@@ -1,5 +1,5 @@
 module Omega
-	class Volunteering::SkillsController < Omega::Controller
+	class Volunteering::SkillsController < Controller
 	  respond_to :html, :json
 	
 	  def index

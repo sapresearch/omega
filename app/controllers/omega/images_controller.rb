@@ -1,5 +1,5 @@
 module Omega
-	class ImagesController < Omega::Controller
+	class ImagesController < Controller
 	  respond_to :html
 	  
 	

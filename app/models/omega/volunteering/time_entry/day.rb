@@ -1,5 +1,5 @@
 module Omega
-	class Volunteering::TimeEntry::Day < Omega::Model
+	class Volunteering::TimeEntry::Day < Model
 	
 	  belongs_to :time_entry
 	

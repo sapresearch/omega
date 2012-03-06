@@ -1,5 +1,5 @@
 module Omega
-	class Contacts::GroupsController < Omega::Controller
+	class Contacts::GroupsController < Controller
 	  respond_to :html, :xml, :js, :json
 	  #sub_layout :determine_sub_layout
 	

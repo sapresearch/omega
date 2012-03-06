@@ -1,5 +1,5 @@
 module Omega
-	class Topic < Omega::Model
+	class Topic < Model
 	  belongs_to :post, :dependent=>:destroy
 	
 	  has_many :groups_topics, :dependent=>:destroy

@@ -1,5 +1,5 @@
 module Omega
-	class BlocksController < Omega::Controller
+	class BlocksController < Controller
 	  # GET /blocks
 	  # GET /blocks.xml
 	  def index

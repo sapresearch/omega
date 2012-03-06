@@ -1,5 +1,5 @@
 module Omega
-	class AssetAllocationsController < Omega::Controller
+	class AssetAllocationsController < Controller
 	  require "util.rb"
 	
 	  respond_to :html, :xml, :js, :json

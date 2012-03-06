@@ -1,5 +1,5 @@
 module Omega
-	class Setting < Omega::Model
+	class Setting < Model
 		belongs_to :user
 		attr_accessible :facebook_token, :twitter, :user_id, :email
 		self.table_name = 'settings'

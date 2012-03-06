@@ -1,5 +1,5 @@
 module Omega
-	class EventRecurrence < Omega::Model
+	class EventRecurrence < Model
 	  belongs_to :event
 	
 	  def is_endless?

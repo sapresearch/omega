@@ -1,5 +1,5 @@
 module Omega
-	class Contact < Omega::Model
+	class Contact < Model
 	  self.table_name = 'contacts'
 	  
 	  require_dependency 'omega/contact/address'

@@ -1,6 +1,6 @@
 module Omega
 	require 'filter.rb'
-	class Volunteering::RecordsController < Omega::Controller
+	class Volunteering::RecordsController < Controller
 	  respond_to :html, :xml, :json, :js
 	  require 'zipcodr'
 	  require 'faster_haversine'

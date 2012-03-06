@@ -1,5 +1,5 @@
 module Omega
-	class Contacts::SkillsController < Omega::Controller
+	class Contacts::SkillsController < Controller
 	  respond_to :html, :xml, :json
 	  #crud_helper Contact::Skill
 	#  require_permission Contact::PERM_VIEW

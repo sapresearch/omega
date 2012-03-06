@@ -1,5 +1,5 @@
 module Omega
-	class CalendarsController < Omega::Controller
+	class CalendarsController < Controller
 	  respond_to :html, :xml, :js, :json
 	  before_filter :get_scope
 	

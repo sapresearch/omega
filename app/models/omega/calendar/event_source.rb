@@ -1,5 +1,5 @@
 module Omega
-	class Calendar::EventSource < Omega::Model
+	class Calendar::EventSource < Model
 	  class << self
 	    def for(source)
 	      where(:source_id => source).where(:source_type => source.class).first

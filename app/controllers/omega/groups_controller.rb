@@ -1,5 +1,5 @@
 module Omega
-	class GroupsController < Omega::Controller
+	class GroupsController < Controller
 	
 	  require_dependency "application_lib.rb"
 	  include ApplicationLib

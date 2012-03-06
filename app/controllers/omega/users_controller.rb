@@ -1,5 +1,5 @@
 module Omega
-	class UsersController < Omega::Controller
+	class UsersController < Controller
 	  respond_to :html, :xml, :js, :json
 	  ##crud_helper User
 	  #require_permission User::PERM_VIEW, :except => [:register, :join,   :create, :lost_username, :lost_password]

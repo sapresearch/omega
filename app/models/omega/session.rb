@@ -1,5 +1,5 @@
 module Omega
-	class Session < Omega::Model
+	class Session < Model
 	  PERM_ADMIN = 'sessions_admin'
 	  PERM_VIEW  = 'sessions_view'
 	  

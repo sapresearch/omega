@@ -1,5 +1,5 @@
 module Omega
-	class AssetsController < Omega::Controller
+	class AssetsController < Controller
 	
 	  respond_to :html, :xml, :js, :json
 	  breadcrumb 'Assets' => :assets

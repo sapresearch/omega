@@ -1,5 +1,5 @@
 module Omega
-	class FormBuilderController < Omega::Controller
+	class FormBuilderController < Controller
 	  
 	  respond_to :html, :xml, :js, :json
 	

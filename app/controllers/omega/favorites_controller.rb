@@ -1,5 +1,5 @@
 module Omega
-	class FavoritesController < Omega::Controller
+	class FavoritesController < Controller
 	  respond_to :html, :js, :xml, :json
 	
 	  breadcrumb 'Favorites' => :favorites

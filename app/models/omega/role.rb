@@ -1,5 +1,5 @@
 module Omega
-	class Role < Omega::Model
+	class Role < Model
 	  self.table_name = 'roles'
 	  PERM_ADMIN = 'roles_admin'
 	  PERM_VIEW  = 'roles_view'

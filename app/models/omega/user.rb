@@ -1,7 +1,7 @@
 module Omega
 	require 'digest/sha2'
 	
-	class User < Omega::Model
+	class User < Model
 	
 	  self.table_name = "users"
 	

@@ -1,5 +1,5 @@
 module Omega
-	class Contact::DataImport < Omega::Model
+	class Contact::DataImport < Model
 	
 	  serialize :csv_rows
 	  serialize :mapped_rows

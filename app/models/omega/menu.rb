@@ -1,6 +1,4 @@
 module Omega
-	module Omega
-	class Menu < Omega::Model
-	end
+	class Menu < Model
 	end
 end

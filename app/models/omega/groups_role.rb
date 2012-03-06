@@ -1,5 +1,5 @@
 module Omega
-	class GroupsRole < Omega::Model
+	class GroupsRole < Model
 	  belongs_to :group
 	  belongs_to :role
 	end

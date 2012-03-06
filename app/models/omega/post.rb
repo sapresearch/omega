@@ -1,5 +1,5 @@
 module Omega
-	class Post < Omega::Model
+	class Post < Model
 	  has_one :topic, :dependent=>:destroy 
 	  has_many :sub_posts, :class_name=>"Post", :foreign_key => "super_post_id", :dependent=>:destroy
 	  belongs_to :super_post, :class_name=>"Post"

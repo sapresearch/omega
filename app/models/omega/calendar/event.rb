@@ -1,6 +1,6 @@
 module Omega
 	class Calendar
-	  class Event < Omega::Model
+	  class Event < Model
 	    self.table_name = 'calendar_events'
 	    include Recurrence
 	

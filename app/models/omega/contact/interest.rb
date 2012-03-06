@@ -1,5 +1,5 @@
 module Omega
-	class Contact::Interest < Omega::Model
+	class Contact::Interest < Model
 	  has_and_belongs_to_many :contacts, :join_table => 'contact_contacts_interests'
 	
 	  validates :name, :presence => true,

@@ -1,5 +1,5 @@
 module Omega
-	class Contact::PhoneNumber < Omega::Model
+	class Contact::PhoneNumber < Model
 		NUMBER_TYPES = %w{Home Business Cell}
 	
 		belongs_to :contact, :polymorphic => true

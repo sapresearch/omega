@@ -1,5 +1,5 @@
 module Omega
-	class ServiceRegistrationsController < Omega::Controller
+	class ServiceRegistrationsController < Controller
 	
 	  require "application_lib.rb"
 	  include ApplicationLib

@@ -1,5 +1,5 @@
 module Omega
-	class Volunteering::Day < Omega::Model
+	class Volunteering::Day < Model
 	
 	  belongs_to :schedule
 	

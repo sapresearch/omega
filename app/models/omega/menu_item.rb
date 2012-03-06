@@ -1,4 +1,4 @@
 module Omega
-	class MenuItem < Omega::Model
+	class MenuItem < Model
 	end
 end

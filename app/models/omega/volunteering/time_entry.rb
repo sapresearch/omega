@@ -1,5 +1,5 @@
 module Omega
-	class Volunteering::TimeEntry < Omega::Model
+	class Volunteering::TimeEntry < Model
 	
 		belongs_to :record
 		has_many :days, :class_name => '::Volunteering::TimeEntry::Day', :dependent => :destroy

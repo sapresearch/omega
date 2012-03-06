@@ -1,5 +1,5 @@
 module Omega
-	class SettingsController < Omega::Controller
+	class SettingsController < Controller
 	
 	
 		def index

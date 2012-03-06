@@ -1,5 +1,5 @@
 module Omega
-	class Service < Omega::Model
+	class Service < Model
 	  require 'util.rb'
 	  
 	  # app-spec

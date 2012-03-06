@@ -1,5 +1,5 @@
 module Omega
-	class ComponentsController < Omega::Controller
+	class ComponentsController < Controller
 	  before_filter :get_parent
 	
 	  # GET /components

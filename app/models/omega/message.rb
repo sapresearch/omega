@@ -1,5 +1,5 @@
 module Omega
-	class Message < Omega::Model
+	class Message < Model
 	  self.table_name = 'messages'
 	
 	  MAX_MESSAGES_PER_PAGE = 10

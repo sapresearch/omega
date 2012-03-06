@@ -1,7 +1,7 @@
 module Omega
 	require 'digest/md5'
 	
-	class UserToken < Omega::Model
+	class UserToken < Model
 	  TOKEN_TYPES = %w{login lost_password}
 	
 	  belongs_to :user

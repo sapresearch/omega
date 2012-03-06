@@ -1,5 +1,5 @@
 module Omega
-	class Volunteering::ContactPosition < Omega::Model
+	class Volunteering::ContactPosition < Model
 	
 	  belongs_to :contact
 	  belongs_to :position

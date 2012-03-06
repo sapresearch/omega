@@ -1,5 +1,5 @@
 module Omega
-	class ServiceSection < Omega::Model
+	class ServiceSection < Model
 	  # app-spec
 	  belongs_to :contact
 	  # end app-spec

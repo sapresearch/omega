@@ -1,5 +1,5 @@
 module Omega
-	class Volunteering::Position < Omega::Model
+	class Volunteering::Position < Model
 	  include Calendar::Recurrence
 	
 	  MAX_POSITIONS_PER_PAGE = 5

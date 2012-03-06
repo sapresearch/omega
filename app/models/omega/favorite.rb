@@ -1,5 +1,5 @@
 module Omega
-	class Favorite < Omega::Model
+	class Favorite < Model
 	  self.table_name = 'favorites'
 	  belongs_to :user
 	  belongs_to :item, :polymorphic => true

@@ -1,5 +1,5 @@
 module Omega
-	class GroupsTopic < Omega::Model
+	class GroupsTopic < Model
 	  belongs_to :group
 	  belongs_to :topic
 	end

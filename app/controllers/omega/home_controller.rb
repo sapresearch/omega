@@ -1,5 +1,5 @@
 module Omega
-	class HomeController < Omega::Controller
+	class HomeController < Controller
 	  respond_to :html
 		puts "\n In Omega::HomeController in Omega\n"
 		puts "\n In Omega::HomeController in Omega. Defined: #{defined?(Omega::Volunteering::Position)}"

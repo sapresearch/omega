@@ -1,5 +1,5 @@
 module Omega
-	class Contact::Value < Omega::Model
+	class Contact::Value < Model
 		has_one :contact
 		has_one :field
 		attr_accessible :value, :field_id, :contact_id

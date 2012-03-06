@@ -1,5 +1,5 @@
 module Omega
-	class Asset < Omega::Model
+	class Asset < Model
 	  require 'util.rb'
 	  
 	  has_many :asset_allocations, :dependent=>:destroy

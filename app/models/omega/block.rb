@@ -1,5 +1,5 @@
 module Omega
-	class Block < Omega::Model
+	class Block < Model
 	end
 	
 	class HtmlBlock < Block

@@ -1,5 +1,5 @@
 module Omega
-	class Contacts::FieldsController < Omega::Controller
+	class Contacts::FieldsController < Controller
 	
 		def new
 			@fields = Contact::Field.find(:all)

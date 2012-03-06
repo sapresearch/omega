@@ -1,5 +1,5 @@
 module Omega
-	class TopicsController < Omega::Controller
+	class TopicsController < Controller
 	
 	  require_dependency "application_lib.rb"
 	  include ApplicationLib

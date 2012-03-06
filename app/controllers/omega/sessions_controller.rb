@@ -1,5 +1,5 @@
 module Omega
-	class SessionsController < Omega::Controller
+	class SessionsController < Controller
 	  respond_to :html, :xml, :json, :js
 	
 	  def index

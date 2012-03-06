@@ -1,5 +1,5 @@
 module Omega
-	class Component < Omega::Model
+	class Component < Model
 	end
 	
 	class HtmlComponent < Component

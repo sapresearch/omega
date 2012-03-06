@@ -1,5 +1,5 @@
 module Omega
-	class Delivery < Omega::Model
+	class Delivery < Model
 		self.table_name = 'deliveries'	 
 	end
 end
