@@ -1,84 +1,90 @@
 module Omega
-	class GroupsController < Omega::Controller
+	class Contacts::GroupsController < Omega::Controller
+	  respond_to :html, :xml, :js, :json
+	  #sub_layout :determine_sub_layout
 	
-	  require_dependency "application_lib.rb"
-	  include ApplicationLib
-	  require_dependency "group_lib.rb"
-	  include GroupLib
-	  
-	  respond_to :html, :xml, :json, :js
-	  breadcrumb 'Groups' => :groups
+	  before_filter :get_all_contact_groups, :except => [:index]
+	
+	  crud_helper Contact::Group, :find => [:assign, :remove]
+	#  require_permission Contact::PERM_VIEW
+	#  require_permission Contact::PERM_ADMIN, :only => [:new, :edit, :create, :update, :destroy]
 	
 	  def index
-	    @group_id = params[:group_id]
-	    @group = Group.find_by_id(@group_id) unless @group_id.nil? # use find_by_id to return nil in case no record
-	
-	    # redirect to default index when the target group is missing
-	    if @group_id && @group.nil?
-	      redirect_to groups_url
-	      return
+	    if params[:contact_id]
+	      @contact = Contact.find(params[:contact_id])
+	      @contact_groups = @contact.groups
+	    else
+	      @contact_groups = Contact::Group.scoped
 	    end
-	
-	    session[:super_group_id] = @group.nil? ? (params[:super_group_id] || session[:super_group_id]) : @group.super_group_id
-	    initialize_group_objects
-	
-	    respond_with(@groups)
+	    respond_with(@contact_groups)
 	  end
 	
-	  # app-spec for contact module
 	  def show
-	    group_id = params[:id]
-	    @group = Group.find(group_id)
-	    @members = @group.members(:order=>:first_name)    
+	    respond_with(@contact_group)
+	  end
+	
+	  def new
+	    @contact_group.addresses.build
+	    @contact_group.phone_numbers.build
+	    respond_with(@contact_group)
+	  end
+	
+	  def edit
+	    respond_with(@contact_group)
 	  end
 	
 	  def create
-	    params_group = params[:group]
-	    params_group.merge!({:capacity=>nil}) if params[:group][:capacity]=="unlimited"
-	    @creator = params[:creator_id] ? Contact.find(params[:creator_id]) : current_contact
-	
-	    Group.transaction do
-	      @group = Group.create(params_group)
-	      GroupsMember.create(:group_id=>@group.id, :member_id=>@creator.id, :position=>"leader")
-	    end
-	    
-	    respond_with(@group) do |format|
-	      format.js {redirect_to groups_url(:group_id=>@group.id)}
-	    end
+	    respond_with(@contact_group = Contact::Group.create(params[:contact_group]))
 	  end
 	
 	  def update
-	    @group = Group.find(params[:id])
-	    @type = params[:type]
-	    case @type
-	      when "publish"
-	        @recursive = (params[:recursive]=="true"||params[:recursive]==true) ? true :false
-	        @group.publish(@recursive)
-	        initialize_group_objects
-	      when "unpublish"
-	        @recursive = (params[:recursive]=="true"||params[:recursive]==true) ? true :false
-	        @group.unpublish(@recursive)
-	        initialize_group_objects
-	      when "block"
-	        @group.block
-	      when "unblock"
-	        @group.unblock
-	      else
-	        params_group = params[:group]
-	        params_group.merge!({:capacity=>nil}) if params[:group][:capacity]=="unlimited"
-	        @group.update_attributes(params_group)
-	
-	        respond_with(@group) do |format|
-	          format.js {redirect_to groups_url(:group_id=>@group.id)}
-	        end
-	    end
+	    @contact_group.update_attributes(params[:contact_group])
+	    respond_with(@contact_group)
 	  end
 	
 	  def destroy
-	    @group = Group.destroy(params[:id])
-	    session[:super_group_id] = @group.super_group_id
-	    initialize_group_objects
+	    @contact_group.destroy
+	    respond_with(@contact_group)
 	  end
 	
+	  def assign
+	    @contact = Contact.find(params[:contact_id])
+	
+	    @group_position = @contact.group_positions.create do |gp|
+	      gp.group = @contact_group
+	      gp.position = params.delete(:position)
+	    end
+	    respond_with(@group_position)
+	  end
+	
+	  def remove
+	    @contact = Contact.find(params[:contact_id])
+	
+	    @group_positions = @contact.group_positions.where('group_id = ?', @contact_group).destroy_all
+	    respond_with(@group_positions)
+	  end
+	
+	  def move
+	    @contact = Contact.find(params[:contact_id])
+	    @group_position = @contact.group_positions.find_by_group_id!(params[:id])
+	    @group_position.group_id = params[:to_id]
+	    @group_position.save
+	
+	    respond_with(@group_position)
+	  end
+	
+	  private
+	    def determine_sub_layout
+	      case params[:action]
+	        when 'show'
+	          'contacts/with_groups'
+	        else
+	          nil
+	      end
+	    end
+	
+	    def get_all_contact_groups
+	      @contact_groups = Contact::Group.scoped
+	    end
 	end
 end
