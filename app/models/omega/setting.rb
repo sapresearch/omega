@@ -27,9 +27,9 @@ module Omega
 		end
 		
 	def self.default_email
-		if not Omega::Setting.first.nil?
-			if not Omega::Setting.first.email.blank?
-				return Omega::Setting.first.email
+		if not Setting.first.nil?
+			if not Setting.first.email.blank?
+				return Setting.first.email
 			end
 		end
 		return "paul.miller01@sap.com"

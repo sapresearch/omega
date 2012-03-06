@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   s.add_dependency('will_paginate', '>= 3.0.pre2', '<= 3.0.2')
   s.add_dependency('activemerchant')
   s.add_dependency('httparty')
+  s.add_dependency('therubyrhino')
 end
