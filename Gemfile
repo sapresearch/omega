@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gemspec
-gem 'rails', "~> 3.2.0"
+gem 'rails', "~> 3.2.2"
 platforms :jruby do
 	gem 'activerecord-jdbcmysql-adapter'
 	gem 'activerecord-jdbc-adapter'
