@@ -7,11 +7,11 @@ require "omega/version"
 Gem::Specification.new do |s|
   s.name        = "omega"
   s.version     = Omega::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Omega."
-  s.description = "TODO: Description of Omega."
+  s.authors     = ["Paul Miller, Kexia Tang, Samuel Kadolph, John Ellenberger"]
+  s.email       = ["john.ellenberger@sap.com"]
+  s.homepage    = "https://github.com/sapresearch/omega"
+  s.summary     = "A multi-tenant application for non-profits' organization and management"
+  s.description = ""
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
