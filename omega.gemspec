@@ -28,4 +28,5 @@ Gem::Specification.new do |s|
   s.add_dependency('activemerchant')
   s.add_dependency('httparty')
   s.add_dependency('therubyrhino')
+  s.add_dependency('therubyracer')
 end
