@@ -23,7 +23,7 @@ module Omega
 	    def anonymous
 	      @anonymous ||= User.new do |anon|
 	        anon.username = "Anonymous"
-	        anon.roles << Role.for_anonymous
+	        anon.roles << Omega::Role.for_anonymous
 	      end
 	    end
 	    

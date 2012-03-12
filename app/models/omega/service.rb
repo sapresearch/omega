@@ -58,7 +58,7 @@ module Omega
 	    alias_method :leaf_services, :service_leaves
 	
 	    def real_public_service_leaves
-	      ServiceLeaf.all.inject([]){|r, sl|s=sl.service; r<<s if s.is_real_public?; r}
+	      Omega::ServiceLeaf.all.inject([]){|r, sl|s=sl.service; r<<s if s.is_real_public?; r}
 	    end
 	    alias_method :real_public_leaf_services, :real_public_service_leaves
 	

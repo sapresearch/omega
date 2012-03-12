@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "asset_allocations", :force => true do |t|
     t.integer  "asset_id"
     t.integer  "service_leaf_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "account_id"
   end
 
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "assets", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "account_id"
   end
 
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.text     "content",                        :null => false
     t.boolean  "user_created", :default => true, :null => false
     t.text     "settings"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "account_id"
   end
 
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "source_type"
     t.boolean  "synchronize"
     t.text     "mapping"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "account_id"
   end
 
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.datetime "start"
     t.datetime "end"
     t.boolean  "all_day"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.boolean  "recurrent"
     t.integer  "recurrence_series_id"
     t.time     "recurrence_start_time"
@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.integer  "shared_to_id"
     t.boolean  "readable"
     t.boolean  "writable"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "account_id"
   end
 
@@ -107,8 +107,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
 
   create_table "calendars", :force => true do |t|
     t.string   "calendar_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "user_id"
     t.integer  "account_id"
   end
@@ -123,8 +123,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.text     "content",                        :null => false
     t.boolean  "user_created", :default => true, :null => false
     t.text     "settings"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "account_id"
   end
 
@@ -142,8 +142,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "zip_code"
     t.string   "country"
     t.text     "notes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "account_id"
   end
 
@@ -177,14 +177,14 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   add_index "contact_contacts_skills", ["contact_id", "skill_id"], :name => "index_contact_contacts_skills_on_contact_id_and_skill_id", :unique => true
 
   create_table "contact_data_imports", :force => true do |t|
-    t.text     "csv_rows",      :limit => 2147483647
-    t.text     "mapping",       :limit => 2147483647
-    t.text     "mapped_rows",   :limit => 2147483647
-    t.text     "imported_rows", :limit => 2147483647
+    t.text     "csv_rows",      :limit => 4294967295
+    t.text     "mapping",       :limit => 4294967295
+    t.text     "mapped_rows",   :limit => 4294967295
+    t.text     "imported_rows", :limit => 4294967295
     t.string   "status"
-    t.text     "contact_ids",   :limit => 2147483647
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text     "contact_ids",   :limit => 4294967295
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "account_id"
   end
 
@@ -193,8 +193,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "contact_fields", :force => true do |t|
     t.string   "name"
     t.string   "data_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "description"
     t.integer  "account_id"
   end
@@ -223,8 +223,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "group_type"
     t.string   "group_name"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "account_id"
   end
 
@@ -236,8 +236,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "csv_file_name"
     t.string   "csv_content_type"
     t.integer  "csv_file_size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "account_id"
   end
 
@@ -245,8 +245,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
 
   create_table "contact_interests", :force => true do |t|
     t.string   "name",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "account_id"
   end
 
@@ -263,8 +263,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
 
   create_table "contact_languages", :force => true do |t|
     t.string   "name",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "account_id"
   end
 
@@ -278,8 +278,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "available_time"
     t.string   "preferred_time"
     t.text     "notes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "account_id"
   end
 
@@ -287,8 +287,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
 
   create_table "contact_skills", :force => true do |t|
     t.string   "name",       :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "account_id"
   end
 
@@ -316,8 +316,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.integer  "field_id"
     t.integer  "contact_id"
     t.string   "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "account_id"
   end
 
@@ -351,8 +351,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.boolean  "evergreen_bw_family_program"
     t.boolean  "do_not_email"
     t.boolean  "no_bulk_emails"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.date     "birthday"
     t.integer  "account_id"
   end
@@ -372,8 +372,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "event_recurrences", :force => true do |t|
     t.string   "interval"
     t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.datetime "end_at"
     t.integer  "account_id"
   end
@@ -386,8 +386,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.string   "location"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "account_id"
   end
 
@@ -397,8 +397,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.integer  "user_id"
     t.integer  "item_id"
     t.string   "item_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "account_id"
   end
 
@@ -412,8 +412,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.integer  "capacity"
     t.boolean  "is_blocked",     :default => false
     t.integer  "super_group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "account_id"
   end
 
@@ -423,8 +423,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "position",   :default => "member"
     t.integer  "group_id"
     t.integer  "member_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "account_id"
   end
 
@@ -434,8 +434,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.integer  "group_id"
     t.integer  "requester_id"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "account_id"
   end
 
@@ -444,8 +444,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "groups_roles", :force => true do |t|
     t.integer  "group_id"
     t.integer  "role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "account_id"
   end
 
@@ -454,8 +454,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "groups_topics", :force => true do |t|
     t.integer  "group_id"
     t.integer  "topic_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "account_id"
   end
 
@@ -464,8 +464,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "groups_uploads", :force => true do |t|
     t.integer  "group_id"
     t.integer  "upload_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "account_id"
   end
 
@@ -476,8 +476,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.boolean  "image_in_use"
     t.string   "banner_or_logo"
     t.integer  "account_id"
@@ -494,8 +494,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "description"
     t.boolean  "enabled",     :default => true, :null => false
     t.integer  "weight",      :default => 10,   :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "account_id"
   end
 
@@ -508,8 +508,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "name",        :null => false
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "account_id"
   end
 
@@ -524,21 +524,12 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.datetime "read_at"
     t.datetime "deleted_by_to_at"
     t.datetime "deleted_by_from_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "account_id"
   end
 
   add_index "messages", ["account_id"], :name => "index_messages_on_account_id"
-
-  create_table "omega_hosting_accounts", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "omega_hosting_accounts", ["user_id"], :name => "index_omega_hosting_accounts_on_user_id"
 
   create_table "page_blocks", :force => true do |t|
     t.integer  "page_id",                      :null => false
@@ -547,8 +538,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.boolean  "enabled",    :default => true, :null => false
     t.integer  "weight",     :default => 10,   :null => false
     t.text     "settings"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "account_id"
   end
 
@@ -562,8 +553,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.boolean  "enabled",      :default => true, :null => false
     t.integer  "weight",       :default => 10,   :null => false
     t.text     "settings"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "account_id"
   end
 
@@ -577,8 +568,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.text     "description"
     t.boolean  "enabled",     :default => true,  :null => false
     t.boolean  "is_home",     :default => false, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "account_id"
   end
 
@@ -596,8 +587,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.text     "description"
     t.string   "status"
     t.boolean  "is_test"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
     t.integer  "account_id"
   end
 
@@ -629,8 +620,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.text     "content"
     t.integer  "author_id"
     t.integer  "super_post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "account_id"
   end
 
@@ -642,8 +633,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.boolean  "locked",        :default => false, :null => false
     t.string   "internal_name"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "account_id"
   end
 
@@ -663,8 +654,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.text     "html"
     t.text     "field_values"
     t.integer  "service_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "account_id"
   end
 
@@ -672,8 +663,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
 
   create_table "service_detail_templates", :force => true do |t|
     t.integer  "service_detail_form_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.integer  "account_id"
   end
 
@@ -681,8 +672,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
 
   create_table "service_leaves", :force => true do |t|
     t.integer  "service_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                     :null => false
+    t.datetime "updated_at",                                                     :null => false
     t.integer  "capacity"
     t.boolean  "is_blocked",                                  :default => false
     t.string   "register_type"
@@ -695,8 +686,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "service_registration_form_values", :force => true do |t|
     t.integer  "service_registration_id"
     t.text     "field_values"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
     t.integer  "account_id"
   end
 
@@ -705,8 +696,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "service_registration_forms", :force => true do |t|
     t.text     "html"
     t.integer  "service_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "account_id"
   end
 
@@ -714,8 +705,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
 
   create_table "service_registration_templates", :force => true do |t|
     t.integer  "service_registration_form_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "account_id"
   end
 
@@ -724,8 +715,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "service_registrations", :force => true do |t|
     t.integer  "service_leaf_id"
     t.integer  "registrant_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "status",          :default => "pending"
     t.integer  "account_id"
   end
@@ -736,8 +727,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.integer  "contact_id"
     t.integer  "service_leaf_id"
     t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "account_id"
   end
 
@@ -748,8 +739,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.text     "description"
     t.string   "status",           :null => false
     t.integer  "super_service_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "account_id"
   end
 
@@ -759,8 +750,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "facebook_token"
     t.boolean  "twitter"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "image_id"
     t.string   "fb_secret"
     t.string   "email"
@@ -773,8 +764,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   create_table "topics", :force => true do |t|
     t.string   "caption"
     t.integer  "post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "topic_type", :default => "regular"
     t.integer  "account_id"
   end
@@ -790,8 +781,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.integer  "binding_id"
     t.string   "binding_type"
     t.integer  "uploader_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "account_id"
   end
 
@@ -814,8 +805,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "token"
     t.string   "token_type"
     t.datetime "consumed_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "account_id"
   end
 
@@ -829,8 +820,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "time_zone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "account_id"
   end
 
@@ -854,8 +845,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "volunteers"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "account_id"
   end
 
@@ -870,8 +861,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.datetime "start"
     t.datetime "end"
     t.boolean  "disclaimer_agreement"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.boolean  "recurrent"
     t.integer  "recurrence_series_id"
     t.time     "recurrence_start_time"
@@ -918,8 +909,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.integer  "hours_required"
     t.boolean  "parental_consent"
     t.integer  "agreement",                         :default => 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.integer  "account_id"
   end
 
@@ -933,8 +924,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.date     "end_date",      :null => false
     t.time     "start_time",    :null => false
     t.time     "end_time",      :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "account_id"
   end
 
@@ -952,8 +943,8 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.integer  "time_entry_id",                               :null => false
     t.string   "day"
     t.decimal  "hours",         :precision => 4, :scale => 2
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.integer  "account_id"
   end
 
