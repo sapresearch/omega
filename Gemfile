@@ -19,5 +19,3 @@ group :assets do
   gem 'coffee-rails', "~> 3.2.0"
   gem 'uglifier'
 end
-
-gem 'accepts-flattened-values', :path => '../accepts-flattened-values'
