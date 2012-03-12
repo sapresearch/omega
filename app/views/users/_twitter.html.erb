@@ -1,0 +1,14 @@
+<% full = url_for(:only_path => false).to_s %>
+<% unneccessary = url_for().to_s %>
+<% host = full.gsub(unneccessary, "") %>
+
+<% if service == false %>
+	<% url = host + (url_for(volunteering_position_path(position))).to_s %>
+<% elsif service == true %>
+	<% url = host + (url_for(services_url(:service_id => position.id ))).to_s %>
+<% end %>
+
+<div id="twitter">
+	<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= url %>" data-text="Check this out" data-count="none">Tweet</a>
+	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+</div>

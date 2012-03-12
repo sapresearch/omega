@@ -1,0 +1,60 @@
+<% javascript_include_tag 'omega_messages' %>
+<div class="content circle-corners-bottom-left">
+
+<div class="heading-main">
+	
+		<h1 class="page-content">
+			My Messages
+		</h1>
+	
+	
+	    
+</div>
+
+
+<div class="main-box">
+	
+  
+  <div class="clear"></div>
+  <ul id="messages-list">
+    <% @messages.each do |message| %>
+        <li id="message-<%= message.id %>" class="list-item relative">
+          <div class="item-list-actions-wrapper corners">
+            <div class="item-list-actions">
+              <%= om_button(:plain=> true, :icon=>'delete') do %>
+                  <%= link_to 'Delete', message_path(message), :method=> :delete, :remote=> true %>
+              <% end %>
+              <%= om_button(:plain=> true, :icon=>'mail-reply') do %>
+                  <%= link_to 'Reply', reply_message_path(message) %>
+              <% end %>
+            </div>
+          </div>
+          <h3>
+            <% if !message.read? %>
+                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class => 'bold' %>
+
+            <% else %>
+
+                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class => 'italic' %>
+
+            <% end %>
+
+          </h3>
+
+          <div>
+            <%= om_button(:plain => true, :icon => 'user') do %>
+                From:  <%= link_to "#{message.from.first_name} #{message.from.last_name}", user_path(message.from), :class => 'blue' %>
+            <% end %>
+            <%= message.created_at.strftime("%a %m/%d/%Y at %I:%M %p") %>
+            <br>
+            <%= truncate(message.body, :length=> 160) %>
+          </div>
+
+        </li>
+    <% end %>
+  </ul>
+  <%= will_paginate @messages %>
+  </div>
+  <div class="clear"></div>
+</div>
+

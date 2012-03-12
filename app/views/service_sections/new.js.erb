@@ -1,0 +1,6 @@
+$('#service_section_form_list').append('<%= escape_javascript( render "service_sections/form", :service_section=>@service_section, :i=>@index.to_i ) %>')
+$('#new_service_section_link').html('<%= escape_javascript( render "service_sections/new_link", :index=>@index.to_i + 1 ) %>')
+
+service_sections_count++; 
+check_service_sections_count();
+refresh_service_section_index();

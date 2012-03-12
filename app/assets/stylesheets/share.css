@@ -1,0 +1,160 @@
+/** app-specific */
+/* partially copied from application_evergreen.css */
+.explanation {
+    background: none repeat scroll 0 0 #f3f3f3;
+    border: 1px solid #ddd;
+    color: #333333;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+#search_text{font-size:12px;}
+.index_search_box{
+    width:100%;
+    height: 30px;
+    padding: 0px 0px 10px 0px;
+}
+
+.index_bread_crumb{
+    padding-top:10px;
+}
+.index_list{
+    padding-bottom:10px;
+    /* max-height:470px;
+    overflow: auto; */    /* page length limit */
+}
+.index_bottom_links, .page_bottom_links{
+    padding:10px 10px;
+    margin-bottom:5px;
+}
+
+.bread_crumb a{ font-style:italic; color:navy }
+
+.accordion_head .left{float:left; margin:0px 0px 0px 10px;}
+.accordion_head .right{float:right; margin:0px 10px 0px 0px;}
+.accordion_head .request_status{float:right; margin:0px 10px 0px 0px; font-weight:bold; font-style:italic;}
+.accordion_head .capacity{float:right; margin:0px 10px 0px 0px;}
+.accordion_head .capacity span{font-weight:bold; font-style:italic;}
+.accordion_head .price{margin:0px 0px 0px 10px; color:yellow}
+
+.accordion_body{ border:1px solid #ccc; }
+.accordion_body .operation_links a{ color:navy; }
+.accordion_body .request_status{float:left;}
+
+
+/* dialog style */
+.ui-dialog{}
+.dialog .field{margin:5px 0px;}
+.dialog label{
+    display: inline-block;
+    margin-left:20px;
+    width: 150px;
+    text-align: right;
+    font-size:13px;
+}
+.dialog select{
+    height:25px;
+}
+
+
+/* data table */
+.css_right{float:right;}
+.dataTables_length{margin:5px;}
+.dataTables_filter input{font-size:12px; margin:5px 5px 5px 0px}
+.dataTables_wrapper{min-height: 0px;}
+.data_table tr{height:20px;}
+.data_table td{vertical-align:bottom;}
+.data_table_count{ margin-bottom:10px; float:left;}
+
+
+
+/* entity assignment */
+.one_to_many_assignment{padding:15px; width:650px; height:370px;}
+.entity_area{
+    width:300px;
+    height:380px;
+}
+.entity_title{
+    font-size:15px;
+    margin:5px;
+}
+.entity_list{
+    border:1px solid #ccc;
+    width:300px;
+    height:350px;
+    overflow-y:auto;
+}
+.entity_exchange{
+    float:left;
+    margin:170px 12px 0px 12px;
+}
+.assignment_object:hover{ background: lightgray; }
+.assignment_object a:hover{ color:green; }
+
+
+/** end of app-spec */
+input,
+textarea,
+select{
+    transition: -box-shadow 2s;
+    -moz-transition: -moz-box-shadow 2s; /* Firefox 4 */
+    -webkit-transition: -webkit-box-shadow 2s; /* Safari and Chrome */
+    -o-transition: -o-box-shadow 2s; /* Opera */
+}
+
+input:focus,input:hover,
+textarea:focus,textarea:hover,
+select:focus,select:hover{
+    background-color:lightyellow;
+    -moz-box-shadow: 5px 5px 5px #ccc;
+    -webkit-box-shadow: 5px 5px 5px #ccc;
+    -o-box-shadow: 5px 5px 5px #ccc;
+    -box-shadow: 5px 5px 5px #ccc;
+}
+
+.disable_selection{
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.ellipsis{
+    text-overflow:ellipsis; 
+    white-space:nowrap;
+    overflow:hidden
+}
+
+.dialog{display:none;}
+.dialog_content{
+    padding:20px;
+}
+
+.page_content{
+    padding:20px 20px;
+}
+
+.full_width{width:100%}
+.left{float:left}
+.right{float:right}
+.left_links{float:left;}
+.right_links{float:right;}
+
+.round{
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -border-radius:5px;
+}
+.shadow{
+    -moz-box-shadow: 3px 3px 3px #ccc;
+    -webkit-box-shadow: 3px 3px 3px #ccc;
+    -box-shadow: 3px 3px 3px #ccc;
+}
+
+.hide{display:none;}
+
+ol{ list-style-type:decimal;}
+
+.blank_sign{ color:#aaa }
+

@@ -1,0 +1,13 @@
+
+
+
+
+
+$('#box').html('<%= escape_javascript(render('new_timesheets', :@entries => @entries, :start => @start)) %>')
+
+
+$('#records-table').dataTable({
+        "bJQueryUI": true
+
+
+});

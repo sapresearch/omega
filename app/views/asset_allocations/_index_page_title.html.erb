@@ -1,0 +1,10 @@
+<% asset ||= @asset %>
+<% leaf_service ||= @leaf_service %>
+<% tail = "" %>
+<% if asset %>
+  <% tail = " for "+asset.name %>
+<% elsif leaf_service %>
+  <% tail = " for "+leaf_service.name %>
+<% end %>
+
+Assets Allocation<%= tail %>

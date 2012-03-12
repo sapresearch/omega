@@ -1,0 +1,30 @@
+<% javascript_include_tag 'omega_home/omega_home','thirdParty/jquery.timepicker' %>
+
+<%= title "Omega Home" %>
+
+<div class="content circle-corners-bottom-left">
+
+	<h2 class="page-content"> Welcome to the Happyville Community Center</h1> 
+	<p></p>
+	<%= image_tag 'omega/community.jpg' %>
+	<!--<p><img class="page-content" src="omega/community.jpg" width="550" height="361" alt="" /></p>-->
+
+	<p>
+	  We are a community based organization offering a number of services to the local community.
+	  Feel free to browse our services and sign-up.  We are also looking
+	  for your support.  If you would like to help us with our mission
+	  feel free to look through our voluteer opportunities and sign-up!								
+	</p>
+
+
+</div>
+
+
+<% content_for :sidebar do %>
+    <%= render :partial => "layouts/omega/sidebar_volunteering_positions" %>
+<% end %>
+
+<% content_for :sidebar do %>
+    <%#= render :partial => "layouts/omega/sidebar_services" %>
+<% end %>
+

@@ -1,0 +1,14 @@
+<% javascript_include_tag 'omega_volunteering_records' %>
+<% stylesheet_link_tag 'omega_volunteering', 'thirdParty/jquery.dataTables.jui.css' %>
+
+<h1 class="page-content corners-top"> Record Hours </h1>
+
+<div class="page-content corners-bottom">
+	<%= render 'form' %>
+	<br /><br /><br />
+	<% if current_user.has_permission? Volunteering::PERM_ADMIN %>
+		<%= render 'timesheets_table', :entries => Volunteering::TimeEntry.all %>
+	<% elsif !current_user.has_permission? Volunteering::PERM_ADMIN %>
+		<%= render 'timesheets_table', :entries => @entries %>
+	<% end %>
+</div>

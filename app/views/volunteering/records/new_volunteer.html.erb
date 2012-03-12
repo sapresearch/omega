@@ -1,0 +1,60 @@
+<% stylesheet_link_tag 'omega_volunteering' %>
+<% javascript_include_tag  'enroll_volunteer','thirdParty/jquery.timepicker', 'new_volunteering_position', 'jquery.tokeninput' %>
+
+
+<div class="content circle-corners-bottom-left  corners-top">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+  					Enroll A Volunteer
+		    	</h1>
+	
+		</div>
+		
+		
+		
+ 		<div class="main-box">	
+			<h2 class="application-form"> Application for <%= @record.position.name %> </h2>
+			<h3 class="application-form"> Volunteer Information </h3>
+			<p>
+
+        <%= form_tag do %>
+			
+			   <% ['search the database','enter volunteer information'].each do |c|%>
+			   	<span class="text-style1" ><%= radio_button_tag 'enroll_volunteer', c %> <%= c.humanize %> <br/>
+			    </span>
+			   <%end%>
+			</p>
+			
+			
+			<div id="search_volunteer">
+				<p>
+					
+				<label > Email </label>
+				 <%= text_field :email, :value => '' %>
+				</p>
+				
+				<p>
+				
+				<div id="search">
+					SEARCH
+				</div>
+				</p>
+				
+			</div>
+			
+			
+			
+<%end%>			
+
+<div id="create_volunteer">
+				
+				<%= render :partial => 'enroll_volunteer_form' %>
+				
+		</div>	
+			<div id="volunteering_application">
+				
+			</div>
+			
+		</div>

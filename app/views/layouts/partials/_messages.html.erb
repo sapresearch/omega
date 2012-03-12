@@ -1,0 +1,14 @@
+<% if not current_user.is_anonymous?
+       unread_messages = current_user.messages.where('read_at is null') %>
+
+    <%= link_to(messages_path) do %>
+        <% if unread_messages.any? %>
+            <span class="om-icon-only om-white-icon ui-icon-mail-open"></span>
+            <%= "(#{unread_messages.count}) " %>Messages
+        <% else %>
+            <span class="om-icon-only om-white-icon ui-icon-mail-closed"></span>Messages
+
+
+        <% end %>
+    <% end %>
+<% end %>

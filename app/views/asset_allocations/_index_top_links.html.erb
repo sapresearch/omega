@@ -1,0 +1,6 @@
+<div id="message_box_display_link">
+  <%= om_button(:contact => true, :icon=>'apply') do %>
+    <%= link_to_function "Hide Message Box", "hide_message_box()", :id=>"hide_message_box_link" %>
+    <%= link_to_function "Show Message Box", "show_message_box()", :id=>"show_message_box_link" %>
+  <% end %>
+</div>

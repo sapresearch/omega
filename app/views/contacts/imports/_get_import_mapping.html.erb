@@ -1,0 +1,62 @@
+
+<br/>
+
+<span class="list-item-detail"> Preview Mapped Fields</span>
+<br/>
+
+<table>
+        <tr>
+          <td>
+
+            <table class="imports-detail">
+
+               <th class="imports-detail">CSV Fields</th>
+
+                <% @import.csv_rows[0].each do |r| %>
+
+                    <tr class="imports-detail">
+
+                      <td class="imports-detail">
+                        <%= r.humanize %>
+                      </td>
+                      
+                    </tr>
+                <%end%>
+
+            </table>
+          </td>
+
+          <td>
+             <table class="imports-detail">
+
+               <th class="imports-detail">Mapped Omega Fields</th>
+
+                <% @import.mapped_rows[0].each do |r| %>
+
+                    <tr class="imports-detail">
+
+                      <td class="imports-detail">
+                        <%= r.humanize %>
+                      </td>
+
+                    </tr>
+                <%end%>
+
+            </table>
+          </td>
+        </tr>
+
+  <tr>
+
+    <%= om_button(:icon=>'cancel') do %>
+      <%= link_to 'Undo Import', undo_import_finalize_contact_imports_url(:id => @import) %>
+    <%end%>
+
+    <%= om_button(:icon=>'cancel') do %>
+    <%= link_to 'Redo Field Mapping', redo_mapping_contact_imports_url(:id => @import) %>
+    <%end%>
+
+  </tr>
+ </table>
+
+

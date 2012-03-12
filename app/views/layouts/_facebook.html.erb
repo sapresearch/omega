@@ -1,0 +1,179 @@
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<script>
+  var isLoaded = false;
+  var attempted_load = "beginning";
+
+
+function load_FB(){
+  var attempted_load = "started it";
+  FB.init({
+    appId  : 100002599482156,
+    status : true, // check login status
+    cookie : true, // enable cookies to allow the server to access the session
+    xfbml  : true  // parse XFBML
+  });
+  isLoaded = true;
+  attempted_load = "got through it";
+}
+
+
+
+function check_if_loaded() {
+   if(isLoaded) {
+     alert("Good news: " + attempted_load + " " + isLoaded);
+     document.getElementById("response").innerHTML='Facebook is loaded';
+   }
+   else {
+     alert("bad news: " + attempted_load + " " + isLoaded);
+     document.getElementById("response").innerHTML='Facebook is not loaded';
+  }
+	return false;
+}
+
+
+
+function get_FB_login_status(){
+	FB.getLoginStatus(function(response) {
+	  if (response.session) {
+	    // logged in and connected user, someone you know
+			document.getElementById('login_response').innerHTML='user is logged in'
+	  } else {
+			document.getElementById('login_response').innerHTML='user is NOT logged in'
+	    // no user session available, someone you dont know
+	  }
+	});
+}
+
+
+
+function login_to_FB(){
+	FB.login(function(response) {
+	  if (response.session) {
+	    if (response.perms) {
+				document.getElementById('login_attempt').innerHTML='user is logged in and granted permissions'
+	      // user is logged in and granted some permissions.
+	      // perms is a comma separated list of granted permissions
+	    } else {
+				document.getElementById('login_attempt').innerHTML='user is logged in but did NOT grant permissions'
+	      // user is logged in, but did not grant any permissions
+	    }
+	  } else {
+	    // user is not logged in
+			document.getElementById('login_attempt').innerHTML='user did NOT  log in and did NOT grant permissions'
+	  }
+	}, {perms:'publish_stream,offline_access'});
+}
+
+
+
+var publish = {method: 'feed', message: 'getting educated about Facebook Connect'};
+function publish_wall_post()
+{
+	FB.ui(publish,
+		function(response)
+		{
+			if (response && response.post_id) {document.getElementById('response').innerHTML='Post was not published';}
+			else {document.getElementById('response').innerHTML=response + response.post_id;}
+		}
+	);
+}
+
+function publish_wall_post2()
+{
+ FB.ui(
+   {
+     method: 'feed',
+     name: 'Facebook Dialogs',
+     link: 'https://developers.facebook.com/docs/reference/dialogs/',
+     picture: 'http://fbrell.com/f8.jpg',
+     caption: 'Reference Documentation',
+     description: 'Dialogs provide a simple, consistent interface for applications to interface with users.',
+     message: 'Facebook Dialogs are easy!'
+   },
+   function(response) {
+     if (response && response.post_id) {
+       alert('Post was published.');
+     } else {
+       alert('Post was not published.');
+     }
+   }
+ );
+}
+
+
+function streamPublish(name, description, hrefTitle, hrefLink, userPrompt){
+    FB.ui(
+    {
+        method: 'stream.publish',
+        message: '',
+        attachment: {
+            name: name,
+            caption: '',
+            description: (description),
+            href: hrefLink
+        },
+        action_links: [
+            { text: hrefTitle, href: hrefLink }
+        ],
+        user_prompt_message: userPrompt
+    },
+    function(response) {
+ 
+    });
+}
+function publishStream(){
+    streamPublish("Stream Publish", 'Thinkdiff.net is AWESOME. I just learned how to develop Iframe+Jquery+Ajax base facebook application development. ', 'Checkout the Tutorial', 'http://wp.me/pr3EW-sv', "Demo Facebook Application Tutorial");
+}
+
+
+
+
+
+
+function load_and_publish(){
+	load_FB();
+	login_to_FB();
+}
+	
+
+function doesFBexist(){
+	if (typeof(FB) != 'undefined' && FB != null) {document.getElementById('login_response').innerHTML='FB exists!'}
+	else { document.getElementById('login_response').innerHTML='FB does not exist' }
+}
+
+
+
+
+function asyncInit(){
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId  : 100002599482156,
+      status : true, 
+      cookie : true,
+      xfbml  : true 
+      })
+    isLoaded = true;
+    attempted_load = "got through it";
+    };
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    //e.src = document.location.protocol + 'connect.facebook.net/en_us/all.js';
+    document.getElementById('fb-root').appendChild(e);
+		document.getElementById('asynch_attempt').innerHTML='asynch worked';
+
+		if (typeof(FB) != 'undefined' && FB != null) {
+	FB.getLoginStatus(function(response) {
+	  if (response.session) {
+	    // logged in and connected user, someone you know
+			document.getElementById('login_response').innerHTML='user is logged in'
+	  } else {
+			document.getElementById('login_response').innerHTML='user is NOT logged in'
+	    // no user session available, someone you dont know
+	  }
+	});
+	} else { alert('FB is undefined') }
+  }());
+}
+
+ </script>

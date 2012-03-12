@@ -1,0 +1,103 @@
+<p><%= nl2br group.description %></p>
+<br clear="all" />
+
+<div class="announcement_block">
+  <% group.announcements.each do |t| %>
+    <div class="announcement">
+      <div class="topic_type"><%= announcement_sign %></div>
+      <div class="topic_title">
+        <%= link_to t.post.title.html_safe, topic_url(t, :group_id=>group.id) %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="group_operation_links operation_links" >
+
+  <div class="left_links">
+    <p>
+      <% unless current_user.is_anonymous? %>
+        <% group_member = GroupsMember.find_by_group_id_and_member_id(group.id, current_contact.id) %>
+        <% if group_member %>
+          <% unless group_member.is_leader? %>
+            <%= om_button(:contact => true, :icon=>'user-remove') do %>
+              <%= link_to_function "Quit", "destroy_group_member('#{escape_javascript(render "groups_members/dialog_destroy_confirm", :group=>group)}', '#{groups_member_url(group_member)}')", "data-tooltip"=>"Quit this group" %>
+            <% end %>
+          <% end %>          
+        <% else %>
+          <% group_request = GroupsRequester.find_by_group_id_and_requester_id(group.id, current_user.id) %>
+          <% unless group_request.nil? %>
+
+            <% unless group_request.status=="rejected" %>
+              <%= om_button(:contact => true, :icon=>'user-remove') do %>
+                <%= link_to_function "Withdraw", "destroy_group_request('#{escape_javascript(render "groups_requesters/dialog_destroy_confirm", :group=>group)}', '#{groups_requester_url(group_request)}')", "data-tooltip"=>"Cancel request" %>
+              <% end %>
+            <% end %>
+
+          <% else %>
+            <% if !group.is_blocked? %>
+              <%= om_button(:contact => true, :icon=>'user-add') do %>
+                <%= link_to_function "Join",
+                  "new_group_request('#{escape_javascript(render "groups_requesters/dialog_new_confirm", :group=>group)}')",
+                  "data-tooltip"=>"Join this group" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>   
+      <% end %>
+
+      <% if group_member || is_admin? %>
+        <%= om_button(:contact => true, :icon=>'back') do %>
+          <%= link_to "Space", space_group_url(group), "data-tooltip"=>"Posts and Uploads" %>
+        <% end %>
+      <% end %>
+
+      <%= om_button(:contact => true, :icon=>'search') do %>
+        <%= link_to "Sub-Groups(#{group.sub_groups.count})", groups_url(:super_group_id=>group.id), :remote=>true, "data-tooltip"=>"View sub-groups in this group" %>
+      <% end %>
+      
+    </p>
+  </div>
+
+  <div class="right_links">
+    <p>
+      <% if is_admin? || group.has_leader?(current_contact) %>
+
+        <%= om_button(:contact => true, :icon=>'mail-new') do %>
+          <%= link_to "Requests", groups_requesters_url(:group_id=>group.id), "data-tooltip"=>"Manage requests" %>
+        <% end %>
+        <%= om_button(:contact => true, :icon=>'group') do %>
+          <%= link_to "Members", groups_members_url(:group_id=>group.id), "data-tooltip"=>"Manage memberships" %>
+        <% end %>
+
+        <% if group.is_private? %>
+          <%= om_button(:contact => true, :icon=>'mail-open') do %>
+            <% if group.is_end? %>
+              <%= link_to "Publish", group_url(group, :type=>"publish"), :remote=>true, :method=>:put, "data-tooltip"=>"Publish this group" %>
+            <% else %>
+              <%= link_to_function "Publish", "update_group_status('#{escape_javascript(render "groups/dialog_update_status_confirm")}', '#{group_url(group, :type=>"publish")}')", "data-tooltip"=>"Publish this group" %>
+            <% end %>
+          <% end %>
+        <% elsif group.is_public? %>
+          <%= om_button(:contact => true, :icon=>'mail') do %>
+            <% if group.is_end? %>
+              <%= link_to "Unpublish", group_url(group, :type=>"unpublish"), :remote=>true, :method=>:put, "data-tooltip"=>"Unpublish this group" %>
+            <% else %>
+              <%= link_to_function "Unpublish", "update_group_status('#{escape_javascript(render "groups/dialog_update_status_confirm")}', '#{group_url(group, :type=>"unpublish")}')", "data-tooltip"=>"Unpublish this group" %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <%= om_button(:contact => true, :icon=>'edit') do %>
+          <%= link_to_function "Edit", "edit_group('#{escape_javascript(render "groups/dialog_edit_form", :group=>group)}')", "data-tooltip"=>"Edit this group" %>
+        <% end %>
+
+        <%= om_button(:contact => true, :icon=>'delete-icon') do %>
+          <%= link_to_function "Delete", "destroy_group('#{escape_javascript(render "groups/dialog_destroy_confirm", :group=>group)}','#{group_url(group)}')", "data-tooltip"=>"Delete this group" %>
+        <% end %>
+
+      <% end %>
+    </p>
+  </div>
+
+</div>

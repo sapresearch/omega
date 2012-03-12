@@ -1,0 +1,14 @@
+<% if @group_request %>
+  $(".groups_list").html("<%= escape_javascript( render "groups/index_list" ) %>")
+  load_dialog_message("<%= escape_javascript(render "groups_requesters/dialog_created_message", :group=>@group) %>")
+<% elsif @group.is_blocked? %>
+  show_dialog_message("group-request-create-blocked-dialog-message")
+<% elsif not @eligible %>
+  load_dialog_message("<%= escape_javascript(render "groups_requesters/dialog_create_not_eligible_message", :group=>@group) %>")
+<% elsif @is_member %>
+  load_dialog_message("<%= escape_javascript(render "groups_requesters/dialog_is_member_message", :group=>@group) %>")
+<% else %>
+  show_dialog_message("group-request-create-duplicate-dialog-message")
+<% end %>
+
+$(".tipsy").remove();

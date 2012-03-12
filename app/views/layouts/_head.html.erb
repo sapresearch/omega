@@ -1,0 +1,57 @@
+<div id="top-pane">
+  <div class="center-content">
+    <%= with_permission(Omega::User::PERM_VIEW) do %>
+    	<div id="user_custom_bar" class="corners-bottom left">
+     		<%= render('layouts/omega/partials/messages') %>
+      	| <%= render('layouts/omega/partials/favorites') %>
+
+        <%= with_permission('cms_admin') do %>
+        	| <%= link_to 'Edit Page', current_page_path %>
+        <% end %>
+    	</div>
+    <% end %>
+
+
+    <div id="ctlrBar" class="corners-bottom right">
+      <% if current_user.is_anonymous? -%>
+          <span id="trigger"><a class="btnLoginCtrl" rel="test" href="#"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
+          | <%= link_to content_tag(:span, t(:sign_up)), register_users_url %>
+      <% else -%>
+          <span class="om-icon-only om-white-icon ui-icon-power"></span>
+          <%= link_to content_tag(:span, "logout"), sessions_url, :method => :delete, :confirm => 'Are you sure?' %>
+           |
+          <span class="om-icon-only om-white-icon ui-icon-person"></span>
+           <%= link_to 'My Profile', edit_user_url(current_user) %>
+      <% end -%>
+    </div>
+    <!--<div id="search_wrapper">-->
+      <!--<input id="search_input">-->
+    <!--</div>-->
+    <div id="loginWrapper">
+      <%= render :partial => "layouts/omega/partials/login_main" %>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="head">
+
+
+  <%= render :partial => "layouts/omega/menu" %>
+
+  <div id="breadcrumb">
+    <!-- commented out for testing only. uncomment later -->
+    <%#= breadcrumbs %>
+  </div>
+
+
+
+
+
+
+
+</div>
+
+
+

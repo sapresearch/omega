@@ -1,0 +1,84 @@
+<% leaf_service ||= @leaf_service %>
+<% assets ||= leaf_service ? leaf_service.assets : Asset.all %>
+<% add_event_listeners ||= false %>
+
+<ul class="assets_list item_list">
+  <% assets.each do |asset| %>
+    <%= render "asset_li", :asset=>asset, :add_event_listeners=>add_event_listeners %>
+  <% end %>
+</ul>
+
+<script type="text/javascript">
+  $(".assets_list").sortable({
+    start: function(event, ui) {$("body").addClass("disable_selection"); is_dragging=true},
+    stop: function(event, ui) {$("body").removeClass("disable_selection"); is_dragging=false},
+    cancel: ".ui-state-disabled",
+    placeholder: "ui-state-highlight",
+    connectWith: ".connectedSortable",
+    items:"li",
+    cursor: 'move'
+  }).disableSelection();
+
+  <% if leaf_service.nil? %>
+    $("#assets_list_block .assets_list li:not(.ui-state-disabled)").each(function(){
+      if($(this).disabled_copy()==null)
+        $(this).clone().addClass("ui-state-disabled").hide().insertAfter(this)
+    })
+
+    $("#assets_list_block .assets_list")
+    .bind("sortupdate", function(event, ui){
+      if(ui.item.parents("#assets_list_block").length>0)
+        ui.item.disabled_copy().insertAfter(ui.item)
+    })
+    .bind("sortover", function(event, ui){
+      if($(".ui-state-highlight", this)){
+        $("."+ui.helper.first_class_name()+".ui-state-disabled").hide()
+      }
+    })
+  <% else %>
+    $("#working_list_block .assets_list")
+    .bind("sortover", function(event, ui){
+      if($(".ui-state-highlight", this)){
+        $("."+ui.helper.first_class_name()+".ui-state-disabled").show()
+      }
+    })
+    .bind("sortreceive", function(event, ui){
+      ui.item.clone().hide().insertBefore(ui.item.disabled_copy())
+
+      var url = '<%= asset_allocations_url %>'
+      var data = {}
+      var type = 'POST'
+      data["asset_id"] = ui.item.object_id()
+      data["leaf_service_id"] = <%= leaf_service.id %>
+      data["type"] = "asset"
+
+      $.ajax({
+        url:url,
+        data:data,
+        type:type,
+        dataType: 'script'
+      })
+    })
+    .bind("sortremove", function(event, ui){
+      var identical_hidden_copy = ui.item.identical_hidden_copy()
+      if(identical_hidden_copy)
+        ui.item.identical_hidden_copy().remove()
+
+      ui.item.disabled_copy().insertAfter(ui.item)
+
+      var url = '<%= asset_allocation_url(0) %>'
+      var data = {}
+      var type = 'DELETE'
+      data["asset_id"]=ui.item.object_id()
+      data["leaf_service_id"]= <%= leaf_service.id %>
+      data["type"] = "asset"
+
+      $.ajax({
+        url:url,
+        data:data,
+        type:type,
+        dataType: 'script'
+      })
+    })
+  <% end %>
+</script>

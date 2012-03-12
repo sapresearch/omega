@@ -1,0 +1,54 @@
+   
+      <%= form_tag :action=> 'create' do %>
+
+
+        <table class="width-100 clear" id="records-table">
+    			<thead>
+    				<tr>
+      					<th class="ui-state-default">
+      						Volunteer </th>
+      					<th class="ui-state-default">Mon</th>
+      					<th class="ui-state-default">Tue</th>
+      					<th class="ui-state-default">Wed</th>
+      					<th class="ui-state-default">Thurs</th>
+      					<th class="ui-state-default">Fri</th>
+      					<th class="ui-state-default">Sat</th>
+     					<th class="ui-state-default">Sun</th>
+
+    				</tr>
+    			</thead>
+   
+            
+    		
+    	<% @entries.each_with_index do |entry, index| %>
+
+    	<%= fields_for "entries[#{index}]", entry do |f| %>
+
+          <p>
+
+         <%= f.hidden_field :week, :value => start %>
+     
+          </p>
+
+    
+    	<%= f.hidden_field :record_id, :value =>  entry.record_id %>
+    
+      	 	<%= render 'record_row', :entry => entry, :f => f, :start => start %>
+    
+    	<%end%>
+    	<% end %> 
+    	
+    	</table>  
+
+    	</p>
+   	 	<p>
+    	<%= om_button(:icon=>'save') do %>
+        	<%= submit_tag "Save" %>
+   	 	<% end %>
+
+    	</p>
+
+		<% end %>
+
+
+       

@@ -1,0 +1,17 @@
+<% stylesheet_link_tag 'omega_users', 'settings', 'omega_contacts' %>
+
+<div class="content circle-corners-bottom-left">
+	<div class="heading-main">
+		<h1 class="page-content">
+			Edit Custom Field
+	  	</h1>
+	</div>
+
+	<%= form_for @field do |n| %>
+		<%= render 'new_field', :n => n %>
+		<div id='contact_submit'>
+			<%= n.submit %>
+		</div>
+	<% end %>
+
+</div>

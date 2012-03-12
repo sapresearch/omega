@@ -1,0 +1,15 @@
+<%= div_for f.object do %>
+    <%= errors_for_model f.object %>
+    <p>
+      <%= f.label :number_type %>
+    </p>
+    <p>
+      <%= f.select :number_type, options_for_select(Contact::PhoneNumber::NUMBER_TYPES) %>
+    </p>
+    <p>
+      <%= f.label :number %>
+    </p>
+    <p>
+      <%= f.text_field :number, :class=> 'validate_presence' %>
+    </p>
+<% end %>

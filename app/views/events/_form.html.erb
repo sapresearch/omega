@@ -1,0 +1,56 @@
+<%= javascript_include_tag 'thirdParty/jquery.timepicker' %>
+
+<%= form_for(@event, :url => @event.persisted? ? calendar_event_path(@calendar, @event) : calendar_events_path(@calendar), :remote => true) do |f| %>
+    <%= f.hidden_field :recurrent %>
+    <p>
+      <%= f.label :name %>
+      <%= f.text_field :name, :class => 'broad-text' %>
+    </p>
+    <p>
+      <%= f.label :all_day %>
+      <%= f.check_box :all_day, :checked => true %>
+    </p>
+
+    <div id="non-recurrent">
+
+      <p>
+        <%= f.label :start %>
+
+        <%= f.text_field :start_date, :class => 'datepickr' %>
+        <%= f.text_field :start_time, :class => 'tpickr' %>
+      </p>
+
+      <p>
+        <%= f.label :end %>
+        <%= f.text_field :end_date, :class => 'datepickr' %>
+        <%= f.text_field :end_time, :class => 'tpickr' %>
+      </p>
+
+    </div>
+    <p>
+      <%= f.label :description %>
+      <%= f.text_area :description, :class => 'broad-text' %>
+    </p>
+   
+    <% if params[:action] == 'new' %>
+    <p>
+      <a href="javascript:void(0)" id="scheduler-trigger">
+        <span class="om-icon-only om-blue-icon ui-icon-refresh"></span>
+        <span class="scheduler-text">
+            Make this event a recurrent series
+        </span>
+        <span class="scheduler-text" style="display:none;">
+            Remove Recurrence
+        </span>
+
+      </a>
+    </p>
+<% end  %>
+    <%= recurrence(f) %>
+
+
+    <%= om_button(:icon => 'Update') do %>
+          <%= f.submit :value => 'Create Event' %>
+      <% end %>
+
+<% end %>

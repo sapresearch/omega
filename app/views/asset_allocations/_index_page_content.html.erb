@@ -1,0 +1,43 @@
+<div id="asset_allocation_top_links">
+  <%= render "index_top_links" %>
+</div>
+
+<div id="asset_allocation_info" class="round shadow">
+  <%= render "asset_allocation_info" %>
+</div>
+
+<div id="assets_list_area">
+  <%= render "assets_list_area" %>
+</div>
+
+<div id="assets_exchange" class="exchange">
+  <img alt="" src="images/double_arrow.jpg" />
+</div>
+
+<div id="working_list_area">
+  <%= render "working_list_area" %>
+</div>
+
+<div id="leaf_services_exchange" class="exchange">
+  <img alt="" src="images/double_arrow.jpg" />
+</div>
+
+<div id="leaf_services_list_area">
+  <%= render "leaf_services_list_area" %>
+</div>
+
+<br clear="all"/>
+
+<div class="asset_allocation_bottom_links">
+  <%= render "index_bottom_links" %>
+</div>
+
+<script type="text/javascript">
+  <% if @asset_id %>
+    $(".asset_<%= @asset_id.to_s %>").click()
+  <% elsif @leaf_service_id %>
+    $(".leaf_service_<%= @leaf_service_id.to_s %>").click()
+  <% end %>
+</script>
+
+

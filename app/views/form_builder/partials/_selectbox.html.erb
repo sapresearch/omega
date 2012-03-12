@@ -1,0 +1,27 @@
+<li class="list-item relative">
+   <div class="item-list-actions-wrapper corners">
+    <div class="item-list-actions">
+                    <span class="om-plain-icon-button"><span class="om-icon om-icon-edit"></span>
+                    <span class="edit-ui-em">Edit </span> </span><br/>
+      <span class="om-plain-icon-button"><span class="om-icon om-icon-delete"></span>
+                    <span class="delete-ui-em">Delete </span> </span>
+    </div>
+  </div>
+
+  
+  <div id="<%= "ui-em-#{index}" %>" class="ui-em-preview" ui-data="selectbox">
+
+    <%= label_tag @field.field_name, nil, :id=>"fields_#{index}_field_name_preview", :class =>'label-preview' %>
+
+    <span id="<%= "value-preview-#{index}" %>">
+           <select>
+             <% options = @field.value.field_value.split(';') %>
+             <% options.each do |option| %>
+             <option><%= option %></option>
+                 <% end %>
+           </select>
+     </span>
+    <%= render :partial => 'form_builder/partials/hidden_fields', :locals => { :index => index } %>
+  </div>
+
+</li>

@@ -1,0 +1,65 @@
+  <div class="service_form_builder_tabs" id="tabs">
+    <ul id="service_form_builder_nav">
+      <li><a id="service_detail_tab_link" href="#tabs-1" onclick="set_service_detail_env()" data-tooltip="Detailed information about the service that you want user to know" >Service Details</a></li>
+      <li><a id="service_registration_tab_link" href="#tabs-2" onclick="set_service_registration_env()" data-tooltip="Customized form to collect user registration information" >Registration Form</a></li>
+    </ul>
+    <div id="tabs-1">
+      <div class="tab_content_options">
+        <span>
+          <label for="select_service_detail_templates">Use Existing Template:</label>
+          <% options = ["none"].concat(@services_with_detail_template.map{|s|[s.name, s.id]}) %>
+          <% default_option_value = @default_service_with_detail_template ? @default_service_with_detail_template.id : "none" %>
+          <% default_option_value = "none" if @service.id %>
+          <%= select_tag(:select_service_detail_templates, options_for_select(options, default_option_value), :onchange => "refresh_service_detail()") %>
+        </span>
+        <span id="check_service_detail_template" class="set_service_template">
+          <label for="has_service_detail_template" >Make this a template:</label>
+          <input id="has_service_detail_template" name="has_service_detail_template" type="checkbox" />
+        </span>
+      </div>
+      <hr/>
+
+      <div class="tab_content" id='table_div_1'>        
+        <ul class="editable_list service_customization_form" id="service_detail" >
+          <%= @service_detail_html %>
+        </ul>
+      </div>
+    </div>
+    
+    <div id="tabs-2">
+      <div class="tab_content_options">
+        <span>
+          <label for="select_service_registration_templates">Use Existing Template:</label>
+          <% options = ["none"].concat(@services_with_registration_template.map{|s|[s.name, s.id]}) %>
+          <% default_option_value = @default_service_with_registration_template ? @default_service_with_registration_template.id : "none" %>
+          <%= select_tag(:select_service_registration_templates, options_for_select(options, default_option_value), :onchange => "refresh_service_registration()") %>
+        </span>
+        <span id="check_service_registration_template" class="set_service_template">
+          <label for="has_service_registration_template" >Make this a template:</label>
+          <input id="has_service_registration_template" name="has_service_registration_template" type="checkbox" />
+        </span>
+      </div>
+      <hr/>
+
+      <div class="tab_content" id='table_div_2'>
+        <ul class="editable_list service_customization_form" id="service_registration">
+          <%= @service_registration_html %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+  var service_detail_field_values = '<%= raw @service.detail_field_values %>'
+  fill_field_values("service_detail",service_detail_field_values);
+
+  <% if @service.has_service_detail_template? %>
+    $("#has_service_detail_template").attr("checked", "checked")
+  <% end %>
+    
+  <% if @service.has_service_registration_template? %>
+    $("#has_service_registration_template").attr("checked", "checked")
+  <% end %>
+</script>
+
+

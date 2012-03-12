@@ -1,0 +1,16 @@
+<% if @service_registration %> 
+  <% if @from_page == "services#index" %>
+    <% if @registrant == current_contact %>
+      $(".services_list").html("<%= escape_javascript( render "services/index_list" ) %>")
+    <% end %>
+  <% elsif @from_page == "service_registrations#index" %>
+      $(".services_page_content").html("<%= escape_javascript( render "service_registrations/index_page_content" ) %>")    
+  <% end %>
+  show_dialog_message("service-registration-created-dialog-message")
+<% elsif @service.service_leaf.is_blocked? %>
+  show_dialog_message("service-registration-create-blocked-dialog-message")
+<% else %>
+  show_dialog_message("service-registration-create-failed-dialog-message")
+<% end %>
+
+$(".tipsy").remove();

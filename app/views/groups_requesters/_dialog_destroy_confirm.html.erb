@@ -1,0 +1,11 @@
+<div id="group-request-destroy-dialog-confirm" class="dialog" title="Withdraw Request">
+  <p>
+    <% requester ||= nil %>
+    <% unless requester.nil? %>
+      <span class="label">Requester:</span>
+      <span class="value"><strong><%= requester.name %></strong></span>
+      <br/>
+    <% end %>
+    Are you sure to withdraw request to <strong class="italic"><%= group.name %></strong>?
+  </p>
+</div>

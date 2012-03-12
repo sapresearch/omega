@@ -1,0 +1,244 @@
+<% stylesheet_link_tag 'omega_volunteering' %>
+<% javascript_include_tag 'thirdParty/jquery.timepicker', 'new_volunteering_position', 'jquery.tokeninput' %>
+
+
+<%= form_for(@record) do |f| %>
+    <%= errors_for_form @record %>
+    <%= f.fields_for :contact, @contact do |c| %>
+    	
+	   <h3 class="application-form">PERSONAL INFORMATION </h3> 
+        <p>
+          <%= c.label :title %> 
+          <%= c.select :title, %w{Mr Miss Ms Mrs} ,{},:selected => @contact.title , :include_blank => false  %>
+        </p>
+
+        <p>
+          <%= c.label :first_name , :'data-tooltip' => 'Plese type in your first name' %>
+          <%= c.text_field :first_name %>
+        </p>
+
+        <p>
+          <%= c.label :last_name , :class => "mandatory-field"%>
+          <%= c.text_field :last_name , :'data-tooltip' => 'Plese type in your last name' %>
+        </p>
+		
+		  <p>
+          <%= c.label :middle_name %>
+          <%= c.text_field :middle_name, :'data-tooltip' => 'Middle name if any' %>
+        </p>
+		
+        <p>
+          <%= c.label :primary_email , :class => "mandatory-field"%>
+          <%= c.text_field :email , :'data-tooltip' => 'Plese type in your primary email'%>
+        </p>
+
+        <p>
+          <%= c.label :secondary_email %>
+          <%= c.text_field :email2 , :'data-tooltip' => 'Plese type in your secondary email'%>
+        </p>
+
+
+		
+		<h3 class="application-form">ADDRESSES</h3>
+		
+			<p>
+         	<%= c.fields_for :addresses do |a| %>
+          		<%= render 'address_form', :f => a %>
+         	<% end %>
+			</p>
+        
+			<p>
+	        	<% new_text = lambda do %>
+	        		<span class="margin-left-2-address" data-tooltip="By clicking on this icon you will be able to add another address. Feel free to add as many addresses as you want">Add Another Address
+	            	<span class="om-icon-only om-blue-icon ui-icon-home"></span>
+	        		</span>
+	        	<% end %>
+	        
+				<%= link_to_new_nested c, :addresses, :text => new_text do |a| %>
+	           	<%= render 'address_form', :f => a %>
+	        	<% end %>
+      	</p>
+
+
+
+		<h3 class="application-form">PHONE NUMBERS</h3>
+      	<p>
+        		<%= c.fields_for :phone_numbers do |pn| %>
+            <%= render 'phone_number_form', :f => pn %>
+        		<% end %>
+      	</p>
+
+      	<p>
+	        	<% new_text = lambda do %>
+	        		<span class="margin-left-2-phone" data-tooltip="By clicking on this icon you will be able to add another phone number. Feel free to add as many phone numbers as you want">Add another phone number
+	            	<span class="om-icon-only om-blue-icon ui-icon-contact"></span>
+	        		</span>
+	        	<% end %>
+	        
+				<%= link_to_new_nested c, :phone_numbers, :text =>  new_text do |pn| %>
+	           	<%= render 'phone_number_form', :f => pn %>
+	        	<% end %>
+      	</p>
+
+
+
+		<h3 class="application-form">EMERGENCY CONTACT INFO</h3>
+			<p>
+	      	<%= c.label :contact_name, :class => "mandatory-field"%>
+				<%= c.text_field :emergency_contact_name%>  
+			</p>
+			
+			<p>
+	      	<%= c.label :contact_number, :class => "mandatory-field"%>
+				<%= c.text_field :emergency_contact_number%>
+			</p>
+				
+			<%end%>
+			<!-- End of contact fields !-->
+
+
+		
+		<h3 class="application-form">WHAT I BRING</h3>
+			<p>
+		      <%= f.label :volunteering_reason, :class => "mandatory-field"%>
+	         <%= f.text_area :volunteering_reason, :'data-tooltip' => 'Please include the reason why you are applying for this assignment' %>	
+			</p>
+	
+			<%= f.hidden_field :position_id %>
+			<%= f.hidden_field :contact_id, :value => @contact.id %>
+					
+			<p>
+		      <%= f.label :my_idea %>
+	         <%= f.text_area :my_idea, :'data-tooltip' => 'Please share with us your idea(s)/ opinions' %>	
+			</p>
+			
+			<%= f.fields_for :contact, @contact do |c| %>
+			
+				<p>
+	         	<%= c.label "Skills and/or Qualifications" , :class => "mandatory-field"%>
+	         	<%= c.text_field :skills_values , :'data-tooltip' => 'Plese type in your skills, seperated by comma: e.g. thougtful, helpful' %>
+				</p>
+	
+				<p>
+	         	<%= c.label "interests/hobbies" %>
+	         	<%= c.text_field :interests_values, :'data-tooltip' => 'Plese type in your interests, seperated by comma' %>
+				</p>
+			
+				<p>
+	        		<%= c.label :languages %>
+	         	<%= c.text_field :languages_values , :'data-tooltip' => 'List down the languages you are familiar with, separated by comma' %>
+				</p>
+
+
+		
+		   <h3 class="application-form">CUSTOM INFORMATION </h3> 
+				<% @contact.custom_fields(@record.position).each do |cf| %>
+					<p>
+						<%= c.label (cf.name.to_sym) %>
+						<% if cf.data_type.to_s == 'boolean' %>
+							<%= c.send(cf.input_field, cf.name_as_sym, "Yes") %> Yes
+							<%= c.send(cf.input_field, cf.name_as_sym, "No") %> No
+						<% else %>
+							<%= c.send(cf.input_field, cf.name_as_sym) %>
+						<% end %>
+						<p class='custom_description'>
+							<%= cf.description %>
+						</p>
+					</p>
+					<br />
+				<% end %>
+
+		
+		
+			<h3 class="application-form">PARENTAL APPROVAL</h3>
+			
+				<p>
+					<span class="form-text">Youth aged 18 and under require parental consent to volunteer with Evergreen. Youth aged 14 and under must be accompanied by a parent or guardian. I am the parent and/or legal guardian of who is under 19 years of age. I hereby verify that I give consent for my child to volunteer with Evergreen.</span>
+				</p>
+				
+				<p>
+				  <%= c.label "parent's name", :class => "mandatory-field"%>
+		        <%= c.text_field :parent_name, :'data-tooltip' => "For parental approval type in your parent's full name" %>	
+			 	</p>
+				
+				<p>
+				  <%= c.label "parent's email" , :class => "mandatory-field"%>
+		        <%= c.text_field :parent_email, :'data-tooltip' => "Please include your parent's email where they could be contacted" %>	
+			 	</p>
+	
+	    	<% end %>
+		<!-- End of contact fields !-->
+
+
+		
+		<h3 class="application-form">AVAILABILITY</h3>
+		
+			<p>
+		   	<%= f.label :can_commit_to, :class => "mandatory-field"%>
+				<br/>
+				<span class="checkbox-block">
+					<% ['Event Only', 'Casual', 'Up to 3 months', 'More than 3 months','# of hours per week' ].each do |o|%>
+		      		<%= f.radio_button :availability, o %> <%=o%>	<br/> 
+					<%end%>
+         	</span>
+			</p>
+			
+			<p>
+				<br/>
+				<%= f.label :Number_of_hours_per_week %> 
+	      	<%= f.text_field :hours_per_week, :'data-tooltip' => 'How many hours each week' %>	
+		 	</p>
+					
+			<p>
+				<br/>
+		      <%= f.label :time_of_the_day , :class => "mandatory-field"%>
+	         <%= f.select :day_time, ['Weekdays','Week Nights','Weekend Days','Weekend Nights'] %>	<br/>
+			</p>
+			
+			<p>
+				<%= f.label :can_start_on , :class => "mandatory-field"%>
+	      	<%= f.text_field :start_date, :class=>'datepickr'%>	
+		   	<%= f.text_field :start_time, :class=>'tpickr' %>	
+		 	</p>
+			
+			<p>
+				<%= f.label :until %>
+	      	<%= f.text_field :end_date, :class=>'datepickr' %>	
+		   	<%= f.text_field :end_time, :class=>'tpickr'%>	
+		 	</p>
+			
+			<p>
+				<%= f.label :volunteering_to_meet_requirements?%>
+	         <%= f.check_box :volunteering_to_meet_requirements %>	
+			</p>
+			<br/>
+	
+			<p>
+				<br/>
+			 	<%= f.label "if yes, how many hours"%>
+	       	<%= f.text_field :hours_required %>	
+			</p>
+			
+			<%unless @record.position.disclaimer_agreement == false%>
+				<h2 class="application-form-content-heading-2">By submitting this application, I understand that:</h2>
+		
+				<p>
+			   	<span class="form-agreement">
+			    		<%= @record.position.agreement%>
+					</span>
+			   </p>
+				
+				<p>
+			   	<span class="form-text-plain"> 
+						<%= f.check_box :agreement, :checked=> @record.position.disclaimer_agreement%> <span class="application-form-content mandatory-field">I Agree &nbsp;   </span>		<br/>
+					</span>
+				</p>
+	   	<% end %>
+	
+			<p>
+	   		<%= om_button(:icon => 'apply') do %>
+					<%= f.submit %>
+				<% end %>
+			</p>
+
+	<% end %>

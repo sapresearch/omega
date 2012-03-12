@@ -1,0 +1,26 @@
+<%= form_for @record, :remote=> true do |f| %>
+
+    <%= f.hidden_field :id %>
+    <%= errors_for_form @record %>
+    <%= f.label :action %>
+    <% ["Accepted", "Rejected", "Further Information Required"].each do |v| %>
+        <%= f.radio_button :action, v, {:checked => "checked"} %> <%= v %>
+    <% end %>
+
+    <p>
+      <%= f.label :Note %>
+      <%= f.text_area :more_information, :rows => 2 %>
+    </p>
+
+    <p>
+      <%= f.label :admin_notes %>
+      <%= f.text_area :admin_notes, :rows => 2 %>
+    </p>
+
+    <p>
+      <%= om_button(:icon => 'save') do %>
+          <%= f.submit "Save" %>
+      <% end %>
+    </p>
+
+<% end %>

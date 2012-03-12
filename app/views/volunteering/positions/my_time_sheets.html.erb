@@ -1,0 +1,71 @@
+<%= context_box do %>
+   <div class="page-content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+			<div class="left-heading">
+				<h1 class="page-content">
+      				Time Sheets
+		    	</h1>
+			</div>
+		</div>
+
+
+      <div class="right">
+      	<br/>
+        <%= om_button(:icon=>'sort-az', :small => true) do %>
+            <%= link_to 'sort A-Z', url_for(params.merge(:name => 'asc')) %>
+        <% end %>
+        <%= om_button(:icon=>'sort-za', :small => true) do %>
+            <%= link_to 'sort Z-A', url_for(params.merge(:name => 'desc')) %>
+        <% end %>
+
+      </div>
+      <div class="clear"></div>
+      <% if @timesheets.empty? %>
+          <strong>You Don't Have Any Time Sheets Yet!</strong><br/><br/>
+      <% else %>
+          <% @timesheets.each do |timesheet| %>
+                <% timesheet.each do |t| %>
+                   <h2><%= Volunteering::Position.find_by_id(Volunteering::Record.find_by_id(t.record_id).position_id).name %></h2>
+                   <span class="cf3a72">From: </span> <span class="date"> <%= start = t.week.strftime('%Y-%m-%d') %> </span>
+                   <span class="cf3a72">To: </span>   <span class="date">  <%= Date.parse(start).advance(:days => 6).to_time.strftime('%Y-%m-%d') %></span>
+                   <% unless t.nil? %>
+                        <table class="width-100">
+                          <thead>
+                          <th class="ui-state-default"></th>
+                          <th class="ui-state-default">MON</th>
+                          <th class="ui-state-default">TUE</th>
+                          <th class="ui-state-default">WED</th>
+                          <th class="ui-state-default">THU</th>
+                          <th class="ui-state-default">FRI</th>
+                          <th class="ui-state-default">SAT</th>
+                          <th class="ui-state-default">SUN</th>
+                          </thead>
+                          <tr class="odd">
+                            <td>Hours</td>
+                            <% @entry_days.each do |ed| %>
+                                <% if t.id == ed.time_entry_id %>
+                                    <td><%= ed.hours %></td>
+                                <% end %>
+                            <% end %>
+                          </tr>
+                        </table>
+                    <% end %>
+                <% end %>
+	          <%#= om_button(:icon => 'clock') do %>
+					<!-- THIS IS ANNE'S SHITTY CODE -->
+	          	<%#= link_to 'Record Hours Now!', new_volunteering_time_entries_path(:id => @record) %>
+					<!-- THIS IS ANNE'S SHITTY CODE -->
+	      	<%# end %>
+          <% end %>
+    	<% end %>
+
+		<!-- my changes -->
+		<% @records.each do |r| %>
+	      <%= om_button(:icon => 'clock') do %>
+				<%= link_to 'Record Hours Now!', new_volunteering_time_entry_path(:id => r.id) %>
+			<% end %>
+		<% end %>
+		<!-- my changes -->
+	</div>
+<% end %>

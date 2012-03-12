@@ -1,0 +1,35 @@
+<form>
+  <input id="search_text" type="text" maxlength="100" size="50" value="Type here to search..."
+         onclick="$(this).select()"
+         onblur="
+           if(is_empty_html($(this).val())){
+             $(this).val('Type here to search...'); 
+             $('.asset_unit').show();
+             $('.no_match').hide();
+           }"
+           />
+</form>
+
+<script type="text/javascript">
+  var asset_names = <%= raw @assets.map(&:name) %>
+  var asset_ids = <%= raw @assets.map(&:id) %>
+  $("#search_text").keyup(function(){
+    var input = $("#search_text").val()
+    var regex = new RegExp( '^.*'+input+'.*$','i' );
+
+    for(var i in asset_names)
+    {
+      if(asset_names[i].match(regex)){
+        $("#asset_unit_"+asset_ids[i]).show()
+      }else{
+        $("#asset_unit_"+asset_ids[i]).hide()
+      }
+    }
+
+    if($(".asset_unit:visible").length==0)
+      $(".no_match").show()
+    else
+      $(".no_match").hide()
+  })
+</script>
+

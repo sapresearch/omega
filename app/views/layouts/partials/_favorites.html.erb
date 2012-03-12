@@ -1,0 +1,10 @@
+<% if not current_user.is_anonymous?
+       favorites = current_user.favorites %>
+
+    <span class="om-icon-only om-white-icon ui-icon-star"></span>
+        <%= link_to(favorites_path) do %>
+            <%= "(#{favorites.count}) " if favorites.any? %>Favorites
+    <% end %>
+
+
+<% end %>

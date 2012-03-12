@@ -1,0 +1,49 @@
+<!-- app-spec: om_button -->
+
+<tr id="service_registration_<%= service_registration.id.to_s %>_tr">
+  <td>
+    <% if service_registration.field_values %>
+      <%= link_to_function om_button(:plain => true, :icon => 'search'){}, 
+        "show_service_registration(#{service_registration.id},
+          '#{service_registration.field_values}',
+          '#{escape_javascript( render "service_registrations/show", :service_registration=>service_registration )}',
+          '#{escape_javascript( render "service_registrations/edit", :service_registration=>service_registration )}',
+          '#{service_registration_url(service_registration)}')",
+        :'data-tooltip'=>"Registration Detail" %>
+    <% end %>
+  </td>
+  <td>
+    <%= om_button(:plain => true, :icon => 'user') do %>
+      <%= link_to service_registration.registrant.name, contact_path(service_registration.registrant), :class => 'blue', :'data-tooltip'=>"View Contact" %>
+    <% end %>
+  </td>
+  <td>
+    <%= om_button(:plain => true, :icon => 'clock') do %>
+      <span><%= service_registration.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
+    <% end %>
+  </td>
+  <td>
+    <% if service_registration.updated_at > service_registration.created_at %>
+      <%= om_button(:plain => true, :icon => 'clock') do %>
+        <span><%= service_registration.updated_at.strftime("%m/%d/%Y at %I:%M%p") %></span>
+      <% end %>
+    <% end %>
+  </td>
+  <td>
+    <% icon = 'mail' if service_registration.status == 'pending' %>
+    <% icon = 'mail-sent' if service_registration.status == 'accepted' %>
+    <% icon = 'mail-reply' if service_registration.status == 'rejected' %>
+    <%= om_button(:plain => true, :icon => icon) do %>
+      <%= link_to_function service_registration.status.capitalize, 
+        "update_service_registration_status('#{service_registration_url(service_registration)}', '#{service_registration.status}')",
+        :'data-tooltip'=>"Update Status" %>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to_function om_button(:plain => true, :icon => 'delete'){},
+        "destroy_service_registration('#{service_registration_url(service_registration)}',
+          '#{escape_javascript( render "service_registrations/show_service_and_registrant", :service_registration=>service_registration )}')",
+        :'data-tooltip'=>"Delete this Record" %>
+  </td>
+</tr>
+

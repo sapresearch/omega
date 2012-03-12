@@ -1,0 +1,25 @@
+<h2>
+<%= @contact_group.name %>
+</h2>
+<div id="contact_accordion">
+  <% @contact_group.addresses.each do |address| %>
+      <h3><a href="#"> <%= address.city.capitalize %></a></h3>
+      <div>
+        City:
+        <%= address.city.capitalize %>
+        <br>
+        Street:
+        <%= address.street %>
+        <br>
+        Postal Code:
+        <%= address.zip_code %>
+      </div>
+  <% end %>
+  <% @contact_group.phone_numbers.each do |phone| %>
+      <h3><a href="#">Phone Number </a></h3>
+      <div>
+        Number (<%= phone.number_type %>):
+        <%= phone.number %>
+      </div>
+  <% end %>
+</div>

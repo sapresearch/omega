@@ -1,0 +1,15 @@
+
+    <ul>
+      <% for contact in @contacts %>
+          <li>
+            <%= contact.first_name%>
+          </li>
+      <%end%>
+    </ul>
+    <ul>
+      <% for group in @groups %>
+          <li>
+            <%= group.group_name%>
+          </li>
+      <%end%>
+    </ul>

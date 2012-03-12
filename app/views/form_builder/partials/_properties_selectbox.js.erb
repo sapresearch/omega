@@ -1,0 +1,31 @@
+$('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "form_builder/partials/properties_selectbox.html") %>').effect('highlight');
+
+        
+        var preview = $('#fields_<%="#{@em_id}"%>_field_name_preview');
+        var field_name_submit = $('#fields_<%="#{@em_id}"%>_field_name');
+        var field_value_preview = $("#<%="value-preview-#{@em_id}"%>");
+        var field_value_submit = $('#fields_<%="#{@em_id}"%>_value_attributes_field_value');
+        var options;
+
+        $('#edit-label-value').keyup(function() {
+            var v = $(this).val();
+            preview.empty().append(v);
+            field_name_submit.val(v)
+        });
+
+        $('#select-values').keyup(function() {
+
+            options = $(this).val().split(';');
+
+            var select_tag = ''
+
+            $.each(options, function(k, v) {
+                select_tag += '<option>' + v + '</option>';
+            });
+            field_value_preview.find('select').empty().append(select_tag);
+            field_value_submit.val($(this).val())
+
+
+        });
+
+

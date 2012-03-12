@@ -1,0 +1,156 @@
+
+<%= form_for @user do |f| %>
+    <%= errors_for_form @user %>
+	
+	<%= f.fields_for :contact do |c|%>
+	
+	 <h3 class="application-form">PERSONAL INFORMATION </h3> 
+		<p>	
+     		<%= c.label :first_name %>
+     		<%= c.text_field(:first_name, :'data-tooltip' => 'Your first name')%> 
+  		</p>
+	
+    	<p>
+     		<%= c.label :last_name %>
+     		<%= c.text_field(:last_name, :'data-tooltip' => 'Your last name')%>
+    	</p>
+
+    
+		<%= c.fields_for :addresses do |a|%>
+      	<p>
+      		<%= a.label :city %>
+				<%= a.text_field(:city, :'data-tooltip' => 'Your current City') %>
+	   	</p>
+		
+			<p>
+        		<%= a.label :postal_code %>
+				<%= a.text_field(:zip_code, :'data-tooltip' => 'Your current Postal Code') %>
+	   	</p>
+		<%end%>
+		
+		<%= c.fields_for :phone_numbers do |p|%>
+			<p>
+				<%= p.label :phone %>
+				<%= p.text_field :number, :'data-tooltip' => 'Phone number where you could be contacted'%>
+	   	</p>
+		<%end%>
+		
+	<%end%>
+              
+   <h3 class="application-form">LOG IN INFORMATION </h3> 
+
+   <%= f.fields_for :contact do |c|%>
+   	<p>
+			<%= c.label :email %>
+			<%= c.text_field(:email, :'data-tooltip' => 'Email where you could be contacted') %>
+   	</p>
+	  
+		<p>
+			<%= c.label :confirm_email %>
+      	<%= c.text_field(:email_confirmation, :'data-tooltip' => 'Please confirm your email') %>
+		</p>
+	<%end%>
+   
+   <p>
+     <%= f.label :username %>
+     <%= f.text_field(:username, :'data-tooltip' => 'Username should include at least 8 characters')%>
+   </p>
+
+   <p>
+     <%= f.label :password %>
+     <%= f.password_field(:password, :'data-tooltip' => 'The password should have at least 8 characters') %>
+   </p>
+
+   <p>
+     <%= f.label :confirmation %>
+     <%= f.password_field :password_confirmation %>
+   </p>
+
+   <h3 class="application-form">CUSTOM INFORMATION </h3> 
+   	<%= f.fields_for :contact do |c|%>
+			<% Contact.for(@user).custom_fields.each do |cf| %>
+				<p>
+					<% if cf.data_type.to_s == 'boolean' %>
+						<%= c.label (cf.name.to_sym) %>
+						<%= c.send(cf.input_field, cf.name_as_sym, "Yes") %> Yes
+						<%= c.send(cf.input_field, cf.name_as_sym, "No") %> No
+					<% else %>
+						<%= c.label (cf.name.to_sym) %>
+						<%= c.send(cf.input_field, cf.name_as_sym) %>
+					<% end %>
+				</p>
+				<p class='custom_description'>
+					<%= cf.description %>
+				</p>
+			<% end %>
+		<% end %>
+
+		<%= with_permission(Omega::User::PERM_ADMIN) do %>
+			<h3 class="application-form">ROLES & PERMISSIONS </h3> 
+			<%= render 'role_assignments', :form => f %>
+		<%end%>
+
+		<% unless Contact.for(current_user).nil?%>
+		
+ 			<h2 class="application-form-content-heading">Newsletters</h2>
+
+			<%= f.fields_for :contact do |c|%>
+		
+				<br/>
+				<p>
+					<span class="checkbox-newsletter"> 
+	
+					<%= c.check_box :evergreen_news%>
+			    	Evergreen News <br/>
+					
+				
+					<%= c.check_box :evergreen_bw_news%>
+					Evergreen Brick Works News<br/>
+		
+				
+					<%= c.check_box :gta_volunteer_news%> 
+					Dig In! GTA (Volunteer News and Opportunities<br/>
+				
+				
+		 			<%= c.check_box :vancouver_volunteer_news%>
+					Dig In! Vancouver (Volunteer News and Opportunities	<br/>		
+		 
+						
+		 			<%= c.check_box :outdoor_classroom%> 
+				   The Outdoor Classroom (School Ground Greening Newsletter	<br/>	
+		
+					
+		 			<%= c.check_box :la_classe_en_plein_air%>
+					La classe en plein air (French edition of The Outdoor Classroom)	<br/>	
+		 
+				
+					<%= c.check_box :evergreen_funding_opp%> 
+				   Evergreen Funding Opportunities			<br/>
+		
+				
+		 			<%= c.check_box :evergreen_bw_school_program%> 
+					Evergreen Brick Works School Program	<br/>
+		
+				
+					<%= c.check_box :evergreen_bw_family_program%>
+					Evergreen Brick Works Family Programming	<br/>
+		 
+					
+				</span>
+			</p>
+		<%end%>	
+
+	<%end%>
+     
+
+		
+		
+
+    <p>
+    <%= om_button do %>
+        <%= f.submit "SAVE" %>
+    <% end %>
+    </p>
+
+<% end %>
+

@@ -1,0 +1,37 @@
+<% stylesheet_link_tag 'share.css' %>
+<% stylesheet_link_tag 'service.css' %>
+<% javascript_include_tag 'util.js' %>
+<% javascript_include_tag 'ui_util.js'%>
+<% javascript_include_tag 'service/form.js' %>
+<% javascript_include_tag 'service/form_builder.js' %>
+<% javascript_include_tag 'service/share.js' %>
+<% javascript_include_tag 'service/new.js' %>
+
+<!-- app-spec -->
+<div class="content circle-corners-bottom" >
+<!-- end app-spec -->
+
+  <!-- original
+  <div class="services_page_title">
+  -->
+  <!-- app-spec -->
+  <div class="heading-main">
+    <h1 class="page-content services_page_title">
+  <!-- end app-spec -->
+
+      <%= render "new_page_title" %>
+
+  <!-- app-spec -->
+    </h1>
+  <!-- end app-spec -->
+  </div>
+
+  <div class="services_page_content">
+    <%= render "services/new_page_content" %>
+  </div>
+
+<!-- app-spec -->
+</div>
+<!-- end app-spec -->
+
+<%= render "services/dialog_back_to_index_confirm" %>

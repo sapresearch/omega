@@ -1,0 +1,36 @@
+<div id="loginFailed">
+</div>
+
+<%= form_for Omega::Session.new, :remote => true, :'data-type' => 'json' do |f| %>
+<p>
+    
+      <%= f.label :user, :class => "login" %>
+      <%= f.text_field :username, :class => 'inputMid', :tabindex=>1 %>
+
+</p>
+
+<p>    
+    
+      <%= f.label :password, :class => "login" %>
+      <%= f.password_field :password, :class => 'inputMid', :tabindex=>1 %>
+
+</p>    
+
+<p class= "left-align">
+        <%= om_button(:icon => 'login') do %>
+       	 	<%= f.submit %>
+    	<% end %>
+</p>
+
+<p class="right-align">
+	
+	  <%= link_to 'Lost your username?', lost_username_path %> <br>
+  	  <%= link_to 'Lost your password?', lost_password_path %>
+	
+</p>
+
+
+
+
+
+<% end %>

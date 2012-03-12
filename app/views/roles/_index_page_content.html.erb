@@ -1,0 +1,28 @@
+<% javascript_include_tag 'matrix.js'%>
+
+<div id="roles_operation_links">
+  <div class="left" id="resotre_role_permission_associations_link">
+    <%= link_to_function "Restore Default",
+      "dialog_confirm('roles-restore-role-permission-associations-dialog-confirm',
+        'Restore Default Permission Settings', '<p>All current status will be lost and you will need to re-assign users to roles. Are you sure?</p>',
+        '#{restore_role_permission_associations_roles_url}', 'PUT', false, {}, {'width':380})",
+      :class=>"roles_operation_button" %>
+  </div>
+  
+  <div class="right" id="new_role_link">
+    <%= render "roles/new_link" %>
+  </div>
+  <script type="text/javascript">
+    $('.roles_operation_button').button({ icons: {primary:'ui-icon-gear'} });
+  </script>
+  <br clear="all"/>
+</div>
+
+<div id="role_permission">
+  <%= render "role_permission" %>
+</div>
+
+<%= will_paginate @roles %>
+
+
+

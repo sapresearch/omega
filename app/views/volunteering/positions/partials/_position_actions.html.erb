@@ -1,0 +1,60 @@
+<div class="position-actions" id="actions-<%= position.id %>" >
+  <%= with_permission(Omega::Volunteering::PERM_ADMIN) do %>
+      <%= om_button(:contact => true, :icon => 'delete') do %>
+          <%= link_to 'Delete', volunteering_position_path(position), :method=>:delete, :confirm => 'Delete this position?', :'data-tooltip' => 'Delete this position' %>
+          <%#= link_to 'Delete', :'data-tooltip' => 'Delete this position' %>
+
+      <% end %>
+      <%= om_button(:contact => true, :icon=>'edit') do %>
+          <%= link_to 'Edit', edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>
+      <% end %>
+      <%= om_button(:contact => true, :icon=>'clipboard-list ') do %>
+          <%= link_to 'Application History', history_volunteering_position_path(position), :'data-tooltip' => 'See all the applications for this position' %>
+      <% end %>
+  <% end %>
+
+       <%= with_permission(Omega::Volunteering::PERM_ADMIN) do %>
+          <%= om_button(:contact => true, :icon => 'clock') do %>
+              <%= link_to 'Log Hours', all_timesheets_volunteering_time_entries_url(:id => position, :'data-tooltip' => 'Log hours for this position') %>
+          <% end %>
+      <% end %>
+	  
+       <%= with_permission(Omega::Volunteering::PERM_APPLY) do %>
+       
+       <%unless Contact.for(current_user).nil?%>
+	   <% @application = Volunteering::Record.find_by_position_id_and_contact_id(position.id,Contact.for(current_user))%>
+		  <% if @application.nil?%>
+		  	<%= om_button(:contact => true, :icon => 'apply') do %>
+              <%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
+		  	<%end%>
+          <%end%>
+      <%end%>
+      <%end%>
+      <%= with_permission(Omega::Volunteering::PERM_ADMIN) do %>
+          <%= om_button(:contact => true, :icon => 'clock') do %>
+              <%#= link_to 'Enroll a Volunteer', new_volunteer_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>
+              <%= link_to 'Enroll a Volunteer', enroll_volunteers_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>
+              <%#= link_to 'Enroll a Volunteer', {} %>
+              
+          <% end %>
+	  <%end%> 
+	  
+	 <% if !current_user.is_anonymous? %>
+      <% if already_favorite?(position) %>
+        <%= with_permission(Omega::Volunteering::PERM_APPLY) do %>
+
+          <%= om_button(:contact => true, :icon => 'favorite-remove') do %>
+              <%= link_to('Remove from Favorites', favorite_path(position), :remote => true, :'data-method' => :post, :'data-tooltip' => 'Remove this position to your favorites') %>
+          <% end %>
+          
+        <%end%>
+      <% else %>
+          <%= om_button(:contact => true, :icon => 'favorite-add') do %>
+              <%= link_to('Add as Favorite', favorite_path(position), :remote => true, :'data-method' => :post,  :'data-tooltip' => 'Add this position to your favorites') %>
+          <% end %>
+      <% end %>
+      
+     <%end %>
+   
+	
+</div>

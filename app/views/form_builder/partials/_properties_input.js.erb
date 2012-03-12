@@ -1,0 +1,22 @@
+$('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "form_builder/partials/properties_input.html") %>').effect('highlight');
+
+        $('#edit-field-value').keyup(function() {
+            var v = $(this).val();
+            $("#<%="value-preview-#{@em_id}"%>").val(v);
+            $('#fields_<%="#{@em_id}"%>_value_attributes_field_value').val(v)
+
+        });
+        $('#edit-label-value').keyup(function() {
+
+            var v = $(this).val();
+            $('#fields_<%="#{@em_id}"%>_field_name_preview').empty().append(v);
+            $('#fields_<%="#{@em_id}"%>_field_name').val(v)
+
+        });
+
+        $('#edit-field-type').live(function() {
+
+            var v = $(this).val();
+            $('#fields_<%="#{@em_id}"%>_field_type').val(v)
+
+        });

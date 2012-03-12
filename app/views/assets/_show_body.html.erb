@@ -1,0 +1,28 @@
+<p><%= nl2br asset.description %></p>
+<br clear="all"/>
+
+<div class="asset_operation_links operation_links" >
+
+  <div class="left_links">
+    <p>
+    </p>
+  </div>
+
+  <div class="right_links">
+    <p>
+      <%= om_button(:contact => true, :icon=>'household-add') do %>
+        <%= link_to "Allocations", asset_allocations_url(:asset_id=>asset.id), "data-tooltip"=>"Allocate Assets" %>
+      <% end %>
+      
+      <%= om_button(:contact => true, :icon=>'edit') do %>
+        <%= link_to_function "Edit", "edit_asset('#{escape_javascript(render "dialog_edit_form_content", :asset=>asset)}')", "data-tooltip"=>"Edit this asset" %>
+      <% end %>
+
+      <%= om_button(:contact => true, :icon=>'delete-icon') do %>
+        <%= link_to_function "Delete", "destroy_asset('#{escape_javascript(render "dialog_destroy_confirm", :asset=>asset)}', '#{asset_url(asset)}')", "data-tooltip"=>"Delete this asset" %>
+      <% end %>
+    </p>
+  </div>
+
+</div>
+

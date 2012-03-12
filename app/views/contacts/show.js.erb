@@ -1,0 +1,35 @@
+$('#group-member-assign-groups-dialog-message').dialog('destroy').andSelf().remove();
+$('#contacts_contact_pane').empty().append('<%= escape_javascript(render(:partial => 'contacts/shared/contact_details')) %>');
+        $("#contact_accordion").accordion();
+        $('#contact-assignment').dialog({ autoOpen: false,
+            modal: true,
+            title: 'Assign Contacts',
+            height:400,
+            width:600
+        });
+        $('#assign-trigger').click(function() {
+            
+            $('#contact-assignment').dialog('open');
+        });
+
+        <% if request.post? %>
+        $('#contacts ul').append('<%= escape_javascript(render('contact_row', :contact_row => @contact)) %>');
+        <% elsif request.put? %>
+        $('#contact_<%= @contact.id %>').replaceWith('<%= escape_javascript(render('contact_row', :contact_row => @contact)) %>');
+        <% end %>
+
+
+
+$('#assign-trigger').click(function() {
+    $('#group-member-assign-groups-dialog-message').dialog({
+        modal: true,
+        width:"auto",
+        height:"auto",
+        buttons: {
+            OK: function() {
+                $(this).dialog( "close" );
+            }
+        }
+    });
+});
+

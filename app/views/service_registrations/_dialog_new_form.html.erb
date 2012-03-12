@@ -1,0 +1,12 @@
+<div id="service-registration-new-dialog-form" class="dialog" title="New Service Registration">
+  <% type ||= "non-admin" %>
+  <% if type == 'admin' %>
+    <%= render "service_registrations/select_registrant" %>
+  <% end %>
+  <p class="validateTips explanation">Colored fields are required.</p>
+  <form id="new_service_registration">
+    <ul class="service_customization_form">
+    </ul>
+  </form>
+</div>
+

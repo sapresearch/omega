@@ -1,0 +1,25 @@
+<%= context_box do %>
+<h1 class="page-content corners-top">
+ Pending  Applications
+</h1>
+<div class="page-content corners-bottom">
+<% if @records.empty? %>
+    <h2> No Pending Applications to Show!</h2>
+
+      <% else %>
+  <ul id="records-list" class="item-list">
+    <% @records.each do |a| %>
+        <%= render 'record_row', :record => a %>
+    <% end %>
+  </ul>
+      <%= will_paginate @records %>
+
+  <div class="clear"></div>
+<%end%>
+
+
+</div>
+<% content_for :sidebar do %>
+    <%= render :partial => "sidebar_records" %>
+<% end %>
+<% end %>

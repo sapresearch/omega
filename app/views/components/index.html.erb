@@ -1,0 +1,21 @@
+<h1>Listing components</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @components.each do |component| %>
+  <tr>
+    <td><%= link_to 'Show', [@page, component] %></td>
+    <td><%= link_to 'Edit', [:edit, @page, component] %></td>
+    <td><%= link_to 'Destroy', [@page, component], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Component', [:new, @page, :component] %>

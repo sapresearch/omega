@@ -1,0 +1,242 @@
+<!-- om_button is app-spec -->
+
+<!-- anytime jquery plugin -->
+<% require_stylesheet 'anytime.css' %>
+<% require_javascript 'anytime.js' %>
+<% require_javascript 'anytimetz.js' %>
+
+<!-- Skin CSS file -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/skin.css" />
+<!-- Utility Dependencies -->
+<script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script>
+<!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+<script src="http://yui.yahooapis.com/2.9.0/build/container/container_core-min.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/menu/menu-min.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/button/button-min.js"></script>
+<!-- Source file for Rich Text Editor-->
+<script src="http://yui.yahooapis.com/2.9.0/build/editor/editor-min.js"></script>
+
+<script type="text/javascript">
+  $(function() {
+    // jquery UI visual effects
+    $( "#tabs" ).tabs();
+    $( "#service_detail" ).sortable({
+	placeholder: "ui-state-highlight"
+    });
+    $( "#service_detail" ).disableSelection();
+    $( "#service_registration" ).sortable({
+	placeholder: "ui-state-highlight"
+    });
+    $( "#service_registration" ).disableSelection();
+
+    // set default environment
+    <% if @service_level == Service::LEAF_LEVEL %>
+      set_leaf_service_env();
+    <% else %>
+      set_branch_service_env();
+    <% end %>
+
+    //prevent submitting by press enter.
+    $('input').keypress(function(event) {
+      if( event.which == 13 ){
+         event.preventDefault();
+      }
+    });
+
+    set_service_detail_env();
+    check_field_exists();
+    preview_service_customization_info()
+  });
+
+  //global variables 
+  var service_leaf_level = '<%= Service::LEAF_LEVEL %>'
+  var service_branch_level = '<%= Service::BRANCH_LEVEL %>'
+  
+  // parse relative objects to json for client read process to avoid ajax
+  var services_with_detail_template = <%= raw @services_with_detail_template.to_json(:include=>{:service_detail_form=>{:only=>:html}}) %>
+  var services_with_registration_template = <%= raw @services_with_registration_template.to_json(:include=>{:service_registration_form=>{:only=>:html}}) %>
+  <% if @service.is_leaf? %>
+    var service_sections_count = <%= @service_sections.length %>;
+  <% end %>
+</script>
+
+<%= form_for(@service, :html=>{:class=>"service_form"}) do |form| %>
+
+  <div class="part edit_part" id="service_basic_info">
+    <h3 class="head">
+      Basic Information
+      <span class="service_right_links edit_links">
+        <%= om_button(:contact => true, :icon=>'edit') do %>
+          <%= link_to_function "Edit", "edit_service_basic_info()", "data-tooltip"=>"Edit Basic information" %>
+        <% end %>
+      </span>
+      <span class="service_right_links update_links">
+        <%= om_button(:contact => true, :icon=>'apply') do %>
+          <%= link_to_function "Preview", "preview_service_basic_info()", "data-tooltip"=>"Preview Basic information" %>
+        <% end %>
+      </span>
+    </h3>
+
+    <div class="show_body body">
+      <div class="field">
+        <span class="label"><strong>Name:</strong></span>
+        <span id="service_name_preview" class="value"><%= @service.name || blank_sign %></span>
+      </div>
+
+      <div class="field">
+        <span class="label"><strong>Description:</strong></span>
+        <span id="service_description_preview" class="value"><%= @service.description || blank_sign %></span>
+      </div>
+
+      <div class="field">
+        <span class="label"><strong>Belongs To:</strong></span>
+        <span id="super_service_preview" class="value"><%= @service.super_service ? @service.super_service.name : blank_sign("(none)") %></span>
+      </div>
+
+      <% if @service.is_leaf? %>
+        <div class="field service_leaf_specific">
+          <span class="label"><strong>Register Type:</strong></span>
+          <span id="service_register_type_preview" class="value"><%= @service.service_leaf.register_type || @service.default_register_type %></span>
+        </div>
+      
+        <div class="field service_leaf_specific">
+          <span class="label"><strong>Capacity:</strong></span>
+          <span id="service_capacity_preview" class="value"><%= @service.service_leaf.capacity || "unlimited" %></span>
+        </div>
+
+        <div class="field service_leaf_specific">
+          <span class="label"><strong>Price:</strong></span>
+          <span id="service_price_preview" class="value"><%= @service.service_leaf.price || 0 %></span>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="edit_body body">
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, :maxlength=>100, :size=>30, :'data-tooltip' => "Name of the service" %>
+      </div>      
+      
+      <div class="field">
+        <%= form.label :description %>
+        <%= form.text_area :description, :cols=>30, :rows=>3, :'data-tooltip' => "Describe the service" %>
+      </div>
+
+      <div class="field">
+        <% options = [["None",nil]].concat(Service.service_branches.map{|s|[s.name, s.id]}) %>
+        <% options.delete [@service.name, @service.id] %>
+        <% default_option_value = @service.super_service_id %>
+
+        <%= form.label :super_service_id, "Belongs To" %>
+        <% if @service.id %>
+          <%= form.select :super_service_id, options_for_select(options, default_option_value) %>
+        <% else %>
+          <%= form.select :super_service_id, options_for_select(options, default_option_value), {}, :onchange=>"set_super_service_env()" %>
+        <% end %>
+      </div>
+
+      <% if @service.is_leaf? %>
+        <div class="field service_leaf_specific">
+          <label for="service_type">Register Type</label>
+          <% options = [["Enrollable","enrollable"],["Requestable","requestable"]] %>
+          <% default_option_value = @service.service_leaf.register_type || @service.default_register_type %>
+          <%= select_tag :service_register_type, options_for_select(options, default_option_value) %>
+        </div>
+      
+        <div class="field service_leaf_specific">
+          <label for="service_capacity">Capacity</label>
+          <input id="service_capacity" class="capacity" maxlength="20" name="service_capacity" size="5" type="text" value="<%= @service.service_leaf.capacity || "unlimited" %>" data-tooltip="Size limit" />
+        </div>
+        <script type="text/javascript">
+          set_unlimited_non_negative_integer_field("service_capacity")
+        </script>
+
+        <div class="field service_leaf_specific">
+          <label for="service_price">Price</label>
+          <input id="service_price" class="price" maxlength="20" name="service_price" size="5" type="text" value="<%= @service.service_leaf.price || 0 %>" data-tooltip="Registration Fee" />
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+
+
+
+  <% if @service.is_leaf? %>
+    <div class="part show_part service_leaf_specific" id="service_section_info">
+      <h3 class="head">
+        Sections
+        <span class="service_right_links edit_links">
+          <%= om_button(:contact => true, :icon=>'edit') do %>
+            <%= link_to_function "Edit", "edit_service_section()", "data-tooltip"=>"Edit sections" %>
+          <% end %>
+        </span>
+        <span class="service_right_links update_links">
+          <%= om_button(:contact => true, :icon=>'apply') do %>
+            <%= link_to_function "Preview", "preview_service_section()", "data-tooltip"=>"Preview sections" %>
+          <% end %>
+        </span>
+      </h3>
+      
+      <div class="show_body body">
+        <% @service_sections.each_with_index do |service_section, i| %>
+          <%= render "service_sections/service_section", :service_section=>service_section, :i=>i %>
+        <% end %>
+      </div>
+
+      <div class="edit_body body">
+        <div id="service_section_form_list">
+          <% @service_sections.each_with_index do |service_section, i| %>
+            <%= render "service_sections/form", :service_section=>service_section, :i=>i  %>
+          <% end %>
+        </div>
+
+        <div class="new_links" id="new_service_section_link">
+          <%= render "service_sections/new_link", :index=>@service_sections.length %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+
+
+
+  <div class="part show_part" id="service_customization_info">
+    <h3 class="head">
+      Customizations
+      <span class="service_right_links edit_links">
+        <%= om_button(:contact => true, :icon=>'edit') do %>
+          <%= link_to_function "Edit", "edit_service_customization_info()", "data-tooltip"=>"Edit customization information" %>
+        <% end %>
+      </span>
+      <span class="service_right_links update_links">
+        <%= om_button(:contact => true, :icon=>'apply') do %>
+          <%= link_to_function "Preview", "preview_service_customization_info()", "data-tooltip"=>"Preview customization information" %>
+        <% end %>
+      </span>
+    </h3>
+    
+    <div class="show_body body">
+
+    </div>
+
+    <div class="edit_body body">
+      <div class="service_form_builder_view">
+        <%= render "services/form_builder_view" %>
+      </div>
+
+      <div class="service_form_builder_tools">
+        <%= render "services/form_builder_tools" %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.hidden_field :status %>
+  <%= hidden_field_tag :service_detail_html %>
+  <%= hidden_field_tag :service_detail_field_values %>
+  <%= hidden_field_tag :service_registration_html %>
+  <%#= hidden_field_tag :service_registration_field_values %> <!-- this might only be necessary when later in registration. Can be used to store default value -->
+  <%= hidden_field_tag :service_level %>
+
+<% end %>

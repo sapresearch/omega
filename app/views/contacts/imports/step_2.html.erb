@@ -1,0 +1,82 @@
+<% stylesheet_link_tag 'csv_import' %>
+<% javascript_include_tag 'import' %>
+
+<%= content_for :explanation do %>
+    <%= render :partial => 'contacts/partials/steps' %>
+<% end %>
+
+<%- title "Omega Contacts - Import Wizard: Step 2" %>
+
+
+  <div class="content circle-corners-bottom-left">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+					Choose/Upload CSV File for Import - Step (2/4)
+
+		    	</h1>
+	
+		</div>
+
+  <%= form_for @import, :html => { :multipart => true } do |f| %>
+
+  <p>
+    <br/>
+    <strong> Browse Data File <br/>
+    <%= f.file_field :csv %> <br/>
+    <br/>
+    Choose Data Type </strong> <br/>
+    <%= f.select :datatype, %w{contacts}%> <br/>
+
+  </p>
+
+  <div class="error_messages">
+    <br/>
+    <br/>
+    <% unless session[:errors].nil?  %>
+      <h2> Oops! Following errors prohibited you from proceeding to the next step:</h2>
+      <p>
+        <% session[:errors].each do |e| %>
+         &nbsp;<%= e %><br/>
+      <%end%>
+      </p>
+
+  <%end%>
+
+  </div>
+
+  <p>
+    <br/>
+
+    <%= om_button(:icon=>'cancel') do %>
+       <%= f.submit "Upload", :name => "upload" %>
+    <%end%>
+
+    <% if session[:last_page] == 'mapping'  %>
+    <%= om_button(:icon=>'next') do %>
+        <%= f.submit "Continue", :name => "next" %>
+    <%end%>
+    <%end%>
+
+    <%= om_button(:icon=>'back') do %>
+        <%= link_to 'Back', csv_import_wizard_contact_imports_url(:step => '1')%>
+        <% session[:errors] = nil %>
+    <%end%>
+
+  </p>
+<% end %>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

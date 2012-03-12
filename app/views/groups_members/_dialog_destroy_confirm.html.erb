@@ -1,0 +1,11 @@
+<div id="group-member-destroy-dialog-confirm" class="dialog" title="Quit Group">
+  <p>
+    <% member ||= nil %>
+    <% unless member.nil? %>
+      <span class="label">Member:</span>
+      <span class="value"><strong><%= member.name %></strong></span>
+      <br/>
+    <% end %>
+    Are you sure to quit <strong class="italic"><%= group.name %></strong>?
+  </p>
+</div>

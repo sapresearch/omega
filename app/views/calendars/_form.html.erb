@@ -1,0 +1,13 @@
+<%= form_for(@calendar,:remote => true) do |f| %>
+
+  <p>
+    <%= f.label :calendar_name %>
+    <%= f.text_field :calendar_name %>
+  </p>
+
+
+
+ <%= om_button(:icon => 'save') do %>
+                      <%= f.submit %>
+                  <% end %>
+<% end %>

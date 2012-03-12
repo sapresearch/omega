@@ -1,0 +1,25 @@
+<% stylesheet_link_tag 'omega_volunteering' %>
+
+
+    <div class="content circle-corners-bottom  corners-top">
+    	
+		<div class="heading-main">
+	
+				<h1 class="page-content">
+      				My Applications
+		    	</h1>
+	
+		</div>
+		
+
+ <div class="main-box">
+  <ul id="records-list" class="item-list">
+    <% if @records.empty? %>
+        	<span class="text-style1">No Applications to Show! Apply for a Volunteering Opportunity Now! </span>
+    <% end %>
+    <% @records.each do |a| %>
+        <%= render 'user_applications', :record => a %>
+    <% end %>
+  </ul>
+  </div>
+</div>

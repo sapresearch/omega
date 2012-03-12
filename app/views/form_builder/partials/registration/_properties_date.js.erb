@@ -1,0 +1,22 @@
+$('#admin-edit-em').empty().append('<%= escape_javascript( render :partial => "form_builder/partials/registration/properties_date.html") %>').effect('highlight');
+
+        $('#ui-em-<%="#{@em_id}"%>').append('<input type="hidden" value="Registration Details" name="fields[<%="#{@em_id}"%>][field_category]" >');
+
+
+        $('#edit-label-value').keyup(function() {
+
+            var v = $(this).val();
+            $('#fields_<%="#{@em_id}"%>_field_name_preview').empty().append(v);
+            $('#fields_<%="#{@em_id}"%>_field_name').val(v)
+
+        });
+
+
+                $('.datepicker').datepicker({
+            onSelect: function(dateText, inst) {
+            $("#<%="value-preview-#{@em_id}"%>").val(dateText);
+            $('#fields_<%="#{@em_id}"%>_value_attributes_field_value').val(dateText)
+            }
+        });
+        
+       

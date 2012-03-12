@@ -1,0 +1,74 @@
+$('body').append('<%= escape_javascript(render 'form', :event => @event, :calendar => @calendar) %>');
+  $('#new_calendar_event').dialog({
+            autoOpen    : true,
+            width       : 800,
+            height      : 700,
+            title       : 'Create a new event',
+            close       :function(){
+                $(this).dialog('destroy');
+                $('#new_calendar_event').remove();
+            }
+        });
+
+
+        $('#calendar_event_start_date').val($('#cal').data('day_data'));
+        $('#calendar_event_end_date').val($('#cal').data('day_data'));
+
+if($('#calendar_event_all_day').is(':checked')){
+     $('#non-recurrent').find('.tpickr').hide();
+}
+        $('#calendar_event_all_day').change(function(){
+            if($(this).is(':checked')){
+
+                $('#non-recurrent').find('.tpickr').hide();
+            }else{
+               $('#non-recurrent').find('.tpickr').show();
+            }
+});
+
+
+$('#new_calendar_event').find('.datepickr').datepicker({
+    dateFormat: 'yy-mm-dd',
+    showButtonPanel: true,
+    changeMonth: true,
+    changeYear: true
+});
+
+        $('#new_calendar_event').find('.tpickr').timepicker();
+
+$('#new_calendar_event').find('span.increase').click(function() {
+    var ipt = $(this).next('input');
+    if (ipt.val() == '') {
+
+        ipt.val(1)
+    } else {
+        var curval = parseFloat(ipt.val());
+        ipt.val(curval + 1)
+    }
+});
+$('#new_calendar_event').find('span.decrease').click(function() {
+    var ipt = $(this).prev('input');
+    var curval = parseFloat(ipt.val());
+    if (curval > 1) ipt.val(curval - 1);
+});
+
+        
+
+$('#scheduler-pattern').find('input').change(function() {
+    var pattern = '#schedule-' + $(this).val();
+    $('#schedule').find('div.schedules:visible').hide();
+    $(pattern).show();
+});
+
+$('#scheduler-trigger').click(function() {
+    $(this).find('span.scheduler-text').toggle();
+    $('#scheduler,#non-recurrent').toggle();
+    var rec = $('#calendar_event_recurrent');
+    (rec.val() == 1 ) ? rec.val(0) : rec.val(1);
+});
+        $('#scheduler').find('input[type="text"]').focusin(function(){
+
+          $(this).prevAll('input[type="radio"]').attr('checked',true)
+        }).end().find('select').change(function(){
+          $(this).prevAll('input[type="radio"]').attr('checked',true)
+        });

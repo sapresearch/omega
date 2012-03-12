@@ -1,0 +1,27 @@
+<% stylesheet_link_tag 'report.css' %>
+<% javascript_include_tag 'https://www.google.com/jsapi' %>
+<% javascript_include_tag 'util.js' %>
+<% javascript_include_tag 'report.js' %>
+
+<script type="text/javascript">
+  google.load('visualization', '1', {packages:['table','gauge']});
+  $(function() { 
+    $("#li_<%= session[:report_partial_name] %>").attr("class","li_selected_report")
+  });
+</script>
+
+<div id="report_menu">
+  <%= render "menu" %>
+</div>
+<div id="report_submenu">
+  <%#= render "submenu" %>
+</div>
+
+<div id="report_content">
+  <%= render session[:report_partial_name] %>
+</div>
+
+<div id="report_print">
+  <%= render "print" %>
+</div>
+

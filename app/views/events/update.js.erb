@@ -1,0 +1,5 @@
+$('#edit_calendar_event_<%= @event.id %>').parents('.ui-dialog').andSelf().remove();
+
+        var cal = $('#cal').data('fullCalendar')
+        cal.removeEvents(<%= @event.id %>)
+cal.renderEvent(<%= @event.to_json.html_safe %>,true)
