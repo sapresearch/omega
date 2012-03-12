@@ -1,4 +1,3 @@
-module Omega
 	class Contact
 	  class UserObserver < ActiveRecord::Observer
 	    observe 'Omega::User'
@@ -26,4 +25,3 @@ module Omega
 	  end
 	end
 	
-end

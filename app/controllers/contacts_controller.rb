@@ -1,4 +1,3 @@
-module Omega
 	class ContactsController < Controller
 	  respond_to :html, :xml, :js, :json
 	  #sub_layout :determine_sub_layout
@@ -129,4 +128,3 @@ module Omega
 	      end
 	    end
 	end
-end

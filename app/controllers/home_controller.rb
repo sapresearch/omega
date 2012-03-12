@@ -1,4 +1,3 @@
-module Omega
 	class HomeController < Controller
 	  respond_to :html
 	
@@ -16,4 +15,3 @@ module Omega
 	    respond_with(@positions, @events)
 	  end
 	end
-end

@@ -1,4 +1,3 @@
-module Omega
 	class Volunteering::Schedule < Model
 	
 	  belongs_to :position
@@ -9,4 +8,3 @@ module Omega
 	  validates_presence_of :schedule_type
 	
 	end
-end

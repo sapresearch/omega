@@ -1,4 +1,3 @@
-module Omega
 	module MyPageHelper
 	
 		def tag_table_for(array, &block)
@@ -16,4 +15,3 @@ module Omega
 		end
 	
 	end
-end

@@ -1,4 +1,3 @@
-module Omega
 	class Volunteering::ContactPosition < Model
 	
 	  belongs_to :contact
@@ -6,4 +5,3 @@ module Omega
 	  
 	
 	end
-end

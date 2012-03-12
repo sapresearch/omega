@@ -1,4 +1,3 @@
-module Omega
 	require 'digest/sha2'
 	
 	class User < Model
@@ -151,4 +150,3 @@ module Omega
 	      new_record? or password_changed?
 	    end
 	end
-end

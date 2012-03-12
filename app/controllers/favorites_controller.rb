@@ -1,4 +1,3 @@
-module Omega
 	class FavoritesController < Controller
 	  respond_to :html, :js, :xml, :json
 	
@@ -43,4 +42,3 @@ module Omega
 	      @model ||= klass.find(params[:id])
 	    end
 	end
-end

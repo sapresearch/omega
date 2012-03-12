@@ -1,4 +1,3 @@
-module Omega
 	class Contact::Field < Model
 		has_many :values
 		has_and_belongs_to_many :volunteering_positions, :class_name => '::Volunteering::Position',
@@ -50,4 +49,3 @@ module Omega
 		end
 	
 	end
-end

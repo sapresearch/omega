@@ -1,4 +1,3 @@
-module Omega
 	class EmailValidator < ActiveModel::EachValidator
 	  def validate_each(record, attribute, value)
 	    unless value =~ /\A(.*)@(.*)\.(.*)\Z/
@@ -6,4 +5,3 @@ module Omega
 	    end
 	  end
 	end
-end

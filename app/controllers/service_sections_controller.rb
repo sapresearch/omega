@@ -1,4 +1,3 @@
-module Omega
 	class ServiceSectionsController < Controller
 	
 	  def new
@@ -9,4 +8,3 @@ module Omega
 	
 	end
 	
-end

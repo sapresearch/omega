@@ -1,4 +1,3 @@
-module Omega
 	module FavoritesHelper
 	  def link_to_favorite(favorite)
 	    link_to(favorite.item_text, polymorphic_path(favorite.item))
@@ -44,4 +43,3 @@ module Omega
 	      Favorite.of(current_user).for(model).any?
 	    end
 	end
-end

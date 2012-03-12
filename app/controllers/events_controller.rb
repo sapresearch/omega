@@ -1,4 +1,3 @@
-module Omega
 	class EventsController < Controller
 	
 	  respond_to :html, :xml, :js, :json
@@ -48,4 +47,3 @@ module Omega
 	      @calendar = Calendar.find(params[:calendar_id])
 	    end
 	end
-end

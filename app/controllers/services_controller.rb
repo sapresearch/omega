@@ -1,4 +1,3 @@
-module Omega
 	class ServicesController < Controller
 	
 	  require_dependency "application_lib.rb"
@@ -290,4 +289,3 @@ module Omega
 	  end
 	
 	end
-end

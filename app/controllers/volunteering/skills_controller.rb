@@ -1,4 +1,3 @@
-module Omega
 	class Volunteering::SkillsController < Controller
 	  respond_to :html, :json
 	
@@ -12,4 +11,3 @@ module Omega
 	    end
 	  end
 	end
-end

@@ -1,4 +1,3 @@
-module Omega
 	class Session < Model
 	  PERM_ADMIN = 'sessions_admin'
 	  PERM_VIEW  = 'sessions_view'
@@ -26,4 +25,3 @@ module Omega
 	    end
 	  end
 	end
-end

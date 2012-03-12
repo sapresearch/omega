@@ -1,4 +1,3 @@
-module Omega
 	class Contact::DataImport < Model
 	
 	  serialize :csv_rows
@@ -8,4 +7,3 @@ module Omega
 	  serialize :mapping
 	  
 	end
-end

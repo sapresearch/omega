@@ -1,4 +1,3 @@
-module Omega
 	class Contact::Group < Model
 	  GROUP_TYPES = %w{Household Organization}
 	
@@ -22,4 +21,3 @@ module Omega
 	  scope :named, lambda { |name| where('name like ? ', "%#{name}%") }
 	
 	end
-end

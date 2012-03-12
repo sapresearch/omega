@@ -1,4 +1,3 @@
-module Omega
 	class UsersController < Controller
 	  respond_to :html, :xml, :js, :json
 	  ##crud_helper User
@@ -203,4 +202,3 @@ module Omega
 		end
 	
 	end
-end

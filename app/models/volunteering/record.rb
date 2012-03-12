@@ -1,4 +1,3 @@
-module Omega
 	class Volunteering::Record < Model
 	
 	  MAX_RECORDS_PER_PAGE = 100
@@ -57,4 +56,3 @@ module Omega
 		end
 	
 	end
-end

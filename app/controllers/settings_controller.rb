@@ -1,4 +1,3 @@
-module Omega
 	class SettingsController < Controller
 	
 	
@@ -31,4 +30,3 @@ module Omega
 		end
 	
 	end
-end

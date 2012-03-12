@@ -1,4 +1,3 @@
-module Omega
 	class Post < Model
 	  has_one :topic, :dependent=>:destroy 
 	  has_many :sub_posts, :class_name=>"Post", :foreign_key => "super_post_id", :dependent=>:destroy
@@ -34,4 +33,3 @@ module Omega
 	    super_post.nil?
 	  end
 	end
-end

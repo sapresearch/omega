@@ -1,4 +1,3 @@
-module Omega
 	module BreadcrumbsHelper
 	  def breadcrumbs
 	    controller.breadcrumbs.collect do |text, url|
@@ -6,4 +5,3 @@ module Omega
 	    end.join(render('shared/breadcrumb_spacer')).html_safe
 	  end
 	end
-end

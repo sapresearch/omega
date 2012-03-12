@@ -1,4 +1,3 @@
-module Omega
 	class PagesController < Controller
 	  respond_to :html
 	  before_filter :get_page, :only => [:show, :edit, :update, :destroy]
@@ -46,4 +45,3 @@ module Omega
 	      end
 	    end
 	end
-end

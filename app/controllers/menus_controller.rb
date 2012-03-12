@@ -1,4 +1,3 @@
-module Omega
 	module Omega
 	class MenusController < Controller
 	  # GET /menus
@@ -84,4 +83,3 @@ module Omega
 	  end
 	end
 	end
-end

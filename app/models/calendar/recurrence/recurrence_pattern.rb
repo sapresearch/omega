@@ -1,4 +1,3 @@
-module Omega
 	class Calendar
 	  module Recurrence
 	    class RecurrencePattern
@@ -63,4 +62,3 @@ module Omega
 	    end
 	  end
 	end
-end

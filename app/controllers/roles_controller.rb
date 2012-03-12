@@ -1,4 +1,3 @@
-module Omega
 	class RolesController < Controller
 	  respond_to :html, :xml, :js, :json
 	  breadcrumb 'Roles' => :roles
@@ -119,4 +118,3 @@ module Omega
 	 
 	end
 	
-end

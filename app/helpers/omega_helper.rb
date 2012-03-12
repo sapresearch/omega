@@ -1,4 +1,3 @@
-module Omega
 	module OmegaHelper
 	include ActionView::Helpers::UrlHelper
 
@@ -20,4 +19,3 @@ module Omega
 		#end
 
 	end
-end

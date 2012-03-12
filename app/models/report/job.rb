@@ -1,4 +1,3 @@
-module Omega
 	class Report::Job
 	  attr_accessor :position_name, :hour, :employee_name
 	
@@ -9,4 +8,3 @@ module Omega
 	  end
 	  
 	end
-end

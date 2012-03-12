@@ -1,4 +1,3 @@
-module Omega
 	class Group < Model
 	  PERM_ADMIN = 'groups_admin'
 	  PERM_VIEW  = 'groups_view'
@@ -170,4 +169,3 @@ module Omega
 	
 	
 	
-end

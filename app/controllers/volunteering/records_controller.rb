@@ -1,4 +1,3 @@
-module Omega
 	require 'filter.rb'
 	class Volunteering::RecordsController < Controller
 	  respond_to :html, :xml, :json, :js
@@ -290,4 +289,3 @@ module Omega
 		end
 	
 	end
-end

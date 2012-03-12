@@ -1,4 +1,3 @@
-module Omega
 	class Calendar
 	  module Recurrence
 	    extend ActiveSupport::Concern
@@ -296,4 +295,3 @@ module Omega
 	      end
 	  end
 	end
-end

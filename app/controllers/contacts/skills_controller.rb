@@ -1,4 +1,3 @@
-module Omega
 	class Contacts::SkillsController < Controller
 	  respond_to :html, :xml, :json
 	  #crud_helper Contact::Skill
@@ -57,4 +56,3 @@ module Omega
 	    respond_with(@contact_skill)
 	  end
 	end
-end

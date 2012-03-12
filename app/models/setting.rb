@@ -1,4 +1,3 @@
-module Omega
 	class Setting < Model
 		belongs_to :user
 		attr_accessible :facebook_token, :twitter, :user_id, :email
@@ -36,4 +35,3 @@ module Omega
 	end
 	
 	end
-end

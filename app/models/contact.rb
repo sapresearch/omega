@@ -1,4 +1,3 @@
-module Omega
 	class Contact < Model
 	  self.table_name = 'contacts'
 	  
@@ -261,4 +260,3 @@ module Omega
 	      !user.nil?
 	    end
 	end
-end

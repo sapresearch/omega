@@ -1,4 +1,3 @@
-module Omega
 	class ServiceLeaf < Model
 	  belongs_to :service
 	  has_many :service_registrations, :dependent => :destroy
@@ -85,4 +84,3 @@ module Omega
 	  alias_method :next_service_section, :next_section
 	
 	end
-end

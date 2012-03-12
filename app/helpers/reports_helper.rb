@@ -1,4 +1,3 @@
-module Omega
 	module ReportsHelper
 	
 	  REPORT_HEADLINE = "Omega Report"
@@ -73,4 +72,3 @@ module Omega
 	  end
 	end
 	
-end

@@ -1,4 +1,3 @@
-module Omega
 	require 'filter.rb'
 	module SearchHelper
 	
@@ -369,4 +368,3 @@ module Omega
 		end
 		
 	end
-end

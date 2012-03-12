@@ -1,4 +1,3 @@
-module Omega
 	class Upload < Model
 		self.table_name = :uploads
 
@@ -9,4 +8,3 @@ module Omega
 	  has_many :groups_uploads, :dependent=>:destroy
 	  has_many :groups, :through=>:group_uploads
 	end
-end

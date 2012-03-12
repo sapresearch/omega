@@ -1,4 +1,3 @@
-module Omega
 	class Contact::PhoneNumber < Model
 		NUMBER_TYPES = %w{Home Business Cell}
 	
@@ -20,4 +19,3 @@ module Omega
 		end
 	
 	end
-end

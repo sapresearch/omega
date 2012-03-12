@@ -1,4 +1,3 @@
-module Omega
 	class Array
 	
 	  def safe_transpose
@@ -14,4 +13,3 @@ module Omega
 	
 	end
 	
-end

@@ -1,4 +1,3 @@
-module Omega
 	module Volunteering
 	  extend ActiveSupport::Autoload
 	  
@@ -15,4 +14,3 @@ module Omega
 	  
 	  def self.table_name_prefix() 'volunteering_' end
 	end
-end

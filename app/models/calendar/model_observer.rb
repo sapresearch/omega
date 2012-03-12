@@ -1,4 +1,3 @@
-module Omega
 	class Calendar
 	  class ModelObserver < ActiveRecord::Observer
 	    observe Omega::Model
@@ -36,4 +35,3 @@ module Omega
 	      end
 	  end
 	end
-end

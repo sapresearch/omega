@@ -1,4 +1,3 @@
-module Omega
 	class GroupsMembersController < Controller
 	
 	  require_dependency "application_lib.rb"
@@ -137,4 +136,3 @@ module Omega
 	  end
 	
 	end
-end

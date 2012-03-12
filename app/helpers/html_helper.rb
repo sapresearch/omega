@@ -1,4 +1,3 @@
-module Omega
 	module HtmlHelper
 	  # indentation helpers
 	  def i(content)
@@ -110,4 +109,3 @@ module Omega
 	
 	
 	end
-end

@@ -1,4 +1,3 @@
-module Omega
 	class Favorite < Model
 	  self.table_name = 'favorites'
 	  belongs_to :user
@@ -14,4 +13,3 @@ module Omega
 	    item.respond_to?(:favorite_text) ? item.favorite_text : item.to_s
 	  end
 	end
-end

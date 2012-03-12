@@ -1,4 +1,3 @@
-module Omega
 	class Volunteering::TimeEntry::Day < Model
 	
 	  belongs_to :time_entry
@@ -11,4 +10,3 @@ module Omega
 	
 	  
 	end
-end

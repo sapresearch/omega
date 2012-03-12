@@ -1,4 +1,3 @@
-module Omega
 	class Calendar
 	  module Recurrence
 	    class OrdinalRow
@@ -26,4 +25,3 @@ module Omega
 	    end
 	  end
 	end
-end

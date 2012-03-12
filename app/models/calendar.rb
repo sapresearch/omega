@@ -1,4 +1,3 @@
-module Omega
 	class Calendar < Model
 	  require_dependency 'omega/calendar/event'
 	  require_dependency 'omega/calendar/event_source'
@@ -12,4 +11,3 @@ module Omega
 	  belongs_to :user
 	  has_many :shares
 	end
-end

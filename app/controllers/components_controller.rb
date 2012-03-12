@@ -1,4 +1,3 @@
-module Omega
 	class ComponentsController < Controller
 	  before_filter :get_parent
 	
@@ -97,4 +96,3 @@ module Omega
 	      end
 	    end
 	end
-end

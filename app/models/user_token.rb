@@ -1,4 +1,3 @@
-module Omega
 	require 'digest/md5'
 	
 	class UserToken < Model
@@ -17,4 +16,3 @@ module Omega
 	      self.token = Digest::MD5.hexdigest("#{user.username}-#{user.email}-#{Time.now.to_i}")
 	    end
 	end
-end

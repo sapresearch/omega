@@ -1,4 +1,3 @@
-module Omega
 	class ServiceRegistration < Model
 	  # app-spec
 	  belongs_to :registrant, :class_name=>"Contact"
@@ -46,4 +45,3 @@ module Omega
 	  end
 	
 	end
-end

@@ -1,4 +1,3 @@
-module Omega
   class Controller < ApplicationController
  #    include Omega::Errors::Handler
 
@@ -21,4 +20,3 @@ module Omega
 
     ##breadcrumb 'Omega' => :root
   end
-end

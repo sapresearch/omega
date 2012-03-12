@@ -1,4 +1,3 @@
-module Omega
 	class Contacts::GroupsController < Controller
 	  respond_to :html, :xml, :js, :json
 	  #sub_layout :determine_sub_layout
@@ -87,4 +86,3 @@ module Omega
 	      @contact_groups = Contact::Group.scoped
 	    end
 	end
-end

@@ -1,4 +1,3 @@
-module Omega
 	class MessagesController < Controller
 	  respond_to :html, :js
 	
@@ -114,4 +113,3 @@ module Omega
 	    breadcrumb "New" => new_message_path
 	  end
 	end
-end

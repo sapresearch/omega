@@ -1,4 +1,3 @@
-module Omega
 	class AssetAllocationsController < Controller
 	  require "util.rb"
 	
@@ -69,4 +68,3 @@ module Omega
 	  end
 	  
 	end
-end

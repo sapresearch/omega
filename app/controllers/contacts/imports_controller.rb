@@ -1,4 +1,3 @@
-module Omega
 	require 'csv'
 	require 'iconv'
 	
@@ -447,4 +446,3 @@ module Omega
 	    }
 	  end
 	end
-end

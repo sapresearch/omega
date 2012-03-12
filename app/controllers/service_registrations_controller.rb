@@ -1,4 +1,3 @@
-module Omega
 	class ServiceRegistrationsController < Controller
 	
 	  require "application_lib.rb"
@@ -117,4 +116,3 @@ module Omega
 	  end
 	  
 	end
-end

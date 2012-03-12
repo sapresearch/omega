@@ -1,4 +1,3 @@
-module Omega
 	class SessionsController < Controller
 	  respond_to :html, :xml, :json, :js
 	
@@ -70,4 +69,3 @@ module Omega
 	      @current_user = user
 	    end
 	end
-end

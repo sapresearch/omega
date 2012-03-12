@@ -1,4 +1,3 @@
-module Omega
 	class BlocksController < Controller
 	  # GET /blocks
 	  # GET /blocks.xml
@@ -82,4 +81,3 @@ module Omega
 	    end
 	  end
 	end
-end

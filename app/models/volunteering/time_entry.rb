@@ -1,4 +1,3 @@
-module Omega
 	class Volunteering::TimeEntry < Model
 	
 		belongs_to :record
@@ -19,4 +18,3 @@ module Omega
 		end
 	
 	end
-end

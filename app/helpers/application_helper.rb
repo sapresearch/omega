@@ -1,4 +1,3 @@
-module Omega
   module ApplicationHelper
 	  def sub_layout
 	    controller.sub_layout
@@ -18,4 +17,3 @@ module Omega
 	  end
 	  
   end
-end

@@ -1,4 +1,3 @@
-module Omega
 	class Contact::Address < Model
 	  ADDRESS_TYPES = %w{Home Work}
 	
@@ -19,4 +18,3 @@ module Omega
 			end
 		end
 	end
-end

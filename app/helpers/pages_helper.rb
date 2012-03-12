@@ -1,4 +1,3 @@
-module Omega
 	module PagesHelper
 	  def current_page_path
 	    current = url_for(params)
@@ -8,4 +7,3 @@ module Omega
 	    page_path(current)
 	  end
 	end
-end

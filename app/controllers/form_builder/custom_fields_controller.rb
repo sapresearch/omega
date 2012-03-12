@@ -1,4 +1,3 @@
-module Omega
 	module FormBuilder
 	  class CustomFieldsController < Controller
 	    respond_to :html, :js
@@ -8,4 +7,3 @@ module Omega
 	    end
 	  end
 	end
-end

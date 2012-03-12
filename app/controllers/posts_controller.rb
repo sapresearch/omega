@@ -1,4 +1,3 @@
-module Omega
 	class PostsController < Controller
 	
 	  require_dependency "application_lib.rb"
@@ -41,4 +40,3 @@ module Omega
 	  end
 	
 	end
-end

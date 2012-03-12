@@ -1,4 +1,3 @@
-module Omega
 	class Message < Model
 	  self.table_name = 'messages'
 	
@@ -56,4 +55,3 @@ module Omega
 	    end
 	  end
 	end
-end

@@ -1,4 +1,3 @@
-module Omega
 	module NestedHelper
 	  REJECT_TEMPLATE = lambda { |v| v.key?('_template') }
 	
@@ -43,4 +42,3 @@ module Omega
 	      end
 	    end
 	end
-end

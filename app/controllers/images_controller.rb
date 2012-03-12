@@ -1,4 +1,3 @@
-module Omega
 	class ImagesController < Controller
 	  respond_to :html
 	  
@@ -37,4 +36,3 @@ module Omega
 	    redirect_to :root
 	  end
 	end
-end

@@ -1,4 +1,3 @@
-module Omega
 	class Image < Model
 		self.table_name = 'images'
 		attr_accessible :banner_or_logo
@@ -26,4 +25,3 @@ module Omega
 			Image.find(Image.get_last_id)
 		end
 	end
-end

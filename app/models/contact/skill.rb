@@ -1,4 +1,3 @@
-module Omega
 	class Contact::Skill < Model
 		has_and_belongs_to_many :contacts, :join_table => 'contact_contacts_skills'
 		has_and_belongs_to_many :users, :join_table => 'contact_skills_users'
@@ -8,4 +7,3 @@ module Omega
 	                   :uniqueness => true#,
 	#                   :contact_skill => true
 	end
-end

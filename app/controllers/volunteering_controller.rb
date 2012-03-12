@@ -1,4 +1,3 @@
-module Omega
 	class VolunteeringController < Controller
 	  require_permission Volunteering::PERM_VIEW
 	
@@ -6,4 +5,3 @@ module Omega
 	
 	  end
 	end
-end

@@ -1,4 +1,3 @@
-module Omega
 	class Topic < Model
 	  belongs_to :post, :dependent=>:destroy
 	
@@ -41,4 +40,3 @@ module Omega
 	  end
 	
 	end
-end

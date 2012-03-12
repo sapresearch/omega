@@ -1,4 +1,3 @@
-module Omega
   class Model < ActiveRecord::Base
     self.abstract_class = true
 		include ::TableNameSpace
@@ -67,4 +66,3 @@ module Omega
         valid
     end
   end
-end

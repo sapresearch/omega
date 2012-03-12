@@ -1,4 +1,3 @@
-module Omega
 	class AssetsController < Controller
 	
 	  respond_to :html, :xml, :js, :json
@@ -43,4 +42,3 @@ module Omega
 	  end
 	
 	end
-end

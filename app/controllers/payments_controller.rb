@@ -1,4 +1,3 @@
-module Omega
 	class PaymentsController < Controller
 	
 	  require "application_lib.rb"
@@ -90,4 +89,3 @@ module Omega
 	    render :nothing => true
 	  end
 	end
-end

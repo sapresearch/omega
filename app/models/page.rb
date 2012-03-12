@@ -1,4 +1,3 @@
-module Omega
 	class Page < Model
 	  has_many :page_blocks
 	  has_many :blocks, :through => :page_blocks
@@ -10,4 +9,3 @@ module Omega
 	    path
 	  end
 	end
-end

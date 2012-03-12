@@ -1,4 +1,3 @@
-module Omega
 	class Asset < Model
 	  require 'util.rb'
 	  
@@ -24,4 +23,3 @@ module Omega
 	  
 	end
 	
-end

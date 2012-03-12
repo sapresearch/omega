@@ -1,4 +1,3 @@
-module Omega
 	class UploadsController < Controller
 	  respond_to :html, :json
 	  
@@ -105,4 +104,3 @@ module Omega
 	    
 	  end
 	end
-end

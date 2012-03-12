@@ -1,4 +1,3 @@
-module Omega
 	class Component < Model
 	end
 	
@@ -7,4 +6,3 @@ module Omega
 	    superclass.model_name
 	  end
 	end
-end

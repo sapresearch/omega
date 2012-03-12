@@ -1,4 +1,3 @@
-module Omega
 	class Calendar
 	  class Event < Model
 	    self.table_name = 'calendar_events'
@@ -88,4 +87,3 @@ module Omega
 	      end
 	  end
 	end
-end

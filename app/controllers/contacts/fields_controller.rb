@@ -1,4 +1,3 @@
-module Omega
 	class Contacts::FieldsController < Controller
 	
 		def new
@@ -33,4 +32,3 @@ module Omega
 		end
 			
 	end
-end

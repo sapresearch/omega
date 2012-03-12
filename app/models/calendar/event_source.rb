@@ -1,4 +1,3 @@
-module Omega
 	class Calendar::EventSource < Model
 	  class << self
 	    def for(source)
@@ -16,4 +15,3 @@ module Omega
 	    super || Hash.new
 	  end
 	end
-end

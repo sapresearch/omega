@@ -1,4 +1,3 @@
-module Omega
 	class Volunteering::PositionsController < Controller
 	  respond_to :html, :xml, :json, :js
 	  require 'zipcodr'
@@ -259,4 +258,3 @@ module Omega
 	  end
 	
 	end
-end

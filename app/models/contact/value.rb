@@ -1,4 +1,3 @@
-module Omega
 	class Contact::Value < Model
 		has_one :contact
 		has_one :field
@@ -24,4 +23,3 @@ module Omega
 		end
 	
 	end
-end

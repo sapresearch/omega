@@ -1,4 +1,3 @@
-module Omega
 	class Role < Model
 	  self.table_name = 'roles'
 	  PERM_ADMIN = 'roles_admin'
@@ -85,4 +84,3 @@ module Omega
 	
 	
 	
-end

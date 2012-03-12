@@ -1,4 +1,3 @@
-module Omega
 	class Service < Model
 	  require 'util.rb'
 	  
@@ -402,4 +401,3 @@ module Omega
 	  end
 	  
 	end
-end

@@ -1,4 +1,3 @@
-module Omega
 	class TopicsController < Controller
 	
 	  require_dependency "application_lib.rb"
@@ -21,4 +20,3 @@ module Omega
 	  end
 	
 	end
-end

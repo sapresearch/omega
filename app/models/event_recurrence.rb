@@ -1,4 +1,3 @@
-module Omega
 	class EventRecurrence < Model
 	  belongs_to :event
 	
@@ -7,4 +6,3 @@ module Omega
 	  end
 	end
 	
-end

@@ -1,4 +1,3 @@
-module Omega
 	class ReportsController < Controller
 	  #require_permission Volunteering::PERM_ADMIN
 	
@@ -24,4 +23,3 @@ module Omega
 	  end
 	
 	end
-end

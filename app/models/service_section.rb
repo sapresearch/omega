@@ -1,4 +1,3 @@
-module Omega
 	class ServiceSection < Model
 	  # app-spec
 	  belongs_to :contact
@@ -75,4 +74,3 @@ module Omega
 	  end
 	
 	end
-end

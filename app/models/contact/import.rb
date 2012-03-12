@@ -1,4 +1,3 @@
-module Omega
 	class Contact::Import < Model
 	
 	  has_attached_file :csv,
@@ -12,4 +11,3 @@ module Omega
 	
 	end
 	
-end

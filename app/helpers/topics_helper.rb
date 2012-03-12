@@ -1,4 +1,3 @@
-module Omega
 	module TopicsHelper
 	
 	  require_dependency "application_lib.rb"
@@ -9,4 +8,3 @@ module Omega
 	  end    
 	
 	end
-end

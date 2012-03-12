@@ -1,4 +1,3 @@
-module Omega
 	class Contacts::InterestsController < Controller
 	  respond_to :html, :xml, :json
 	  #crud_helper Contact::Interest
@@ -35,4 +34,3 @@ module Omega
 	    respond_with(@contact_interest)
 	  end
 	end
-end

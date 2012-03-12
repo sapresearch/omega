@@ -1,4 +1,3 @@
-module Omega
 	class Volunteering::Position < Model
 	  include Calendar::Recurrence
 	
@@ -155,4 +154,3 @@ module Omega
 			0
 		end
 	end
-end

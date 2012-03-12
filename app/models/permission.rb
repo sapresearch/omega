@@ -1,4 +1,3 @@
-module Omega
 	class Permission < Model
 	  self.table_name = 'permissions'
 	  PERM_ASSIGN_TO_ROLE = 'permissions_assign_to_role'
@@ -49,4 +48,3 @@ module Omega
 	  validates :value, :presence => true#,
 	                    #:uniqueness => true
 	end
-end
