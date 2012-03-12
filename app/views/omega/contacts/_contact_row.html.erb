@@ -1,3 +1,0 @@
-<%= content_tag_for :li, contact_row, :class => cycle("even", "odd") do %>
-    <%= link_to "#{contact_row.last_name}, #{contact_row.first_name}", contact_row, :remote => true %>
-<% end %>

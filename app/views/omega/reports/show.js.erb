@@ -1,5 +1,0 @@
-$("#report_content").html("<%= escape_javascript(render(session[:report_partial_name])) %>")
-
-var original_class = $("#li_<%= session[:report_partial_name] %>").attr("class")
-$(".li_selected_report").attr("class", original_class)
-$("#li_<%= session[:report_partial_name] %>").attr("class","li_selected_report")

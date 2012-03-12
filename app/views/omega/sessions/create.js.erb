@@ -1,6 +1,0 @@
-<% if @session.authenticated? %>
-window.location = '<%= @session.requested_page %>';
-<% else %>
-var erroMsg = '<span class="error">Username or password is incorrect</span>';
-$('#loginFailed').empty().append(erroMsg);
-<% end %>

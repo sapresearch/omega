@@ -1,6 +1,0 @@
-$(".services_page_content").html("<%= escape_javascript( render "service_registrations/index_page_content" ) %>")
-<% if @status_update_success == false %>
-  show_dialog_message("service-registration-update-status-failed-dialog-message")
-<% end %>
-
-$(".tipsy").remove();

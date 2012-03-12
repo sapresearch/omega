@@ -1,7 +1,0 @@
-.groups_list .group_head.ui-state-default{background:darkseagreen; border:1px solid transparent;}
-.groups_list .group_head.ui-state-hover{background:#4096EE;}
-.groups_list .group_head.ui-state-focus{background:#4096EE; border:1px solid transparent;}
-.groups_list .group_head.ui-state-active{background:#4096EE; border:1px solid transparent;}
-#group_capacity{width:200px;}
-
-.accordion_head .member_position{float:right; margin:0px 10px 0px 0px; font-weight:bold; font-style:italic;}

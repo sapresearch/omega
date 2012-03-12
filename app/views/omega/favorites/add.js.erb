@@ -1,9 +1,0 @@
-<% if @favorite.valid? %>
-        <% if @favorite.item.is_a?(Volunteering::Position) %>
-        <% position = @favorite.item %>
-        $('#actions-<%= position.id %>').replaceWith('<%= escape_javascript  render 'volunteering/positions/partials/position_actions', :position => position %> ');
-        <% end %>
-        <% else %>
-        <% end %>
-
-$('div.tipsy').remove();

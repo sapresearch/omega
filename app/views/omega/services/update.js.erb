@@ -1,5 +1,0 @@
-<% unless @type == "block" || @type=="unblock" %>
-  $(".services_list").html("<%= escape_javascript( render "services/index_list" ) %>")
-<% end %>
-
-$(".tipsy").remove();

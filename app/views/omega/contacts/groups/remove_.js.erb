@@ -1,5 +1,0 @@
-        //remove the contact from tha assigned contacts
-        $('tr[data-id=<%= @contact.id %>]').remove();
-        $('.assigned-groups').empty().append('<%= escape_javascript(render :partial => 'contacts/partials/assigned_groups') %>');
-         //remove the tooltip from the dom
-        $('div.tipsy').remove();

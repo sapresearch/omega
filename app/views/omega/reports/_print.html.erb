@@ -1,8 +1,0 @@
-<%= form_tag "reports/print_file", :method=>:post, :id=>"html_form" do -%>
-<!--
-  <input type="hidden" id="head_html" name="head_html"/>
--->
-  <input type="hidden" id="report_html" name="report_html"/>
-<% end -%>
-
-<div id="print_link"><%= link_to_function "Print Report", "print_file()" %></div>

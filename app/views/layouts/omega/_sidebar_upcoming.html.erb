@@ -1,8 +1,0 @@
-<%= side_bar_box('Upcoming Events') do %>
-    <% @events.each do |e| %>
-        <h3>
-          <span class="om-icon-only om-blue-icon ui-icon-calendar"></span>
-          <%= link_to e.title, calendars_url %>
-        </h3>
-    <% end %>
-<% end %>

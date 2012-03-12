@@ -1,7 +1,0 @@
-<% @contacts.each do |contact| %>
-    <ul>
-      <li  class="<%= cycle("even", "odd") %>">
-        <%= link_to "#{contact.last_name}, #{contact.first_name}", contact, :remote => true %>
-      </li>
-    </ul>
-<% end %>

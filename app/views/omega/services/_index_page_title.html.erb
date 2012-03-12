@@ -1,6 +1,0 @@
-    <% if @super_service.nil? %>
-      All <%= session[:my_services_switch]=="on" ? "My Registered" : "Offered" %> Services
-    <% else %>
-      <%= session[:my_services_switch]=="on" ? "My Registered" : "" %> Services in <%= @super_service.name %>
-    <% end %>
-

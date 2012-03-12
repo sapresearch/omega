@@ -1,8 +1,0 @@
-//app-spec copied from contact module
-
-//$('#contacts_contact_pane').empty().append('<%#= escape_javascript(render 'show') %>');
-$('.dialog').dialog('close');
-$("#contact_accordion").accordion();
-var contacts = <%= @group.members.to_json.html_safe %>;
-//update contacts, method available in omega_contacts.js
-update_contacts(contacts, <%= @group.id %>, "<%= @group.name %>");
