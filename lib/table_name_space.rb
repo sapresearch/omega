@@ -11,12 +11,13 @@ module TableNameSpace
 	end
 
 	module ClassMethods
-		include ActiveRecord::ModelSchema::ClassMethods
+		#include ActiveRecord::ModelSchema::ClassMethods
 
-		alias :old_table_name :table_name 
+		#alias :old_table_name :table_name 
 		def table_name
-			table_name = self.old_table_name
-			table_name.gsub('omega_', '') unless table_name.nil?
+			#table_name = self.table_name
+			table_name = self.name.tableize.gsub('omega/', '').gsub('/', '_')
+			#table_name.gsub('omega_', '') unless table_name.nil?
 		end
 
 	end
