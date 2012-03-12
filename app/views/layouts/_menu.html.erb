@@ -5,7 +5,7 @@
     <li><%= link_to "Participate", root_url, :class =>'root_em' %>
       <div>
 	    <!-- commented out for testing only. remember to uncomment later -->
-        <%#= link_to "Our Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
+        <%= link_to "Our Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
         <%= link_to "Volunteer", volunteering_positions_url %>
         <%= link_to "Report My Time", new_volunteering_time_entry_url %>
         <%= link_to "My Messages", messages_url %>       
@@ -39,13 +39,9 @@
      <%#= Services Menu is Rendered in the Service Module %>
        <%= with_permission(Volunteering::PERM_ADMIN) do %>
        <li>  <!-- commented out for testing. uncomment later -->
- 	        <%#= link_to "Manage Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
+ 	        <%= link_to "Manage Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
             <%#= render "services/nested_menu" %>
        </li>
-	   
-	   <li>
-
-	   </li>
        <% end %> 
      <%#= End Manage Services %>
 
