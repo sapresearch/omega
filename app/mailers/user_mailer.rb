@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => Omega::Setting.default_email
+  default :from => Setting.default_email
   default_url_options = { :host => "omega.com" }
   
   def lost_username(email, users)

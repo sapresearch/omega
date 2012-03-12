@@ -1,5 +1,5 @@
 <%#= render 'layouts/settings' %> <!-- This was for the social media stuff -->
-<% with_permission(Omega::User::PERM_ADMIN) do %>
+<% with_permission(User::PERM_ADMIN) do %>
 	<%= render 'update_email' %>
 	
 	<p>

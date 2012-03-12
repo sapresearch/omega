@@ -1,6 +1,6 @@
 	class Contact
 	  class UserObserver < ActiveRecord::Observer
-	    observe 'Omega::User'
+	    observe 'User'
 	
 	    def after_save(user)
 	      return unless Contact.table_exists?

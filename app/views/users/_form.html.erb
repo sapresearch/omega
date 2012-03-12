@@ -85,7 +85,7 @@
 			<% end %>
 		<% end %>
 
-		<%= with_permission(Omega::User::PERM_ADMIN) do %>
+		<%= with_permission(User::PERM_ADMIN) do %>
 			<h3 class="application-form">ROLES & PERMISSIONS </h3> 
 			<%= render 'role_assignments', :form => f %>
 		<%end%>

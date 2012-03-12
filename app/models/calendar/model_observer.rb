@@ -1,6 +1,6 @@
 	class Calendar
 	  class ModelObserver < ActiveRecord::Observer
-	    observe Omega::Model
+	    observe Model
 	    
 	    def after_save(model)
 	      puts "after_save(#{model})"

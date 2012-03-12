@@ -1,7 +1,7 @@
 <div id="loginFailed">
 </div>
 
-<%= form_for Omega::Session.new, :remote => true, :'data-type' => 'json' do |f| %>
+<%= form_for Session.new, :remote => true, :'data-type' => 'json' do |f| %>
 <p>
     
       <%= f.label :user, :class => "login" %>

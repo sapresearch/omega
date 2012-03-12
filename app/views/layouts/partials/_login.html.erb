@@ -4,7 +4,7 @@
 <div id="loginFailed">
 </div>
 
-	<%= form_for Omega::Session.new, :remote => true, :'data-type' => 'json' do |f| %>
+	<%= form_for Session.new, :remote => true, :'data-type' => 'json' do |f| %>
     <p>
       <%= f.label :username %>
       <%= f.text_field :username, :class => 'inputMid', :tabindex=>1 %>

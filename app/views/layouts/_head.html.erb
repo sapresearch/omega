@@ -1,6 +1,6 @@
 <div id="top-pane">
   <div class="center-content">
-    <%= with_permission(Omega::User::PERM_VIEW) do %>
+    <%= with_permission(User::PERM_VIEW) do %>
     	<div id="user_custom_bar" class="corners-bottom left">
      		<%= render('layouts/omega/partials/messages') %>
       	| <%= render('layouts/omega/partials/favorites') %>

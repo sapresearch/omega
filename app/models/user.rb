@@ -22,7 +22,7 @@
 	    def anonymous
 	      @anonymous ||= User.new do |anon|
 	        anon.username = "Anonymous"
-	        anon.roles << Omega::Role.for_anonymous
+	        anon.roles << Role.for_anonymous
 	      end
 	    end
 	    
@@ -53,9 +53,9 @@
 	  
 	  has_one :contact
 	  has_many :phone_numbers, :through => :contact
-	  has_many :messages,      :foreign_key => :to_id,   :class_name => 'Omega::Message', :inverse_of => :to,
+	  has_many :messages,      :foreign_key => :to_id,   :class_name => 'Message', :inverse_of => :to,
 	                           :conditions => ['deleted_by_to_at IS NULL']
-	  has_many :sent_messages, :foreign_key => :from_id, :class_name => 'Omega::Message', :inverse_of => :from,
+	  has_many :sent_messages, :foreign_key => :from_id, :class_name => 'Message', :inverse_of => :from,
 	                           :conditions => ['deleted_by_from_at IS NULL']
 	
 	  has_and_belongs_to_many :skills,    :class_name => '::Contact::Skill',
