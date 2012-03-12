@@ -20,8 +20,8 @@
       </div>
 
 		<% content_for :sidebar do %>
-			<%= render :partial => "layouts/omega/sidebar_positions_skills" %>
-			<%= render :partial => "layouts/omega/sidebar_positions_interests" %>
+			<%= render :partial => "layouts/sidebar_positions_skills" %>
+			<%= render :partial => "layouts/sidebar_positions_interests" %>
 		<% end %>
 
       <%# if tags = @skills_tags or tags = @interests_tags %>
@@ -100,7 +100,7 @@
 					</div>
 
 					<div id='position_toolbar'>
-						<%= render 'omega/volunteering/positions/partials/position_toolbar', :position => position %>
+						<%= render 'volunteering/positions/partials/position_toolbar', :position => position %>
 					</div>
 
 				</div>

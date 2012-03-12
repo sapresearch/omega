@@ -6,7 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require omega/rails
+//= require rails
 //= require thirdParty/jquery
 //= require thirdParty/jquery-ui
 //= require thirdParty/jquery.tipsy

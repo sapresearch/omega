@@ -1,5 +1,5 @@
-<%= stylesheet_link_tag    "omega/application" %>
-<%= javascript_include_tag "omega/application" %>
+<%= stylesheet_link_tag    "application" %>
+<%= javascript_include_tag "application" %>
 <%= csrf_meta_tags %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -26,7 +26,7 @@
 
 
 <div id="wrapper">
-  <%= render :partial => "layouts/omega/head" %>
+  <%= render :partial => "layouts/head" %>
 
   <div id="sap-logo">
   </div>
@@ -36,13 +36,13 @@
 
    <div id="content_box">
     <!-- commented out for testing. uncomment later -->
-    <%#= render(:layout => "layouts/omega/columns") do
-        render(:layout => "layouts/omega/sub_layout", :locals => {:sub_layout => sub_layout}) do
+    <%#= render(:layout => "layouts/columns") do
+        render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
             yield
         end
     end %>
-	    <%= render(:layout => "layouts/omega/columns") do
-        render(:layout => "layouts/omega/sub_layout") do
+	    <%= render(:layout => "layouts/columns") do
+        render(:layout => "layouts/sub_layout") do
             yield
         end
     end %>
@@ -54,7 +54,7 @@
 
 <div id="banner_wrapper">
     <div id="banner-left">
-	<%= image_tag 'omega/logo.png', :id => 'logo'%>
+	<%= image_tag 'logo.png', :id => 'logo'%>
     </div>
  	<div id="banner-right" >
 		<h1> Omega Non-Profit Portal </h1>		  	
@@ -62,7 +62,7 @@
 </div>
 
 
-<%= render :partial => "layouts/omega/footer" %>
+<%= render :partial => "layouts/footer" %>
 
 <!-- tmp section for debugging -->
 <!--<%# if ENV["RAILS_ENV"]=="development" %>

@@ -16,7 +16,7 @@
 
     protect_from_forgery
 
-    layout 'omega/application'
+    layout 'application'
 
     ##breadcrumb 'Omega' => :root
   end

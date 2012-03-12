@@ -1,8 +1,8 @@
 	class Calendar < Model
-	  require_dependency 'omega/calendar/event'
-	  require_dependency 'omega/calendar/event_source'
-	  require_dependency 'omega/calendar/model_observer'
-	  require_dependency 'omega/calendar/recurrence'
+	  require_dependency 'calendar/event'
+	  require_dependency 'calendar/event_source'
+	  require_dependency 'calendar/model_observer'
+	  require_dependency 'calendar/recurrence'
 
 		self.table_name = 'calendars'
 	

@@ -1,14 +1,14 @@
 	class Contact < Model
 	  self.table_name = 'contacts'
 	  
-	  require_dependency 'omega/contact/address'
-	  #require_dependency 'omega/contact/group'
-	  require_dependency 'omega/contact/group_position'
-	  require_dependency 'omega/contact/import'
-	  require_dependency 'omega/contact/interest'
-	  require_dependency 'omega/contact/phone_number'
-	  require_dependency 'omega/contact/skill'
-	  require_dependency 'omega/contact/user_observer'
+	  require_dependency 'contact/address'
+	  #require_dependency 'contact/group'
+	  require_dependency 'contact/group_position'
+	  require_dependency 'contact/import'
+	  require_dependency 'contact/interest'
+	  require_dependency 'contact/phone_number'
+	  require_dependency 'contact/skill'
+	  require_dependency 'contact/user_observer'
 	  require 'zipcodr'
 	
 	  PERM_ADMIN     = 'contacts_admin'
