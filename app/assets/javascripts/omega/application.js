@@ -6,7 +6,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require omega/rails
+//= require thirdParty/jquery
+//= require thirdParty/jquery-ui
+//= require thirdParty/jquery.tipsy
+//= require thirdParty/jquery.dataTables.min.js
 
 /* Overlay layer for notifications and ajax request notifications*/
 jQuery.showFlash = function(msg, n) {
