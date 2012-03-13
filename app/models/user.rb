@@ -70,7 +70,7 @@
 	  has_many :uploads, :foreign_key=>"uploader_id"
 	  has_many :posts
 	  accepts_nested_attributes_for :contact
-	  #accepts_flattened_values_for :skills, :value => :name
+	  ## TODO commented out for testing accepts_flattened_values_for :skills, :value => :name
 	
 	  attr_accessor :password, :password_confirmation
 	  attr_accessible :username, :email, :contact_attributes, :account_id

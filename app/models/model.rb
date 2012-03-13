@@ -1,6 +1,7 @@
   class Model < ActiveRecord::Base
     self.abstract_class = true
-		include ::TableNameSpace
+	# TODO uncomment this later. Commented out to test with gem-app conversion.
+	#include ::TableNameSpace
 
     class << self
       private

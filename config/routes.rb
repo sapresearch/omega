@@ -1,4 +1,4 @@
-Omega::Engine.routes.draw do
+Omega::Application.routes.draw do
     #match 'calendars' => 'calendars#index'
 
 
