@@ -24,7 +24,7 @@
 	  has_and_belongs_to_many :interests, :class_name => 'Contact::Interest',
 	                                      :join_table => 'contact_interests_volunteering_positions'
 	
-	  # TODO commented out for testing accepts_flattened_values_for :skills, :interests, :value => :name
+		accepts_flattened_values_for :skills, :interests, :value => :name
 	  accepts_nested_attributes_for :schedule, :reject_if => proc { |att| att['start_time'].blank? }
 	  accepts_nested_attributes_for :contacts
 	

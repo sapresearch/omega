@@ -108,9 +108,9 @@
 			Contact::Address.update_addresses(params)
 		end
 	
-	  # TODO commented out for testing accepts_flattened_values_for :interests, :skills, :languages, :value => :name
+		accepts_flattened_values_for :interests, :skills, :languages, :value => :name
 	
-	  # TODO commented out for testing accepts_flattened_values_for :phone_numbers, :value => :phone_numbers_attributes, :value => :number
+		accepts_flattened_values_for :phone_numbers, :value => :phone_numbers_attributes, :value => :number
 	  accepts_nested_attributes_for :addresses, :phone_numbers,
 	                                :reject_if => NestedHelper::REJECT_TEMPLATE, :allow_destroy => true
 	

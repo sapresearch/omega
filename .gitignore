@@ -9,3 +9,4 @@ manual_merge/
 
 test/dummy/miler_omega_meta_development
 test/dummy/config/databse.yml
+tmp/
