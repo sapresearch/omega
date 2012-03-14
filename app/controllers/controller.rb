@@ -1,16 +1,16 @@
   class Controller < ApplicationController
  #    include Omega::Errors::Handler
 
- #   include Omega::Assets::Dependencies
+    include Omega::Assets::Dependencies
 
     include Omega::Breadcrumbs
     include Omega::CurrentUser
-  ##  include Omega::CurrentUserTimeZone
+    include Omega::CurrentUserTimeZone
 #    include Omega::Crud
     include Omega::Permissions
- ##   include Omega::SubLayouts
+    include Omega::SubLayouts
 
- #   include Omega::Mixins::Controllers::Crud
+    include Omega::Mixins::Controllers::Crud
 
   #  self.responder = Omega::ControllerResponder
 
@@ -18,5 +18,5 @@
 
     layout 'application'
 
-    ##breadcrumb 'Omega' => :root
+    breadcrumb 'Omega' => :root
   end

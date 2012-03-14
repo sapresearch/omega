@@ -121,7 +121,7 @@ Omega::Application.routes.draw do
     end
   end
 
-  #resources :assets
+  resources :assets
   resources :asset_allocations
 
   resources :payments do

@@ -1,9 +1,9 @@
-<% stylesheet_link_tag 'omega_contacts.css' %>
+<% require_stylesheet 'omega_contacts.css' %>
 
-<% stylesheet_link_tag 'share.css' %>
-<% stylesheet_link_tag 'groups_member.css' %>
-<% javascript_include_tag 'util.js' %>
-<% javascript_include_tag 'ui_util.js'%>
+<% require_stylesheet 'share.css' %>
+<% require_stylesheet 'groups_member.css' %>
+<% require_javascript 'util.js' %>
+<% require_javascript 'ui_util.js'%>
 
 <%= render :layout => 'layouts/contacts/with_groups' do %>
 <%= render :layout => 'layouts/contacts/with_contacts', :locals => { :contacts => @contacts } do %>

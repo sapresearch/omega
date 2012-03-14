@@ -1,7 +1,7 @@
-<% stylesheet_link_tag 'report.css' %>
-<% javascript_include_tag 'https://www.google.com/jsapi' %>
-<% javascript_include_tag 'util.js' %>
-<% javascript_include_tag 'report.js' %>
+<% require_stylesheet 'report.css' %>
+<% require_javascript 'https://www.google.com/jsapi' %>
+<% require_javascript 'util.js' %>
+<% require_javascript 'report.js' %>
 
 <script type="text/javascript">
   google.load('visualization', '1', {packages:['table','gauge']});

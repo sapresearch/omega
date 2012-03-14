@@ -8,8 +8,8 @@
 
   <title><%= content_for?(:title) ? content_for(:title) : "Omega" %></title>
 
-  <% stylesheet_link_tag 'application_evergreen', 'thirdParty/jquery-ui-1.8.4.custom' %>
-  <% javascript_include_tag 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.tipsy', "rails", 'application', 'thirdParty/jquery.dataTables.min.js' %>
+  <% require_stylesheet 'application_evergreen', 'thirdParty/jquery-ui-1.8.4.custom' %>
+  <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.tipsy', "rails", 'application', 'thirdParty/jquery.dataTables.min.js' %>
   <%= csrf_meta_tag %>
   <%= flash_session_meta_tag %>
   <!--[if IE]>

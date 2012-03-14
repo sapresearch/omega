@@ -40,7 +40,7 @@
        <%= with_permission(Volunteering::PERM_ADMIN) do %>
        <li>  <!-- commented out for testing. uncomment later -->
  	        <%= link_to "Manage Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
-            <%#= render "services/nested_menu" %>
+            <%= render "services/nested_menu" %>
        </li>
        <% end %> 
      <%#= End Manage Services %>

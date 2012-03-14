@@ -1,7 +1,7 @@
-<% javascript_include_tag 'thirdParty/jquery.dataTables.min.js' %>
-<% javascript_include_tag 'omega_volunteering_records' %>
-<% stylesheet_link_tag 'omega_volunteering' %>
-<% stylesheet_link_tag 'thirdParty/jquery.dataTables.jui.css' %>
+<% require_javascript 'thirdParty/jquery.dataTables.min.js' %>
+<% require_javascript 'omega_volunteering_records' %>
+<% require_stylesheet 'omega_volunteering' %>
+<% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
 <%= context_box do %>
 <h1 class="page-content corners-top">
   Appliaction history of <%= "#{@contact.first_name} #{@contact.last_name}" %>

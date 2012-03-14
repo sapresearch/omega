@@ -1,4 +1,4 @@
-<% javascript_include_tag 'tiny_mce/jquery.tinymce' %>
+<% require_javascript 'tiny_mce/jquery.tinymce' %>
 
 <%= form_for([@page, @component]) do |f| %>
   <% if @component.errors.any? %>
