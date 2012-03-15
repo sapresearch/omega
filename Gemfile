@@ -9,6 +9,7 @@ end
 
 gem "sqlite3", :platform => :ruby
 gem 'mysql2', '0.3.7'
+
 gem "jquery-rails"
 
 # Gems used only for assets and not required

@@ -1,6 +1,5 @@
   class Controller < ApplicationController
  #    include Omega::Errors::Handler
-
     include Omega::Assets::Dependencies
 
     include Omega::Breadcrumbs

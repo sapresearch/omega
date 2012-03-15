@@ -21,4 +21,5 @@ require 'patches/fix_5243'
 require 'patches/namespaced_validators'
 
 require 'omega/engine'
-#require 'omega/module'
+require 'omega/module'
+

@@ -1,6 +1,3 @@
-<%= stylesheet_link_tag    "application" %>
-<%= javascript_include_tag "application" %>
-<%= csrf_meta_tags %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -8,9 +5,13 @@
 
   <title><%= content_for?(:title) ? content_for(:title) : "Omega" %></title>
 
-  <% require_stylesheet 'application_evergreen', 'thirdParty/jquery-ui-1.8.4.custom' %>
-  <% require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.tipsy', "rails", 'application', 'thirdParty/jquery.dataTables.min.js' %>
-  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+  <%# require_stylesheet 'application_evergreen', 'thirdParty/jquery-ui-1.8.4.custom' %>
+  <%# require_javascript 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.tipsy', "rails", 'application', 'thirdParty/jquery.dataTables.min.js' %>
+  <%#= csrf_meta_tag %>
   <%= flash_session_meta_tag %>
   <!--[if IE]>
 
