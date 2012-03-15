@@ -1,3 +1,4 @@
+require 'omega/routes'
 module Omega
   Rails::Railtie::ABSTRACT_RAILTIES << 'Omega::ModuleBase' << 'Omega::Module::Base'
 

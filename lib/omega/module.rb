@@ -4,6 +4,7 @@ require 'mime/types'
 require 'will_paginate'
 
 require 'omega'
+require 'omega/module_base'
 
 module Omega
   class Module < ModuleBase

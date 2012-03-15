@@ -1,3 +1,4 @@
+require 'omega/module'
 module Omega
   module Tasks
     class << self
