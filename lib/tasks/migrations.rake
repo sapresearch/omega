@@ -1,3 +1,4 @@
+require 'omega/migrations'
 Omega::Tasks.define do
   desc 'Migrate all installed modules. Turn off output with VERBOSE=false.'
   task :migrate => :environment do

@@ -1,6 +1,7 @@
 require 'omega/module'
 module Omega
   module Tasks
+	extend ::Rake::DSL
     class << self
       def define
         namespace :omega do
