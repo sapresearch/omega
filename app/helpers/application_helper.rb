@@ -1,4 +1,5 @@
   module ApplicationHelper
+
 	  def sub_layout
 	    controller.sub_layout
 	  end
@@ -15,5 +16,14 @@
 	  		page_title
 	  	}
 	  end
+	  
+		def method_missing(name, *args)
+			super unless name.to_s.include?("tenant_")
+			if args.empty?
+				controller.send(name.to_s.gsub('tenant_', '').to_sym)
+			elsif !args.empty?
+				controller.send(name.to_s.gsub('tenant_', '').to_sym, params[:account_name], args)
+			end
+		end
 	  
   end

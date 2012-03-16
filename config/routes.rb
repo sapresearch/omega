@@ -1,7 +1,7 @@
 Omega::Application.routes.draw do
     #match 'calendars' => 'calendars#index'
 
-
+	scope :path => "/:account_name" do
     resources :calendars do
       resources :events
       resources :shares, :as => :calendar_shares, :module => :calendars
@@ -278,4 +278,6 @@ Omega::Application.routes.draw do
   scope :module => 'omega' do
     match '*url' => '#not_found'
   end
+end
+
 end
