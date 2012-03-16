@@ -148,7 +148,7 @@
     ----------------------------------*/
     .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
         border: 1px solid #DCD7BA;
-        background: #DCD7BA url(../../images/ui-bg_flat_100_4196ee_40x100_evergreen.png) 50% 50% repeat-x;
+        background: #DCD7BA url(/assets/ui-bg_flat_100_4196ee_40x100_evergreen.png) 50% 50% repeat-x;
         font-weight: normal;
         color: #333;
         
@@ -166,7 +166,7 @@
 
     .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
         border: 1px solid #448be2;
-        background: #448be2 url(../../images/ui-bg_flat_100_448be2_40x100.png) 50% 50% repeat-x;
+        background: #448be2 url(/assets/ui-bg_flat_100_448be2_40x100.png) 50% 50% repeat-x;
         font-weight: normal;
         color: #ffffff;
     }
@@ -199,7 +199,7 @@
     ----------------------------------*/
     .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
         border: 1px solid #448be2;
-        background: #ffffff url(../../images/ui-bg_flat_100_ffffff_40x100.png) 50% 50% repeat-x;
+        background: #ffffff url(/assets/ui-bg_flat_100_ffffff_40x100.png) 50% 50% repeat-x;
         color: #448be2;
     }
 
@@ -209,7 +209,7 @@
 
     .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
         border: 1px solid #ed513b;
-        background: #fef1ec url(../../images/ui-bg_inset-soft_95_fef1ec_1x100.png) 50% bottom repeat-x;
+        background: #fef1ec url(/assets/ui-bg_inset-soft_95_fef1ec_1x100.png) 50% bottom repeat-x;
         color: #ed513b;
     }
 
@@ -244,41 +244,41 @@
     .ui-icon {
         width: 16px;
         height: 16px;
-        background-image: url(../../images/ui-icons_ffffff_256x240.png);
+        background-image: url(/assets/ui-icons_ffffff_256x240.png);
     }
 
     .ui-widget-content .ui-icon {
-        background-image: url(../../images/ui-icons_ffffff_256x240.png);
+        background-image: url(/assets/ui-icons_ffffff_256x240.png);
     }
 
     .ui-widget-header .ui-icon {
-        background-image: url(../../images/ui-icons_ffffff_256x240.png);
+        background-image: url(/assets/ui-icons_ffffff_256x240.png);
     }
 
     .ui-state-default .ui-icon {
-        background-image: url(../../images/ui-icons_ffffff_256x240.png);
+        background-image: url(/assets/ui-icons_ffffff_256x240.png);
     }
 
     .ui-state-hover .ui-icon, .ui-state-focus .ui-icon {
-        background-image: url(../../images/ui-icons_ffffff_256x240.png);
+        background-image: url(/assets/ui-icons_ffffff_256x240.png);
     }
 
     .om-white-icon {
-        background-image: url(../../images/ui-icons_ffffff_256x240.png);
+        background-image: url(/assets/ui-icons_ffffff_256x240.png);
     }
 
     .om-blue-icon {
-        background-image: url(../../images/ui-icons_448be2_256x240.png);
+        background-image: url(/assets/ui-icons_448be2_256x240.png);
     }
     
     .om-pink-icon {
 
-        background-image: url(../../images/ui-icons_c2366b_256x240.png);
+        background-image: url(/assets/ui-icons_c2366b_256x240.png);
 
     }
 
     .ui-state-error .ui-icon, .ui-state-error-text .ui-icon {
-        background-image: url(../../images/ui-icons_ed513b_256x240.png);
+        background-image: url(/assets/ui-icons_ed513b_256x240.png);
     }
 
     /* positioning */
@@ -1051,7 +1051,7 @@
 
     /* Overlays */
     .ui-widget-overlay {
-        background: #333333 url(../../images/ui-bg_flat_0_333333_40x100.png) 50% 50% repeat-x;
+        background: #333333 url(/assets/ui-bg_flat_0_333333_40x100.png) 50% 50% repeat-x;
         opacity: .80;
         filter: Alpha(Opacity = 80);
     }
@@ -1059,7 +1059,7 @@
     .ui-widget-shadow {
         margin: -8px 0 0 -8px;
         padding: 8px;
-        background: #aaaaaa url(../../images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
+        background: #aaaaaa url(/assets/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
         opacity: .30;
         filter: Alpha(Opacity = 30);
         -moz-border-radius: 8px;
@@ -1465,7 +1465,7 @@
         position: relative;
         border: 0;
         padding: .5em 1em;
-           background: #f7f7f7 url(../../images/bg_clouds.png) center repeat;
+           background: #f7f7f7 url(/assets/bg_clouds.png) center repeat;
         overflow: auto;
         zoom: 1;
     }
