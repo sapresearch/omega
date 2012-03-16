@@ -10,3 +10,8 @@ manual_merge/
 test/dummy/miler_omega_meta_development
 test/dummy/config/databse.yml
 tmp/
+
+config/database.yml
+config/database_1.yml
+config/database_2.yml
+

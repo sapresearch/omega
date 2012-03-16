@@ -36,18 +36,11 @@
 
 
    <div id="content_box">
-    <!-- commented out for testing. uncomment later -->
-    <%#= render(:layout => "layouts/columns") do
+    <%= render(:layout => "layouts/columns") do
         render(:layout => "layouts/sub_layout", :locals => {:sub_layout => sub_layout}) do
             yield
         end
     end %>
-	    <%= render(:layout => "layouts/columns") do
-        render(:layout => "layouts/sub_layout") do
-            yield
-        end
-    end %>
-
 
    </div>
 </div>
