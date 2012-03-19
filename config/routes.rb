@@ -1,6 +1,8 @@
 Omega::Application.routes.draw do
     #match 'calendars' => 'calendars#index'
 
+	resources :accounts
+	  
 	scope :path => "/:account_name" do
     resources :calendars do
       resources :events

@@ -1,5 +1,5 @@
 class AddAccountIdColumns < ActiveRecord::Migration
-	TABLES = ActiveRecord::Base.connection.tables.reject { |t| t == 'omega_hosting_accounts' }
+	TABLES = ActiveRecord::Base.connection.tables.reject { |t| t == 'accounts' }
 
   def self.up
 		TABLES.each do |t|
