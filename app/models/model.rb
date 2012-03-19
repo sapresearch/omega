@@ -35,8 +35,6 @@
     end
 
     default_scope do |model|
-			current = Account.current.nil? ? "nil" : Account.current.name
-			puts "\n\n From Model, Account.current is : " + Account.current.name + ". About to load #{model.name}"
       model.where(:account_id => Account.current)
     end
 

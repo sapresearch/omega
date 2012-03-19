@@ -51,7 +51,7 @@
 	      @service_registrations = @service.service_registrations
 	    end
 	    
-	    respond_with(@service_registration)
+	    respond_with('tenant', @service_registration)
 	  end
 	
 	  def update
@@ -96,7 +96,7 @@
 	      filter_services
 	    end
 	    
-	    respond_with(@service_registration)
+	    respond_with('tenant', @service_registration)
 	  end
 	
 	  def paypal_return

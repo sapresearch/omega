@@ -15,13 +15,13 @@
 	    
 	    @assets = Asset.all
 	    @new_asset = Asset.new(:name=>"New Asset")
-	    respond_with(@assets)
+	    respond_with('tenant', @assets)
 	  end
 	
 	  def create
 	    @asset = Asset.create(params[:asset])
 	
-	    respond_with(@asset) do |format|
+	    respond_with('tenant', @asset) do |format|
 	      format.js {redirect_to assets_url(:asset_id=>@asset.id)}
 	    end
 	  end
@@ -30,7 +30,7 @@
 	    @asset = Asset.find(params[:id])
 	    @asset.update_attributes(params[:asset])
 	
-	    respond_with(@asset) do |format|
+	    respond_with('tenant', @asset) do |format|
 	      format.js {redirect_to assets_url(:asset_id=>@asset.id)}
 	    end
 	  end

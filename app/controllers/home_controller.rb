@@ -12,6 +12,6 @@
 	     # @components = @page.components
 	   # end
 	
-	    respond_with(@positions, @events)
+	    respond_with('tenant', @positions, @events)
 	  end
 	end

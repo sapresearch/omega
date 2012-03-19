@@ -13,7 +13,7 @@
 	
 	      breadcrumb 'Week ' + @entry.week.to_s => :volunteering_time_entries
 	
-	      respond_with(@entry)
+	      respond_with('tenant', @entry)
 	    end
 	
 	    def new
@@ -51,7 +51,7 @@
 			# Not for AJAX call.
 			@entries = Volunteering::TimeEntry.find_by_contact(Contact.for(current_user).id)
 			@record = params[:id]
-	      respond_with(@entry)
+	      respond_with('tenant', @entry)
 	    end
 	    
 	    def new_timesheets

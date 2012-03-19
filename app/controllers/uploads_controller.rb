@@ -58,7 +58,7 @@
 	      upload.uploader = current_user
 	    end
 	
-	    respond_with(@upload)
+	    respond_with('tenant', @upload)
 	  end
 	
 	  # PUT /uploads/1

@@ -7,7 +7,7 @@
 	      @calendar = @scope.find(params[:calendar_id])
 	      @share = @calendar.shares.create(params[:share])
 	      flash[:notice] = "Calendar shared"
-	      respond_with(@share, :location => [@calendar])
+	      respond_with('tenant', @share, :location => [@calendar])
 	    end
 	
 	    protected

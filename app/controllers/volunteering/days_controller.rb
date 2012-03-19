@@ -5,32 +5,32 @@
 	
 	  def index
 	      @days = Volunteering::Schedule::Day.all
-	      respond_with(@days)
+	      respond_with('tenant', @days)
 	    end
 	
 	    def show
 	      @day = Volunteering::Schedule::Day.find(params[:id])
-	      respond_with(@day)
+	      respond_with('tenant', @day)
 	    end
 	
 	    def new
 	      @day = Volunteering::Schedule::Day.new
-	      respond_with(@day)
+	      respond_with('tenant', @day)
 	    end
 	
 	    def edit
 	      @day = Volunteering::Schedule::Day.find(params[:id])
-	      respond_with(@day)
+	      respond_with('tenant', @day)
 	    end
 	
 	    def create
 	      @day = Volunteering::Schedule::Day.create(params[:volunteering_schedule_day])
-	      respond_with(@day)
+	      respond_with('tenant', @day)
 	    end
 	
 	    def update
 	      @day = Volunteering::Schedule::Day.find(params[:id])
-	      respond_with(@day)
+	      respond_with('tenant', @day)
 	    end
 	
 	    def destroy

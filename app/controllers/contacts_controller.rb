@@ -18,49 +18,49 @@ class ContactsController < Controller
   def index
     #@contact_groups = Contact::Group.scoped  # old database
     @contact_groups = Group.scoped
-    respond_with(@contacts) do |format|
+    respond_with('tenant', @contacts) do |format|
       format.any(:html, :js) { render 'all' }
     end
   end
 
   def all
     @contacts = Contact.status
-    respond_with(@contacts)
+    respond_with('tenant', @contacts)
   end
 
   def list
-    respond_with(@contacts)
+    respond_with('tenant', @contacts)
   end
 
   def show
     #@contact_groups = Contact::Group.scoped # old database
     @contact_groups = Group.scoped
-    respond_with(@contact)
+    respond_with('tenant', @contact)
   end
 
   def new
     @contact.addresses.build
     @contact.phone_numbers.build
-    respond_with(@contact)
+    respond_with('tenant', @contact)
   end
 
   def edit
-    respond_with(@contact)
+    respond_with('tenant', @contact)
   end
 
   def upload
     @contact = Contact.find(params[:id])
-    respond_with(@contact)
+    respond_with('tenant', @contact)
   end
 
   def do_upload
     @contact = Contact.find(params[:id])
     @contact.update_attributes(params[:contact])
-    respond_with(@contact)
+    respond_with('tenant', @contact)
   end
 
   def create
-    respond_with(@contact = Contact.create(params[:contact]))
+    respond_with('tenant', @contact = Contact.create(params[:contact]))
   end
 
   def autocomplete
@@ -68,7 +68,7 @@ class ContactsController < Controller
     @contacts = Contact.named(@q)
     @contacts.limit(params[:limit]) if params[:limit]
 
-    respond_with(@contacts) do |format|
+    respond_with('tenant', @contacts) do |format|
       #format.psv { render :text => @contacts.map { |c| "#{c.last_name} #{c.first_name}|#{c.id}" }.join("\n") }
       format.json do
         if @contacts.any?
@@ -84,7 +84,7 @@ class ContactsController < Controller
     @q        = params[:q]
     @contacts = Contact.named(@q)
 
-    respond_with(@contacts) do |format|
+    respond_with('tenant', @contacts) do |format|
       format.any(:html, :js) { render 'all' }
     end
   end
@@ -93,7 +93,7 @@ class ContactsController < Controller
     @letter   = params[:letter]
     @contacts = Contact.where('last_name like ?', "#{@letter}%").order('last_name')
 
-    respond_with(@contacts) do |format|
+    respond_with('tenant', @contacts) do |format|
       format.any(:html, :js) { render 'all' }
     end
   end
@@ -104,14 +104,14 @@ class ContactsController < Controller
     end
 
     @contact.update_attributes(params[:contact])
-    respond_with(@contact) do |format|
+    respond_with('tenant', @contact) do |format|
       format.js {redirect_to contact_url(@contact)}
     end
   end
 
   def destroy
     @contact.destroy
-    respond_with(@contact)
+    respond_with('tenant', @contact)
   end
 
   private

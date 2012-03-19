@@ -34,7 +34,7 @@
 	        @super_group = @group.super_group
 	      end
 	    end
-	    respond_with(@group_request)
+	    respond_with('tenant', @group_request)
 	  end
 	
 	  def update

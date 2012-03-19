@@ -17,34 +17,34 @@
 	
 	  def index
 	    @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
-	    respond_with(@positions)
+	    respond_with('tenant', @positions)
 	  end
 	
 	  def upcoming
 	    @positions = @positions.where('start is not null').order('start ASC')
 	    @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
 	    breadcrumb 'Upcoming Positions' => :upcoming_volunteering_positions
-	    respond_with(@positions)
+	    respond_with('tenant', @positions)
 	  end
 	
 	  def show
 	    @position = Volunteering::Position.find(params[:id])
 	    breadcrumb @position.name => volunteering_position_path(@position)
-	    respond_with(@position)
+	    respond_with('tenant', @position)
 	  end
 	
 	  def edit
 	    @position = Volunteering::Position.find(params[:id])
 	    fix_model_to_view
 		 @contact_assignment = @position.contacts.count > 0 ? 'existing' : 'none'
-	    respond_with(@position)
+	    respond_with('tenant', @position)
 	  end
 	
 	  def new
 	    @position = Volunteering::Position.new
 	    fix_model_to_view
 		 @contact_assignment = 'new'
-	    respond_with(@position)
+	    respond_with('tenant', @position)
 	  end
 	
 	  def create
@@ -63,10 +63,10 @@
 			@position.update_attributes(:end => @position.correct_end_date) if !@position.recurrent
 			# Do this after position so that it is assigned an ID.
 			#field_positions = @position.id.to_s if field_positions.to_i == 0
-		  	respond_with(@position)
+		  	respond_with('tenant', @position)
 		 else
 			reset_view_if_error
-		   respond_with(@position)
+		   respond_with('tenant', @position)
 		 end
 	  end
 	
@@ -84,13 +84,13 @@
 	
 	    @position.update_attributes(params[:volunteering_position])
 	    fix_model_to_view
-	    respond_with(@position)
+	    respond_with('tenant', @position)
 	  end
 	
 	  def destroy
 	    @position = Volunteering::Position.find(params[:id])
 	    @position.destroy
-	    respond_with(@position)
+	    respond_with('tenant', @position)
 	  end
 	
 	  def skills
@@ -133,7 +133,7 @@
 	    @position = Volunteering::Position.find(params[:id])
 	    @records = @position.records
 	    @records = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
-	    respond_with(@records)
+	    respond_with('tenant', @records)
 	  end
 	
 	  private

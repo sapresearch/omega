@@ -21,7 +21,7 @@
 	    session[:super_group_id] = @group.nil? ? (params[:super_group_id] || session[:super_group_id]) : @group.super_group_id
 	    initialize_group_objects
 	
-	    respond_with(@groups)
+	    respond_with('tenant', @groups)
 	  end
 	
 	  # app-spec for contact module
@@ -41,7 +41,7 @@
 	      GroupsMember.create(:group_id=>@group.id, :member_id=>@creator.id, :position=>"leader")
 	    end
 	    
-	    respond_with(@group) do |format|
+	    respond_with('tenant', @group) do |format|
 	      format.js {redirect_to groups_url(:group_id=>@group.id)}
 	    end
 	  end
@@ -67,7 +67,7 @@
 	        params_group.merge!({:capacity=>nil}) if params[:group][:capacity]=="unlimited"
 	        @group.update_attributes(params_group)
 	
-	        respond_with(@group) do |format|
+	        respond_with('tenant', @group) do |format|
 	          format.js {redirect_to groups_url(:group_id=>@group.id)}
 	        end
 	    end

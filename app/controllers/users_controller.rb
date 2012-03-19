@@ -8,16 +8,16 @@
 	
 	  def index
 	    @users = @users.paginate(:page => params[:page], :per_page => User::MAX_USERS_PER_PAGE)
-	    respond_with(@users)
+	    respond_with('tenant', @users)
 	  end
 	
 	  def show
 		@user = User.find(params[:id])
-	    respond_with(@user)
+	    respond_with('tenant', @user)
 	  end
 	
 	  def new
-	    respond_with(@user)
+	    respond_with('tenant', @user)
 	  end
 	
 	  def register
@@ -26,7 +26,7 @@
 	    contact = @user.build_contact
 	    contact.addresses.build
 	    contact.phone_numbers.build
-	    respond_with(@user)
+	    respond_with('tenant', @user)
 	  end
 	  
 	  def role_assignment
@@ -43,19 +43,19 @@
 		 @user.password = password
 		 @user.password_confirmation = confirm
 		 @user.save
-	    respond_with(@user)
+	    respond_with('tenant', @user)
 	  end
 	
 	  def edit
 	    unless @user == current_user
 	      require_permission User::PERM_ADMIN
 	    end
-	    respond_with(@user)
+	    respond_with('tenant', @user)
 	  end
 	
 	  def create
 	    @user = User.new(params[:user])
-	    respond_with(@user)
+	    respond_with('tenant', @user)
 	  end
 	
 	  def update
@@ -66,14 +66,14 @@
 	
 	  def destroy
 	    @user.destroy
-	    respond_with(@user)
+	    respond_with('tenant', @user)
 	  end
 	
 	  def letter
 	    @letter = params[:letter]
 	    @users  = User.where('username like ?', "#{@letter}%").order('username')
 	    @users  = @users.paginate(:page => params[:page], :per_page => User::MAX_USERS_PER_PAGE)
-	    respond_with(@users) do |format|
+	    respond_with('tenant', @users) do |format|
 	      format.any(:html, :js) { render 'index' }
 	    end
 	  end
@@ -83,7 +83,7 @@
 	    @users = User.named(@q)
 	    @users.limit(params[:limit]) if params[:limit]
 	
-	    respond_with(@users) do |format|
+	    respond_with('tenant', @users) do |format|
 	      format.json do
 	        render :json  =>   @users.map { |c| {:id => c.id, :label => "#{c.last_name}  #{c.first_name}", :value => c.id} }
 	      end
@@ -98,7 +98,7 @@
 	      UserMailer.lost_username(@email, @users).deliver
 	    end
 	
-	    respond_with(:ok)
+	    respond_with('tenant', :ok)
 	  end
 	
 	  def lost_password
@@ -112,7 +112,7 @@
 	      UserMailer.lost_password(@username, @user, @user_token, token_sessions_url(:token => @user_token.token)).deliver
 	    end
 	
-	    respond_with(:ok)
+	    respond_with('tenant', :ok)
 	  end
 	
 	  SORT_KEYS = ['username']

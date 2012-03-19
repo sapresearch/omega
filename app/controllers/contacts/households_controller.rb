@@ -3,6 +3,6 @@
 	    group = params[:contact_group]
 	    group[:group_type] = 'Household'
 	
-	    respond_with(@contact_group = Contact::Group.create(group))
+	    respond_with('tenant', @contact_group = Contact::Group.create(group))
 	  end
 	end

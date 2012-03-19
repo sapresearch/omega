@@ -14,12 +14,12 @@
 	  def index
 	    @messages = @messages.paginate(:page => params[:page], :per_page => Message::MAX_MESSAGES_PER_PAGE)
 	
-	    respond_with(@messages)
+	    respond_with('tenant', @messages)
 	  end
 	
 	  def sent
 	    @messages = @messages.paginate(:page => params[:page], :per_page => Message::MAX_MESSAGES_PER_PAGE)
-	    respond_with(@messages)
+	    respond_with('tenant', @messages)
 	  end
 	
 	  def show
@@ -27,23 +27,23 @@
 	      @message.touch(:read_at)
 	    end
 	
-	    respond_with(@message)
+	    respond_with('tenant', @message)
 	  end
 	
 	  def new
-	    respond_with(@message)
+	    respond_with('tenant', @message)
 	  end
 	
 	  def reply
 	    @message = @original_message.reply
 	    breadcrumb "Reply" => reply_message_path(@original_message)
-	    respond_with(@message)
+	    respond_with('tenant', @message)
 	  end
 	
 	  def forward
 	    @message = @original_message.forward
 	    breadcrumb "Forward" => forward_message_path(@original_message)
-	    respond_with(@message)
+	    respond_with('tenant', @message)
 	  end
 	
 	  def create
@@ -51,12 +51,12 @@
 	      m.from = current_user
 	    end
 	
-	    respond_with(@message)
+	    respond_with('tenant', @message)
 	  end
 	
 	  def update
 	    @message.update_attributes(params[:message])
-	    respond_with(@message)
+	    respond_with('tenant', @message)
 	  end
 	
 	  def destroy
@@ -72,7 +72,7 @@
 	#      # require_permission !!
 	#      @message.destroy
 	#    end
-	    respond_with(@message)
+	    respond_with('tenant', @message)
 	  end
 	
 	  SORT_KEYS       = ['created_at']
