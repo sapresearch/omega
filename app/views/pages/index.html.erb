@@ -10,7 +10,7 @@
 <% @pages.each do |page| %>
   <tr>
     <td><%= link_to 'Show', page %></td>
-    <td><%= link_to 'Edit', edit_page_path(page) %></td>
+    <td><%=  link_to 'Edit', tenant_edit_page_path(page) %></td>
     <td><%= link_to 'Destroy', page, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
@@ -18,4 +18,4 @@
 
 <br />
 
-<%= link_to 'New Page', new_page_path %>
+<%=  link_to 'New Page', tenant_new_page_path %>

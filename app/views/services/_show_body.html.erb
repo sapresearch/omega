@@ -44,9 +44,9 @@
                   <% else %>
 
                     <%= om_button(:contact => true, :icon=>'search') do %>
-                      <%= link_to "View Services", services_url(:super_service_id=>service.id), :remote=>true, "data-tooltip"=>"View services in this category" %>
+                      <%=  link_to "View Services", tenant_services_url(:super_service_id=>service.id), :remote=>true, "data-tooltip"=>"View services in this category" %>
                     <% end %>
-                    <%#= link_to "View Services >>", services_url(:super_service_id=>service.id), :remote=>true, :class=>"service_operation_button" %>
+                    <%#=  link_to "View Services >>", tenant_services_url(:super_service_id=>service.id), :remote=>true, :class=>"service_operation_button" %>
                     
                   <% end %>
                 </p>
@@ -58,17 +58,17 @@
                   
                     <% if service.is_leaf? %>
                       <%= om_button(:contact => true, :icon=>'household-add') do %>
-                        <%= link_to "Assets", asset_allocations_url(:leaf_service_id=>service.id), "data-tooltip"=>"Allocate Assets" %>
+                        <%=  link_to "Assets", tenant_asset_allocations_url(:leaf_service_id=>service.id), "data-tooltip"=>"Allocate Assets" %>
                       <% end %>
                       <%= om_button(:contact => true, :icon=>'group') do %>
-                        <%= link_to "Registrations", service_registrations_url(:service_id=>service.id), "data-tooltip"=>"Manage registrations" %>
+                        <%=  link_to "Registrations", tenant_service_registrations_url(:service_id=>service.id), "data-tooltip"=>"Manage registrations" %>
                       <% end %>
                     <% end %>
 
                     <% if service.is_private? %>
                       <%= om_button(:contact => true, :icon=>'mail-open') do %>
                         <% if service.is_leaf? %>
-                          <%= link_to "Publish", service_url(service, :type=>"publish"), :remote=>true, :method=>:put, "data-tooltip"=>"Publish this service" %>
+                          <%=  link_to "Publish", tenant_service_url(service, :type=>"publish"), :remote=>true, :method=>:put, "data-tooltip"=>"Publish this service" %>
                         <% else %>
                           <%= link_to_function "Publish", "update_service_status('#{service_url(service, :type=>"publish")}')", "data-tooltip"=>"Publish this service category" %>
                         <% end %>
@@ -76,7 +76,7 @@
                     <% elsif service.is_public? %>
                       <%= om_button(:contact => true, :icon=>'mail') do %>
                         <% if service.is_leaf? %>
-                          <%= link_to "Unpublish", service_url(service, :type=>"unpublish"), :remote=>true, :method=>:put, "data-tooltip"=>"Unpublish this service" %>
+                          <%=  link_to "Unpublish", tenant_service_url(service, :type=>"unpublish"), :remote=>true, :method=>:put, "data-tooltip"=>"Unpublish this service" %>
                         <% else %>
                           <%= link_to_function "Unpublish", "update_service_status('#{service_url(service, :type=>"unpublish")}')", "data-tooltip"=>"Unpublish this service category" %>
                         <% end %>
@@ -84,9 +84,9 @@
                     <% end %>
                     
                     <%= om_button(:contact => true, :icon=>'edit') do %>
-                      <%= link_to "Edit", edit_service_url(service), "data-tooltip"=>"Edit this service" %>
+                      <%=  link_to "Edit", tenant_edit_service_url(service), "data-tooltip"=>"Edit this service" %>
                     <% end %>
-                    <%#= link_to "Edit", edit_service_url(service), :class=>"service_operation_button" %>
+                    <%#=  link_to "Edit", tenant_edit_service_url(service), :class=>"service_operation_button" %>
 
                     <%= om_button(:contact => true, :icon=>'delete-icon') do %>
                       <%= link_to_function "Delete", "destroy_service('#{service_url(service)}')", "data-tooltip"=>"Delete this service" %>

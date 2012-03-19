@@ -3,19 +3,19 @@
       <li>
 
         <%= om_button(:icon=>'mail', :sidebar => true) do %>
-            <%= link_to 'inbox', messages_path %>
+            <%=  link_to 'inbox', tenant_messages_path %>
         <% end %>
       </li>
 	  <br/>
       <li>
         <%= om_button(:icon=>'mail-new', :sidebar => true) do %>
-            <%= link_to 'new', new_message_path %>
+            <%=  link_to 'new', tenant_new_message_path %>
         <% end %>
       </li>
 	  <br/>
       <li>
         <%= om_button(:icon=>'mail-sent', :sidebar => true) do %>
-            <%= link_to 'sent', sent_messages_path %>
+            <%=  link_to 'sent', tenant_sent_messages_path %>
         <% end %>
       </li>
     </ul>

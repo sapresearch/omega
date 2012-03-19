@@ -3,7 +3,7 @@
     <%# @services.each do |p| %>
         <h3>
           <span class="om-icon-only om-blue-icon ui-icon-folder-open"></span>
-          <%#= link_to truncate( p.service_name  ,:length => 30 ) , service_url(:id => p) %>
+          <%#=  link_to truncate( p.service_name  ,:length => 30 ) , tenant_service_url(:id => p) %>
         </h3>
     <%# end %>
     -->
@@ -11,7 +11,7 @@
     <% @services.each do |s| %>
       <h3>
         <span class="om-icon-only om-blue-icon ui-icon-folder-open"></span>
-        <%= link_to truncate( s.name  ,:length => 30 ) , services_url(:service_id => s.id) %>
+        <%=  link_to truncate( s.name  ,:length => 30 ) , tenant_services_url(:service_id => s.id) %>
       </h3>
     <% end %>
 

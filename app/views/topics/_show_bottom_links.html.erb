@@ -1,5 +1,5 @@
 <div class="right_links">
-  <%= link_to "Back to "+@group.name+" Space", space_group_url(@group), :class=>"operation_button" %>
+  <%=  link_to "Back to "+@group.name+" Space", tenant_space_group_url(@group), :class=>"operation_button" %>
 </div>
 <script type="text/javascript">
   $('.operation_button').button({ icons: {primary:'ui-icon-gear'} });

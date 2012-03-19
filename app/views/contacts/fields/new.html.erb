@@ -31,10 +31,10 @@
 					<% positions = f.volunteering_positions.count == Volunteering::Position.all.count ? "All Positions" : f.volunteering_positions.collect { |vp| vp.name }.join(', ') %>
 					<strong>Positions: </strong><%= positions %><br />
       			<%= om_button(:contact => true, :icon=>'edit') do %>
-						<%= link_to :edit, edit_contact_field_path(f) %>
+						<%=  link_to :edit, tenant_edit_contact_field_path(f) %>
       			<% end %>
       			<%= om_button(:contact => true, :icon => 'delete') do %>
-						<%= link_to 'Delete', contact_field_path(f), :method => :delete, :confirm => 'Delete this field?', :'data-tooltip' => 'Delete this field' %>
+						<%=  link_to 'Delete', tenant_contact_field_path(f), :method => :delete, :confirm => 'Delete this field?', :'data-tooltip' => 'Delete this field' %>
 						<%#= button_to 'Delete', contact_field_path(f), :method => :delete, :confirm => 'Delete this field?', :'data-tooltip' => 'Delete this field' %>
       			<% end %>
 				</p>

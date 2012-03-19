@@ -54,7 +54,7 @@
                 <% end %>
 	          <%#= om_button(:icon => 'clock') do %>
 					<!-- THIS IS ANNE'S SHITTY CODE -->
-	          	<%#= link_to 'Record Hours Now!', new_volunteering_time_entries_path(:id => @record) %>
+	          	<%#=  link_to 'Record Hours Now!', tenant_new_volunteering_time_entries_path(:id => @record) %>
 					<!-- THIS IS ANNE'S SHITTY CODE -->
 	      	<%# end %>
           <% end %>
@@ -63,7 +63,7 @@
 		<!-- my changes -->
 		<% @records.each do |r| %>
 	      <%= om_button(:icon => 'clock') do %>
-				<%= link_to 'Record Hours Now!', new_volunteering_time_entry_path(:id => r.id) %>
+				<%=  link_to 'Record Hours Now!', tenant_new_volunteering_time_entry_path(:id => r.id) %>
 			<% end %>
 		<% end %>
 		<!-- my changes -->

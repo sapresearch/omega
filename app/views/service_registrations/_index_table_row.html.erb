@@ -14,7 +14,7 @@
   </td>
   <td>
     <%= om_button(:plain => true, :icon => 'user') do %>
-      <%= link_to service_registration.registrant.name, contact_path(service_registration.registrant), :class => 'blue', :'data-tooltip'=>"View Contact" %>
+      <%=  link_to service_registration.registrant.name, tenant_contact_path(service_registration.registrant), :class => 'blue', :'data-tooltip'=>"View Contact" %>
     <% end %>
   </td>
   <td>

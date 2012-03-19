@@ -78,7 +78,7 @@
       <% end %>
       <% if @contact.id %>
        <%= om_button(:icon=>'back') do %>
-          <%= link_to 'Cancel' , contact_path(@contact), :remote=> true %>
+          <%=  link_to 'Cancel' , tenant_contact_path(@contact), :remote=> true %>
       <% end %>
       <% end %>
     </p>

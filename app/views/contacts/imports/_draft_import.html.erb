@@ -9,11 +9,11 @@
   <tr>
 
     <%= om_button(:icon=>'cancel') do %>
-      <%= link_to 'Resume Working', redo_mapping_contact_imports_url(:id => @import) %>
+      <%=  link_to 'Resume Working', tenant_redo_mapping_contact_imports_url(:id => @import) %>
     <%end%>
 
     <%= om_button(:icon=>'cancel') do %>
-        <%= link_to 'Delete', delete_forever_contact_imports_url(:id => @import.id), 'data-tooltip' => 'Delete this Import', :confirm => 'Are You Sure?' %>
+        <%=  link_to 'Delete', tenant_delete_forever_contact_imports_url(:id => @import.id), 'data-tooltip' => 'Delete this Import', :confirm => 'Are You Sure?' %>
     <%end%>
 
   </tr>

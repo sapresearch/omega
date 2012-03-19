@@ -19,7 +19,7 @@
 		<%= render 'timesheets_table' %>
 
  		<%= om_button(:contact => true, :icon => 'apply') do %>
-         <%= link_to 'Edit', all_timesheets_volunteering_time_entries_url(:id=> @position), :'data-tooltip' => 'Apply for this position' %>
+         <%=  link_to 'Edit', tenant_all_timesheets_volunteering_time_entries_url(:id=> @position), :'data-tooltip' => 'Apply for this position' %>
 		<%end%> 
    </div>
 </div>

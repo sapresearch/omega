@@ -56,13 +56,13 @@
 	                  <% end %>
 
                   <h2>
-                    <%= link_to truncate(position.name, :length=>60), volunteering_position_path(position), :class => 'position-name'  %>
+                    <%=  link_to truncate(position.name, :length=>60), tenant_volunteering_position_path(position), :class => 'position-name'  %>
                   </h2>
 						</div>
 
 					<div class="position_body"><br /><br />
                   <p>
-                    <%= truncate(position.description, :length=> 140) %> <%= link_to '( read more ... )', volunteering_position_path(position) %>
+                    <%= truncate(position.description, :length=> 140) %> <%=  link_to '( read more ... )', tenant_volunteering_position_path(position) %>
                   </p>
 
                   <p>

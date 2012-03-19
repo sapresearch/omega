@@ -34,7 +34,7 @@
         </div>
         <div>
           <%= om_button(:plain => true, :icon => 'user') do %>
-              <%= link_to "#{user.username} - #{user.first_name} #{user.last_name}", role_assignment_users_path(:id => user), :class => 'blue' %>
+              <%=  link_to "#{user.username} - #{user.first_name} #{user.last_name}", tenant_role_assignment_users_path(:id => user), :class => 'blue' %>
           <% end %>
 
         </div>

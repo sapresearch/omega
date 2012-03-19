@@ -5,8 +5,8 @@
 </div>
 
 <div class="right_links">
-  <%= link_to "Group Requests", groups_requesters_url(:group_id=>@group.id), :class=>"operation_button" %>
-  <%= link_to "Back to "+(@group.super_group.nil? ? "All Groups" : @group.super_group.name), groups_url(:group_id=>@group.id), :class=>"operation_button" %>
+  <%=  link_to "Group Requests", tenant_groups_requesters_url(:group_id=>@group.id), :class=>"operation_button" %>
+  <%=  link_to "Back to "+(@group.super_group.nil? ? "All Groups" : @group.super_group.name), tenant_groups_url(:group_id=>@group.id), :class=>"operation_button" %>
 </div>
 <script type="text/javascript">
   $('.operation_button').button({ icons: {primary:'ui-icon-gear'} });

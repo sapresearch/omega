@@ -20,17 +20,17 @@
         <div id="contact-actions" class="right">
           <%= with_permission(Contact::PERM_ADMIN) do %>
               <%= om_button(:icon=>'user-add', :contact => true) do %>
-                  <%= link_to 'New Contact', new_contact_path, :remote => true %>
+                  <%=  link_to 'New Contact', tenant_new_contact_path, :remote => true %>
               <% end %>
               <%#= om_button(:icon=>'group', :contact => true) do %>
-                  <%#= link_to 'New Group', new_group_path, :remote => true %>
+                  <%#=  link_to 'New Group', tenant_new_group_path, :remote => true %>
               <%# end %>
               <!-- old database
               <%#= om_button(:icon=>'household-add', :contact => true) do %>
-                  <%#= link_to 'New Household', new_contact_household_path, :remote => true %>
+                  <%#=  link_to 'New Household', tenant_new_contact_household_path, :remote => true %>
               <%# end %>
               <%#= om_button(:icon=>'organization-add', :contact => true) do %>
-                  <%#= link_to 'New organization', new_contact_organization_path, :remote => true %>
+                  <%#=  link_to 'New organization', tenant_new_contact_organization_path, :remote => true %>
               <%# end %>
               -->
           <% end %>

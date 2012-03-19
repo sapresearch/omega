@@ -2,16 +2,16 @@
 
   <%= with_permission(Volunteering::PERM_ADMIN) do %>
       <%= om_button(:contact => true, :icon => 'clock') do %>
-           <%= link_to 'Invite a Volunteer', enroll_volunteers_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>
+           <%=  link_to 'Invite a Volunteer', tenant_enroll_volunteers_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>
       <% end %>
       <%= om_button(:contact => true, :icon=>'edit') do %>
-          <%= link_to 'Edit', edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>
+          <%=  link_to 'Edit', tenant_edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>
       <% end %>
       <%= om_button(:contact => true, :icon => 'delete') do %>
-          <%= link_to 'Delete', volunteering_position_path(position), :method=>:delete, :confirm => 'Delete this position?', :'data-tooltip' => 'Delete this position' %>
+          <%=  link_to 'Delete', tenant_volunteering_position_path(position), :method=>:delete, :confirm => 'Delete this position?', :'data-tooltip' => 'Delete this position' %>
       <% end %>
       <%= om_button(:contact => true, :icon=>'clipboard-list ') do %>
-          <%= link_to 'Applicants', history_volunteering_position_path(position), :'data-tooltip' => 'See all the applications for this position' %>
+          <%=  link_to 'Applicants', tenant_history_volunteering_position_path(position), :'data-tooltip' => 'See all the applications for this position' %>
       <% end %>
   <% end %>
 
@@ -21,11 +21,11 @@
 			<% if @application.nil?%>
 		  		<%#= om_button(:contact => true, :icon => 'apply') do %>
 		  		<%= om_button(:contact => true, :icon => 'user-add') do %>
-					<%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
+					<%=  link_to 'Apply', tenant_new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
 		  		<%end%>
 			<% elsif !@application.nil? %>
       		<%= om_button(:contact => true, :icon => 'clock') do %>
-        			<%= link_to 'Log Hours', new_volunteering_time_entry_url(:position_id => position.id, :'data-tooltip' => 'Log hours for this position') %>
+        			<%=  link_to 'Log Hours', tenant_new_volunteering_time_entry_url(:position_id => position.id, :'data-tooltip' => 'Log hours for this position') %>
       		<% end %>
         	<%end%>
       <%end%>

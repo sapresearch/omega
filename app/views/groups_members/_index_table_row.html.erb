@@ -3,7 +3,7 @@
 <tr id="groups_member_<%= groups_member.id.to_s %>_tr">
   <td>
     <%= om_button(:plain => true, :icon => 'user') do %>
-      <%= link_to groups_member.member.name, contact_path(groups_member.member), :class => 'blue', :'data-tooltip'=>"View Contact" %>
+      <%=  link_to groups_member.member.name, tenant_contact_path(groups_member.member), :class => 'blue', :'data-tooltip'=>"View Contact" %>
     <% end %>
   </td>
   <td>

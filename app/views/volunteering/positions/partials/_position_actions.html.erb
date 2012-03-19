@@ -1,21 +1,21 @@
 <div class="position-actions" id="actions-<%= position.id %>" >
   <%= with_permission(Volunteering::PERM_ADMIN) do %>
       <%= om_button(:contact => true, :icon => 'delete') do %>
-          <%= link_to 'Delete', volunteering_position_path(position), :method=>:delete, :confirm => 'Delete this position?', :'data-tooltip' => 'Delete this position' %>
+          <%=  link_to 'Delete', tenant_volunteering_position_path(position), :method=>:delete, :confirm => 'Delete this position?', :'data-tooltip' => 'Delete this position' %>
           <%#= link_to 'Delete', :'data-tooltip' => 'Delete this position' %>
 
       <% end %>
       <%= om_button(:contact => true, :icon=>'edit') do %>
-          <%= link_to 'Edit', edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>
+          <%=  link_to 'Edit', tenant_edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>
       <% end %>
       <%= om_button(:contact => true, :icon=>'clipboard-list ') do %>
-          <%= link_to 'Application History', history_volunteering_position_path(position), :'data-tooltip' => 'See all the applications for this position' %>
+          <%=  link_to 'Application History', tenant_history_volunteering_position_path(position), :'data-tooltip' => 'See all the applications for this position' %>
       <% end %>
   <% end %>
 
        <%= with_permission(Volunteering::PERM_ADMIN) do %>
           <%= om_button(:contact => true, :icon => 'clock') do %>
-              <%= link_to 'Log Hours', all_timesheets_volunteering_time_entries_url(:id => position, :'data-tooltip' => 'Log hours for this position') %>
+              <%=  link_to 'Log Hours', tenant_all_timesheets_volunteering_time_entries_url(:id => position, :'data-tooltip' => 'Log hours for this position') %>
           <% end %>
       <% end %>
 	  
@@ -25,15 +25,15 @@
 	   <% @application = Volunteering::Record.find_by_position_id_and_contact_id(position.id,Contact.for(current_user))%>
 		  <% if @application.nil?%>
 		  	<%= om_button(:contact => true, :icon => 'apply') do %>
-              <%= link_to 'Apply', new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
+              <%=  link_to 'Apply', tenant_new_volunteering_record_url(:id=>position), :'data-tooltip' => 'Apply for this position' %>
 		  	<%end%>
           <%end%>
       <%end%>
       <%end%>
       <%= with_permission(Volunteering::PERM_ADMIN) do %>
           <%= om_button(:contact => true, :icon => 'clock') do %>
-              <%#= link_to 'Enroll a Volunteer', new_volunteer_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>
-              <%= link_to 'Enroll a Volunteer', enroll_volunteers_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>
+              <%#=  link_to 'Enroll a Volunteer', tenant_new_volunteer_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>
+              <%=  link_to 'Enroll a Volunteer', tenant_enroll_volunteers_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>
               <%#= link_to 'Enroll a Volunteer', {} %>
               
           <% end %>

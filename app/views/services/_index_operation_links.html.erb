@@ -1,8 +1,8 @@
       <div class="services_left_links">
         <% if is_admin?(current_user) %>
-          <%= link_to "New", new_service_url(:service_level=>Service::LEAF_LEVEL), :class=>"services_index_operation_button" %>
-          <%= link_to "New Category", new_service_url(:service_level=>Service::BRANCH_LEVEL), :class=>"services_index_operation_button" %>
-          <%#= link_to "Create New"+(@super_service.nil? ? "" : " Service in "+@super_service.name), new_service_url %>
+          <%=  link_to "New", tenant_new_service_url(:service_level=>Service::LEAF_LEVEL), :class=>"services_index_operation_button" %>
+          <%=  link_to "New Category", tenant_new_service_url(:service_level=>Service::BRANCH_LEVEL), :class=>"services_index_operation_button" %>
+          <%#=  link_to "Create New"+(@super_service.nil? ? "" : " Service in "+@super_service.name), tenant_new_service_url %>
         <% end %>
       </div>
       <div class="services_right_links">

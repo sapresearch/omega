@@ -54,6 +54,6 @@
       <%= link_to 'delete', @contact_group, :method=> :delete, :remote => true %>
   <% end %>
   <%= om_button(:icon=>'user-edit') do %>
-      <%= link_to 'edit', edit_contact_group_path(@contact_group), :remote => true %>
+      <%=  link_to 'edit', tenant_edit_contact_group_path(@contact_group), :remote => true %>
   <% end %>
 </div>

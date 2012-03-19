@@ -22,20 +22,20 @@
           <div class="item-list-actions-wrapper corners">
             <div class="item-list-actions">
               <%= om_button(:plain=> true, :icon=>'delete') do %>
-                  <%= link_to 'Delete', message_path(message), :method=> :delete, :remote=> true %>
+                  <%=  link_to 'Delete', tenant_message_path(message), :method=> :delete, :remote=> true %>
               <% end %>
               <%= om_button(:plain=> true, :icon=>'mail-reply') do %>
-                  <%= link_to 'Reply', reply_message_path(message) %>
+                  <%=  link_to 'Reply', tenant_reply_message_path(message) %>
               <% end %>
             </div>
           </div>
           <h3>
             <% if !message.read? %>
-                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class => 'bold' %>
+                <%=  link_to truncate(message.subject, :length=>60), tenant_message_path(message), :class => 'bold' %>
 
             <% else %>
 
-                <%= link_to truncate(message.subject, :length=>60), message_path(message), :class => 'italic' %>
+                <%=  link_to truncate(message.subject, :length=>60), tenant_message_path(message), :class => 'italic' %>
 
             <% end %>
 
@@ -43,7 +43,7 @@
 
           <div>
             <%= om_button(:plain => true, :icon => 'user') do %>
-                From:  <%= link_to "#{message.from.first_name} #{message.from.last_name}", user_path(message.from), :class => 'blue' %>
+                From:  <%=  link_to "#{message.from.first_name} #{message.from.last_name}", tenant_user_path(message.from), :class => 'blue' %>
             <% end %>
             <%= message.created_at.strftime("%a %m/%d/%Y at %I:%M %p") %>
             <br>

@@ -4,7 +4,7 @@
     <%= with_permission(Volunteering::PERM_ADMIN) do %>
         <li>
           <%= om_button(:icon=>'edit', :sidebar => true) do %>
-              <%= link_to 'Edit', edit_volunteering_position_path(@position) %>
+              <%=  link_to 'Edit', tenant_edit_volunteering_position_path(@position) %>
           <% end %>
         </li>
     <% end %>
@@ -23,14 +23,14 @@
     <% end %>
     <li>
       <%= om_button(:icon=>'back', :sidebar => true) do %>
-          <%= link_to 'Back', volunteering_positions_path %>
+          <%=  link_to 'Back', tenant_volunteering_positions_path %>
       <% end %>
     </li>
     <% if current_user.has_permission?('view_application_history') %>
         <li>
 
           <%= om_button(:icon=>'clipboard-list ', :sidebar => true) do %>
-              <%= link_to 'Application History', history_volunteering_position_path(@position) %>
+              <%=  link_to 'Application History', tenant_history_volunteering_position_path(@position) %>
           <% end %>
         </li>
     <% end %>
@@ -38,7 +38,7 @@
       <%= with_permission(Volunteering::PERM_APPLY) do %>
           <% unless Contact.for(current_user).nil? %>
           <%= om_button(:icon => 'apply', :sidebar => true) do %>
-              <%= link_to 'Apply', new_volunteering_record_url(:id=>@position) %>
+              <%=  link_to 'Apply', tenant_new_volunteering_record_url(:id=>@position) %>
           <% end %>
           <%end%>
       <% end %>

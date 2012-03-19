@@ -14,14 +14,14 @@
       <div class="tr announcement">
         <div class="td topic_type"><%= announcement_sign %></div>
         <div class="td topic_title" title="<%= t.post.content %>">
-          <%= link_to t.post.title.html_safe, topic_url(t, :group_id=>@group.id) %>
-          <div class="author_block">By <span class="author_link"><%= link_to t.post.author.name, contact_url(t.post.author) %></span></div>
+          <%=  link_to t.post.title.html_safe, tenant_topic_url(t, :group_id=>@group.id) %>
+          <div class="author_block">By <span class="author_link"><%=  link_to t.post.author.name, tenant_contact_url(t.post.author) %></span></div>
         </div>
         <div class="td topic_popularity"><%= t.popularity %></div>
         <div class="td topic_last_post">
           <%= t.last_post.updated_at %>
           <div class="author_block">
-            By <span class="author_link"><%= link_to t.last_post.author.name, contact_url(t.last_post.author) %></span>
+            By <span class="author_link"><%=  link_to t.last_post.author.name, tenant_contact_url(t.last_post.author) %></span>
           </div>
         </div>
       </div>
@@ -30,14 +30,14 @@
       <div class="tr regular">
         <div class="td topic_type"></div>
         <div class="td topic_title" title="<%= t.post.content %>">
-          <%= link_to t.post.title.html_safe, topic_url(t, :group_id=>@group.id) %>
-          <div class="author_block">By <span class="author_link"><%= link_to t.post.author.name, contact_url(t.post.author) %></span></div>
+          <%=  link_to t.post.title.html_safe, tenant_topic_url(t, :group_id=>@group.id) %>
+          <div class="author_block">By <span class="author_link"><%=  link_to t.post.author.name, tenant_contact_url(t.post.author) %></span></div>
         </div>
         <div class="td topic_popularity"><%= t.popularity %></div>
         <div class="td topic_last_post">
           <%= t.last_post.updated_at %>
           <div class="author_block">
-            By <span class="author_link"><%= link_to t.last_post.author.name, contact_url(t.last_post.author) %></span>
+            By <span class="author_link"><%=  link_to t.last_post.author.name, tenant_contact_url(t.last_post.author) %></span>
           </div>
         </div>
       </div>
