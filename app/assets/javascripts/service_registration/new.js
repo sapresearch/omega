@@ -1,9 +1,9 @@
 function new_service_registration(service, url, from_page){
     
-    if(service.service.service_registration_form)
+    if(service.service_registration_form)
     {
-        var registration_html = service.service.service_registration_form.html
-        $( "#service-registration-new-dialog-form" ).attr("title", service.service.name + " Registration")
+        var registration_html = service.service_registration_form.html
+        $( "#service-registration-new-dialog-form" ).attr("title", service.name + " Registration")
         $( "#service-registration-new-dialog-form form ul").html(registration_html)
         $('.date_picker').datepicker()
 
@@ -19,7 +19,7 @@ function new_service_registration(service, url, from_page){
                 "Register": function() {
                     if ( validate_fields("new_service_registration") ) {
                         var registrant_id = $("#service-registration-new-dialog-form .select_registrant .contacts_list").val()
-                        register_service(service.service.id, registrant_id, "pending", true, url, from_page)
+                        register_service(service.id, registrant_id, "pending", true, url, from_page)
                         $( this ).dialog( "close" );
                     }
                 },
@@ -37,8 +37,8 @@ function new_service_registration(service, url, from_page){
     }
     else
     {
-        $( "#service-registration-new-dialog-confirm" ).attr("title", service.service.name + " Registration")
-        $( "#service-registration-new-dialog-confirm .confirm_question" ).html("Are you sure to register "+service.service.name+"?")
+        $( "#service-registration-new-dialog-confirm" ).attr("title", service.name + " Registration")
+        $( "#service-registration-new-dialog-confirm .confirm_question" ).html("Are you sure to register "+service.name+"?")
         $( "#service-registration-new-dialog-confirm" ).dialog({
             width: 'auto',
             modal: true,
@@ -46,7 +46,7 @@ function new_service_registration(service, url, from_page){
             buttons: {
                 "Register": function() {
                     var registrant_id = $("#service-registration-new-dialog-confirm .select_registrant .contacts_list").val()
-                    register_service(service.service.id, registrant_id, "pending", false, url, from_page)
+                    register_service(service.id, registrant_id, "pending", false, url, from_page)
                     $( this ).dialog( "close" );
                 },
                 Cancel: function() {

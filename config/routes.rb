@@ -77,11 +77,7 @@ Omega::Application.routes.draw do
           put :move, :path => 'move/:to_id'
         end
       end
-
-
-
-
-  end
+    end
   end
 
 

@@ -8,7 +8,7 @@ platforms :jruby do
 end
 
 gem "sqlite3", :platform => :ruby
-gem 'mysql2', '0.3.7'
+gem 'mysql2', '0.3.10'
 
 gem "jquery-rails"
 

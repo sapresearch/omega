@@ -177,12 +177,12 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
   add_index "contact_contacts_skills", ["contact_id", "skill_id"], :name => "index_contact_contacts_skills_on_contact_id_and_skill_id", :unique => true
 
   create_table "contact_data_imports", :force => true do |t|
-    t.text     "csv_rows",      :limit => 4294967295
-    t.text     "mapping",       :limit => 4294967295
-    t.text     "mapped_rows",   :limit => 4294967295
-    t.text     "imported_rows", :limit => 4294967295
+    t.text     "csv_rows",      :limit => 2147483647
+    t.text     "mapping",       :limit => 2147483647
+    t.text     "mapped_rows",   :limit => 2147483647
+    t.text     "imported_rows", :limit => 2147483647
     t.string   "status"
-    t.text     "contact_ids",   :limit => 4294967295
+    t.text     "contact_ids",   :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
@@ -908,7 +908,7 @@ ActiveRecord::Schema.define(:version => 20120126091111) do
     t.boolean  "volunteering_to_meet_requirements"
     t.integer  "hours_required"
     t.boolean  "parental_consent"
-    t.integer  "agreement",                         :default => 0
+    t.integer  "agreement",                         :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"

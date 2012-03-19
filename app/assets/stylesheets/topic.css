@@ -20,8 +20,8 @@
     font-size:12px;
     color:#222;
 }
-.topic_type{ width:5%;}
-.topic_title{ width:55%; font-weight:bold; }
+.topic_type{ width:5%; display:inline-block;}
+.topic_title{ width:55%; font-weight:bold; display:inline-block;}
 .topic_popularity{width:10%;}
 .topic_last_post{width:20%;}
 

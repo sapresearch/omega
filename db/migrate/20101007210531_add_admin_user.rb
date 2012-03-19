@@ -15,6 +15,9 @@ class AddAdminUser < ActiveRecord::Migration
       u.password_salt = 128.times.inject('') { |salt,| salt << rand(93) + 33 }
       u.password_hash = Digest::SHA512.hexdigest('admin' + u.password_salt)
       u.roles << Role.find_by_internal_name('administrator')
+      contact = u.build_contact
+      contact.addresses.build
+      contact.phone_numbers.build
     end.save(:validate => false)
   end
 

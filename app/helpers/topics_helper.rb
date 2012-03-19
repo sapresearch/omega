@@ -4,7 +4,7 @@
 	  include ApplicationLib
 	
 	  def announcement_sign
-	    image_tag "/images/announcement.png"
+	    image_tag "/assets/announcement.png"
 	  end    
 	
 	end

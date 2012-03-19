@@ -4,11 +4,9 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
-//= require jquery_ujs
-//= require rails
 //= require thirdParty/jquery
 //= require thirdParty/jquery-ui
+//= require rails
 //= require thirdParty/jquery.tipsy
 //= require thirdParty/jquery.dataTables.min.js
 

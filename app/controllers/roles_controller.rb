@@ -29,7 +29,6 @@ class RolesController < Controller
 
     respond_with(@role) do |format|
       format.js {redirect_to roles_url(:page=>@page)}
-      format.html {redirect_to roles_url(:page=>@page)}
     end
   end
 
@@ -95,6 +94,9 @@ class RolesController < Controller
             u.password_salt = 128.times.inject('') { |salt,| salt << rand(93) + 33 }
             u.password_hash = Digest::SHA512.hexdigest('admin' + u.password_salt)
           end
+          contact = user.build_contact
+          contact.addresses.build
+          contact.phone_numbers.build
         end
         user.roles << Role.find_by_internal_name('administrator')
         user.save(:validate=>false)

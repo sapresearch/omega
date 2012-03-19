@@ -67,7 +67,7 @@ function show_service_registration(service_registration_id, field_values, show_h
 }
 
 function edit_service_registration(service_registration_id, field_values, edit_html, url){
-    //var registration_html = service.service.service_registration_form.html
+    //var registration_html = serviceservice_registration_form.html
     $( "#service-registration-edit-dialog-form").html(edit_html)
     $('.date_picker').datepicker()
 

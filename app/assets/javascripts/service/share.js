@@ -12,7 +12,7 @@ function service_registration_html(){
 function find_service_by_id(services, id){
   if(isNaN(id)) return null;
   for(var i=0; i<services.length; i++){
-    if(services[i].service.id == id)
+    if(services[i].id == id)
       return services[i];
   }
   return null;
