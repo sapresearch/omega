@@ -1,5 +1,6 @@
 .table{border:1px solid #ddd;}
 .thead{ background: #eee;}
+.announcement_block{padding:5px;}
 .announcement{ background: lightyellow;}
 .th, .tr{}
 .tbody .tr{border-top:1px solid #ddd;}
@@ -21,7 +22,8 @@
     color:#222;
 }
 .topic_type{ width:5%; display:inline-block;}
-.topic_title{ width:55%; font-weight:bold; display:inline-block;}
+.topic_title{ width:55%; font-weight:bold; display:inline-block}
+.topic_title a{ vertical-align: bottom}
 .topic_popularity{width:10%;}
 .topic_last_post{width:20%;}
 
