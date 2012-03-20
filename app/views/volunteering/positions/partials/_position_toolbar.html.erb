@@ -2,7 +2,7 @@
 
   <%= with_permission(Volunteering::PERM_ADMIN) do %>
       <%= om_button(:contact => true, :icon => 'clock') do %>
-           <%=  link_to 'Invite a Volunteer', tenant_enroll_volunteers_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>
+           <%=  link_to 'Invite a Volunteer', enroll_volunteers_volunteering_records_path(:id=>position), :'data-tooltip' => 'Enroll a volunteer' %>
       <% end %>
       <%= om_button(:contact => true, :icon=>'edit') do %>
           <%=  link_to 'Edit', tenant_edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>
