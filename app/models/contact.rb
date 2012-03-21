@@ -1,5 +1,4 @@
 	class Contact < Model
-	  self.table_name = 'contacts'
 	  
 	  require_dependency 'contact/address'
 	  #require_dependency 'contact/group'
@@ -120,6 +119,7 @@
 	  scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
 	  
 	  attr_accessor :email_confirmation
+	  attr_accessible :account_id
 	
 	  validates :email,      :presence  => true,
 	  								 :confirmation => true,

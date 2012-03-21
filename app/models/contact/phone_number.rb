@@ -2,7 +2,7 @@
 		NUMBER_TYPES = %w{Home Business Cell}
 	
 		belongs_to :contact, :polymorphic => true
-		attr_accessible :number
+		attr_accessible :number, :account_id
 	    
 		# The validator won't work for this because of the namespaced validations.
 		validates :number, :presence => true#, :phone_number => true

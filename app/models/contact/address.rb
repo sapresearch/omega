@@ -6,7 +6,7 @@
 	  validates :city, :presence => true
 	  validates :zip_code, :presence => true
 	
-	  attr_accessible :address_type, :street, :unit_apt_number, :city, :state, :zip_code, :country
+	  attr_accessible :address_type, :street, :unit_apt_number, :city, :state, :zip_code, :country, :account_id
 	
 		def self.update_addresses(params)
 			if not params[:addresses_attributes].nil?

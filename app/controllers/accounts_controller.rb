@@ -41,6 +41,7 @@
     # POST /accounts
     # POST /accounts.json
     def create
+		params[:account].delete(:contact)
       @account = Account.new(params[:account])
 
       respond_to do |format|
@@ -66,7 +67,11 @@
 					@admin.password = password
 					@admin.password_confirmation = confirm
 					@admin.roles << Role.find_by_internal_name_and_account_id('administrator', @account.id)
-					@admin.save
+					
+					contact = @admin.build_contact(:account_id => @account.id)
+					contact.addresses.build(:account_id => @account.id)
+					contact.phone_numbers.build(:account_id => @account.id)
+					@admin.save(:validate => false)
 
           format.html { redirect_to @account, notice: 'Account was successfully created.' }
           format.json { render json: @account, status: :created, location: @account }
