@@ -47,6 +47,7 @@
 	  end
 	
 	  def edit
+		@user = User.find(params[:id])
 	    unless @user == current_user
 	      require_permission User::PERM_ADMIN
 	    end
