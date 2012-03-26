@@ -68,7 +68,7 @@ module Omega
         end
 
         def _get_dependencies_for_html
-          ([_get_javascript_tag('assets/dependencies')] + TYPES.collect do |type|
+          ([_get_javascript_tag('/assets/dependencies')] + TYPES.collect do |type|
             send(:"all_required_#{type.pluralize}").collect do |source, options|
               send(:"_get_#{type}_tag", *([source] << options))
             end

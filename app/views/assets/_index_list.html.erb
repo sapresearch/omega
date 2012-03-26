@@ -2,17 +2,17 @@
 <% assets ||= (@assets || []) %>
 
 <% if assets.empty? %>
-  <%= render "assets/index_no_asset_message" %>
+  <%= render "/assets/index_no_asset_message" %>
 <% else %>
   <div id="assets_accordion">
     <% assets.each do |asset| %>
       <div id="asset_unit_<%= asset.id %>" class="asset_unit">
         <h3 id="asset_head_<%= asset.id %>" class="accordion_head asset_head">
-          <%= render "assets/show_head", :asset=>asset %>
+          <%= render "/assets/show_head", :asset=>asset %>
         </h3>
 
         <div id="asset_body_<%= asset.id %>" class="accordion_body asset_body" >
-          <%= render "assets/show_body", :asset=>asset %>
+          <%= render "/assets/show_body", :asset=>asset %>
         </div>
       </div>
     <% end %>
