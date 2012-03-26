@@ -24,18 +24,22 @@
 		# This intercepts the "tenant_...._url" methods that are called in redirect to.
 		# We can't just overwrite the _url method becuase the redirect_to method would
 		# call the original method defined in Rails, not our monkeypatched method.
-		def method_missing(name, *args)
-			name = name.to_s
-			if name.include?("tenant_")
-				if args.empty?
-					send(name.to_s.gsub('tenant_', '').to_sym)
-				elsif !args.empty?
-					send(name.to_s.gsub('tenant_', '').to_sym, params[:account_name], args)
-				end
-			else
-				super
-			end
-		end
+#		def method_missing(name, *args)
+#			name = name.to_s
+#			if name.include?("tenant_")
+#				if args.empty?
+#					send(name.to_s.gsub('tenant_', '').to_sym)
+#				elsif !args.empty?
+#					send(name.to_s.gsub('tenant_', '').to_sym, params[:account_name], args)
+#				end
+#			else
+#				super
+#			end
+#		end
+
+	def default_url_options(options={})
+		{:account_name => Account.current.name}
+	end
 	
     protected
       def load_hosting_account
