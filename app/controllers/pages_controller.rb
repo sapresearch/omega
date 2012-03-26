@@ -4,35 +4,35 @@
 	
 	  def index
 	    @pages = Page.scoped
-	    respond_with('tenant', @pages)
+	    respond_with(@pages)
 	  end
 	
 	  def show
-	    respond_with('tenant', @page)
+	    respond_with(@page)
 	  end
 	
 	  def new
 	    @page = Page.new
-	    respond_with('tenant', @page)
+	    respond_with(@page)
 	  end
 	
 	  def edit
-	    respond_with('tenant', @page)
+	    respond_with(@page)
 	  end
 	
 	  def create
 	    @page = Page.create(params[:page])
-	    respond_with('tenant', @page, :location => page_url(@page.path))
+	    respond_with(@page, :location => page_url(@page.path))
 	  end
 	
 	  def update
 	    @page.update_attributes(params[:page])
-	    respond_with('tenant', @page)
+	    respond_with(@page)
 	  end
 	
 	  def destroy
 	    @page.destroy
-	    respond_with('tenant', @page)
+	    respond_with(@page)
 	  end
 	
 	  private

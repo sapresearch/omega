@@ -12,46 +12,46 @@
 	    @records = Volunteering::Record.scoped.includes(:contact, :position)
 	    @records = @records
 	    @records = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
-	    respond_with('tenant', @records)
+	    respond_with(@records)
 	  end
 	
 	  def show
 	    @record = Volunteering::Record.find(params[:id])
-	    respond_with('tenant', @record)
+	    respond_with(@record)
 	  end
 	
 	  def newest
 	    @records = Volunteering::Record.find(:all, :conditions => ['status = ?', "Applied"])
 	    @records =  @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
 	    breadcrumb 'Newest Applications' => :newest_volunteering_records
-	    respond_with('tenant', @records)
+	    respond_with(@records)
 	
 	  end
 	
 	  def pending
 	    @records = Volunteering::Record.find(:all, :conditions => ['status = ?', "Pending"])
 	    breadcrumb 'Pending Applications' => :pending_volunteering_records
-	    respond_with('tenant', @records)
+	    respond_with(@records)
 	  end
 	
 	  def my_applications
 	    @records = Volunteering::Record.where('volunteering_records.contact_id = ?', Contact.for(current_user))
 	    @records = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
 	    breadcrumb 'Pending Applications' => :pending_volunteering_records
-	    respond_with('tenant', @records)
+	    respond_with(@records)
 	  end
 	
 	  def completed
 	    @records = Volunteering::Record.find(:all, :conditions => ['status = ?', "Complete"])
 	    @records = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
 	    breadcrumb 'Completed Applications' => :completed_volunteering_records
-	    respond_with('tenant', @records)
+	    respond_with(@records)
 	
 	  end
 	
 	  def administer
 	    @record = Volunteering::Record.find(params[:id])
-	    respond_with('tenant', @record)
+	    respond_with(@record)
 	  end
 	
 	
@@ -64,7 +64,7 @@
 	    record    = Volunteering::Record.find(params[:id])
 	    @records  = Volunteering::Record.where('position_id = ?', record.position_id).order('created_at desc')
 	    @records =  @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
-	    respond_with('tenant', @records)
+	    respond_with(@records)
 	  end
 	
 	  def user_history
@@ -73,7 +73,7 @@
 	    @records      = Volunteering::Record.where('contact_id = ?', contact_id).order('created_at desc')
 	  
 	    breadcrumb 'Applications from user' => 'Applications from user'
-	    respond_with('tenant', @records)
+	    respond_with(@records)
 	  end
 	
 	  def new
@@ -86,7 +86,7 @@
 	    end 
 	    
 	    @contact = Contact.for(current_user)
-	    respond_with('tenant', @record)
+	    respond_with(@record)
 	  end
 	
 	  def new_volunteer
@@ -108,7 +108,7 @@
 	    
 	    @contact = Contact.find(@record.contact_id)
 	    
-	    respond_with('tenant', @record)
+	    respond_with(@record)
 	  end
 	
 	  def create
@@ -132,7 +132,7 @@
 	   	@user = Contact.find(@record.contact_id)
 	   	UserMailer.parental_approval(@user).deliver
 	   end
-	   respond_with('tenant', @record)
+	   respond_with(@record)
 	  end
 	  
 	  def create_volunteer
@@ -146,7 +146,7 @@
 	   
 	   UserMailer.parental_approval(@user).deliver
 	  
-	   respond_with('tenant', @record)
+	   respond_with(@record)
 	    
 	  end
 	  
@@ -190,7 +190,7 @@
 	
 		@contact.update_attributes(contact)
 	
-	    respond_with('tenant', @record)
+	    respond_with(@record)
 	  end
 	
 	  def withdraw
@@ -232,7 +232,7 @@
 			@records << Volunteering::Record.new if @records.empty?
 	
 			@params = params
-			respond_with('tenant', @skills_and_interests)
+			respond_with(@skills_and_interests)
 		end
 	
 		def create_single

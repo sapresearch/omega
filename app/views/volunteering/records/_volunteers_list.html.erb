@@ -10,7 +10,7 @@
 						<span class="om-icon-only om-blue-icon ui-icon-plus" data-tooltip="Add this volunteer"></span>
 					</span>
 					<span class="om-contact-icon-button">
-						<%=  link_to ("<span class='om-icon om-icon-user-add'></span>".html_safe), tenant_my_page_user_path(Contact.find(row[:id]).user), :'data-tooltip' => "See this user's homepage" %>
+						<%=  link_to ("<span class='om-icon om-icon-user-add'></span>".html_safe), my_page_user_path(Contact.find(row[:id]).user), :'data-tooltip' => "See this user's homepage" %>
 					</span>
 					<%= " #{row[:first_name].to_s} #{row[:last_name].to_s}" %>
 				</li>

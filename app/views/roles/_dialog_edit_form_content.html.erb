@@ -1,5 +1,5 @@
   <p>
-    <%= form_for(role, :url => tenant_edit_role_path(role), :remote=>true) do |form| %>
+    <%= form_for(role, :url => edit_role_path(role), :remote=>true) do |form| %>
       <div class="field">
         <%= form.label :name %>
         <%= form.text_field :name, :maxlength=>Role::MAX_LENGTH, :size=>30 %>

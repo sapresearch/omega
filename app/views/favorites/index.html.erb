@@ -21,7 +21,7 @@
           <div class="item-list-actions-wrapper corners">
             <div class="item-list-actions">
               <%= om_button(:plain => true, :icon=>'delete') do %>
-                  <%=  link_to 'Remove as favorite', tenant_favorite_path(favorite.item), :method=> :delete %>
+                  <%=  link_to 'Remove as favorite', favorite_path(favorite.item), :method=> :delete %>
               <% end %>
               <%= om_button(:plain => true, :icon=>'next') do %>
                   <%= link_to_favorite(favorite) %>

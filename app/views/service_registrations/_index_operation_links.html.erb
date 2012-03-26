@@ -4,7 +4,7 @@
           :class=>"services_registration_operation_button" %>
       </div>
       <div class="services_right_links">
-        <%=  link_to "Back to "+(@service.super_service.nil? ? "All Services" : @service.super_service.name), tenant_services_url(:service_id=>@service.id), :class=>"services_registration_operation_button" %>
+        <%=  link_to "Back to "+(@service.super_service.nil? ? "All Services" : @service.super_service.name), services_url(:service_id=>@service.id), :class=>"services_registration_operation_button" %>
       </div>
       <script type="text/javascript">
         $('.services_registration_operation_button').button({ icons: {primary:'ui-icon-gear'} });

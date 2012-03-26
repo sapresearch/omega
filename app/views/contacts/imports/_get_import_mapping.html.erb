@@ -49,11 +49,11 @@
   <tr>
 
     <%= om_button(:icon=>'cancel') do %>
-      <%=  link_to 'Undo Import', tenant_undo_import_finalize_contact_imports_url(:id => @import) %>
+      <%=  link_to 'Undo Import', undo_import_finalize_contact_imports_url(:id => @import) %>
     <%end%>
 
     <%= om_button(:icon=>'cancel') do %>
-    <%=  link_to 'Redo Field Mapping', tenant_redo_mapping_contact_imports_url(:id => @import) %>
+    <%=  link_to 'Redo Field Mapping', redo_mapping_contact_imports_url(:id => @import) %>
     <%end%>
 
   </tr>

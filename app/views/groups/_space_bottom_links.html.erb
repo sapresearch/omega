@@ -2,7 +2,7 @@
   <%= link_to_function "New", "load_dialog_form('#{escape_javascript(render "posts/dialog_new_form", :post=>@new_post, :is_topic=>true)}', {width:620})", :class=>"operation_button" %>
 </div>
 <div class="right_links">
-  <%=  link_to "Back to "+@group.name, tenant_groups_url(:group_id=>@group.id), :class=>"operation_button" %>
+  <%=  link_to "Back to "+@group.name, groups_url(:group_id=>@group.id), :class=>"operation_button" %>
 </div>
 <script type="text/javascript">
   $('.operation_button').button({ icons: {primary:'ui-icon-gear'} });

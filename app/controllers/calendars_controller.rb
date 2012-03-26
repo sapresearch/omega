@@ -4,7 +4,7 @@
 	
 	  def index
 	    @calendars = @scope
-	    respond_with('tenant', @calendars)
+	    respond_with(@calendars)
 	  end
 	
 	  def administer
@@ -14,40 +14,40 @@
 	  def show
 	    @calendar = @scope.find(params[:id])
 	    @events = @calendar.events
-	    respond_with('tenant', @calendars)
+	    respond_with(@calendars)
 	  end
 	
 	  def new
 	    @calendar = @scope.new
-	    respond_with('tenant', @calendar)
+	    respond_with(@calendar)
 	  end
 	
 	  def create
 	    @calendar = @scope.create(params[:calendar])
-	    respond_with('tenant', @calendar, :location => @calendar)
+	    respond_with(@calendar, :location => @calendar)
 	  end
 	
 	  def edit
 	    @calendar = @scope.find(params[:id])
-	    respond_with('tenant', @calendar)
+	    respond_with(@calendar)
 	  end
 	
 	  def update
 	    @calendar = @scope.find(params[:id])
 	    @calendar.update_attributes(params[:calendar])
-	    respond_with('tenant', @calendar)
+	    respond_with(@calendar)
 	  end
 	
 	  def add_event
 	    @calendar = @scope.find(params[:id])
 	    @event = Event.new(params[:event])
-	    respond_with('tenant', @calendar)
+	    respond_with(@calendar)
 	  end
 	
 	  def destroy
 	    @calendar = @scope.find(params[:id])
 	    @calendar.destroy
-	    respond_with('tenant', @calendar)
+	    respond_with(@calendar)
 	  end
 	
 	  def events

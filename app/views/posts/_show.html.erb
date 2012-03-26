@@ -1,6 +1,6 @@
 <div class="post_block" id="post_block_<%= post.id.to_s %>">
   <div class="post_created_at">
-    <%= post.created_at %> created by <%=  link_to post.author.name, tenant_contact_url(post.author) %>
+    <%= post.created_at %> created by <%=  link_to post.author.name, contact_url(post.author) %>
   </div>
   <div class="post_body round shadow">
     <% if post.title.strip.length>0 %>

@@ -32,12 +32,12 @@
 
   
 		<%= om_button(:icon=>'next') do %>
-    		<%=  link_to 'Continue', tenant_csv_import_wizard_contact_imports_url(:step => '2')%>
+    		<%=  link_to 'Continue', csv_import_wizard_contact_imports_url(:step => '2')%>
     		<% session[:last_page] = "intro" %>
 		<%end%>
 
 		<%= om_button(:icon=>'cancel') do %>
-    		<%=  link_to 'Cancel', tenant_contacts_url()%>
+    		<%=  link_to 'Cancel', contacts_url()%>
 		<%end%>
 
 

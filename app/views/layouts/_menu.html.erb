@@ -1,36 +1,36 @@
 <div id="navigation">
 
   <ul id="topnav">
-    <li><%=  link_to "home", tenant_root_url, :class =>'root_em' %></li>
-    <li><%=  link_to "Participate", tenant_root_url, :class =>'root_em' %>
+    <li><%=  link_to "home", root_url, :class =>'root_em' %></li>
+    <li><%=  link_to "Participate", root_url, :class =>'root_em' %>
       <div>
 	    <!-- commented out for testing only. remember to uncomment later -->
         <%=  link_to "Our Services", services_url(:super_service_id=>Service::ROOT_SUPER_SERVICE_ID, :my_services_switch=>"off") %>
-        <%=  link_to "Volunteer", tenant_volunteering_positions_url %>
-        <%=  link_to "Report My Time", tenant_new_volunteering_time_entry_url %>
-        <%=  link_to "My Messages", tenant_messages_url %>       
+        <%=  link_to "Volunteer", volunteering_positions_url %>
+        <%=  link_to "Report My Time", new_volunteering_time_entry_url %>
+        <%=  link_to "My Messages", messages_url %>       
         <% unless current_user.is_anonymous? %>
-		   	<%=  link_to "MyOmega", tenant_my_page_user_path(current_user) %>
+		   	<%=  link_to "MyOmega", my_page_user_path(current_user) %>
 		  <% end %>
       </div> 
     </li>
 
-    <li> <%=  link_to "Calendar", tenant_calendars_url %></li>
+    <li> <%=  link_to "Calendar", calendars_url %></li>
     
       <%#= Manage Volunteers appears if you have permission %>
      
      <%= with_permission(Volunteering::PERM_ADMIN) do %>
      <li>
-        <%=  link_to "Manage Volunteers", tenant_volunteering_positions_url %>
+        <%=  link_to "Manage Volunteers", volunteering_positions_url %>
         <div>
-          <%=  link_to "Volunteering Status", tenant_volunteering_positions_url %>
+          <%=  link_to "Volunteering Status", volunteering_positions_url %>
           <%= with_permission(Volunteering::PERM_ADMIN) do %>
-            <%=  link_to "Create an Assignment", tenant_new_volunteering_position_path %>
+            <%=  link_to "Create an Assignment", new_volunteering_position_path %>
           <% end %>
           <%= with_permission(Volunteering::PERM_ADMIN) do %>
-             <%=  link_to "Manage Applicants", tenant_volunteering_records_path %>
+             <%=  link_to "Manage Applicants", volunteering_records_path %>
           <%end%> 
-          <%=  link_to "Enter Volunteer Time", tenant_my_time_sheets_volunteering_positions_path %>
+          <%=  link_to "Enter Volunteer Time", my_time_sheets_volunteering_positions_path %>
          </div>
        </li>
        <% end %> 
@@ -48,13 +48,13 @@
      <%#= People / Asset Management Menu Item %>
      <%= with_permission(Volunteering::PERM_ADMIN) do %>
       <li>
-        <%=  link_to "Administer Team", tenant_contacts_url %>
+        <%=  link_to "Administer Team", contacts_url %>
         <div>
-           <%=  link_to "Groups", tenant_groups_url %>
-           <%=  link_to "Reports", tenant_reports_url %>
-           <%=  link_to "Contacts", tenant_contacts_url %>
-           <%=  link_to "Import Contacts", tenant_csv_import_wizard_contact_imports_url(:step=> '1') %>
-           <%=  link_to "List of imports", tenant_contact_imports_url() %>
+           <%=  link_to "Groups", groups_url %>
+           <%=  link_to "Reports", reports_url %>
+           <%=  link_to "Contacts", contacts_url %>
+           <%=  link_to "Import Contacts", csv_import_wizard_contact_imports_url(:step=> '1') %>
+           <%=  link_to "List of imports", contact_imports_url() %>
          </div>
        </li>
       <% end %>      
@@ -63,11 +63,11 @@
 	     
       <%#= Administer the Site %>
       <%= with_permission(Volunteering::PERM_ADMIN) do %>
-      <li> <%=  link_to "Administer Site", tenant_settings_url %> 
+      <li> <%=  link_to "Administer Site", settings_url %> 
          <div>
-           <%=  link_to "Permission \\ Role Matrix", tenant_roles_url %>
-           <%=  link_to "Users", tenant_users_url %>
-           <%=  link_to "Edit Logo", tenant_edit_logo_images_url  %>
+           <%=  link_to "Permission \\ Role Matrix", roles_url %>
+           <%=  link_to "Users", users_url %>
+           <%=  link_to "Edit Logo", edit_logo_images_url  %>
          </div>
       </li>
       <% end %>

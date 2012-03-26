@@ -6,7 +6,7 @@
       <% if is_admin? %>
         <br/><br/>
         <%= om_button(:contact => true, :icon => 'clock') do %>
-          <%=  link_to 'Create a New Service'+(@super_service ? ' in '+@super_service.name : ''), tenant_new_service_url %>
+          <%=  link_to 'Create a New Service'+(@super_service ? ' in '+@super_service.name : ''), new_service_url %>
         <% end %>
       <% end %>
     <% else %>

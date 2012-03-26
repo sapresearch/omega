@@ -5,12 +5,12 @@
           <td>
 
              <%= om_button(:plain => true, :icon => 'next') do %>
-                <%=  link_to 'See Application', tenant_volunteering_record_path(record) %>
+                <%=  link_to 'See Application', volunteering_record_path(record) %>
             <% end %>
           </td>
           <td>
             <%= om_button(:plain => true, :icon => 'user') do %>
-                <%=  link_to "#{record.contact.first_name} #{record.contact.last_name}", tenant_contact_path(record.contact), :class => 'blue' %>
+                <%=  link_to "#{record.contact.first_name} #{record.contact.last_name}", contact_path(record.contact), :class => 'blue' %>
             <% end %>
           </td>
           <td><%= om_button(:plain => true, :icon => 'mail-sent') do %>
@@ -19,7 +19,7 @@
           </td>
           <td>
             <%= om_button(:plain => true, :icon => 'folder-open') do %>
-                <%=  link_to record.action , tenant_administer_volunteering_record_url(record), :remote => 'true' %>
+                <%=  link_to record.action , administer_volunteering_record_url(record), :remote => 'true' %>
             <% end %>
           </td>
           <td> <%= om_button(:plain => true, :icon => 'folder-open') do %>

@@ -57,7 +57,7 @@ Email: <%= @contact.email %><br/>
     <span data-tooltip="Upload your document">
       <span class="om-icon-only om-blue-icon ui-icon-document"></span>
 
-      <%=  link_to "Upload", tenant_upload_contact_path(@contact), :remote => true %>
+      <%=  link_to "Upload", upload_contact_path(@contact), :remote => true %>
 </span>
     
       <%= render :partial => "/contacts/uploads/upload_records" %>
@@ -154,7 +154,7 @@ Email: <%= @contact.email %><br/>
           <%# Contact::Group.without_contact(@contact).each do |g| %>
               <li>
                 <span data-tooltip="Add  <%#= "#{@contact.first_name} #{@contact.last_name} to: #{g.name} by clicking. The assignment gets applied right away".html_safe %>">
-                <%#=  link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus"></span> #{g.name.truncate(40)} }.html_safe, tenant_assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
+                <%#=  link_to %Q{<span class="om-icon-only om-blue-icon ui-icon-plus"></span> #{g.name.truncate(40)} }.html_safe, assign_contact_contact_group_path(g, :contact_id => @contact.id), :method => :put, :remote => true %>
               </span>
               </li>
           <%# end %>

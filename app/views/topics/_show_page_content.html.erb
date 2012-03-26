@@ -1,6 +1,6 @@
 <div class="topic_block">
   <div class="topic_created_at">
-    <%= @topic.created_at %> created by <%=  link_to @topic.author.name, tenant_contact_url(@topic.author) %>
+    <%= @topic.created_at %> created by <%=  link_to @topic.author.name, contact_url(@topic.author) %>
   </div>
   <div class="topic_body round shadow <%= "announcement" if @topic.is_announcement? %>">
     <div class="topic_content">

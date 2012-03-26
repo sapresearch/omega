@@ -2,11 +2,11 @@
   <div class="item-list-actions-wrapper corners">
     <div class="item-list-actions">
       <%= om_button(:plain => true, :icon => 'folder-edit') do %>
-          <%=  link_to "Withdraw Application", tenant_withdraw_volunteering_record_path(record)%>
+          <%=  link_to "Withdraw Application", withdraw_volunteering_record_path(record)%>
       <% end %>
       <br>
       <%= om_button(:plain => true, :icon => 'next') do %>
-          <%=  link_to 'Application Details', tenant_volunteering_record_url(record) %>
+          <%=  link_to 'Application Details', volunteering_record_url(record) %>
       <% end %>
       <br>
     </div>
@@ -18,7 +18,7 @@
   <ul>
     <li>
       <%= om_button(:plain => true, :icon => 'user') do %>
-          From:  <%=  link_to "#{record.contact.first_name} #{record.contact.last_name}", tenant_contact_path(record.contact), :class => 'blue' %>
+          From:  <%=  link_to "#{record.contact.first_name} #{record.contact.last_name}", contact_path(record.contact), :class => 'blue' %>
 
       <% end %>
     </li>

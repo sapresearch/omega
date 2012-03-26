@@ -34,13 +34,13 @@
 
               <% if position.status_of(Contact.for(current_user)) == :valid %>
                   <%= om_button(:plain => true, :icon => 'clock') do %>
-                      <%=  link_to 'Log Hours', tenant_new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user))) %>
+                      <%=  link_to 'Log Hours', new_volunteering_time_entry_url(:id => position.record_for(Contact.for(current_user))) %>
                   <% end %>
               <% end %>
 
               <% if position.status_of(Contact.for(current_user)) != :valid %>
                   <%= om_button(:plain => true, :icon => 'apply') do %>
-                      <%=  link_to 'Apply', tenant_new_volunteering_record_url(:id=>position) %>
+                      <%=  link_to 'Apply', new_volunteering_record_url(:id=>position) %>
                   <% end %>
               <% end %>
               <%= toggle_favorite(position) %>
@@ -65,11 +65,11 @@
               </div>
           <% end %>
               <h2>
-                <%=  link_to truncate(position.name, :length=>60), tenant_volunteering_position_path(position) %>
+                <%=  link_to truncate(position.name, :length=>60), volunteering_position_path(position) %>
               </h2>
 
               <p class="posDescribtion">
-                <%= truncate(position.description, :length=> 160) %> <%=  link_to '( read more ... )', tenant_volunteering_position_path(position) %>
+                <%= truncate(position.description, :length=> 160) %> <%=  link_to '( read more ... )', volunteering_position_path(position) %>
               </p>
 
               <div class="position_tags">

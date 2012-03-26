@@ -3,16 +3,16 @@
 	
 	  def index
 	    require_permission Session::PERM_ADMIN
-	    respond_with('tenant', @sessions = Session.all)
+	    respond_with(@sessions = Session.all)
 	  end
 	
 	  def show
 	    require_permission Session::PERM_ADMIN
-	    respond_with('tenant', @session = Session.find_by_id(params[:id]))
+	    respond_with(@session = Session.find_by_id(params[:id]))
 	  end
 	
 	  def new
-	    respond_with('tenant', @session = Session.new)
+	    respond_with(@session = Session.new)
 	  end
 	
 	  def edit
@@ -28,7 +28,7 @@
 	      set_current_user(@session.user)
 	    end
 	    
-	    respond_with('tenant', @session)
+	    respond_with(@session)
 	  end
 	
 	  def update

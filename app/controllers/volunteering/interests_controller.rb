@@ -6,7 +6,7 @@
 	
 	    @interests = @interests.where("name LIKE ?", params[:q] + '%') if params[:q]
 	
-	    respond_with('tenant', @interests) do |format|
+	    respond_with(@interests) do |format|
 	      format.json { render :json => @interests.map { |s| { :id => s.name, :name => s.name } } }
 	    end
 	  end

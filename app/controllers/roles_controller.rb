@@ -15,7 +15,7 @@ class RolesController < Controller
     @roles = Role.paginate(:page => @page, :per_page => Role::PAGE_SIZE)
     @role = Role.new(:name=>"New Role")
 
-    respond_with('tenant', @roles)
+    respond_with(@roles)
   end
 
   def create
@@ -27,7 +27,7 @@ class RolesController < Controller
 
     @page = (Role.all.count / Role::PAGE_SIZE).ceil
 
-    respond_with('tenant', @role) do |format|
+    respond_with(@role) do |format|
       format.js {redirect_to roles_url(:page=>@page)}
     end
   end
@@ -41,7 +41,7 @@ class RolesController < Controller
     @role.update_attributes(:name=>@name,:description=>@description, :internal_name=>@internal_name)
     @page = params[:page]
 
-    respond_with('tenant', @role) do |format|
+    respond_with(@role) do |format|
       format.js {redirect_to roles_url(:page=>@page)}
     end
   end
@@ -106,7 +106,7 @@ class RolesController < Controller
 
     @roles = Role.all
     @permissions = Permission.all
-    respond_with('tenant', @roles)
+    respond_with(@roles)
   end
 
   def update_permission
@@ -116,7 +116,7 @@ class RolesController < Controller
     @permission_switch == "on" ? @role.permissions << @permission : @role.permissions.delete(@permission)
     @role.save!
 
-    respond_with('tenant', @role)
+    respond_with(@role)
   end
 
 end

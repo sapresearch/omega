@@ -13,7 +13,7 @@
 	      @topic.groups << @group
 	      @topic.save
 	    end
-	    respond_with('tenant', @post) do |format|
+	    respond_with(@post) do |format|
 	      format.js do
 	        if @topic
 	          redirect_to space_group_url(@group)
@@ -29,7 +29,7 @@
 	    @post.update_attributes(params[:post])
 	    @group = Group.find(params[:group_id])
 	    @topic = @post.root_topic
-	    respond_with('tenant', @post)
+	    respond_with(@post)
 	  end
 	
 	  def destroy

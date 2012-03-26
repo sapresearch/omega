@@ -38,11 +38,11 @@
 
   <tr>
     <%= om_button(:icon=>'cancel') do %>
-    <%=  link_to 'Redo Import', tenant_redo_import_finalize_contact_imports_url(:id => @import) %>
+    <%=  link_to 'Redo Import', redo_import_finalize_contact_imports_url(:id => @import) %>
     <%end%>
 
     <%= om_button(:icon=>'cancel') do %>
-    <%=  link_to 'Delete Forever', tenant_delete_forever_contact_imports_url(:id => @import) %>
+    <%=  link_to 'Delete Forever', delete_forever_contact_imports_url(:id => @import) %>
     <%end%>
   </tr>
 

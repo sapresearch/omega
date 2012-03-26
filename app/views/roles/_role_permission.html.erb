@@ -10,7 +10,7 @@
               <% unless role.locked %>
                 <div class="role_operation_links round shadow">
                   <%= link_to_function om_button(:plain => true, :icon => 'edit'){}, "edit_role('#{escape_javascript(render "dialog_edit_form_content", :role=>role, :page=>@page)}')" %>
-                  <%= link_to_function om_button(:plain => true, :icon => 'delete'){}, "destroy_role('#{escape_javascript(render "dialog_destroy_confirm", :role=>role)}', '#{tenant_role_url(role)}', #{@page.to_s})" %>
+                  <%= link_to_function om_button(:plain => true, :icon => 'delete'){}, "destroy_role('#{escape_javascript(render "dialog_destroy_confirm", :role=>role)}', '#{role_url(role)}', #{@page.to_s})" %>
                 </div>
               <% end %>
             </div>

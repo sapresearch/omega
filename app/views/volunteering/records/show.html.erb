@@ -39,11 +39,11 @@
 			<span class="application-detail"> <%= @record.action %>  </span> <br/><br/><br/><br/>
 		
 		    <%= om_button(:contact => true, :icon => 'folder-open') do %>
-                <%=  link_to "Take Action Now!" , tenant_administer_volunteering_record_url(@record), :remote => 'true' %> 
+                <%=  link_to "Take Action Now!" , administer_volunteering_record_url(@record), :remote => 'true' %> 
             <% end %>	
 			
 			 <%= om_button(:contact => true, :icon => 'user') do %>
-                <%=  link_to "Edit Applicant" , tenant_edit_volunteering_record_url(@record)%>
+                <%=  link_to "Edit Applicant" , edit_volunteering_record_url(@record)%>
              <% end %>	
 		 
          <% end %>
@@ -64,7 +64,7 @@
 	
 
   <%#= om_button(:icon => 'next') do %>
-            <%#=  link_to "Go To Volunteering Positions", tenant_volunteering_positions_url %>
+            <%#=  link_to "Go To Volunteering Positions", volunteering_positions_url %>
         <%# end %>
 
 

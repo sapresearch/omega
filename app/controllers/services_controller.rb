@@ -35,7 +35,7 @@
 	    session[:requestable_switch] = params[:requestable_switch] || ( session[:requestable_switch] || "on" )
 	
 	    filter_services
-	    respond_with('tenant', @services)
+	    respond_with(@services)
 	  end
 	
 	  def new
@@ -63,7 +63,7 @@
 	
 	    # automatically restore filters to default when creating a new service in order to view it.
 	    reset_filter_sessions   
-	    respond_with('tenant', @service)
+	    respond_with(@service)
 	  end
 	
 	  def create
@@ -112,7 +112,7 @@
 	      
 	    end
 	    
-	    respond_with('tenant', @service, :location=>services_url(:service_id=>@service.id))
+	    respond_with(@service, :location=>services_url(:service_id=>@service.id))
 	  end
 	
 	  def edit
@@ -140,7 +140,7 @@
 	
 	    # automatically set filters to default
 	    reset_filter_sessions    
-	    respond_with('tenant', @service)
+	    respond_with(@service)
 	  end
 	
 	  def update
@@ -260,7 +260,7 @@
 	    @services = @service.sibling_services
 	
 	    filter_services
-	    respond_with('tenant', @service, :location=>services_url(:service_id=>@service.id))
+	    respond_with(@service, :location=>services_url(:service_id=>@service.id))
 	  end
 	
 	  def destroy
@@ -270,7 +270,7 @@
 	    @services = sub_services_of(@super_service)
 	
 	    filter_services
-	    respond_with('tenant', @service)
+	    respond_with(@service)
 	  end
 	
 	
