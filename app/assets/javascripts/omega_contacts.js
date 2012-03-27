@@ -4,7 +4,7 @@ $(function() {
      * get all contacts out of the db
      */
     $.ajax({
-        url: '/contacts/all',
+        url: account_prefix_path+'/contacts/all',
         dataType: 'json',
         success: function(data) {
             update_contacts(data);
@@ -17,11 +17,11 @@ $(function() {
      * autocomplete for contacts
      */
     $ac_contacts.autocomplete({
-        source : '/contacts/autocomplete',
+        source : account_prefix_path+'/contacts/autocomplete',
         minLength: 3,
         select: function(event, ui) {
             $.ajax({
-                url: '/contacts/' + ui.item.id,
+                url: '/'+account_name+'/contacts/' + ui.item.id,
                 dataType: 'script',
                 cache : false
             });
@@ -88,7 +88,7 @@ $(function() {
             var contact_id = ui.draggable.attr('data-id');
             //var from_group_id = ui.draggable.attr('data-group-id');
             $.ajax({
-                url : '/groups_members/add/',
+                url : account_prefix_path+'/groups_members/add/',
                 data: {group_id:group_id, member_id:contact_id,type:"contacts_to_group"},
                 type: 'POST',
                 dataType : 'script'
@@ -149,7 +149,7 @@ function update_contacts(contacts, group_id, group_name) {
                 list += '<tr data-id="' + contacts[i].id + '" data-group-id="' + group_id + '">';
             else
                 list += '<tr data-id="' + contacts[i].id + '">'
-            list += '<td><a data-remote="true" href="/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
+            list += '<td><a data-remote="true" href="'+account_prefix_path+'/contacts/' + contacts[i].id + '">' + contacts[i].last_name + ', '
                     + contacts[i].first_name + '</a>'
                     + '<td class="text-right" width="40px"><span class="mgm-contact hide">'
                     + '<span data-tooltip="Add me to another group me by dragging into a group on the left" class="om-icon-only om-blue-icon ui-icon-arrow-4-diag"></span>'

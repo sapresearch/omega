@@ -7,6 +7,12 @@
 
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
+  <script type="text/javascript">
+    var account_name = '<%= Account.current.name %>'
+    var account_prefix_path = ''
+    if(account_name.length>0)
+      account_prefix_path = '/'+account_name
+  </script>
   <%= csrf_meta_tags %>
 
   <%# require_stylesheet 'application_evergreen', 'thirdParty/jquery-ui-1.8.4.custom' %>
