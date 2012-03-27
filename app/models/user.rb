@@ -46,7 +46,8 @@
 	    end
 	  
 	  end
-	
+
+		belongs_to :account
 	  has_and_belongs_to_many :roles
 	  
 	  has_one :contact
@@ -71,8 +72,8 @@
 	  # TODO Not sure why this is commented out 
 		# accepts_flattened_values_for :skills, :value => :name
 	
-	  attr_accessor :password, :password_confirmation
-	  attr_accessible :username, :email, :contact_attributes, :account_id
+	  attr_accessor :password, :password_confirmation, :account_id
+	  attr_accessible :username, :email, :contact_attributes
 	
 	  validates :username,   :presence => true,
 	                         :uniqueness => true,

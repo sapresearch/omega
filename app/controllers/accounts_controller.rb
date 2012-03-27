@@ -63,9 +63,10 @@
 	
 					password = params[:user].delete(:password)
 					confirm = params[:user].delete(:password_confirmation)
-					@admin = User.new(:account_id => @account.id, :email => params[:user][:email], :username => params[:user][:username])
+					@admin = User.new(:email => params[:user][:email], :username => params[:user][:username])
 					@admin.password = password
 					@admin.password_confirmation = confirm
+					@admin.account = @account
 					@admin.roles << Role.find_by_internal_name_and_account_id('administrator', @account.id)
 					
 					contact = @admin.build_contact(:account_id => @account.id)

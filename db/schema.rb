@@ -11,16 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120126091111) do
+ActiveRecord::Schema.define(:version => 20120327184425) do
 
   create_table "accounts", :force => true do |t|
-    t.integer  "user_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
 
   create_table "asset_allocations", :force => true do |t|
     t.integer  "asset_id"
