@@ -34,12 +34,14 @@
 	  end
 	
 	  def join
+		 account = Account.find_by_name(params[:account_name])
 		 password = params[:user].delete(:password)
 		 confirm = params[:user].delete(:password_confirmation)
 		 unless params[:user][:contact_attributes][:birthday].nil?
 			params[:user][:contact_attributes][:birthday] = Date.strptime(params[:user][:contact_attributes][:birthday], '%m/%d/%Y')
 		 end
 		 @user = User.new(params[:user])
+		 @user.account = account
 		 @user.password = password
 		 @user.password_confirmation = confirm
 		 @user.save
@@ -61,12 +63,16 @@
 	
 	  def update
 			@user = User.find(params[:id])
+			role_ids = params[:user].delete(:role_ids)
+			roles = role_ids.inject([]) { |roles, id| roles << Role.find(id) }
+			@user.roles = roles
 			@user.update_attributes(params[:user])
 			Contact.for(@user).update_contact_attributes(params[:user][:contact_attributes])
 			render "summary"
 	  end
 	
 	  def destroy
+			@user = User.find(params[:id])
 	    @user.destroy
 	    respond_with(@user)
 	  end
