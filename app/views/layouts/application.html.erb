@@ -8,10 +8,20 @@
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <script type="text/javascript">
-    var account_name = '<%= Account.current.name %>'
-    var account_prefix_path = ''
-    if(account_name.length>0)
-      account_prefix_path = '/'+account_name
+    //bind ajax csrf token for ajax post requests
+    $(function(){
+      var ajax_csrf_token = '<%= session[:ajax_csrf_token] %>';
+      $("body").bind("ajaxSend", function(elm, xhr, s){
+         if (s.type == "POST") {
+            xhr.setRequestHeader('ajax_csrf_token', ajax_csrf_token);
+         }
+      });
+      
+      var account_name = '<%= Account.current.name %>'
+      var account_prefix_path = ''
+      if(account_name.length>0)
+        account_prefix_path = '/'+account_name
+    })
   </script>
   <%= csrf_meta_tags %>
 

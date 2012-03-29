@@ -2,6 +2,7 @@
 	  respond_to :html
 	
 	  def index
+      @code = params[:code]
 	    @positions =  Volunteering::Position.limit(5)
 	    @services = Service.limit(5)
 			@services = Service.real_public_service_leaves.reverse.take(5)
