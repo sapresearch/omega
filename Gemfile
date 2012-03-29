@@ -7,7 +7,6 @@ platforms :jruby do
 	gem 'jruby-openssl'
 end
 
-gem "sqlite3", :platform => :ruby
 gem 'mysql2', '0.3.10'
 
 gem "jquery-rails"
