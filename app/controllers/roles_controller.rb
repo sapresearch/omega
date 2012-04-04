@@ -2,6 +2,8 @@ class RolesController < Controller
   respond_to :html, :xml, :js, :json
   breadcrumb 'Roles' => :roles
 
+  before_filter :access_control
+
   def index
     #@roles = Role.all
     @permissions = Permission.all
@@ -117,6 +119,16 @@ class RolesController < Controller
     @role.save!
 
     respond_with(@role)
+  end
+
+  private
+
+  def access_control
+    return if current_user.is_anonymous?
+    unless current_user.has_permission?(Role::PERM_ADMIN)
+      redirect_to root_url(:code=>CODE_PERMISSION_REQUIRED)
+      return
+    end
   end
 
 end

@@ -29,8 +29,11 @@
     <%= render :partial => "layouts/sidebar_services" %>
 <% end %>
 
-<% if @code.to_i == CODE_ANONYMOUS %>
-  <script type="text/javascript">
+<script type="text/javascript">
+  <% case @code.to_i %>
+  <% when CODE_ANONYMOUS %>
     dialog_message("general_message", "Please Log in", "<p>Please log in first.</p>", {width:300})
-  </script>
-<% end %>
+  <% when CODE_PERMISSION_REQUIRED %>
+    dialog_message("general_message", "Access Denied", "<p>Sorry, but permission is required to access that page.</p>", {width:300})
+  <% end %>
+</script>

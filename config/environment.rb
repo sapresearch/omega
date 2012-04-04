@@ -6,3 +6,4 @@ Omega::Application.initialize!
 
 
 CODE_ANONYMOUS = 1
+CODE_PERMISSION_REQUIRED = 2
