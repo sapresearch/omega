@@ -13,7 +13,7 @@
     $(function(){
       var ajax_csrf_token = '<%= session[:ajax_csrf_token] %>';
       $("body").bind("ajaxSend", function(elm, xhr, s){
-         if (s.type == "POST") {
+         if (s.type != "GET") {
             xhr.setRequestHeader('ajax_csrf_token', ajax_csrf_token);
          }
       });
@@ -46,8 +46,6 @@
 
   <div id="sap-logo">
   </div>
-
-
 
 
    <div id="content_box">

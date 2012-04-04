@@ -40,15 +40,18 @@
       end
 
       def controller_access_control
-        if request.get? && session[:ajax_csrf_token].nil?
-          session[:ajax_csrf_token] = Digest::MD5.hexdigest("#{Time.now.to_i}")
-        elsif request.post?
-          return if session[:ajax_csrf_token] != request.headers['ajax_csrf_token']
+        if request.get?
+          session[:ajax_csrf_token] = Digest::MD5.hexdigest("#{Time.now.to_i}") if session[:ajax_csrf_token].nil?
+        elsif request.xhr?
+          if session[:ajax_csrf_token] != request.headers['ajax_csrf_token']
+            render :nothing=>true
+            return
+          end
         end
         
         if current_user.is_anonymous?
           controller = params[:controller]
-          free_controllers = ["home","sessions"]
+          free_controllers = ["home","sessions", "users"]
           unless free_controllers.include?(controller)
             redirect_to root_url(:code=>CODE_ANONYMOUS)
             return
