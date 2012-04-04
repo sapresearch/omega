@@ -21,7 +21,6 @@
 	  end
 	
 	  def register
-		 puts "\n\nIN REGISTER"
 	    @user = User.new
 	    contact = @user.build_contact
 	    contact.addresses.build
@@ -64,8 +63,11 @@
 	  def update
 			@user = User.find(params[:id])
 			role_ids = params[:user].delete(:role_ids)
-			roles = role_ids.inject([]) { |roles, id| roles << Role.find(id) }
-			@user.roles = roles
+
+			if current_user.has_permission?(Role::PERM_ADMIN) and !role_ids.nil?
+				roles = role_ids.inject([]) { |roles, id| roles << Role.find(id) }
+				@user.roles = roles
+			end
 			@user.update_attributes(params[:user])
 			Contact.for(@user).update_contact_attributes(params[:user][:contact_attributes])
 			render "summary"
