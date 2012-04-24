@@ -36,6 +36,8 @@
 		 account = Account.find_by_name(params[:account_name])
 		 password = params[:user].delete(:password)
 		 confirm = params[:user].delete(:password_confirmation)
+		# TODO if the user puts in the wrong format this fails. Make it fail gracefully.
+		#params[:user][:contact_attributes].delete(:birthday)
 		 unless params[:user][:contact_attributes][:birthday].nil?
 			params[:user][:contact_attributes][:birthday] = Date.strptime(params[:user][:contact_attributes][:birthday], '%m/%d/%Y')
 		 end
