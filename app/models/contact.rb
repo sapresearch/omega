@@ -148,7 +148,7 @@
 	    user.save(:validate => false)
 			# TODO this won't deliver the mail. Creates an error message.
 	    #mail = UserMailer.registration_confirmation(user).deliver
-	    Delivery.create(:message_id => mail.message_id, :recipient => user.email, :content => '', :status => 'Sent' )
+	    #Delivery.create(:message_id => mail.message_id, :recipient => user.email, :content => '', :status => 'Sent' )
 	   end
 	  end
 	
