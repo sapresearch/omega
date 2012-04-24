@@ -19,6 +19,8 @@ group :assets do
   gem 'uglifier'
 end
 
+gem 'aws-ses', :require => 'aws/ses'
+
 
 # Originally listed in omega.gemspec
 gem 'zipcodr', '0.0.2'
