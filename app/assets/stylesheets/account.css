@@ -1,0 +1,31 @@
+#account_page_body{
+    margin:0px;
+}
+
+#account_page_body #main_div{
+    margin:auto;
+    width:50%;
+    min-width:800px;
+    background: white;
+    border-left: 1px solid #C4B991;
+    border-right: 1px solid #C4B991;
+    border-bottom: 1px solid #C4B991;
+    -moz-box-shadow: 0px 0px 8px #444;
+    -webkit-box-shadow: 0px 0px 8px #444;
+    box-shadow: 0px 0px 8px #444;
+    margin-bottom: -10px;
+    min-height: 650px;
+    height: auto;
+}
+
+#account_page_body #main_div #header{
+    padding:20px;
+    font-family:fantasy;
+    font-size:30px;
+    text-align:center;
+    background: url('account_bg_1.jpg');
+}
+
+#account_page_body #main_div #content{
+    padding: 20px;
+}

@@ -1,5 +1,7 @@
   class AccountsController < ActionController::Base
 
+    layout 'account'
+
     # GET /accounts
     # GET /accounts.json
     def index
