@@ -16,7 +16,7 @@
 	  #around_filter :services_exception_handler
 	
 	  def new
-	#begin
+=begin
 	    paypal_url = "https://api-3t.sandbox.paypal.com/nvp"
 	    query = {
 	      :PWD=>"",
@@ -30,7 +30,7 @@
 	    }
 	    self.class.http_proxy('proxy', 8083)
 	    self.class.post(paypal_url, :query=>query).inspect
-	#end
+=end
 	
 	    @payable_type = params[:payable_type]
 	    @payable_id = params[:payable_id]
