@@ -44,18 +44,21 @@
     # POST /accounts.json
     def create
       @account = Account.new(params[:account])
+	  roles, permissions = [], []
 
       Role::DEFAULT_ROLES.each_value do |role_attributes|
-        @account.roles.build(role_attributes)
+        roles << @account.roles.build(role_attributes)
       end
 	  
       @account.roles.each do |role|
         perms = Role::DEFAULT_ASSIGNMENTS[role.internal_name]
-        perms.each { |perm| role.permissions.build(:name => perm.titleize, :value => perm) }
+        perms.each { |perm| permissions << role.permissions.build(:name => perm.titleize, :value => perm) }
       end
 
       respond_to do |format|
         if @account.save
+			roles.each { |r| r.update_attribute(:account_id, @account.id) }
+			permissions.each { |r| r.update_attribute(:account_id, @account.id) }
 	
 					password = params[:user].delete(:password)
 					confirm = params[:user].delete(:password_confirmation)
