@@ -43,25 +43,19 @@
     # POST /accounts
     # POST /accounts.json
     def create
-		params[:account].delete(:contact)
       @account = Account.new(params[:account])
+
+      Role::DEFAULT_ROLES.each_value do |role_attributes|
+        @account.roles.build(role_attributes)
+      end
+	  
+      @account.roles.each do |role|
+        perms = Role::DEFAULT_ASSIGNMENTS[role.internal_name]
+        perms.each { |perm| role.permissions.build(:name => perm.titleize, :value => perm) }
+      end
 
       respond_to do |format|
         if @account.save
-					Permission::DEFAULT_PERMISSIONS.each_key do |perm|
-						Permission.create!(:account_id => @account.id, :name => perm.titleize, :value => perm)
-					end
-	
-					Role::DEFAULT_ROLES.each_value do |role_attributes|
-						role_attributes[:account_id] = @account.id
-						Role.create!( role_attributes )
-					end
-	
-					Role::DEFAULT_ASSIGNMENTS.each do |internal_role_name, perms|
-						role = Role.find_by_internal_name_and_account_id(internal_role_name, @account.id)
-						perms.map! { |perm| Permission.find_by_value_and_account_id(perm, @account.id) }
-						role.permissions << perms
-					end
 	
 					password = params[:user].delete(:password)
 					confirm = params[:user].delete(:password_confirmation)

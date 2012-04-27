@@ -43,6 +43,7 @@
 	  }
 	  
 	  has_and_belongs_to_many :roles
+	  belongs_to :account
 	
 	  validates :name,  :presence => true
 	  validates :value, :presence => true#,

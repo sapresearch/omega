@@ -1,8 +1,10 @@
-  class Account < ActiveRecord::Base
+class Account < ActiveRecord::Base
 
 	require 'user_account_mismatch_error'
 	validates :name, :uniqueness => true
 	has_many :users
+	has_many :permissions
+	has_many :roles
 		
     class << self
       def current

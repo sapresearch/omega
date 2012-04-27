@@ -69,7 +69,8 @@
 	    def for_anonymous; where('internal_name = ?', ANONYMOUS).first end
 	    def for_authenticated_user; where('internal_name = ?', AUTHENTICATED_USER).first end
 	  end
-	
+
+	  belongs_to :account
 	  has_and_belongs_to_many :users
 	  has_and_belongs_to_many :permissions
 	  has_many :groups_roles, :dependent=>:destroy
