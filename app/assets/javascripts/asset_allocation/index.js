@@ -1,3 +1,5 @@
+//= require jquery.timers-1.1.2.js
+
 $.fn.extend({   
     disabled_copy: function(){
         var first_class_name = $(this).first_class_name();
