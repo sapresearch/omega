@@ -44,22 +44,29 @@
     # POST /accounts.json
     def create
       @account = Account.new(params[:account])
-	  roles, permissions = [], []
+			roles, permissions = [], []
 
-      Role::DEFAULT_ROLES.each_value do |role_attributes|
-        roles << @account.roles.build(role_attributes)
-      end
+			Role::DEFAULT_ROLES.each_value do |role_attributes|
+				roles << @account.roles.build(role_attributes)
+			end
 	  
-      @account.roles.each do |role|
-        perms = Role::DEFAULT_ASSIGNMENTS[role.internal_name]
-        perms.each { |perm| permissions << role.permissions.build(:name => perm.titleize, :value => perm) }
-      end
+			Permission::DEFAULT_PERMISSIONS.each_key do |perm|
+				permissions << @account.permissions.build(name: perm.titleize, value: perm)
+			end
 
       respond_to do |format|
         if @account.save
-			roles.each { |r| r.update_attribute(:account_id, @account.id) }
-			permissions.each { |r| r.update_attribute(:account_id, @account.id) }
-	
+					# Make sure they're assigned to the right account.
+					roles.each { |r| r.update_attribute(:account_id, @account.id) }
+					permissions.each { |r| r.update_attribute(:account_id, @account.id) }
+			
+					# Assign default permissions to each role.
+					@account.roles.each do |role|
+						default_perms = Role::DEFAULT_ASSIGNMENTS[role.internal_name]
+						permissions.each { |p| role.permissions << p if default_perms.include?(p.value) }
+						role.save
+      		end
+			
 					password = params[:user].delete(:password)
 					confirm = params[:user].delete(:password_confirmation)
 					@admin = User.new(:email => params[:user][:email], :username => params[:user][:username])
