@@ -42,6 +42,7 @@
 #account_page_body fieldset{
     padding:10px;
 }
+.bg_eee{background: #eee;}
 
 #account_page_body fieldset legend{
     background:url('account_bg_1.jpg');
