@@ -4,7 +4,7 @@
   <table>
     <tr>
       <th class="name">Account Name</th>
-      <th class="created_at">Created time</th>
+      <th class="created_at">Time Created</th>
       <th class="operations">Operations</th>
     </tr>
 
@@ -25,12 +25,9 @@
 
 </fieldset>
 
-  <div class="accounts_bottom_links page_bottom_links" >
-    <div class="left_links">
-      <%= link_to 'New Account', new_account_path, :class=>"operation_button" %>
-    </div>
+<div class="accounts_bottom_links page_bottom_links" >
+  <div class="left_links">
+    <%= link_to 'New Account', new_account_path, :class=>"operation_button" %>
   </div>
+</div>
 
-  <script type="text/javascript">
-    $('.operation_button').button({ icons: {primary:'ui-icon-gear'} });
-  </script>
