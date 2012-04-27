@@ -1,6 +1,20 @@
-<h1>Editing account</h1>
+<fieldset class="round">
+  <legend class="round shadow">Editing account</legend>
+  <%= render 'form' %>
+</fieldset>
 
-<%= render 'form' %>
+<div class="accounts_bottom_links page_bottom_links" >
+  <div class="left_links">    
+    <%= link_to_function 'Update', '$(".edit_account").submit()', :class=>"operation_button" %>
+    <!--<%= link_to 'Show', @account, :class=>"operation_button" %>-->
+  </div>
+  
+  <div class="right_links">
+    <%= link_to 'Back', accounts_path, :class=>"operation_button" %>
+  </div>
+</div>
 
-<%= link_to 'Show', @account %> |
-<%= link_to 'Back', accounts_path %>
+<script type="text/javascript">
+  $('.operation_button').button({ icons: {primary:'ui-icon-gear'} });
+</script>
+

@@ -2,29 +2,23 @@
   <% if @account.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
-
       <ul>
-      <% @account.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @account.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-	<p>
-		<%= f.label :account_name %>
-		<%= f.text_field :name %>
-	</p>
+  <p>
+    <%= f.label :account_name %>
+    <%= f.text_field :name %>
+  </p>
 
-	<br />
-	
-	<p> Create a administrator for your new account: </p>
-	<p>Username <%= text_field_tag 'user[username]' %></p>
-	<p>Password <%= password_field_tag 'user[password]' %></p>
-	<p>Confirm Password <%= password_field_tag 'user[password_confirmation]' %></p>
-	<p>Email <%= text_field_tag 'user[email]' %></p>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <br/>
+  <p>Administrator for this account: </p>
+  <p>Username <%= text_field_tag 'user[username]' %></p>
+  <p>Password <%= password_field_tag 'user[password]' %></p>
+  <p>Confirm Password <%= password_field_tag 'user[password_confirmation]' %></p>
+  <p>Email <%= text_field_tag 'user[email]' %></p>
 <% end %>

@@ -1,21 +1,36 @@
-<h1>Listing accounts</h1>
+<fieldset class="round">
+  <legend class="round shadow">Listing accounts</legend>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <table>
+    <tr>
+      <th class="name">Account Name</th>
+      <th class="created_at">Created time</th>
+      <th class="operations">Operations</th>
+    </tr>
 
-<% @accounts.each do |account| %>
-  <tr>
-    <td><%= link_to 'Show', account %></td>
-    <td><%= link_to 'Edit', edit_account_path(account) %></td>
-    <td><%= link_to 'Destroy', account, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+  <% @accounts.each_with_index do |account, index| %>
+    <% parity = index%2==0 ? "even" : "odd" %>
+    <tr class="<%= parity %>">
+      <td><%= account.name %></td>
+      <td><%= account.created_at %></td>
+      <td>
+        <!--<%= link_to 'Show', account %> |-->
+        <%= link_to 'Edit', edit_account_path(account) %> |
+        <%= link_to 'Destroy', account, :confirm=> 'Are you sure?', :method=> :delete %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
 
-<br />
 
-<%= link_to 'New Account', new_account_path %>
+</fieldset>
+
+  <div class="accounts_bottom_links page_bottom_links" >
+    <div class="left_links">
+      <%= link_to 'New Account', new_account_path, :class=>"operation_button" %>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $('.operation_button').button({ icons: {primary:'ui-icon-gear'} });
+  </script>

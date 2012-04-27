@@ -70,7 +70,7 @@
 					contact.phone_numbers.build(:account_id => @account.id)
 					@admin.save(:validate => false)
 
-          format.html { redirect_to @account, notice: 'Account was successfully created.' }
+          format.html { redirect_to accounts_url, notice: 'Account was successfully created.' }
           format.json { render json: @account, status: :created, location: @account }
         else
           format.html { render action: "new" }

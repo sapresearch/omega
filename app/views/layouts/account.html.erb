@@ -3,8 +3,8 @@
   <head>
     <title><%= @title || "Omega Accounts Portal" %></title>
 
-    <%= stylesheet_link_tag    "share","account" %>
-    <%= javascript_include_tag "share","account" %>
+    <%= stylesheet_link_tag    'thirdParty/jquery-ui-1.8.4.custom', "share","account" %>
+    <%= javascript_include_tag 'thirdParty/jquery', 'thirdParty/jquery-ui', 'thirdParty/jquery.tipsy', "rails", 'thirdParty/jquery.dataTables.min.js', "share","account", %>
     <%= csrf_meta_tags %>
     <%= flash_session_meta_tag %>
     <!--[if IE]>
@@ -30,7 +30,7 @@
       <div id="nav"><!-- place holder --> </div>
       <div id="content">
         <%if flash[:notice] -%>
-          <div id="notice"><%= flash[:notice]%></div>
+          <div id="notice" class="round shadow"><%= flash[:notice]%></div>
         <%end -%>
         <%= yield %>
         <br clear="all"/>

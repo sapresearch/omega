@@ -1,5 +1,6 @@
 #account_page_body{
     margin:0px;
+    background:#ccc;
 }
 
 #account_page_body #main_div{
@@ -29,3 +30,33 @@
 #account_page_body #main_div #content{
     padding: 20px;
 }
+
+#account_page_body #notice{
+    background: none repeat scroll 0 0 #f3f3f3;
+    border: 1px solid #ddd;
+    color: #333333;
+    margin: 10px 0 20px 0;
+    padding: 10px;
+}
+
+#account_page_body fieldset{
+    padding:10px;
+}
+
+#account_page_body fieldset legend{
+    background:url('account_bg_1.jpg');
+    padding:10px;
+    font-family:fantasy;
+}
+
+table{width:100%}
+th { text-align: center; }
+th.name{width:30%}
+th.created_at{width:40%}
+th.operations{width:30%}
+tr.even { background: #EAEBFF }
+tr.odd { background: #EEF3DA }
+tr a:hover { color: #333; }
+tr:hover{background:lightyellow;}
+td{ text-align: center;}
+
