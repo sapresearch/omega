@@ -51,18 +51,19 @@ class Account < ActiveRecord::Base
 	def build_admin(params)
 		password = params[:user].delete(:password)
 		confirm = params[:user].delete(:password_confirmation)
-		@admin = User.new(:email => params[:user][:email], :username => params[:user][:username])
-		@admin.password = password
-		@admin.password_confirmation = confirm
-		@admin.account = self
-		@admin.roles << Role.find_by_internal_name_and_account_id('administrator', self.id)
+		admin = User.new(:email => params[:user][:email], :username => params[:user][:username])
+		admin.password = password
+		admin.password_confirmation = confirm
+		admin.account = self
+		admin.roles << Role.find_by_internal_name_and_account_id('administrator', self.id)
 
-		contact = @admin.build_contact(:account_id => self.id)
+		contact = admin.build_contact(:account_id => self.id)
 		contact.addresses.build(:account_id => self.id)
 		contact.phone_numbers.build(:account_id => self.id)
-		@admin.save(:validate => false)
+		admin.save(:validate => false)
 	end
 
+	# Important. Use '_' in roles/permissions arrays to ensure that the account doesn't execute self.roles
 	def assign_roles_and_permissions(_roles, _permissions)
 		account_id = self.id
 
