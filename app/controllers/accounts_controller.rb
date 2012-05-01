@@ -56,30 +56,9 @@
 
       respond_to do |format|
         if @account.save
-					# Make sure they're assigned to the right account.
-					roles.each { |r| r.update_attribute(:account_id, @account.id) }
-					permissions.each { |r| r.update_attribute(:account_id, @account.id) }
+					@account.assign_roles_and_permissions(roles, permissions)
+					@account.build_admin(params)
 			
-					# Assign default permissions to each role.
-					@account.roles.each do |role|
-						default_perms = Role::DEFAULT_ASSIGNMENTS[role.internal_name]
-						permissions.each { |p| role.permissions << p if default_perms.include?(p.value) }
-						role.save
-      		end
-			
-					password = params[:user].delete(:password)
-					confirm = params[:user].delete(:password_confirmation)
-					@admin = User.new(:email => params[:user][:email], :username => params[:user][:username])
-					@admin.password = password
-					@admin.password_confirmation = confirm
-					@admin.account = @account
-					@admin.roles << Role.find_by_internal_name_and_account_id('administrator', @account.id)
-					
-					contact = @admin.build_contact(:account_id => @account.id)
-					contact.addresses.build(:account_id => @account.id)
-					contact.phone_numbers.build(:account_id => @account.id)
-					@admin.save(:validate => false)
-
           format.html { redirect_to accounts_url, notice: 'Account was successfully created.' }
           format.json { render json: @account, status: :created, location: @account }
         else

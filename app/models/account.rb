@@ -36,16 +36,46 @@ class Account < ActiveRecord::Base
 	end
 	
 	def current_user(session)
-        current_user = begin
-          if session[:user_id]
-            user = User.find_by_id(session[:user_id])
-			# If the session hash has a user_id, but the user couldn't be found, then the user is probably from another account.
-			raise UserAccountMismatchError.new if user.nil?
-			user
-          else
-            User.anonymous
-          end
-        end
-    end
-	  
-  end
+		current_user = begin
+			if session[:user_id]
+				user = User.find_by_id(session[:user_id])
+				# If the session hash has a user_id, but the user couldn't be found, then the user is probably from another account.
+				raise UserAccountMismatchError.new if user.nil?
+				user
+			else
+				User.anonymous
+			end
+		end
+	end
+	
+	def build_admin(params)
+		password = params[:user].delete(:password)
+		confirm = params[:user].delete(:password_confirmation)
+		@admin = User.new(:email => params[:user][:email], :username => params[:user][:username])
+		@admin.password = password
+		@admin.password_confirmation = confirm
+		@admin.account = self
+		@admin.roles << Role.find_by_internal_name_and_account_id('administrator', self.id)
+
+		contact = @admin.build_contact(:account_id => self.id)
+		contact.addresses.build(:account_id => self.id)
+		contact.phone_numbers.build(:account_id => self.id)
+		@admin.save(:validate => false)
+	end
+
+	def assign_roles_and_permissions(_roles, _permissions)
+		account_id = self.id
+
+		# Make sure they're assigned to the right account.
+		_roles.each { |r| r.update_attribute(:account_id, account_id) }
+		_permissions.each { |r| r.update_attribute(:account_id, account_id) }
+
+		# Assign default permissions to each role.
+		self.roles.each do |role|
+			default_perms = Role::DEFAULT_ASSIGNMENTS[role.internal_name]
+			_permissions.each { |p| role.permissions << p if default_perms.include?(p.value) }
+			role.save
+		end
+	end
+
+end
