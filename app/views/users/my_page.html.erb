@@ -1,24 +1,20 @@
 <% require_stylesheet 'omega_volunteering', 'settings', 'omega_users_table', 'omega_users' %>
 <%#= javascript_include_tag 'omega_users', 'omega_my_page' %>
 
-
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
-
 <body>
+	<div id="fb-root"></div>
+	<script>
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=180942338636872";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
 
-	<div id="fb">
-	  <div id="fb-root"></div>
-	  <script src="http://connect.facebook.net/en_US/all.js"></script>
-	  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
 	  <script>
-	    FB.init({ appId: '117866098303408', cookie:true, status:true, xfbml:true });
-			function fb_message(){
-				user_message = " ";
-				FB.ui({ method: 'feed', message: user_message});
-			}
-
 
 			$(document).ready(function() {
 				div_height();
@@ -155,9 +151,7 @@
 								<% end %>
 							</td>
 	         			<td class="accounts"> 
-								<form onsubmit="fb_message()">
-									<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
-								</form>
+									<div class="fb-like" data-href="<%= url_for(volunteering_position_path(position))%>" data-send="false" data-width="90" data-layout="button_count" data-show-faces="true"></div>
 							</td>
 	         			<td class="accounts"> 
 								<%= render 'twitter', :position => position, :service => false %>
@@ -171,9 +165,7 @@
 								<td class="accounts"> <%= s[:next_event].to_s %></td>
 								<td class="accounts"> Status: <i><%= s[:status] %></i></td>
 		         			<td class="accounts"> 
-									<form onsubmit="fb_message()">
-										<input type="submit" id="fb" size="0" maxlength="0" value="facebook" /> 
-									</form>
+									<div class="fb-like" data-href="<%= url_for(volunteering_position_path(position))%>" data-send="false" data-width="90" data-layout="button_count" data-show-faces="true"></div>
 								</td>
 		         			<td class="accounts"> 
 									<%= render 'twitter', :position => s[:service], :service => true %>
@@ -183,11 +175,6 @@
 					<% end %>
 				</tbody>
 			</table>
-	
-		<!-- Unneccessary, since we don't need offline access anymore. !-->
-			<!--<fb:login-button perms="offline_access">Login with Facebook</fb:login-button>!-->
-		<!-- Unneccessary, since we don't need offline access anymore. !-->
-	
 	
 		<br /><br />
 	</div>
