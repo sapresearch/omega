@@ -64,9 +64,14 @@
       def general_exception_handler
         begin
           yield
-        rescue
-          flash[:notice]="Please check your input."
-          redirect_to :back
+        rescue        
+          if request.xhr?
+            render :js => "dialog_message('general_message', 'Not able to process', '<p>Please check your input again, or contact our administrator.</p>', {width:300})"
+            return
+          else            
+            flash[:error]="Please check your input again, or contact our administrator."
+            redirect_to :back
+          end          
         end
       end
 
