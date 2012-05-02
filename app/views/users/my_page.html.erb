@@ -151,7 +151,7 @@
 								<% end %>
 							</td>
 	         			<td class="accounts"> 
-									<div class="fb-like" data-href="<%= url_for(volunteering_position_path(position))%>" data-send="false" data-width="90" data-layout="button_count" data-show-faces="true"></div>
+									<div class="fb-like" data-href="<%= url_for(volunteering_position_url(position))%>" data-send="false" data-width="90" data-layout="button_count" data-show-faces="true"></div>
 							</td>
 	         			<td class="accounts"> 
 								<%= render 'twitter', :position => position, :service => false %>
@@ -165,7 +165,7 @@
 								<td class="accounts"> <%= s[:next_event].to_s %></td>
 								<td class="accounts"> Status: <i><%= s[:status] %></i></td>
 		         			<td class="accounts"> 
-									<div class="fb-like" data-href="<%= url_for(volunteering_position_path(position))%>" data-send="false" data-width="90" data-layout="button_count" data-show-faces="true"></div>
+									<div class="fb-like" data-href="<%=url_for(services_url(:service_id=>s[:service].id))%>" data-send="false" data-width="90" data-layout="button_count" data-show-faces="true"></div>
 								</td>
 		         			<td class="accounts"> 
 									<%= render 'twitter', :position => s[:service], :service => true %>
