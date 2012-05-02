@@ -1,3 +1,6 @@
+//= require thirdParty/jquery.timepicker.js
+//= require thirdParty/jquery.fullcalendar.js
+
 $(function() {
 
 
