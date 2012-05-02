@@ -1239,7 +1239,7 @@ li.list-item {
     z-index: 1000;
 }
 
-#topnav {
+ul#topnav {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
@@ -1254,8 +1254,8 @@ li.list-item {
     position: relative;
     font-size: 1em;
     /* background: url("../bg_menu.png") repeat-x;*/
-     background: url(<%= asset_data_uri 'bg_menu_evergreen.png' %>) repeat-x;  /* This controls the nav bar background color */
-   
+    background: url(<%= asset_data_uri 'bg_menu_evergreen.png' %>) repeat-x;  /* This controls the nav bar background color */
+    background: url('/assets/bg_menu_evergreen.png') repeat-x; /* for IE */
 }
 
 

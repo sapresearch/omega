@@ -16,6 +16,7 @@
   #  self.responder = Omega::ControllerResponder
 
     before_filter :controller_access_control
+    around_filter :general_exception_handler
 
     protect_from_forgery
 
@@ -56,6 +57,16 @@
             redirect_to root_url(:code=>CODE_ANONYMOUS)
             return
           end
+        end
+      end
+
+      # fail gracefully
+      def general_exception_handler
+        begin
+          yield
+        rescue
+          flash[:notice]="Please check your input."
+          redirect_to :back
         end
       end
 
