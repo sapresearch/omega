@@ -9,6 +9,7 @@
 //= require rails
 //= require thirdParty/jquery.tipsy
 //= require thirdParty/jquery.dataTables.min.js
+//= require ui_util
 
 /* Overlay layer for notifications and ajax request notifications*/
 jQuery.showFlash = function(msg, n) {
@@ -89,7 +90,9 @@ jQuery(function($) {
                                                 function() {
                                                     $(this).fadeOut();
                                                 }).bind("ajaxError", function(e, xhr, settings, exception) {
-        $.showFlash('Error :' + xhr.responseText)
+
+        //$.showFlash('Error :' + xhr.responseText)  // for development
+        dialog_message('general_message', 'Not able to process', '<p>An error has occurred. Please check your input again, or contact your administrator.</p>', {width:300}) // for production
 
     });
 

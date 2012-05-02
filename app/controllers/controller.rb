@@ -66,10 +66,11 @@
           yield
         rescue        
           if request.xhr?
-            render :js => "dialog_message('general_message', 'Not able to process', '<p>Please check your input again, or contact our administrator.</p>', {width:300})"
+            #render :js=>"alert(1)"
+            render :js => "dialog_message('general_message', 'Not able to process', '<p>An error has occurred. Please check your input again, or contact your administrator.</p>', {width:300})"
             return
           else            
-            flash[:error]="Please check your input again, or contact our administrator."
+            flash[:error]="An error has occurred. Please check your input again, or contact your administrator."
             redirect_to :back
           end          
         end
