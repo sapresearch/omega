@@ -1,4 +1,4 @@
-<%# stylesheet_link_tag 'omega_volunteering', 'omega_volunteering_left' %>
+<%= stylesheet_link_tag 'omega_volunteering', 'omega_volunteering_left' %>
 <%# javascript_include_tag 'omega_volunteering' %>
     <div class="content circle-corners-bottom-left" style="min-height:<%= (@positions.count % Volunteering::Position::MAX_POSITIONS_PER_PAGE) * 395 %>;">
 
@@ -60,7 +60,7 @@
                   </h2>
 						</div>
 
-					<div class="position_body"><br /><br />
+				<div class="position_body"><br /><br />
                   <p>
                     <%= truncate(position.description, :length=> 140) %> <%=  link_to '( read more ... )', volunteering_position_path(position) %>
                   </p>
