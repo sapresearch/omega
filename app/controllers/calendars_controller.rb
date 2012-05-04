@@ -4,6 +4,7 @@
 	
 	  def index
 	    @calendars = @scope
+      @calendar = @scope.first
 	    respond_with(@calendars)
 	  end
 	
@@ -23,6 +24,7 @@
 	  end
 	
 	  def create
+      @calendars = @scope
 	    @calendar = @scope.create(params[:calendar])
 	    respond_with(@calendar, :location => @calendar)
 	  end
@@ -65,11 +67,15 @@
 	
 	  protected
 	    def get_scope
+=begin
 	      if params[:user_id]
 	        @user = User.find(params[:user_id])
 	        @scope = Calendar.where(:user_id => @user)
 	      else
 	        @scope = Calendar.scoped
 	      end
+=end
+        @user = params[:user_id].nil? ? current_user : User.find(params[:user_id])
+        @scope = @user.calendars
 	    end
 	end

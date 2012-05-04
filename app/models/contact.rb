@@ -18,6 +18,7 @@
 	  TITLES = %w{ Mr Miss Ms Mrs}
 	
 	  attr_accessible :first_name, :last_name, :email, :phone_numbers_attributes, :addresses_attributes, :birthday
+    attr_accessible :account_id
 	
 	  scope :status, where('status IS NULL')
 	  before_destroy { |contact| Contact::Value.destroy_all "contact_id = #{contact.id}" }
@@ -119,7 +120,6 @@
 	  scope :named, lambda { |name| where('last_name like ? or first_name like ?', "%#{name}%", "%#{name}%") }
 	  
 	  attr_accessor :email_confirmation
-	  attr_accessible :account_id
 	
 	  validates :email,      :presence  => true,
 	  								 :confirmation => true,

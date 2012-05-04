@@ -1,20 +1,23 @@
 //= require thirdParty/jquery.timepicker.js
 //= require thirdParty/jquery.fullcalendar.js
 
-$(function() {
 
+function formatDateForId(d) {
+    return '' + d.getFullYear() + '-' + ((d.getMonth() < 10) ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1)) + '-' + ((d.getDate() < 10) ? ('0' + d.getDate()) : d.getDate());
+}
 
-    function formatDateForId(d) {
-        return '' + d.getFullYear() + '-' + ((d.getMonth() < 10) ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1)) + '-' + ((d.getDate() < 10) ? ('0' + d.getDate()) : d.getDate());
-    }
+    
+function load_calendar(calendar_id){
+//$(function() {
 
     var csrf_token = $('meta[name=csrf-token]').attr('content');
     // dont cache the cal calendar selector as it changes on the calendar selevt even
-    $('#cal').data('calendar_id', 1);
+    $('#cal').empty();
+    $('#cal').data('calendar_id', calendar_id);
     $('#cal').fullCalendar({
 
         more            :3,
-        calendar_id     :1,
+        calendar_id     :calendar_id,
         height          : 550,
         header          : {
             left        : 'prev,next today',
@@ -53,8 +56,7 @@ $(function() {
         eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
             $.ajax({
                 type:   'POST',
-
-                url     : account_prefix_path+'/calendars/1/events/' + event.id,
+                url     : account_prefix_path+'/calendars/' + $('#cal').data('calendar_id') +'/events/' + event.id,
                 data    :   {
                     _method:'PUT',
                     'calendar_event[start]' : $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd HH:mm'),
@@ -148,7 +150,7 @@ $(function() {
                         },
                         "Delete": function() {
                             $.ajax({
-                                url     : account_prefix_path+'/calendars/' + cal.data('calendar_id') + '/events/' + event.id ,
+                                url     : account_prefix_path+'/calendars/' + $('#cal').data('calendar_id') + '/events/' + event.id ,
                                 dataType: 'script',
                                 type    : "delete",
                                 success : function() {
@@ -181,14 +183,5 @@ $(function() {
         }
 
     });
-
-    $('#_calendars').change(function() {
-
-        $('#cal').data('calendar_id', $(this).val());
-        var fullCalendar = $('#cal').data('fullCalendar');
-        fullCalendar.removeEvents();
-        fullCalendar.addEventSource(account_prefix_path+'/calendars/' + $('#cal').data('calendar_id') + '/events.json')
-    })
-
-})
-        ;
+//});
+}

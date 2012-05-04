@@ -1,3 +1,4 @@
+/* original code
 $('body').append('<%= escape_javascript(render 'form') %>');
         $('#new_calendar').dialog({
             autoOpen    : true,
@@ -8,4 +9,5 @@ $('body').append('<%= escape_javascript(render 'form') %>');
                 $('#new_calendar').remove();
             }
         });
-
+*/
+load_dialog_form('<%= escape_javascript(render 'form') %>', {width:500, title:"New Calendar"})

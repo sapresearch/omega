@@ -1,6 +1,7 @@
+//$('#new_calendar').parents('.ui-dialog').andSelf().remove();
+$(".calendar-top-right").html("<%= escape_javascript( render "calendars_drop_down_list", :calendars=>@calendars, :calendar=>@calendar) %>")
+load_calendar("<%= @calendar.id %>")
 
-
-$('#new_calendar').parents('.ui-dialog').andSelf().remove();
 
 
 

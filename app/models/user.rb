@@ -62,6 +62,7 @@
 	  has_many :favorites
 	  has_many :favorite_items, :through => :favorites, :source => :item
 	  has_one :setting
+    has_many :calendars
 	
 	  # association with groups and services
 	  has_many :groups_requesters, :dependent=>:destroy, :foreign_key=>"requester_id"

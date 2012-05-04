@@ -16,7 +16,7 @@
   #  self.responder = Omega::ControllerResponder
 
     before_filter :controller_access_control
-    around_filter :general_exception_handler
+    #around_filter :general_exception_handler
 
     protect_from_forgery
 
@@ -66,7 +66,6 @@
           yield
         rescue        
           if request.xhr?
-            #render :js=>"alert(1)"
             render :js => "dialog_message('general_message', 'Not able to process', '<p>An error has occurred. Please check your input again, or contact your administrator.</p>', {width:300})"
             return
           else            

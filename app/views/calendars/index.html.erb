@@ -1,5 +1,5 @@
 <%# require_javascript "thirdParty/jquery.timepicker.js", "thirdParty/jquery.fullcalendar.js", "calendars.js" %>
-<% require_javascript "calendars.js" %>
+<% require_javascript "ui_util.js","calendars.js" %>
 <%# require_stylesheet "thirdParty/jquery.fullcalendar.css", "omega_calendars.css" %>
 <% require_stylesheet "omega_calendars.css" %>
 
@@ -7,43 +7,34 @@
 
 
 <div class="content circle-corners-bottom-left">
-
-		<div class="heading-main">
-
-				<h1 class="page-content">
-  					Calendar
-		    	</h1>
-
-
-        </div>
-
-
-
-<div class="main-box">
-<p>
-	 <span class="calendar-top-right">
-
-
-	  				<%= select( nil, "calendars", Calendar.all.collect {|p| [ p.calendar_name, p.id ] })  %>
-</span>
-
-<span class="calendar-top-left">
-	<%= om_button(:icon => "calendar") do %>
-        				<%=  link_to "Create Calendar", new_calendar_url, :remote  => true %>
-    				<% end %> <br/>
-</span>
-
-
-</p>
-
-
-
-
-  <div id="cal">
+  <div class="heading-main">
+    <h1 class="page-content">
+      Calendar
+    </h1>
   </div>
 
-
+  <div class="main-box">
+    <p>
+      <span class="calendar-top-right">
+        <%#= select( nil, "calendars", Calendar.all.collect {|p| [ p.calendar_name, p.id ] })  %>
+        <%= render "calendars_drop_down_list", :calendars=>@calendars, :calendar=>@calendars.first %>
+      </span>
+      <span class="calendar-top-left">
+        <%= om_button(:icon => "calendar") do %>
+          <%=  link_to "Create Calendar", new_calendar_url, :id=>"create_calendar_link", :remote  => true %>
+        <% end %>
+        <br/>
+      </span>
+    </p>
+    <div id="cal">
+    </div>
+  </div>
 </div>
-</div>
 
-
+<script type="text/javascript">
+  <% if @calendar %>
+    load_calendar("<%= @calendar.id %>")
+  <% else %>
+    $("#create_calendar_link").click();
+  <% end %>
+</script>
