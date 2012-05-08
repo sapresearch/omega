@@ -3,6 +3,7 @@ Omega::Application.routes.draw do
 
 	resources :accounts
 	  
+my_routes = lambda {
   resources :calendars do
     resources :events
     resources :shares, :as => :calendar_shares, :module => :calendars
@@ -279,4 +280,17 @@ Omega::Application.routes.draw do
   scope :module => 'omega' do
     match '*url' => '#not_found'
   end
+}
+
+	# This allows us to use the /account_name in development.
+	# If we used the subdomain, the account_name would be 
+	# limited to the subdomain of your development server. 
+	if Rails.env.production?
+		scope :path => "/:account_name" do
+			my_routes.call
+		end
+	elsif Rails.env.development?
+		my_routes.call
+	end
+
 end
