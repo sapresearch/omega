@@ -32,12 +32,12 @@
 	
     protected
       def load_hosting_account
-				account_name = /\w*/.match(request.domain).to_s
+				account_name = request.subdomain
         @account = Account.find_by_name!(account_name)
         @account.with(session) { yield }
       	rescue ActiveRecord::RecordNotFound
         	#TODO
-        	render :text=>"", :status=>404
+        	render :text=>"The #{account_name} account was not found.", :status=>404
       end
 
       def controller_access_control
