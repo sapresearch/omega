@@ -6,25 +6,25 @@ class Account < ActiveRecord::Base
 	has_many :permissions
 	has_many :roles
 		
-    class << self
-      def current
-        Thread.current[:account]
-      end
+	class << self
+		def current
+			Thread.current[:account]
+		end
 
-      def current=(account)
-        Thread.current[:account] = account
-      end
-    end
+		def current=(account)
+			Thread.current[:account] = account
+		end
+	end
 
-    def with(session)
-      previous, Account.current = Account.current, self
-	  current_user = current_user(session)
-	  if Account.current.has_user?(current_user)
-		yield
-	  end
-    ensure
-      Account.current = previous
-    end
+	def with(session)
+		previous, Account.current = Account.current, self
+		current_user = current_user(session)
+		if Account.current.has_user?(current_user)
+			yield
+		end
+		ensure
+			Account.current = previous
+	end
 	
 	def has_user?(user)
 		if not user.is_anonymous?

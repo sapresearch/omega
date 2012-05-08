@@ -32,12 +32,12 @@
 	
     protected
       def load_hosting_account
-        @account = Account.find_by_name!(params[:account_name])
-        puts "\n\nFrom Controller, in load_hosting_account. Hosting Account: " + @account.inspect.to_s
+				account_name = /\w*/.match(request.domain).to_s
+        @account = Account.find_by_name!(account_name)
         @account.with(session) { yield }
-      rescue ActiveRecord::RecordNotFound
-        #TODO
-        render :text=>"", :status=>404
+      	rescue ActiveRecord::RecordNotFound
+        	#TODO
+        	render :text=>"", :status=>404
       end
 
       def controller_access_control
