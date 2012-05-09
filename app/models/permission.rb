@@ -48,4 +48,5 @@
 	  validates :name,  :presence => true
 	  validates :value, :presence => true#,
 	                    #:uniqueness => true
+		validate :validate_current_account
 	end

@@ -61,6 +61,7 @@ class Account < ActiveRecord::Base
 		contact.addresses.build(:account_id => self.id)
 		contact.phone_numbers.build(:account_id => self.id)
 		admin.save(:validate => false)
+		admin
 	end
 
 	# Important. Use '_' in roles/permissions arrays to ensure that the account doesn't execute self.roles

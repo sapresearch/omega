@@ -1,6 +1,11 @@
   class Model < ActiveRecord::Base
     self.abstract_class = true
     belongs_to :account
+
+		# Validation to call in various subclasses.
+		def validate_current_account
+			errors.add(:account_id, 'The Account ID must be for the current account') if account != Account.current
+		end
 	
 	def self.build_default_scope
       if method(:default_scope).owner != ActiveRecord::Base.singleton_class

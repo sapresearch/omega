@@ -57,17 +57,10 @@ describe "Accounts" do
 		params = {user: { email: 'test@test.com', password: 'password', password_confirmation: 'password', username: 'tester' } }
 		account_a, account_b = dual_accounts
 		b_id = account_b.id
-		account_a.build_admin(params)
+		admin = account_a.build_admin(params)
 		Account.current = account_a
-		admin = User.first
 		admin.update_attribute(:account_id, b_id)
 		admin.account_id.should eq(account_a.id)
 	end
 
-	it "should make account name attr_protected" do
-		account_a, account_b = dual_accounts
-		correct_name = account_a.name
-		account_a.update_attribute(name: 'hacked')
-		account_a.name.should eq(correct_name)
-	end
 end

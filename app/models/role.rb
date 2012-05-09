@@ -81,7 +81,5 @@
 	  validates :internal_name, :presence => true#,
 	                            #:uniqueness => true,
 	                            #:if => :locked?
+		validate :validate_current_account
 	end
-	
-	
-	
