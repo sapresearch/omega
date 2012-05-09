@@ -1,0 +1,73 @@
+require 'spec_helper'
+
+def create_account(name)
+		account = Account.new(name: 'test_account')
+		roles, permissions = account.build_roles_and_permissions
+		account.save
+		Account.current = account
+		account.assign_roles_and_permissions(roles, permissions)
+		account
+end
+
+def dual_accounts
+	a = create_account('b')
+	b = create_account('c')
+	return a, b
+end
+
+describe "Accounts" do
+
+	it "Should be a valid account" do
+		account = Account.new(name: 'a')
+		account.should be_valid
+	end
+
+	it "should have default roles and permissions" do
+		account = create_account('a')
+		roles = Role::DEFAULT_ROLES.count
+		account.roles.count.should eq(roles)
+		perms = Permission::DEFAULT_PERMISSIONS.count
+		account.permissions.count.should eq(perms)
+	end
+
+	# Security Tests
+
+	it "should block updates to roles/permissions for another account" do
+		account_a, account_b = dual_accounts
+		b_id = account_b.id
+		Account.current = account_a
+		role, perm = Role.first, Permission.first
+		role.update_attribute(:account_id, b_id)
+		perm.update_attribute(:account_id, b_id)
+		role.account_id.should eq(account_a.id)
+		perm.account_id.should eq(account_a.id)
+	end
+
+	it "should block creating a role/permission for another account" do
+		account_a, account_b = dual_accounts
+		b_id = account_b.id
+		Account.current = account_a
+		role = Role.new(name: 'Hacker', internal_name: 'hacker', account_id: b_id)
+		perm = Permission.new(name: 'Hacker', value: 'hacker', account_id: b_id)
+		role.should be_invalid
+		perm.should be_invalid
+	end
+
+	it "should block updating a user's account_id" do
+		params = {user: { email: 'test@test.com', password: 'password', password_confirmation: 'password', username: 'tester' } }
+		account_a, account_b = dual_accounts
+		b_id = account_b.id
+		account_a.build_admin(params)
+		Account.current = account_a
+		admin = User.first
+		admin.update_attribute(:account_id, b_id)
+		admin.account_id.should eq(account_a.id)
+	end
+
+	it "should make account name attr_protected" do
+		account_a, account_b = dual_accounts
+		correct_name = account_a.name
+		account_a.update_attribute(name: 'hacked')
+		account_a.name.should eq(correct_name)
+	end
+end

@@ -79,4 +79,16 @@ class Account < ActiveRecord::Base
 		end
 	end
 
+	def build_roles_and_permissions
+		_roles, _permissions = [], []
+		Role::DEFAULT_ROLES.each_value do |role_attributes|
+			_roles << roles.build(role_attributes)
+		end
+	  
+		Permission::DEFAULT_PERMISSIONS.each_key do |perm|
+			_permissions << permissions.build(name: perm.titleize, value: perm)
+		end
+		return _roles, _permissions
+	end
+
 end
