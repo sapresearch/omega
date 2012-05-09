@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120327184425) do
+ActiveRecord::Schema.define(:version => 20120509214725) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -346,21 +346,13 @@ ActiveRecord::Schema.define(:version => 20120327184425) do
     t.string   "gender"
     t.string   "about_us"
     t.string   "status"
-    t.boolean  "evergreen_news"
-    t.boolean  "evergreen_bw_news"
-    t.boolean  "gta_volunteer_news"
-    t.boolean  "vancouver_volunteer_news"
-    t.boolean  "outdoor_classroom"
-    t.boolean  "la_classe_en_plein_air"
-    t.boolean  "evergreen_funding_opp"
-    t.boolean  "evergreen_bw_school_program"
-    t.boolean  "evergreen_bw_family_program"
     t.boolean  "do_not_email"
     t.boolean  "no_bulk_emails"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "birthday"
     t.integer  "account_id"
+    t.boolean  "over_18",                  :default => false
   end
 
   add_index "contacts", ["account_id"], :name => "index_contacts_on_account_id"
