@@ -1,5 +1,6 @@
 	class Setting < Model
 		belongs_to :user
+		belongs_to :account
 		attr_accessible :facebook_token, :twitter, :user_id, :email
 		self.table_name = 'settings'
 	
@@ -25,13 +26,8 @@
 			return fb_enabled
 		end
 		
-	def self.default_email
-		if not Setting.first.nil?
-			if not Setting.first.email.blank?
-				return Setting.first.email
-			end
+		def self.default
+			first
 		end
-		return "paul.miller01@sap.com"
-	end
 	
 	end

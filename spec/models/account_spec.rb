@@ -6,6 +6,7 @@ def create_account(name)
 		account.save
 		Account.current = account
 		account.assign_roles_and_permissions(roles, permissions)
+		account.build_setting('test@test.com')
 		account
 end
 
@@ -15,10 +16,15 @@ def dual_accounts
 	return a, b
 end
 
+params = {}
+params[:account] = {:name=>"darkside"}
+params[:user] = {:username=>"darkside", :password=>"password", :password_confirmation=>"password", :email=>"pmiller987@gmail.com"}
+PARAMS = params
+
 describe "Accounts" do
 
 	it "Should be a valid account" do
-		account = Account.new(name: 'a')
+		account = create_account('a')
 		account.should be_valid
 	end
 
@@ -29,6 +35,12 @@ describe "Accounts" do
 		perms = Permission::DEFAULT_PERMISSIONS.count
 		account.permissions.count.should eq(perms)
 	end
+
+	it "should have a default email" do
+		account = create_account('a')
+		account.setting.email.should =~ /[^ ]/
+	end
+		
 
 	# Security Tests
 

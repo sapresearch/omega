@@ -5,6 +5,7 @@ class Account < ActiveRecord::Base
 	has_many :users
 	has_many :permissions
 	has_many :roles
+	has_one :setting
 		
 	class << self
 		def current
@@ -48,10 +49,21 @@ class Account < ActiveRecord::Base
 		end
 	end
 	
+	def self.new_and_save(params)
+		@account = Account.new(params[:account])
+		roles, permissions = @account.build_roles_and_permissions
+		@account.save
+		@account.assign_roles_and_permissions(roles, permissions)
+		@account.build_admin(params)
+		@account.build_setting(params[:user][:email])
+		@account
+	end
+
 	def build_admin(params)
 		password = params[:user].delete(:password)
 		confirm = params[:user].delete(:password_confirmation)
-		admin = User.new(:email => params[:user][:email], :username => params[:user][:username])
+		email, username = params[:user][:email], params[:user][:username]
+		admin = User.new(:email => email, :username => username)
 		admin.password = password
 		admin.password_confirmation = confirm
 		admin.account = self
@@ -62,6 +74,12 @@ class Account < ActiveRecord::Base
 		contact.phone_numbers.build(:account_id => self.id)
 		admin.save(:validate => false)
 		admin
+	end
+
+	def build_setting(email)
+		setting = Setting.create(:email => email)
+		setting.update_attribute(:account_id, self.id)
+		setting
 	end
 
 	# Important. Use '_' in roles/permissions arrays to ensure that the account doesn't execute self.roles

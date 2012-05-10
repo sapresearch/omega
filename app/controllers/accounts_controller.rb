@@ -43,22 +43,8 @@
     # POST /accounts
     # POST /accounts.json
     def create
-      @account = Account.new(params[:account])
-			roles, permissions = [], []
-
-			Role::DEFAULT_ROLES.each_value do |role_attributes|
-				roles << @account.roles.build(role_attributes)
-			end
-	  
-			Permission::DEFAULT_PERMISSIONS.each_key do |perm|
-				permissions << @account.permissions.build(name: perm.titleize, value: perm)
-			end
-
       respond_to do |format|
-        if @account.save
-					@account.assign_roles_and_permissions(roles, permissions)
-					@account.build_admin(params)
-			
+        if Account.new_and_save(params)
           format.html { redirect_to accounts_url, notice: 'Account was successfully created.' }
           format.json { render json: @account, status: :created, location: @account }
         else
