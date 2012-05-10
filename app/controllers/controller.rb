@@ -16,7 +16,7 @@
   #  self.responder = Omega::ControllerResponder
 
     before_filter :controller_access_control
-    #around_filter :general_exception_handler
+    around_filter :general_exception_handler
 
     protect_from_forgery
 

@@ -20,8 +20,10 @@
     })
     var account_name = '<%= Account.current.name %>'
     var account_prefix_path = ''
-    if(account_name.length>0)
-      account_prefix_path = '/'+account_name
+    <% unless Rails.env.production? %>
+      if(account_name.length>0)
+        account_prefix_path = '/'+account_name
+    <% end %>
   </script> 
 
   <%# require_stylesheet 'application_evergreen', 'thirdParty/jquery-ui-1.8.4.custom' %>
