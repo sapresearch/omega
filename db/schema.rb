@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509214725) do
+ActiveRecord::Schema.define(:version => 20120507161431) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -352,7 +352,7 @@ ActiveRecord::Schema.define(:version => 20120509214725) do
     t.datetime "updated_at"
     t.date     "birthday"
     t.integer  "account_id"
-    t.boolean  "over_18",                  :default => false
+    t.boolean  "over_18",                     :default => false
   end
 
   add_index "contacts", ["account_id"], :name => "index_contacts_on_account_id"

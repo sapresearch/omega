@@ -17,7 +17,7 @@
 	
 	  TITLES = %w{ Mr Miss Ms Mrs}
 	
-	  attr_accessible :first_name, :last_name, :email, :phone_numbers_attributes, :addresses_attributes, :birthday
+	  attr_accessible :first_name, :last_name, :email, :phone_numbers_attributes, :addresses_attributes, :birthday, :over_18
     attr_accessible :account_id
 	
 	  scope :status, where('status IS NULL')
@@ -122,16 +122,21 @@
 	  attr_accessor :email_confirmation
 	
 	  validates :email,      :presence  => true,
-	  								 :confirmation => true,
+                           :confirmation => true,
 	                         :length    => 6..80,
 	                         :email     => true
 	
-	  validates :first_name, :length    => 0..80,
+	  validates :first_name, :presence  => true,
+                           :length    => 0..80,
 	                         :unless    => :has_user?
 	  validates :last_name,  :presence  => true,
 	                         :length    => 1..80,
 	                         :unless    => :has_user?
-	  validates :birthday,	 :presence  => true
+
+#    validates :birthday,	 :presence  => false
+    validates :over_18,    :presence =>  true,
+                           :inclusion => {:in => [true, false]}
+#                           ,:if  =>  :has_valid_birthday
 	
 	  after_save :sync_to_user, :unless => :synced?
 	
@@ -231,28 +236,37 @@
 			end
 		end
 	
-		def over_18?
-			bday = self.birthday
-			today = Date.today
-			result = false
-			if (today.year - bday.year) > 18
-				result = true
-			elsif (today.year - bday.year) < 18 
-				result = false
-			else # it equals 18
-				if (today.month - bday.month) > 0
-					result = true
-				elsif (today.month - bday.month) < 0
-					result = false
-				elsif (today.month - bday.month) == 0
-					if (today.day - bday.day) >= 0
-						result = true
-					else
-						result = false
-					end
-				end
-			end
-		end
+#		def over_18?
+#			bday = self.birthday
+#			today = Date.today
+#			result = false
+#			if bday == '' and self.is_18 == true
+#				result = true
+#			elsif (today.year - bday.year) < 18
+#				result = false
+#      elsif (today.year - bday.year) > 18
+#        result = true
+#			else # it equals 18
+#				if (today.month - bday.month) > 0
+#					result = true
+#				elsif (today.month - bday.month) < 0
+#					result = false
+#				elsif (today.month - bday.month) == 0
+#					if (today.day - bday.day) >= 0
+#						result = true
+#					else
+#						result = false
+#					end
+#				end
+#			end
+#		end
+
+    def has_valid_birthday
+      if(!self.birthday.nil?)
+        actual_age = (Date.today.year - self.birthday.year).to_i
+        :over_18 ? actual_age > 18 : actual_age <=18
+      end
+    end
 				
 	
 	  private

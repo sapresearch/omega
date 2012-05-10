@@ -1,5 +1,6 @@
 .bundle/
 
+
 log/*.log
 
 pkg/
@@ -25,3 +26,6 @@ config/database_1.yml
 
 config/database_2.yml
 
+nbproject/
+
+.project

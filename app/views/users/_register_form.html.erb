@@ -1,3 +1,4 @@
+<%= require_javascript 'thirdParty/jquery.validate.190', 'new_user' %>
 <div id="signup-form">
 <%= form_for @user, :url => register_users_path do |f| %>
 <p> This is user contact: <%= is_nil = @user.contact.nil? ? "nil" : "not nil" %></p>
@@ -8,30 +9,35 @@
 	 <h3 class="application-form">PERSONAL INFORMATION </h3> 
 
      	<p>
-     		<%= c.label :first_name%>
-	   	<%= c.text_field(:first_name, :'data-tooltip' => 'Email where you could be contacted') %> 
+     		<%= c.label :first_name, :class => "mandatory-field"%>
+	   	<%= c.text_field(:first_name, :'data-tooltip' => 'Your first name') %> 
 	   </p>
 	    
 	   <p>
       	<%= c.label :last_name, :class => "mandatory-field" %>
-	   	<%= c.text_field(:last_name, :'data-tooltip' => 'Email where you could be contacted') %> 
+	   	<%= c.text_field(:last_name, :'data-tooltip' => 'Your family name') %> 
 		</p>
 
 		<p>
 			<%= c.label :birthday %>
 			<%= c.text_field :birthday, :'data-tooltip' => 'Your birthday. MM/DD/YYYY' %>
 		</p>
+		
+		<p>
+			<%= c.label :over_18, 'I am over 18' %>
+			<%= c.check_box :over_18, :'data-tooltip' => 'Are you a minor?' %>
+		</p>
 			   
 		<%=  c.fields_for :addresses do |a|%>
 
         	<p>
         		<%= a.label :city, :class => "mandatory-field"%>
-				<%= a.text_field(:city, :'data-tooltip' => 'Email where you could be contacted') %> 
+				<%= a.text_field(:city, :'data-tooltip' => 'City where you reside') %> 
 		   </p>
 		    
 		   <p>
         		<%= a.label :postal_code , :class => "mandatory-field"%>
-				<%= a.text_field(:zip_code, :'data-tooltip' => 'Email where you could be contacted') %>
+				<%= a.text_field(:zip_code, :'data-tooltip' => 'Your postal code or zip code') %>
 	 		</p>
 
 		<%end%>
@@ -55,8 +61,8 @@
 	  </p>
 	  
 	  <p>
-	  <%= c.label :confirm_email %>
-      <%= c.text_field(:email_confirmation, :'data-tooltip' => 'Email where you could be contacted') %>
+	  <%= c.label :confirm_email, :class => "mandatory-field" %>
+      <%= c.text_field(:email_confirmation, :'data-tooltip' => 'Re-type email address again') %>
 	  </p>
 	  
    <%end%>
@@ -72,12 +78,11 @@
 	  </p>
 	  
 	  <p>
-      <%= f.label :confirm_password %>
+      <%= f.label :confirm_password, :class => "mandatory-field" %>
       <%= f.password_field :password_confirmation %>
       </p>
-	  <%#= f.label :time_zone %>
-	  <%#= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
-		
+        <%#= f.label :time_zone %>
+        <%#= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
     <%= om_button do %>
         <%= f.submit "REGISTER" %>
     <% end %>
