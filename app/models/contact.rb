@@ -134,7 +134,7 @@
 	                         :unless    => :has_user?
 
 #    validates :birthday,	 :presence  => false
-    validates :over_18,    :presence =>  true,
+    validates :over_18,    #:presence =>  true,
                            :inclusion => {:in => [true, false]}
 #                           ,:if  =>  :has_valid_birthday
 	
