@@ -79,7 +79,14 @@ class Account < ActiveRecord::Base
 	def build_setting(email)
 		setting = Setting.create(:email => email)
 		setting.update_attribute(:account_id, self.id)
+		verify_setting_email(email) if Rails.env.production?
 		setting
+	end
+
+	def verify_setting_email(email)
+		require '../secret_key.rb'
+		ses = AWS::SES::Base.new(:access_key_id => AWS_ACCESS[:access_key_id], :secret_access_key => AWS_ACCESS[:secret_access_key])
+		ses.addresses.verify(email)
 	end
 
 	# Important. Use '_' in roles/permissions arrays to ensure that the account doesn't execute self.roles
