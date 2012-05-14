@@ -77,7 +77,7 @@ class Account < ActiveRecord::Base
 	end
 
 	def build_setting(email)
-		setting = Setting.create(:email => email)
+		setting = Setting.create(:email => email, :account_id => self.id)
 		setting.update_attribute(:account_id, self.id)
 		verify_setting_email(email) if Rails.env.production?
 		setting
