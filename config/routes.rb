@@ -238,7 +238,7 @@ my_routes = lambda {
 		put :update_my_page
 	 end
     collection do
-      get :register
+      get :register, :check_email_uniqueness, :check_username_uniqueness
       post :join, :path => 'register'
       get :autocomplete
       get :role_assignment

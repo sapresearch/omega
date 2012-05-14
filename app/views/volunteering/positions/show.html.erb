@@ -2,123 +2,137 @@
 <% if notice != nil %><p class="notice"><%= notice %></p>
 <% end %>
 
-    <div class="content circle-corners-bottom corners-top">
-    	
-		<div class="heading-main-columns">
-	
-		<h1 class="page-content">
-			 <%= @position.name %>
-		</h1>
-	   
-        </div>
-		
-	  <div class="main-box">	
-	
-      <p>
-        <%= @position.description %>
-      </p>
+<div class="content circle-corners-bottom corners-top">
 
-      <div>
-        <% unless @position.recurrent? %>
+  <div class="heading-main-columns">
+
+    <h1 class="page-content">
+      <%= @position.name %>
+    </h1>
+
+  </div>
+
+  <div class="main-box">
+
+    <%#*<p>%>
+      <%#= @position.description %>
+    <%#*</p>%>
+
+    <div>
+      <% unless @position.recurrent? %>
+        <div class="position-show position-wrapper">
+          <div class="position_top_bar">
+            <div class="pos-date">
+              <div class="pos-cal-month"><%= @position.start.strftime("%b") %></div>
+              <div class="pos-cal-day"> <%= @position.start.day %></div>
+            </div>
             <% if @position.start %>
-                <p>
-                  <span class="om-icon-only ui-icon-date"></span> <span> Start date:</span>
-                  <%= @position.start.to_formatted_s(:long) %>
-                </p>
+            <p>
+              <span class="om-icon-only ui-icon-date"></span> <span> Start date:</span>
+              <%= @position.start.to_formatted_s(:long) %>
+            </p>
             <% end %>
             <% if @position.end %>
-                <p>
-                  <span class="om-icon-only ui-icon-date"></span> <span>End date:</span>
-                  <%= @position.end.to_formatted_s(:long) %>
-                </p>
+              <p>
+                <span class="om-icon-only ui-icon-date"></span> <span>End date:</span>
+                <%= @position.end.to_formatted_s(:long) %>
+              </p>
             <% end %>
-            <!-- hours-->
-        <% else %>
-            <% recurrence = @position.recurrence %>
-            <p class="explanation">
-
-              <span class="om-icon-only ui-icon-date"></span>
-
-              This Position reoccurs
-              <%= case recurrence.pattern
-                      when Calendar::Recurrence::DAILY
-                          case recurrence.daily.every
-                              when Calendar::Recurrence::DAY
-                                  "every " + pluralize(recurrence.daily.days, 'day')
-                              when Calendar::Recurrence::WEEKDAY
-                                  "every weekday"
-                          end
-                      when Calendar::Recurrence::WEEKLY
-                          "every " +
-                                  pluralize(recurrence.weekly.weeks, 'week') + ' on ' +
-                                  t(:'calendar.recurrence.days_of_the_week').select { |day, hday| recurrence.weekly.days[day.to_s] == '1' }.values.join(', ')
-                      when Calendar::Recurrence::MONTHLY
-                          case recurrence.monthly.every
-
-                              when Calendar::Recurrence::DAY
-                                  'day ' + recurrence.monthly.day.days.to_s + ' of every ' + recurrence.monthly.day.months.to_s + ' month'
-
-                              when Calendar::Recurrence::ORDINAL
-                                  'the ' + t(:"calendar.recurrence.ordinals.#{recurrence.monthly.ordinal.ordinal}") + ' ' +
-                                          t(:"calendar.recurrence.days.#{recurrence.monthly.ordinal.days}") +
-                                          ' of every ' + recurrence.monthly.ordinal.months.to_s + ' month'
-                          end
-
-                      when Calendar::Recurrence::YEARLY
-                          case recurrence.yearly.every
-
-                              when Calendar::Recurrence::DAY
-                                  'every ' + recurrence.yearly.day.days.to_s + ' ' + t(:"calendar.recurrence.months.#{recurrence.yearly.day.months}")
-                              when Calendar::Recurrence::ORDINAL
-                                  'the ' + t(:"calendar.recurrence.ordinals.#{recurrence.yearly.ordinal.ordinal}") + ' ' +
-                                          t(:"calendar.recurrence.days.#{recurrence.yearly.ordinal.days}") +
-                                          ' of every ' + recurrence.yearly.ordinal.months.to_s + ' month'
-
-
-                          end
-
-
-                  end
-              %>
-              
-              
-              
-            </p>
+            <%#*<h2>%>
+              <%#=  link_to truncate(@position.name, :length=>60), volunteering_position_path(@position), :class => 'position-name'  %>
+            <%#*</h2>%>
+          </div>
+          <%#*<div class="position_body">%>
             
+          <%#*</div>%>
+        </div>
+        <!-- hours-->
+      <% else %>
+        <% recurrence = @position.recurrence %>
+        <p class="explanation">
 
-        <% end %>
+          <span class="om-icon-only ui-icon-date"></span>
+
+          This Position reoccurs
+          <%= case recurrence.pattern
+          when Calendar::Recurrence::DAILY
+            case recurrence.daily.every
+            when Calendar::Recurrence::DAY
+              "every " + pluralize(recurrence.daily.days, 'day')
+            when Calendar::Recurrence::WEEKDAY
+              "every weekday"
+            end
+          when Calendar::Recurrence::WEEKLY
+            "every " +
+              pluralize(recurrence.weekly.weeks, 'week') + ' on ' +
+              t(:'calendar.recurrence.days_of_the_week').select { |day, hday| recurrence.weekly.days[day.to_s] == '1' }.values.join(', ')
+          when Calendar::Recurrence::MONTHLY
+            case recurrence.monthly.every
+
+            when Calendar::Recurrence::DAY
+              'day ' + recurrence.monthly.day.days.to_s + ' of every ' + recurrence.monthly.day.months.to_s + ' month'
+
+            when Calendar::Recurrence::ORDINAL
+              'the ' + t(:"calendar.recurrence.ordinals.#{recurrence.monthly.ordinal.ordinal}") + ' ' +
+                t(:"calendar.recurrence.days.#{recurrence.monthly.ordinal.days}") +
+                ' of every ' + recurrence.monthly.ordinal.months.to_s + ' month'
+            end
+
+          when Calendar::Recurrence::YEARLY
+            case recurrence.yearly.every
+
+            when Calendar::Recurrence::DAY
+              'every ' + recurrence.yearly.day.days.to_s + ' ' + t(:"calendar.recurrence.months.#{recurrence.yearly.day.months}")
+            when Calendar::Recurrence::ORDINAL
+              'the ' + t(:"calendar.recurrence.ordinals.#{recurrence.yearly.ordinal.ordinal}") + ' ' +
+                t(:"calendar.recurrence.days.#{recurrence.yearly.ordinal.days}") +
+                ' of every ' + recurrence.yearly.ordinal.months.to_s + ' month'
 
 
-        <% if @position.contacts.any? %>
-            <p>
-              <span class="fieldDescribtion"> Contact:</span>
-            <ul>
+            end
 
 
-              <% @position.contacts.each do |contact| %>
-                  <li>  <%= contact.first_name %> <%= contact.last_name %></li>
-              <% end %>
-            </ul>
-            </p>
-        <% end %>
+          end
+        %>
 
 
-      </div>
-	  </div>
+
+        </p>
+
+
+      <% end %>
+
+
+      <% if @position.contacts.any? %>
+        <p>
+          <span class="fieldDescribtion"> Contact:</span>
+        <ul>
+
+
+          <% @position.contacts.each do |contact| %>
+            <li>  <%= contact.first_name %> <%= contact.last_name %></li>
+          <% end %>
+        </ul>
+        </p>
+      <% end %>
+
+
     </div>
+  </div>
+</div>
 
 <% content_for :sidebar do %>
 
-    <%= render :partial => "layouts/sidebar_position_show_menu" %>
+  <%= render :partial => "layouts/sidebar_position_show_menu" %>
 
 
-<% if @position.skills.any? %>
+  <% if @position.skills.any? %>
     <%= render :partial => "layouts/sidebar_position_show_skills" %>
-<% end %>
+  <% end %>
 
-<%if @position.interests.any? %>
+  <%if @position.interests.any? %>
     <%= render :partial => "layouts/sidebar_position_show_interests" %>
-<% end %>
+  <% end %>
 
 <% end %>
 

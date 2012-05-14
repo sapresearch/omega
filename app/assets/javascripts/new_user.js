@@ -35,7 +35,7 @@ $(document).ready(function () {
                 ,minlength: 4
                 ,maxlength: 30
                 ,email: true
-//                ,remote: "/test2/users/check_email_uniqueness"
+                ,remote: "/test2/users/check_email_uniqueness"
             }
             ,"user[contact_attributes][email_confirmation]": {
                 required: true
@@ -45,7 +45,7 @@ $(document).ready(function () {
                 required: true
                 ,minlength: 2
                 ,maxlength: 20
-//                ,remote: "/test2/users/check_username_uniqueness"
+                ,remote: "/test2/users/check_username_uniqueness"
             }
             ,"user[password]": {
                 required: true

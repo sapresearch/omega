@@ -233,7 +233,7 @@ class UsersController < Controller
     @username = User.find_by_username(params[:user][:username]).nil?
 
     respond_to do |format|
-      fomat.json { render :json => @username}
+      format.json { render :json => @username}
     end
   end
 
