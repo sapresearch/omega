@@ -21,6 +21,9 @@
 	  end
 	
 	  def create
+      puts 1111
+      puts params[:calendar_event]
+      puts 2222
 	    @event = @calendar.events.create(params[:calendar_event])
 	    respond_with(@event)
 	  end

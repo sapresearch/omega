@@ -43,5 +43,30 @@
 	    return nil if service_registration_form_value.nil?
 	    ActiveSupport::JSON.decode(service_registration_form_value.field_values)
 	  end
+
+    # implementation subject to change
+    def synchronize_calendar(new_status = "accepted", old_status = "pending", calendar = self.registrant.calendars.first)
+      return if calendar.nil? 
+      service = service_leaf.service
+      
+      service_leaf.service_sections.each do |service_section|
+        if new_status == "accepted" && old_status != "accepted"
+          calendar.events.create(:name=>service.name, :start_date=>service_section.event.start_at, :end_date=>service_section.event.end_at)
+          if service_section.is_recurrent?
+            start_at = service_section.event.start_at
+            end_at = service_section.event.end_at
+            interval = service_section.event.recurrence_interval
+            recurrence_end_at = service_section.event.event_recurrence.end_at
+            while true
+              start_at += interval
+              end_at += interval
+              end_at.to_i <= recurrence_end_at.to_i ? calendar.events.create(:name=>service.name, :start_date=>start_at, :end_date=>end_at) : break
+            end
+          end
+        elsif new_status != "accepted" && old_status == "accepted"
+          calendar.events.where(:name=>service.name).destroy_all
+        end
+      end     
+    end
 	
 	end

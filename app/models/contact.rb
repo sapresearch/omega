@@ -49,6 +49,7 @@
 	  self.include_root_in_json = false
 	
 	  belongs_to :user, :dependent=>:destroy
+    has_many :calendars, :through=>:user
 	  
 	  has_and_belongs_to_many :interests, :join_table => 'contact_contacts_interests'
 	  has_and_belongs_to_many :skills,    :join_table => 'contact_contacts_skills'

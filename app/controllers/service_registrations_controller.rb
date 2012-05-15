@@ -39,6 +39,7 @@
 	
 	        @service_registration = ServiceRegistration.create(:service_leaf_id=>@service_leaf_id, :status=>@status, :registrant_id=>@registrant.id)
 	        @service_registration.create_service_registration_form_value(:field_values => @field_values) unless @field_values.nil?
+          @service_registration.synchronize_calendar(@status)
 	      end
 	    end
 	
@@ -64,7 +65,10 @@
 	      if @status=="accepted" && @service_registration.status!="accepted" && @service.capacity && @service.accepted_registrants.count >= @service.capacity
 	        @status_update_success = false
 	      else
-	        @service_registration.update_attribute(:status,@status)
+          ServiceRegistration.transaction do
+            @service_registration.synchronize_calendar(@status, @service_registration.status)
+            @service_registration.update_attribute(:status,@status)
+          end
 	      end
 	    end
 	    
@@ -81,20 +85,22 @@
 	  def destroy
 	    @service_registration = ServiceRegistration.find(params[:id])     
 	    @service = @service_registration.service
-	    
-	    # for js
-	    # not redirect to services#index for better performance
-	    @type=params[:type]
-	    if @type=="admin"
-	         
-	      @service_registration.destroy
-	      @service_registrations = @service.service_registrations
-	    else
-	      @service_registration.destroy unless @service_registration.status == "rejected" 
-	      @super_service = @service.super_service
-	      @services = @service.sibling_services
-	      filter_services
-	    end
+
+      ServiceRegistration.transaction do        
+        # for js
+        # not redirect to services#index for better performance
+        @type=params[:type]
+        if @type=="admin"
+          @service_registration.destroy
+          @service_registrations = @service.service_registrations
+        else
+          @service_registration.destroy unless @service_registration.status == "rejected"
+          @super_service = @service.super_service
+          @services = @service.sibling_services
+          filter_services
+        end
+        @service_registration.synchronize_calendar("deleted", @service_registration.status)
+      end
 	    
 	    respond_with(@service_registration)
 	  end
