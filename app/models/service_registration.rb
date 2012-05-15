@@ -54,10 +54,11 @@
           calendar.events.create(:name=>service.name, :start_date=>service_section.event.start_at, :end_date=>service_section.event.end_at)
           if service_section.is_recurrent?
             start_at = service_section.event.start_at
-            end_at = service_section.event.end_at
-            interval = service_section.event.recurrence_interval
+            end_at = service_section.event.end_at            
             recurrence_end_at = service_section.event.event_recurrence.end_at
             while true
+              break if start_at.nil?             
+              interval = service_section.event.recurrence_interval(start_at)
               start_at += interval
               end_at += interval
               end_at.to_i <= recurrence_end_at.to_i ? calendar.events.create(:name=>service.name, :start_date=>start_at, :end_date=>end_at) : break

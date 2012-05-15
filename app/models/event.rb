@@ -205,16 +205,17 @@
 	    return interval_values_hash["minute"].to_i
 	  end
 	
-	  def recurrence_interval
+	  def recurrence_interval(start_at=Time.now)
 	    return nil if event_recurrence.nil?
 	    interval_values_hash = ActiveSupport::JSON.decode(event_recurrence.interval)
 	    result = 0
 	    interval_values_hash.each do |key,value|
 	      case key
 	        when "year"
-	          result += value.to_i.year.to_i
+            result += (start_at.advance(:years=>value.to_i)-start_at).to_i
 	        when "month"
-	          result += value.to_i.month.to_i
+            result += (start_at.advance(:months=>value.to_i)-start_at).to_i
+	          #result += value.to_i.month.to_i
 	        when "day"
 	          result += value.to_i.day.to_i
 	        when "hour"
