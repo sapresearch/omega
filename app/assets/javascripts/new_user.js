@@ -22,7 +22,7 @@ $(document).ready(function () {
             }
             ,"user[contact_attributes][addresses_attributes][0][zip_code]": {
                 required: true
-                ,minlength: 6
+                ,minlength: 5
                 ,maxlength: 10
             }
             ,"user[contact_attributes][phone_numbers_attributes][0][number]": {
