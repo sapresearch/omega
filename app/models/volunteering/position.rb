@@ -43,13 +43,17 @@
 		def valid_dates
 			self.errors.clear
 			if !recurrent
-				s = self.start_time
-				e = self.end_time
-	      
-				if s >= e
+				return 
+				if start_time.nil? or end_time.nil?
+					return self.errors.add :start_time, " The start time and end time must be filled in."
+				end
+				if start_time >= end_time
 					self.errors.add :start_time, " The start time, #{start_time}, has to be before end time, #{end_time} "
 				end
 			elsif recurrent
+				if recurrence_start_time.nil? or recurrence_end_time.nil?
+					return self.errors.add :recurrence_start_time, " The start time and end time must be filled in."
+				end
 				if recurrence_start_time >= recurrence_end_time
 					self.errors.add :recurrence_start_time, " #{recurrence_start_time} has to be before end time, which is #{recurrence_end_time}"
 				end
