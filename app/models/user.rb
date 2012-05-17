@@ -76,14 +76,18 @@
 	  attr_accessor :password, :password_confirmation, :account_id
 	  attr_accessible :username, :email, :contact_attributes
 	
-		validate :validate_current_account
+		validate :validate_current_account, :username_must_be_unique#validate username->see model.rb file
 	  validates :username,   :presence => true,
-	                         :uniqueness => true,
 	                         :length => 3..40
+#                           ,:uniqueness => true
+#   ...this will not work since rails will check the database without respect to
+#   multi-tenancy (in which case the same username may exist in the same table
+#   but under different accounts). solution: have to write a separate function
+#   in order to check uniqueness in a specific account
 	  validates :password,   :presence => true,
 	                         :confirmation => true,
 	                         :length => 5..40,
-	                         :if => :save_password?
+	                         :unless => :save_password?
 
 	  before_create :create_salt, :save_password
 	  before_update :save_password

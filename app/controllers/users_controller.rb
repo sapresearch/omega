@@ -42,13 +42,6 @@ class UsersController < Controller
       params[:user][:contact_attributes][:birthday] = Date.strptime(params[:user][:contact_attributes][:birthday], '%m/%d/%Y')
     end
 
-#    checking to see if the user's age is above 18 or not
-#    if params[:user][:contact_attributes][:over_18] == '0'
-#      params[:user][:contact_attributes][:is_18] = false
-#    elsif params[:user][:contact_attributes][:is_18] == '1'
-#      params[:user][:contact_attributes][:is_18] = true
-#    end
-
     @user = User.new(params[:user])
     @user.account = account
     @user.password = password
@@ -222,18 +215,18 @@ class UsersController < Controller
   end
 
   def check_email_uniqueness
-    @email = User.find_by_email(params[:user][:contact_attributes][:email]).nil?
+    has_same_email = User.find_by_email(params[:user][:contact_attributes][:email]).nil?
 
     respond_to do |format|
-      format.json { render :json => @email }
+      format.json { render :json => has_same_email }
     end
   end
 
   def check_username_uniqueness
-    @username = User.find_by_username(params[:user][:username]).nil?
+    has_same_username = User.find_by_username(params[:user][:username]).nil?
 
     respond_to do |format|
-      format.json { render :json => @username}
+      format.json { render :json => has_same_username}
     end
   end
 

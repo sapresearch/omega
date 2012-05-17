@@ -6,6 +6,13 @@
 		def validate_current_account
 			errors.add(:account_id, 'The Account ID must be for the current account') if account != Account.current
 		end
+
+    # Validation to check uniqueness of username field
+    def username_must_be_unique
+      if !User.find_by_username(self.username).nil?
+        errors.add(:username, 'The username is already taken.')
+      end
+    end
 	
 	def self.build_default_scope
       if method(:default_scope).owner != ActiveRecord::Base.singleton_class
