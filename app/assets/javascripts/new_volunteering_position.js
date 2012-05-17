@@ -132,11 +132,10 @@ $(function() {
     });
 
     $('#scheduler-pattern').find('input').change(function() {
-    var pattern = '#schedule-' + $(this).val();
-    $('#schedule').find('div.schedules:visible').hide();
-    $(pattern).show();
-    
-});
+    	var pattern = '#schedule-' + $(this).val();
+    	$('#schedule').find('div.schedules:visible').hide();
+    	$(pattern).show();
+		});
 
 });
 

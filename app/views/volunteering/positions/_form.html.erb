@@ -64,7 +64,7 @@
         </p>
       </div>
 
-      <%= recurrence(f, !@position.recurrent?) %>
+	    <%= render('shared/recurrence', :builder => f, :hidden => !@position.recurrent? ) %>
 
     
   	 <h3 class="application-form">Calendar Synchronization</h3> 

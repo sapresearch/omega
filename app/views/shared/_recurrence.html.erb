@@ -16,21 +16,21 @@
 
        <h2 class="application-form-content-heading">Timeline</h2>
        <p> <%= r.label :Start_time %>
-       	   <%= r.text_field :start_time, :class => 'tpickr', :value => r.object.start_time.try(:to_s, :time) %></p>
+       	   <%= r.text_field :start_time, :class => 'tpickr', :value => r.object.start_time.try(:to_s, :time) %>
+			 </p>
+
        <p> <%= r.label :End_time %> 
-       	   <%= r.text_field :end_time, :class => 'tpickr', :value => r.object.end_time.try(:to_s, :time) %></p>
+       	   <%= r.text_field :end_time, :class => 'tpickr', :value => r.object.end_time.try(:to_s, :time) %>
+			 </p>
         
        <p>
           <%= r.label :Start_date %>
           <%= r.text_field :start, :class=> 'datepickr' %>
-
-        </p>
+       </p>
 
         <p>
-        	
           <%= r.radio_button :end_on, Calendar::Recurrence::END_ON_NEVER %>
           <%= r.label :no_end_date %>
-
         </p>
 
         <p>
@@ -38,7 +38,7 @@
           <%= r.radio_button :end_on, Calendar::Recurrence::END_ON_NUMBER %>
           
           <br/><br/>
-                    <%= r.label '' %>
+          <%= r.label '' %>
 
           <%= r.text_field :end_after, :class => 'inputSmall' %>
           ocurrences
@@ -47,8 +47,7 @@
         <p>
           <%= r.label :end_by %>
           <%= r.radio_button :end_on, Calendar::Recurrence::END_ON_DATE %> <br/><br/>
-                    <%= r.label '' %>
-
+          <%= r.label '' %>
           <%= r.text_field :end_at, :class=> 'datepickr' %>
         </p>
         
@@ -58,26 +57,23 @@
         	
         <span class="radio-button-block"> 	
          <%= r.radio_button :pattern, Calendar::Recurrence::DAILY  %> <strong>Daily </strong>
-               </span>
+        </span>
   
-          <br/>
+        <br/>
           
         <span class="radio-button-block"> 	
-  
          <%= r.radio_button :pattern, Calendar::Recurrence::WEEKLY %> <strong>Weekly </strong>
         </span> 
-          <br/>
+        <br/>
           
         <span class="radio-button-block"> 	
- 
           <%= r.radio_button :pattern, Calendar::Recurrence::MONTHLY %> <strong>Monthly </strong>
         </span>          	
-
-          <br/>
+        <br/>
           
         <span class="radio-button-block">   
           <%#= r.label t(:'calendar.recurrence.yearly') %>
-          <%= r.radio_button :pattern, Calendar::Recurrence::YEARLY, :checked => true %> <strong>Yearly </strong>
+          <%= r.radio_button :pattern, Calendar::Recurrence::YEARLY %> <strong>Yearly </strong>
         </span>
        
         </div>
@@ -97,10 +93,8 @@
 
             <%= r.fields_for(:weekly) do |w| %>
                 <p>
-
                   Every
                   <%= w.text_field :weeks, :class => 'inputSmall' %>
-
                   week(s)
                 </p>
 
@@ -149,30 +143,23 @@
                   <%= y.radio_button :every, Calendar::Recurrence::DAY %>On
 
                   <%= y.fields_for(:day) do |yd| %>
-                      
                       <%= yd.select :months, months %>
-
                       <%= yd.text_field :days, :class => 'inputSmall' %>
                       <br/>
                   <% end %>
                 </p>
 
                 <p>
-
                   <%= y.radio_button :every, Calendar::Recurrence::ORDINAL %>On the
                   <%= y.fields_for(:ordinal) do |yo| %>
                       <%= yo.select :ordinal, ordinals %><%= yo.select :days, days %>
                       of <%= yo.select :months, months %>
-
                   <% end %>
                 </p>
             <% end %>
           </div>
 
-
         </div>
 
-      
-        
   <% end %>
 </div>
