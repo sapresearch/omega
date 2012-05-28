@@ -1,36 +1,30 @@
-<div id="loginFailed">
+<% require_stylesheet 'login' %>
+
+<div id="loginFailed" >
 </div>
 
 <%= form_for Session.new, :remote => true, :'data-type' => 'json' do |f| %>
-<p>
-    
-      <%= f.label :user, :class => "login" %>
-      <%= f.text_field :username, :class => 'inputMid', :tabindex=>1 %>
-
-</p>
-
-<p>    
-    
-      <%= f.label :password, :class => "login" %>
-      <%= f.password_field :password, :class => 'inputMid', :tabindex=>1 %>
-
-</p>    
-
-<p class= "left-align">
-        <%= om_button(:icon => 'login') do %>
-       	 	<%= f.submit "OK" %>
-    	<% end %>
-</p>
-
-<p class="right-align">
-	
-	  <%=  link_to 'Lost your username?', lost_username_path %> <br>
-  	  <%=  link_to 'Lost your password?', lost_password_path %>
-	
-</p>
-
-
-
-
-
+  <table>
+    <tr id="login_tr">
+      <td id="login_fields">
+        <div class="login_field">
+          <%= f.label :user_name, :class => "login" %>
+          <%= f.text_field :username, :class => 'inputMid', :tabindex=>1 %>
+        </div>
+        <div class="login_field">
+          <%= f.label :password, :class => "login" %>
+          <%= f.password_field :password, :class => 'inputMid', :tabindex=>1 %>
+        </div>
+      </td>
+      <td id="login_operations">
+        <div class="login_operation">
+          <%=  link_to 'Lost your username?', lost_username_path %>
+        </div>
+        <div class="login_operation">
+          <%=  link_to 'Lost your password?', lost_password_path %>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <%= f.submit :class=>:hidden_submit%>
 <% end %>

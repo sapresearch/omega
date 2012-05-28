@@ -129,11 +129,22 @@ jQuery(function($) {
 
 
     loginWrapper.dialog({
+        resizable: false,
         modal   : true,
         autoOpen: false,
         title   : 'Login',
-        width   : 400
+        width   : 500,
+        buttons: {
+            Login: function() {
+                $('#new_session').submit();
+            },
+            Cancel: function() {
+            	$(this).dialog( "close" );
+            }
+	}
     });
+
+
     trigger.click(function() {
         loginWrapper.dialog('open');
         $('#session_username').focus();
