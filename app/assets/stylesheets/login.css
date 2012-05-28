@@ -1,0 +1,51 @@
+#login_tr{
+    display:block;
+    margin:20px 0px 0px 0px;
+}
+#loginFailed{
+    width:100%;
+    background: #eee;
+}
+#loginFailed .error{
+    display:block;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #ddd;
+    height: 25px;
+    font-size: 12px;
+}
+#login_fields{
+    padding-right:30px;
+    border-right:1px solid #bbb;
+}
+#login_fields label{
+    text-align: right;
+    width:80px;
+}
+#login_fields input{
+    width:100px;
+    height:30px;
+}
+.login_field{
+    margin:15px 0px 15px 0px;
+}
+#login_operations{
+    padding:0px 20px 0px 20px;
+    margin-top:10px;
+    text-align: center;
+}
+.login_operation{
+    margin:10px 0px 25px 0px;
+}
+.login_operation a{
+    font-size:13px;
+}
+.login_operation a:hover{
+    color:green;
+}
+.hidden_submit{
+    visibility:hidden;
+}
+
