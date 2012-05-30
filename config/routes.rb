@@ -285,7 +285,7 @@ my_routes = lambda {
 	# This allows us to use the /account_name in development.
 	# If we used the subdomain, the account_name would be 
 	# limited to the subdomain of your development server. 
-	if Rails.env.development?
+	if Rails.env.development? or Rails.env.test?
 		scope :path => "/:account_name" do
 			my_routes.call
 		end
