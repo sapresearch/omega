@@ -20,11 +20,11 @@ class Account < ActiveRecord::Base
 	def with(session)
 		Account.current = self
 		current_user = current_user(session)
-		if Account.current.has_user?(current_user)
+		if Account.current.has_user?(current_user) 
 			yield
 		end
 	end
-	
+
 	def has_user?(user)
 		if not user.is_anonymous?
 			has_user = user.account == self
@@ -49,11 +49,14 @@ class Account < ActiveRecord::Base
 	
 	def self.new_and_save(params)
 		@account = Account.new(params[:account])
-		roles, permissions = @account.build_roles_and_permissions
 		@account.save
+
+		Account.current = @account
+		roles, permissions = @account.build_roles_and_permissions
 		@account.assign_roles_and_permissions(roles, permissions)
 		@account.build_admin(params)
 		@account.build_setting(params[:user][:email])
+		@account.save
 		@account
 	end
 
