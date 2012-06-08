@@ -1,6 +1,5 @@
 	class Setting < Model
 		belongs_to :user
-		belongs_to :account
 		attr_accessible :facebook_token, :twitter, :user_id, :email
 		self.table_name = 'settings'
 	
