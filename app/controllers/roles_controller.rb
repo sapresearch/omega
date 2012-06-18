@@ -61,19 +61,21 @@ class RolesController < Controller
   def restore_role_permission_associations
     Role.transaction do
       Permission.transaction do
-
+        
+        admins = Role.find_by_internal_name(:administrator).users
+        
         Role.destroy_all
         Permission.destroy_all
 
         Role::DEFAULT_ROLES.each_with_index do |(internal_name, attr), index|
           role = Role.new(attr.reverse_merge(:name => internal_name.titleize).merge(:internal_name => internal_name))
-          role.id = index+1
+          #role.id = index+1
           role.save
         end
 
         Permission::DEFAULT_PERMISSIONS.each_with_index do |(value, attr), index|
           permission = Permission.new(attr.reverse_merge(:name => value.titleize).merge(:value => value))
-          permission.id = index+1
+          #permission.id = index+1
           permission.save!
         end
 
@@ -86,13 +88,15 @@ class RolesController < Controller
         User.all.each do |u|
           role = Role.find_by_internal_name("authenticated_user")
           u.roles << role
-          u.save!
+          u.save(:validate=>false)
         end
 
-        user = User.find_by_username("admin")
+        user = admins.first
+        #user = User.find_by_username("admin")
         if user.nil?
           user = User.new do |u|
-            u.username = 'admin'
+            u.username = 'admin_'+ Account.current.name
+            u.password = 'admin'
             u.password_salt = 128.times.inject('') { |salt,| salt << rand(93) + 33 }
             u.password_hash = Digest::SHA512.hexdigest('admin' + u.password_salt)
           end
