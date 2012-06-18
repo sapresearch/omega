@@ -1,0 +1,10 @@
+<fieldset id="homepage_news_item_list" class="round">
+	<legend class="round shadow">Related News</legend>
+	<% news_items.each do |news_item| %>
+		<div class="homepage_news_item">
+			<div class="homepage_news_item_title"><a href="<%= news_item.url %>"><%= news_item.title %></a></div>
+			<div class="homepage_news_item_url"><%= news_item.url %></div>
+			<div class="homepage_news_item_content"><%= news_item.content.truncate(300) %></div>
+		</div>
+	<% end %>
+</fieldset>

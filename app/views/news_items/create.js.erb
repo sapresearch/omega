@@ -1,0 +1,3 @@
+//$("#new_news_item_li_<%= @news_item.remote_id.to_s %>").remove();
+delete_element("new_news_item_li_<%= @news_item.remote_id.to_s %>")
+$("#old_news_item_list ul").append("<%= escape_javascript( render "news_items/old_news_item_li", :news_item=>@news_item ) %>")

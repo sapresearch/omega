@@ -1,0 +1,27 @@
+<div id='news_item_settings_area' class='hide'>
+	<div id="news_item_settings" class='round shadow'>
+		<div class="field">
+			<label>Algorithm Applied for Fetching News</label>
+			<select>
+				<option>Naive Bayes</option>
+				<option>Logistic Regression</option>
+				<option>kNN</option>
+				<option>Neural Networks</option>
+			</select>
+		</div>
+		<div class='field'>
+			<label>Allow Auto-updating News</label>
+			<input type="radio" name="auto_update" value="yes" />Yes
+			<input type="radio" name="auto_update" value="no" checked="checked" />No
+		</div>
+	</div>
+	
+	<div id='news_item_settings_bottom_links' class='page_bottom_links'>
+		<div class="left_links">
+		  	<%= link_to_function "Update", "", :class=>"operation_button" %>
+		</div>
+		<script>
+			$('.operation_button').button({ icons: {primary:'ui-icon-gear'} });
+		</script>
+	</div>
+</div>

@@ -89,10 +89,11 @@ jQuery(function($) {
                                          }).bind("ajaxComplete",
                                                 function() {
                                                     $(this).fadeOut();
+                                                    $(".tipsy").remove();
                                                 }).bind("ajaxError", function(e, xhr, settings, exception) {
 
-        //$.showFlash('Error :' + xhr.responseText)  // for development
-        dialog_message('general_message', 'Not able to process', '<p>An error has occurred. Please check your input again, or contact your administrator.</p>', {width:300}) // for production
+        $.showFlash('Error :' + xhr.responseText)  // for development
+        //dialog_message('general_message', 'Not able to process', '<p>An error has occurred. Please check your input again, or contact your administrator.</p>', {width:300}) // for production
 
     });
 

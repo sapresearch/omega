@@ -1,0 +1,25 @@
+<div id='news_item_list_area' class='show'>	
+	<div id="old_news_item_list" class='round shadow'>
+		<div class="title corners-top">
+			Existing News
+		</div>
+		<%= render "old_news_item_list_content"%>
+	</div>
+	<div id="new_news_item_list" class='round shadow'>
+		<div class="title corners-top">
+			Upcoming News
+		</div>
+		<%= render "new_news_item_list_content"%>
+	</div>
+	<div id='news_item_bottom_links' class='page_bottom_links'>
+		<div class="left_links">
+		  	<%= link_to "View Homepage", root_url, :class=>"operation_button" %>
+		</div>
+		<div class="right_links">
+			<%= link_to_function "Fetch Latest News", "", :class=>"operation_button" %>
+		</div>
+		<script>
+			$('.operation_button').button({ icons: {primary:'ui-icon-gear'} });
+		</script>
+	</div>
+</div>

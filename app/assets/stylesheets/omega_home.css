@@ -33,3 +33,35 @@ ul.thumb li img {
 	font-size: 1.7em;
     font-weight: bold
 }
+
+
+fieldset#homepage_news_item_list{
+    padding:10px;
+    border-width:1px;
+}
+
+fieldset#homepage_news_item_list legend{
+	border-width:1px;
+    background:url('account_bg_1.jpg');
+    padding:10px;
+    font-family:fantasy;
+}
+
+
+#homepage_news_item_list{
+	padding: 5px 15px;
+}
+.homepage_news_item{
+	margin: 15px 0px;
+}
+.homepage_news_item_title a{
+	font-size:13px;	
+}
+.homepage_news_item_url{
+	color:green;
+	margin-bottom: 5px;
+}
+.homepage_news_item_content{
+	font-size:12px;
+}
+

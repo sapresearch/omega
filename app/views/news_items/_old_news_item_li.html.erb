@@ -1,0 +1,14 @@
+<% enabled = news_item.visible? ? true : false%>
+
+<li id="old_news_item_li_<%= news_item.id.to_s %>">
+	<% if enabled %>
+		<%= link_to %Q{<span class="op_block ui-icon icon-tick" data-tooltip="Click to hide from homepage"></span>}.html_safe, news_item_url(news_item, :news_item=>{:visibility=>false}), :method => :put, :remote => true %>
+	<% else %>
+		<%= link_to %Q{<span class="op_block ui-icon icon-circle" data-tooltip="Click to display on homepage"></span>}.html_safe, news_item_url(news_item, :news_item=>{:visibility=>true}), :method => :put, :remote => true %>
+	<% end %>
+	<span class="news_item_title <%= enabled ? "enabled" : "disabled" %>">
+		<a href="<%= news_item.url %>"><%= news_item.title %></a>
+	</span>
+	<%= link_to_function %Q{<span class="op_block ui-icon icon-circled-cross" data-tooltip="Delete this news item"></span>}.html_safe, 
+		"load_dialog_confirm('#{escape_javascript(render "news_items/dialog_destroy_confirm", :news_item=>news_item)}', '#{news_item_url(news_item)}', 'DELETE', true, {}, {width:400})" %>
+</li>

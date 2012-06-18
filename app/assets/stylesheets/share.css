@@ -152,9 +152,22 @@ select:focus,select:hover{
     -box-shadow: 3px 3px 3px #ccc;
 }
 
+.show(display:'')
 .hide{display:none;}
 
 ol{ list-style-type:decimal;}
 
 .blank_sign{ color:#aaa }
+
+.disabled{opacity:0.6}
+.ui-icon{
+	width:16px;
+	height:16px;
+	background: url('/assets/ui-icons_2e83ff_256x240.png')
+}
+.icon-circle{background-position: -112px -144px;}
+.icon-tick{background-position: -64px -144px;}
+.icon-circled-cross{background-position: -32px -192px;}
+.icon-curved-left-arrow{background-position: 0 -64px;}
+
 

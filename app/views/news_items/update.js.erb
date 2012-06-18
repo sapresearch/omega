@@ -1,0 +1,1 @@
+$("#old_news_item_li_<%= @news_item.id.to_s %>").replaceWith("<%= escape_javascript( render "news_items/old_news_item_li", :news_item=>@news_item ) %>")

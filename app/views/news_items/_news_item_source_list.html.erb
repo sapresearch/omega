@@ -1,0 +1,35 @@
+<% visibility ||= 'hide'%>
+
+<div id='news_item_source_list_area' class='<%= visibility %>'>
+	<div id='news_item_source_list' class='round shadow'>
+		<table>
+			<tr>
+				<th class="name">Source Name</th>
+			    <th class="url">Source URL</th>
+			    <th class="type">Source Type</th>
+			    <th></th>
+			</tr>
+		
+		  	<% @news_item_sources.each_with_index do |news_item_source, index| %>
+				<% parity = index%2==0 ? "even" : "odd" %>
+				<tr class="<%= parity %>">
+					<td><%= news_item_source.name %></td>
+					<td><%= news_item_source.url %></td>
+					<td><%= news_item_source.source_type %></td>
+					<td>
+						<%= link_to_function 'Edit', "load_dialog_form('#{escape_javascript(render "news_item_sources/dialog_edit_form", :news_item_source=>news_item_source)}', {width:620})", "data-tooltip"=>"Edit this source" %> |
+						<%= link_to_function 'Delete', "load_dialog_confirm('#{escape_javascript(render "news_item_sources/dialog_destroy_confirm", :news_item_source=>news_item_source)}', '#{news_item_source_url(news_item_source)}', 'DELETE', true, {}, {})", "data-tooltip"=>"Delete this source" %>
+				  	</td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+	<div id='news_item_source_bottom_links' class='page_bottom_links'>
+		<div class="left_links">
+		  	<%= link_to_function "New Source", "load_dialog_form('#{escape_javascript(render "news_item_sources/dialog_new_form", :news_item_source=>NewsItemSource.new)}', {width:620})", :class=>"operation_button" %>
+		</div>
+		<script>
+			$('.operation_button').button({ icons: {primary:'ui-icon-gear'} });
+		</script>
+	</div>
+</div>

@@ -1,0 +1,116 @@
+#news_item_menu div {
+	display: inline-block;
+	margin: 2px 2px 0px 2px;
+	padding: 5px;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 27px;
+	text-align: center;
+	width: 271px;
+	height: 30px;
+	border: 1px solid #ccc;
+	position: relative;
+	z-index: 1;
+}
+#news_item_menu div:hover {
+	cursor: hand;
+}
+#news_item_menu div.active {
+	color: #444;
+	background: #eee;
+	border-bottom: 1px solid #eee;
+}
+#news_item_menu div.inactive {
+	color: white;
+	text-shadow: 1px 1px 1px #666;
+	background: #aaa;
+	border-bottom: 1px solid #ccc;
+}
+#news_management_content {
+	position: relative;
+	top: -1px;
+	height: 600px;
+	background: #eee;
+	border: 1px solid #ccc;
+	padding: 10px;
+}
+
+#news_item_list_area .title {
+	height: 25px;
+	/*background:url(/assets/my_work_onepixel_fillers.png) repeat-x scroll 0 -42px;*/
+	background:#36c;
+	text-align: center;
+	font-size: 15;
+	font-weight: bold;
+	color: white;
+}
+#news_item_list_area .list_content{
+	height:530px;
+	overflow-y:scroll;
+}
+#news_item_list_area li span{
+	display:inline-block;
+}
+#news_item_list_area li{
+	padding: 3px 3px;
+}
+#news_item_list_area li:hover{
+	background:lightyellow;
+	-moz-box-shadow: 0px 0px 5px 2px #ccc;
+    -webkit-box-shadow: 0px 0px 5px 2px #ccc;
+    -box-shadow: 0px 0px 5px 2px #ccc;
+}
+#news_item_list_area .op_block{
+	vertical-align:top;
+}
+#news_item_list_area .news_item_title{
+	width:345px;
+}
+
+#old_news_item_list {
+	margin-left: 3px;
+	display: inline-block;
+	float:left;
+	width: 410px;
+	height: 560px;
+	background: #f7f7f7;
+}
+#new_news_item_list {
+	margin-left: 18px;
+	display: inline-block;
+	width: 410px;
+	height: 560px;
+	background: #f7f7f7;
+}
+
+#news_item_source_list_area{padding:10px;}
+#news_item_source_list{
+	margin-bottom:15px;
+	background:#f7f7f7;
+}
+
+table{width:100%}
+th { text-align: center; border-bottom:none;}
+th.name{width:20%}
+th.url{width:50%}
+th.type{width:20%}
+th.operations{width:10%}
+tr.even { background: #EAEBFF }
+tr.odd { background: #EEF3DA }
+tr a:hover { color: #333; }
+td{ text-align: center;}
+
+#news_item_settings_area{padding:10px;}
+#news_item_settings{background:#f8f8f8; padding:20px;margin-bottom:15px;}
+.field{
+	margin:5px 10px
+}
+label{
+	color:#444;
+	width: 250px;
+	text-align:left;	
+}
+#news_item_settings select{
+	position:relative;
+	top:-8px;
+}

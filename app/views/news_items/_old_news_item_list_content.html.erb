@@ -1,0 +1,7 @@
+<div class="list_content">
+	<ul>
+		<% @old_news_items.each do |news_item| %>
+			<%= render "old_news_item_li", :news_item=>news_item %>			
+		<% end %>
+	</ul>
+</div>

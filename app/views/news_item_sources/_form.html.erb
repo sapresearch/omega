@@ -1,0 +1,19 @@
+<%= form_for news_item_source, :remote=>true do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, :maxlength=>NewsItemSource::NAME_MAX_LENGTH, :size=>30 %>
+  </div>
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_field :url, :maxlength=>NewsItemSource::URL_MAX_LENGTH, :size=>100 %>
+  </div>
+
+  <div class="field">
+    <% options = NewsItemSource::SOURCE_TYPES.map{|t|[t, t]} %>
+    <% default_option_value = "RSS" %>
+
+    <%= form.label :source_type, "Source Type" %>
+    <%= form.select :source_type, options_for_select(options, default_option_value) %>
+  </div>
+<% end %>
+

@@ -1,5 +1,6 @@
 <% require_javascript 'omega_home/omega_home','thirdParty/jquery.timepicker' %>
 <% require_javascript 'ui_util' %>
+<% require_stylesheet 'omega_home' %>
 
 <%= title "Omega Home" %>
 
@@ -16,7 +17,7 @@
 	  for your support.  If you would like to help us with our mission
 	  feel free to look through our voluteer opportunities and sign-up!								
 	</p>
-
+	<%= render "news_item_list", :news_items=>NewsItem.visible %>
 
 </div>
 

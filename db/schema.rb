@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507161431) do
+ActiveRecord::Schema.define(:version => 20120607214727) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -352,7 +352,7 @@ ActiveRecord::Schema.define(:version => 20120507161431) do
     t.datetime "updated_at"
     t.date     "birthday"
     t.integer  "account_id"
-    t.boolean  "over_18",                     :default => false
+    t.boolean  "over_18",                  :default => false
   end
 
   add_index "contacts", ["account_id"], :name => "index_contacts_on_account_id"
@@ -528,6 +528,26 @@ ActiveRecord::Schema.define(:version => 20120507161431) do
   end
 
   add_index "messages", ["account_id"], :name => "index_messages_on_account_id"
+
+  create_table "news_item_sources", :force => true do |t|
+    t.integer  "account_id",                     :null => false
+    t.string   "name"
+    t.string   "source_type", :default => "rss"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "news_items", :force => true do |t|
+    t.integer  "account_id",                            :null => false
+    t.integer  "news_item_source_id"
+    t.string   "title"
+    t.text     "content"
+    t.string   "url"
+    t.boolean  "visibility",          :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "page_blocks", :force => true do |t|
     t.integer  "page_id",                      :null => false
