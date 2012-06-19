@@ -154,4 +154,5 @@
 	    def save_password?
 	      new_record? or password_changed?
 	    end
+
 	end

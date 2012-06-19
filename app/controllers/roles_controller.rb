@@ -63,6 +63,7 @@ class RolesController < Controller
       Permission.transaction do
         
         admins = Role.find_by_internal_name(:administrator).users
+        user = admins.first
         
         Role.destroy_all
         Permission.destroy_all
@@ -91,12 +92,12 @@ class RolesController < Controller
           u.save(:validate=>false)
         end
 
-        user = admins.first
         #user = User.find_by_username("admin")
         if user.nil?
           user = User.new do |u|
             u.username = 'admin_'+ Account.current.name
             u.password = 'admin'
+            u.account_id = Account.current.id
             u.password_salt = 128.times.inject('') { |salt,| salt << rand(93) + 33 }
             u.password_hash = Digest::SHA512.hexdigest('admin' + u.password_salt)
           end
