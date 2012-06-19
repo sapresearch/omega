@@ -57,6 +57,7 @@ class Account < ActiveRecord::Base
 
 		Account.current = @account
 		roles, permissions = @account.build_roles_and_permissions
+		@account.create_news_group
 		@account.assign_roles_and_permissions(roles, permissions)
 		@account.build_admin(params)
 		@account.build_setting(params[:user][:email])
@@ -79,6 +80,20 @@ class Account < ActiveRecord::Base
 		contact.phone_numbers.build(:account_id => self.id)
 		admin.save(:validate => false)
 		admin
+	end
+
+	def create_news_group(group_name = name, recursive_loops = 0)
+		port = 3004
+		news_chimp_uri = "ymqdomega2.dhcp.ymq.sap.corp:#{port}/groups/new/#{group_name}"
+		result = Curl::Easy.perform(news_chimp_uri)
+		id = result.body_str.partition(':').last.gsub(/["} ]/, '')
+		# recursively call the method until it finds a suitable name
+		if id == '' and recursive_loops < 5
+			puts "\n\n#{recursive_loops}"
+			create_news_group(name + 'a', recursive_loops + 1)
+		elsif id != ''
+			settings.first.update_attribute(:news_group_id, id)
+		end
 	end
 
 	def build_setting(email)
