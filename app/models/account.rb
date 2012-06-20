@@ -85,14 +85,17 @@ class Account < ActiveRecord::Base
 	def create_news_group(group_name = name, recursive_loops = 0)
 		port = 3004
 		news_chimp_uri = "ymqdomega2.dhcp.ymq.sap.corp:#{port}/groups/new/#{group_name}"
-		result = Curl::Easy.perform(news_chimp_uri)
-		id = result.body_str.partition(':').last.gsub(/["} ]/, '')
-		# recursively call the method until it finds a suitable name
-		if id == '' and recursive_loops < 5
-			puts "\n\n#{recursive_loops}"
-			create_news_group(name + 'a', recursive_loops + 1)
-		elsif id != ''
-			settings.first.update_attribute(:news_group_id, id)
+		begin
+			result = Curl::Easy.perform(news_chimp_uri)
+			id = result.body_str.partition(':').last.gsub(/["} ]/, '')
+			# recursively call the method until it finds a suitable name
+			if id == '' and recursive_loops < 5
+				puts "\n\n#{recursive_loops}"
+				create_news_group(name + 'a', recursive_loops + 1)
+			elsif id != ''
+				settings.first.update_attribute(:news_group_id, id)
+			end
+		rescue StandardError
 		end
 	end
 
