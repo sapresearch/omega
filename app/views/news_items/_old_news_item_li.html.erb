@@ -7,7 +7,7 @@
 		<%= link_to %Q{<span class="op_block ui-icon icon-circle" data-tooltip="Click to display on homepage"></span>}.html_safe, news_item_url(news_item, :news_item=>{:visibility=>true}), :method => :put, :remote => true %>
 	<% end %>
 	<span class="news_item_title <%= enabled ? "enabled" : "disabled" %>">
-		<a href="<%= news_item.url %>"><%= news_item.title %></a>
+		<a href="<%= news_item.url %>" target='_blank'><%= news_item.title %></a>
 	</span>
 	<%= link_to_function %Q{<span class="op_block ui-icon icon-circled-cross" data-tooltip="Delete this news item"></span>}.html_safe, 
 		"load_dialog_confirm('#{escape_javascript(render "news_items/dialog_destroy_confirm", :news_item=>news_item)}', '#{news_item_url(news_item)}', 'DELETE', true, {}, {width:400})" %>

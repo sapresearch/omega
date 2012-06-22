@@ -4,7 +4,11 @@ Omega::Application.routes.draw do
 	resources :accounts
 	  
 my_routes = lambda {
-  resources :news_items
+  resources :news_items do
+      collection do
+          get :fetch
+      end
+  end
   resources :news_item_sources
   
   resources :calendars do

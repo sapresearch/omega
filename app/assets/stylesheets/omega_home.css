@@ -39,6 +39,9 @@ fieldset#homepage_news_item_list{
     padding:10px;
     border-width:1px;
 }
+fieldset#homepage_news_item_list div{
+    word-wrap:break-word;
+}
 
 fieldset#homepage_news_item_list legend{
 	border-width:1px;
@@ -60,6 +63,8 @@ fieldset#homepage_news_item_list legend{
 .homepage_news_item_url{
 	color:green;
 	margin-bottom: 5px;
+	word-wrap:break-word;
+	width:600px;
 }
 .homepage_news_item_content{
 	font-size:12px;

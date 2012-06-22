@@ -1,0 +1,9 @@
+<% if @new_news_items.empty? %>
+	dialog_message("no-news", "No news found", "<p>No news is found at the moment. Please try later.</p>", {width:500})
+<% else %>
+	$('#new_news_item_list ul').empty()
+	<% @new_news_items.each do |news_item| %>
+		$('#new_news_item_list ul').append("<%= escape_javascript ( render "new_news_item_li", :news_item=>news_item )%>")
+	<% end %>
+<% end %>
+

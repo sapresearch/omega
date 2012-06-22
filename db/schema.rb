@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120619135903) do
+ActiveRecord::Schema.define(:version => 20120621131059) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -569,6 +569,7 @@ ActiveRecord::Schema.define(:version => 20120619135903) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remote_id"
   end
 
   create_table "news_items", :force => true do |t|
@@ -580,6 +581,7 @@ ActiveRecord::Schema.define(:version => 20120619135903) do
     t.boolean  "visibility",          :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remote_id"
   end
 
   create_table "page_blocks", :force => true do |t|

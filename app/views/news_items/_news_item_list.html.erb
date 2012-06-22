@@ -16,7 +16,7 @@
 		  	<%= link_to "View Homepage", root_url, :class=>"operation_button" %>
 		</div>
 		<div class="right_links">
-			<%= link_to_function "Fetch Latest News", "", :class=>"operation_button" %>
+			<%= link_to "Fetch Latest News", fetch_news_items_url, :remote=>true, :method=>:get, :class=>"operation_button" %>
 		</div>
 		<script>
 			$('.operation_button').button({ icons: {primary:'ui-icon-gear'} });

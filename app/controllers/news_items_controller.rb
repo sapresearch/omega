@@ -2,6 +2,7 @@
 	
 	  require_dependency "application_lib.rb"
 	  include ApplicationLib
+	  require "curb"
 	  
 	  respond_to :html, :xml, :json, :js
 	  breadcrumb 'News' => :news_items
@@ -20,12 +21,21 @@
     end
     
     def create
-      @news_item = NewsItem.create(params[:news_item])
+      url = params[:news_item][:url]   
+      @news_item = NewsItem.create(params[:news_item]) unless NewsItem.find_by_url(url)
     end
     
     def destroy
       @news_item = NewsItem.find(params[:id])
       @news_item.destroy
+    end
+    
+    #under construction
+    def fetch
+      uri = NewsItem::REMOTE_FETCH_NEWS_ITEMS_URL
+      result = Curl::Easy.perform(uri)
+      @new_news_items_hash = ActiveSupport::JSON.decode(result.body_str)
+      @new_news_items = @new_news_items_hash.map{|remote_id, value_hash| NewsItem.new(:remote_id=>remote_id, :title=>value_hash["title"], :news_item_source=>NewsItemSource.find_by_url(value_hash["source_url"]), :url=>value_hash["url"], :content=>value_hash["content"])}     
     end
     
 	end
