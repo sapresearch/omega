@@ -1,7 +1,8 @@
 	class NewsItem < Model
 	  TITLE_MAX_LENGTH = 100
 	  
-	  CLASS_ID = Setting.first.news_group_id
+		setting = Setting.first
+	  CLASS_ID = setting.nil? ? nil : setting.news_group_id
 	  NEWS_CLASSIFIER_SERVICE_HOST = "ymqdomega2.dhcp.ymq.sap.corp:3002"
 	  REMOTE_FETCH_NEWS_ITEMS_URL = NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{CLASS_ID}/stories/30"
 	
