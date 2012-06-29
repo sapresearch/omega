@@ -16,7 +16,7 @@
     end
 	  
 	  def remote_news_item_source_url
-	    NewsItem::NEWS_CLASSIFIER_SERVICE_HOST+"/sources/" + remote_id
+	    NewsItem::NEWS_CLASSIFIER_SERVICE_HOST + "/sources/" + remote_id
 	  end
 	  
 	end

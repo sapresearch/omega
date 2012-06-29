@@ -2,7 +2,6 @@
   
     require_dependency "application_lib.rb"
     include ApplicationLib
-    require "net/http"
     
     respond_to :html, :xml, :json, :js
   
