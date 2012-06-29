@@ -1,0 +1,1 @@
+$("#new_news_item_liked_link_<%= @remote_id %>").replaceWith("<%= escape_javascript( render "news_item_liked_link", :liked=>false, :remote_id=>@remote_id ) %>")
