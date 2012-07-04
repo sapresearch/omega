@@ -46,4 +46,3 @@ gem 'httparty'
 gem 'therubyrhino'
 gem 'therubyracer'
 gem 'curb'
-

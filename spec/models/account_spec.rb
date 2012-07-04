@@ -38,7 +38,7 @@ describe "Accounts" do
 
 	it "should have a default email" do
 		account = create_account('a')
-		account.setting.email.should =~ /[^ ]/
+		account.setting.email.should =~ /[^ ]/#non blank screen with at least 4 chars?
 	end
 		
 

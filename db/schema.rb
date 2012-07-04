@@ -570,7 +570,10 @@ ActiveRecord::Schema.define(:version => 20120621131059) do
     t.datetime "created_at"
     t.datetime "updated_at"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     t.string   "remote_id"
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   end
@@ -585,7 +588,10 @@ ActiveRecord::Schema.define(:version => 20120621131059) do
     t.datetime "created_at"
     t.datetime "updated_at"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     t.string   "remote_id"
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   end
