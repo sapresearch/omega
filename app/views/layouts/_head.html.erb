@@ -17,6 +17,9 @@
           <span id="trigger"><a class="btnLoginCtrl" rel="test" href="#"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
           | <%=  link_to content_tag(:span, t(:sign_up)), register_users_url %>
       <% else -%>
+		<span>
+			<%= current_user.email %>
+		</span>
           <span class="om-icon-only om-white-icon ui-icon-power"></span>
           <%=  link_to content_tag(:span, "logout"), sessions_url, :method => :delete, :confirm => 'Are you sure?' %>
            |

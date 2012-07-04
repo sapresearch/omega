@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag 'omega_volunteering', 'omega_volunteering_left' %>
+<% require_javascript 'https://www.google.com/jsapi' %>
 <%# javascript_include_tag 'omega_volunteering' %>
 <div class="content circle-corners-bottom-left" style="min-height:<%= (@positions.count % Volunteering::Position::MAX_POSITIONS_PER_PAGE) * 395 %>;">
 
@@ -22,6 +23,33 @@
   <% content_for :sidebar do %>
     <%= render :partial => "layouts/sidebar_positions_skills" %>
     <%= render :partial => "layouts/sidebar_positions_interests" %>
+
+    <div id="gauge_chart">
+      <div id="gauge_chart_div">
+      </div>
+    </div>
+
+    <% max_val = Volunteering::Record.all.inject(0) { |r, e| r += e.position.duration } / 3600 * 80 / 100 %>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['gauge']});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Evaluation', 'Hours'],
+          ['Committed', <%= Volunteering::Record.where(:action => :Accepted).inject(0) { |r, e| r += e.position.duration } / 3600 %> ]
+        ]);
+        var options = {
+          width: 500, height: 200
+          , greenFrom: <%= max_val * 80 / 100 %>, greenTo: <%= max_val %>
+          , yellowFrom: <%= max_val * 60 / 100 %>, yellowTo: <%= max_val * 80 / 100 %>
+          , redFrom: 0, redTo: <%= max_val * 60 / 100 %>
+          , max: <%= max_val %>
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('gauge_chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
   <% end %>
 
 <%# if tags = @skills_tags or tags = @interests_tags %>

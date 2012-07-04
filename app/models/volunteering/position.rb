@@ -135,6 +135,10 @@
 		difference_in_seconds = 60 * (e_mins - s_mins)
 		s + difference_in_seconds
 	  end
+
+    def duration
+      self.end-self.start
+    end
 	
 	
 	end

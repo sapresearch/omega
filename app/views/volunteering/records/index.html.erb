@@ -2,36 +2,58 @@
 <% require_javascript 'omega_volunteering_records' %>
 <% require_stylesheet 'omega_volunteering' %>
 <% require_stylesheet 'thirdParty/jquery.dataTables.jui.css' %>
+<% require_javascript 'https://www.google.com/jsapi' %>
 
 <div class="content circle-corners-bottom corners-top">
-    	
-		<div class="heading-main">
-			<h1 class="page-content">
-  				Manage Applications
-		  	</h1>
-      </div>
-		
-	
-	<div class="main-box">
-	
-	  <table class="width-100 clear" id="records-table">
-	    <thead>
-		    <tr>
-		      <th>Position</th>
-		      <th>From</th>
-		      <th>Date</th>
-		      <th>Action</th>
-		      <th>Status</th>
-		    </tr>
-	    </thead>
-	    <% if @records.empty? %>
-	      <h2> No Applications to Show!</h2>
-	    <% else %>
-	 	   <%= render :partial => 'record_row', :collection => @records, :as => :record %>
-	    <%end%>
-	 </table>
+  <div class="heading-main">
+    <h1 class="page-content">Manage Applications</h1>
+  </div>
+  <div class="main-box">
+    <table class="width-100 clear" id="records-table">
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>From</th>
+          <th>Date</th>
+          <th>Action</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <% if @records.empty? %>
+        <h2> No Applications to Show!</h2>
+      <% else %>
+         <%= render :partial => 'record_row', :collection => @records, :as => :record %>
+      <%end%>
+    </table>
     <%= will_paginate @positions %>
-	 <div class="clear"></div>
-	
-	</div>
+    <div class="clear"></div>
+  </div>
+
+  <div id="applicants_charts">
+    <div id="bar_chart_div"></div>
+  </div>
+  <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable(
+        <%= 
+        raw Volunteering::Record.all.inject( { } ) {
+          |count, record| count[record.action].nil? ?
+            count[record.action] = 1 : count[record.action] += 1
+          count
+        }.flatten(0).insert(0, ['Status', 'Apllications'])
+        %>
+      );
+
+      var options = {
+        title: 'Application Status'
+        , vAxis: {title: 'Status',  titleTextStyle: {color: 'red'}}
+        //, hAxis: { format: '#' }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
+      chart.draw(data, options);
+    }
+  </script>
 </div>

@@ -1,10 +1,17 @@
-# Configure Rails Environment
-ENV["RAILS_ENV"] = "test"
+require 'rubygems'
+require 'selenium-webdriver'
 
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
-require "rails/test_help"
+driver = Selenium::WebDriver.for :firefox
+driver.get "http://google.com"
 
-Rails.backtrace_cleaner.remove_silencers!
+element = driver.find_element :name => "q"
+element.send_keys "Cheese!"
+element.submit
 
-# Load support files
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+puts "Page title is #{driver.title}"
+
+wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+wait.until { driver.title.downcase.start_with? "cheese!" }
+
+puts "Page title is #{driver.title}"
+driver.quit

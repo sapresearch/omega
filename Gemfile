@@ -20,8 +20,16 @@ group :assets do
 end
 
 group :development, :test do
-	gem 'rspec-rails'
+	gem 'rspec-rails', "~>2.10.1"
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'launchy'
 end
+
+group :test do
+  gem 'database_cleaner'
+end
+
 
 gem 'aws-ses', :require => 'aws/ses'
 
@@ -38,3 +46,4 @@ gem 'httparty'
 gem 'therubyrhino'
 gem 'therubyracer'
 gem 'curb'
+

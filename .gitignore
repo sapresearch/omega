@@ -27,5 +27,6 @@ config/database_1.yml
 config/database_2.yml
 
 nbproject/
+public/
 
 .project
