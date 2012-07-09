@@ -17,7 +17,7 @@
 	
 	  TITLES = %w{ Mr Miss Ms Mrs}
 	
-	  attr_accessible :first_name, :last_name, :email, :phone_numbers_attributes, :addresses_attributes, :birthday, :over_18
+	  attr_accessible :first_name, :last_name, :email, :phone_numbers_attributes, :addresses_attributes, :birthday, :over_18, :skill_ids, :interest_ids
     attr_accessible :account_id
 	
 	  scope :status, where('status IS NULL')
@@ -107,6 +107,18 @@
 		def update_subclass_attributes(params)
 			Contact::PhoneNumber.update_phone_numbers(params)
 			Contact::Address.update_addresses(params)
+		end
+
+		# Takes the skills and interests from the params hash and updates them both (in a dynamic manner).
+		# We use a hash to avoid repetitively calling the same methods for both Skills and Interests.
+		def update_skills_and_interests(params)
+			{'skill' => Skill, 'interest' => Contact::Interest}.each do |name, klass|
+				join_table = ('contact' + '_' + name).to_sym
+				plural = name + '_ids'
+	    	ids = params[:contact][plural].gsub(/[\[\]]/, "").split(',').uniq # Use gsub and split to format the ids as an array, rather than a string.
+	    	self.update_attributes(plural => ids) # Update the contact's skills or interests
+	    	self.send(name.pluralize.to_sym) << klass.create(params[join_table]) unless params[join_table][:name].blank? # Create a new skill/interest
+			end
 		end
 	
 		accepts_flattened_values_for :interests, :skills, :languages, :value => :name

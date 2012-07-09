@@ -196,24 +196,13 @@ class UsersController < Controller
   end
 
   def update_my_page
-    contact = Contact.for(params[:id])
 		@user = User.find(params[:id])
-
-    skills = params[:contact][:skill_ids].gsub(/[\[\]]/, "").split(',').uniq # Use gsub and split to format the ids as an array, rather than a string.
-    contact.update_attributes(:skill_ids => skills)
-    contact.skills << Contact::Skill.create(params[:contact_skill]) unless params[:contact_skill][:name].blank?
-
-    interests = params[:contact][:interest_ids].gsub(/[\[\]]/, "").split(',').uniq
-    contact.update_attributes(:interest_ids => interests)
-    contact.interests << Contact::Interest.create(params[:contact_interest]) unless params[:contact_interest][:name].blank?
-
-    params[:contact].delete(:skill_ids)
-    params[:contact].delete(:interest_ids)
+    contact = @user.contact
+		contact.update_skills_and_interests(params)
+    params[:contact].delete(:skill_ids); params[:contact].delete(:interest_ids)
     contact.update_contact_attributes(params[:contact])
-
 		contact.update_attributes(last_name: params[:contact][:last_name], first_name: params[:contact][:first_name], email: params[:contact][:email])
 		@user.update_attributes(last_name: params[:contact][:last_name], first_name: params[:contact][:first_name], email: params[:contact][:email])
-
     redirect_to(my_page_user_path(@user))
   end
 

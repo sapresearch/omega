@@ -73,7 +73,7 @@
 		# accepts_flattened_values_for :skills, :value => :name
 	
 	  attr_accessor :password, :password_confirmation, :account_id
-	  attr_accessible :username, :email, :contact_attributes
+	  attr_accessible :username, :email, :contact_attributes, :first_name, :last_name
 	
 		validate :validate_current_account, :username_must_be_unique#validate username->see model.rb file
 	  validates :username,   :presence => true,
