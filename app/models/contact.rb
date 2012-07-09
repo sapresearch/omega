@@ -101,7 +101,7 @@
 				end
 			end
 			update_subclass_attributes(params)
-			self.update_attributes(params)
+    	self.save
 		end
 	
 		def update_subclass_attributes(params)
