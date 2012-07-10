@@ -1,10 +1,6 @@
 	class NewsItem < Model
 	  TITLE_MAX_LENGTH = 100
-	  
-		setting = Setting.first
-	  CLASS_ID = setting.nil? ? nil : setting.news_group_id
 	  NEWS_CLASSIFIER_SERVICE_HOST = "ymqdomega2.dhcp.ymq.sap.corp:3002"
-	  REMOTE_FETCH_NEWS_ITEMS_URL = NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{CLASS_ID}/stories/30"
 	  
 	  attr_accessor :liked
 	
@@ -17,14 +13,20 @@
 	  scope :invisible, lambda { where(:visibility=>false) }
 	
 	  class << self
-	    def remote_class_add_news_item_url(remote_id)
-	      CLASS_ID
-        NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{CLASS_ID}?document_id=#{remote_id}"
+	    def remote_fetch_news_items_url(remote_news_items_class_id, num_news_items)
+	      NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{remote_news_items_class_id}/stories/#{num_news_items}"
+	    end
+	    
+	    def remote_class_add_news_item_url(remote_news_items_class_id, remote_id)
+        NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{remote_news_items_class_id}?document_id=#{remote_id}"
       end
       
-      def remote_class_remove_news_item_url(remote_id)
-        CLASS_ID
-        NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{CLASS_ID}/remove_document/#{remote_id}"
+      def remote_class_add_keyword_url(remote_news_item_class_id, keyword)
+        NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{remote_news_items_class_id}?keywords=#{keyword}"
+      end
+      
+      def remote_class_remove_news_item_url(remote_news_items_class_id, remote_id)
+        NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{remote_news_items_class_id}/remove_document/#{remote_id}"
       end
     end
     

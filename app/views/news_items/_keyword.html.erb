@@ -1,0 +1,7 @@
+<span id="news_item_keyword_<%= keyword %>" class='keyword round'>
+	<%= keyword %>
+	<%= link_to %Q{<div class="delete_keyword ui-icon icon-circled-cross"></div>}.html_safe, delete_keyword_news_items_url(:keyword=>keyword), :method=>:put, :remote=>true %>						
+</span>
+<script type="text/javascript">
+	$("#news_item_keyword_<%= keyword %>").add_keywords_deletion_effect();
+</script>

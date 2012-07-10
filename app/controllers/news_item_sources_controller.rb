@@ -11,7 +11,7 @@
             
         #synchronize remote service
         url= NewsItemSource::REMOTE_NEWS_ITEM_SOURCES_URL
-        result = Curl::Easy.http_post(url, Curl::PostField.content('group_id', NewsItem::CLASS_ID), Curl::PostField.content('url', @news_item_source.url))
+        result = Curl::Easy.http_post(url, Curl::PostField.content('group_id', @remote_news_items_class_id), Curl::PostField.content('url', @news_item_source.url))
         
         @remote_news_item_source_id_hash = ActiveSupport::JSON.decode(result.body_str)
         @remote_news_item_source_id = @remote_news_item_source_id_hash["$oid"]

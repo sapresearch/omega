@@ -28,5 +28,19 @@
 		def self.default
 			first
 		end
+		
+		def delete_keyword!(keyword)
+		  keywords = news_item_keywords.split(",")
+		  keywords.delete(keyword)
+		  update_attribute("news_item_keywords",keywords.join(","))
+		end
+		
+		def create_keyword!(keyword)
+		  keywords = news_item_keywords.split(",")
+		  return false if keywords.include? keyword
+      keywords << keyword
+      update_attribute("news_item_keywords",keywords.join(","))
+      return true
+		end
 	
 	end

@@ -9,10 +9,28 @@
 				<option>Neural Networks</option>
 			</select>
 		</div>
+		
 		<div class='field'>
 			<label>Allow Auto-updating News</label>
 			<input type="radio" name="auto_update" value="yes" />Yes
 			<input type="radio" name="auto_update" value="no" checked="checked" />No
+		</div>
+		
+		<div class='field'>
+			<label>Keywords</label>
+			<div id="keywords">
+				<span id="keywords_list">
+				<% @keywords.each do |keyword| %>
+					<%= render "keyword", :keyword=>keyword %>										
+				<% end %>
+				</span>
+				<span id='new_keyword_field'>
+					<%= form_tag create_keyword_news_items_url, :id=>"new_keyword", :method=>:put, :remote=>true do %>
+						<%= text_field_tag "keyword", "", :class=>"round", :size=>8, :maxlength=>20 %>
+					<% end %>
+					<%= link_to_function "Add", "$('#new_keyword').submit()", :class=>"operation_button" %>
+				</span>
+			</div>
 		</div>
 		<!-- div for # of news to be fetched in one batch -->
 		<!-- div for reset default training set, roll back the last, etc -->

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120621131059) do
+ActiveRecord::Schema.define(:version => 20120621131100) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -822,6 +822,7 @@ ActiveRecord::Schema.define(:version => 20120621131059) do
     t.string   "email"
     t.integer  "account_id"
     t.string   "news_group_id"
+    t.string   "news_item_keywords"
   end
 
   add_index "settings", ["account_id"], :name => "index_settings_on_account_id"

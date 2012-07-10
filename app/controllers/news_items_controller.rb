@@ -31,22 +31,39 @@
     end
     
     def fetch
-      uri = NewsItem::REMOTE_FETCH_NEWS_ITEMS_URL
-      result = Curl::Easy.perform(uri)
+      url = NewsItem.remote_fetch_news_items_url(@remote_news_items_class_id, 30)
+      result = Curl::Easy.perform(url)
       @new_news_items_hash = ActiveSupport::JSON.decode(result.body_str)
       @new_news_items = @new_news_items_hash.map{|remote_id, value_hash| NewsItem.new(:remote_id=>remote_id, :title=>value_hash["title"], :news_item_source=>NewsItemSource.find_by_url(value_hash["source_url"]), :url=>value_hash["url"], :content=>value_hash["content"], :liked => value_hash["in_group?"])}     
     end
     
     def like     
       @remote_id = params[:remote_id]
-      url= NewsItem.remote_class_add_news_item_url(params[:remote_id])
+      url= NewsItem.remote_class_add_news_item_url(@remote_news_items_class_id, params[:remote_id])
       result = Curl::Easy.http_put(url, nil)
     end
     
     def dislike
       @remote_id = params[:remote_id]
-      url= NewsItem.remote_class_remove_news_item_url(params[:remote_id])
+      url= NewsItem.remote_class_remove_news_item_url(@remote_news_items_class_id, params[:remote_id])
       result = Curl::Easy.http_put(url, nil)
+    end
+    
+    def delete_keyword
+      @keyword = params[:keyword]
+      @setting.delete_keyword!(@keyword)
+    end
+    
+    def create_keyword
+      NewsItem.transaction do        
+        @keyword = params[:keyword]
+        @success = @setting.create_keyword!(@keyword)
+        #synchronize remote service
+        if @success
+          #url = NewsItem.remote_class_add_keyword_url(remote_news_item_class_id, keyword)
+          #result = Curl::Easy.http_put(url, nil)
+        end
+      end
     end
     
 	end

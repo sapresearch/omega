@@ -5,13 +5,14 @@ Omega::Application.routes.draw do
 	  
 my_routes = lambda {
   resources :news_items do
-    member do
-      
+    member do     
     end
     collection do
       get :fetch
       put :like
       put :dislike
+      put :delete_keyword
+      put :create_keyword
     end
   end
   resources :news_item_sources

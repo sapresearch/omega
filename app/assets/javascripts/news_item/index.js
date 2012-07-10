@@ -10,6 +10,19 @@ $(function(){
 	});
 });
 
+$.fn.extend({
+    add_keywords_deletion_effect: function(){
+        $(this).hover(
+			function(){
+				$(".delete_keyword", this).css("visibility","visible")
+			},
+			function(){
+				$(".delete_keyword", this).css("visibility","hidden")
+			}
+		);
+    }
+});
+
 function show_news_item_list(){
 	if($('#news_item_menu div#news_item_list_link').hasClass('inactive')){
 		$('#news_management_content div.show').removeClass('show').addClass('hide');
@@ -35,42 +48,16 @@ function show_news_item_settings(){
 	}
 }
 
-//under construction
-function fetch_news(){
-	var req = $.ajax({
-	    url : 'http://ymqdomega2.dhcp.ymq.sap.corp:3001/groups/4fdf9b803ce7615efa000001/stories/10',
-	    dataType : "jsonp",
-	    timeout : 10000
+// not using
+function add_keywords_deletion_effect(){
+	$(".keyword").each(function(index, element){
+		$(this).hover(
+			function(){
+				$(".delete_keyword", this).css("visibility","visible")
+			},
+			function(){
+				$(".delete_keyword", this).css("visibility","hidden")
+			}
+		);
 	});
-	
-	req.success(function() {
-	    console.log('Yes! Success!');
-	});
-	
-	req.error(function() {
-	    console.log('Oh noes!');
-	});
-	
-	
-	/*
-	$.getJSON('http://ymqdomega2.dhcp.ymq.sap.corp:3001/groups/4fdf9b803ce7615efa000001/stories/10.json?callback=?', function(data) {
-		alert(data)
-		
-	  var items = [];
-	
-	  $.each(data, function(key, val) {
-	    items.push('<li id="' + key + '">' + val + '</li>');
-	  });
-	
-	  $('<ul/>', {
-	    'class': 'my-new-list',
-	    html: items.join('')
-	  }).appendTo('body');
-	  
-	}).success(function() { alert("second success"); })
-.error(function(jqXHR, textStatus, errorThrown) {
-        alert("error " + textStatus);
-        alert("incoming Text " + jqXHR.responseText);
-    })
-.complete(function() { alert("complete"); });*/
 }

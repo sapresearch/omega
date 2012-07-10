@@ -15,7 +15,7 @@
 
   #  self.responder = Omega::ControllerResponder
 
-    before_filter :controller_access_control
+    before_filter :controller_access_control, :init_variables
     #around_filter :general_exception_handler
 
     protect_from_forgery
@@ -57,6 +57,14 @@
             redirect_to root_url(:code=>CODE_ANONYMOUS)
             return
           end
+        end
+      end
+      
+      def init_variables
+        @setting = Setting.first
+        if @setting
+          @remote_news_items_class_id = @setting.news_group_id
+          @keywords = @setting.news_item_keywords.split(",")
         end
       end
 

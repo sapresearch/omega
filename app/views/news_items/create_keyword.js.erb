@@ -1,0 +1,6 @@
+<% if @success %>
+	$("#keywords_list").append('<%= escape_javascript(render "keyword", :keyword=>@keyword)%>')
+<% else %>
+	dialog_message("news-item-keyword-exist", "Keyword already exist", "<p>This keyword is already existed. Please put another one.</p>", {width:500})
+<% end %>
+$('input#keyword').val('');
