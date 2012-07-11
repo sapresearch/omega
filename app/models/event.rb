@@ -247,7 +247,7 @@
 	    end_at_i = end_at.to_i
 	    until_at_i = until_at.to_i
 	    return nil if begin_at_i>until_at_i || start_at_i>end_at_i
-	
+
 	    if is_recurrent?
 	      duration_i = end_at_i - start_at_i
 	      interval_i = recurrence_interval

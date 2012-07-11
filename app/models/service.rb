@@ -132,7 +132,7 @@
 	      remaining_leaf_service_combinations=leaf_services.to_combinations  # collection of possible combinations uncounted
 	      
 	      assets.each do |asset|        
-	#=begin
+=begin
 	        asset.services.to_combinations.each do |sc|         
 	          if leaf_service_conflicts[sc].nil?
 	            sc_a = sc.to_a
@@ -142,7 +142,7 @@
 	            return leaf_service_conflicts if remaining_leaf_service_combinations.empty?
 	          end          
 	        end
-	#=end
+=end
 	#=begin
 	        accounted_services = []
 	        asset.services.each do |leaf_service_1|

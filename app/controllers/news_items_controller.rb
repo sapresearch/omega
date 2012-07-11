@@ -52,6 +52,10 @@
     def delete_keyword
       @keyword = params[:keyword]
       @setting.delete_keyword!(@keyword)
+      
+      #synchronize remote service
+      url = NewsItem.remote_class_remove_keyword_url(@remote_news_items_class_id, @keyword)
+      result = Curl::Easy.http_put(url, nil)    
     end
     
     def create_keyword
@@ -60,8 +64,8 @@
         @success = @setting.create_keyword!(@keyword)
         #synchronize remote service
         if @success
-          #url = NewsItem.remote_class_add_keyword_url(remote_news_item_class_id, keyword)
-          #result = Curl::Easy.http_put(url, nil)
+          url = NewsItem.remote_class_add_keyword_url(@remote_news_items_class_id, @keyword)
+          result = Curl::Easy.http_put(url, nil)
         end
       end
     end

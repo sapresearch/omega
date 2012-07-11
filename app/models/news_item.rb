@@ -21,12 +21,16 @@
         NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{remote_news_items_class_id}?document_id=#{remote_id}"
       end
       
-      def remote_class_add_keyword_url(remote_news_item_class_id, keyword)
+      def remote_class_add_keyword_url(remote_news_items_class_id, keyword)
         NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{remote_news_items_class_id}?keywords=#{keyword}"
       end
       
       def remote_class_remove_news_item_url(remote_news_items_class_id, remote_id)
         NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{remote_news_items_class_id}/remove_document/#{remote_id}"
+      end
+      
+      def remote_class_remove_keyword_url(remote_news_items_class_id, keyword)
+        NEWS_CLASSIFIER_SERVICE_HOST + "/groups/#{remote_news_items_class_id}/remove_keywords?keywords=#{keyword}"
       end
     end
     
