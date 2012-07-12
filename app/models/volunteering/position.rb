@@ -139,6 +139,30 @@
     def duration
       self.end-self.start
     end
+
+		class << self
+
+			def normal
+				all.select { |position| position.priority == 'Normal' }
+			end
+
+			def rank
+				positions = all
+				priority_scores = { 'Urgent!' => 0.0, 'High' => 0.5, 'Normal' => 1.0 }
+				time_rank = positions.sort_by { |vp| vp.start }
+				scores = {}
+				c = count.to_f - 1
+				time_rank.each_with_index do |vp, i|
+					normalized = i/c
+					priority = (priority_scores[vp.priority] or 1.0)
+					puts "#{normalized} and #{priority}"
+					scores[vp] = (normalized + priority)
+				end
+				scores = scores.sort_by { |k,v| v }
+				scores.inject([]) { |array, subarray| array << subarray.first }
+			end
+
+		end
 	
 	
 	end
