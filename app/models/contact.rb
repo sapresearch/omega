@@ -76,6 +76,10 @@
 	  has_many :service_leaves, :through=>:service_registrations
 	  has_many :service_sections
 	  has_many :payments, :foreign_key=>"payer_id"
+	  
+	  def joined_groups
+	    groups_members.map{|gm|gm.group}
+	  end
 	
 	  def registered_services
 	    service_leaves.map{|sl|sl.service}
