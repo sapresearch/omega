@@ -64,7 +64,7 @@
         @setting = Setting.first
         if @setting
           @remote_news_items_class_id = @setting.news_group_id
-          @keywords = @setting.news_item_keywords.split(",")
+          @keywords = @setting.news_item_keywords.to_s.split(",")
         end
       end
 
