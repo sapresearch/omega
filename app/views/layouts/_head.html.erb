@@ -17,7 +17,7 @@
           <span id="trigger"><a class="btnLoginCtrl" rel="test" href="#"><span>Login</span></a> <a class="btnLoginCtrl" style="display:none;"><span>Close</span></a></span>
           | <%=  link_to content_tag(:span, t(:sign_up)), register_users_url %>
       <% else -%>
-		<span>
+		<span id="username_span">
 			<%= current_user.username %>
 		</span>
           <span class="om-icon-only om-white-icon ui-icon-power"></span>

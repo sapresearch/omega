@@ -69,4 +69,7 @@ fieldset#homepage_news_item_list legend{
 .homepage_news_item_content{
 	font-size:12px;
 }
+span#username_span {
+	text-transform: none;
+}
 
