@@ -148,17 +148,17 @@
 
 			def rank
 				positions = all
-				priority_scores = { 'Urgent!' => 0.0, 'High' => 0.5, 'Normal' => 1.0 }
-				time_rank = positions.sort_by { |vp| vp.start }
+				time_weight = 1.5
+				priority_scores = { 'Urgent!' => 1.0, 'High' => 0.5, 'Normal' => 0.0 }
+				time_rank = positions.sort_by { |vp| vp.start }.reverse
 				scores = {}
 				c = count.to_f - 1
 				time_rank.each_with_index do |vp, i|
-					normalized = i/c
-					priority = (priority_scores[vp.priority] or 1.0)
-					puts "#{normalized} and #{priority}"
+					normalized = (i/c * time_weight)
+					priority = (priority_scores[vp.priority] or 0.0)
 					scores[vp] = (normalized + priority)
 				end
-				scores = scores.sort_by { |k,v| v }
+				scores = scores.sort_by { |k,v| v }.reverse
 				scores.inject([]) { |array, subarray| array << subarray.first }
 			end
 
