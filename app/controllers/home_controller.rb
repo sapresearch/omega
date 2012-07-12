@@ -3,7 +3,7 @@
 	
 	  def index
       @code = params[:code]
-	    @positions =  Volunteering::Position.limit(5)
+	    @positions =  Volunteering::Position.rank
 	    @services = Service.limit(5)
 			@services = Service.real_public_service_leaves.reverse.take(5)
 	    @events = Calendar::Event.limit(6)
