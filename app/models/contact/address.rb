@@ -17,4 +17,14 @@
 				end
 			end
 		end
+		
+		# not in use
+		def is_home_address?
+		  address_type.to_s.downcase == "home" || address_type == nil		  
+		end
+		
+		# not in use
+		def is_work_address?
+		  address_type.to_s.downcase == "work"
+		end
 	end

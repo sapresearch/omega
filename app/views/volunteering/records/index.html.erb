@@ -30,30 +30,29 @@
   </div>
 
   <div id="applicants_charts">
-    <div id="bar_chart_div"></div>
+    <div id="geo_chart_div"></div>
   </div>
-  <script type="text/javascript">
-    google.load("visualization", "1", {packages:["corechart"]});
-    google.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable(
-        <%= 
-        raw Volunteering::Record.all.inject( { } ) {
-          |count, record| count[record.action].nil? ?
-            count[record.action] = 1 : count[record.action] += 1
-          count
-        }.flatten(0).insert(0, ['Status', 'Apllications'])
-        %>
-      );
-
-      var options = {
-        title: 'Application Status'
-        , vAxis: {title: 'Status',  titleTextStyle: {color: 'red'}}
-        //, hAxis: { format: '#' }
-      };
-
-      var chart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
-      chart.draw(data, options);
-    }
-  </script>
+  <script type='text/javascript'>
+	 google.load('visualization', '1', {'packages': ['geochart']});
+	 google.setOnLoadCallback(drawMarkersMap);
+	
+	  function drawMarkersMap() {
+	  var data = google.visualization.arrayToDataTable(
+	   <%= raw Contact::Address.includes(:contact).select {
+	   	|c| !c.city.nil? }.map {
+	   		|r| [r.city, r.contact.first_name.to_s+' '+r.contact.last_name.to_s]
+		}.insert(0, ['City', 'Volunteer']) %>
+	  );
+	
+	  var options = {
+	    region: '021'
+	    , displayMode: 'markers'
+	    , colorAxis: {colors: ['green', 'blue']}
+	    // , resolution: 'provinces'
+	  };
+	
+	  var chart = new google.visualization.GeoChart(document.getElementById('geo_chart_div'));
+	  chart.draw(data, options);
+	};
+	</script>
 </div>
