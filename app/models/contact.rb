@@ -17,8 +17,8 @@
 	
 	  TITLES = %w{ Mr Miss Ms Mrs}
 	
-	  attr_accessible :first_name, :last_name, :email, :phone_numbers_attributes, :addresses_attributes, :birthday, :over_18, :skill_ids, :interest_ids
-    attr_accessible :account_id
+	  #attr_accessible :first_name, :last_name, :email, :phone_numbers_attributes, :addresses_attributes, :birthday, :over_18, :skill_ids, :interest_ids
+    #attr_accessible :account_id
 	
 	  scope :status, where('status IS NULL')
 	  before_destroy { |contact| Contact::Value.destroy_all "contact_id = #{contact.id}" }

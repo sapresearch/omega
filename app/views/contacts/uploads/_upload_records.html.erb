@@ -36,7 +36,7 @@
                   <span><%= truncate(file.upload_file_name, :length => 20 ) %></span>
               <% end %>
             </td>
-            <td><%= file.uploader.username %></td>
+            <td><%#= file.uploader.username %><%= file.binding.first_name %></td>
             <td><%= file.updated_at.strftime("%m/%d/%Y at %I:%M%p") %></td>
             <td>
               <span data-tooltip="Delete document">
