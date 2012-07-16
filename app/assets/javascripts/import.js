@@ -36,7 +36,7 @@ function import_data(selection, import_date){
     $.ajax({
 
                 type: "GET",
-                url: "/contacts/imports/get_import_data",
+                url: account_prefix_path+"/contacts/imports/get_import_data",
                 data: { "created_at": import_date, "filter": selection },
                 success: function(html){
 
@@ -51,7 +51,7 @@ function draft_import(date){
     $.ajax({
 
                 type: "GET",
-                url: "/contacts/imports/draft_import",
+                url: account_prefix_path+"/contacts/imports/draft_import",
                 data: { "created_at": date },
                 success: function(html){
                     $('#import_contacts').html(html);
@@ -65,7 +65,7 @@ function redo_import(date){
     $.ajax({
 
                 type: "GET",
-                url: "/contacts/imports/redo_import",
+                url: account_prefix_path+"/contacts/imports/redo_import",
                 data: { "created_at": date },
                 success: function(html){
                     $('#import_contacts').html(html);

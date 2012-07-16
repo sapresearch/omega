@@ -33,6 +33,7 @@
     protected
       def load_hosting_account
 				account_name = Rails.env.production? ? request.subdomain : params[:account_name]
+				@account_path = Rails.env.production? ? "" : "/"+account_name
         @account = Account.find_by_name!(account_name)
         @account.with(session) { yield }
       	rescue ActiveRecord::RecordNotFound
