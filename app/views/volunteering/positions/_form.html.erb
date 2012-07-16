@@ -80,7 +80,7 @@
 
     <div id="vp_contact">
        <h3 class="application-form">Contact for this position</h3> 
-        <% [['none', 'no contact'], ['existing', 'existing contact'], ['new', 'new contact']].each do |value, text| %>
+        <% [['none', 'no contact'], ['existing', 'existing contact']].each do |value, text| %>
 				<% checked = value == @contact_assignment ? {'checked' => true} : nil %>
             <%= radio_button_tag 'contact_assignment', value, checked %><%= text %>
         <% end %>
@@ -112,15 +112,6 @@
         <%= f.hidden_field :contact_ids %>
     	</div>
 	
-
-
-		<div id="position_new_contact" class="hide">
-      	<h2 class="application-form-content-heading">Create a new contact</h2>
-      	<%= f.fields_for :contacts do |ff| %>
-         	<%= render 'contact_form', :f => ff %>
-      	<% end %>
-      </div>
-
 
 
       <h3 class="application-form">Custom Field</h3>
