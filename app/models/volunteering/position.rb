@@ -66,10 +66,13 @@
 	    records.includes(:contact).where('action = ?', 'Accepted').collect(&:contact)
 	  end
 	
+	  def unrejected_volunteers
+	    records.includes(:contact).select { |r| r.action != 'Rejected' }
+	  end
+
 	  def missing_volunteers
 	    volunteers_required - active_volunteers.count
 	  end
-	
 	
 	  def to_s
 	    "Volunteering Position: #{name}"

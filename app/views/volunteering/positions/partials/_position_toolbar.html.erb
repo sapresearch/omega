@@ -7,9 +7,15 @@
       <%= om_button(:contact => true, :icon=>'edit') do %>
           <%=  link_to 'Edit', edit_volunteering_position_path(position), :'data-tooltip' => 'Edit this position' %>
       <% end %>
-      <%= om_button(:contact => true, :icon => 'delete') do %>
-          <%=  link_to 'Delete', volunteering_position_path(position), :method=>:delete, :confirm => 'Delete this position?', :'data-tooltip' => 'Delete this position' %>
-      <% end %>
+			<% if position.unrejected_volunteers.count == 0 %>
+      	<%= om_button(:contact => true, :icon => 'delete') do %>
+          	<%=  link_to 'Delete', volunteering_position_path(position), :method=>:delete, :confirm => 'Delete this position?', :'data-tooltip' => 'Delete this position' %>
+      	<% end %>
+			<% elsif position.unrejected_volunteers.count > 0 %>
+      	<%= om_button(:contact => true, :icon => 'delete') do %>
+          	<%=  link_to 'Delete', history_volunteering_position_path(position), :confirm => "This positon can't be deleted until all the volunteers have been rejected", :'data-tooltip' => "This positon can't be deleted until all the volunteers have been rejected" %>
+      	<% end %>
+			<% end %>
       <%= om_button(:contact => true, :icon=>'clipboard-list ') do %>
           <%=  link_to 'Applicants', history_volunteering_position_path(position), :'data-tooltip' => 'See all the applications for this position' %>
       <% end %>
