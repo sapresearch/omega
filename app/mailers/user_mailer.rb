@@ -18,7 +18,7 @@ class UserMailer < ActionMailer::Base
   end
 
 	def volunteering_position_notice(user, record, reason)
-		@user, @reason, @record = user, record, reason
+		@user, @record, @reason = user, record, reason
 		mail :to => user.mail
 	end
   
