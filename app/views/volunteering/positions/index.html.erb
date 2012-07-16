@@ -1,6 +1,26 @@
 <%= stylesheet_link_tag 'omega_volunteering', 'omega_volunteering_left' %>
 <% require_javascript 'https://www.google.com/jsapi' %>
+<% require_javascript 'thirdParty/jquery.tagcanvas' %>
 <%# javascript_include_tag 'omega_volunteering' %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if(!$('#tag_canvas').tagcanvas({
+      textColour: '#00459A'
+      , outlineColour: '#f96'
+      , textfont: 'Impact,Arial Black,sans-serif'
+      , textHeight: 20
+      , reverse: true
+      , depth: 0.8
+      , maxSpeed: 0.05
+      , weight: true
+      , weightMode: "both"
+      , weightFrom: 'data-weight'
+    },'weightTags')) {
+      // something went wrong, hide the canvas container
+      $('#tag_canvas_div').hide();
+    }
+  });
+</script>
 <div class="content circle-corners-bottom-left" style="min-height:<%= (@positions.count % Volunteering::Position::MAX_POSITIONS_PER_PAGE) * 395 %>;">
 
   <div class="heading-main-columns">
@@ -24,32 +44,44 @@
     <%= render :partial => "layouts/sidebar_positions_skills" %>
     <%= render :partial => "layouts/sidebar_positions_interests" %>
 
-    <div id="gauge_chart">
-      <div id="gauge_chart_div">
-      </div>
-    </div>
-
-    <% max_val = Volunteering::Record.all.inject(0) { |r, e| r += e.position.duration } / 3600 * 80 / 100 %>
-    <script type='text/javascript'>
-      google.load('visualization', '1', {packages:['gauge']});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Evaluation', 'Hours'],
-          ['Committed', <%= Volunteering::Record.where(:action => :Accepted).inject(0) { |r, e| r += e.position.duration } / 3600 %> ]
-        ]);
-        var options = {
-          width: 500, height: 200
-          , greenFrom: <%= max_val * 80 / 100 %>, greenTo: <%= max_val %>
-          , yellowFrom: <%= max_val * 60 / 100 %>, yellowTo: <%= max_val * 80 / 100 %>
-          , redFrom: 0, redTo: <%= max_val * 60 / 100 %>
-          , max: <%= max_val %>
-        };
-
-        var chart = new google.visualization.Gauge(document.getElementById('gauge_chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
+	<h1 class="side-bar corners-top">Tag Cloud: Skills and Interests</h1>
+	<!--div class="corners-bottom sidebar-menu-content"-->
+	    <div id="charts_div">
+			<!--div id="gauge_chart_div" style="width:250px;height:200px;border:2px solid white;"></div-->
+			<div id="tag_canvas_div">
+				<ul class="weighted" style="font-size: 50%" id="weightTags">
+		        	<% for i in 0...@tags.count %>
+						<li><a data-weight='<%= @tags[i][1].to_s %>' href='#'><%= @tags[i][0].to_s %></a></li>
+					<% end %>
+		      	</ul>
+				<canvas id="tag_canvas" width="350" height="350" style="float: left; margin-bottom: 20px; ">
+					<p>You browser does not support HTML5 and thus tag cloud could not be loaded.</p>
+				</canvas>
+			</div>
+	    </div>
+	
+	    <% max_val = Volunteering::Record.all.inject(0) { |r, e| r += e.position.duration } / 3600 * 80 / 100 %>
+	    <script type='text/javascript'>
+	      google.load('visualization', '1', {packages:['gauge']});
+	      google.setOnLoadCallback(drawChart);
+	      function drawChart() {
+	        var data = google.visualization.arrayToDataTable([
+	          ['Evaluation', 'Hours'],
+	          ['Committed', <%= Volunteering::Record.where(:action => :Accepted).inject(0) { |r, e| r += e.position.duration } / 3600 %> ]
+	        ]);
+	        var options = {
+	          width: 500, height: 200
+	          , greenFrom: <%= max_val * 80 / 100 %>, greenTo: <%= max_val %>
+	          , yellowFrom: <%= max_val * 60 / 100 %>, yellowTo: <%= max_val * 80 / 100 %>
+	          , redFrom: 0, redTo: <%= max_val * 60 / 100 %>
+	          , max: <%= max_val %>
+	        };
+	
+	        var chart = new google.visualization.Gauge(document.getElementById('gauge_chart_div'));
+	        chart.draw(data, options);
+	      }
+	    </script>
+    <!--/div-->
   <% end %>
 
 <%# if tags = @skills_tags or tags = @interests_tags %>

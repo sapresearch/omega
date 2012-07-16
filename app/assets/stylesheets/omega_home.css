@@ -72,4 +72,6 @@ fieldset#homepage_news_item_list legend{
 span#username_span {
 	text-transform: none;
 }
-
+sup {
+	color: red;
+}

@@ -19,14 +19,11 @@ group :assets do
   gem 'uglifier'
 end
 
-group :development, :test do
+group :test do
 	gem 'rspec-rails', "~>2.10.1"
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'capybara-webkit' #has an external requirement Qt4: https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
   gem 'launchy'
-end
-
-group :test do
   gem 'database_cleaner'
 end
 

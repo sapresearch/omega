@@ -17,7 +17,12 @@
 	
 	  def index
 	    @positions = @positions.paginate(:page => params[:page], :per_page => Volunteering::Position::MAX_POSITIONS_PER_PAGE)
-	    respond_with(@positions)
+      #fetch skills and interests of contacts and return array of unique elements with the number of occurrences
+      #this is used in the tag cloud feature
+      skills = Contact::Skill.all.map { |r| r.name.to_s.downcase }
+      interests = Contact::Interest.all.map { |r| r.name.to_s.downcase }
+      @tags = (skills + interests).inject({}) { |r, e| r[e] = r[e].nil? ? 1 : r[e]+1; r }.flatten(0)
+	    respond_with(@positions, @tags)
 	  end
 	
 	  def upcoming
@@ -255,6 +260,5 @@
 	  def reset_view_if_error
 		 @positions = Volunteering::Position.find(:all).unshift(Volunteering::Position::CollectionWithAll.new, Volunteering::Position::CollectionWithCurrentPosition.new)
 	    @position.build_event_source unless @position.event_source
-	  end
-	
+	  end	
 	end
