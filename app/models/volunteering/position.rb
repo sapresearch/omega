@@ -143,6 +143,17 @@
       self.end-self.start
     end
 
+		def next_occurence
+			return start if not recurrent
+			if Time.now < recurrence_start # hasn't started yet
+				return recurrence_start 
+			elsif Time.now >= recurrence_end # it's over
+				return recurrence_end_time
+			else # still reoccurring
+				Time.now
+			end
+		end
+
 		class << self
 
 			def normal
@@ -153,7 +164,7 @@
 				positions = all.to_a
 				time_weight = 1.5
 				priority_scores = { 'Urgent!' => 1.0, 'High' => 0.5, 'Normal' => 0.0 }
-				time_rank = positions.sort_by { |vp| vp.start }.reverse
+				time_rank = positions.sort_by { |vp| vp.next_occurence }.reverse
 				scores = {}
 				c = count.to_f - 1
 				time_rank.each_with_index do |vp, i|
