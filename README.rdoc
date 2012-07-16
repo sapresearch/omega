@@ -1,1 +1,2 @@
 # omega
+May  need to install Qt4 beforehand since it is used as an external dependency for capybara-webkit: https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
