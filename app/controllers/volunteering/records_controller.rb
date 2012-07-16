@@ -181,15 +181,13 @@
 	      @message.save
 	    end
 	
-		contact = params[:volunteering_record][:contact]
+			contact = params[:volunteering_record][:contact]
 	    params[:volunteering_record].delete(:contact) 
-	    
 	    @record.update_attributes(params[:volunteering_record])
-	    
 	    @contact = Contact.find(@record.contact_id)
-	
-		@contact.update_attributes(contact)
-	
+			@contact.update_attributes(contact)
+	    note = params[:volunteering_record][:more_information]
+			UserMailer.volunteering_position_notice(@contact.user, @record, note).deliver
 	    respond_with(@record)
 	  end
 	

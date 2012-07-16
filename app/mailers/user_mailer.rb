@@ -16,6 +16,11 @@ class UserMailer < ActionMailer::Base
   def registration_confirmation(user)
     mail :to => user.email 
   end
+
+	def volunteering_position_notice(user, record, reason)
+		@user, @reason, @record = user, record, reason
+		mail :to => user.mail
+	end
   
   def parental_approval(user)
     @user = user
