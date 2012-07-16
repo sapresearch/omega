@@ -150,7 +150,7 @@
 			end
 
 			def rank
-				positions = all
+				positions = all.to_a
 				time_weight = 1.5
 				priority_scores = { 'Urgent!' => 1.0, 'High' => 0.5, 'Normal' => 0.0 }
 				time_rank = positions.sort_by { |vp| vp.start }.reverse
