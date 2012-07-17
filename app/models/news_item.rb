@@ -1,6 +1,6 @@
 	class NewsItem < Model
 	  TITLE_MAX_LENGTH = 100
-	  NEWS_CLASSIFIER_SERVICE_HOST = "ymqdomega2.dhcp.ymq.sap.corp:3002"
+	  NEWS_CLASSIFIER_SERVICE_HOST = "news_chimp.omegaportal.com"
 	  
 	  attr_accessor :liked
 	

@@ -83,9 +83,9 @@ class Account < ActiveRecord::Base
 	end
 
 	def create_news_group(group_name = name, recursive_loops = 0)
-		news_chimp_uri = "#{NEWS_CLASSIFIER_SERVICE_HOST}/groups/new/#{group_name}"
+		news_chimp_uri = NewsItem::NEWS_CLASSIFIER_SERVICE_HOST + '/groups'
 		begin
-			result = Curl::Easy.perform(news_chimp_uri)
+			result = Curl::Easy.http_post(news_chimp_uri, Curl::PostField.content('name', self.name))
 			id = result.body_str.partition(':').last.gsub(/["} ]/, '')
 			# recursively call the method until it finds a suitable name
 			if id == '' and recursive_loops < 5
