@@ -1,6 +1,6 @@
 	class Setting < Model
 		belongs_to :user
-		attr_accessible :facebook_token, :twitter, :user_id, :email
+		attr_accessible :facebook_token, :twitter, :user_id, :email, :news_group_id
 		self.table_name = 'settings'
 	
 	  PERM_ADMIN = 'myomega_admin'

@@ -89,18 +89,21 @@ class Account < ActiveRecord::Base
 			id = result.body_str.partition(':').last.gsub(/["} ]/, '')
 			# recursively call the method until it finds a suitable name
 			if id == '' and recursive_loops < 5
-				puts "\n\n#{recursive_loops}"
 				create_news_group(name + 'a', recursive_loops + 1)
 			elsif id != ''
-				settings.first.update_attribute(:news_group_id, id)
+				set = (Setting.first or Setting.new)
+				set.news_group_id = id
+				set.save
 			end
 		rescue StandardError
 		end
 	end
 
 	def build_setting(email)
-		setting = Setting.create(:email => email, :account_id => self.id)
+		setting = (Setting.first or Setting.new)
+		setting.update_attributes(:email => email, :account_id => self.id)
 		setting.update_attribute(:account_id, self.id)
+		setting.save
 		verify_setting_email(email) if Rails.env.production?
 		setting
 	end
