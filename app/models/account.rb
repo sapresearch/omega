@@ -83,8 +83,7 @@ class Account < ActiveRecord::Base
 	end
 
 	def create_news_group(group_name = name, recursive_loops = 0)
-		port = 3004
-		news_chimp_uri = "ymqdomega2.dhcp.ymq.sap.corp:#{port}/groups/new/#{group_name}"
+		news_chimp_uri = "#{NEWS_CLASSIFIER_SERVICE_HOST}/groups/new/#{group_name}"
 		begin
 			result = Curl::Easy.perform(news_chimp_uri)
 			id = result.body_str.partition(':').last.gsub(/["} ]/, '')
