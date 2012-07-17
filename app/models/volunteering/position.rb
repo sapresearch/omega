@@ -144,24 +144,70 @@
     end
 
 		def next_occurence
-			return start if not recurrent
-			if Time.now < recurrence_start # hasn't started yet
-				return recurrence_start 
-			elsif Time.now >= recurrence_end # it's over
-				return recurrence_end_time
-			else # still reoccurring
-				Time.now
-			end
+			recurrent ? next_recurrence : start
 		end
+
+		def next_recurrence
+			recur = recurrences
+			recur.each do |r|
+				return r if r >= Date.today
+			end
+			recur.last # Return last event if no recurrence happens after today
+		end
+
+		# return an array of all recurrences
+		def recurrences
+			recurrence_end_on == 'number' ? recurrences_for_end_number : recurrences_for_end_date
+		end
+
+		def recurrences_for_end_date
+			all = [recurrence_start]
+			case recurrence_pattern
+				when 'weekly'
+					until recurrence_end_at < (all.last + 7)
+						all << (all.last + 7)
+					end
+				when 'monthly'
+					until recurrence_end_at < (all.last >> 7)
+						all << (all.last >> 1)
+					end
+				when 'yearly'
+					until recurrence_end_at < (all.last >> 12)
+						all << (all.last >> 12)
+					end
+			end
+			all
+		end
+
+		def recurrences_for_end_number
+			all = [recurrence_start]
+			case recurrence_pattern
+				when 'weekly'
+					(recurrence_end_after - 1).times do
+						all << (all.last + 7)
+					end
+				when 'monthly'
+					(recurrence_end_after - 1).times do
+						all << (all.last >> 1)
+					end
+				when 'yearly'
+					(recurrence_end_after - 1).times do
+						all << (all.last >> 12)
+					end
+			end
+			all
+		end
+
 
 		class << self
 
-			def normal
-				all.select { |position| position.priority == 'Normal' }
+			# Return all positions that haven't already passed.
+			def active
+				all.select { |vp| vp.next_occurence.to_date >= Date.today }
 			end
 
 			def rank
-				positions = all.to_a
+				positions = active
 				time_weight = 1.5
 				priority_scores = { 'Urgent!' => 1.0, 'High' => 0.5, 'Normal' => 0.0 }
 				time_rank = positions.sort_by { |vp| vp.next_occurence }.reverse
