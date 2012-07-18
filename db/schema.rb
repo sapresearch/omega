@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120621131100) do
+ActiveRecord::Schema.define(:version => 20120718134231) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -390,6 +390,15 @@ ActiveRecord::Schema.define(:version => 20120621131100) do
 
   add_index "contacts", ["account_id"], :name => "index_contacts_on_account_id"
 
+  create_table "customizations", :force => true do |t|
+    t.integer  "account_id",           :null => false
+    t.string   "name"
+    t.string   "homepage_headline"
+    t.text     "homepage_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "deliveries", :force => true do |t|
     t.string  "message_id"
     t.string  "recipient"
@@ -569,13 +578,7 @@ ActiveRecord::Schema.define(:version => 20120621131100) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     t.string   "remote_id"
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   end
 
   create_table "news_items", :force => true do |t|
@@ -587,13 +590,7 @@ ActiveRecord::Schema.define(:version => 20120621131100) do
     t.boolean  "visibility",          :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     t.string   "remote_id"
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   end
 
   create_table "page_blocks", :force => true do |t|
@@ -823,6 +820,7 @@ ActiveRecord::Schema.define(:version => 20120621131100) do
     t.integer  "account_id"
     t.string   "news_group_id"
     t.string   "news_item_keywords"
+    t.integer  "customization_id"
   end
 
   add_index "settings", ["account_id"], :name => "index_settings_on_account_id"
@@ -880,9 +878,9 @@ ActiveRecord::Schema.define(:version => 20120621131100) do
   add_index "user_tokens", ["account_id"], :name => "index_user_tokens_on_account_id"
 
   create_table "users", :force => true do |t|
-    t.string   "username",                     :null => false
-    t.string   "password_hash", :limit => 128, :null => false
-    t.string   "password_salt", :limit => 128, :null => false
+    t.string   "username",                                    :null => false
+    t.string   "password_hash", :limit => 128,                :null => false
+    t.string   "password_salt", :limit => 128,                :null => false
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
@@ -890,6 +888,7 @@ ActiveRecord::Schema.define(:version => 20120621131100) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
+    t.integer  "visit_count",                  :default => 0
   end
 
   add_index "users", ["account_id"], :name => "index_users_on_account_id"

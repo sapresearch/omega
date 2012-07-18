@@ -22,11 +22,15 @@
 	  def create
 	    @session = Session.new(params[:session])
 	    @session.requested_page = session[:requested_page] || root_url
-	
+      
 	    if @session.authenticate
 	      flash['Logged in']
 	      set_current_user(@session.user)
-	    end
+	      
+	      count = current_user.visit_count  
+	      current_user.visit_count += 1;   
+        current_user.save!(:validate=>false)
+	    end     
 	    
 	    respond_with(@session)
 	  end

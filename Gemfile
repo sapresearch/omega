@@ -22,7 +22,7 @@ end
 group :test do
 	gem 'rspec-rails', "~>2.10.1"
   gem 'capybara'
-  gem 'capybara-webkit' #has an external requirement Qt4: https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
+  # gem 'capybara-webkit' #has an external requirement Qt4: https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
   gem 'launchy'
   gem 'database_cleaner'
 end

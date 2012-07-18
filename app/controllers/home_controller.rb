@@ -2,6 +2,10 @@
 	  respond_to :html
 	
 	  def index
+      if current_user != nil and current_user.visit_count == 1
+        redirect_to my_page_user_path(current_user) and return
+      end
+      
       @code = params[:code]
 	    @positions =  Volunteering::Position.rank
 	    @services = Service.limit(5)
