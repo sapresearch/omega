@@ -101,8 +101,8 @@ jQuery(function($) {
 
     $("ul#topnav li a").mouseover(function() { //Hover over event on list item
 
-        $(this).parent().find("div").delay(200).slideDown('fast'); //Show the subnav
-        $(this).parent().find("#services_nested_menu_ul_root").delay(200).slideDown('fast'); //special case for services
+        $(this).parent().find("div").delay(200).slideDown('slow'); //Show the subnav
+        $(this).parent().find("#services_nested_menu_ul_root").delay(200).slideDown('slow'); //special case for services
     });
 
     $("ul#topnav li").mouseleave(function() {
