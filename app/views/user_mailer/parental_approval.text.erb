@@ -2,8 +2,8 @@
 Dear Mr/Ms. <%=@user.parent_name%>
 
 
-Please respond to this email if you approve/dis-approve of the application made by 
-<%=@user.first_name%> <%=@user.last_name%>.
+Please respond to <%= Setting.default.email %> if you approve/dis-approve of the application made by 
+<%=@user.first_name%> <%=@user.last_name%>. Please do not reply to this email directly, but to <%= Setting.default.email %>.
 
 
 Kind Regards,

@@ -1,6 +1,5 @@
 class UserMailer < ActionMailer::Base
-	# TODO change this default once we get production access to SES email service.
-  default :from => Setting.default.nil? ? 'paul.miller01@sap.com' : Setting.default.email
+  default :from => 'noreply@omegaportal.com'
   default_url_options = { :host => "omega.com" }
   
   def lost_username(email, users)
