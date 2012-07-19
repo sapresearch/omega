@@ -218,8 +218,13 @@ class UsersController < Controller
     has_same_username = User.find_by_username(params[:user][:username]).nil?
 
     respond_to do |format|
-      format.json { render :json => has_same_username}
+      format.json { render :json => has_same_username }
     end
   end
+  
+  # def myomega_page_info_entered
+    # @user = current_user
+    # if @user.first_name
+  # end
 
 end

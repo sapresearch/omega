@@ -26,9 +26,11 @@
 	    if @session.authenticate
 	      flash['Logged in']
 	      set_current_user(@session.user)
-	      
-	      count = current_user.visit_count  
-	      current_user.visit_count += 1;   
+
+        if(current_user.visit_count == 0)
+          session[:first_time_redirect] = true
+        end
+	      current_user.visit_count += 1
         current_user.save!(:validate=>false)
 	    end     
 	    
