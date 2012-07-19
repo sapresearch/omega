@@ -7,12 +7,21 @@
 			errors.add(:account_id, 'The Account ID must be for the current account') if account != Account.current
 		end
 
-    # Validation to check uniqueness of username field
-    def username_must_be_unique
-      if !User.find_by_username(self.username).nil?
-        errors.add(:username, 'The username is already taken.')
-      end
-    end
+		# This validates uniqueness within the current tenant only.
+		# This can be used in any model like:
+		# class User < Model
+		# 	validates_unique :username
+		# end
+		def self.validates_unique(*attr_names)
+			options = attr_names.extract_options!
+			validates_each(attr_names, options) do |record, attribute, value|
+				klass = record.class
+				find_method = "find_by_#{attribute}".to_sym
+				duplicates = klass.send(find_method, value)
+				record.errors[attribute] << "This #{attribute} is already taken" if duplicates
+			end
+		end
+
 	
 	def self.build_default_scope
       if method(:default_scope).owner != ActiveRecord::Base.singleton_class

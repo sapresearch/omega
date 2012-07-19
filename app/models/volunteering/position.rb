@@ -35,9 +35,9 @@
 	#-------------------------------------------------------------------------------------------------
 	
 		validate :valid_dates
+		validates_unique :name # Custom validation. See model.rb
 		validates_presence_of :description, :volunteers_required, :name
 		validates_numericality_of :volunteers_required, :only_integer => true, :greater_than => 0
-		validates_uniqueness_of :name
 		validates_presence_of :start, :end, :unless => :recurrent?
 	
 		def valid_dates
