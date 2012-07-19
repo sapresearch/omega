@@ -1,0 +1,36 @@
+<div id="customization_options">
+  <span data-tooltip="use default homepage">
+    <label for="default_homepage" >Default</label>
+    <input id="default_homepage" name="customization_options" type="radio" checked="checked" onclick="alert('under construction')" />
+  </span>
+  <span data-tooltip="new customization">
+    <label for="new_customization" >New Customization</label>
+    <input id="new_customization" name="customization_options" type="radio" onclick="new_customization('<%= new_customization_url %>')" />
+  </span>
+  <span data-tooltip="select from existing customizations">
+    <label for="select_customization" >Existing Customizations</label>
+    <input id="select_customization" name="customization_options" type="radio" onclick="existing_customizations()" />
+  </span>
+  <span id="select_customizations_field">
+    <% unless @customizations.to_a.empty? %>
+      <%# options = @customizations.map{|c|[c.name, c.id]} %>
+      <%# default_option_value = @customization.nil? ? nil : @customization.id%>
+      <%#= select_tag(:select_customizations, options_for_select(options, default_option_value), :onchange => "edit_customization()") %>
+
+      <select id="select_customizations" name="select_customizations" onchange="edit_customization()">
+        <% @customizations.each_with_index do |c,i| %>
+          <option id="option_customization_<%= c.id %>" value="<%= c.id %>" <%= "selected='selected'" if !@customization.nil? && c.id == @customization.id %> ><%= c.name %></option>
+          <script type="text/javascript">
+            $('#option_customization_<%= c.id %>').data('edit_url', '<%= @customization_edit_urls[i] %>')
+          </script>
+        <% end %>
+      </select>
+    <% end %>
+  </span>
+</div>
+
+<hr/>
+
+<div id="customization_fields">
+</div>
+

@@ -4,6 +4,7 @@ Omega::Application.routes.draw do
 	resources :accounts
 	  
 my_routes = lambda {
+  resources :customizations
   resources :news_items do
     member do     
     end

@@ -1,0 +1,9 @@
+<%= render "form", :is_ajax=>false %>
+<div id='new_customization_bottom_links' class='page_bottom_links'>
+  <div class="left_links">
+    <%= link_to_function "Update", "$('.edit_customization').submit()", :method=>:put, :class=>"operation_button" %>
+  </div>
+  <script>
+    $('.operation_button').button({ icons: {primary:'ui-icon-gear'} });
+  </script>
+</div>

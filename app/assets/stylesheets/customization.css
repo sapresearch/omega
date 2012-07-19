@@ -1,0 +1,14 @@
+#customization_options span{
+    display:inline-block;
+    margin:5px 20px;
+}
+#customization_options label{
+    width:auto;
+}
+#customization_options input{
+    
+}
+
+#select_customizations_field{
+    display:none;
+}

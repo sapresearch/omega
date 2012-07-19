@@ -1,0 +1,15 @@
+<%= form_for @customization, :remote=>is_ajax do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, :size=>30 %>
+  </div>
+  <div class="field">
+    <%= form.label :homepage_headline %>
+    <%= form.text_field :homepage_headline, :size=>100 %>
+  </div>
+  <div class="field">
+    <%= form.label :homepage_description %>
+    <%= form.text_area :homepage_description %>
+  </div>
+<% end %>
+
