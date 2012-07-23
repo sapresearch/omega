@@ -75,10 +75,12 @@ class Account < ActiveRecord::Base
 		admin.account = self
 		admin.roles << Role.find_by_internal_name_and_account_id('administrator', self.id)
 
-		contact = admin.build_contact(:account_id => self.id)
+		contact = admin.build_contact(:first_name => params[:user][:first_name], :last_name => params[:user][:last_name], :account_id => self.id)
 		contact.addresses.build(:account_id => self.id)
 		contact.phone_numbers.build(:account_id => self.id)
 		admin.save(:validate => false)
+		admin.update_attribute(:first_name, params[:user][:first_name])
+		admin.update_attribute(:last_name, params[:user][:last_name])
 		admin
 	end
 
@@ -101,7 +103,7 @@ class Account < ActiveRecord::Base
 
 	def build_setting(email)
 		setting = (Setting.first or Setting.new)
-		setting.update_attributes(:email => email, :account_id => self.id)
+		setting.update_attributes(:email => email)
 		setting.update_attribute(:account_id, self.id)
 		setting.save
 		verify_setting_email(email) if Rails.env.production?
