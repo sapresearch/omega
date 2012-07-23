@@ -1,8 +1,9 @@
 <%= form_for @customization, :remote=>is_ajax do |form| %>
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, "Customization Name" %>
     <%= form.text_field :name, :size=>30 %>
   </div>
+
   <div class="field">
     <%= form.label :homepage_headline %>
     <%= form.text_field :homepage_headline, :size=>100 %>

@@ -1,0 +1,2 @@
+$(".page_content").html("<%= escape_javascript(render "index_page_content") %>");
+dialog_message("customization-deleted", "Customization Deleted", "<p>Customization <strong class='italic'><%= @pre_customization.name %></strong> has been successfully deleted.</p>", {width:500})

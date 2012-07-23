@@ -11,6 +11,12 @@ $.fn.extend({
     },
     is_empty: function(){
         return $(this).html().match(/\w+/) ? false :true
+    },
+    visible: function(){
+        $(this).css('visibility','visible')
+    },
+    invisible: function(){
+        $(this).css('visibility','hidden')
     }
 });
 

@@ -1,7 +1,7 @@
 <%= render "form", :is_ajax=>false %>
 <div id='new_customization_bottom_links' class='page_bottom_links'>
   <div class="left_links">
-    <%= link_to_function "Create", "$('.new_customization').submit()", :method=>:post, :class=>"operation_button" %>
+    <%= link_to_function "Create and Adopt", "$('.new_customization').submit()", :method=>:post, :class=>"operation_button" %>
   </div>
   <script>
     $('.operation_button').button({ icons: {primary:'ui-icon-gear'} });

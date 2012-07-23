@@ -1,0 +1,10 @@
+<% unless @customizations.to_a.empty? %>
+  <select id="select_customizations" name="select_customizations" onchange="edit_customization()">
+    <% @customizations.each_with_index do |c,i| %>
+      <option id="option_customization_<%= c.id %>" value="<%= c.id %>" <%= "selected='selected'" if !@customization.nil? && c.id == @customization.id %> ><%= c.name %></option>
+      <script type="text/javascript">
+        $('#option_customization_<%= c.id %>').data('edit_url', '<%= @customization_edit_urls[i] %>')
+      </script>
+    <% end %>
+  </select>
+<% end %>

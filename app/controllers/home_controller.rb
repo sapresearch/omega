@@ -17,6 +17,18 @@
 	    #  @blocks = @page.blocks
 	     # @components = @page.components
 	   # end
+
+      #customization fields
+      @homepage_headline = "Welcome to the Happyville Community Center"
+      @homepage_description =  "We are a community based organization offering a number of services to the local community.
+                                Feel free to browse our services and sign-up.  We are also looking
+                                for your support.  If you would like to help us with our mission
+                                feel free to look through our voluteer opportunities and sign-up!"
+      @customization = @setting.customization
+      if @customization
+        @homepage_headline = @customization.homepage_headline
+        @homepage_description = @customization.homepage_description
+      end
 	
 	    respond_with(@positions, @events)
 	  end
