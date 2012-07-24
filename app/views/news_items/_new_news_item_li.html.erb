@@ -2,7 +2,7 @@
 <%# liked ||= false %>
 
 <li id="new_news_item_li_<%= news_item.remote_id.to_s %>">
-	<%= link_to %Q{<span class="op_block ui-icon icon-curved-left-arrow" data-tooltip="Adopt this news item"></span>}.html_safe, news_items_url(:news_item=>{:remote_id=>news_item.remote_id, :title=>news_item.title, :content=>news_item.content, :url=>news_item.url, :news_item_source_id=>news_item.news_item_source}), :method => :post, :remote => true %>
+	<%= link_to %Q{<span class="op_block app-ui-icon icon-curved-left-arrow" data-tooltip="Adopt this news item"></span>}.html_safe, news_items_url(:news_item=>{:remote_id=>news_item.remote_id, :title=>news_item.title, :content=>news_item.content, :url=>news_item.url, :news_item_source_id=>news_item.news_item_source}), :method => :post, :remote => true %>
 	<span class="news_item_title">
 		<a href="<%= news_item.url %>" target='_blank'><%= news_item.title %></a>
 	</span>

@@ -111,6 +111,13 @@ select:focus,select:hover{
     -o-box-shadow: 5px 5px 5px #ccc;
     -box-shadow: 5px 5px 5px #ccc;
 }
+input[type=file]{
+    background-color:transparent;
+    -moz-box-shadow: 0px 0px 0px #ccc;
+    -webkit-box-shadow: 0px 0px 0px #ccc;
+    -o-box-shadow: 0px 0px 0px #ccc;
+    -box-shadow: 0px 0px 0px #ccc;
+}
 
 .disable_selection{
     -webkit-user-select: none;
@@ -152,7 +159,7 @@ select:focus,select:hover{
     -box-shadow: 3px 3px 3px #ccc;
 }
 
-.show(display:'')
+.show{ display:'' }
 .hide{display:none;}
 
 ol{ list-style-type:decimal;}
@@ -160,7 +167,7 @@ ol{ list-style-type:decimal;}
 .blank_sign{ color:#aaa }
 
 .disabled{opacity:0.4}
-.ui-icon{
+.app-ui-icon{
 	width:16px;
 	height:16px;
 	background: url('/assets/ui-icons_2e83ff_256x240.png')

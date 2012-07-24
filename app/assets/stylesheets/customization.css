@@ -35,13 +35,5 @@
     display:block;
 }
 
-#customization_fields form [type=file]{
-    background-color:transparent;
-    -moz-box-shadow: 0px 0px 0px #ccc;
-    -webkit-box-shadow: 0px 0px 0px #ccc;
-    -o-box-shadow: 0px 0px 0px #ccc;
-    -box-shadow: 0px 0px 0px #ccc;
-
-    margin:8px 0px 7px 0px;
-}
+#customization_fields form [type=file]{ margin:8px 0px 7px 0px; }
 
