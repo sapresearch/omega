@@ -10,11 +10,15 @@ function new_customization(url){
 function edit_customization(){
     var option = $('#select_customizations option:selected')
     var edit_url = option.data('edit_url');
-    $.ajax({
-        url: edit_url,
-        dataType: 'script',
-        cache: false
-    });
+    if(edit_url){
+        $.ajax({
+            url: edit_url,
+            dataType: 'script',
+            cache: false
+        });
+    }else{
+        dialog_message("no-customization", "No Customization Found", "<p>No existing customization is found.</p>", {width:500})
+    }
 }
 
 function delete_customization(dialog_html, url){

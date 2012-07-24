@@ -9,6 +9,7 @@ class CustomizationsController < Controller
 
   def new
     @customization = Customization.new
+    @logo = @homepage_picture = nil
   end
 
   def create
@@ -20,6 +21,8 @@ class CustomizationsController < Controller
 
   def edit
     @customization = Customization.find(params[:id])
+    @logo = @customization.logo.url!="/logos/original/missing.png" ? @customization.logo.url(:fixed) : nil
+    @homepage_picture = @customization.homepage_picture.url!="/homepage_pictures/original/missing.png" ? @customization.homepage_picture.url(:fixed) : nil
   end
 
   def update

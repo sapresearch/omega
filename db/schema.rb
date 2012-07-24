@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120718134231) do
+ActiveRecord::Schema.define(:version => 20120723131102) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -391,10 +391,16 @@ ActiveRecord::Schema.define(:version => 20120718134231) do
   add_index "contacts", ["account_id"], :name => "index_contacts_on_account_id"
 
   create_table "customizations", :force => true do |t|
-    t.integer  "account_id",           :null => false
+    t.integer  "account_id",                    :null => false
     t.string   "name"
     t.string   "homepage_headline"
     t.text     "homepage_description"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.string   "homepage_picture_file_name"
+    t.string   "homepage_picture_content_type"
+    t.integer  "homepage_picture_file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

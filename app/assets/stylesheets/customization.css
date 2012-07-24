@@ -1,57 +1,47 @@
-#customization_options{
-    padding:5px;
-}
-#customization_options .left_links{
-    margin:2px 30px 2px 2px;
-}
+#customization_options{ padding:5px; }
+#customization_options .left_links{ margin:2px 30px 2px 2px; }
 #customization_options .option{
     display:inline-block;
     margin:5px 20px;
 }
 #customization_options .option label{
-    /*
-    font-family: Arial;
-    font-weight: bold;
-    font-size: 14px;
-    color:#555;
-    */
     font-size:13px;
     width:auto;
 }
-#customization_options select{
-    width:135px;
-}
-
-#select_customizations_field{
-    visibility:hidden;
-}
-
-#customization_fields{
-    margin-top:15px;
-}
-#customization_fields .field{
-    margin:7px 0px;
-}
+#customization_options select{ width:185px; }
+#select_customizations_field{ visibility:hidden; }
+#customization_fields{ margin-top:15px; }
+#customization_fields .field{ margin:7px 0px; }
+#customization_fields .field div{ display:inline-block; }
 #customization_fields label{
     width:150px;
     margin:10px 10px 5px 10px;
     font: 13px/1.5em "Lucida Grande",Arial,sans-serif,helvetica, arial, freesans, clean;
     text-align: left;
 }
-#customization_fields input{
-    font: 13px/1.5em "Lucida Grande",Arial,sans-serif,helvetica, arial, freesans, clean;
-}
+#customization_fields input{ font: 13px/1.5em "Lucida Grande",Arial,sans-serif,helvetica, arial, freesans, clean; }
 #customization_fields textarea{
-    width:500px;
+    width:550px;
     font: 13px/1.5em "Lucida Grande",Arial,sans-serif,helvetica, arial, freesans, clean;
 }
-#customization_fields #customization_homepage_headline{
-    width:500px;
+#customization_fields #customization_homepage_headline{ width:550px; }
+#customization_fields #customization_name{ width:300px; }
+
+#new_customization_bottom_links .left_links{ margin-left:160px; }
+#new_customization_bottom_links .right_links{ margin-right:137px; }
+
+#customization_fields form img{
+    border:1px solid #999;
+    display:block;
 }
 
-#new_customization_bottom_links .left_links{
-    margin-left:160px;
+#customization_fields form [type=file]{
+    background-color:transparent;
+    -moz-box-shadow: 0px 0px 0px #ccc;
+    -webkit-box-shadow: 0px 0px 0px #ccc;
+    -o-box-shadow: 0px 0px 0px #ccc;
+    -box-shadow: 0px 0px 0px #ccc;
+
+    margin:8px 0px 7px 0px;
 }
-#new_customization_bottom_links .right_links{
-    margin-right:187px;
-}
+

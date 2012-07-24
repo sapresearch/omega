@@ -24,10 +24,11 @@
                                 Feel free to browse our services and sign-up.  We are also looking
                                 for your support.  If you would like to help us with our mission
                                 feel free to look through our voluteer opportunities and sign-up!"
-      @customization = @setting.customization
+      @homepage_picture = "community.jpg"
       if @customization
         @homepage_headline = @customization.homepage_headline
         @homepage_description = @customization.homepage_description
+        @homepage_picture = @customization.homepage_picture.url(:fixed) if @customization.homepage_picture.url!="/homepage_pictures/original/missing.png"
       end
 	
 	    respond_with(@positions, @events)

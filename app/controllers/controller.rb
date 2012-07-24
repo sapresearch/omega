@@ -67,6 +67,10 @@
           @remote_news_items_class_id = @setting.news_group_id
           @keywords = @setting.news_item_keywords.to_s.split(",")
         end
+        
+        @customization = @setting.customization
+        @logo = 'logo.png'
+        @logo = @customization.logo.url(:fixed) if @customization && @customization.logo.url!="/logos/original/missing.png"
       end
 
       # fail gracefully

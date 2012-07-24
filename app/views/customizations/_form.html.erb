@@ -5,9 +5,26 @@
   </div>
 
   <div class="field">
+    <%= form.label :logo %>
+    <div>
+      <%= image_tag @logo if @logo %>
+      <%= form.file_field :logo%>
+    </div>
+  </div>
+
+  <div class="field">
     <%= form.label :homepage_headline %>
     <%= form.text_field :homepage_headline, :size=>100 %>
   </div>
+
+  <div class="field">
+    <%= form.label :homepage_picture %>
+    <div>
+      <%= image_tag @homepage_picture if @homepage_picture %>
+      <%= form.file_field :homepage_picture%>
+    </div>
+  </div>
+
   <div class="field">
     <%= form.label :homepage_description %>
     <%= form.text_area :homepage_description %>
