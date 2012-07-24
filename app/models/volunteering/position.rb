@@ -210,7 +210,7 @@
 				positions = active
 				time_weight = 1.5
 				priority_scores = { 'Urgent!' => 1.0, 'High' => 0.5, 'Normal' => 0.0 }
-				time_rank = positions.sort_by { |vp| vp.next_occurence }.reverse
+				time_rank = positions.sort_by { |vp| vp.next_occurence.to_date }.reverse
 				scores = {}
 				c = count.to_f - 1
 				time_rank.each_with_index do |vp, i|
