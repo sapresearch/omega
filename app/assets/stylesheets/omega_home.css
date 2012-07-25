@@ -35,6 +35,10 @@ ul.thumb li img {
 }
 
 
+.content h2{ padding-top:0px; text-align: center;}
+.content #homepage_picture img{ margin-left:30px;}
+.content #homepage_description{}
+
 fieldset#homepage_news_item_list{
     padding:10px;
     border-width:1px;

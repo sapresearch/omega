@@ -5,15 +5,11 @@
 <%= title "Omega Home" %>
 
 <div class="content circle-corners-bottom-left">
-
-	<h2 class="page-content"><%= @homepage_headline %></h1>
-	<p></p>
-        <%= image_tag @homepage_picture %>
-	<!--<p><img class="page-content" src="community.jpg" width="550" height="361" alt="" /></p>-->
-
-	<p><%= @homepage_description %></p>
-	<%= render "news_item_list", :news_items=>NewsItem.visible %>
-
+    <h2 class="page-content"><%= @homepage_headline %></h1>
+    <p id="homepage_picture"><%= image_tag @homepage_picture %></p>
+    <!--<p><img class="page-content" src="community.jpg" width="550" height="361" alt="" /></p>-->
+    <p id="homepage_description"><%= @homepage_description %></p>
+    <%= render "news_item_list", :news_items=>NewsItem.visible %>
 </div>
 
 
