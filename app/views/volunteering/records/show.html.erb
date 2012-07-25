@@ -1,70 +1,43 @@
-
 <div class="content circle-corners-bottom-left corners-top">
+	<div class="heading-main">
+		<h1 class="page-content">
+			<%= @record.position.name %>
+		</h1>
+	</div>
 
-			<div class="heading-main">
-	
-				<h1 class="page-content">
-		<%= @record.position.name %>
-		    	</h1>
-	
-		</div>
-
-<div class="main-box">	
-
+	<div class="main-box">	
 		<p class="summary"> 
-		
-		 <h3 class="application-form">Applicant Information</h3>
-			 <strong> Full Name:  </strong>
-			 <span class="application-detail"> <%= @record.contact.title %> <%= @record.contact.first_name %> <%= @record.contact.last_name %></span><br/>
-             <%unless @record.contact.addresses.empty?%>
-			 <strong>Address:</strong>
-			 <span class="application-detail"> <%= @record.contact.addresses.first.street %>, <%= @record.contact.addresses.first.city %> <%= @record.contact.addresses.first.zip_code %></span>
-			 
-             <%end%>
+			
+			<% if @record.contact.user == current_user and @record.action == "To Be Taken" %>
+				<p><strong>Thank you for applying! Your application is under consideration. </strong></p>
+			<% end %>
+
+			<h3 class="application-form">Applicant Information</h3>
+			<strong> Full Name:  </strong>
+			<span class="application-detail"> <%= @record.contact.title %> <%= @record.contact.first_name %> <%= @record.contact.last_name %></span><br/>
+			<%unless @record.contact.addresses.empty?%>
+				<strong>Address:</strong>
+				<span class="application-detail"> <%= @record.contact.addresses.first.street %>, <%= @record.contact.addresses.first.city %> <%= @record.contact.addresses.first.zip_code %></span>
+			<%end%>
+
 			<h3 class="application-form">Volunteering History</h3>
-
 			<% Volunteering::Record.where('contact_id = ?',@record.contact_id).each do |r|%>
-			  	<strong> Position and Start Date: </strong>
-			  <%= r.position.name %> - <%= r.start_date %>  <br/>
-			 
-			
-            <%end%>
+				<strong> Position and Start Date: </strong>
+				<%= r.position.name %> - <%= r.start_date %>  <br/>
+			<%end%>
 		
-		 <%= with_permission(Volunteering::PERM_ADMIN) do %>
-         
-		
-			
-			 <h3 class="application-form">Application Approval</h3>
-			 <strong>Action:</strong>
-			<span class="application-detail"> <%= @record.action %>  </span> <br/><br/><br/><br/>
-		
+			<%= with_permission(Volunteering::PERM_ADMIN) do %>
+				<h3 class="application-form">Application Approval</h3>
+				<strong>Action:</strong>
+				<span class="application-detail"> <%= @record.action %>  </span> <br/><br/><br/><br/>
 		    <%= om_button(:contact => true, :icon => 'folder-open') do %>
-                <%=  link_to "Take Action Now!" , administer_volunteering_record_url(@record), :remote => 'true' %> 
-            <% end %>	
-			
-			 <%= om_button(:contact => true, :icon => 'user') do %>
-                <%=  link_to "Edit Applicant" , edit_volunteering_record_url(@record)%>
-             <% end %>	
-		 
-         <% end %>
-		 
+					<%= link_to "Take Action Now!" , administer_volunteering_record_url(@record), :remote => 'true' %> 
+				<% end %>	
+				<%= om_button(:contact => true, :icon => 'user') do %>
+					<%= link_to "Edit Applicant" , edit_volunteering_record_url(@record)%>
+				<% end %>	
+			<% end %>
 
-		 
-	     
-			
-			
 		</p>
-
-
-
-		
-		
+	</div>
 </div>
-		</div>
-	
-
-  <%#= om_button(:icon => 'next') do %>
-            <%#=  link_to "Go To Volunteering Positions", volunteering_positions_url %>
-        <%# end %>
-
-
