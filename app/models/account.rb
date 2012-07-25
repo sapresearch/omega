@@ -60,7 +60,7 @@ class Account < ActiveRecord::Base
 		@account.create_news_group
 		@account.assign_roles_and_permissions(roles, permissions)
 		@account.build_admin(params)
-		@account.build_setting(params[:user][:email])
+		@account.build_setting(params[:user][:email], params[:setting][:iso3166_region_code])
 		@account.save
 		@account
 	end
@@ -101,9 +101,10 @@ class Account < ActiveRecord::Base
 		end
 	end
 
-	def build_setting(email)
+	def build_setting(email, region)
 		setting = (Setting.first or Setting.new)
 		setting.update_attributes(:email => email)
+    setting.update_attributes(:iso3166_region_code => region)
 		setting.update_attribute(:account_id, self.id)
 		setting.save
 		verify_setting_email(email) if Rails.env.production?

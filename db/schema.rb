@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723131102) do
+ActiveRecord::Schema.define(:version => 20120725143133) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -827,6 +827,7 @@ ActiveRecord::Schema.define(:version => 20120723131102) do
     t.string   "news_group_id"
     t.string   "news_item_keywords"
     t.integer  "customization_id"
+    t.string   "iso3166_region_code", :default => "CA"
   end
 
   add_index "settings", ["account_id"], :name => "index_settings_on_account_id"

@@ -33,6 +33,11 @@
   </div>
 
   <div class="field">
+    <div class="field_label">Region</div>
+    <div class="field_content"><%= select_tag 'setting[iso3166_region_code]', '<option value="CA">Canada</option><option value="US">USA</option>'.html_safe %></div>
+  </div>
+
+  <div class="field">
     <div class="field_label">Password</div>
     <div class="field_content"><%= password_field_tag 'user[password]' %></div>
   </div>

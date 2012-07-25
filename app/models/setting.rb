@@ -1,7 +1,7 @@
 	class Setting < Model
 		belongs_to :user
     belongs_to :customization
-		attr_accessible :facebook_token, :twitter, :user_id, :email, :news_group_id
+		attr_accessible :facebook_token, :twitter, :user_id, :email, :news_group_id, :iso3166_region_code
 
 		self.table_name = 'settings'
 	
