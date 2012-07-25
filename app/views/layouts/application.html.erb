@@ -5,8 +5,8 @@
 
   <title><%= content_for?(:title) ? content_for(:title) : "Omega" %></title>
 
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag  "application" %>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <script type="text/javascript">
     //bind ajax csrf token for ajax post requests
@@ -57,16 +57,6 @@
     end %>
 
    </div>
-</div>
-
-
-<div id="banner_wrapper">
-    <div id="banner-left">
-        <%= image_tag @logo, :id=>'logo' %>
-    </div>
- 	<div id="banner-right" >
-		<h1> Omega Non-Profit Portal </h1>		  	
-	</div>
 </div>
 
 
