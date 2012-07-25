@@ -10,7 +10,9 @@
 	
 		#has_many :images
 		#accepts_nested_attributes_for :images
-	
+
+    validates :iso3166_region_code, :presence => true, :inclusion => { :in => ['CA', 'US'] }
+
 		def self.fb_enabled?(current_user)
 			fb_enabled = FALSE
 			if current_user.is_admin? then

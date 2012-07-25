@@ -12,7 +12,14 @@
 	    @records = Volunteering::Record.scoped.includes(:contact, :position)
 	    @records = @records
 	    @records = @records.paginate(:page => params[:page], :per_page => Volunteering::Record::MAX_RECORDS_PER_PAGE)
-	    respond_with(@records)
+      settings = Setting.find_by_account_id Account.current
+      @region = settings.iso3166_region_code
+      @geochart_data = Contact::Address.includes(:contact).select {
+        |c| !c.city.nil?
+          }.map {
+            |r| [r.city, r.contact.first_name.to_s+' '+r.contact.last_name.to_s]
+          }.insert(0, ['City', 'Volunteer'])
+	    respond_with(@records, @region, @geochart_data)
 	  end
 	
 	  def show
