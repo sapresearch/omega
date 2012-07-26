@@ -17,36 +17,26 @@
 	    end
 	
 	    def new
-			# AJAX call. When an admin selects a specific contact this selects only the records for positions that the contact is actually enrolled in.
-			if not params[:contact_id].nil? 
-				selected_user = Contact.find(params[:contact_id]).user
-				@records = Volunteering::Record.for(selected_user)
-			elsif params[:contact_id].nil? 
-				@records = Volunteering::Record.for(current_user)
-			end
-	
-	 		# Correctly set the first position that shows up.
-			if not params[:record_id].nil? # If there is an ajax call to select a particular position.
-				@records = Volunteering::Record.sort_by_selected_position(@records, params[:record_id])
-			elsif params[:record_id].nil?
-				@records = Volunteering::Record.sort_by_selected_position(@records, params[:position_id])
-			end
+			# AJAX call. When an admin selects a specific contact this selects only the records for positions that the contact is enrolled.
+	 		# Then correctly set the first position that shows up.
+			current_contact = params[:contact_id].nil? ? current_user : Contact.find(params[:contact_id]).user
+			@records = Volunteering::Record.for(current_contact)
+			@records = Volunteering::Record.sort_by_selected_position(@records, params[:record_id])
+			@contacts = params[:contact_id].nil? ? Contact.all : Contact.sorted_list(params[:contact_id])
 	
 			# AJAX call. Populate the correct time entry.
 			if !params[:week].nil? and !params[:record_id].blank?
 	      	@entry = Volunteering::TimeEntry.find_by_week_and_record(params[:week], Volunteering::Record.find(params[:record_id])) 
 				if @entry.nil?
 					@entry = Volunteering::TimeEntry.new
-	      		['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each { |day| @entry.days.build(:day => day) }
+	      	['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each { |day| @entry.days.build(:day => day) }
 				end
 			elsif !params[:time_entry_id].nil?
 				@entry = Volunteering::TimeEntry.find(params[:time_entry_id])
 			else
 				@entry = Volunteering::TimeEntry.new
-	      	['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each { |day| @entry.days.build(:day => day) }
+	      ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].each { |day| @entry.days.build(:day => day) }
 			end
-	
-			@contacts = params[:contact_id].nil? ? Contact.all : Contact.sorted_list(params[:contact_id])
 	
 			# Not for AJAX call.
 			@entries = Volunteering::TimeEntry.find_by_contact(Contact.for(current_user).id)

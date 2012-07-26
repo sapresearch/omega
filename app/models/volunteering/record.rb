@@ -30,19 +30,17 @@
 	
 		class << self
 			def for(user)
-				Volunteering::Record.all.select { |vr| vr.contact.user == user and vr.status != "Rejected" }
+				Volunteering::Record.all.select { |vr| !vr.contact.nil? }.select { |vr| vr.contact.user == user and vr.status != "Rejected" }
 			end
 	
-			def sort_by_selected_position(array_of_records, position_id)
-				return array_of_records if position_id.nil?
-				array_of_records.each do |r|
-					if r.position.id == position_id.to_i
-						array_of_records.delete(r)
-						array_of_records.unshift(r)
-					end
-				end
-				array_of_records
+			def sort_by_selected_position(records, record_id)
+				return records if record_id.nil?
+				record_id = record_id.to_i
+				sorted_records = records.select { |r| r.id == record_id }
+				records.each { |r| sorted_records << r unless r.id == record_id }
+				sorted_records
 			end
+
 			def find_by_contact_and_position(contact, position)
 				records = Volunteering::Record.all
 				records.select! { |r| r.contact.id == contact.id and r.position.id == position.id }

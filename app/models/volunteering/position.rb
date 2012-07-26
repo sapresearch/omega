@@ -140,7 +140,8 @@
 	  end
 
     def duration
-      self.end-self.start
+      return self.end-self.start if not recurrent
+	  return next_recurrence-start if recurrent
     end
 
 		def next_occurence
