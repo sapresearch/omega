@@ -141,7 +141,7 @@
 
     def duration
       return self.end-self.start if not recurrent
-	  return next_recurrence-start if recurrent
+	  	return next_recurrence.to_date.to_i - recurrence_start.to_date.to_i if recurrent
     end
 
 		def next_occurence
