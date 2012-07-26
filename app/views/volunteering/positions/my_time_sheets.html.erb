@@ -1,7 +1,12 @@
 <% require_javascript 'https://www.google.com/jsapi' %>
-<%= context_box do %>
+
+<div class="content circle-corners-bottom">
+  <div class="heading-main">
+    <h1 class="page-content page_title">Time Sheets</h1>
+  </div>
+<!--
    <div class="page-content circle-corners-bottom  corners-top">
-    	
+
 		<div class="heading-main">
 			<div class="left-heading">
 				<h1 class="page-content">
@@ -9,7 +14,7 @@
 		    	</h1>
 			</div>
 		</div>
-
+-->
 
       <div class="right">
       	<br/>
@@ -68,15 +73,17 @@
 			<% end %>
 		<% end %>
 		<!-- my changes -->
-	</div>
-<div id="volunteer_charts" style="position: absolute; top: 350px; left: 350px; right: 700px">
-  <div id="range_slider_div"></div>
-  <div id="category_filter_div">
-  	<input type="radio" name="period" value="this_year" onclick="setPeriod(1);" checked /> Current Year &nbsp;
-	<input type="radio" name="period" value="this_month" onclick="setPeriod(2);" /> Current Month &nbsp;
-	<input type="radio" name="period" value="last_month" onclick="setPeriod(3);" /> Last Month
+	
+  <div id="volunteer_charts">
+    <div id="range_slider_div"></div>
+    <div id="category_filter_div">
+          <input type="radio" name="period" value="this_year" onclick="setPeriod(1);" checked /> Current Year &nbsp;
+          <input type="radio" name="period" value="this_month" onclick="setPeriod(2);" /> Current Month &nbsp;
+          <input type="radio" name="period" value="last_month" onclick="setPeriod(3);" /> Last Month
+    </div>
+    <div id="pie_chart_div" style="color: #E1DFCB"></div>
   </div>
-  <div id="pie_chart_div" style="color: #E1DFCB"></div>
+                
 </div>
 <script type="text/javascript">
   // Load the Visualization API and the controls package.
@@ -94,7 +101,7 @@
   // instantiates a dashboard, a range slider and a pie chart,
   // passes in the data and draws it.
   function drawDashboard() {
-	
+
 	  // Create our data table.
 	  data[0] = google.visualization.arrayToDataTable(
 	    <%= raw  Contact.includes(:records => :position).all.map{
@@ -108,7 +115,7 @@
 	    }.sort{ |a, b| b[1] <=> a[1] }.insert(0, ['Volunteer', 'Hours'])
 	    %>
 	  );
-	  
+
 	  data[1] = google.visualization.arrayToDataTable(
 		    <%= raw  Contact.includes(:records => :position).all.map{
 		      |c| [c.first_name.to_s, c.records.inject(0) {
@@ -121,7 +128,7 @@
 		    }.sort{ |a, b| b[1] <=> a[1] }.insert(0, ['Volunteer', 'Hours'])
 	    	%>
 	  );
-	  
+
 	  data[2] = google.visualization.arrayToDataTable(
 		    <%= raw  Contact.includes(:records => :position).all.map{
 		      |c| [c.first_name.to_s, c.records.inject(0) {
@@ -134,11 +141,11 @@
 		    }.sort{ |a, b| b[1] <=> a[1] }.insert(0, ['Volunteer', 'Hours'])
 		    %>
 	  );
-	  
+
 	  // Create a dashboard.
 	  dashboard = new google.visualization.Dashboard(
 	      document.getElementById('volunteer_charts'));
-	
+
 	  // Create a range slider, passing some options
 	  var donutRangeSlider = new google.visualization.ControlWrapper({
 	    'controlType': 'NumberRangeFilter',
@@ -148,7 +155,7 @@
 	      , 'ui': { 'labelStacking': 'vertical' }
 	    }
 	  });
-	  
+
 	  // Define a category picker control for the Gender column
 	  var categoryPicker = new google.visualization.ControlWrapper({
 	    'controlType': 'CategoryFilter',
@@ -162,7 +169,7 @@
 	      }
 	    }
 	  });
-	
+
 	  // Create a pie chart, passing some options
 	  pieChart = new google.visualization.ChartWrapper({
 	    'chartType': 'PieChart',
@@ -176,14 +183,14 @@
 	      , chartArea: { left: 30, top: 30, width: 400, height: 400 }
 	    }
 	  });
-	
+
 	  // Establish dependencies, declaring that 'filter' drives 'pieChart',
 	  // so that the pie chart will only display entries that are let through
 	  // given the chosen slider range.
 	  dashboard.bind(donutRangeSlider, pieChart);
 	  drawChart();
 	}
-	
+
 function drawChart() {
 	// dashboard.bind(categoryPicker, pieChart);
 	// Draw the dashboard.
@@ -206,4 +213,4 @@ function setPeriod(option) {
 	}
 }
 </script>
-<% end %>
+
