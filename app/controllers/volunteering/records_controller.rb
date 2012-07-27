@@ -135,7 +135,7 @@
 	   
 	   @record.save
 	   
-	   unless @record.contact_id.nil?
+	   unless @record.contact_id.nil? or @contact.over_18
 	   	@user = Contact.find(@record.contact_id)
 	   	UserMailer.parental_approval(@user).deliver
 	   end

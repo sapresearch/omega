@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   default :from => 'noreply@omegaportal.com'
-  default_url_options = { :host => "myomegaportal.org", :account_name => Account.current.name }
+  default_url_options = { :host => "myomegaportal.org" }
   
   def lost_username(email, user)
     @email, @user = email, user
