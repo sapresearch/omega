@@ -117,7 +117,7 @@ class UsersController < Controller
       @username = params[:username]
       @user = User.find_by_username(@username)
       @user_token = UserToken.create(:token_type => 'login', :user => @user)
-      UserMailer.lost_password(@username, @user, @user_token, token_sessions_url(:token => @user_token.token)).deliver
+      UserMailer.lost_password(@username, @user, @user_token, token_sessions_url(:token => @user_token.token), request.host).deliver
     end
     respond_with(:ok)
   end

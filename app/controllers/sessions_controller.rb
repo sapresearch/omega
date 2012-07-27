@@ -38,17 +38,12 @@
 	  end
 	
 	  def update
-	    
 	  end
 	
+		# TODO check that the token was created within the last 24 hours.
 	  def token
 	    @user_token = UserToken.find_by_token!(params[:token])
-	
-	    raise('Token has been used') if @user_token.consumed_at
-	
 	    set_current_user(@user_token.user)
-	    @user_token.touch(:consumed_at)
-	
 	    redirect_to edit_user_url(@user_token.user)
 	  end
 	

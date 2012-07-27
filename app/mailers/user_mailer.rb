@@ -7,8 +7,8 @@ class UserMailer < ActionMailer::Base
     mail :to => @email
   end
 
-  def lost_password(username, user, user_token, session_url)
-    @username, @user, @user_token, @session_url = username, user, user_token, session_url
+  def lost_password(username, user, user_token, session_url, host)
+    @username, @user, @user_token, @session_url, @host = username, user, user_token, session_url, host
     mail :to => user.email
   end
   

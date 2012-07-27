@@ -12,7 +12,7 @@
     include Omega::Mixins::Controllers::Crud
 
     before_filter :controller_access_control, :init_variables
-    around_filter :general_exception_handler if Rails.env.production? 
+    #around_filter :general_exception_handler TODO remember to uncomment this when you go to production.
 
     protect_from_forgery
     layout 'application'
