@@ -104,27 +104,21 @@ class UsersController < Controller
   end
 
   def lost_username
-    if params[:email]
-      @email = params[:email]
-      @users = User.where('email = ?', @email)
-
-      UserMailer.lost_username(@email, @users).deliver
-    end
-
-    respond_with(:ok)
+		if params[:email]
+			@email = params[:email]
+			@user = User.find_by_email(@email)
+			UserMailer.lost_username(@email, @user).deliver
+		end
+		respond_with(:ok)
   end
 
   def lost_password
     if params[:username]
-
       @username = params[:username]
       @user = User.find_by_username(@username)
-
       @user_token = UserToken.create(:token_type => 'login', :user => @user)
-
       UserMailer.lost_password(@username, @user, @user_token, token_sessions_url(:token => @user_token.token)).deliver
     end
-
     respond_with(:ok)
   end
 

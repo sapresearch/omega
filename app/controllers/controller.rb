@@ -1,31 +1,25 @@
   class Controller < ApplicationController
 
+		# Important! load_hosting_account must go before the other filters.
 		around_filter :load_hosting_account
- #    include Omega::Errors::Handler
-    include Omega::Assets::Dependencies
 
+    include Omega::Assets::Dependencies
     include Omega::Breadcrumbs
     include Omega::CurrentUser
     include Omega::CurrentUserTimeZone
-#    include Omega::Crud
     include Omega::Permissions
     include Omega::SubLayouts
-
     include Omega::Mixins::Controllers::Crud
 
-  #  self.responder = Omega::ControllerResponder
-
     before_filter :controller_access_control, :init_variables
-    #around_filter :general_exception_handler
+    around_filter :general_exception_handler if Rails.env.production? 
 
     protect_from_forgery
-
     layout 'application'
-
     breadcrumb 'Omega' => :root
 
-
-
+		# This sets the :account_name option in #url_for or #path helpers.
+		# UserMailer does not inherit from Controller, so those helpers are hardcoded.
     def default_url_options(options={})
       {:account_name => Account.current.name}
     end
@@ -37,10 +31,12 @@
         @account = Account.find_by_name!(account_name)
         @account.with(session) { yield }
       	rescue ActiveRecord::RecordNotFound
-        	#TODO
         	render :text=>"The #{account_name} account was not found.", :status=>404
       end
 
+			# If it's a GET request, then set the csrf token.
+			# If it's a non-ajax request (XHR), then validate that csrf token is correct.
+			# Also ensure that anonymous users can only access specified controllers.
       def controller_access_control
         if request.get?
           session[:ajax_csrf_token] = Digest::MD5.hexdigest("#{Time.now.to_i}") if session[:ajax_csrf_token].nil?
@@ -53,7 +49,7 @@
         
         if current_user.is_anonymous?
           controller = params[:controller]
-          free_controllers = ["home","sessions", "users"]
+          free_controllers = ["home", "sessions", "users"]
           unless free_controllers.include?(controller)
             redirect_to root_url(:code=>CODE_ANONYMOUS)
             return
