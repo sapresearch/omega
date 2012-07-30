@@ -40,11 +40,12 @@
 	  def update
 	  end
 	
-		# TODO check that the token was created within the last 24 hours.
 	  def token
 	    @user_token = UserToken.find_by_token!(params[:token])
-	    set_current_user(@user_token.user)
-	    redirect_to edit_user_url(@user_token.user)
+			if @user_token.to_i + 86400 > Time.now.to_i # 24 hours old
+	    	set_current_user(@user_token.user)
+	    	redirect_to edit_user_url(@user_token.user)
+			end
 	  end
 	
 	  def destroy
