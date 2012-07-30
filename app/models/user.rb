@@ -16,7 +16,7 @@
 	  before_save   :ensure_has_authenticated_role
 
 	  attr_accessor :password, :password_confirmation, :account_id
-	  attr_accessible :username, :email, :contact_attributes, :first_name, :last_name
+	  attr_accessible :username, :email, :contact_attributes, :first_name, :last_name, :updated_at
 
 
 

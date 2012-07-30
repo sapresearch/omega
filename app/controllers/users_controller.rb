@@ -65,11 +65,14 @@ class UsersController < Controller
 
   def update
     @user = User.find(params[:id])
-    role_ids = params[:user].delete(:role_ids)
+    @user.password = params[:user].delete(:password)
+    @user.password_confirmation = params[:user].delete(:password_confirmation)
+		@user.update_attributes(updated_at: Time.now) # To ensure that this runs even if params is now empty.
 
+    role_ids = params[:user].delete(:role_ids)
     if current_user.has_permission?(Role::PERM_ADMIN) and !role_ids.nil?
       roles = role_ids.inject([]) { |roles, id| roles << Role.find(id) }
-    @user.roles = roles
+    	@user.roles = roles
     end
     @user.update_attributes(params[:user])
     Contact.for(@user).update_contact_attributes(params[:user][:contact_attributes])

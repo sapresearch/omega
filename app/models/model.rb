@@ -4,7 +4,7 @@
 
 		# Validation to call in various subclasses.
 		def validate_current_account
-			errors.add(:account_id, 'The Account ID must be for the current account') if account != Account.current
+			errors.add(:account_id, 'The Account ID must be for the current account') if account.id != Account.current.id
 		end
 
 		# This validates uniqueness within the current tenant only.
@@ -18,6 +18,7 @@
 				klass = record.class
 				find_method = "find_by_#{attribute}".to_sym
 				duplicates = klass.send(find_method, value)
+				duplicates = nil if duplicates == record # so it doesn't match itself.
 				record.errors[attribute] << "This #{attribute} is already taken" if duplicates
 			end
 		end

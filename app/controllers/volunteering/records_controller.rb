@@ -135,26 +135,20 @@
 	   
 	   @record.save
 	   
-	   unless @record.contact_id.nil? or @contact.over_18
+	   unless @record.contact_id.nil?
 	   	@user = Contact.find(@record.contact_id)
-	   	UserMailer.parental_approval(@user).deliver
+	   	UserMailer.parental_approval(@user).deliver unless @contact.over_18
 	   end
 	   respond_with(@record)
 	  end
 	  
 	  def create_volunteer
-	   
 	   @record = Volunteering::Record.create(params[:volunteering_record])
 	   @record.action = 'Accepted'
 	   @record.save
-	    
-	   
 	   @user = Contact.find(@record.contact_id)
-	   
-	   UserMailer.parental_approval(@user).deliver
-	  
+	   UserMailer.parental_approval(@user).deliver unless @contact.over_18
 	   respond_with(@record)
-	    
 	  end
 	  
 	  def update
