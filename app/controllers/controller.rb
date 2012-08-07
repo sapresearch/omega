@@ -41,7 +41,7 @@
         if request.get?
           session[:ajax_csrf_token] = Digest::MD5.hexdigest("#{Time.now.to_i}") if session[:ajax_csrf_token].nil?
         elsif request.xhr?
-          if session[:ajax_csrf_token] != request.headers['ajax_csrf_token']
+          if request.headers['ajax_csrf_token'].nil? || session[:ajax_csrf_token] != request.headers['ajax_csrf_token']
             render :nothing=>true
             return
           end

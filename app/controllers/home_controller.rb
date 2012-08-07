@@ -1,6 +1,6 @@
 	class HomeController < Controller
 	  respond_to :html
-	
+
 	  def index
       if current_user != nil and current_user.visit_count == 1 and session[:first_time_redirect]
         session[:first_time_redirect] = false

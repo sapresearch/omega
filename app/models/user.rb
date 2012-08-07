@@ -1,7 +1,7 @@
 	require 'digest/sha2'
 	
 	class User < Model
-	
+
 	  PERM_ADMIN               = 'users_admin'
 	  PERM_ASSIGN_TO_ROLE      = 'users_assign_to_role'
 	  PERM_CHANGE_OWN_USERNAME = 'users_change_own_username'
